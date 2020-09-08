@@ -1,0 +1,265 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, img, strong, var, dl, dt, dd, ol, ul, li, form, label, table, caption, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, menu, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: normal;
+  font-size: 100%;
+  vertical-align:baseline;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+ol, ul {
+  list-style: none;
+  list-style-type: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+}
+
+#sec1 {
+	background: url("../image/background_desk.svg") no-repeat;
+  background-size: cover;
+  background-position: top left;
+  display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  height: 200px;
+}
+
+.sec1-cover, .sec3-cover{
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sec1-content{
+  display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+  width: 1200px;
+  max-width: 95%;
+  height: 100%;
+}
+
+.sec1-article-container{
+  display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+  width: 210px;
+  max-width: 100%;
+}
+
+.sec1-title{
+	color: #ffffff;
+  font-size: 18px;
+  font-weight: bolder;
+  line-height: 150%;
+  }
+
+.sec1-text1 {
+	color: #ffffff;
+  font-size: 14px;
+  line-height: 150%;
+  }
+
+.sec1-text2{
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+#sec2 {
+	background: #ffffff;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.sec2-content{
+  display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+  width: 1200px;
+  max-width: 95%;
+  height: auto;
+  margin: 40px 0px;
+}
+
+#sec2 ul{
+}
+
+#sec2 li{
+  margin: 20px 20px 20px 0px;
+}
+
+#sec2 h1{
+  display: block;
+  color: #3f3f3f;
+  font-size: 14px;
+  font-weight: bolder;
+  line-height: 150%;
+}
+
+#sec2 p{
+  display: block;
+  color: #3f3f3f;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+#sec3 {
+	background: url("../image/background_desk.svg") no-repeat;
+  background-size: cover;
+  background-position: bottom right;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  height: auto;
+}
+
+.sec3-content{
+  display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+  width: 1200px;
+  max-width: 95%;
+  height: auto;
+  margin: 40px 0px;
+}
+
+.sec3-text{
+	color: #ffffff;
+  font-size: 14px;
+  line-height: 150%;
+  }
+
+#secbottom {
+  background: #666666;
+  display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+  width: 100%;
+  height: 200px;
+}
+
+#secbottom-button {
+  list-style-type : none;
+  text-align: center;
+}
+
+#secbottom-button li {
+  background: rgba(0, 0, 0, 0.75);
+  display: inline-block;
+	border-radius: 12px;
+	width: 140px;
+	height: 24px;
+	margin: 10px 5px;
+}
+
+#secbottom-button a {
+  display: block;
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: none;
+  padding: 7px;
+}
+
+@media (min-width: 700px) {
+  #sec1 {
+    height: 360px;
+  }
+
+  .sec1-article-container{
+    width: 400px;
+  }
+
+  .sec1-title{
+    font-size: 32px;
+    }
+
+  .sec1-text1 {
+    font-size: 24px;
+    }
+
+  .sec1-text2{
+    font-size: 16px;
+  }
+
+  #sec2 h1{
+    display: inline-block;
+    width: 150px;
+  }
+
+  #sec2 p{
+    display: inline-block;
+  }
+}
+
+@media (min-width: 1000px) {
+  #sec1 {
+    height: 480px;
+  }
+
+  .sec1-cover{
+    background: rgba(0, 0, 0, 0);
+  }
+
+  .sec1-article-container{
+    width: 480px;
+  }
+
+  .sec1-title{
+    font-size: 40px;
+    }
+
+  .sec1-text1 {
+    font-size: 32px;
+    }
+
+  .sec1-text2{
+    font-size: 18px;
+  }
+
+  #sec2 h1{
+    font-size: 16px;
+  }
+
+  #sec2 p{
+    font-size: 16px;
+  }
+
+  .sec3-text{
+    font-size: 16px;
+    line-height: 220%;
+    }
+}

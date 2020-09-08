@@ -1,0 +1,369 @@
+.sakagura_container {
+	display: none;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: auto;
+}
+
+.registory_sakagura_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 96%;
+  max-width: 1200px;
+  height: auto;
+  color: #000000;
+  font-size: 14px;
+}
+
+.edit_sakagura_title {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100%;
+  padding: 8px;
+  border-top: 3px solid #d2d2d2;
+  border-bottom: 3px solid #d2d2d2;
+}
+
+.edit_sakagura_note {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8BA340;
+  font-size: 12px;
+  line-height: 120%;
+  width: 100%;
+  padding: 0 8px;
+  margin-top: 16px;
+}
+
+.sakagura_form {
+	width: 100%;
+	height: auto;
+}
+
+.sakagura_wrapper {
+	width: 100%;
+	height: auto;
+}
+
+.row_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: #f5f5f5;
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid #d2d2d2;
+}
+
+.row_title_container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	padding: 8px;
+}
+
+.row_title_sign {
+	background: #3f3f3f;
+	width: 4px;
+	height: 18px;
+}
+
+.row_title {
+	margin-left: 8px;
+}
+
+.row_title span {
+	color: #ff0000;
+	font-size: 12px;
+	margin-left: 8px;
+}
+
+.row {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100%;
+	padding: 8px;
+	border-top: 1px solid #d2d2d2;
+}
+
+.column1_container, .column3_container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	line-height: 140%;
+}
+
+.column3_container {
+	margin-top: 10px;
+}
+
+.column1, .column3 {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	margin-right: 8px;
+}
+
+.column1_container span, .column3_container span {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+.column2, .column4 {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  line-height: 140%;
+  width: 100%;
+}
+
+.column2_select {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.column2 input, .column2 SELECT, .column4 input, .column4 SELECT {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 16px;
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+.column2 textarea, .column4 textarea {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 16px;
+  width: 100%;
+  height: 80px;
+  padding: 0 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+.column2_select label {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.column2_select label input {
+  position: relative;
+  top: -4px;
+  width: auto;
+}
+
+.edit_sakagura_button_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+input[name="close_sakagura"], input[name="delete_sakagura"], .button_back {
+  background: #e6e6e6;
+  outline: none;
+  color: #3f3f3f;
+  font-size: 15px;
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+input[name="update_sakagura"], input[name="sakagura_confirm"], .submit_button {
+  background: #C5CE51;
+  color: #3f3f3f;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/*確認画面***********************************************************/
+.dialog_add_sakagura_background, .dialog_message_background {
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  width: 100%;
+  z-index: 100;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.dialog_table {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+.dialog_table-cell {
+	display: table-cell;
+	width: 100%;
+}
+
+#dialog_add_sakagura {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	background: #ffffff;
+	color: #3f3f3f;
+	font-size: 14px;
+	width: 100%;
+	height: 100%;
+	padding: 16px 8px;
+	margin: 0 auto;
+}
+
+.confirm_note {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8BA340;
+  font-size: 14px;
+  line-height: 120%;
+  width: 100%;
+  padding: 0 8px;
+  margin-top: 8px;
+}
+
+.frame {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.alt {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.alt:first-child {
+  margin-top: 0;
+}
+
+.confirm_item_title {
+  display: flex;
+  align-items: center;
+  background: #e6e6e6;
+  width: 100%;
+  height: 32px;
+  padding-left: 8px;
+}
+
+.confirm_item_title span {
+  background: #666666;
+  width: 4px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.confirm_item_info {
+	display: flex;
+  align-items: center;
+  line-height: 140%;
+  width: 100%;
+  min-height: 24px;
+  padding: 4px 8px;
+}
+
+@media only screen and (min-width: 560px) {
+  .dialog_add_sakagura_background {
+    background: rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  #dialog_add_sakagura {
+    width: 86%;
+    max-width: 1200px;
+    height: auto;
+    padding: 32px;
+    border-radius: 4px;
+  }
+}

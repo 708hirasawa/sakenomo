@@ -1,0 +1,696 @@
+.sake_container {
+  display: none;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+#registory_sake_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 1200px;
+  max-width: 96%;
+  height: auto;
+  color: #000000;
+  font-size: 14px;
+}
+
+/************************************************************/
+.edit_sake_title, .add_sakagura_title {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100%;
+  padding: 8px;
+  border-top: 3px solid #d2d2d2;
+  border-bottom: 3px solid #d2d2d2;
+}
+
+.edit_sake_note, .add_sakagura_note {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8BA340;
+  font-size: 12px;
+  line-height: 120%;
+  width: 100%;
+  padding: 0 8px;
+  margin-top: 16px;
+}
+
+/************************************************************/
+.form {
+  width: 100%;
+  height: auto;
+}
+
+#sakedata {
+  width: 100%;
+  height: auto;
+}
+
+.row_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: #f5f5f5;
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid #d2d2d2;
+}
+
+.row_title_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+}
+
+.row_title_sign {
+  background: #3f3f3f;
+  width: 4px;
+  height: 18px;
+}
+
+.row_title {
+  margin-left: 8px;
+}
+
+.row_title span {
+  color: #ff0000;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.row_select_brewery {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+  border-top: 1px solid #d2d2d2;
+}
+
+.column1_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  line-height: 140%;
+}
+
+.column1_container span {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+.column1 {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 8px;
+}
+
+input[name="add_sakagura_button"] {
+  background: #E05314;
+  color: #ffffff;
+  width: 100px;
+  padding: 2px 0;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.column2 {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  line-height: 140%;
+  width: 100%;
+}
+
+input[name="sakagura_name"] {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+  flex-grow: 1;
+}
+
+.column2 label {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+}
+
+.column2 label input, .column2 label SELECT {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 16px;
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px;
+  border-top: 1px solid #d2d2d2;
+}
+
+.column2_tokuteimeisho, .column2_range, .column2_ingredient, .column2_yeast, .column2_seiho, .column2_recommend {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  line-height: 140%;
+}
+
+.column2_tokuteimeisho label, .column2_ingredient label, .column2_yeast label, .column2_seiho label, .column2_recommend label {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 8px;
+  margin-right: 16px;
+}
+
+.column2_tokuteimeisho div, .column2_ingredient div, .column2_seiho div, .column2_recommend div {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+}
+
+.column2_yeast_others_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.column2_yeast_others_container div {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.column2_tokuteimeisho div label, .column2_ingredient div label, .column2_yeast_others_container div label, .column2_seiho div label, .column2_recommend div label {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+  margin-right: 0;
+}
+
+.column2_tokuteimeisho label input {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  margin-right: 4px;
+}
+
+.column2_ingredient label input, .column2_yeast label input, .column2_seiho label input, .column2_recommend label input {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  margin-right: 4px;
+}
+
+.column2_tokuteimeisho div label input, .column2_ingredient div label input, .column2_yeast_others_container div label input, .column2_seiho div label input, .column2_recommend div label input {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+}
+
+.column2_tokuteimeisho #special_name_other, .column2_ingredient #ingredients_other, .column2_yeast #koubo_other, .column2_yeast #koubo_other2, .column2_yeast #koubo_other3 {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 16px;
+  min-width: 120px;
+  max-width: 150px;
+  height: 30px;
+  padding: 0 8px;
+  margin-top: 8px;
+  margin-left: 8px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+.column2_range div {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.column2_range div input {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 16px;
+  width: 80px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+.column2_riceitem_container, .column2_concouritem_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+}
+
+.column2_riceitem, .column2_concouritem {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.column2_riceitem_text {
+  color: #8BA340;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.column2_riceitem #rice_used_other, .column2_riceitem #rice_used_other2, .column2_riceitem #rice_used_other3 {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  display: none;
+}
+
+.rice_used_other_text {
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+}
+
+.rice_used_other_input {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.rice_used_other_input #seimai_rate, .rice_used_other_input #kakemai_rate, .rice_used_other_input #seimai_rate2, .rice_used_other_input #kakemai_rate2, .rice_used_other_input #seimai_rate3, .rice_used_other_input #kakemai_rate3 {
+  max-width: 80px;
+  margin-right: 4px;
+}
+
+input[name="jas_code1"], input[name="jas_code2"], input[name="jas_code3"] {
+	border: 1px solid #ff0000;
+}
+
+.edit_sake_button_container, .add_sakagura_button_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+input[name="cancel_sake"], input[name="button_back"] {
+  background: #e6e6e6;
+  outline: none;
+  color: #3f3f3f;
+  font-size: 15px;
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+input[name="confirm_button"], input[name="submit_button"], input[name="update_button"], input[name="add_sakagura_ok"] {
+  background: #C5CE51;
+  color: #3f3f3f;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/************************************************************/
+.dialog_add_sakagura_background, .dialog_add_sake_background {
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  width: 100%;
+  z-index: 100;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.dialog_table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.dialog_table-cell {
+  display: table-cell;
+  width: 100%;
+}
+
+#dialog_add_sakagura, #dialog_add_sake {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  color: #000000;
+  font-size: 14px;
+  width: 100%;
+  height: 100%;
+  padding: 16px 8px;
+  margin: 0 auto;
+}
+
+.close_add_sakagura {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.close_add_sakagura_button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.close_add_sakagura_prev2020 {
+  fill: #3f3f3f;
+  width: 20px;
+  height: 20px;
+}
+
+.add_sakagura_title {
+	margin-top: 16px;
+}
+
+.add_sakagura_form_container {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.add_sakagura_input {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background: #e6e6e6;
+  color: #3f3f3f;
+  font-size: 16px;
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: none;
+  autocomplete="off";
+}
+
+.add_sakagura_content {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.add_sakagura_content li {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #000000;
+  font-size: 14px;
+  line-height: 140%;
+  width: 100%;
+  min-height: 50px;
+  padding: 8px;
+  cursor:pointer;
+}
+
+.add_sakagura_content_icon {
+  object-fit: cover;
+  fill: #b2b2b2;
+  max-width: 18px;
+  min-width: 18px;
+  max-height: 15px;
+  min-height: 15px;
+  margin-right: 8px;
+}
+
+.add_sakagura_content li span {
+  margin-right: 8px;
+}
+
+.add_sakagura_content li span:last-child {
+  color: #b2b2b2;
+  font-size: 12px;
+  margin-right: 0;
+}
+
+.add_sakagura_content li:hover {
+  background: #B4DCE6;
+}
+
+/************************************************************/
+.confirm_note {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8BA340;
+  font-size: 14px;
+  line-height: 120%;
+  width: 100%;
+  padding: 0 8px;
+  margin-top: 8px;
+}
+
+.frame {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.alt {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.alt:first-child {
+  margin-top: 0;
+}
+
+.confirm_item_title {
+  display: flex;
+  align-items: center;
+  background: #e6e6e6;
+  width: 100%;
+  height: 32px;
+  padding-left: 8px;
+}
+
+.confirm_item_title span {
+  background: #666666;
+  width: 4px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.confirm_item_info {
+  display: flex;
+  align-items: center;
+  line-height: 140%;
+  width: 100%;
+  min-height: 24px;
+  padding: 4px 8px;
+}
+
+/************************************************************/
+#dialog_sake_message {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  color: #3f3f3f;
+  font-size: 14px;
+  width: 90%;
+  border-radius: 4px;
+  padding: 16px 8px;
+  margin: 0 auto;
+}
+
+#dialog-message {
+  color: #8BA340;
+  font-size: 14px;
+  line-height: 120%;
+}
+
+#error_message {
+  color: #3f3f3f;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 120%;
+  margin-top: 8px;
+}
+
+#message_back {
+  background: #e6e6e6;
+  outline: none;
+  color: #8c8c8c;
+  font-size: 15px;
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 560px) {
+  .dialog_add_sakagura_background, .dialog_add_sake_background {
+    background: rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  #dialog_add_sake, #dialog_add_sakagura {
+    width: 86%;
+    max-width: 1200px;
+    height: auto;
+    padding: 32px;
+    border-radius: 4px;
+  }
+}

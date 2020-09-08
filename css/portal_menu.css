@@ -1,0 +1,202 @@
+/********************
+ * service_sidebar
+********************/
+#search_menu {
+    float:left;
+    font-size:12px;
+    height:30px;
+    width:64px;
+    left: 48px;
+    top: 41px;
+    //background: #e3e3e3;
+    background: linear-gradient(#c3c3c3, #e6e6e6);
+    border: 0px solid #8c8c8c;
+    border-radius: 0px;
+    height:28px;
+    padding-top:6px;
+    padding-bottom:6px;
+}
+
+#service_sidebar {
+    position: absolute;
+    left: 0px;
+    top: 36px;
+    box-shadow: 2px 3px 3px -1px rgba(0,0,0,.8);
+    z-index: 200;
+    display: none;
+    overflow:visible;
+    background:#fff;
+    color:#000;
+    border:1px solid #c6c6c6;
+    border-radius:2px;
+    font-size: 13px;
+    margin-top:4px;
+    width:224px;
+    padding:8px 8px;
+}
+
+#service_sidebar .service_listing .menu_item:first-child .sub_menu {
+    height:300px;
+    width:340px;
+    background-color:#fff;
+    background-image:url(../images/icons/know_sake.jpg);
+    background-repeat: no-repeat;
+    background-position:right bottom;
+}
+
+#service_sidebar .service_listing .menu_item:nth-child(2) .sub_menu {
+    height:360px;
+    width:340px;
+    background-color:#fff;
+    background-image:url(../images/icons/search_sake.jpg);
+    background-repeat: no-repeat;
+    background-position:bottom;
+}
+
+#service_sidebar .service_listing .menu_item:nth-child(3) .sub_menu {
+    height:280px;
+    width:340px;
+    background-color:#fff;
+    background-image:url(../images/icons/search_sakagura.jpg);
+    background-repeat: no-repeat;
+    background-position:right bottom;
+}
+
+#service_sidebar .service_listing .menu_item:nth-child(4) .sub_menu {
+    height:280px;
+    width:340px;
+    background-color:#fff;
+    background-image:url(../images/icons/search_inshokuten.jpg);
+    background-repeat: no-repeat; background-position:right bottom;
+}
+
+#service_sidebar .service_listing .menu_item:nth-child(5) .sub_menu {
+    height:220px;
+    width:260px;
+    background-color:#fff;
+    background-image:url(../images/icons/search_syuhanten.jpg);
+    background-repeat: no-repeat;
+    background-position:right bottom;
+}
+
+#service_sidebar .service_listing .menu_item:nth-child(6) .sub_menu {
+    height:280px;
+    width:340px;
+    background-color:#fff;
+    background-image:url(../images/icons/search_user.jpg);
+    background-repeat: no-repeat;
+    background-position:right bottom;
+}
+
+#service_sidebar .service_listing .menu_item:nth-child(7) .sub_menu {
+    height:230px;
+    width:260px;
+    background-color:#fff;
+    background-image:url(../images/icons/notification.jpg);
+    background-repeat: no-repeat;
+    background-position:left bottom;
+}
+
+#service_sidebar .service_listing .menu_item > span:nth-child(2) {
+    margin-bottom:4px;
+}
+
+#service_sidebar > span:first-child {
+	float:right;
+}
+
+#service_sidebar > div:first-child {
+	padding-bottom:2px;
+    border-bottom:1px solid #c6c6c6;
+}
+
+#service_sidebar > span:first-child img {
+    width:16px;
+    margin:0px;
+}
+
+.service_listing .menu_item {
+    position:relative;
+    overflow:visible;
+    padding:2px;
+    margin:8px 24px 8px 4px;
+    background: #fff;
+    color: #404040;
+}
+
+.service_listing .menu_item:hover {
+    background: #e3e3e3;
+}
+
+.service_listing .menu_item .sub_menu > div:first-child {
+    margin:4px;
+    border-bottom:1px solid #c6c6c6;
+}
+
+.service_listing .menu_item > span {
+  margin:2px 2px 0px 2px;
+}
+
+.service_listing .menu_item > span img {
+  width:28px;
+  margin:auto 4px auto 4px;
+}
+
+.sub_listing > div {
+    width:90%;
+    padding:2px;
+    margin:4px 4px 4px 4px;
+    background: #fff;
+    color: #404040;
+}
+
+.sub_listing > div span {
+    margin:2px 2px 0px 8px;
+}
+
+.sub_listing div:hover {
+    background: #e3e3e3;
+}
+
+.sub_menu {
+    left: 200px;
+    position:absolute;
+    overflow:auto;
+    background:#fff;
+    width:200px;
+    border:1px solid #c6c6c6;
+    border-radius:2px;
+    box-shadow: 2px 3px 3px -1px rgba(0,0,0,.8);
+    top:-10px;
+    left:200px;
+    z-index:300px;
+    display:none;
+}
+
+.menu_item .sub_menu div {
+    position:relative;
+    border-bottom:0px solid #c6c6c6;
+}
+
+.service_listing .menu_item:first-child .sub_listing > div {
+    float:left;
+    width:48%;
+}
+
+.service_listing .menu_item:nth-child(2) .sub_listing > div {
+    float:left;
+    width:46%;
+}
+
+.service_listing .menu_item:nth-child(3) .sub_listing > div {
+    width:48%;
+}
+
+.service_listing .menu_item:nth-child(4) .sub_listing > div {
+    width:48%;
+}
+
+.service_listing .menu_item:nth-child(5) .sub_listing > div {
+    width:48%;
+}
+

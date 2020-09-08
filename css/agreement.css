@@ -1,0 +1,120 @@
+#all_container {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: auto;
+	margin-top: 105px;
+}
+
+#main_container {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	color: #3f3f3f;
+	width: 1200px;
+	max-width: 96%;
+	height: auto;
+}
+
+/************************************************************/
+.subject {
+	display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+	background: #e6f2e6;
+	color: #000000;
+  font-size: 18px;
+  font-weight: bold;
+	width: 100%;
+  padding: 8px;
+}
+
+.introduction {
+	display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+	line-height: 160%;
+	width: 100%;
+	padding: 0 8px;
+	margin-top: 16px;
+}
+
+/************************************************************/
+.section {
+	display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+	margin-top: 20px;
+}
+
+.title {
+	display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+	color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+	width: 100%;
+  padding: 0 8px;
+}
+
+.sub_title {
+  font-size: 15px;
+	font-weight: bold;
+	line-height: 160%;
+	width: 100%;
+	padding: 0 24px;
+	margin-top: 8px;
+}
+
+.text {
+	display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+	line-height: 160%;
+	width: 100%;
+	padding: 0 16px;
+	margin-top: 8px;
+	display: inline;
+}
+
+.item {
+	font-size: 14px;
+	line-height: 160%;
+	padding: 0 24px;
+	margin-top: 8px;
+	list-style-type: disc;
+}
+
+
+/************************************************************/
+@media only screen and (min-width: 560px) {
+  .config_item {
+    padding: 20px;
+  }
+}
+
+@media only screen and (min-width: 1260px) {
+	#main_sub_container {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+}

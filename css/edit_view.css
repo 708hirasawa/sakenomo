@@ -1,0 +1,204 @@
+/*edit_sake*******************/
+.edit_sake_bar_container {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.edit_sake_bar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+  width: 100%;
+  height: auto;
+  padding: 16px 0;
+}
+
+#edit_sake, #add_sake {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  width: 240px;
+  height: 30px;
+  border-radius: 4px;
+  margin: 8px 20px;
+  cursor: pointer;
+}
+
+#edit_sake {
+  background: #28809E;
+  color:#ffffff;
+}
+
+#add_sake {
+  background: #C5CE51;
+  color:#3f3f3f;
+}
+
+.edit_sake_penplus2020, .add_sake_pen1616 {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.edit_sake_penplus2020 {
+  fill: #ffffff;
+}
+
+.add_sake_pen1616 {
+  fill: #3f3f3f;
+}
+
+.edittable {
+  width: 100%;
+  height: auto;
+}
+
+.sakerow {
+  color: #3f3f3f;
+  width: 100%;
+  height: auto;
+}
+
+.sakecolumn1 {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background:#e6e6e6;
+  font-size: 13px;
+  font-weight: bold;
+  width: 100%;
+  height: auto;
+  padding: 8px;
+  padding-left: 32px;
+}
+
+.sakecolumn1:before {
+  content:"\00a0";
+  display: block;
+  border: solid 9px #3f3f3f;
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: 8px;
+  top: 47%;
+  margin-top: -8px;
+}
+
+.sakecolumn1:after {
+  content:"\00a0";
+  display:block;
+  width: 3px;
+  height: 6px;
+  border: solid #e6e6e6;
+  border-width: 0 2px 2px 0;
+  position:absolute;
+  left: 15px;
+  top: 47%;
+  margin-top: -4px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.sakecolumn2 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 140%;
+  width: 100%;
+  height: auto;
+  padding: 8px;
+}
+
+/*dialog_edit_sake*******************/
+#dialog_edit_sake {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: #fff;
+  color: #3f3f3f;
+  font-size: 13px;
+  width: 100%;
+  height: 100%;
+  padding: 16px 8px;
+  margin: 0 auto;
+}
+
+#close_edit_sake {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+#close_edit_sake_button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.close_edit_sake_close2020 {
+  fill: #3f3f3f;
+  width: 20px;
+  height: 20px;
+}
+
+.edit_sake_title, .add_sakagura_title {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border: 2px solid #3f3f3f;
+}
+
+.edit_sake_note, .add_sakagura_note {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8BA340;
+  font-size: 12px;
+  line-height: 120%;
+  width: 100%;
+  padding-left: 8px;
+  margin-top: 8px;
+}

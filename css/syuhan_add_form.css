@@ -1,0 +1,190 @@
+.sakerow {
+    overflow:auto; 
+    font-size: 9pt;
+		background: #f5f5f5;
+    padding-top:4px;
+    padding-bottom:4px;
+    border-left: 1px solid #c6c6c6; color:#000;
+    border-right: 1px solid #c6c6c6; color:#000;
+    border-bottom: 1px solid #c6c6c6; color:#000;
+}
+
+#container {
+		overflow:auto;
+    font-family: "メイリオ", Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    border:0px solid #404040; 
+		color:#000;
+    padding: 2px 4px 2px 4px;
+    margin-top:84px; 
+    margin-left:0px; 
+    margin-right:0px; 
+    margin-bottom:auto;
+}
+
+#sample1 {
+    position:         "absolute";
+    color:				    #000;
+    opacity:			    1.0;
+    //backgroundColor:	"#000";
+    //background-color:	#404040;
+    //border:	5px solid	#404040;
+    //border-radius:    10px 10px 0 0;
+    boxShadow:			  "5px 5px 10px #444";
+}
+
+.inputform
+{
+    -moz-border-radius:6px; /* Firefox */
+    -webkit-border-radius: 6px; /* Safari, Chrome */
+    -khtml-border-radius: 6px; /* KHTML */
+    border-radius: 4px; /* CSS3 */
+    padding: 0px 0px 0px 0px;
+    //margin: 0px 0px 0px 7px;
+    //background: #dec6e6;
+    font-family: "メイリオ", "Myriad Pro", Arial, sans-serif;
+    font-size: 9pt;
+    background: #e3e3e3;
+}
+
+.add_button {
+    border: none;
+    background: #a9b949;
+    font-family: "メイリオ", "Myriad Pro", Arial, sans-serif;
+    height: 34px;
+    width: 120px;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 5px;
+    margin:0px 4px 0px 0px;
+    /*box-shadow: 0px 3px 1px #2075aa;*/
+  	-webkit-transition: all 0.15s linear;
+	  -moz-transition: all 0.15s linear;
+	  transition: all 0.15s linear;
+}
+
+.add_button:hover {
+    background: #dec6e6;
+    /*box-shadow: 0 3px 1px #237bb2;*/
+}
+
+.add_button:active {
+    background: #136899;
+    /*box-shadow: 0 3px 1px #0f608c;*/
+}
+
+/*
+#form {
+  font-family: "メイリオ", Arial, Helvetica, sans-serif;
+	position: relative;
+	top: 0px;
+  border:	3px solid	#404040;
+	boxShadow: "5px 5px 10px #444";
+}
+*/
+
+table, td, th {
+    border: 1px solid black;
+}
+
+table {
+    width: 200%;
+    table-layout: fixed;
+}
+
+th {
+    height: 50px;
+}
+
+#customers {
+    font-family: "メイリオ", Arial, Helvetica, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #626262;
+	  border-radius: 25px;
+}
+
+#customers td, #customers th {
+    font-size: 0.8em;
+    border: 1px solid #626262;
+    padding: 3px 7px 2px 7px;
+}
+
+#customers th {
+    color: #ffffff;
+    background-color: #626262;
+}
+
+#customers tr.alt td {
+    color: #000000;
+    background-color: #f6f5ff;
+}
+
+@media only screen and (min-width: 740px) {
+
+		#container {
+				width: 78%;
+				padding: 4px 8px 4px 8px;
+				margin-top:84px; 
+				margin-left:auto; 
+				margin-right:auto; 
+				margin-bottom:auto;
+		}
+
+		.hamburger {
+				display:none;
+		}
+
+		#dialog_add_syuhanten {
+				width:74%;
+				top: 50%;
+				left: 50%;
+				margin-top: -280px; /* Negative half of height. */
+				margin-left: -37%; /* Negative half of width. */
+		}
+}
+
+/*-------------------------------*/
+/*           Wrappers            */
+/*-------------------------------*/
+#wrapper {
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  padding-left: 0;
+  transition: all 0.5s ease;
+
+	//border:1px solid #ff0000;
+}
+
+#wrapper.toggled { 
+		margin-right: -220px;
+		margin-left: 220px; 
+}
+
+#wrapper.toggled #sidebar-wrapper { width: 220px; }
+
+#sidebar-wrapper {
+		-moz-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+
+		position:fixed;
+		top:0px;
+		left: 220px;
+		width: 0px;
+		height: 100%;
+
+		background: #1a1a1a;
+		margin-left: -220px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		transition: all 0.5s ease;
+		z-index: 1000;
+}
+
+#sidebar-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+

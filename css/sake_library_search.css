@@ -1,0 +1,1219 @@
+body {
+	background: #E8EAEC;
+}
+
+#container {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: auto;
+	margin-top: 105px;
+}
+
+#search_main_container {
+  display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+  width: 1200px;
+  max-width: 96%;
+	height: auto;
+}
+
+#hidden_form {
+  display: none;
+}
+
+/************************************************************/
+#accordion {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #E8EAEC;
+  width: 100vw;
+  color: #3f3f3f;
+  font-size: 13px;
+  z-index: 9;
+}
+
+#accordion_frame {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+#pc_search {
+  display: none;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  width: 100%;
+  padding: 16px 24px;
+}
+
+#pc_search div {
+  background: #8c8c8c;
+  width: 4px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+#pc_search p {
+  color: #000000;
+	font-weight: bold;
+  font-size: 16px;
+}
+
+#tab_accordion {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.simpleTabs {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.simpleTabs li {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+}
+
+.simpleTabs li a {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background: #F2F4F6;
+  width: 100%;
+  height: 40px;
+  border-top: 2px solid #E8EAEC;
+}
+
+.simpleTabs li a p {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  color: #b2b2b2;
+  font-size: 14px;
+}
+
+.simpleTabs li a.active {
+  background: #E8EAEC;
+  border-top: 2px solid #009696;
+}
+
+.simpleTabs li a.active p {
+  color: #000000;
+  font-weight: bold;
+}
+
+.simpleTabs li a p span {
+  display: none;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.mobile_accordion_sake3630, .mobile_accordion_brewery3630, .mobile_accordion_restaurant3630 {
+  display: none;
+  fill: #b2b2b2;
+  width: 24px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.mobile_accordion_all3030, .mobile_accordion_store3030 {
+  display: none;
+  fill: #b2b2b2;
+  width: 20px;
+  height: 20px;
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.simpleTabs a.active .mobile_accordion_all3030, .simpleTabs a.active .mobile_accordion_sake3630, .simpleTabs a.active .mobile_accordion_brewery3630, .simpleTabs a.active .mobile_accordion_restaurant3630, .simpleTabs a.active .mobile_accordion_store3030 {
+  fill: #000000;
+}
+
+/************************************************************/
+#tabs-34, #tabs-30, #tabs-31, #tabs-32, #tabs-33 {
+  width: 100%;
+  overflow: hidden;
+}
+
+.mobilesake_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 16px 0;
+	border: 1px solid #0000ff;
+}
+
+#tabs-29 .mobilesake_container {
+  margin-top: 0;
+}
+
+.mobilesake_content {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 96%;
+}
+
+.sake_new_registry {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  background: #F4F6F8;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 16px;
+}
+
+.mobile_pen1616 {
+  fill: #b2b2b2;
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+}
+
+.sake_new_registry p {
+  color: #000000;
+  font-size: 13px;
+}
+
+#mobile_sake_searchplus, #mobile_brewery_searchplus {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 32px;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+.mobile_searchplus3020 {
+  fill: #b2b2b2;
+  width: 30px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+#mobile_sake_searchplus p, #mobile_brewery_searchplus p {
+  color: #666666;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/************************************************************/
+#tabs-30_content, #tabs-31_content, #tabs-32_content, #tabs-33_content {
+  display: none;
+  background: #ffffff;
+  width: 100%;
+  padding: 0 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.accordion_tabs_title {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #000000;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.accordion_tabs_title div {
+  background: #8c8c8c;
+  width: 4px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.accordion_tabs_title p {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  font-weight: bold;
+}
+
+.accordion_tabs_title span {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+#sake_sidebar_form, #sakagura_sidebar_form, #syuhanten_sidebar_form {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.sake_option, .sakagura_option {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 16px 0;
+  border-top: 1px solid #e6e6e6;
+}
+
+.sake_option:last-child, .sakagura_option:last-child {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.search_option_row_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  max-width: 80px;
+  margin-right: 8px;
+}
+
+.search_option_icon_map1216 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 16px;
+}
+
+.search_option_icon_tokuteimeisho1616, .search_option_icon_rice1616, .search_option_icon_cleanedrice1616, .search_option_icon_alc1616, .search_option_icon_nihonshudo1616, .search_option_icon_oke2020, .search_option_icon_visit1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+}
+
+.search_option_row_title {
+  color: #000000;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.sake_option SELECT, .search_option_row_text, .sakagura_option SELECT {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 16px;
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+  flex-grow: 1;
+}
+
+.search_option_row_text {
+	font-size: 14px;
+  width: auto;
+  margin-right: 8px;
+  border: none;
+  flex-grow: 0;
+}
+
+.sake_option_seiho {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 16px 0;
+  border-top: 1px solid #e6e6e6;
+}
+
+.sake_option_trigger {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.arrow_icon, .arrow_icon span {
+  display: inline-block;
+  transition: all .3s;
+  box-sizing: border-box;
+}
+
+.arrow_icon {
+  position: relative;
+  width: 6px;
+  height: 6px;
+}
+
+.arrow_icon span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid #8c8c8c;
+  border-right: 2px solid #8c8c8c;
+}
+
+.arrow_icon span {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+
+.arrow_icon.active span {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+}
+
+.dialog_sidebar {
+  display: none;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width:100%;
+  height: auto;
+  padding: 4px 8px;
+	margin-top: 8px;
+}
+
+.dialog_sidebar ul li {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  float: left;
+  padding: 8px 12px 8px 8px;
+  background: #ffffff;
+  border-radius: 4px;
+  margin: 4px 0;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/************************************************************/
+.mobile_accordion_button_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 0 8px;
+  margin: 8px 0;
+}
+
+.mobile_accordion_button_container button {
+  background: #e6e6e6;
+  outline: none;
+  color: #8c8c8c;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100px;
+  height: 30px;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.mobile_accordion_button_container button:last-child {
+  background: #E05314;
+  color: #ffffff;
+  width: 160px;
+  margin-left: 10px;
+  border: none;
+}
+
+/************************************************************/
+#tab_main {
+  display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: auto;
+}
+
+/* sakaguraspec */
+.sakaguraspec {
+		overflow:auto;
+		//clear:both;
+		left:4px;
+		min-height:18px;
+		width:auto;
+		font-size:9pt;
+		padding:2px;
+		border:1px dotted #c6c6c6;
+}
+
+.sakaguraspec > div {
+		overflow:hidden;
+		float:left;
+		font-size:11px;
+		min-width:58px;
+		max-width:168px;
+		height:20px;
+		border-right:1px solid #e3e3e3;
+		margin:2px;
+		padding:1px;
+}
+
+.seihou {
+		margin:auto 0px;
+		overflow:auto;
+		padding:1px;
+		border:0px solid #c3c3c3;
+}
+
+#search_background {
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: none;
+	position: fixed;
+	background-color: #cccccc;
+	color: #aaaaaa;
+	opacity: .5;
+	filter: alpha(opacity = 50);
+}
+
+#inner_background {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.loader {
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 120px;
+	height: 120px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+/*.complex {
+		border: 1px solid #e3e3e3;
+		box-shadow: 1px 1px 1px -1px rgba(0,0,0,.9);
+    margin-left: 12px;
+}*/
+
+/*#close_sake_sidebar {
+		float:right;
+		width:24px;
+		height:24px;
+		cusor:pointer;
+		border:1px solid #fff;
+}
+
+#close_sake_sidebar:hover {
+		border:1px solid #c6c6c6;
+}
+
+#close_sake_sidebar:active {
+		border:1px solid #404040;
+}*/
+
+
+
+/************************************************************/
+#tabs-all, #tabs-sake, #tabs-sakagura, #tabs-syuhanten {
+  width: 100%;
+}
+
+#hidden_all_count_query {
+  border: 1px solid #00ff00;
+}
+
+#in_disp_all_from {
+  border: 1px solid #0000ff;
+}
+
+#in_disp_all_to {
+  border: 1px solid #ff0000;
+}
+
+.count_sort_container {
+  color: #3f3f3f;
+  width: 100%;
+}
+
+.sake_view {
+  display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+  width: 100%;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.search_result_keyword {
+  display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+  line-height: 120%;
+  width: 100%;
+}
+
+.search_result_keyword_content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search_result_keyword_content span {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search_result_keyword_search2020 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+}
+
+.click_sort {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.click_sort div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.click_sort_sort1214 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 14px;
+}
+
+.click_sort_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b2b2b2;
+  font-size: 13px;
+  height: 20px;
+  padding: 0 4px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.click_sort_standard {
+  color: #0740A5;
+}
+
+/************************************************************/
+.search_result_count {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 12px;
+  width: 100%;
+  padding: 4px 0;
+  margin: 8px;
+}
+
+.loading {
+  display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+  color: #8c8c8c;
+  margin-left: auto;
+  visibility: hidden;
+}
+
+/************************************************************/
+#search_general_result, #search_sake_result, #search_sakagura_result {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.searchRow_link, .sakaguraRow_link, .syuhantenRow_link  {
+	display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+	background: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+.searchRow_link:first-child, .sakaguraRow_link:first-child, .syuhantenRow_link:first-child {
+  margin-top: 0;
+}
+
+.search_result_name_container, .search_sakagura_result_name_container, .search_syuhanten_result_name_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.search_result_sake_image {
+  overflow: hidden;
+  width: 70px;
+  min-width: 70px;
+  height: 80px;
+  border: 1px solid #d2d2d2;
+  margin-right: 8px;
+}
+
+.search_sakagura_result_brewery_image, .search_syuhanten_result_store_image {
+  overflow: hidden;
+  width: 80px;
+  min-width: 80px;
+  height: 80px;
+  border: 1px solid #d2d2d2;
+  margin-right: 8px;
+}
+
+.search_result_sake_image img, .search_sakagura_result_brewery_image img, .search_syuhanten_result_store_image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.search_result_sake_brewery_date_container, .search_sakagura_result_brewery_pref_date_container, .search_syuhanten_result_store_pref_date_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: auto;
+  height: auto;
+  margin-right: 0;
+  flex-grow: 1;
+}
+
+.search_result_sake, .search_sakagura_result_brewery, .search_syuhanten_result_store {
+  color: #0740A5;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 140%;
+}
+
+.search_result_brewery_date_container, .search_sakagura_result_pref_date_container, .search_syuhanten_result_pref_date_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 140%;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.search_result_date, .search_sakagura_result_date, .search_syuhanten_result_date {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.search_result_button_container, .search_sakagura_result_button_container, .search_syuhanten_result_button_container {
+  display: none;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: auto;
+  min-width: 120px;
+  height: auto;
+}
+
+.custom_button {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#e6e6e6, #ffffff);
+  height: 28px;
+  border: 2px solid #d2d2d2;
+  border-radius: 4px;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+.custom_button:first-child {
+  margin-bottom: 8px;
+}
+
+.custom_button:hover {
+  background: linear-gradient(#EDCACA, #ffffff);
+  border: 2px solid #FF4545;
+}
+
+.search_result_button_heart2020, .search_result_button_pin1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.search_result_button_writing1816 {
+  fill: #b2b2b2;
+  width: 18px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.custom_button:hover .search_result_button_heart2020, .custom_button:hover .search_result_button_pin1616, .custom_button:hover .search_result_button_writing1816 {
+  fill: #FF4545;
+}
+
+.button-text {
+  color: #666666;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/************************************************************/
+.search_result_rank {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-top: 1px dotted #d2d2d2;
+}
+
+.search_result_star_rating {
+  position: relative;
+  width: 100px;
+  height: 20px;
+  font-size: 20px;
+  margin-top: 8px;
+}
+.search_result_star_rating_front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  color: #AAC81E;
+}
+.search_result_star_rating_back {
+  color: #d2d2d2;
+}
+
+.search_result_sake_rate {
+  color: #E05314;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 8px;
+}
+
+/************************************************************/
+.spec, .sakagura_spec, .syuhanten_spec {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-top: 1px dotted #d2d2d2;
+}
+
+.spec_item, .sakagura_spec_item, .syuhanten_spec_item {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  width: 33.333333%;
+  height: 36px;
+  padding: 0 8px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  border-right: 1px solid #e6e6e6;
+}
+
+.spec_item:nth-child(1), .spec_item:nth-child(5) {
+  display: none;
+}
+
+.spec_item:nth-child(4) {
+  border-right: none;
+}
+
+.sakagura_spec_item:nth-child(3) {
+  border-right: none;
+}
+
+.spec_title, .sakagura_spec_title, .syuhanten_spec_title {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.spec_info, .sakagura_spec_info, .syuhanten_spec_info {
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.spec_item_tokuteimeisho1616, .spec_item_alc1616, .spec_item_rice1616, .spec_item_cleanedrice1616, .spec_item_nihonshudo1616, .spec_item_sando1616, .spec_item_aminosando1616, .spec_item_bottle1616, .spec_item_visit1616, .spec_item_kurashop1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+/************************************************************/
+.search_result_turn_page {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 12px;
+  border: 1px solid #ff0000;
+}
+
+#prev_all, #next_all, #prev_sake, #next_sake, #prev_sakagura, #next_sakagura {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background: none;
+  border: none;
+  outline: none;
+  margin: 0;
+  width: auto;
+  height: 24px;
+  border-bottom: 1px dotted #b2b2b2;
+  cursor: pointer;
+}
+
+#prev_all, #prev_sake, #prev_sakagura {
+  margin-right: 4px;
+  color: #b2b2b2;
+}
+
+#next_all, #next_sake, #next_sakagura {
+  margin-left: 4px;
+  color: #0740A5;
+}
+
+.pageitems {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #b2b2b2;
+  color: #ffffff;
+  font-size: 11px;
+  border: none;
+  outline: none;
+  width: 24px;
+  height: 24px;
+  margin: 0 4px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.pageitems:hover {
+  opacity: 0.5;
+}
+
+/************************************************************/
+@media only screen and (min-width: 410px) {
+  .search_result_brewery_date_container, .search_sakagura_result_pref_date_container, .search_syuhanten_result_pref_date_container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media only screen and (min-width: 560px) {
+  .search_result_sake_image {
+    width: 80px;
+    min-width: 80px;
+  }
+
+  .search_result_sake_brewery_date_container, .search_sakagura_result_brewery_pref_date_container, .search_syuhanten_result_store_pref_date_container {
+    margin-right: 8px;
+  }
+
+  .search_result_sake, .search_sakagura_result_brewery, .search_syuhanten_result_store {
+    font-size: 16px;
+  }
+
+  .search_result_brewery_date_container, .search_sakagura_result_pref_date_container, .search_syuhanten_result_pref_date_container {
+    justify-content: flex-start;
+  }
+
+  .search_result_date, .search_sakagura_result_date, .search_syuhanten_result_date {
+    margin-left: 20px;
+  }
+
+  .search_result_button_container, .search_sakagura_result_button_container, .search_syuhanten_result_button_container {
+    display: flex;
+  }
+
+  .spec_item, .sakagura_spec_item, .syuhanten_spec_item {
+    width: auto;
+    max-width: 120px;
+    padding: 0 10px;
+  }
+
+  .spec_item:nth-child(4) {
+    border-right: 1px solid #e6e6e6;
+  }
+
+  .spec_item:last-child {
+    border-right: none;
+  }
+
+  .spec_item:nth-child(1), .spec_item:nth-child(5) {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 880px) {
+  #search_main_container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  #mobilesake {
+    display: none;
+  }
+
+  #accordion {
+    background: none;
+    min-width: 270px;
+    max-width: 270px;
+    padding: 0;
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+
+  #pc_search {
+		display: flex;
+	}
+
+  #pc_search p {
+    font-size: 18px;
+  }
+
+  .simpleTabs {
+    flex-direction: column;
+    background: #ffffff;
+    padding: 0 16px;
+	}
+
+  .simpleTabs li {
+    border-top: 1px solid #e6e6e6;
+  }
+
+  .simpleTabs li a {
+    justify-content: flex-start;
+    background: none;
+    height: 48px;
+    padding: 0 16px;
+    border-top: none;
+  }
+
+  .simpleTabs li a.active {
+    background: none;
+    border-top: none;
+  }
+
+  .simpleTabs li a p {
+    font-size: 17px;
+  }
+
+  .simpleTabs li a p span {
+    display: flex;
+  }
+
+  .mobile_accordion_sake3630, .mobile_accordion_brewery3630, .mobile_accordion_restaurant3630 {
+    display: block
+  }
+
+  .mobile_accordion_all3030, .mobile_accordion_store3030 {
+    display: block;
+  }
+
+  #tabs-30_content, #tabs-31_content, #tabs-32_content, #tabs-33_content {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .accordion_tabs_title {
+    font-size: 18px;
+  }
+
+  .dialog_sidebar {
+    padding: 4px 0;
+  }
+
+  .dialog_sidebar ul li {
+    padding: 8px;
+    background: none;
+    border-radius: 0px;
+    margin: 0;
+  }
+
+  .mobile_accordion_button_container {
+    margin: 0;
+  }
+
+  .mobile_accordion_button_container button {
+    width: 80px;
+    margin: 16px;
+  }
+
+  .mobile_accordion_button_container button:last-child {
+    width: 120px;
+  }
+
+  .mobilesake_container {
+    display: none;
+  }
+}
