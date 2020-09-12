@@ -1,11 +1,11 @@
-<?php
+ï»¿<?php
 
 require_once("db_functions.php");
 $id = sqlite3::escapeString($_GET['id']);
 
 if(!$db = opendatabase("sake.db"))
 {
-   die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
+   die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
 }
 
 $item = "";

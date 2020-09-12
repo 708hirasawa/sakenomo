@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 
 require_once("db_functions.php");
 
@@ -7,7 +7,7 @@ $syuhanten_id = sqlite3::escapeString($_GET['syuhanten_id']);
 
 if(!$db = opendatabase("sake.db"))
 {
-	$return = "ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[";
+	$return = "ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶šã‚¨ãƒ©ãƒ¼";
 	header("Content-type: application/xml");
 	echo '<?xml version="1.0" encoding="utf-8" ?> ' . "\n";
 	echo '<xml>'."\n";

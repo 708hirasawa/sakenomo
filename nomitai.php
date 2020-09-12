@@ -1,11 +1,11 @@
-<?php
+ï»¿<?php
 
 require_once("db_functions.php");
 $sake_id = sqlite3::escapeString($_GET['sake_id']);
 
 if(!$db = opendatabase("sake.db"))
 {
-   die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
+   die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
 }
 
 $username = $_COOKIE['login_cookie'];

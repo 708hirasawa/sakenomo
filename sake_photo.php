@@ -1,9 +1,9 @@
-<?php
+ï»¿<?php
 require_once("db_functions.php");
 
 if(!$db = opendatabase("sake.db"))
 {
-	die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
+	die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
 }
 
 $sake_id = $_POST["sake_id"];

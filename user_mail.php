@@ -1,17 +1,17 @@
-<?php
+ï»¿<?php
 
 function write_manage_mail()
 {
 	print('<!-- send mail -->');
 	print('<div id="dialog_message">');
-	  print('<div>ƒƒbƒZ[ƒW</div>');
+	  print('<div>ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</div>');
 	  print('<span><button id="close_dialog_message"><img src="images/icons/cross.svg"></button></span>');
 
 	  print('<div id="message_tabs">');
 		print('<ul>');
-			print('<li><a href="#tab_sendmail">ƒ[ƒ‹‚ğ‘—‚é</a></li>');
-			print('<li><a href="#tab_received">óMƒgƒŒƒC</a></li>');
-			print('<li><a href="#tab_sent">‘—MƒgƒŒƒC</a></li>');
+			print('<li><a href="#tab_sendmail">ãƒ¡ãƒ¼ãƒ«ã‚’é€ã‚‹</a></li>');
+			print('<li><a href="#tab_received">å—ä¿¡ãƒˆãƒ¬ã‚¤</a></li>');
+			print('<li><a href="#tab_sent">é€ä¿¡ãƒˆãƒ¬ã‚¤</a></li>');
 		print('</ul>');
 
 		print('<div id="tab_sendmail">');
@@ -19,16 +19,16 @@ function write_manage_mail()
 			print('<center>');
 				print('<div>');
 					print('<div>');
-						print('<span>ƒ†[ƒU[–¼</span>');
-						print('<span><input id="mail_user" value="" placeholder="ƒ†[ƒU[–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢"></span>');
+						print('<span>ãƒ¦ãƒ¼ã‚¶ãƒ¼å</span>');
+						print('<span><input id="mail_user" value="" placeholder="ãƒ¦ãƒ¼ã‚¶ãƒ¼åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„"></span>');
 					print('</div>');
 					print('<div>');
-						print('<span>‘è–¼</span>');
-						print('<span><input id="mail_subject" value="" placeholder="‘è–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢"></span>');
+						print('<span>é¡Œå</span>');
+						print('<span><input id="mail_subject" value="" placeholder="é¡Œåã‚’å…¥åŠ›ã—ã¦ãã ã•ã„"></span>');
 					print('</div>');
 					print('<div>');
-						print('<span>ƒƒbƒZ[ƒW</span>');
-						print('<span><textarea id="mail_message" placeholder="ƒRƒƒ“ƒg‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢"></textarea></span>');
+						print('<span>ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</span>');
+						print('<span><textarea id="mail_message" placeholder="ã‚³ãƒ¡ãƒ³ãƒˆã‚’å…¥åŠ›ã—ã¦ãã ã•ã„"></textarea></span>');
 					print('</div>');
 				print('</div>');
 			print('</center>');
@@ -36,13 +36,13 @@ function write_manage_mail()
 		print('</div>');
 
 		print('<div id="tab_received" class="form-action hide">');
-		  print('<div id="tab_received_container">ƒ[ƒ‹‚ğ•\¦‚·‚é</div>');
+		  print('<div id="tab_received_container">ãƒ¡ãƒ¼ãƒ«ã‚’è¡¨ç¤ºã™ã‚‹</div>');
 		  print('<table id="message_table" class="customers" border="1" cellspacing="0">');
 			print('<tr>');
-			  print('<td>·ol</td>');
-			  print('<td>’…Mƒ^ƒCƒ€</td>');
-			  print('<td>‘è–¼</td>');
-			  print('<td>ƒƒbƒZ[ƒW</td>');
+			  print('<td>å·®å‡ºäºº</td>');
+			  print('<td>ç€ä¿¡ã‚¿ã‚¤ãƒ </td>');
+			  print('<td>é¡Œå</td>');
+			  print('<td>ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</td>');
 			print('</tr>');
 		  print('</table>');
 		print('</div>');
@@ -52,7 +52,7 @@ function write_manage_mail()
 		  print('</table>');
 		print('</div>');
 	  print('</div> <!-- tabs -->');
-	  print('<center><input type="button" id="message_dialog_close" value="•Â‚¶‚é"></center>');
+	  print('<center><input type="button" id="message_dialog_close" value="é–‰ã˜ã‚‹"></center>');
 	print('</div>');
 
 	print('<!-- dialog_background -->');

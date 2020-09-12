@@ -1,11 +1,11 @@
-<?php
+Ôªø<?php
 
 require_once("db_functions.php");
 $username = $_COOKIE['login_cookie'];
 
 if(!$db = opendatabase("sake.db"))
 {
-	die("ÉfÅ[É^ÉxÅ[ÉXê⁄ë±ÉGÉâÅ[ .<br />");
+	die("„Éá„Éº„Çø„Éô„Éº„ÇπÊé•Á∂ö„Ç®„É©„Éº .<br />");
 }
 
 $condition = "";
@@ -51,7 +51,7 @@ if(!empty($_POST['special_name']))
 //$condition = "WHERE (special_name = '15') ";
 
 /***********
- * éïƒ
+ * ÈÖíÁ±≥
  ***********/
 if(!empty($_POST['syubei']))
 {
@@ -79,7 +79,7 @@ if(!empty($_POST['syubei']))
 }
 
 /***********
- * é_ìx
+ * ÈÖ∏Â∫¶
  ***********/
 if(!empty($_POST['sando']))
 {
@@ -94,27 +94,27 @@ if(!empty($_POST['sando']))
 	/* loop to store and display values of individual checked checkbox. */
 	foreach($_POST['sando'] as $selected)
 	{
-		if($selected == "1") // 0.5à»â∫
+		if($selected == "1") // 0.5‰ª•‰∏ã
 		{
 			$condition .= "(oxidation_level <= 0.5)";
 		}
-		else if($selected == "2") // 0.6Å`1.0
+		else if($selected == "2") // 0.6ÔΩû1.0
 		{
 			$condition .= "(oxidation_level >= 0.6 AND oxidation_level <= 1)";
 		}
-		else if($selected == "3") // 1.1Å`1.5
+		else if($selected == "3") // 1.1ÔΩû1.5
 		{
 			$condition .= "(oxidation_level >= 1.1 AND oxidation_level <= 1.5)";
 		}
-		else if($selected == "4") // 1.6Å`2.0
+		else if($selected == "4") // 1.6ÔΩû2.0
 		{
 			$condition .= "(oxidation_level >= 1.6 AND oxidation_level <= 2.0)";
 		}
-		else if($selected == "5") // 2.1Å`2.5
+		else if($selected == "5") // 2.1ÔΩû2.5
 		{
 			$condition .= "(oxidation_level >= 2.1 AND oxidation_level <= 2.5)";
 		}
-		else if($selected == "6") // 2.6à»è„
+		else if($selected == "6") // 2.6‰ª•‰∏ä
 		{
 			$condition .= "(oxidation_level >= 2.6)";
 		}
@@ -131,7 +131,7 @@ if(!empty($_POST['sando']))
 }
 
 /***********
- * ê∏ïƒï‡çá
+ * Á≤æÁ±≥Ê≠©Âêà
  ***********/
 if(!empty($_POST['seimai']))
 {
@@ -146,31 +146,31 @@ if(!empty($_POST['seimai']))
 	/* loop to store and display values of individual checked checkbox. */
 	foreach($_POST['seimai'] as $selected)
 	{
-		if($selected == "1") // 71%à»è„
+		if($selected == "1") // 71%‰ª•‰∏ä
 		{
 			$condition .= "seimai_rate <= 0.71";
 		}
-		else if($selected == "2") // 70%Å`61%
+		else if($selected == "2") // 70%ÔΩû61%
 		{
 			$condition .= "(seimai_rate >= 61 AND seimai_rate <= 70)";
 		}
-		else if($selected == "3") // 60%Å`51%
+		else if($selected == "3") // 60%ÔΩû51%
 		{
 			$condition .= "(seimai_rate >= 51 AND seimai_rate <= 60)";
 		}
-		else if($selected == "4") // 50%Å`41%
+		else if($selected == "4") // 50%ÔΩû41%
 		{
 			$condition .= "(seimai_rate >= 41 AND seimai_rate <= 50)";
 		}
-		else if($selected == "5") // 40%Å`31%
+		else if($selected == "5") // 40%ÔΩû31%
 		{
 			$condition .= "(seimai_rate >= 31 AND seimai_rate <= 40)";
 		}
-		else if($selected == "6") // 30%Å`21%
+		else if($selected == "6") // 30%ÔΩû21%
 		{
 			$condition .= "(seimai_rate >= 21 AND seimai_rate <= 30)";
 		}
-		else if($selected == "7") // 20%à»â∫
+		else if($selected == "7") // 20%‰ª•‰∏ã
 		{
 			$condition .= "seimai_rate >= 20";
 		}
@@ -188,7 +188,7 @@ if(!empty($_POST['seimai']))
 
 
 /*********
- * ï]âø
+ * Ë©ï‰æ°
  *********/
 if(!empty($_POST['hyouka']))
 {
@@ -203,31 +203,31 @@ if(!empty($_POST['hyouka']))
 	/* loop to store and display values of individual checked checkbox. */
 	foreach($_POST['hyouka'] as $selected)
 	{
-		if($selected == "1") // 71%à»è„
+		if($selected == "1") // 71%‰ª•‰∏ä
 		{
 			$condition .= "(sake_rank <= 0.71)";
 		}
-		else if($selected == "2") // 70%Å`61%
+		else if($selected == "2") // 70%ÔΩû61%
 		{
 			$condition .= "(sake_rank >= 0.61 AND sake_rank <= 0.7)";
 		}
-		else if($selected == "3") // 60%Å`51%
+		else if($selected == "3") // 60%ÔΩû51%
 		{
 			$condition .= "(sake_rank >= 0.51 AND sake_rank <= 0.6)";
 		}
-		else if($selected == "4") // 50%Å`41%
+		else if($selected == "4") // 50%ÔΩû41%
 		{
 			$condition .= "(sake_rank >= 0.41 AND sake_rank <= 0.5)";
 		}
-		else if($selected == "5") // 40%Å`31%
+		else if($selected == "5") // 40%ÔΩû31%
 		{
 			$condition .= "(sake_rank >= 0.31 AND sake_rank <= 0.4)";
 		}
-		else if($selected == "6") // 30%Å`21%
+		else if($selected == "6") // 30%ÔΩû21%
 		{
 			$condition .= "(sake_rank >= 0.21 AND sake_rank <= 0.3)";
 		}
-		else if($selected == "7") // 20%à»â∫
+		else if($selected == "7") // 20%‰ª•‰∏ã
 		{
 			$condition .= "(sake_rank >= 0.2)";
 		}
@@ -245,7 +245,7 @@ if(!empty($_POST['hyouka']))
 
 
 /*********
- * ínï˚
+ * Âú∞Êñπ
  *********/
 if(isset($_POST["sake_region"]) && ($_POST["sake_region"] != ""))
 {
@@ -263,7 +263,7 @@ if(isset($_POST["sake_region"]) && ($_POST["sake_region"] != ""))
 }
 
 /***************
- * ìsìπï{åß
+ * ÈÉΩÈÅìÂ∫úÁúå
  ***************/
 if(isset($_POST["sake_pref"]) && ($_POST["sake_pref"] != ""))
 {

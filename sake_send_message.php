@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 require_once("db_functions.php");
 
 $username = $_COOKIE['login_cookie'];
@@ -18,7 +18,7 @@ $in_time = time();
 
 if(!$db = opendatabase("sake.db"))
 {
-   die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
+   die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
 }
 
 $sql = "INSERT INTO ".$tablename ."(contributor, subject, message, pass_word, write_date) VALUES ('$username', '$title', '$message', '$password', '$in_time')";

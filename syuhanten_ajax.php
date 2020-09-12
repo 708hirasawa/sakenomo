@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 
 require_once("db_functions.php");
 
@@ -6,7 +6,7 @@ $condition = "";
 
 if(!$db = opendatabase("sake.db"))
 {
-	die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
+	die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
 }
 
 if(isset($_POST["syuhanten_name"]) && ($_POST["syuhanten_name"] != ""))
@@ -17,7 +17,7 @@ if(isset($_POST["syuhanten_name"]) && ($_POST["syuhanten_name"] != ""))
 }
 
 /*********
- * •]‰¿
+ * è©•ä¾¡
  *********/
 if(!empty($_POST['syuhanten_hyouka']))
 {
@@ -32,31 +32,31 @@ if(!empty($_POST['syuhanten_hyouka']))
 	/* loop to store and display values of individual checked checkbox. */
 	foreach($_POST['syuhanten_hyouka'] as $selected)
 	{
-		if($selected == "1") // 71%ˆÈã
+		if($selected == "1") // 71%ä»¥ä¸Š
 		{
 			$condition .= "(syuhanten_rank <= 0.71)";
 		}
-		else if($selected == "2") // 70%`61%
+		else if($selected == "2") // 70%ï½61%
 		{
 			$condition .= "(syuhanten_rank >= 0.61 AND syuhanten_rank <= 0.7)";
 		}
-		else if($selected == "3") // 60%`51%
+		else if($selected == "3") // 60%ï½51%
 		{
 			$condition .= "(syuhanten_rank >= 0.51 AND syuhanten_rank <= 0.6)";
 		}
-		else if($selected == "4") // 50%`41%
+		else if($selected == "4") // 50%ï½41%
 		{
 			$condition .= "(syuhanten_rank >= 0.41 AND syuhanten_rank <= 0.5)";
 		}
-		else if($selected == "5") // 40%`31%
+		else if($selected == "5") // 40%ï½31%
 		{
 			$condition .= "(syuhanten_rank >= 0.31 AND syuhanten_rank <= 0.4)";
 		}
-		else if($selected == "6") // 30%`21%
+		else if($selected == "6") // 30%ï½21%
 		{
 			$condition .= "(syuhanten_rank >= 0.21 AND syuhanten_rank <= 0.3)";
 		}
-		else if($selected == "7") // 20%ˆÈ‰º
+		else if($selected == "7") // 20%ä»¥ä¸‹
 		{
 			$condition .= "(syuhanten_rank >= 0.2)";
 		}
@@ -73,7 +73,7 @@ if(!empty($_POST['syuhanten_hyouka']))
 }
 
 /*********
- * ’n•û
+ * åœ°æ–¹
  *********/
 if(isset($_POST["syuhanten_region"]) && ($_POST["syuhanten_region"] != ""))
 {
@@ -91,7 +91,7 @@ if(isset($_POST["syuhanten_region"]) && ($_POST["syuhanten_region"] != ""))
 }
 
 /***************
- * “s“¹•{Œ§
+ * éƒ½é“åºœçœŒ
  ***************/
 if(isset($_POST["syuhanten_pref"]) && ($_POST["syuhanten_pref"] != ""))
 {
