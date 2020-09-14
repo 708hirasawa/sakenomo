@@ -155,31 +155,25 @@ function displaySyudo($db, $jsake_level)
 	return $syudo;
 }
 
-function displayAlcohol($db, $alcohol_level)
+function displayAlcohol($alcohol_level)
 {
-	$alcohol_array = explode(',', $alcohol_level);
 	$alcohol = "";
 
-	if(count($alcohol_array) == 1 && $alcohol_array[0] != "")
-	{
-		$alcohol = $alcohol_array[0]."度";
-		$alcohol = mb_convert_encoding($alcohol, "UTF-8", "SJIS");				
-	}
-	else if(count($alcohol_array) > 1 && $alcohol_array[0] != "")
-	{
-		if($alcohol_array[0] == $alcohol_array[1])
-		{
-			$alcohol = $alcohol_array[0]."度";
+	if($alcohol_level == null || $alcohol_level == "")
+		return $alcohol;
+
+	$alcohol_array = explode(',', $alcohol_level);
+
+	if($alcohol_array[0] != null && $alcohol_array[1] != null) {
+		if($alcohol_array[0] == $alcohol_array[1]) {
+			$alcohol = $alcohol_array[0].'%';
+		} else {
+			$alcohol = $alcohol_array[0] .'～'.$alcohol_array[1].'%';
 		}
-		else
-		{
-			if($alcohol_array[0] != null && $alcohol_array[1] != null)
-				$alcohol = $alcohol_array[0].'～'.$alcohol_array[1].'度';
-			else if($alcohol_array[0] != null && $alcohol_array[1] == null)
-				$alcohol = $alcohol_array[0] ."度以上";
-			else if($alcohol_array[0] == null && $alcohol_array[1] != null)
-				$alcohol = $alcohol_array[1] ."度以下";
-		}
+	} else if($alcohol_array[0] != null && $alcohol_array[1] == null) {
+		$alcohol = $alcohol_array[0] .'%';
+	} else {
+		$alcohol = '<span style="color: #b2b2b2;">--</span>';
 	}
 
 	return $alcohol;
@@ -374,7 +368,7 @@ if($_POST["search_type"] == "1")
 							  'sake_read' => $row["sake_read"], 
 							  'sake_id'	  => $row["sake_id"],
 							  'special_name' => displaySpecialName($row["special_name"]),
-							  'alcohol_level' => displayAlcohol($db, $row["alcohol_level"]), 
+							  'alcohol_level' => displayAlcohol($row["alcohol_level"]), 
 							  'rice_used' => displayRice($db, $row["rice_used"]), 
 							  'seimai_level' => displaySeimaiRate($db, $row["rice_used"], $row["seimai_rate"]), 
 							  'jsake_level'	 => displaySyudo($db, $row["jsake_level"]),
