@@ -1,11 +1,11 @@
-<?php
+ï»¿<?php
 
 require_once("db_functions.php");
 $id = sqlite3::escapeString($_GET['id']);
 
 if(!$db = opendatabase("sake.db"))
 {
-    //die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
+    //die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
 	$return = "failed";
 	header("Content-type: application/xml");
 	echo '<?xml version="1.0" encoding="utf-8" ?> ' . "\n";
@@ -601,7 +601,7 @@ else
 }
 
 
-//$volume_other = "<rss version=\"2.0\"><item><other_size1>1000</other_size1><other_price1>1000</other_price1></item><item><other_size2>2000</other_size2><other_price2>2000‰~</other_price2></item><item><other_size4>4000</other_size4><other_price4>5000</other_price4></item></rss>";
+//$volume_other = "<rss version=\"2.0\"><item><other_size1>1000</other_size1><other_price1>1000</other_price1></item><item><other_size2>2000</other_size2><other_price2>2000å††</other_price2></item><item><other_size4>4000</other_size4><other_price4>5000</other_price4></item></rss>";
 $volume_other = $volume_other.'</rss>';
 
 if($item == "")
