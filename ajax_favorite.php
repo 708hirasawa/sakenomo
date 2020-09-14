@@ -4,48 +4,53 @@ require_once("db_functions.php");
 function displaySpecialName($sake_code)
 {
 	$special_name = "";
+
+	if($sake_code == null || $sake_code == "")
+		return $special_name;
+
+	$special_array = explode(',', $sake_code);
 	
-	if($sake_code == "11")
+	if($special_array[0] == "11")
 	{
 		$special_name = "普通酒";
 	}
-	else if($sake_code == "21")
+	else if($special_array[0] == "21")
 	{
 		$special_name = "本醸造酒";
 	}
-	else if($sake_code == "22")
+	else if($special_array[0] == "22")
 	{
 		$special_name = "特別本醸造酒";
 	}
-	else if($sake_code == "31")
+	else if($special_array[0] == "31")
 	{
 		$special_name = "純米酒";
 	}
-	else if($sake_code == "32")
+	else if($special_array[0] == "32")
 	{
 		$special_name = "特別純米酒";
 	}
-	else if($sake_code == "33")
+	else if($special_array[0] == "33")
 	{
 		$special_name = "純米吟醸酒";
 	}
-	else if($sake_code == "34")
+	else if($special_array[0] == "34")
 	{
 		$special_name = "純米大吟醸酒";
 	}
-	else if($sake_code == "43")
+	else if($special_array[0] == "43")
 	{
 		$special_name = "吟醸酒";
 	}
-	else if($sake_code == "44")
+	else if($special_array[0] == "44")
 	{
 		$special_name = "大吟醸酒";
 	}
-	else if($sake_code == "90")
+	else if($special_array[0] == "90")
 	{
-		$special_name = "その他";
+		$special_name = $special_array[1];
 	}
-	else if($sake_code == "99")
+	else if($special_array[0] == "45")
 	{
 		$special_name = "非公開";
 	}
