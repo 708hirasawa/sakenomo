@@ -212,44 +212,46 @@ function displayAminoLevel($db, $amino_level)
 
 function displayRice($db, $rice_used)
 {
-	$rice_array = explode('/', $rice_used);
 	$rice_value = "";
 
-	for($i = 0; $i < count($rice_array); $i++)
+	if($rice_used && $rice_used != "") 
 	{
-		$rice_entry = explode(',', $rice_array[$i]);
+		$rice_array = explode('/', $rice_used);
 
-		$sql = "SELECT SAKE_RICE.rice_name, SAKE_RICE.rice_kanji, SAKE_RICE.rice_kana FROM SAKE_RICE WHERE SAKE_RICE.rice_name = '$rice_entry[0]'";
-		$sake_result = executequery($db, $sql);
-		$record = getnextrow($sake_result);
+		for($i = 0; $i < count($rice_array); $i++) {
+			$rice_entry = explode(',', $rice_array[$i]);
 
-		if($rice_entry[1] == "1")
-		{
-			$rice_value .= "麹米:";
+			if($i > 0 && $rice_entry[0] != "") {
+				$rice_value .= " / ";
+			}
+
+			$sql = "SELECT SAKE_RICE.rice_name, SAKE_RICE.rice_kanji, SAKE_RICE.rice_kana FROM SAKE_RICE WHERE SAKE_RICE.rice_name = '$rice_entry[0]'";
+			$sake_result = executequery($db, $sql);
+			$record = getnextrow($sake_result);
+
+			if($rice_entry[1] == "1") {
+				$rice_value .= "麹米:";
+			} else if($rice_entry[1] == "2") {
+				$rice_value .= "掛米:";
+			}
+
+			if($rice_entry[0] != "") 
+			{
+				if($rice_entry[0] == "other" && count($rice_entry) >= 3) {
+					$rice_value .= $rice_entry[3];
+				} 
+				else 
+				{
+					$rice_kanji = $record ? $record["rice_kanji"] : $rice_used;
+					$rice_value .= $rice_kanji ." ";
+				}
+			}
 		}
-		else if($rice_entry[1] == "2")
-		{
-			$rice_value .= "掛米:";
-		}
-
-		if($rice_entry[0] != "")
-		{	 
-			$rice_kanji = $record ? $record["rice_kanji"] : $rice_used;
-			$rice_value .= ($rice_kanji != "null") ? $rice_kanji : "";
-			break;
-		}
-
-		if($rice_entry[2] != "")
-		{
-			$rice_value .= '[' .$rice_entry[2] .'%]';
-		}
-
-		if($i < (count($rice_array) - 1))
-		  $rice_value .= ' / ';
+	} 
+	else 
+	{
+		$rice_value .= '<span style="color: #b2b2b2;">--</span>';
 	}
-
-	//return $rice_entry[0];
-	//$rice_value += $rice_kanji;
 
 	return $rice_value;
 }
