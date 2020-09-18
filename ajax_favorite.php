@@ -66,34 +66,50 @@ function displaySeimaiRate($db, $rice_used, $seimai_rate)
 {
 	$seimai = "";
 
-	$rice_array = explode('/', $rice_used);
-	$seimai_array = explode(',', $seimai_rate);
+	if(($rice_used   && $rice_used   != "") && 
+	   ($seimai_rate && $seimai_rate != "")) {
 
-	for($i = 0; $i < count($seimai_array); $i++)
-	{
-		if(count($rice_array) > 0 && $i < count($rice_array))
+		$rice_array   = explode('/', $rice_used);
+		$seimai_array = explode(',', $seimai_rate);
+		$bfound = false;
+
+		foreach($seimai_array as $element) 
 		{
-			$rice_entry = explode(',', $rice_array[$i]);
-
-			if($rice_entry[1] == "1")
-			{
-					$seimai .= "麹米:";
-			}
-			else if($rice_entry[1] == "2")
-			{
-					$seimai .= "掛米:";
+			if($element) {
+				$bfound = true;
+				break;
 			}
 		}
 
-		if($seimai_array[$i] != "") 
-			 $seimai .= $seimai_array[$i]."%";     
-
-		if($i < (count($seimai_array) - 1) && $seimai_array[$i + 1] != "")
+		if($bfound) 
 		{
-			 $seimai .= " / ";
+			for($i = 0; $i < count($seimai_array); $i++) 
+			{
+				if($i > 0 && $seimai_array[$i] != "") 
+				{
+					$seimai .= " / ";
+				}
+	
+				if(count($rice_array) > 0 && $i < count($rice_array)) 
+				{
+					$rice_entry = explode(',', $rice_array[$i]);
+					if($rice_entry[1] == "1") {
+						$seimai .= "麹米:";
+					} else if($rice_entry[1] == "2") {
+						$seimai .= "掛米:";
+					}
+				}
+	
+				if($seimai_array[$i])
+					$seimai .= $seimai_array[$i] ."%";
+			}
+		} 
+		else 
+		{
+			$seimai .= '<span style="color: #b2b2b2;">--</span>';
 		}
 	}
-
+	
 	return $seimai;
 }
 
