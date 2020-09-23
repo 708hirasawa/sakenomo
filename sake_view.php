@@ -4460,9 +4460,16 @@ jQuery(document).ready(function($) {
 	});
 
 	$("#personal .follow").click(function() {
-		 var data = $("#form").serialize();
-		 var sake_id = <?php echo json_encode($sake_id); ?>;
-		 //alert("follow:" + sake_id);
+		var data = $("#form").serialize();
+		var sake_id = $('#container').data('sake_id');
+		var username = $('#container').data('contributor');
+
+		//alert("follow:" + sake_id);
+		if(username == undefined || username == "")
+		{
+			window.location.href = "user_login_form.php";
+			return;
+		}
 
 		 $.ajax({
 				type: "post",

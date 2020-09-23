@@ -306,7 +306,10 @@ function GetSakeCategory($category_code)
 
 ?>
 <?php
-print('<div id="container">');
+print('<div id="container"
+              data-id=' .$id
+              .' data-contributor="' .$username
+              .'">');
 	if($row) {
 		print('<input type="hidden" id="hidden_title"				value="'  .stripslashes($row["sakagura_name"]) .'">');
 		print('<input type="hidden" id="region_name"				value="'  .$row["region_name"] .'">');
@@ -2535,7 +2538,14 @@ jQuery(document).ready(function(){
 
 		var id = <?php echo json_encode($id); ?>;
 		var data = $(this).attr("value");
+		var username = $('#container').data('contributor');
 		//alert("data1:" + data);
+
+		if(username == undefined || username == "")
+		{
+        window.location.href = "user_login_form.php";
+        return;
+		}
 
 		$.ajax({
 			type: "post",
