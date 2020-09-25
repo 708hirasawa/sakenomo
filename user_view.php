@@ -1854,7 +1854,7 @@ $(function() {
 			//var data = "search_type=" + search_type + "&category=" + category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username=" + username + "&orderby=" + orderby;
 			//var my_url = "?" + "search_type=" + search_type + "&category=" + category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&orderby=" + orderby + href;
 
-			var data =  "search_type=1" + "&category=2"  + "&from=" + in_disp_from + "&disp_max=" + disp_max;
+			var data =  "search_type=1" + "&category=2" + "&from=" + in_disp_from + "&disp_max=" + disp_max;
 
 			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
 			var username =  <?php echo json_encode($_GET['username']); ?>;
@@ -2136,6 +2136,8 @@ $(function() {
 						var limit = ((in_disp_from + p_max) >= $("#count_sake").val()) ? $("#count_sake").val() : (in_disp_from + p_max);
 						$('#disp_sake').text((parseInt($('#in_disp_from').val()) + 1) + "～" + limit + "件 / 全" + $("#count_sake").val() + "件");
 
+						//alert("count_sake:" + $("#count_sake").val())
+
 						$('#review_result_turn_page .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
 						$('#review_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
 
@@ -2234,7 +2236,7 @@ $(function() {
 		$(document).on('click', '.nomitai_set #review_result_turn_page .pageitems', function(e){
 
 				var search_type = 1;
-				var category = 2;
+				var category = 1;
 				var disp_max = 25;
 				var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text());
 				var position = $(this).index();
@@ -3043,6 +3045,7 @@ $(function() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(function() {
 
@@ -3335,7 +3338,7 @@ jQuery(document).ready(function($) {
 			if($('#all_container').data('category') == 2) {
 
 				var search_type = 1;
-				var category = 2;
+				var category = 1;
 				var username = $('#all_container').data('username');
 				var orderby = $('#order_sake').val();
 				var data = "search_type=" + search_type + "&category" + category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username=" + username;
@@ -3346,16 +3349,17 @@ jQuery(document).ready(function($) {
 				if($("#order_sakagura").val())
 					data += "&orderby=" + $("#order_sake").val();
 
-				$('#tab_sake').removeClass('nomitai_set');
-				$('#tab_sake').addClass('nonda_set');
+				$('#tab_sake').removeClass('nonda_set');
+				$('#tab_sake').addClass('nomitai_set');
 				$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
 				$('#tab_sake .diplay_selection div:nth(1)').addClass('selected');
 
+				//alert("data:" + data)
 				$("body").trigger("search_nomitai", [ in_disp_from, in_disp_to, data, true ] );
 			}
 			else {
 
-				var category = 1;
+				var category = 2;
 				var data = "category" + category + "&username=" + $('#all_container').data('username') + "&from=" + in_disp_from + "&to=" + in_disp_to;
 
 				if(count_query)

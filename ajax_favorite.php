@@ -337,11 +337,11 @@ if($_POST["search_type"] == "1")
 
 	if($count_query == 1)
 	{
-		$sql = "SELECT COUNT(*) FROM FAVORITE_J, SAKE_J, SAKAGURA_J " .$condition ." ORDER BY " .$orderby ." LIMIT ".$from.", ".$disp_max;
+		//$sql = "SELECT COUNT(*) FROM FAVORITE_J, SAKE_J, SAKAGURA_J " .$condition ." ORDER BY " .$orderby ." LIMIT ".$from.", ".$disp_max;
+		$sql = "SELECT COUNT(*) FROM FAVORITE_J, SAKE_J, SAKAGURA_J " .$condition;
 		$res = executequery($db, $sql);
 		$record = getnextrow($res); 
 		$count_result = $record["COUNT(*)"];
-
 		$sql = "SELECT SAKE_J.sake_id, SAKE_J.sake_name, SAKE_J.sake_read, SAKE_J.special_name, SAKE_J.alcohol_level, SAKE_J.rice_used, SAKE_J.seimai_rate, SAKE_J.jsake_level, SAKE_J.oxidation_level, SAKE_J.amino_level, SAKE_J.koubo_used, SAKE_J.sake_rank, SAKE_J.write_date, FAVORITE_J.favorite_date, SAKAGURA_J.sakagura_name, SAKAGURA_J.sakagura_name, SAKAGURA_J.id, SAKAGURA_J.pref, SAKAGURA_J.address, FAVORITE_J.username FROM FAVORITE_J, SAKE_J, SAKAGURA_J " .$condition ." ORDER BY " .$orderby ." LIMIT ".$from.", ".$disp_max;
 		$res = executequery($db, $sql);
 	}
@@ -351,7 +351,7 @@ if($_POST["search_type"] == "1")
 		$res = executequery($db, $sql);
 		//$count_result = count($res);
 	}
-
+	
 	if(!$res)   
 	{
 		header('Content-Type: application/json');
