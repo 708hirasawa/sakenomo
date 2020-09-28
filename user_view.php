@@ -2816,12 +2816,16 @@ $(function() {
 					if(count_result == 0 && users == null) {
 						var innerText = '<div class="navigate_page_no_registry">ユーザーをフォローしていません</div>';
 						$('#users_table').html(innerText);
+						$('#user_sort').css({"display":"none"});
+
 						//alert("count_result:" + count_result + " users:" + users);
 						$("#tab_users .search_result_count").css({"display":"none"});
 						//$('#review_result_turn_page').empty();
 						$('#userfollowpage').empty();
 					}
 					else {
+
+						$('#user_sort').css({"display":"flex"});
 
 						for(i = 0; i < users.length; i++) {
 
