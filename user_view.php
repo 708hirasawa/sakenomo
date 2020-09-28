@@ -2456,10 +2456,10 @@ $(function() {
 
 										if(sakagura[i].direct_sale == 1)
 											innerHTML += 'あり';
-										else if(sakagura[i].direct_sake == 2)
+										else if(sakagura[i].direct_sale == 2)
 											innerHTML += 'なし';
 										else
-											innerHTML += '<span style="color: #b2b2b2;">--</span>';
+												innerHTML += '<span style="color: #b2b2b2">--</span>';
 
 										innerHTML += '</div>';
 										innerHTML += '</div>';
