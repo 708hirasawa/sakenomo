@@ -144,28 +144,23 @@ function displayOxidation($db, $oxidation_level)
 
 function displaySyudo($db, $jsake_level)
 {
-	$syudo_array = explode(',', $jsake_level);
 	$syudo = "";
 
-	if(count($syudo_array) == 1)
-	{
-			$syudo = $syudo_array[0];
-	}
-	else
-	{
-		if($syudo_array[0] == $syudo_array[1])
-		{
-				$syudo = $syudo_array[0];
+	if($jsake_level == null || $jsake_level == "")
+		return $syudo;
+
+	$syudo_array = explode(',', $jsake_level);
+
+	if($syudo_array[0] != null && $syudo_array[1] != null) {
+		if($syudo_array[0] == $syudo_array[1]) {
+			$syudo .= number_format($syudo_array[0], 1);
+		} else {
+			$syudo .= number_format($syudo_array[0], 1).'～'.number_format($syudo_array[1], 1);
 		}
-		else
-		{
-			if($syudo_array[0] != null && $syudo_array[1] != null)
-				$syudo = $syudo_array[0].'～'.$syudo_array[1];
-			else if($syudo_array[0] != null && $syudo_array[1] == null)
-				$syudo = $syudo_array[0];
-			else if($syudo_array[0] == null && $syudo_array[1] != null)
-				$syudo = $syudo_array[1] ."以下";
-		}
+	} else if($syudo_array[0] != null && $syudo_array[1] == null) {
+		$syudo .= number_format($syudo_array[0], 1);
+	} else {
+		$syudo .= '<span style="color: #b2b2b2;">--<span>';
 	}
 
 	return $syudo;
@@ -389,7 +384,7 @@ if($_POST["search_type"] == "1")
 							  'alcohol_level' => displayAlcohol($row["alcohol_level"]), 
 							  'rice_used' => displayRice($db, $row["rice_used"]), 
 							  'seimai_level' => displaySeimaiRate($db, $row["rice_used"], $row["seimai_rate"]), 
-							  'jsake_level'	 => displaySyudo($db, $row["jsake_level"]),
+							  'jsake_level'	 => $row["jsake_level"],
 							  'oxidation_level' => displayOxidation($db, $row["oxidation_level"]), 
 							  'amino_level'	  => displayAminoLevel($db, $row["amino_level"]),
 							  'koubo_used'	  => $row["koubo_used"],
