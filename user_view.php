@@ -2810,7 +2810,6 @@ $(function() {
 					var sql = data[0].sql;
 
 					$('#users_table').empty();
-					//alert("sql:" + sql);
 					//alert("sql:" + sql + " count_result:" + count_result);
 
 					if(count_result == 0 && users == null) {
@@ -2820,7 +2819,6 @@ $(function() {
 
 						//alert("count_result:" + count_result + " users:" + users);
 						$("#tab_users .search_result_count").css({"display":"none"});
-						//$('#review_result_turn_page').empty();
 						$('#userfollowpage').empty();
 					}
 					else {
@@ -3286,6 +3284,11 @@ jQuery(document).ready(function($) {
 		var username = $('#all_container').data('username');
 		var favoriteuser = $('#all_container').data('username');
 		var data = "favoriteuser=" + favoriteuser;
+
+		if(loginname == null|| loginname == "") {
+			window.location.href = "user_login_form.php";
+			return;
+		}
 
 		$.ajax({
 			type: "post",
