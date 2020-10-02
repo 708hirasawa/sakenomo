@@ -1718,7 +1718,6 @@ print('<div id="container" data-category=' .$category
 							{
 									$condition = 'WHERE (sake_name LIKE "%' .$sake_name .'%" OR sake_read LIKE "%' .$sake_name .'%" OR sake_search LIKE "%' .$sake_name. '%" OR sake_english LIKE "%' .$sake_name .'%" OR sake_id LIKE "%' .$sake_name.'%")';
 							}
-
 					}
 
 					if(isset($_GET["sake_id"]) && ($_GET["sake_id"] != ""))
@@ -3244,6 +3243,95 @@ writefooter();
 
 <script type="text/javascript">
 
+var rice_items = [
+		  ["kokusanmai", "国産米", "こくさんまい"],
+          ["yamadanishiki", "山田錦", "やまだにしき"],
+          ["yamadaho", "山田穂", "やまだぼ"],
+          ["gohyakumangoku", "五百万石", "ごひゃくまんごく"],
+          ["omachi", "雄町", "おまち"],
+          ["aiyama", "愛山", "あいやま"],
+          ["akitashukomachi", "秋田酒こまち", "あきたさけこまち"],
+          ["akinosei", "秋の精", "あきのせい"],
+          ["ipponjime", "一本〆", "いっぽんじめ"],
+          ["oyamanishiki", "雄山錦", "おやまにしき"],
+          ["kairyoshinko", "改良信交", "かいりょうしんこう"],
+          ["kamenoo", "亀の尾", "かめのお"],
+          ["ginotome", "ぎんおとめ", "ぎんおとめ"],
+          ["ginginga", "吟ぎんが", "ぎんぎんが"],
+          ["ginnosato", "吟のさと", "ぎんのさと"],
+          ["ginnosei", "吟の精", "ぎんのせい"],
+          ["gimpu", "吟風", "ぎんぷう"],
+          ["ginfubuki", "吟吹雪", "ぎんふぶき"],
+          ["kinmonnishiki", "金紋錦", "きんもんにしき"],
+          ["kuranohana", "蔵の華", "くらのはな"],
+          ["koshitanrei", "越淡麗", "こしたんれい"],
+          ["koshinoshizuku", "越の雫", "こしのしずく"],
+          ["saitonoshizuku", "西都の雫", "さいとのしずく"],
+          ["sakemirai", "酒未来", "さけみらい"],
+          ["sakemusashi", "さけ武蔵", "さけむさし"],
+          ["shinriki", "神力", "しんりき"],
+          ["suisei", "彗星", "すいせい"],
+          ["senbonnishiki", "千本錦", "せんぼんにしき"],
+          ["tatsunootoshigo", "龍の落とし子", "たつのおとしご"],
+          ["tamazakae", "玉栄", "たまさかえ"],
+          ["dewasansan", "出羽燦々", "でわさんさん"],
+          ["dewanosato", "出羽の里", "でわのさと"],
+          ["hattan", "八反", "はったん"],
+          ["hattannishiki", "八反錦", "はったんにしき"],
+          ["hanaomoi", "華想い", "はなおもい"],
+          ["hanafubuki", "華吹雪", "はなふぶき"],
+          ["hitachinishiki", "ひたち錦", "ひたちにしき"],
+          ["hitogokochi", "ひとごこち", "ひとごこち"],
+          ["hohai", "豊盃", "ほうはい"],
+          ["hoshiakari", "星あかり", "ほしあかり"],
+          ["maikaze", "舞風", "まいかぜ"],
+          ["misatonishiki", "美郷錦", "みさとにしき"],
+          ["miyamanishiki", "美山錦", "みやまにしき"],
+		  ["yamasakeyongo", "山酒4号（玉苗）", "やまさけよんごう（たまなえ）"],
+          ["yuinoka", "結の香", "ゆいのか"],
+          ["yumenoka", "夢の香", "ゆめのかおり"],
+          ["wakamizu", "若水", "わかみず"],
+          ["wataribune", "渡船", "わたりぶね"],
+          ["other", "その他", "そのた"]];
+
+function GetRiceString(rice_used) {
+
+	var rice_array = rice_used.split('/');
+	var rice_text = "";
+
+	for(var i = 0; i < rice_array.length; i++) {
+		var rice_entry = rice_array[i].split(',');
+
+		rice_text += "<span>";
+
+		for(var j = 0; j < rice_items.length; j++) {
+
+			if(rice_entry[0] == rice_items[j][0]) {
+	
+				if(rice_entry[1] == "1") {
+					rice_text += "麹米:";
+				} else if(rice_entry[1] == "2") {
+					rice_text += "掛米:";
+				}
+
+				if(rice_entry[0] == "other") {
+					rice_text += (i == 0) ? rice_entry[3] : ' / ' + rice_entry[3];
+					//rice_text += rice_entry[3];
+				} else {
+					//alert("rice_array[j]:" + rice_array[i]);
+					rice_text += (i == 0) ? rice_items[j][1] : ' / ' + rice_items[j][1];
+				}
+
+				break;
+			}
+		}
+
+		rice_text += "</span>";
+	}
+
+	return rice_text;
+}
+
 //hirasawa追加ここから/////////////////////////////////////////////////////////
 /*スマホ絞り込み検索コンテンツ*/
 $(document).on('click', '#mobile_sake_searchplus', function(e){
@@ -3400,7 +3488,7 @@ $(function() {
 																if(sake[i].special_name && sake[i].special_name != "") {
 																	innerHTML += sake[i].special_name;
 																} else {
-																	innerHTML += '<span style="color: #b2b2b2;">--</span>';
+																	innerHTML += '<span style="color: #b2b2b2">--</span>';
 																}
 
 															innerHTML += '</div>';
@@ -3414,21 +3502,22 @@ $(function() {
 																	if(alcohol_array.length == 1) {
 																		innerHTML += alcohol_array[0] + '%';
 																	} else {
-																		if(alcohol_array[0] == alcohol_array[1]) {
+																		if(alcohol_array[0] == alcohol_array[1] && alcohol_array[0] != "") {
 																			innerHTML += alcohol_array[0] + '%';
 																		} else if(alcohol_array[0] != "" && alcohol_array[1] != "") {
 																			innerHTML += alcohol_array[0] + '～' + alcohol_array[1] + '%';
 																		} else if(alcohol_array[0] != "" && alcohol_array[1] == "") {
 																			innerHTML += alcohol_array[0] + '%';
+																		} else {
+																			innerHTML += '<span style="color: #b2b2b2">--</span>';
 																		}
 																	}
 																} else {
-																	innerHTML += '<span style="color: #b2b2b2;">--</span>';
+																	innerHTML += '<span style="color: #b2b2b2">--</span>';
 																}
 
 																innerHTML += '</div>';
 															innerHTML += '</div>';
-
 
 															///////////////////////////////////////////////////////////////
 															innerHTML += '<div class="spec_item">';
@@ -3436,9 +3525,9 @@ $(function() {
 															innerHTML += '<div class="spec_info">';
 
 																if(sake[i].rice_used != null && sake[i].rice_used != "") {
-																	innerHTML += sake[i].rice_used;
+																	innerHTML += GetRiceString(sake[i].rice_used);
 																} else {
-																	innerHTML += '<span style="color: #b2b2b2;">--</span>';
+																	innerHTML += '<span style="color: #b2b2b2">--</span>';
 																}
 
 															innerHTML += '</div>';
@@ -3873,77 +3962,6 @@ $(function() {
 // sake mode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 $(function() {
-
-	var rice_items = [
-		  ["kokusanmai", "国産米", "こくさんまい"],
-          ["yamadanishiki", "山田錦", "やまだにしき"],
-          ["yamadaho", "山田穂", "やまだぼ"],
-          ["gohyakumangoku", "五百万石", "ごひゃくまんごく"],
-          ["omachi", "雄町", "おまち"],
-          ["aiyama", "愛山", "あいやま"],
-          ["akitashukomachi", "秋田酒こまち", "あきたさけこまち"],
-          ["akinosei", "秋の精", "あきのせい"],
-          ["ipponjime", "一本〆", "いっぽんじめ"],
-          ["oyamanishiki", "雄山錦", "おやまにしき"],
-          ["kairyoshinko", "改良信交", "かいりょうしんこう"],
-          ["kamenoo", "亀の尾", "かめのお"],
-          ["ginotome", "ぎんおとめ", "ぎんおとめ"],
-          ["ginginga", "吟ぎんが", "ぎんぎんが"],
-          ["ginnosato", "吟のさと", "ぎんのさと"],
-          ["ginnosei", "吟の精", "ぎんのせい"],
-          ["gimpu", "吟風", "ぎんぷう"],
-          ["ginfubuki", "吟吹雪", "ぎんふぶき"],
-          ["kinmonnishiki", "金紋錦", "きんもんにしき"],
-          ["kuranohana", "蔵の華", "くらのはな"],
-          ["koshitanrei", "越淡麗", "こしたんれい"],
-          ["koshinoshizuku", "越の雫", "こしのしずく"],
-          ["saitonoshizuku", "西都の雫", "さいとのしずく"],
-          ["sakemirai", "酒未来", "さけみらい"],
-          ["sakemusashi", "さけ武蔵", "さけむさし"],
-          ["shinriki", "神力", "しんりき"],
-          ["suisei", "彗星", "すいせい"],
-          ["senbonnishiki", "千本錦", "せんぼんにしき"],
-          ["tatsunootoshigo", "龍の落とし子", "たつのおとしご"],
-          ["tamazakae", "玉栄", "たまさかえ"],
-          ["dewasansan", "出羽燦々", "でわさんさん"],
-          ["dewanosato", "出羽の里", "でわのさと"],
-          ["hattan", "八反", "はったん"],
-          ["hattannishiki", "八反錦", "はったんにしき"],
-          ["hanaomoi", "華想い", "はなおもい"],
-          ["hanafubuki", "華吹雪", "はなふぶき"],
-          ["hitachinishiki", "ひたち錦", "ひたちにしき"],
-          ["hitogokochi", "ひとごこち", "ひとごこち"],
-          ["hohai", "豊盃", "ほうはい"],
-          ["hoshiakari", "星あかり", "ほしあかり"],
-          ["maikaze", "舞風", "まいかぜ"],
-          ["misatonishiki", "美郷錦", "みさとにしき"],
-          ["miyamanishiki", "美山錦", "みやまにしき"],
-          ["other", "その他", "そのた"]];
-
-		function GetRiceString(rice_used) {
-
-			var rice_array = rice_used.split('/');
-			var rice_text = "";
-
-			for(var i = 0; i < rice_array.length; i++)
-			{
-				var rice_entry = rice_array[i].split(',');
-
-				rice_text += "<span>";
-
-				for(var j = 0; j < rice_items.length; j++) {
-					if(rice_entry[0] == rice_items[j][0]) {
-						//alert("rice_array[j]:" + rice_array[i]);
-						rice_text += (i == 0) ? rice_items[j][1] : ' / ' + rice_items[j][1];
-						break;
-					}
-				}
-
-				rice_text += "</span>";
-			}
-
-			return rice_text;
-		}
 
 		function sake_serialize(in_disp_from, in_disp_to) {
 
@@ -4492,7 +4510,7 @@ $(function() {
 				var position = parseInt($(this).text());
 				var p_max = 25;
 				var in_disp_from = (position - 1) * p_max;
-				var in_disp_to = parseInt($("#in_disp_sake_from").val()) + 25;
+				var in_disp_to = in_disp_from + 25;
 
 				$('#category').val(2);
 				$('#sakepage .search_button.pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
