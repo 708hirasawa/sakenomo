@@ -1216,13 +1216,13 @@ print('<div id="container" data-category=' .$category
 					print('<input type="hidden" id="hidden_all_count_query" name="count_all_query" value=' .$count_result .'>');
 					//$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." ORDER BY sake_read"." LIMIT ".$from.", ".$to;
 
-					$sql  = 'SELECT			SAKE_J.sake_id AS id, sake_name, SAKE_J.sake_rank AS rank, SAKE_J.write_update AS write_date, sakagura_name, special_name, sake_category, alcohol_level, jsake_level, rice_used, seimai_rate, setting, postal_code, pref, address, brand ';
+					$sql  = 'SELECT			SAKE_J.sake_id AS id, sake_name, SAKE_J.sake_rank AS rank, SAKE_J.write_update AS write_date, sakagura_name, special_name, sake_category, alcohol_level, jsake_level, rice_used, seimai_rate, setting, postal_code, pref, address, SAKE_J.sake_id as observation, SAKE_J.sake_id as direct_sale, SAKE_J.sake_id as brand ';
 					$sql .=	' FROM			SAKE_J, SAKAGURA_J ' .$condition1;
 					$sql .= ' UNION ';
-					$sql .= ' SELECT		SAKAGURA_J.id AS id, SAKAGURA_J.sakagura_name, SAKAGURA_J.rank AS rank,	SAKAGURA_J.date_updated AS write_date, null, null, null, null, null, null, null, null, postal_code, pref, address, brand ';
+					$sql .= ' SELECT		SAKAGURA_J.id AS id, SAKAGURA_J.sakagura_name, SAKAGURA_J.rank AS rank,	SAKAGURA_J.date_updated AS write_date, null, null, null, null, null, null, null, null, postal_code, pref, address, observation, direct_sale, brand ';
 					$sql .= ' FROM			SAKAGURA_J ' .$condition2;
 					//$sql .= ' UNION ';
-					//$sql .= '	SELECT		SYUHANTEN_J.syuhanten_id AS id, SYUHANTEN_J.syuhanten_name, SYUHANTEN_J.syuhanten_rank AS rank,	SYUHANTEN_J.date_added AS write_date, null, null, null, null, null, null, null, null, syuhanten_postal_code AS postal_code, syuhanten_pref, syuhanten_address AS address, null ';
+					//$sql .= '	SELECT		SYUHANTEN_J.syuhanten_id AS id, SYUHANTEN_J.syuhanten_name, SYUHANTEN_J.syuhanten_rank AS rank,	SYUHANTEN_J.date_added AS write_date, null, null, null, null, null, null, null, null, syuhanten_postal_code AS postal_code, syuhanten_pref, syuhanten_address AS address, null, null, null ';
 					//$sql .= ' FROM			SYUHANTEN_J ' .$condition3;
 					$sql .= '	LIMIT '		.$from .', ' .$p_max;
 
@@ -3518,6 +3518,7 @@ $(function() {
 
 																innerHTML += '</div>';
 															innerHTML += '</div>';
+
 
 															///////////////////////////////////////////////////////////////
 															innerHTML += '<div class="spec_item">';

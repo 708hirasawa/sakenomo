@@ -290,13 +290,13 @@ if($_POST["category"] == 1)
 		$count_result = $count_result1 + $count_result2; // + $count_result3;
 	}
 
-	$sql  = 'SELECT			SAKE_J.sake_id AS id, sake_name, SAKE_J.sake_rank AS rank, SAKE_J.write_update AS write_date, sakagura_name, special_name, sake_category, alcohol_level, jsake_level, rice_used, seimai_rate, postal_code, pref, address ';
+	$sql  = 'SELECT			SAKE_J.sake_id AS id, sake_name, SAKE_J.sake_rank AS rank, SAKE_J.write_update AS write_date, sakagura_name, special_name, sake_category, alcohol_level, jsake_level, rice_used, seimai_rate, postal_code, pref, address, SAKE_J.sake_id as observation, SAKE_J.sake_id as direct_sale, SAKE_J.sake_id as brand ';
 	$sql .=	' FROM			SAKE_J, SAKAGURA_J ' .$condition1;
 	$sql .= ' UNION ';
-	$sql .= ' SELECT		SAKAGURA_J.id AS id, SAKAGURA_J.sakagura_name, SAKAGURA_J.rank AS rank, SAKAGURA_J.date_updated AS write_date, null, null, null, null, null, null, null, postal_code, pref, address '; 
+	$sql .= ' SELECT		SAKAGURA_J.id AS id, SAKAGURA_J.sakagura_name, SAKAGURA_J.rank AS rank, SAKAGURA_J.date_updated AS write_date, null, null, null, null, null, null, null, postal_code, pref, address, observation, direct_sale, brand '; 
 	$sql .= ' FROM			SAKAGURA_J ' .$condition2;
 	//$sql .= ' UNION ';
-	//$sql .= ' SELECT		SYUHANTEN_J.syuhanten_id AS id, SYUHANTEN_J.syuhanten_name, SYUHANTEN_J.syuhanten_rank AS rank, SYUHANTEN_J.date_added AS write_date, null, null, null, null, null, null, null, syuhanten_postal_code AS postal_code, syuhanten_pref, syuhanten_address AS address ';
+	//$sql .= ' SELECT		SYUHANTEN_J.syuhanten_id AS id, SYUHANTEN_J.syuhanten_name, SYUHANTEN_J.syuhanten_rank AS rank, SYUHANTEN_J.date_added AS write_date, null, null, null, null, null, null, null, syuhanten_postal_code AS postal_code, syuhanten_pref, syuhanten_address AS address, null, null, null ';
 	//$sql .= ' FROM			SYUHANTEN_J ' .$condition3;
 	$sql .= ' LIMIT	'	   .$from .', ' .$to;
 
@@ -403,10 +403,13 @@ if($_POST["category"] == 1)
 								'alcohol_level' => $row["alcohol_level"], 
 								'jsake_level' => $row["jsake_level"], 
 								'seimai_rate' => $row["seimai_rate"], 
-								'rice_used' => $rice_text, 
+								'rice_used' => $row["rice_used"], // $rice_text, 
 								'postal_code' => $row["postal_code"], 
 								'pref' => $row["pref"], 
 								'address' => $row["address"], 
+								'observation' => $row["observation"], 
+								'direct_sale' => $row["direct_sale"], 
+								'brand' => $row["brand"], 
 								'write_date' => $intime);
 		}
 	}
