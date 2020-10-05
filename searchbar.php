@@ -105,7 +105,7 @@ function write_search_bar()
               print('<!--<div class="border_line"></div>-->');
 
               print('<div class="input_item">');
-                print('<input id="sake_input" class="all_mode" autocomplete="off" placeholder="日本酒、酒蔵を検索" type="text" name="keyword" value =' .$keyword .'>');
+                print('<input id="sake_input" class="all_mode" autocomplete="off" placeholder="日本酒、酒蔵を検索" type="text" name="keyword" value ="' .$keyword .'">');
                 print('<ul id="sake_content"></ul>');
               print('</div>');
 
