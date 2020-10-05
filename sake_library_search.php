@@ -3641,6 +3641,7 @@ $(function() {
 													/////////////////////////////////////////////////
 													innerHTML += '<div class="sakagura_spec_item">';
 													innerHTML += '<span class="sakagura_spec_title"><svg class="spec_item_visit1616"><use xlink:href="#visit1616"/></svg>酒蔵見学</span>';
+
 													innerHTML += '<span class="sakagura_spec_info">';
 														if(sake[i].observation == 1)
 															innerHTML += '可';
@@ -3653,11 +3654,12 @@ $(function() {
 
 													/////////////////////////////////////////////////
 													innerHTML += '<div class="sakagura_spec_item">';
-													innerHTML += '<span class="sakagura_spec_title"><svg class="spec_item_visit1616"><use xlink:href="#visit1616"/></svg>酒蔵直販店</span>';
+													innerHTML += '<span class="sakagura_spec_title"><svg class="spec_item_kurashop1616"><use xlink:href="#kurashop1616"/></svg>酒蔵直販店</span>';
+
 													innerHTML += '<span class="sakagura_spec_info">';
 														if(sake[i].direct_sale == 1)
 															innerHTML += 'あり';
-														else if(sake[i].direct_sake == 2)
+														else if(sake[i].direct_sale == 2)
 															innerHTML += 'なし';
 														else
 															innerHTML += '<span style="color: #b2b2b2;">--</span>';
@@ -4824,7 +4826,7 @@ $(function() {
 
 												if(sakagura[i].direct_sale == 1)
 													innerHTML += 'あり';
-												else if(sakagura[i].direct_sake == 2)
+												else if(sakagura[i].direct_sale == 2)
 													innerHTML += 'なし';
 												else
 													innerHTML += '<span style="color: #b2b2b2;">--</span>';
