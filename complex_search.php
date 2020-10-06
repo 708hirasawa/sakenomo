@@ -2,62 +2,72 @@
 require_once("db_functions.php");
 header('Content-type: text/html; charset=UTF-8');
 
-function GetSakeSpecialName($sake_code)
+function GetSakeSpecialName($special_name)
 {
-	if($sake_code == "11")
+	$sake_code = explode(',', $special_name);
+
+	if($sake_code[0] == "11")
 	{
 		$retval = "普通酒";
 		return $retval;
 	}
-	else if($sake_code == "21")
+	else if($sake_code[0] == "21")
 	{
 		$retval = "本醸造酒";
 		return $retval;
 	}
-	else if($sake_code == "22")
+	else if($sake_code[0] == "22")
 	{
 		$retval = "特別本醸造酒";
 		return $retval;
 	}
-	else if($sake_code == "31")
+	else if($sake_code[0] == "31")
 	{
 		$retval = "純米酒";
 		return $retval;
 	}
-	else if($sake_code == "32")
+	else if($sake_code[0] == "32")
 	{
 		$retval = "特別純米酒";
 		return $retval;
 	}
-	else if($sake_code == "33")
+	else if($sake_code[0] == "33")
 	{
 		$retval = "純米吟醸酒";
 		return $retval;
 	}
-	else if($sake_code == "34")
+	else if($sake_code[0] == "34")
 	{
 		$retval = "純米大吟醸酒";
 		return $retval;
 	}
-	else if($sake_code == "43")
+	else if($sake_code[0] == "43")
 	{
 		$retval = "吟醸酒";
 		return $retval;
 	}
-	else if($sake_code == "44")
+	else if($sake_code[0] == "44")
 	{
 		$retval = "大吟醸酒";
 		return $retval;
 	}
-	else if($sake_code == "90")
+	else if($sake_code[0] == "45")
 	{
-		$retval = "その他";
+		$retval = "非公開";
 		return $retval;
 	}
-	else if($sake_code == "99")
+	else if($sake_code[0] == "90")
 	{
-		$retval = "不明";
-		return $retval;
+		if(count($sake_code) > 1) 
+		{
+			$retval = $sake_code[1];
+			return $retval;
+		}
+		else 
+		{
+			$retval = "その他";
+			return $retval;
+		}
 	}
 	else
 	{
@@ -585,11 +595,11 @@ else if($_POST["category"] == 2)
 
 			if($condition == "")
 			{
-				$condition = "WHERE special_name ='" .$special_name. "'";
+				$condition = "WHERE special_name like '%" .$special_name. "%'";
 			}
 			else
 			{
-				$condition .= " AND special_name ='" .$special_name. "'";
+				$condition .= " AND special_name like '%" .$special_name. "%'";
 			}
 		}
 	}

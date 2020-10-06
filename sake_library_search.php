@@ -399,7 +399,7 @@ print('<div id="container" data-category=' .$category
 										<OPTION VALUE="34">純米大吟醸酒</OPTION>
 										<OPTION VALUE="43">吟醸酒</OPTION>
 										<OPTION VALUE="44">大吟醸酒</OPTION>
-										<OPTION VALUE="99">非公開</OPTION>
+										<OPTION VALUE="45">非公開</OPTION>
 										<OPTION VALUE="90">その他</OPTION>
 									</SELECT>
 
@@ -418,7 +418,7 @@ print('<div id="container" data-category=' .$category
 											<label><li><input type="checkbox" name="special_name[]" value="34">純米大吟醸酒</li></label>
 											<label><li><input type="checkbox" name="special_name[]" value="43">吟醸酒</li></label>
 											<label><li><input type="checkbox" name="special_name[]" value="44">大吟醸酒</li></label>
-											<label><li><input type="checkbox" name="special_name[]" value="99">非公開</li></label>
+											<label><li><input type="checkbox" name="special_name[]" value="45">非公開</li></label>
 				 							<label><li><input type="checkbox" name="special_name[]" value="90">その他</li></label>
 										</ul>
 									</div>-->
@@ -1339,11 +1339,14 @@ print('<div id="container" data-category=' .$category
 
 												if($row["special_name"]) {
 													$special_name_array = explode(',', $row["special_name"]);
+
 													if($special_name_array[0] == "90") {
+														print(GetSakeSpecialName($special_name_array[0]));
 														print($special_name_array[1]);
 													} else {
 														print(GetSakeSpecialName($special_name_array[0]));
 													}
+
 												} else {
 													print('<span style="color: #b2b2b2;">--</span>');
 												}
@@ -2401,18 +2404,21 @@ print('<div id="container" data-category=' .$category
 									print('<div class="spec_item">');
 										print('<div class="spec_title"><svg class="spec_item_tokuteimeisho1616"><use xlink:href="#tokuteimeisho1616"/></svg>特定名称</div>');
 										print('<div class="spec_info">');
-
 											if($row["special_name"]) {
 												$special_name_array = explode(',', $row["special_name"]);
 												if($special_name_array[0] == "90") {
-													print($special_name_array[1]);
+													if(count($special_name_array) > 1) {
+														print($special_name_array[1]);
+													}
+													else {
+														print("その他");
+													}
 												} else {
 													print(GetSakeSpecialName($special_name_array[0]));
 												}
 											} else {
 												print('<span style="color: #b2b2b2;">--</span>');
 											}
-
 										print('</div>');
 									print('</div>');
 									/////////////////////////////////////////////////
@@ -4170,7 +4176,6 @@ $(function() {
 										innerHTML += '</div>';*/
 
 								innerHTML += '</div>';
-
 
 								// 酒ランク ////////////////////////////////////////////////
 								var rank_width = (sake[i].sake_rank / 5) * 100 + '%';
