@@ -2035,99 +2035,47 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 
-					if(!empty($_GET['seimai_rate']))
+					if(is_array($_GET['seimai_rate'])) 
 					{
-						$expr = "";
-
-						foreach($_GET['seimai_rate'] as $selected)
+						if(!empty($_GET['seimai_rate']))
 						{
-							if($selected == "1")
+							$expr = "";
+				
+							foreach($_GET['seimai_rate'] as $selected)
 							{
 								if($expr == "")
 								{
-									$expr = "substr(seimai_rate, 0, 3) > \"71\"";
+									$expr = "seimai_rate LIKE \"%".$selected."%\"";
 								}
 								else
 								{
-									$expr .= " or (substr(seimai_rate, 0, 3) > \"71\")";
+									$expr .= " OR seimai_rate LIKE \"%".$selected."%\"";
 								}
+							}	
+				
+							if($condition == "")
+							{
+								$condition = "WHERE (" .$expr ." ) ";
 							}
-							else if($selected == "2")
+							else
 							{
-								if($expr == "")
-								{
-
-									$expr = "(substr(seimai_rate, 0, 3) >= \"61\" and substr(seimai_rate, 0, 3) < \"70\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"61\" and  substr(seimai_rate, 0, 3) < \"70\")";
-								}
-							}
-							else if($selected == "3")
-							{
-								if($expr == "")
-								{
-									$expr = "(substr(seimai_rate, 0, 3) >= \"51\" and substr(seimai_rate, 0, 3) < \"60\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"51\" and  substr(seimai_rate, 0, 3) < \"60\")";
-								}
-							}
-							else if($selected == "4")
-							{
-								if($expr == "")
-								{
-									$expr = "(substr(seimai_rate, 0, 3) >= \"41\" and substr(seimai_rate, 0, 3) < \"50\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"41\" and  substr(seimai_rate, 0, 3) < \"50\")";
-								}
-							}
-							else if($selected == "5")
-							{
-								if($expr == "")
-								{
-									$expr = "(substr(seimai_rate, 0, 3) >= \"31\" and substr(seimai_rate, 0, 3) < \"40\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"31\" and  substr(seimai_rate, 0, 3) < \"40\")";
-								}
-							}
-							else if($selected == "6")
-							{
-								if($expr == "")
-								{
-									$expr = "(substr(seimai_rate, 0, 3) >= \"21\" and substr(seimai_rate, 0, 3) < \"30\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"21\" and substr(seimai_rate, 0, 3) < \"30\")";
-								}
-							}
-							else if($selected == "7")
-							{
-								if($expr == "")
-								{
-									$expr = "substr(seimai_rate, 0, 3) < \"20\"";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) < \"20\")";
-								}
+								$condition .= " AND (" .$expr ." ) ";
 							}
 						}
-
-						if($condition == "")
+					}
+					else {
+						if(isset($_GET["seimai_rate"]) && ($_GET["seimai_rate"] != ""))
 						{
-							$condition = "WHERE (" .$expr ." ) ";
-						}
-						else
-						{
-							$condition .= "AND (" .$expr ." ) ";
+							$seimai_rate = $_GET["seimai_rate"];
+				
+							if($condition == "")
+							{
+								$condition = "WHERE seimai_rate ='" .$seimai_rate. "'";
+							}
+							else
+							{
+								$condition .= " AND seimai_rate ='" .$seimai_rate. "'";
+							}
 						}
 					}
 
@@ -2279,6 +2227,8 @@ print('<div id="container" data-category=' .$category
 					}
 
 					$sql = "SELECT COUNT(*) FROM SAKE_J, SAKAGURA_J ".$condition;
+					//print('<div>sql' .$sql .'</div>');
+
 					$res = executequery($db, $sql);
 					$row = getnextrow($res);
 					$count_result = $row["COUNT(*)"];

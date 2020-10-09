@@ -1,11 +1,11 @@
-<?php
+ï»¿<?php
 
 require_once("db_functions.php");
 $username = $_COOKIE['login_cookie'];
 
 if(!$db = opendatabase("sake.db"))
 {
-	die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
+	die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
 }
 
 if(isset($_POST["search_text"]) && ($_POST["search_text"] != ""))
@@ -13,7 +13,7 @@ if(isset($_POST["search_text"]) && ($_POST["search_text"] != ""))
 	$sake_name = sqlite3::escapeString($_POST["search_text"]);
 	//$sake_name = str_replace("%", "\%", $sake_name);
 
-	$sake_name = str_replace("@", " ", $sake_name);
+	$sake_name = str_replace("ã€€", " ", $sake_name);
 	$keyword_elements = explode(' ', $sake_name);
 	$condition = "";
 
@@ -75,7 +75,7 @@ else
 }
 
 /**************
- * ğ‘ 
+ * é…’è”µ
  **************/
 
 $condition = "WHERE sakagura_name LIKE \"" .$sake_name. "%\" OR sakagura_read LIKE \"" .$sake_name."%\" OR sakagura_search LIKE \"%" .$sake_name."%\"";
@@ -95,7 +95,7 @@ else
 }
 
 /**************
- * ğ”Ì“X
+ * é…’è²©åº—
  **************/
 
 $condition = "WHERE syuhanten_name LIKE \"" .$sake_name. "%\" OR syuhanten_read LIKE \"" .$sake_name."%\"";
