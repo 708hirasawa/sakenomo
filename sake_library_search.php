@@ -1857,11 +1857,10 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 
-					//////////////////////////////////////
 					if(!empty($_GET['sake_category']))
 					{
 						$expr = "";
-
+				
 						foreach($_GET['sake_category'] as $selected)
 						{
 							if($expr == "")
@@ -1872,21 +1871,18 @@ print('<div id="container" data-category=' .$category
 							{
 								$expr .= " AND sake_category LIKE \"%".$selected."%\"";
 							}
-						}
-
-						//print('<div>' .$expr .'</div>');
+						}	
+				
 						if($condition == "")
 						{
-							//$condition = "WHERE (" .$expr ."%\") ";
 							$condition = "WHERE (" .$expr ." ) ";
 						}
 						else
 						{
-							//$condition .= "AND (" .$expr ."%\") ";
-							$condition .= "AND (" .$expr ." ) ";
+							$condition .= " AND (" .$expr ." ) ";
 						}
 					}
-
+					
 					if(!empty($_GET['jsake_level']))
 					{
 						$expr = "";
