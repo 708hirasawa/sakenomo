@@ -211,7 +211,7 @@ $from = ($page - 1) * $p_max;
 $to = $from + $p_max;
 $sake_category = $_GET['sake_category'];
 
-if(!empty($_POST['sake_category']))
+if(!empty($_GET['sake_category']))
 	$sake_category = implode(',', $_GET['sake_category']);
 
 print('<div id="container" data-category=' .$category
@@ -1715,11 +1715,11 @@ print('<div id="container" data-category=' .$category
 										}
 									}
 
-									$condition = 'WHERE (' .$expression .')';
+									$condition = 'WHERE (' .$expression .') ';
 							}
 							else
 							{
-									$condition = 'WHERE (sake_name LIKE "%' .$sake_name .'%" OR sake_read LIKE "%' .$sake_name .'%" OR sake_search LIKE "%' .$sake_name. '%" OR sake_english LIKE "%' .$sake_name .'%" OR sake_id LIKE "%' .$sake_name.'%")';
+									$condition = 'WHERE (sake_name LIKE "%' .$sake_name .'%" OR sake_read LIKE "%' .$sake_name .'%" OR sake_search LIKE "%' .$sake_name. '%" OR sake_english LIKE "%' .$sake_name .'%" OR sake_id LIKE "%' .$sake_name.'%") ';
 							}
 					}
 
@@ -1784,17 +1784,48 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 
-					if(isset($_GET["pref"]) && ($_GET["pref"] != ""))
+					if(is_array($_GET['pref'])) 
 					{
-						$pref = $_GET['pref'];
-
-						if($condition == "")
+						if(!empty($_GET['pref']))
 						{
-							$condition = "WHERE (" ."pref LIKE \"%".$pref."%\"" ." ) ";
+							$expr = "";
+				
+							foreach($_GET['pref'] as $selected)
+							{
+								if($expr == "")
+								{
+									$expr = "pref LIKE \"%".$selected."%\"";
+								}
+								else
+								{
+									$expr .= " OR pref LIKE \"%".$selected."%\"";
+								}
+							}	
+				
+							if($condition == "")
+							{
+								$condition = "WHERE (" .$expr ." ) ";
+							}
+							else
+							{
+								$condition .= " AND (" .$expr ." ) ";
+							}
 						}
-						else
+					}
+					else
+					{
+						if(isset($_GET["pref"]) && ($_GET["pref"] != ""))
 						{
-							$condition .= "AND (" ." OR pref LIKE \"%".$pref."%\"" ." ) ";
+							$pref = $_GET["pref"];
+				
+							if($condition == "")
+							{
+								$condition = "WHERE pref ='" .$pref. "'";
+							}
+							else
+							{
+								$condition .= " AND pref ='" .$pref. "'";
+							}
 						}
 					}
 
@@ -2227,7 +2258,7 @@ print('<div id="container" data-category=' .$category
 					}
 
 					$sql = "SELECT COUNT(*) FROM SAKE_J, SAKAGURA_J ".$condition;
-					//print('<div>sql' .$sql .'</div>');
+					//print('<div>sql:' .$sql .'</div>');
 
 					$res = executequery($db, $sql);
 					$row = getnextrow($res);
@@ -2241,7 +2272,7 @@ print('<div id="container" data-category=' .$category
 					//$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." ORDER BY sake_read"." LIMIT ".$from.", ".$to;
 					$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." LIMIT ".$from.", ".$p_max;
 					$res = executequery($db, $sql);
-					//print('<div>' .$sql .'</div>');
+					//print('<div>' .$sql: .'</div>');
 
 					///////////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
