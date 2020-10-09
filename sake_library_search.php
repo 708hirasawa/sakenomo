@@ -211,9 +211,6 @@ $from = ($page - 1) * $p_max;
 $to = $from + $p_max;
 $sake_category = $_GET['sake_category'];
 
-if(!empty($_GET['sake_category']))
-	$sake_category = implode(',', $_GET['sake_category']);
-
 print('<div id="container" data-category=' .$category
 							.' data-from=' .$from
 							.' data-to' .$to
