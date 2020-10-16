@@ -454,44 +454,9 @@ require_once("searchbar.php");
 			print('</div>');
 		print('</div>');
 
-			print('<ul class="user_activity_info">');
-        //飲んだ
-        print('<li>');
-          print('<span><svg class="user_activity_info_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span>');
-          print('<span id="user_activity_nonda">' .$nonda_count .'</span>');
-        print('</li>');
-        // お気に入り酒蔵
-        print('<li>');
-          print('<span><svg class="user_activity_info_brewery2016"><use xlink:href="#brewery2016"/></svg>お気に入り酒蔵</span>');
-          print('<span id="user_activity_sakagura">' .$count_sakagura .'</span>');
-        print('</li>');
-
-        /*
-        //お気に入り飲食店
-        print('<li>');
-          print('<span><svg class="user_activity_info_restaurant1816"><use xlink:href="#restaurant1816"/></svg>お気に入り飲食店</span>');
-          print('<span id="user_activity_restaurant">no code</span>');
-        print('</li>');
-        //お気に入り酒販店
-        print('<li>');
-          print('<span><svg class="user_activity_info_store3030"><use xlink:href="#store3030"/></svg>お気に入り酒販店</span>');
-          print('<span id="user_activity_store">no code</span>');
-        print('</li>');
-        //フォロー中
-        print('<li>');
-          print('<span><svg class="user_activity_info_pin1616"><use xlink:href="#pin1616"/></svg>フォロー中</span>');
-          print('<span id="user_activity_follow">no code</span>');
-        print('</li>');
-        //フォロワー
-        print('<li>');
-          print('<span><svg class="user_activity_info_people1616"><use xlink:href="#people1616"/></svg>フォロワー</span>');
-          print('<span id="user_activity_follower">no code</span>');
-        print('</li>');*/
-      print("</ul>");
-
 			//マイページタブリンク
 			print('<div class="mypage_top_link_container">');
-				print('<a href="user_view.php?username=' .$username .'" class="mypage_top_link"><span>トップへ</span></a>');
+				print('<a href="user_view.php?username=' .$username .'" class="mypage_top_link"><svg class="mypage_top_link_person2020"><use xlink:href="#person2020"/></svg><span>マイページトップへ</span></a>');
 			print("</div>");
 
 		print("</div>");
@@ -1212,12 +1177,12 @@ require_once("searchbar.php");
 				print('</div>');
 
 				//次へ前へ
-				print('<div class="next_prev_container">');
+				/*非表示中print('<div class="next_prev_container">');
 					print('<div class="next_prev_bar">');
 						print('<a id="prev_button" href="">前へ</a>');
 						print('<a id="next_button" href="">次へ</a>');
 					print("</div>");
-				print('</div>');
+				print('</div>');*/
 
 			print("</div>");
 
