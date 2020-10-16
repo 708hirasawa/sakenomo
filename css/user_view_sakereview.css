@@ -296,66 +296,6 @@
 }
 
 /************************************************************/
-.user_activity_info {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 12px;
-  line-height: 180%;
-  margin-top: 4px;
-}
-
-.user_activity_info li {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 4px;
-  margin-right: 15px;
-}
-
-.user_activity_info li:last-child {
-  margin-right: 0px;
-}
-
-.user_activity_info li span {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-#user_activity_nonda, #user_activity_sakagura, #user_activity_restaurant, #user_activity_store, #user_activity_follow, #user_activity_follower {
-  font-weight: bold;
-  margin-left: 4px;
-}
-
-.user_activity_info_heart2020, .user_activity_info_store3030, .user_activity_info_pin1616, .user_activity_info_people1616 {
-  fill: #b2b2b2;
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-}
-
-.user_activity_info_brewery2016 {
-  fill: #b2b2b2;
-  width: 20px;
-  height: 16px;
-  margin-right: 5px;
-}
-
-.user_activity_info_restaurant1816 {
-  fill: #b2b2b2;
-  width: 18px;
-  height: 16px;
-  margin-right: 5px;
-}
-
-/************************************************************/
 .mypage_top_link_container {
   display: flex;
   flex-wrap: nowrap;
@@ -373,36 +313,20 @@
   justify-content: flex-start;
   align-items: center;
   text-decoration: none;
-}
-
-.mypage_top_link span {
-  position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  color: #666666;
-  font-size: 14px;
-  font-weight: bold;
-  padding-left: 16px;
   margin-left: 8px;
 }
 
-.mypage_top_link span:after {
-  content:"\00a0";
-  display:block;
-  width: 8px;
-  height: 8px;
-  border: solid #b2b2b2;
-  border-width: 0 3px 3px 0;
-  position:absolute;
-  left: 2px;
-  top: 1px;
-  -webkit-transform: rotate(135deg);
-  -moz-transform: rotate(135deg);
-  -o-transform: rotate(135deg);
-  transform: rotate(135deg);
+.mypage_top_link_person2020 {
+  fill: #8c8c8c;
+  width: 16px;
+  height: 16px;
+}
+
+.mypage_top_link span {
+  color: #666666;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 5px;
 }
 
 /*user_sake_review*******************/
