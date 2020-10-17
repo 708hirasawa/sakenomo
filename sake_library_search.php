@@ -1704,32 +1704,32 @@ print('<div id="container" data-category=' .$category
 
 					if(isset($_GET["keyword"]) && ($_GET["keyword"] != ""))
 					{
-							$sake_name = sqlite3::escapeString($_GET["keyword"]);
-							$sake_name = str_replace("　", " ", $sake_name);
-							$keyword_elements = explode(' ', $sake_name);
-							$condition1 = "";
+						$sake_name = sqlite3::escapeString($_GET["keyword"]);
+						$sake_name = str_replace("　", " ", $sake_name);
+						$keyword_elements = explode(' ', $sake_name);
+						$condition1 = "";
 
-							if(count($keyword_elements) > 1)
-							{
-									$expression = "";
+						if(count($keyword_elements) > 1)
+						{
+							$expression = "";
 
-									foreach($keyword_elements as $element) {
-										if($expression == "")
-										{
-											$expression = '(sake_name LIKE "%' .$element .'%" OR sake_read LIKE "%' .$element. '%" OR sake_search LIKE "%' .$element. '%" OR sake_english LIKE "%' .$element .'%" OR sake_id LIKE "%' .$element .'%")';
-										}
-										else
-										{
-											$expression .= ' AND (sake_name LIKE "%' .$element .'%" OR sake_read LIKE "%' .$element. '%" OR sake_search LIKE "%' .$element. '%" OR sake_english LIKE "%' .$element .'%" OR sake_id LIKE "%' .$element .'%")';
-										}
-									}
-
-									$condition = 'WHERE (' .$expression .') ';
+							foreach($keyword_elements as $element) {
+								if($expression == "")
+								{
+									$expression = '(sake_name LIKE "%' .$element .'%" OR sake_read LIKE "%' .$element. '%" OR sake_search LIKE "%' .$element. '%" OR sake_english LIKE "%' .$element .'%" OR sake_id LIKE "%' .$element .'%")';
+								}
+								else
+								{
+									$expression .= ' AND (sake_name LIKE "%' .$element .'%" OR sake_read LIKE "%' .$element. '%" OR sake_search LIKE "%' .$element. '%" OR sake_english LIKE "%' .$element .'%" OR sake_id LIKE "%' .$element .'%")';
+								}
 							}
-							else
-							{
-									$condition = 'WHERE (sake_name LIKE "%' .$sake_name .'%" OR sake_read LIKE "%' .$sake_name .'%" OR sake_search LIKE "%' .$sake_name. '%" OR sake_english LIKE "%' .$sake_name .'%" OR sake_id LIKE "%' .$sake_name.'%") ';
-							}
+
+							$condition = 'WHERE (' .$expression .') ';
+						}
+						else
+						{
+							$condition = 'WHERE (sake_name LIKE "%' .$sake_name .'%" OR sake_read LIKE "%' .$sake_name .'%" OR sake_search LIKE "%' .$sake_name. '%" OR sake_english LIKE "%' .$sake_name .'%" OR sake_id LIKE "%' .$sake_name.'%") ';
+						}
 					}
 
 					if(isset($_GET["sake_id"]) && ($_GET["sake_id"] != ""))

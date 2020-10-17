@@ -890,7 +890,6 @@ else if($_POST["category"] == 2)
 		$orderby = $_POST["orderby"] ." " .$desc;
 	}
 
-
 	// query count 
 	$count_result = 0;
 
