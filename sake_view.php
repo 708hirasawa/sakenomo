@@ -1222,7 +1222,12 @@ require_once("searchbar.php");
 
 												if($row["special_name"]) {
 													if($special_name_array[0] == "90") {
-														print($special_name_array[1]);
+														if(count($special_name_array) > 1) {
+															print($special_name_array[1]);
+														}
+														else {
+															print("その他");
+														}
 													} else {
 														print(GetSakeSpecialName($special_name_array[0]));
 													}

@@ -211,9 +211,6 @@ $from = ($page - 1) * $p_max;
 $to = $from + $p_max;
 $sake_category = $_GET['sake_category'];
 
-if(!empty($_POST['sake_category']))
-	$sake_category = implode(',', $_GET['sake_category']);
-
 print('<div id="container" data-category=' .$category
 							.' data-from=' .$from
 							.' data-to' .$to
@@ -399,7 +396,7 @@ print('<div id="container" data-category=' .$category
 										<OPTION VALUE="34">純米大吟醸酒</OPTION>
 										<OPTION VALUE="43">吟醸酒</OPTION>
 										<OPTION VALUE="44">大吟醸酒</OPTION>
-										<OPTION VALUE="99">非公開</OPTION>
+										<OPTION VALUE="45">非公開</OPTION>
 										<OPTION VALUE="90">その他</OPTION>
 									</SELECT>
 
@@ -418,7 +415,7 @@ print('<div id="container" data-category=' .$category
 											<label><li><input type="checkbox" name="special_name[]" value="34">純米大吟醸酒</li></label>
 											<label><li><input type="checkbox" name="special_name[]" value="43">吟醸酒</li></label>
 											<label><li><input type="checkbox" name="special_name[]" value="44">大吟醸酒</li></label>
-											<label><li><input type="checkbox" name="special_name[]" value="99">非公開</li></label>
+											<label><li><input type="checkbox" name="special_name[]" value="45">非公開</li></label>
 				 							<label><li><input type="checkbox" name="special_name[]" value="90">その他</li></label>
 										</ul>
 									</div>-->
@@ -1339,11 +1336,14 @@ print('<div id="container" data-category=' .$category
 
 												if($row["special_name"]) {
 													$special_name_array = explode(',', $row["special_name"]);
+
 													if($special_name_array[0] == "90") {
+														print(GetSakeSpecialName($special_name_array[0]));
 														print($special_name_array[1]);
 													} else {
 														print(GetSakeSpecialName($special_name_array[0]));
 													}
+
 												} else {
 													print('<span style="color: #b2b2b2;">--</span>');
 												}
@@ -1712,11 +1712,11 @@ print('<div id="container" data-category=' .$category
 										}
 									}
 
-									$condition = 'WHERE (' .$expression .')';
+									$condition = 'WHERE (' .$expression .') ';
 							}
 							else
 							{
-									$condition = 'WHERE (sake_name LIKE "%' .$sake_name .'%" OR sake_read LIKE "%' .$sake_name .'%" OR sake_search LIKE "%' .$sake_name. '%" OR sake_english LIKE "%' .$sake_name .'%" OR sake_id LIKE "%' .$sake_name.'%")';
+									$condition = 'WHERE (sake_name LIKE "%' .$sake_name .'%" OR sake_read LIKE "%' .$sake_name .'%" OR sake_search LIKE "%' .$sake_name. '%" OR sake_english LIKE "%' .$sake_name .'%" OR sake_id LIKE "%' .$sake_name.'%") ';
 							}
 					}
 
@@ -1781,17 +1781,48 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 
-					if(isset($_GET["pref"]) && ($_GET["pref"] != ""))
+					if(is_array($_GET['pref'])) 
 					{
-						$pref = $_GET['pref'];
-
-						if($condition == "")
+						if(!empty($_GET['pref']))
 						{
-							$condition = "WHERE (" ."pref LIKE \"%".$pref."%\"" ." ) ";
+							$expr = "";
+				
+							foreach($_GET['pref'] as $selected)
+							{
+								if($expr == "")
+								{
+									$expr = "pref LIKE \"%".$selected."%\"";
+								}
+								else
+								{
+									$expr .= " OR pref LIKE \"%".$selected."%\"";
+								}
+							}	
+				
+							if($condition == "")
+							{
+								$condition = "WHERE (" .$expr ." ) ";
+							}
+							else
+							{
+								$condition .= " AND (" .$expr ." ) ";
+							}
 						}
-						else
+					}
+					else
+					{
+						if(isset($_GET["pref"]) && ($_GET["pref"] != ""))
 						{
-							$condition .= "AND (" ." OR pref LIKE \"%".$pref."%\"" ." ) ";
+							$pref = $_GET["pref"];
+				
+							if($condition == "")
+							{
+								$condition = "WHERE pref ='" .$pref. "'";
+							}
+							else
+							{
+								$condition .= " AND pref ='" .$pref. "'";
+							}
 						}
 					}
 
@@ -1823,11 +1854,10 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 
-					//////////////////////////////////////
 					if(!empty($_GET['sake_category']))
 					{
 						$expr = "";
-
+				
 						foreach($_GET['sake_category'] as $selected)
 						{
 							if($expr == "")
@@ -1838,21 +1868,18 @@ print('<div id="container" data-category=' .$category
 							{
 								$expr .= " AND sake_category LIKE \"%".$selected."%\"";
 							}
-						}
-
-						//print('<div>' .$expr .'</div>');
+						}	
+				
 						if($condition == "")
 						{
-							//$condition = "WHERE (" .$expr ."%\") ";
 							$condition = "WHERE (" .$expr ." ) ";
 						}
 						else
 						{
-							//$condition .= "AND (" .$expr ."%\") ";
-							$condition .= "AND (" .$expr ." ) ";
+							$condition .= " AND (" .$expr ." ) ";
 						}
 					}
-
+					
 					if(!empty($_GET['jsake_level']))
 					{
 						$expr = "";
@@ -2032,99 +2059,47 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 
-					if(!empty($_GET['seimai_rate']))
+					if(is_array($_GET['seimai_rate'])) 
 					{
-						$expr = "";
-
-						foreach($_GET['seimai_rate'] as $selected)
+						if(!empty($_GET['seimai_rate']))
 						{
-							if($selected == "1")
+							$expr = "";
+				
+							foreach($_GET['seimai_rate'] as $selected)
 							{
 								if($expr == "")
 								{
-									$expr = "substr(seimai_rate, 0, 3) > \"71\"";
+									$expr = "seimai_rate LIKE \"%".$selected."%\"";
 								}
 								else
 								{
-									$expr .= " or (substr(seimai_rate, 0, 3) > \"71\")";
+									$expr .= " OR seimai_rate LIKE \"%".$selected."%\"";
 								}
+							}	
+				
+							if($condition == "")
+							{
+								$condition = "WHERE (" .$expr ." ) ";
 							}
-							else if($selected == "2")
+							else
 							{
-								if($expr == "")
-								{
-
-									$expr = "(substr(seimai_rate, 0, 3) >= \"61\" and substr(seimai_rate, 0, 3) < \"70\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"61\" and  substr(seimai_rate, 0, 3) < \"70\")";
-								}
-							}
-							else if($selected == "3")
-							{
-								if($expr == "")
-								{
-									$expr = "(substr(seimai_rate, 0, 3) >= \"51\" and substr(seimai_rate, 0, 3) < \"60\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"51\" and  substr(seimai_rate, 0, 3) < \"60\")";
-								}
-							}
-							else if($selected == "4")
-							{
-								if($expr == "")
-								{
-									$expr = "(substr(seimai_rate, 0, 3) >= \"41\" and substr(seimai_rate, 0, 3) < \"50\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"41\" and  substr(seimai_rate, 0, 3) < \"50\")";
-								}
-							}
-							else if($selected == "5")
-							{
-								if($expr == "")
-								{
-									$expr = "(substr(seimai_rate, 0, 3) >= \"31\" and substr(seimai_rate, 0, 3) < \"40\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"31\" and  substr(seimai_rate, 0, 3) < \"40\")";
-								}
-							}
-							else if($selected == "6")
-							{
-								if($expr == "")
-								{
-									$expr = "(substr(seimai_rate, 0, 3) >= \"21\" and substr(seimai_rate, 0, 3) < \"30\")";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) >= \"21\" and substr(seimai_rate, 0, 3) < \"30\")";
-								}
-							}
-							else if($selected == "7")
-							{
-								if($expr == "")
-								{
-									$expr = "substr(seimai_rate, 0, 3) < \"20\"";
-								}
-								else
-								{
-									$expr .= " or (substr(seimai_rate, 0, 3) < \"20\")";
-								}
+								$condition .= " AND (" .$expr ." ) ";
 							}
 						}
-
-						if($condition == "")
+					}
+					else {
+						if(isset($_GET["seimai_rate"]) && ($_GET["seimai_rate"] != ""))
 						{
-							$condition = "WHERE (" .$expr ." ) ";
-						}
-						else
-						{
-							$condition .= "AND (" .$expr ." ) ";
+							$seimai_rate = $_GET["seimai_rate"];
+				
+							if($condition == "")
+							{
+								$condition = "WHERE seimai_rate ='" .$seimai_rate. "'";
+							}
+							else
+							{
+								$condition .= " AND seimai_rate ='" .$seimai_rate. "'";
+							}
 						}
 					}
 
@@ -2276,6 +2251,8 @@ print('<div id="container" data-category=' .$category
 					}
 
 					$sql = "SELECT COUNT(*) FROM SAKE_J, SAKAGURA_J ".$condition;
+					//print('<div>sql:' .$sql .'</div>');
+
 					$res = executequery($db, $sql);
 					$row = getnextrow($res);
 					$count_result = $row["COUNT(*)"];
@@ -2288,7 +2265,7 @@ print('<div id="container" data-category=' .$category
 					//$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." ORDER BY sake_read"." LIMIT ".$from.", ".$to;
 					$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." LIMIT ".$from.", ".$p_max;
 					$res = executequery($db, $sql);
-					//print('<div>' .$sql .'</div>');
+					//print('<div>' .$sql: .'</div>');
 
 					///////////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
@@ -2401,18 +2378,21 @@ print('<div id="container" data-category=' .$category
 									print('<div class="spec_item">');
 										print('<div class="spec_title"><svg class="spec_item_tokuteimeisho1616"><use xlink:href="#tokuteimeisho1616"/></svg>特定名称</div>');
 										print('<div class="spec_info">');
-
 											if($row["special_name"]) {
 												$special_name_array = explode(',', $row["special_name"]);
 												if($special_name_array[0] == "90") {
-													print($special_name_array[1]);
+													if(count($special_name_array) > 1) {
+														print($special_name_array[1]);
+													}
+													else {
+														print("その他");
+													}
 												} else {
 													print(GetSakeSpecialName($special_name_array[0]));
 												}
 											} else {
 												print('<span style="color: #b2b2b2;">--</span>');
 											}
-
 										print('</div>');
 									print('</div>');
 									/////////////////////////////////////////////////
@@ -4170,7 +4150,6 @@ $(function() {
 										innerHTML += '</div>';*/
 
 								innerHTML += '</div>';
-
 
 								// 酒ランク ////////////////////////////////////////////////
 								var rank_width = (sake[i].sake_rank / 5) * 100 + '%';
