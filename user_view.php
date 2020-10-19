@@ -585,8 +585,8 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 								print('<div class="tab_sakagura_sort_container">');
 
 									print('<div class="diplay_selection">');
-										print('<div class="diplay_selection_button"><span>コメント・写真</span></div>');
-										print('<div class="diplay_selection_button selected"><span>お気に入り</span></div>');
+										print('<div class="diplay_selection_button"><span><svg class="diplay_selection_review1816"><use xlink:href="#review1816"/></svg>コメント</span></div>');
+										print('<div class="diplay_selection_button selected"><span><svg class="diplay_selection_pin1616"><use xlink:href="#pin1616"/></svg>お気に入り</span></div>');
 									print("</div>");
 
 									$sql = "SELECT COUNT(*) FROM FOLLOW_J, SAKAGURA_J WHERE username = '$username' AND sakagura_id = id";
@@ -901,8 +901,8 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 								print('<div class="tab_users_sort_container">');
 
 									print('<div class="diplay_selection">');
-										print('<div class="diplay_selection_button selected"><span>フォロー中</span></div>');
-										print('<div class="diplay_selection_button"><span>フォロワー</span></div>');
+										print('<div class="diplay_selection_button selected"><span><svg class="diplay_selection_pin1616"><use xlink:href="#pin1616"/></svg>フォロー中</span></div>');
+										print('<div class="diplay_selection_button"><span><svg class="diplay_selection_people1616"><use xlink:href="#people1616"/></svg>フォロワー</span></div>');
 									print("</div>");
 
 									print('<input type="hidden" id="in_user_disp_from" value=0>');
