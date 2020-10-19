@@ -566,11 +566,18 @@
   font-size: 15px;
 }
 
-.diplay_selection_heart2020, .diplay_selection_pin1616 {
+.diplay_selection_heart2020, .diplay_selection_pin1616, .diplay_selection_people1616 {
   fill: #ffffff;
   width: 16px;
   height: 16px;
-  margin-right: 8px;
+  margin-right: 5px;
+}
+
+.diplay_selection_review1816 {
+  fill: #ffffff;
+  width: 18px;
+  height: 16px;
+  margin-right: 5px;
 }
 
 #view_mode {
