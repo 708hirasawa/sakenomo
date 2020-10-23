@@ -247,13 +247,6 @@ print('<div id="container" data-category=' .$category
 					</ul>
 
 					<div id="tabs-29" class="form-action show">
-						<div class="mobilesake_container">
-							<div class="mobilesake_content">
-							<?php
-								print('<input type="hidden" id="in_disp_all_from" name="in_disp_all_from" value=' .$from .'>');
-							?>
-							</div>
-						</div>
 					</div>
 
 					<div id="tabs-30" class="form-action hide">
@@ -575,7 +568,7 @@ print('<div id="container" data-category=' .$category
 									<div class="search_option_row_container"><svg class="search_option_icon_cleanedrice1616"><use xlink:href="#cleanedrice1616"/></svg><p class="search_option_row_title">精米歩合</p></div>
 									<SELECT name="seimai_rate">
 									  <OPTION VALUE="">指定なし</OPTION>
-									  <OPTION VALUE="19">20%未満</OPTION>
+									  <OPTION VALUE="10">20%未満</OPTION>
 									  <OPTION VALUE="20">20%以上30%未満</OPTION>
 									  <OPTION VALUE="30">30%以上40%未満</OPTION>
 									  <OPTION VALUE="40">40%以上50%未満</OPTION>
@@ -1135,11 +1128,32 @@ print('<div id="container" data-category=' .$category
 			die("データベース接続エラー .<br />");
 		}
 
+		function patternMatch($string, $seimai_rate1, $seimai_rate2)
+		{
+			if($string != "" && $string != null)
+			{
+				$seimai_array = explode(',', $string);
+
+				for($i = 0; $i < count($seimai_array); $i++)
+				{
+					if(intval($seimai_array[$i]) >= $seimai_rate1 && intval($seimai_array[$i]) < $seimai_rate2)
+					{
+						return 1;
+					}
+				}
+			}
+
+			return 0;
+		}
+
+		$db->createFunction('patternMatch', 'patternMatch', 3);
+
 		//tab_main//////////////////////////////////////////////////////////////////////////////
 		print('<div id="tab_main">');
 
 			/* count */
 			print('<div id="tabs-all" class="form-action show">');
+				print('<input type="hidden" id="in_disp_all_from" name="in_disp_all_from" value=' .$from .'>');
 
 				if($category == "1")
 				{
@@ -1416,17 +1430,9 @@ print('<div id="container" data-category=' .$category
 											print('<div class="spec_info">');
 
 												$rice_array = explode('/', $row["rice_used"]);
-												$seimai_array = explode(',', $row["seimai_rate"]);
-												$bfound = false;
-											
-												foreach($seimai_array as $element) {
-												    if($element) {
-														$bfound = true;
-														break;
-													}
-												}
+										        $seimai_array = explode(',', $row["seimai_rate"]);
 
-												if($bfound) {
+												if(count($seimai_array) > 0) {
 													for($i = 0; $i < count($seimai_array); $i++) {
 														if($i > 0 && $seimai_array[$i] != "") {
 															print(" / ");
@@ -1704,11 +1710,11 @@ print('<div id="container" data-category=' .$category
 									foreach($keyword_elements as $element) {
 										if($expression == "")
 										{
-												$expression = '(sake_name LIKE "%' .$element .'%" OR sake_read LIKE "%' .$element. '%" OR sake_search LIKE "%' .$element. '%" OR sake_english LIKE "%' .$element .'%" OR sake_id LIKE "%' .$element .'%")';
+											$expression = '(sake_name LIKE "%' .$element .'%" OR sake_read LIKE "%' .$element. '%" OR sake_search LIKE "%' .$element. '%" OR sake_english LIKE "%' .$element .'%" OR sake_id LIKE "%' .$element .'%")';
 										}
 										else
 										{
-												$expression .= ' AND (sake_name LIKE "%' .$element .'%" OR sake_read LIKE "%' .$element. '%" OR sake_search LIKE "%' .$element. '%" OR sake_english LIKE "%' .$element .'%" OR sake_id LIKE "%' .$element .'%")';
+											$expression .= ' AND (sake_name LIKE "%' .$element .'%" OR sake_read LIKE "%' .$element. '%" OR sake_search LIKE "%' .$element. '%" OR sake_english LIKE "%' .$element .'%" OR sake_id LIKE "%' .$element .'%")';
 										}
 									}
 
@@ -1781,12 +1787,12 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 
-					if(is_array($_GET['pref'])) 
+					if(is_array($_GET['pref']))
 					{
 						if(!empty($_GET['pref']))
 						{
 							$expr = "";
-				
+
 							foreach($_GET['pref'] as $selected)
 							{
 								if($expr == "")
@@ -1797,8 +1803,8 @@ print('<div id="container" data-category=' .$category
 								{
 									$expr .= " OR pref LIKE \"%".$selected."%\"";
 								}
-							}	
-				
+							}
+
 							if($condition == "")
 							{
 								$condition = "WHERE (" .$expr ." ) ";
@@ -1814,7 +1820,7 @@ print('<div id="container" data-category=' .$category
 						if(isset($_GET["pref"]) && ($_GET["pref"] != ""))
 						{
 							$pref = $_GET["pref"];
-				
+
 							if($condition == "")
 							{
 								$condition = "WHERE pref ='" .$pref. "'";
@@ -1857,7 +1863,7 @@ print('<div id="container" data-category=' .$category
 					if(!empty($_GET['sake_category']))
 					{
 						$expr = "";
-				
+
 						foreach($_GET['sake_category'] as $selected)
 						{
 							if($expr == "")
@@ -1868,8 +1874,8 @@ print('<div id="container" data-category=' .$category
 							{
 								$expr .= " AND sake_category LIKE \"%".$selected."%\"";
 							}
-						}	
-				
+						}
+
 						if($condition == "")
 						{
 							$condition = "WHERE (" .$expr ." ) ";
@@ -1879,7 +1885,7 @@ print('<div id="container" data-category=' .$category
 							$condition .= " AND (" .$expr ." ) ";
 						}
 					}
-					
+
 					if(!empty($_GET['jsake_level']))
 					{
 						$expr = "";
@@ -2059,12 +2065,12 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 
-					if(is_array($_GET['seimai_rate'])) 
+					if(is_array($_GET['seimai_rate']))
 					{
 						if(!empty($_GET['seimai_rate']))
 						{
 							$expr = "";
-				
+
 							foreach($_GET['seimai_rate'] as $selected)
 							{
 								if($expr == "")
@@ -2075,8 +2081,8 @@ print('<div id="container" data-category=' .$category
 								{
 									$expr .= " OR seimai_rate LIKE \"%".$selected."%\"";
 								}
-							}	
-				
+							}
+
 							if($condition == "")
 							{
 								$condition = "WHERE (" .$expr ." ) ";
@@ -2088,17 +2094,47 @@ print('<div id="container" data-category=' .$category
 						}
 					}
 					else {
+
 						if(isset($_GET["seimai_rate"]) && ($_GET["seimai_rate"] != ""))
 						{
 							$seimai_rate = $_GET["seimai_rate"];
-				
+
+							if($seimai_rate == "10") {
+								$seimai_rate1 = 1;
+								$seimai_rate2 = 20;
+							}
+							else if($seimai_rate == "20") {
+								$seimai_rate1 = 20;
+								$seimai_rate2 = 30;
+							}
+							else if($seimai_rate == "30") {
+								$seimai_rate1 = 30;
+								$seimai_rate2 = 40;
+							}
+							else if($seimai_rate == "40") {
+								$seimai_rate1 = 40;
+								$seimai_rate2 = 50;
+							}
+							else if($seimai_rate == "50") {
+								$seimai_rate1 = 50;
+								$seimai_rate2 = 60;
+							}
+							else if($seimai_rate == "60") {
+								$seimai_rate1 = 60;
+								$seimai_rate2 = 70;
+							}
+							else if($seimai_rate == "70") {
+								$seimai_rate1 = 70;
+								$seimai_rate2 = 100;
+							}
+
 							if($condition == "")
 							{
-								$condition = "WHERE seimai_rate ='" .$seimai_rate. "'";
+								$condition = "WHERE patternMatch(seimai_rate, " .$seimai_rate1 .", " .$seimai_rate2 .")";
 							}
 							else
 							{
-								$condition .= " AND seimai_rate ='" .$seimai_rate. "'";
+								$condition .= " AND patternMatch(seimai_rate, " .$seimai_rate1 .", " .$seimai_rate2 .")";
 							}
 						}
 					}
@@ -2462,7 +2498,7 @@ print('<div id="container" data-category=' .$category
 										$rice_array = explode('/', $row["rice_used"]);
 										$seimai_array = explode(',', $row["seimai_rate"]);
 
-										if($seimai_array[0] || $seimai_array[1] || $seimai_array[2]) {
+										if(count($seimai_array) > 0) {
 											for($i = 0; $i < count($seimai_array); $i++) {
 												if($i > 0 && $seimai_array[$i] != "") {
 													print(" / ");
@@ -2492,6 +2528,7 @@ print('<div id="container" data-category=' .$category
 										print('<div class="spec_info">');
 
 										$syudo_array = explode(',', $row["jsake_level"]);
+
 										if($syudo_array[0] != null && $syudo_array[1] != null) {
 											if($syudo_array[0] == $syudo_array[1]) {
 												print(number_format($syudo_array[0], 1));
@@ -3287,7 +3324,7 @@ function GetRiceString(rice_used) {
 		for(var j = 0; j < rice_items.length; j++) {
 
 			if(rice_entry[0] == rice_items[j][0]) {
-	
+
 				if(rice_entry[1] == "1") {
 					rice_text += "麹米:";
 				} else if(rice_entry[1] == "2") {
@@ -4126,6 +4163,7 @@ $(function() {
 					}
 
 					//alert("SQL:" + data[0].sql);
+					//alert("sake_length:" + sake.length)
 
 					if(sake) {
 
