@@ -92,6 +92,7 @@ body {
   align-items: center;
   width: 100%;
   height: auto;
+  margin-bottom: 16px;
 }
 
 .simpleTabs li {
@@ -182,12 +183,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 16px 0;
-	border: 1px solid #0000ff;
-}
-
-#tabs-29 .mobilesake_container {
-  margin-top: 0;
+  margin-bottom: 16px;
 }
 
 .mobilesake_content {
@@ -1182,7 +1178,6 @@ body {
 
   #tabs-30_content, #tabs-31_content, #tabs-32_content, #tabs-33_content {
     display: block;
-    margin-top: 16px;
   }
 
   .accordion_tabs_title {
