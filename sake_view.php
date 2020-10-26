@@ -45,6 +45,7 @@ require_once("searchbar.php");
 							 array("12", "orange4040", "オレンジ"),
 							 array("41", "kiwi4040", "キウイ"),
 							 array("13", "grapefruit4040", "グレープフルーツ"),
+							 array("43", "watermelon4040", "スイカ"),
 							 array("14", "nashi4040", "梨"),
 							 array("15", "pineapple4040", "パイナップル"),
 							 array("16", "banana4040", "バナナ"),
@@ -2524,11 +2525,11 @@ require_once("searchbar.php");
 							print('<div class="tastingnote_caption">');
 								print('<div class="tastingnote_caption_title"><svg class="tastingnote_caption_help2020"><use xlink:href="#help2020"/></svg>フレーバーについて</div>');
 								print('<div class="tastingnote_caption_invisible">');
-									print('<div class="tastingnote_caption_text">フレーバーは味や香りなどから感じられる総合的な印象を表しています。日本酒の多様な風味をより具体的にイメージしていただけるように、Sakenomoではフレーバーを以下の33種類に分類しています。</div>');
+									print('<div class="tastingnote_caption_text">フレーバーは味や香りなどから感じられる総合的な印象を表しています。日本酒の多様な風味をより具体的にイメージしていただけるように、Sakenomoではフレーバーを以下の34種類に分類しています。</div>');
 									print('<div class="tastingnote_caption_content">');
 										print('<div class="tastingnote_caption_content_title">フルーティタイプ</div>');
 										print('<ul class="tastingnote_caption_item">');
-											print('<li>青りんご</li><li>いちご</li><li>オレンジ</li><li>キウイ</li><li>グレープフルーツ</li><li>梨</li><li>パイナップル</li><li>バナナ</li><li>ぶどう</li><li>マスカット</li><li>マンゴー</li><li>メロン</li><li>桃</li><li>洋梨</li><li>ライチ</li><li>りんご</li><li>レモン</li><li>花</li>');
+											print('<li>青りんご</li><li>いちご</li><li>オレンジ</li><li>キウイ</li><li>グレープフルーツ</li><li>スイカ</li><li>梨</li><li>パイナップル</li><li>バナナ</li><li>ぶどう</li><li>マスカット</li><li>マンゴー</li><li>メロン</li><li>桃</li><li>洋梨</li><li>ライチ</li><li>りんご</li><li>レモン</li><li>花</li>');
 										print('</ul>');
 
 										print('<div class="tastingnote_caption_content_title">スッキリタイプ</div>');
