@@ -464,9 +464,9 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								print('<div class="tab_sake_sort_container">');
 
-									print('<div class="diplay_selection">');
-										print('<div class="diplay_selection_button selected"><span><svg class="diplay_selection_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span></div>');
-										print('<div class="diplay_selection_button"><span><svg class="diplay_selection_pin1616"><use xlink:href="#pin1616"/></svg>飲みたい</span></div>');
+									print('<div class="display_selection">');
+										print('<div class="display_selection_button selected"><span><svg class="display_selection_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span></div>');
+										print('<div class="display_selection_button"><span><svg class="display_selection_pin1616"><use xlink:href="#pin1616"/></svg>飲みたい</span></div>');
 									print("</div>");
 
 									/*非表示中print('<div class="user_drop_down">');
@@ -584,9 +584,9 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								print('<div class="tab_sakagura_sort_container">');
 
-									print('<div class="diplay_selection">');
-										print('<div class="diplay_selection_button"><span><svg class="diplay_selection_review1816"><use xlink:href="#review1816"/></svg>コメント</span></div>');
-										print('<div class="diplay_selection_button selected"><span><svg class="diplay_selection_pin1616"><use xlink:href="#pin1616"/></svg>お気に入り</span></div>');
+									print('<div class="display_selection">');
+										print('<div class="display_selection_button"><span><svg class="display_selection_review1816"><use xlink:href="#review1816"/></svg>コメント</span></div>');
+										print('<div class="display_selection_button selected"><span><svg class="display_selection_pin1616"><use xlink:href="#pin1616"/></svg>お気に入り</span></div>');
 									print("</div>");
 
 									$sql = "SELECT COUNT(*) FROM FOLLOW_J, SAKAGURA_J WHERE username = '$username' AND sakagura_id = id";
@@ -900,9 +900,9 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 							print('<div id="tab_users" class="form-action hide">');
 								print('<div class="tab_users_sort_container">');
 
-									print('<div class="diplay_selection">');
-										print('<div class="diplay_selection_button selected"><span><svg class="diplay_selection_pin1616"><use xlink:href="#pin1616"/></svg>フォロー中</span></div>');
-										print('<div class="diplay_selection_button"><span><svg class="diplay_selection_people1616"><use xlink:href="#people1616"/></svg>フォロワー</span></div>');
+									print('<div class="display_selection">');
+										print('<div class="display_selection_button selected"><span><svg class="display_selection_pin1616"><use xlink:href="#pin1616"/></svg>フォロー中</span></div>');
+										print('<div class="display_selection_button"><span><svg class="display_selection_people1616"><use xlink:href="#people1616"/></svg>フォロワー</span></div>');
 									print("</div>");
 
 									print('<input type="hidden" id="in_user_disp_from" value=0>');
@@ -1081,6 +1081,7 @@ $(function() {
 							["12", "orange4040", "オレンジ"],
 							["41", "kiwi4040", "キウイ"],
 							["13", "grapefruit4040", "グレープフルーツ"],
+							["43", "watermelon4040", "スイカ"],
 							["14", "nashi4040", "梨"],
 							["15", "pineapple4040", "パイナップル"],
 							["16", "banana4040", "バナナ"],
@@ -1809,7 +1810,7 @@ $(function() {
 		});
 
 		/* 飲んだ */
-		$('#tab_sake .diplay_selection div:first-child').on( "click", function(event) {
+		$('#tab_sake .display_selection div:first-child').on( "click", function(event) {
 
 				var category = 1;
 				var in_disp_from = 0;
@@ -1823,7 +1824,7 @@ $(function() {
 
 				$('#tab_sake').removeClass('nomitai_set');
 				$('#tab_sake').addClass('nonda_set');
-				$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
+				$('#tab_sake .display_selection_button.selected').removeClass('selected');
 				$(this).addClass('selected');
 				//$('#all_container').data('cateogry', 1);
 
@@ -2265,7 +2266,7 @@ $(function() {
 		});
 
 		/* 飲みたい */
-		$('#tab_sake .diplay_selection div:nth-child(2)').on( "click", function(event) {
+		$('#tab_sake .display_selection div:nth-child(2)').on( "click", function(event) {
 
 				var search_type = 1;
 				var category = 2;
@@ -2286,7 +2287,7 @@ $(function() {
 				$('#tab_sake').removeClass('nonda_set');
 				$('#tab_sake').addClass('nomitai_set');
 
-				$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
+				$('#tab_sake .display_selection_button.selected').removeClass('selected');
 				$(this).addClass('selected');
 
 				var stateObj = { 'search_type': search_type,
@@ -2629,16 +2630,16 @@ $(function() {
 		});
 
 		/* コメント・写真 */
-		$('#tab_sakagura .diplay_selection div:first-child').on( "click", function(event) {
+		$('#tab_sakagura .display_selection div:first-child').on( "click", function(event) {
 
-				$('#tab_sakagura .diplay_selection_button.selected').removeClass('selected');
+				$('#tab_sakagura .display_selection_button.selected').removeClass('selected');
 				$(this).addClass('selected');
 		});
 
 		/* お気に入り */
-		$('#tab_sakagura .diplay_selection div:nth-child(2)').on( "click", function(event) {
+		$('#tab_sakagura .display_selection div:nth-child(2)').on( "click", function(event) {
 
-				$('#tab_sakagura .diplay_selection_button.selected').removeClass('selected');
+				$('#tab_sakagura .display_selection_button.selected').removeClass('selected');
 				$(this).addClass('selected');
 
 				/*
@@ -2650,7 +2651,7 @@ $(function() {
 				var count_query = 1;
 				var data = "search_type=" + search_type + "&from = "+in_disp_from + "&disp_max=" + disp_max + "&username=" + username + "&orderby="+ $("#order_sake").val() + "&count_query=1";
 
-				$('#tab_sakagura .diplay_selection_button.selected').removeClass('selected');
+				$('#tab_sakagura .display_selection_button.selected').removeClass('selected');
 				$(this).addClass('selected');
 
 				var text = (in_disp_from + 1) + '～' + in_disp_to + '件 / 全' + $('#count_sakagura').val() + '件'
@@ -3147,8 +3148,8 @@ jQuery(document).ready(function($) {
 			$('#tab_sake').removeClass('nomitai_set');
 			$('#tab_sake').addClass('nonda_set');
 
-			$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
-			$('#tab_sake .diplay_selection div:first-child').addClass('selected');
+			$('#tab_sake .display_selection_button.selected').removeClass('selected');
+			$('#tab_sake .display_selection div:first-child').addClass('selected');
 
 			var stateObj = { 'category': 1,
 							 'href': href,
@@ -3173,8 +3174,8 @@ jQuery(document).ready(function($) {
 			}
 
 			my_url += href;
-			$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
-			$('#tab_sake .diplay_selection div:first-child').addClass('selected');
+			$('#tab_sake .display_selection_button.selected').removeClass('selected');
+			$('#tab_sake .display_selection div:first-child').addClass('selected');
 
 			$('#sakagurapage .pageitems.selected').removeClass('selected');
 			$('#sakagurapage .pageitems:nth(0)').addClass('selected');
@@ -3243,9 +3244,9 @@ jQuery(document).ready(function($) {
 				$('#all_container').data('cateogry', 1);
 				$('#tab_sake').removeClass('nomitai_set');
 				$('#tab_sake').addClass('nonda_set');
-				$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
+				$('#tab_sake .display_selection_button.selected').removeClass('selected');
 
-				$('#tab_sake .diplay_selection_button:nth(0)').addClass('selected');
+				$('#tab_sake .display_selection_button:nth(0)').addClass('selected');
 				$("body").trigger("search_nonda", [ in_disp_from, disp_max, data, false ] );
 			}
 			else if(state.category && state.category == 2) {
@@ -3256,8 +3257,8 @@ jQuery(document).ready(function($) {
 				$('#all_container').data('cateogry', 2);
 				$('#tab_sake').removeClass('nonda_set');
 				$('#tab_sake').addClass('nomitai_set');
-				$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
-				$('#tab_sake .diplay_selection_button:nth(1)').addClass('selected');
+				$('#tab_sake .display_selection_button.selected').removeClass('selected');
+				$('#tab_sake .display_selection_button:nth(1)').addClass('selected');
 
 				$("body").trigger("search_nomitai", [ in_disp_from, state.to, data, false ] );
 			}
@@ -3358,8 +3359,8 @@ jQuery(document).ready(function($) {
 
 				$('#tab_sake').removeClass('nonda_set');
 				$('#tab_sake').addClass('nomitai_set');
-				$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
-				$('#tab_sake .diplay_selection div:nth(1)').addClass('selected');
+				$('#tab_sake .display_selection_button.selected').removeClass('selected');
+				$('#tab_sake .display_selection div:nth(1)').addClass('selected');
 
 				//alert("data:" + data)
 				$("body").trigger("search_nomitai", [ in_disp_from, in_disp_to, data, true ] );
@@ -3378,8 +3379,8 @@ jQuery(document).ready(function($) {
 				$('#tab_sake').removeClass('nomitai_set');
 				$('#tab_sake').addClass('nonda_set');
 
-				$('#tab_sake .diplay_selection_button.selected').removeClass('selected');
-				$('#tab_sake .diplay_selection div:first-child').addClass('selected');
+				$('#tab_sake .display_selection_button.selected').removeClass('selected');
+				$('#tab_sake .display_selection div:first-child').addClass('selected');
 
 				$("body").trigger("search_nonda", [ in_disp_from, disp_max, data, true ] );
 			}
@@ -3423,7 +3424,7 @@ jQuery(document).ready(function($) {
 						 'to': 25 };
 
 		history.replaceState(stateObj, "user", "");
-		$('#tab_sake .diplay_selection div:first-child').trigger('click');
+		$('#tab_sake .display_selection div:first-child').trigger('click');
 	}
 });
 
