@@ -109,6 +109,7 @@ function write_Nonda()
 						  print('<label><input type="checkbox" name="flavor[]" value="12" data-img="orange4040">オレンジ</label>');
 						  print('<label><input type="checkbox" name="flavor[]" value="41" data-img="kiwi4040">キウイ</label>');
 						  print('<label><input type="checkbox" name="flavor[]" value="13" data-img="grapefruit4040">グレープフルーツ</label>');
+						  print('<label><input type="checkbox" name="flavor[]" value="43" data-img="watermelon4040">スイカ</label>');
 						  print('<label><input type="checkbox" name="flavor[]" value="14" data-img="nashi4040">梨</label>');
 						  print('<label><input type="checkbox" name="flavor[]" value="15" data-img="pineapple4040">パイナップル</label>');
 						  print('<label><input type="checkbox" name="flavor[]" value="16" data-img="banana4040">バナナ</label>');
