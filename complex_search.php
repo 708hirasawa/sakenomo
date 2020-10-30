@@ -460,6 +460,7 @@ else if($_POST["category"] == 2)
 		}
 
 		return 0;
+		//return 1;
 	}
 
 	$db->createFunction('patternMatch', 'patternMatch', 3);		
