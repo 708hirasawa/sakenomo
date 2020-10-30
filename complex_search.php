@@ -1,4 +1,5 @@
 ﻿<?php
+
 require_once("db_functions.php");
 header('Content-type: text/html; charset=UTF-8');
 
@@ -431,7 +432,39 @@ if($_POST["category"] == 1)
 else if($_POST["category"] == 2)
 {
 	$condition = "";
-    
+	$db = opendatabase("sake.db");
+
+	if(!$db) {
+		$result1 = 0;
+		$count_result = 0;
+
+		$result[] = array('result' => $result1, 'sql' => $condition, 'count' => $count_result);
+		header('Content-Type: application/json');
+		echo json_encode($result);
+		return 0;
+	}
+
+	function patternMatch($string, $seimai_rate1, $seimai_rate2)
+	{
+		if($string != "" && $string != null) 
+		{
+			$seimai_array = explode(',', $string);
+
+			for($i = 0; $i < count($seimai_array); $i++) 
+			{
+				if(intval($seimai_array[$i]) >= $seimai_rate1 && intval($seimai_array[$i]) < $seimai_rate2) 
+				{
+					return 1;
+				}
+			}
+		}
+
+		return 0;
+		//return 1;
+	}
+
+	$db->createFunction('patternMatch', 'patternMatch', 3);		
+
 	if(isset($_POST["keyword"]) && ($_POST["keyword"] != "")) {
 
 		$keyword = $_POST["keyword"];
@@ -628,11 +661,11 @@ else if($_POST["category"] == 2)
 			{
 				if($expr == "")
 				{
-					$expr = "seimai_rate LIKE \"%".$selected."%\"";
+					$expr = 'seimai_rate LIKE "%'.$selected.'%"';
 				}
 				else
 				{
-					$expr .= " OR seimai_rate LIKE \"%".$selected."%\"";
+					$expr .= ' OR seimai_rate LIKE "%'.$selected.'%"';
 				}
 			}	
 
@@ -652,17 +685,46 @@ else if($_POST["category"] == 2)
 		{
 			$seimai_rate = $_POST["seimai_rate"];
 
+			if($seimai_rate == "10") {
+				$seimai_rate1 = 1;
+				$seimai_rate2 = 20;
+			}
+			else if($seimai_rate == "20") {
+				$seimai_rate1 = 20;
+				$seimai_rate2 = 30;
+			}
+			else if($seimai_rate == "30") {
+				$seimai_rate1 = 30;
+				$seimai_rate2 = 40;
+			}
+			else if($seimai_rate == "40") {
+				$seimai_rate1 = 40;
+				$seimai_rate2 = 50;
+			}
+			else if($seimai_rate == "50") {
+				$seimai_rate1 = 50;
+				$seimai_rate2 = 60;
+			}
+			else if($seimai_rate == "60") {
+				$seimai_rate1 = 60;
+				$seimai_rate2 = 70;
+			}
+			else if($seimai_rate == "70") {
+				$seimai_rate1 = 70;
+				$seimai_rate2 = 100;
+			}
+	
 			if($condition == "")
 			{
-				$condition = "WHERE seimai_rate ='" .$seimai_rate. "'";
+				$condition = "WHERE patternMatch(seimai_rate, " .$seimai_rate1 .", " .$seimai_rate2 .")";
 			}
 			else
 			{
-				$condition .= " AND seimai_rate ='" .$seimai_rate. "'";
+				$condition .= " AND patternMatch(seimai_rate, " .$seimai_rate1 .", " .$seimai_rate2 .")";
 			}
 		}
 	}
-
+	
 	if(!empty($_POST['sake_category']))
 	{
 		$expr = "";
@@ -829,18 +891,8 @@ else if($_POST["category"] == 2)
 		$orderby = $_POST["orderby"] ." " .$desc;
 	}
 
-	if(!$db = opendatabase("sake.db"))
-	{
-		$result1 = 0;
-		$count_result = 0;
 
-		$result[] = array('result' => $result1, 'sql' => $condition, 'count' => $count_result);
-		header('Content-Type: application/json');
-		echo json_encode($result);
-		return 0;
-	}
-
-	/* query count */
+	// query count 
 	$count_result = 0;
 
 	if($_POST["count_query"] == "1")
@@ -851,11 +903,11 @@ else if($_POST["category"] == 2)
 		$count_result = $record["COUNT(*)"];
 	}
 
-	/* query */
+	// query 
 	$from = ($_POST["from"] != undefined && $_POST["from"]) ? $_POST["from"] : 0; 
 	//$to = ($_POST["to"] != undefined && $_POST["to"]) ? $_POST["to"] : 25; 
 	$to = 25; 
-	
+
 	if($orderby != "")
 		$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition ." ORDER BY " .$orderby ." LIMIT ".$from.", ".$to;
 	else	
@@ -881,11 +933,6 @@ else if($_POST["category"] == 2)
 			$sake_category_array = explode(',', $row["sake_category"]);
 			$special_name = GetSakeSpecialName($row["special_name"]);
 			$sake_category = "";
-
-			//if($row["rice_used"] && $row["rice_used"] != "")
-			//{
-			//	$rice_text = "";
-			//}
 
 			for($i = 0; $i < count($sake_category_array); $i++)
 			{
