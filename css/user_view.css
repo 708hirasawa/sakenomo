@@ -515,7 +515,7 @@
 }
 
 /************************************************************/
-.diplay_selection {
+.display_selection {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -525,7 +525,7 @@
   width: 100%;
 }
 
-.diplay_selection_button {
+.display_selection_button {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -540,23 +540,23 @@
   cursor: pointer;
 }
 
-.diplay_selection_button:last-child {
+.display_selection_button:last-child {
   margin-right: 0;
 }
 
-.diplay_selection .selected {
+.display_selection .selected {
   background: #22445B;
 }
 
-.diplay_selection .selected span {
+.display_selection .selected span {
   color: #ffffff;
 }
 
-.diplay_selection .selected svg {
+.display_selection .selected svg {
   fill: #ffffff;
 }
 
-.diplay_selection_button span {
+.display_selection_button span {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
@@ -566,14 +566,14 @@
   font-size: 15px;
 }
 
-.diplay_selection_heart2020, .diplay_selection_pin1616, .diplay_selection_people1616 {
+.display_selection_heart2020, .display_selection_pin1616, .display_selection_people1616 {
   fill: #ffffff;
   width: 16px;
   height: 16px;
   margin-right: 5px;
 }
 
-.diplay_selection_review1816 {
+.display_selection_review1816 {
   fill: #ffffff;
   width: 18px;
   height: 16px;
