@@ -211,9 +211,6 @@ $from = ($page - 1) * $p_max;
 $to = $from + $p_max;
 $sake_category = $_GET['sake_category'];
 
-if(!empty($_GET['sake_category']))
-	$sake_category = implode(',', $_GET['sake_category']);
-
 print('<div id="container" data-category=' .$category
 							.' data-from=' .$from
 							.' data-to' .$to
@@ -578,7 +575,7 @@ print('<div id="container" data-category=' .$category
 									<div class="search_option_row_container"><svg class="search_option_icon_cleanedrice1616"><use xlink:href="#cleanedrice1616"/></svg><p class="search_option_row_title">精米歩合</p></div>
 									<SELECT name="seimai_rate">
 									  <OPTION VALUE="">指定なし</OPTION>
-									  <OPTION VALUE="19">20%未満</OPTION>
+									  <OPTION VALUE="10">20%未満</OPTION>
 									  <OPTION VALUE="20">20%以上30%未満</OPTION>
 									  <OPTION VALUE="30">30%以上40%未満</OPTION>
 									  <OPTION VALUE="40">40%以上50%未満</OPTION>
@@ -1419,17 +1416,9 @@ print('<div id="container" data-category=' .$category
 											print('<div class="spec_info">');
 
 												$rice_array = explode('/', $row["rice_used"]);
-												$seimai_array = explode(',', $row["seimai_rate"]);
-												$bfound = false;
-											
-												foreach($seimai_array as $element) {
-												    if($element) {
-														$bfound = true;
-														break;
-													}
-												}
+												$seimai_array = json_decode($row["seimai_rate"]);
 
-												if($bfound) {
+												if(count($seimai_array) > 0) {
 													for($i = 0; $i < count($seimai_array); $i++) {
 														if($i > 0 && $seimai_array[$i] != "") {
 															print(" / ");
