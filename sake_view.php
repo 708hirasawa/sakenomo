@@ -1164,7 +1164,7 @@ require_once("searchbar.php");
 
 									// サムネ
 									print('<ul id="preview_thumbnail_container">');
-										$rd = executequery($db, "SELECT FILENAME FROM SAKE_IMAGE WHERE sake_id = '$sake_id' limit 9");
+										$rd = executequery($db, "SELECT FILENAME FROM SAKE_IMAGE WHERE sake_id = '$sake_id' limit 10");
 
 										while($image = getnextrow($rd))
 										{
@@ -3111,23 +3111,6 @@ require_once("searchbar.php");
 				$path = "images/icons/notice_banner.svg";
 				print('<div id="ad1"><img src="images/icons/notice_banner.svg"></div>');
 
-				/*非表示中*/
-				/*print('<div class="sake_list">');
-					print('<div><svg class="sake_list_samebrewery3630"><use xlink:href="#samebrewery3630"/></svg>同じ酒蔵の日本酒</div>');
-					write_sake_list($db, $result);
-				print("</div>");*/
-
-				print('<div class="recommend_sake">');
-					print('<div><svg class="top_recommend3630"><use xlink:href="#recommend3630"/></svg>おすすめの日本酒</div>');
-
-					$sql = "SELECT SAKE_J.sake_id as sake_id, sake_name, sakagura_name, pref, filename FROM SAKE_J, SAKAGURA_J, SAKE_IMAGE WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKE_J.sake_id = SAKE_IMAGE.sake_id ORDER BY RANDOM() LIMIT 8";
-					$res = executequery($db, $sql);
-					write_sake_list($db, $res);
-
-				print("</div>");
-
-				/*一時的に非表示write_sakagura($db);*/
-
 			print('</div>');/*banner_frame*/
 			////////////////////////////////////////
 			////////////////////////////////////////
@@ -3367,7 +3350,12 @@ $(function(){
 		autoplay: false,
 		arrows: false,
 		fade: true,
-		infinite: false
+		infinite: false,
+		responsive: [{
+			breakpoint: 680, settings: {
+				dots: true,
+			}
+		},]
 	});
 
 	//サムネイル画像アイテムをクリックしたときにスライダー切り替え
@@ -3390,254 +3378,6 @@ $(function(){
 		  $(this).removeClass("thumbnail-current");
 		});
 		$(thumbnailItem+'[data-index="'+nextSlide+'"]').addClass("thumbnail-current");
-	});
-});
-
-$(function() {
-
-	$('.multiple-sake').slick({
-	infinite: true,
-	centerMode: true,
-	centerPadding: '0px',
-	slidesToShow: 2,
-		swipeToSlide: true,
-
-	responsive: [{
-		  breakpoint: 1260, settings: {
-			centerMode: true,
-			centerPadding: '100px',
-			slidesToShow: 6,}
-		  },
-		  {
-		  breakpoint: 1200, settings: {
-			centerMode: true,
-			centerPadding: '70px',
-			slidesToShow: 6,}
-		  },
-		  {
-		  breakpoint: 1140, settings: {
-			centerMode: true,
-			centerPadding: '40px',
-			slidesToShow: 6,}
-		  },
-		  {
-		  breakpoint: 1080, settings: {
-			centerMode: true,
-			centerPadding: '15px',
-			slidesToShow: 6,}
-		  },
-		  {
-		  breakpoint: 1020, settings: {
-			centerMode: true,
-			centerPadding: '145px',
-			slidesToShow: 4,}
-		  },
-		  {
-		  breakpoint: 960, settings: {
-			centerMode: true,
-			centerPadding: '110px',
-			slidesToShow: 4,}
-		  },
-		  {
-		  breakpoint: 900, settings: {
-			centerMode: true,
-			centerPadding: '85px',
-			slidesToShow: 4,}
-		  },
-		  {
-		  breakpoint: 840, settings: {
-			centerMode: true,
-			centerPadding: '60px',
-			slidesToShow: 4,}
-		  },
-		  {
-		  breakpoint: 780, settings: {
-			centerMode: true,
-			centerPadding: '30px',
-			slidesToShow: 4,}
-		  },
-		  {
-		  breakpoint: 720, settings: {
-			centerMode: true,
-			centerPadding: '0px',
-			slidesToShow: 4,}
-		  },
-		  {
-		  breakpoint: 660, settings: {
-			centerMode: true,
-			centerPadding: '130px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 600, settings: {
-			centerMode: true,
-			centerPadding: '100px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 540, settings: {
-			centerMode: true,
-			centerPadding: '70px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 480, settings: {
-			centerMode: true,
-			centerPadding: '55px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 447, settings: {
-			centerMode: true,
-			centerPadding: '40px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 415, settings: {
-			centerMode: true,
-			centerPadding: '34px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 401, settings: {
-			centerMode: true,
-			centerPadding: '24px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 376, settings: {
-			centerMode: true,
-			centerPadding: '18px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 370, settings: {
-			centerMode: false,
-			slidesToShow: 2,}
-		  }
-		]
-	});
-
-	$('.multiple-brewery, .multiple-restaurant, .multiple-store, .multiple-item').slick({
-		centerMode: true,
-		centerPadding: '0px',
-		slidesToShow: 1,
-		swipeToSlide: true,
-
-		responsive: [{
-		  breakpoint: 1260, settings: {
-			centerMode: true,
-			centerPadding: '100px',
-			slidesToShow: 3,}
-		  },
-		  {
-		  breakpoint: 1200, settings: {
-			centerMode: true,
-			centerPadding: '70px',
-			slidesToShow: 3,}
-		  },
-		  {
-		  breakpoint: 1140, settings: {
-			centerMode: true,
-			centerPadding: '40px',
-			slidesToShow: 3,}
-		  },
-		  {
-		  breakpoint: 1080, settings: {
-			centerMode: true,
-			centerPadding: '15px',
-			slidesToShow: 3,}
-		  },
-		  {
-		  breakpoint: 1020, settings: {
-			centerMode: true,
-			centerPadding: '145px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 960, settings: {
-			centerMode: true,
-			centerPadding: '110px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 900, settings: {
-			centerMode: true,
-			centerPadding: '85px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 840, settings: {
-			centerMode: true,
-			centerPadding: '60px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 780, settings: {
-			centerMode: true,
-			centerPadding: '30px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 720, settings: {
-			centerMode: true,
-			centerPadding: '0px',
-			slidesToShow: 2,}
-		  },
-		  {
-		  breakpoint: 660, settings: {
-			centerMode: true,
-			centerPadding: '130px',
-			slidesToShow: 1,}
-		  },
-		  {
-		  breakpoint: 600, settings: {
-			centerMode: true,
-			centerPadding: '100px',
-			slidesToShow: 1,}
-		  },
-		  {
-		  breakpoint: 540, settings: {
-			centerMode: true,
-			centerPadding: '70px',
-			slidesToShow: 1,}
-		  },
-		  {
-		  breakpoint: 480, settings: {
-			centerMode: true,
-			centerPadding: '55px',
-			slidesToShow: 1,}
-		  },
-		  {
-		  breakpoint: 447, settings: {
-			centerMode: true,
-			centerPadding: '40px',
-			slidesToShow: 1,}
-		  },
-		  {
-		  breakpoint: 415, settings: {
-			centerMode: true,
-			centerPadding: '34px',
-			slidesToShow: 1,}
-		  },
-		  {
-		  breakpoint: 401, settings: {
-			centerMode: true,
-			centerPadding: '24px',
-			slidesToShow: 1,}
-		  },
-		  {
-		  breakpoint: 376, settings: {
-			centerMode: true,
-			centerPadding: '18px',
-			slidesToShow: 1,}
-		  },
-		  {
-		  breakpoint: 370, settings: {
-			centerMode: false,
-			slidesToShow: 1,}
-		  }
-		]
 	});
 });
 
