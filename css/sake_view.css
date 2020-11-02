@@ -282,6 +282,7 @@
   font-size: 11px;
   width: 100%;
   height: 56px;
+  padding: 0 8px;
   margin-left: 2px;
 }
 
@@ -382,23 +383,21 @@
 #preview_frame {
   display: flex;
   flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
-  height: 150px;
+  height: auto;
 }
 
 #preview_main_container {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 400px;
 }
 
 .sakeimage {
-  width: 150px;
-  max-width: 150px;
-  min-width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 400px;
   border: 1px solid #d2d2d2;
 }
 
@@ -417,18 +416,18 @@
 }
 
 #preview_thumbnail_container {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 150px;
+  width: 100%;
   height: 100%;
 }
 
 .sakeimage_thumbnail {
-  width: 33.333%;
-  height: 33.333%;
+  width: 60px;
+  height: 60px;
   padding: 2px;
   cursor: pointer;
 }
@@ -443,7 +442,7 @@
 #definition_outerframe {
   width: 100%;
   height: auto;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 #definition {
@@ -1789,297 +1788,6 @@
   margin-top: 20px;
 }
 
-/*sake_list*******************/
-.sake_list, .recommend_sake, .brewery {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  color: #3f3f3f;
-  width: 1200px;
-  max-width: 100%;
-  height: auto;
-  border-top: 1px solid #e6e6e6;
-  margin-top: 20px;
-}
-
-.sake_list > div:first-child, .recommend_sake > div:first-child, .brewery > div:first-child {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  color: #000000;
-  font-size: 18px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.sake_list_samebrewery3630, .top_recommend3630, .top_brewery3630 {
-  fill: #8c8c8c;
-  width: 30px;
-  height: 25px;
-  margin-right: 10px;
-}
-
-.multiple-sake, .multiple-brewery {
-  width: 1200px;
-  max-width: 100%;
-  height: 250px;
-}
-
-.sakeitem {
-  width: 140px;
-  height: 250px;
-  margin: 0 10px;
-  outline: none;
-}
-
-.sakeitem {
-  display: none;
-}
-
-.sakeitem.slick-initialized {
-  display: block; /*slick-initializedが付与されたら表示*/
-}
-
-.sakeitem_click {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  background: #f5f5f5;
-  width: 140px;
-  max-width: 140px;
-  height: 250px;
-  border: 1px solid #d2d2d2;
-  border-radius: 4px;
-  outline: none;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.sakeitem_click:hover h1 {
-  background: #FFFAF0;
-  color: #DC7814;
-}
-
-.sakeitem_image_container {
-  width: 140px;
-  height: 200px;
-  overflow: hidden;
-}
-
-.sakeitem_image_container img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.sakeitem_sake_brewery_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  color: #0740a5;
-  font-weight: bold;
-  width: 140px;
-  height: 50px;
-  padding: 0 4px;
-  border-top: 1px solid #d2d2d2;
-}
-
-.sakeitem_sake_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 140px;
-  max-width: 100%;
-  height: 26px;
-  border-bottom: 1px dotted #d2d2d2;
-}
-
-.sakeitem_sake_container p {
-  font-size: 14px;
-  font-weight: bold;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-}
-
-.sakeitem_brewery_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 140px;
-  max-width: 100%;
-  height: 24px;
-}
-
-.sakeitem_brewery_container p {
-  color: #3f3f3f;
-  font-size: 13px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-}
-
-/*brewery*******************/
-.multiple-brewery li {
-  width: 300px;
-  height: 250px;
-  overflow: hidden;
-  margin: 0 10px;
-  outline: none;
-}
-
-.multiple-brewery li {
-  display: none;
-}
-
-.multiple-brewery li.slick-initialized {
-  display: block; /*slick-initializedが付与されたら表示*/
-}
-
-.banner_item {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 300px;
-  max-width: 300px;
-  height: 120px;
-  overflow: hidden;
-  outline: none;
-}
-
-.banner_item:hover .banner_item_name_container div {
-  color: #DC7814;
-}
-
-.banner_item:first-child {
-  margin-bottom: 10px;
-}
-
-.banner_item > div:first-child {
-  width: 130px;
-  height: 120px;
-  overflow: hidden;
-  border: 1px solid #d2d2d2;
-  margin-right: 10px;
-}
-
-.banner_item > div:first-child img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.banner_item_article_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  overflow: hidden;
-  color: #3f3f3f;
-  width: 160px;
-  height: 120px;
-}
-
-.banner_item_name_pref_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  height: 40px;
-  border-bottom: 1px solid #d2d2d2;
-}
-
-.banner_item_name_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 22px;
-}
-
-.banner_item_name_container > div {
-  color: #0740A5;
-  font-size: 14px;
-  font-weight: bold;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
-}
-
-.banner_item_pref_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 18px;
-}
-
-.banner_item_pref_container > div {
-  font-size: 12px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
-}
-
-.banner_item_profile_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  overflow: hidden;
-  width: 100%;
-  height: 80px;
-}
-
-.banner_item_brewery_profile {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  margin-top: 4px;
-}
-
-.banner_item_brewery_profile > div {
-  font-size: 13px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
-  margin-bottom: 4px;
-}
-
 /*preview*******************/
 #dialog_preview {
   position: fixed;
@@ -2205,53 +1913,9 @@
   }
 }
 
-@media only screen and (min-width: 360px) {
-  #preview_frame {
-    height: 168px;
-  }
-
-  #preview_main_container {
-    width: 168px;
-    height: 168px;
-  }
-
-  .sakeimage {
-    width: 168px;
-    max-width: 168px;
-    min-width: 168px;
-    height: 168px;
-  }
-
-  #preview_thumbnail_container {
-    width: 168px;
-  }
-}
-
 @media only screen and (min-width: 370px) {
   .tastes_item:first-child .tastes_title {
     font-size: 13px;
-  }
-}
-
-@media only screen and (min-width: 375px) {
-  #preview_frame {
-    height: 176px;
-  }
-
-  #preview_main_container {
-    width: 176px;
-    height: 176px;
-  }
-
-  .sakeimage {
-    width: 176px;
-    max-width: 176px;
-    min-width: 176px;
-    height: 176px;
-  }
-
-  #preview_thumbnail_container {
-    width: 176px;
   }
 }
 
@@ -2260,66 +1924,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
-}
-
-@media only screen and (min-width: 411px) {
-  #preview_frame {
-    height: 192px;
-  }
-
-  #preview_main_container {
-    width: 192px;
-    height: 192px;
-  }
-
-  .sakeimage {
-    width: 192px;
-    max-width: 192px;
-    min-width: 192px;
-    height: 192px;
-  }
-
-  #preview_thumbnail_container {
-    width: 192px;
-  }
-}
-
-@media only screen and (min-width: 440px) {
-  #preview_frame {
-    height: 206px;
-  }
-
-  #preview_main_container {
-    width: 206px;
-    height: 206px;
-  }
-
-  .sakeimage {
-    width: 206px;
-    max-width: 206px;
-    min-width: 206px;
-    height: 206px;
-  }
-
-  #preview_thumbnail_container {
-    width: 206px;
-  }
-}
-
-@media only screen and (min-width: 470px) {
-  #preview_frame {
-    height: auto;
-  }
-
-  #preview_thumbnail_container {
-    margin-left: 15px;
-    width: 100%;
-  }
-
-  .sakeimage_thumbnail {
-    width: 60px;
-    height: 60px;
   }
 }
 
@@ -2364,27 +1968,16 @@
   }
 
   #preview_frame {
-    flex-direction: column;
-    justify-content: flex-start;
     width: 300px;
-    height: auto;
-  }
-
-  #preview_main_container {
-    width: 300px;
-    height: 400px;
   }
 
   .sakeimage {
     width: 300px;
-    max-width: 300px;
-    min-width: 300px;
-    height: 400px;
   }
 
   #preview_thumbnail_container {
-    margin-top: 15px;
-    margin-left: 0;
+    display: flex;
+    margin-top: 16px;
   }
 
   #definition_outerframe {
@@ -2443,10 +2036,6 @@
 
   #banner_frame {
     width: 300px;
-  }
-
-  .multiple-brewery li {
-    margin: 0;
   }
 
   #ad1, #ad2 {
