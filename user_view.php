@@ -233,9 +233,11 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 	}
 
 	$category = $_GET['category'];
-	$from = $_GET['from'];
-	$to = $_GET['in_disp_to'];
-
+	$p_max = 25;
+	$page = $_GET['page'];
+	$from = ($page - 1) * $p_max;
+	$to = $from + $p_max;
+	
 	if(!$db = opendatabase("sake.db"))
 	{
 		die("データベース接続エラー .<br />");
@@ -251,7 +253,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 	$res = executequery($db, $sql);
 	$row = getnextrow($res);
 
-	print('<div id="all_container" data-username="' .$username .'" data-from="' .$from .'" data-to="' .$to .'" data-category="' .$category .'">');
+	print('<div id="all_container" data-username="' .$username .'" data-page="' .$page .'" data-from="' .$from .'" data-to="' .$to .'" data-max="' .$p_max .'" data-category="' .$category .'">');
 
 		if($row)
 		{
@@ -874,7 +876,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								print('</div>');
 
-								print("<div id=\"syuhanten_table\" style=\"margin-top:4px;\">");
+								print('<div id="syuhanten_table" style="margin-top:4px">');
 
 									$sql = "SELECT * FROM FOLLOW_SYUHANTEN_J, SYUHANTEN_J WHERE username = '$username' AND FOLLOW_SYUHANTEN_J.syuhanten_id = SYUHANTEN_J.syuhanten_id";
 									$res = executequery($db, $sql);
@@ -1154,11 +1156,12 @@ $(function() {
 
 		function nonda_serialize(in_disp_from, in_disp_to, query_count, mode) {
 
-			var data = "from=" + in_disp_from + "&to=" + in_disp_to;
 			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
 			var username =  <?php echo json_encode($_GET['username']); ?>;
+			var data = "search_type=1";
 
 			if(mode == 1) { // for ajax
+				data += "&from=" + in_disp_from + "&to=" + in_disp_to;
 
 				if(username && username != "")
 					data += "&username=" + username;
@@ -1166,6 +1169,7 @@ $(function() {
 					data += "&username=" + loginname;
 			}
 			else if(mode == 2) { // for url
+				data += "&page=" + (in_disp_from / $('#all_container').data('max') + 1);
 
 				if(username && username != "")
 					data += "&username=" + username;
@@ -1239,28 +1243,28 @@ $(function() {
 			var data = "sake_id="+$(this).attr('sake_id');
 			var obj = this;
 
-				$.ajax({
-						type: "post",
-						url: "sake_follow.php?sake_id="+id,
-						data: data,
-				}).done(function(xml){
-						var str = $(xml).find("str").text();
-						//alert("removed");
+			$.ajax({
+					type: "post",
+					url: "sake_follow.php?sake_id="+id,
+					data: data,
+			}).done(function(xml){
+					var str = $(xml).find("str").text();
+					//alert("removed");
 
-						if(str == "follow")
-						{
-							$(obj).removeClass("followed");
-							$("#count_sake").val(  parseInt($("#count_sake").val()) - 1);
-						}
-						else
-						{
-							$(obj).addClass("followed");
-							$("#count_sake").val(  parseInt($("#count_sake").val()) + 1);
-						}
+					if(str == "follow")
+					{
+						$(obj).removeClass("followed");
+						$("#count_sake").val(  parseInt($("#count_sake").val()) - 1);
+					}
+					else
+					{
+						$(obj).addClass("followed");
+						$("#count_sake").val(  parseInt($("#count_sake").val()) + 1);
+					}
 
-				}).fail(function(data){
-						alert("This is Error");
-				});
+			}).fail(function(data){
+					alert("This is Error");
+			});
 		});
 
 		$("#sake_table").delegate('.tastingview .user_button', 'click', function() {
@@ -1680,6 +1684,38 @@ $(function() {
 				});
 	    }
 
+		$("body").on("tab_sake_click", function( event, in_disp_from, in_disp_to, username, href, position, bCount) {
+
+			var data = nonda_serialize(in_disp_from, in_disp_to, 1, 1);
+			var my_url = "?" + nonda_serialize(in_disp_from, in_disp_to, 1, 2);
+
+			if($("#order_sake").val()) {
+				data += "&orderby=" + $("#order_sake").val();
+				my_url += "&orderby=" + $("#order_sake").val();
+			}
+
+			my_url += href;
+
+			$('#tab_sake').removeClass('nomitai_set');
+			$('#tab_sake').addClass('nonda_set');
+			$('#tab_sake .display_selection_button.selected').removeClass('selected');
+			$('#tab_sake .display_selection div:first-child').addClass('selected');
+
+			var stateObj = { 'search_type': 1,
+							'category': 1,
+							'data': data,
+							'url': my_url,
+							'href': href,
+							'username': username,
+							'orderby': $("#order_sake").val(),
+							'from': 0,
+							'to': 25 };
+
+			//alert("data:" + data);
+			history.pushState(stateObj, "user", my_url);
+			$("body").trigger("search_nonda", [ in_disp_from, in_disp_to, data, true ] );
+		});
+
 		$("body").on("search_nonda", function( event, in_disp_from, in_disp_to, data, bCount) {
 			searchNonda(in_disp_from, in_disp_to, data, bCount);
 		});
@@ -1691,6 +1727,7 @@ $(function() {
 		/* 次の飲んだ */
 		$(document).on('click', '.nonda_set #next_review', function() {
 
+				var search_type = 1;
 				var category = 1;
 				var disp_max = 25;
 				var in_disp_from = parseInt($('#in_disp_from').val()) + disp_max;
@@ -1706,10 +1743,12 @@ $(function() {
 				if(in_disp_from >= $("#count_sake").val())
 					return false;
 
-				var stateObj = { 'category': category,
+				var stateObj = { 'search_type': search_type,
+								 'category': category,
+								 'data': data,
+								 'url': my_url,
 								 'href': href,
 								 'username': username,
-								 'url': my_url,
 								 'orderby': orderby,
 								 'from': in_disp_from,
 								 'to': in_disp_to };
@@ -1722,6 +1761,7 @@ $(function() {
 		/* 前の飲んだ */
 		$(document).on('click', '.nonda_set #prev_review', function() {
 
+				var search_type = 1;
 				var category = 1;
 				var disp_max = 25;
 				var in_disp_to = parseInt($("#in_disp_from").val());
@@ -1739,10 +1779,12 @@ $(function() {
 					return false;
 				}
 
-				var stateObj = { 'category': category,
+				var stateObj = { 'search_type': search_type,
+								 'category': category,
+								 'data': data,
+								 'url': my_url,
 								 'href': href,
 								 'username': username,
-								 'url': my_url,
 								 'orderby': orderby,
 								 'from': in_disp_from,
 								 'to': in_disp_to };
@@ -1753,6 +1795,7 @@ $(function() {
 
 		$(document).on('click', '.nonda_set #review_result_turn_page .pageitems', function(e){
 
+				var search_type = 1;
 				var category = 1;
 				var limit = 0;
 				var disp_max = 25;
@@ -1772,10 +1815,12 @@ $(function() {
 
 				$('.nonda_set #review_result_turn_page .pageitems.selected').removeClass("selected");
 
-				var stateObj = { 'category': category,
+				var stateObj = { 'search_type': search_type,
+								 'category': category,
+								 'data': data,
+								 'url': my_url,
 								 'username': username,
 								 'href': href,
-								 'data': data,
 								 'from': 0,
 								 'to': 25,
 								 'orderby': orderby };
@@ -1812,6 +1857,7 @@ $(function() {
 		/* 飲んだ */
 		$('#tab_sake .display_selection div:first-child').on( "click", function(event) {
 
+				var search_type = 1;
 				var category = 1;
 				var in_disp_from = 0;
 				var in_disp_to = 25;
@@ -1828,11 +1874,12 @@ $(function() {
 				$(this).addClass('selected');
 				//$('#all_container').data('cateogry', 1);
 
-				var stateObj = { 'category': category,
-								 'href': href,
-								 'category': 1,
-								 'username': username,
+				var stateObj = { 'search_type': search_type,
+								 'category': category,
 								 'data': data,
+								 'url': my_url,
+								 'href': href,
+								 'username': username,
 								 'from': 0,
 								 'to': 25,
 								 'orderby': orderby };
@@ -1849,18 +1896,14 @@ $(function() {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// 飲みたい
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function sake_serialize(in_disp_from, in_disp_to, query_count, mode) {
 
-		function sake_serialize(in_disp_from, disp_max, query_count, mode) {
-
-			//var data = "search_type=" + search_type + "&category=" + category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username=" + username + "&orderby=" + orderby;
-			//var my_url = "?" + "search_type=" + search_type + "&category=" + category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&orderby=" + orderby + href;
-
-			var data =  "search_type=1" + "&category=2" + "&from=" + in_disp_from + "&disp_max=" + disp_max;
-
+			var data = "search_type=1" + "&category=2";
 			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
 			var username =  <?php echo json_encode($_GET['username']); ?>;
 
 			if(mode == 1) { // for ajax
+				data += "&from=" + in_disp_from + "&disp_max=" + in_disp_to;
 
 				if(username && username != "")
 					data += "&username=" + username;
@@ -1868,6 +1911,7 @@ $(function() {
 					data += "&username=" + loginname;
 			}
 			else if(mode == 2) { // for url
+				data += "&page=" + in_disp_from;
 
 				if(username && username != "")
 					data += "&username=" + username;
@@ -2137,8 +2181,6 @@ $(function() {
 						var limit = ((in_disp_from + p_max) >= $("#count_sake").val()) ? $("#count_sake").val() : (in_disp_from + p_max);
 						$('#disp_sake').text((parseInt($('#in_disp_from').val()) + 1) + "～" + limit + "件 / 全" + $("#count_sake").val() + "件");
 
-						//alert("count_sake:" + $("#count_sake").val())
-
 						$('#review_result_turn_page .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
 						$('#review_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
 
@@ -2192,9 +2234,10 @@ $(function() {
 
 				//alert("data:" + data);
 				var stateObj = { 'search_type': search_type,
+								 'data': data,
+								 'url': my_url,
 								 'category': category,
 								 'href': href,
-								 'data': data,
 								 'from': in_disp_from,
 								 'to': in_disp_to,
 								 'username': username,
@@ -2223,8 +2266,9 @@ $(function() {
 
 				var stateObj = { 'search_type': search_type,
 								 'category': category,
-								 'href': href,
 								 'data': data,
+								 'url': my_url,
+								 'href': href,
 								 'from': in_disp_from,
 								 'to': in_disp_to,
 								 'username': username,
@@ -2237,7 +2281,7 @@ $(function() {
 		$(document).on('click', '.nomitai_set #review_result_turn_page .pageitems', function(e){
 
 				var search_type = 1;
-				var category = 1;
+				var category = 2;
 				var disp_max = 25;
 				var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text());
 				var position = $(this).index();
@@ -2253,9 +2297,9 @@ $(function() {
 
 				var stateObj = { 'search_type': search_type,
 								 'category': category,
-								 'href': href,
-								 'search_type': search_type,
 								 'data': data,
+								 'url': my_url,
+								 'href': href,
 								 'from': in_disp_from,
 								 'to': in_disp_to,
 								 'username': username,
@@ -2277,9 +2321,6 @@ $(function() {
 				var count_query = 1;
 				var username = $('#all_container').data('username');
 				var href = $('.simpleTabs li a:nth(0)').attr('href');
-				//var data = "search_type=" + search_type + "&category=" + category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username=" + username + "&orderby=" + orderby + "&count_query=1";
-				//var my_url = "?" + search_type + "&category=" + category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&orderby=" + orderby + "&count_query=1" + href;
-
 				var data = sake_serialize(in_disp_from, disp_max, 1, 1);
 				var my_url = "?" + sake_serialize(in_disp_from, disp_max, 0, 2) + href;
 
@@ -2292,11 +2333,11 @@ $(function() {
 
 				var stateObj = { 'search_type': search_type,
 								 'category': category,
+								 'data': data,
+								 'url': my_url,
 								 'href': href,
-								 'category': 2,
 								 'orderby': orderby,
 								 'username': username,
-								 'data': data,
 								 'from': 0,
 								 'to': 25 };
 
@@ -2318,8 +2359,8 @@ $(function() {
 				var in_disp_to = disp_max;
 				var href = $('.simpleTabs li a:nth(0)').attr('href');
 				var orderby = ($("#order_sake").val() == 1) ? 2 : 1;
-				var data = "search_type = "+search_type + "&category=" + category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username=" + username + "&orderby=" + orderby;
-				var my_url = "?search_type = "+search_type + "&category=" + category + "&from=" + in_disp_from + "&username=" + username + "&orderby=" + orderby + href;
+				var data = "search_type=" + search_type + "&category = "+category + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username=" + username + "&orderby=" + orderby;
+				var my_url = "?search_type=" + search_type + "&category = "+category + "&from=" + in_disp_from + "&username=" + username + "&orderby=" + orderby + href;
 
 				$("#order_sake").val(orderby);
 				$("#sake_sort span").css({"color": "#b2b2b2"});
@@ -2327,8 +2368,9 @@ $(function() {
 
 				var stateObj = { 'search_type': search_type,
 								 'category': category,
-								 'href': href,
 								 'data': data,
+								 'url': my_url,
+								 'href': href,
 								 'from': 0,
 								 'to': 25 };
 
@@ -2374,7 +2416,6 @@ $(function() {
 
 						//alert("my in_disp_from:" + in_disp_from);
 						$('#in_sakagura_disp_from').val(in_disp_from);
-
 						////////////////////////////////////////////////////////////////////////
 
 						$('#sakagura_table').empty();
@@ -2625,8 +2666,71 @@ $(function() {
 				});
 		}
 
+		function sakagura_serialize(in_disp_from, disp_max, query_count, mode) 
+		{
+			var category = 2;
+			var orderby = $("#order_sakagura").val();
+			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
+			var username =  <?php echo json_encode($_GET['username']); ?>;
+			var data = "search_type=2";
+
+			if(mode == 1) { // for ajax
+				data += "&from=" + in_disp_from + "&disp_max=" + disp_max;
+
+				if(username && username != "")
+					data += "&username=" + username;
+				else if(loginname && loginname != "")
+					data += "&username=" + loginname;
+			}
+			else if(mode == 2) { // for url
+				data += "&page=" + (in_disp_from / $('#all_container').data('max') + 1);
+
+				if(username && username != "")
+					data += "&username=" + username;
+			}
+
+			if(query_count && query_count == 1) {
+				data += "&count_query=" + query_count;
+			}
+
+			return data;
+		}
+
+		$("body").on("tab_sakagura_click", function(event, in_disp_from, in_disp_to, username, href, position, bCount) 
+		{
+			var search_type = 2;
+			var category = 2;
+			var data = sakagura_serialize(in_disp_from, in_disp_to, 1, 1);
+			var my_url = "?" + sakagura_serialize(in_disp_from, in_disp_to, 1, 2);
+
+			if($("#order_sakagura").val()) {
+				data += "&orderby=" + $("#order_sakagura").val();
+				my_url += "&orderby=" + $("#order_sakagura").val();
+			}
+
+			my_url += href;
+			$('#tab_sake .display_selection_button.selected').removeClass('selected');
+			$('#tab_sake .display_selection div:first-child').addClass('selected');
+
+			$('#sakagurapage .pageitems.selected').removeClass('selected');
+			$('#sakagurapage .pageitems:nth(0)').addClass('selected');
+
+			var stateObj = { 'search_type': search_type,
+							 'category': category,
+							 'data': data,
+							 'url': my_url,
+							 'href': href,
+							 'username': username,
+							 'orderby': $("#order_sakagura").val(),
+							 'from': 0,
+							 'to': 25 };
+
+			history.pushState(stateObj, "user", my_url);
+			searchSakagura(data, in_disp_from, in_disp_to);
+		});
+
 		$("body").on("search_sakagura", function(event, data, in_disp_from, in_disp_to) {
-				searchSakagura(data, in_disp_from, in_disp_to)
+			searchSakagura(data, in_disp_from, in_disp_to)
 		});
 
 		/* コメント・写真 */
@@ -2698,27 +2802,29 @@ $(function() {
 
 				var search_type = 2;
 				var disp_max = 25;
+				var username = $('#all_container').data('username');
+				var orderby = $("#order_sakagura").val();
 				var in_disp_from = parseInt($("#in_sakagura_disp_from").val()) + disp_max;
 				var in_disp_to = ((in_disp_from + disp_max) > $('#count_sakagura').val()) ? $('#count_sakagura').val() : in_disp_from + disp_max;
+				var href = $('.simpleTabs li a:nth(1)').attr('href');
+				var data = sakagura_serialize(in_disp_from, disp_max, 1, 1);
+				var my_url = "?" + sakagura_serialize(in_disp_from, disp_max, 1, 2) + href;
 
 				if((parseInt($("#in_sakagura_disp_from").val()) + disp_max) >= $("#count_sakagura").val())
 					return false;
 
-				var username = $('#all_container').data('username');
-				var orderby = $("#order_sakagura").val();
-				var href = $('.simpleTabs li a:nth(1)').attr('href');
-				var data = "search_type=" + search_type + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username=" + username + "&orderby=" + orderby;
-				var my_url = "?search_type=" + search_type + "&from=" + in_disp_from + "&orderby=" + orderby + href
-
-				var stateObj = { 'href': href,
+				var stateObj = { 'search_type': search_type,
+								 'data': data,
 								 'url': my_url,
-								 'search_type': search_type,
+								 'href': href,
 								 'orderby': orderby,
 								 'username': username,
 								 'from': in_disp_from,
 								 'to': in_disp_to };
 
 				history.pushState(stateObj, "user", my_url);
+
+				//alert("sakagura data:" + data);
 				searchSakagura(data, in_disp_from, in_disp_to);
 		});
 
@@ -2731,24 +2837,24 @@ $(function() {
 				var in_disp_from = parseInt($("#in_sakagura_disp_from").val()) - disp_max;
 				var in_disp_to = in_disp_from + disp_max;
 				var href = $('.simpleTabs li a:nth(1)').attr('href');
-				var data = "search_type=" + search_type + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username="+username + "&orderby=" + orderby;
-				var my_url = "?search_type=" + search_type + "&from=" + in_disp_from + "&orderby=" + orderby + href;
+				var data = sakagura_serialize(in_disp_from, disp_max, 1, 1);
+				var my_url = "?" + sakagura_serialize(in_disp_from, disp_max, 1, 2) + href;
 
 				if(($("#in_sakagura_disp_from").val() - disp_max) < 0)
 					return false;
 
 				$('#next_sakagura').addClass('active');
 
-				var stateObj = { 'href': href,
+				var stateObj = { 'search_type': search_type,
+								 'data': data,
 								 'url': my_url,
-								 'search_type': search_type,
+								 'href': href,
 								 'username': username,
 								 'orderby': orderby,
 								 'from': in_disp_from,
 								 'to': in_disp_to };
 
 				history.pushState(stateObj, "user", my_url);
-
 				//alert("search sakagura in_disp_from:" + in_disp_from);
 				searchSakagura(data, in_disp_from, in_disp_to);
 		});
@@ -2763,13 +2869,15 @@ $(function() {
 				var username = $('#all_container').data('username');
 				var orderby = $("#order_sakagura").val();
 				var href = $('.simpleTabs li a:nth(1)').attr('href');
-				var data = "search_type=" + search_type + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&username=" + username + "&orderby=" + orderby;
-				var my_url = "?search_type=" + search_type + "&from=" + in_disp_from + "&orderby=" + orderby + href;
+				var data = sakagura_serialize(in_disp_from, disp_max, 1, 1);
+				var my_url = "?" + sakagura_serialize(in_disp_from, disp_max, 1, 2) + href;
 
-				var stateObj = { 'href': href,
+				var stateObj = { 'search_type': search_type,
+								 'data': data,
+								 'url': my_url,
+								 'href': href,
 								 'url': my_url,
 								 'username': username,
-								 'search_type': search_type,
 								 'orderby': orderby,
 								 'from': in_disp_from,
 								 'to': in_disp_to };
@@ -2786,11 +2894,38 @@ $(function() {
 
 $(function() {
 
+	function users_serialize(in_disp_from, in_disp_to, bCount, mode)
+	{
+		var data = "search_type=3";
+		var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
+		var username = $('#all_container').data('username');
+
+		if(mode == 1) { // for ajax
+			data += "&from=" + in_disp_from + "&in_disp_to=" + in_disp_to;
+
+			if(username && username != "")
+				data += "&username=" + username;
+			else if(loginname && loginname != "")
+				data += "&username=" + loginname;
+		}
+		else if(mode == 2) { // for url
+			data += "&page=" + (in_disp_from / $('#all_container').data('max') + 1);
+
+			if(username && username != "")
+				data += "&username=" + username;
+		}
+
+		if(bCount && bCount == 1) {
+			data += "&count_query=" + bCount;
+		}
+
+		return data;
+	}
+
 	function searchUsers(data, in_disp_from, in_disp_to, bCount)
 	{
 			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
 			var username = $('#all_container').data('username');
-
 			dispLoading("処理中...");
 			//alert("searchUsers:" + data);
 			//alert("count_result:" + $('#count_result').val());
@@ -2811,7 +2946,7 @@ $(function() {
 					var sql = data[0].sql;
 
 					$('#users_table').empty();
-					//alert("sql:" + sql + " count_result:" + count_result);
+					//alert("sql:" + sql);
 
 					if(count_result == 0 && users == null) {
 						var innerText = '<div class="navigate_page_no_registry">ユーザーをフォローしていません</div>';
@@ -2875,6 +3010,8 @@ $(function() {
 								innerHTML += '</div>';
 
 							innerHTML += '</a>';
+
+
 							$('#users_table').append(innerHTML);
 							$("#tab_users .search_result_count").css({"display":"block"});
 						}
@@ -3032,6 +3169,31 @@ $(function() {
 
 	});
 
+	$("body").on("tab_users_click", function(event, in_disp_from, in_disp_to, username, href, position, bCount) 
+	{
+		var search_type = 3;
+		var in_disp_from = 0;
+		var in_disp_to = 25;
+		var bCount = 1;
+		var data = users_serialize(in_disp_from, in_disp_to, bCount, 1);
+		var my_url = "?" + users_serialize(in_disp_from, in_disp_to, bCount, 2) + href;
+
+		//alert("data:" + data);
+
+		var stateObj = { 'search_type': search_type,
+						'category': 3,
+						'data': data,
+						'url': my_url,
+						'href': href,
+						'username': username,
+						'orderby': $("#order_user").val(),
+						'from': 0,
+						'to': 25 };
+
+		history.pushState(stateObj, "user", my_url);
+		$("body").trigger("search_users", [ data, in_disp_from, in_disp_to, 1 ] );
+	});
+
 	$("body").on("search_users", function(event, data, in_disp_from, in_disp_to) {
 		searchUsers(data, in_disp_from, in_disp_to, true)
 	});
@@ -3132,111 +3294,43 @@ jQuery(document).ready(function($) {
 		var username = $('#all_container').data('username');
 		var in_disp_from = 0;
 		var in_disp_to = 25;
-
+		
 		if(href == "#tab_sake")
 		{
-			var category = 1;
-			var data = "search_type=" + category + "&from=" + in_disp_from + "&to=" + in_disp_to + "&username=" + username + "&count_query=1";
-			var my_url = "?search_type=" + category + "&from=" + in_disp_from + "&count_query=1";
-
-			if($("#order_sake").val()) {
-				data += "&orderby=" + $("#order_sake").val();
-				my_url += "&orderby=" + $("#order_sake").val();
-			}
-
-			my_url += href;
-			$('#tab_sake').removeClass('nomitai_set');
-			$('#tab_sake').addClass('nonda_set');
-
-			$('#tab_sake .display_selection_button.selected').removeClass('selected');
-			$('#tab_sake .display_selection div:first-child').addClass('selected');
-
-			var stateObj = { 'category': 1,
-							 'href': href,
-							 'url': my_url,
-							 'username': username,
-							 'orderby': $("#order_sake").val(),
-							 'from': 0,
-							 'to': 25 };
-
-			history.pushState(stateObj, "user", my_url);
-			$("body").trigger("search_nonda", [ in_disp_from, in_disp_to, data, true ] );
+			$("body").trigger("tab_sake_click", [ in_disp_from, in_disp_to, username, href, position, true ] );
 		}
 		else if(href == "#tab_sakagura")
 		{
-			var category = 2;
-			var data = "search_type=" + category + "&from=" + in_disp_from + "&to=" + in_disp_to + "&username=" + username + "&count_query=1";
-			var my_url = "?search_type=" + category + "&from=" + in_disp_from + "&count_query=1";
-
-			if($("#order_sakagura").val()) {
-				data += "&orderby=" + $("#order_sakagura").val();
-				my_url += "&orderby=" + $("#order_sakagura").val();
-			}
-
-			my_url += href;
-			$('#tab_sake .display_selection_button.selected').removeClass('selected');
-			$('#tab_sake .display_selection div:first-child').addClass('selected');
-
-			$('#sakagurapage .pageitems.selected').removeClass('selected');
-			$('#sakagurapage .pageitems:nth(0)').addClass('selected');
-
-			var stateObj = { 'category': 2,
-							 'href': href,
-							 'url': my_url,
-							 'username': username,
-							 'orderby': $("#order_sakagura").val(),
-							 'from': 0,
-							 'to': 25 };
-
-			history.pushState(stateObj, "user", my_url);
-			$("body").trigger("search_sakagura", [ data, in_disp_from, in_disp_to ] );
+			$("body").trigger("tab_sakagura_click", [ in_disp_from, in_disp_to, username, href, position, true ] );
 		}
 		else if(href == "#tab_users")
 		{
-			var category = 3;
-			var in_disp_from = 0;
-			var in_disp_to = 25;
-			var bCount = 1;
-			var my_url = "?search_type=" + category + "&from=" + in_disp_from;
-			var anchor_user = <?php echo json_encode($_GET['username']); ?>;
-			var data = "username=" + username;
-
-			if(anchor_user && anchor_user != "")
-				my_url += "?username=" + anchor_user;
-
-			my_url += "&count_query=1" + href;
-
-			var stateObj = { 'category': 3,
-							 'href': href,
-							 'url': my_url,
-							 'username': anchor_user,
-							 'orderby': $("#order_user").val(),
-							 'from': 0,
-							 'to': 25 };
-
-			history.pushState(stateObj, "user", my_url);
-			$("body").trigger("search_users", [ data, in_disp_from, in_disp_to, 1 ] );
+			$("body").trigger("tab_users_click", [ in_disp_from, in_disp_to, username, href, position, true ] );
 		}
 	});
 
 	$(window).on('popstate', function(event) {
 
 		var state = event.originalEvent.state;
+		var category = state.category;
 		var disp_max = 25;
 		var curr = $('.simpleTabs').find(".active");
 		var href = state.href;
 		var prev = $('.simpleTabs').find('a[href="' + state.href +'"]');
-
+		
 		curr.removeClass('active');
 		prev.addClass('active');
 
 		$('#tab_main').find('.show').removeClass('show').addClass('hide').hide();
 		$(href).removeClass('hide').addClass('show').show();
 
-		if(href == "#tab_sake")
+		//alert("popstate:" + state.search_type);
+
+		if(state.search_type == 1)
 		{
 			if(state.category && state.category == 1) {
-				var data = "from=" + state.from + "&to=" + state.to + "&username=" + state.username + "&orderby=" + state.orderby;
+				//var data = "from=" + state.from + "&to=" + state.to + "&username=" + state.username + "&orderby=" + state.orderby;
+				var data = state.data;
 				var in_disp_from = (state.from && state.from != undefined) ? state.from : 0;
 				var in_disp_to = in_disp_from + disp_max;
 
@@ -3245,34 +3339,34 @@ jQuery(document).ready(function($) {
 				$('#tab_sake').removeClass('nomitai_set');
 				$('#tab_sake').addClass('nonda_set');
 				$('#tab_sake .display_selection_button.selected').removeClass('selected');
-
 				$('#tab_sake .display_selection_button:nth(0)').addClass('selected');
 				$("body").trigger("search_nonda", [ in_disp_from, disp_max, data, false ] );
 			}
 			else if(state.category && state.category == 2) {
 				var in_disp_from = (state.from && state.from != undefined) ? state.from : 0;
 				var in_disp_to = in_disp_from + disp_max;
-				var data = "search_type=" + state.search_type +"&from=" + state.from + "&disp_max=" + disp_max + "&username=" + state.username + "&orderby=" + state.orderby;
+				var data = state.data;
+				//var data = "search_type=" + state.search_type +"&from=" + state.from + "&disp_max=" + disp_max + "&username=" + state.username + "&orderby=" + state.orderby;
 
 				$('#all_container').data('cateogry', 2);
 				$('#tab_sake').removeClass('nonda_set');
 				$('#tab_sake').addClass('nomitai_set');
 				$('#tab_sake .display_selection_button.selected').removeClass('selected');
 				$('#tab_sake .display_selection_button:nth(1)').addClass('selected');
-
 				$("body").trigger("search_nomitai", [ in_disp_from, state.to, data, false ] );
 			}
 		}
-		else if(href == "#tab_sakagura")
+		else if(state.search_type == 2)
 		{
-			var data = "search_type=" + state.category +
-						"&from=" + state.from +
-						"&to="  + state.to +
-						"&username="  + state.username +
-						"&count_query=1" +
-						"&orderby=" + state.orderby;
-
+			// var data = "search_type=" + state.search_type + "&from=" + state.from + "&to="  + state.to + "&username="  + state.username + "&count_query=1" + "&orderby=" + state.orderby;
+			var data = state.data;
 			$("body").trigger("search_sakagura", [ data, state.from, state.to ] );
+		}
+		else if(state.search_type == 3)
+		{
+			// var data = "search_type=" + state.search_type + "&from=" + state.from + "&to="  + state.to + "&username="  + state.username + "&count_query=1" + "&orderby=" + state.orderby;
+			var data = state.data;
+			$("body").trigger("search_user", [ data, state.from, state.to ] );
 		}
 	});
 
@@ -3321,7 +3415,6 @@ jQuery(document).ready(function($) {
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	var hash = window.location.hash;
 
 	if(hash && hash != "")
