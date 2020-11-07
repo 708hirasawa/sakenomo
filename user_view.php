@@ -2898,7 +2898,7 @@ $(function() {
 	{
 		var data = "search_type=3";
 		var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
-		var username = $('#all_container').data('username');
+		var username =  <?php echo json_encode($_GET['username']); ?>;
 
 		if(mode == 1) { // for ajax
 			data += "&from=" + in_disp_from + "&in_disp_to=" + in_disp_to;
