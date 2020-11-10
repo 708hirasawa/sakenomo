@@ -13,6 +13,9 @@ function write_HamburgerLogo()
 
 function write_side_menu()
 {
+	$loginname = $_COOKIE['login_cookie'];
+	$username = $_COOKIE['username'];
+	
 	print('<!-- Sidebar -->');
 	print('<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">');
 	  print('<ul class="sidebar-nav">');
@@ -23,22 +26,20 @@ function write_side_menu()
 				print('<div class="user-img-container">');
 				print('<img src="' .$path .'">');
 				print('</div>');
-				print('<span>'.$_COOKIE['username'].'</span>');
+				print('<span>'.$username.'</span>');
 
 		  print('</a>');
 		print('</li>');
 		print('<li class="sidebar-item">');
 
-				$username = $_COOKIE['login_cookie'];
-
 				if($username == "" || $username == null)
 				{
-					print('<a href="user_login_form.php" class="fa fa-fw fa-login"><div class="img-container"><svg class="mobile_login2020"><use xlink:href="#login2020"/></svg></div><span>ログイン</span>');
+					print('<a href="user_login_form.php" class="fa fa-fw fa-login"><div class="img-container"><svg class="header_login2020"><use xlink:href="#login2020"/></svg></div><span>ログイン</span>');
 					print('</a>');
 				}
 				else
 				{
-					print('<a href="user_view.php?username=' .$_COOKIE['login_cookie'] .'" class="fa fa-fw fa-mypage"><div class="img-container"><svg class="mobile_person2020"><use xlink:href="#person2020"/></svg></div><span>マイページ</span>');
+					print('<a href="user_view.php?username=' .$loginname .'" class="fa fa-fw fa-mypage"><div class="img-container"><svg class="mobile_person2020"><use xlink:href="#person2020"/></svg></div><span>マイページ</span>');
 					print('</a>');
 				}
 
