@@ -4996,6 +4996,11 @@ $(function() {
 								$('#view_sakagura_result').text(parseInt($('#in_disp_sakagura_from').val()) + 1 + '～' + limit);
 
 								$('html, body').animate({scrollTop:0}, 'fast');
+
+								if($('.mobilesake_container').css('display') != 'none') {
+									$('#tabs-31_content').css('display', 'none');
+						}
+
 						}
 						else {
 							$("#count_sakagura_result").css({"display":"none"});
