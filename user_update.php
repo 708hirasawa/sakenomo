@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 
 require_once("db_functions.php");
 $username = $_POST['username'];
@@ -7,7 +7,7 @@ $email = $_POST['email'];
 
 if(!$db = opendatabase("sake.db"))
 {
-   die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
+   die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
 }
 
 $item = "";
@@ -94,7 +94,7 @@ if((isset($_POST['birthday_year']) && $_POST['birthday_year'] != undefined) &&
    (isset($_POST['birthday_day']) && $_POST['birthday_day'] != undefined)) 
 {
 
-	// ‘S•”“ü—Í‚µ‚Ä‚¨‚©‚È‚¢‚Æ‚¢‚¯‚È‚¢
+	// å…¨éƒ¨å…¥åŠ›ã—ã¦ãŠã‹ãªã„ã¨ã„ã‘ãªã„
 
 	$birthday_year = $_POST['birthday_year'];
 	$birthday_month = $_POST['birthday_month'];
@@ -225,7 +225,7 @@ if(isset($_POST['user_introduction']) && $_POST['user_introduction'] != undefine
 }
 
 /**************
- * —˜ğ‘Ši
+ * åˆ©é…’è³‡æ ¼
  *************/
 
 if(isset($_POST['certification']) && $_POST['certification'] != undefined)
@@ -405,6 +405,8 @@ if(!$res)
 else
 {
 	$return = "success";
+
+	setcookie("username", $username, time() + (10 * 365 * 24 * 60 * 60));
 
 	header("Content-type: application/xml");
 	echo '<?xml version="1.0" encoding="utf-8" ?> ' . "\n";
