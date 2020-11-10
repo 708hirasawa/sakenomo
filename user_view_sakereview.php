@@ -395,10 +395,19 @@ require_once("searchbar.php");
 			$res = executequery($db, $sql);
 			$row = getnextrow($res);
 
-			$path = "images/icons/noimage_user30.svg";
+			if($row) {
+				$path = "images/icons/noimage_user30.svg";
+				$imagefile = null;
+				$email = stripslashes($row["email"]);
+				$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
+				$result = executequery($db, $sql);
+				$rd = getnextrow($result);
 
-			if($row["imagefile"])
-				$path = "images/profile/" .$row["imagefile"];
+				if($rd) {
+					$imagefile = $rd["filename"];
+					$path = "images/profile/" .$imagefile;
+				}
+			}
 
 			print('<div class="user_image_name_container">');
 			//写真
