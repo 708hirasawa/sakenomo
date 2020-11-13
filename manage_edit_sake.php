@@ -241,6 +241,7 @@ function writeSakeContainer($sakagura_id, $sakagura_name)
               print('<div class="column2">');
                 print('<label><SELECT name="year_made">');
                   print('<OPTION VALUE="">----</OPTION>');
+                  print('<OPTION VALUE=2020>2020年 令和2年</OPTION>');
                   print('<OPTION VALUE=2019>2019年 令和1年</OPTION>');
                   print('<OPTION VALUE=2018>2018年 平成30年</OPTION>');
                   print('<OPTION VALUE=2017>2017年 平成29年</OPTION>');
@@ -832,8 +833,9 @@ function writeSakeContainer($sakagura_id, $sakagura_name)
                   print('<div class="column2_concouritem">');
                     print('<label><SELECT name="sake_award_year1">');
                       print('<OPTION VALUE="">年度</OPTION>');
-					  print('<OPTION VALUE=2019>2019年 令和1年</OPTION>');
-					  print('<OPTION VALUE=2018>2018年 平成30年</OPTION>');
+                      print('<OPTION VALUE=2020>2020年 令和2年</OPTION>');
+                      print('<OPTION VALUE=2019>2019年 令和1年</OPTION>');
+                      print('<OPTION VALUE=2018>2018年 平成30年</OPTION>');
                       print('<OPTION VALUE=2017>2017年 平成29年</OPTION>');
                       print('<OPTION VALUE=2016>2016年 平成28年</OPTION>');
                       print('<OPTION VALUE=2015>2015年 平成27年</OPTION>');
@@ -921,8 +923,9 @@ function writeSakeContainer($sakagura_id, $sakagura_name)
                   print('<div class="column2_concouritem">');
                     print('<label><SELECT name="sake_award_year2">');
                       print('<OPTION VALUE="">年度</OPTION>');
-					  print('<OPTION VALUE=2019>2019年 令和1年</OPTION>');
-					  print('<OPTION VALUE=2018>2018年 平成30年</OPTION>');
+                      print('<OPTION VALUE=2020>2020年 令和2年</OPTION>');
+                      print('<OPTION VALUE=2019>2019年 令和1年</OPTION>');
+                      print('<OPTION VALUE=2018>2018年 平成30年</OPTION>');
                       print('<OPTION VALUE=2017>2017年 平成29年</OPTION>');
                       print('<OPTION VALUE=2016>2016年 平成28年</OPTION>');
                       print('<OPTION VALUE=2015>2015年 平成27年</OPTION>');
@@ -1009,8 +1012,9 @@ function writeSakeContainer($sakagura_id, $sakagura_name)
                   print('<div class="column2_concouritem">');
                     print('<label><SELECT name="sake_award_year3">');
                       print('<OPTION VALUE="">年度</OPTION>');
-					  print('<OPTION VALUE=2019>2019年 令和1年</OPTION>');
-					  print('<OPTION VALUE=2018>2018年 平成30年</OPTION>');
+                      print('<OPTION VALUE=2020>2020年 令和2年</OPTION>');
+                      print('<OPTION VALUE=2019>2019年 令和1年</OPTION>');
+                      print('<OPTION VALUE=2018>2018年 平成30年</OPTION>');
                       print('<OPTION VALUE=2017>2017年 平成29年</OPTION>');
                       print('<OPTION VALUE=2016>2016年 平成28年</OPTION>');
                       print('<OPTION VALUE=2015>2015年 平成27年</OPTION>');
