@@ -475,8 +475,8 @@ print('<div id="container"
 
             if($result)
             {
-				$rd = getnextrow($result);
-				$count_result = $rd["COUNT(*)"];
+                $rd = getnextrow($result);
+                $count_result = $rd["COUNT(*)"];
             }
 
             $numPage = ($count_result % 25) ? ($count_result / 25) + 1 : $count_result / 25;
@@ -487,8 +487,8 @@ print('<div id="container"
             $in_disp_from = 0;
             $in_disp_to = 25;
 
-            //$sql = "SELECT * FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKAGURA_J.id = '$id' ORDER BY SAKE_J.sake_read ASC";
-            $sql = "SELECT * FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKAGURA_J.id = '$id' ORDER BY SAKE_J.write_update DESC LIMIT $in_disp_from, $in_disp_to";
+            $sql = "SELECT * FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKAGURA_J.id = '$id' ORDER BY SAKE_J.sake_read ASC LIMIT $in_disp_from, $in_disp_to";
+            //$sql = "SELECT * FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKAGURA_J.id = '$id' ORDER BY SAKE_J.write_update DESC LIMIT $in_disp_from, $in_disp_to";
             //print("<div>sql:".$sql."</div>");
 
             $result = executequery($db, $sql);
@@ -560,16 +560,16 @@ print('<div id="container"
 
                     if($record["setting"] != "" && $record["setting"] != undefined)
                     {
-						$path = "images/photo/thumb/" .$record["setting"];
+                      $path = "images/photo/thumb/" .$record["setting"];
                     }
                     else
                     {
-						$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
+                      $result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
 
-						if($rd = getnextrow($result_set))
-						{
-							$path = "images/photo/thumb/" .$rd["filename"];
-						}
+                      if($rd = getnextrow($result_set))
+                      {
+                        $path = "images/photo/thumb/" .$rd["filename"];
+                      }
                     }
 
                     print('<div class="search_sake_result_name_container">');
@@ -666,9 +666,12 @@ print('<div id="container"
 
                           if($record["rice_used"] && $record["rice_used"] != "") {
                             $rice_array = explode('/', $record["rice_used"]);
-
                             for($i = 0; $i < count($rice_array); $i++) {
                               $rice_entry = explode(',', $rice_array[$i]);
+
+                              if($i > 0 && $rice_entry[0] != "") {
+                                print(" / ");
+                              }
 
                               $sql = "SELECT SAKE_RICE.rice_name, SAKE_RICE.rice_kanji, SAKE_RICE.rice_kana FROM SAKE_RICE WHERE SAKE_RICE.rice_name = '$rice_entry[0]'";
                               $sake_result = executequery($db, $sql);
@@ -681,18 +684,19 @@ print('<div id="container"
                               }
 
                               if($rice_entry[0] != "") {
-                                $rice_kanji = $rd ? $rd["rice_kanji"] : $rice_used;
-                                print($rice_kanji);
-	                            }
-
-                              if($i < (count($rice_array) - 1))
-                                print(" / ");
+                                if($rice_entry[0] == "other") {
+                                  print($rice_entry[3]);
+                                } else {
+                                  $rice_kanji = $record ? $rd["rice_kanji"] : $rice_used;
+                                  print($rice_kanji ." ");
+                                }
+                              }
                             }
                           } else {
                             print('<span style="color: #b2b2b2;">--</span>');
                           }
 
-                        print("</div>");
+                          print("</div>");
                       print("</div>");
                       ////////////////////////////////////////
                       print('<div class="spec_item">');
@@ -2408,7 +2412,8 @@ $(function() {
 
 		if(in_disp_from < $("#hidden_sake_count_query").val())
 		{
-			var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.write_update" + "&desc=DESC";
+			//var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.write_update" + "&desc=DESC";
+			var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.sake_read" + "&desc=ASC";
 			searchSake(in_disp_from, disp_max, data, false);
 		}
 	});
@@ -2421,7 +2426,7 @@ $(function() {
 
 		if(in_disp_from >= 0)
 		{
-			var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.write_update" + "&desc=DESC";
+			var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.sake_read" + "&desc=ASC";
 			searchSake(in_disp_from, disp_max, data, false);
 		}
 	});
@@ -2433,7 +2438,7 @@ $(function() {
 		var in_disp_from = (position - 1) * disp_max;
 		var in_disp_to = in_disp_from + disp_max;
 		var my_url = "?" + data;
-		var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.write_update" + "&desc=DESC";
+		var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.sake_read" + "&desc=ASC";
 		searchSake(in_disp_from, disp_max, data, false);
 	});
 
