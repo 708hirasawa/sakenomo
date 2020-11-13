@@ -5,9 +5,19 @@ function GetWareki($year)
 	$seireki = intval($year);
 	$wareki = "";
 
-	if($seireki > 1988)
+	if($seireki > 2018)
 	{
-		$wareki = "平成".($seireki - 1988)."年";
+		if($seireki == 2019)
+			$wareki = "平成31年/令和元年";
+		else
+			$wareki = "令和".($seireki - 2018)."年";
+	}
+	else if($seireki > 1988)
+	{
+		if($seireki == 1989)
+			$wareki = "昭和64年/平成元年";
+		else
+			$wareki = "平成".($seireki - 1988)."年";
 	}
     else if($seireki > 1925)
 	{
