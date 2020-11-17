@@ -876,4 +876,12 @@ input[name="nonda_image_caption"] {
   border: 1px solid #b2b2b2;
 }
 
-/********************/
+@media only screen and (min-width: 560px) {
+  #dialog_bbs {
+    width: 86%;
+    max-width: 480px;
+    height: auto;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}
