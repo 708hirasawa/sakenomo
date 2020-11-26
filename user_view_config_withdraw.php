@@ -17,7 +17,7 @@ require_once("nonda.php");
 <title>Sakenomo退会 [Sakenomo]</title>
 
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-<link rel="stylesheet" type="text/css" href="css/hamburger.css">
+<link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/user_view_config_withdraw.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
