@@ -1,33 +1,3 @@
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, img, strong, var, dl, dt, dd, ol, ul, li, form, label, table, caption, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, menu, nav, section, summary, time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: normal;
-  font-size: 100%;
-  vertical-align:baseline;
-  box-sizing: border-box;
-}
-
-body {
-  line-height: 1;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-
-ol, ul {
-  list-style: none;
-  list-style-type: none;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
-}
-
-button, input, select, textarea {
-  font-family : inherit;
-  font-size   : 100%;
-}
-
 /*-------------------------------*/
 /*     Sidebar nav styles        */
 /*-------------------------------*/
@@ -51,7 +21,7 @@ button, input, select, textarea {
   box-shadow: 0 1px 0 rgba(255,255,255,0.5);
 }
 
-.sidebar-brand a {
+.sidebar-user {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -139,27 +109,13 @@ button, input, select, textarea {
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   text-decoration: none;
-  transition: all .1s;
 }
-
-/*.sidebar-nav .dropdown-menu {
-  background-color: #222222;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  width: 100%;
-}*/
 
 /*-------------------------------*/
 /*       Hamburger-Cross         */
 /*-------------------------------*/
-.hamburger {
+.logo_navi_container .hamburger {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -172,74 +128,29 @@ button, input, select, textarea {
   cursor: pointer;
 }
 
-.hamburger:hover { outline: none; }
-.hamburger:focus { outline: none; }
-.hamburger:active { outline: none; }
-
-.hamburger.is-closed .hamb-top, .hamburger.is-closed .hamb-middle, .hamburger.is-closed .hamb-bottom, .hamburger.is-open .hamb-top, .hamburger.is-open .hamb-middle, .hamburger.is-open .hamb-bottom {
+.logo_navi_container .hamburger span {
   position: absolute;
+  background: #8c8c8c;
   width: 20px;
   height: 2px;
   border-radius: 1px;
 }
 
-.hamburger.is-closed .hamb-top {
+.logo_navi_container .hamb-top {
   top: 0px;
-  background-color: #8c8c8c;
-  -webkit-transition: all 0.3s ease-in-out;
 }
 
-.hamburger.is-closed .hamb-middle {
+.logo_navi_container .hamb-middle {
   top: 50%;
-  background-color: #8c8c8c;
   margin-top: -1px;
 }
 
-.hamburger.is-closed .hamb-bottom {
+.logo_navi_container .hamb-bottom {
   bottom: 0px;
-  background-color: #8c8c8c;
-  -webkit-transition: all 0.3s ease-in-out;
-}
-
-.hamburger.is-open .hamb-top {
-  top: 50%;
-  background-color: #ffffff;
-  margin-top: -2px;
-  -webkit-transform: rotate(45deg);
-  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.73, 1, 0.28, 0.08);
-}
-
-.hamburger.is-open .hamb-middle {
-  background-color: #ffffff;
-  display: none;
-}
-
-.hamburger.is-open .hamb-bottom {
-  top: 50%;
-  background-color: #ffffff;
-  margin-top: -2px;
-  -webkit-transform: rotate(-45deg);
-  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.73, 1, 0.28, 0.08);
-}
-
-/*-------------------------------*/
-/*          Dark Overlay         */
-/*-------------------------------*/
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 120%;
-  background-color: rgba(63, 63, 63, 0.75);
-  z-index: 80;
-  display: none;
 }
 
 .overlay .hamburger {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -253,6 +164,40 @@ button, input, select, textarea {
   cursor: pointer;
 }
 
-.nav .open > a { background-color: transparent; }
-.nav .open > a:hover { background-color: transparent; }
-.nav .open > a:focus { background-color: transparent; }
+.overlay .hamburger span {
+  position: absolute;
+  background: #ffffff;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.overlay .hamb-top {
+  top: 50%;
+  margin-top: -2px;
+  -webkit-transform: rotate(45deg);
+}
+
+.overlay .hamb-middle {
+  display: none;
+}
+
+.overlay .hamb-bottom {
+  top: 50%;
+  margin-top: -2px;
+  -webkit-transform: rotate(-45deg);
+}
+
+/*-------------------------------*/
+/*          Dark Overlay         */
+/*-------------------------------*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background-color: rgba(63, 63, 63, 0.75);
+  z-index: 100;
+  display: none;
+}
