@@ -770,7 +770,6 @@
 }
 
 .custom_button:hover {
-  /*background: linear-gradient(#EDCACA, #ffffff);*/
   border: 1px solid #FF4545;
 }
 
@@ -1040,7 +1039,7 @@
 }
 
 .tastes_bar_container {
-	display: flex;
+  display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: center;
@@ -1179,12 +1178,8 @@
   font-size: 16px;
   width: 100%;
   padding: 16px;
-  border: 2px dotted #d2d2d2;
-}
-
-#tab_sakagura .navigate_page_no_registry {
   margin-top: 24px;
-  margin-bottom: 16px;
+  border: 2px dotted #d2d2d2;
 }
 
 #review_result_turn_page, #sakagurapage {
