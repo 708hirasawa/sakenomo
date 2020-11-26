@@ -16,7 +16,7 @@ require_once("nonda.php");
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
 <title>プロフィール編集 [Sakenomo]</title>
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-<link rel="stylesheet" type="text/css" href="css/hamburger.css">
+<link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/user_view_config_profile.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
@@ -519,7 +519,7 @@ $(function() {
 		//<a href="javascript:history.back()">
 		var username = <?php echo json_encode($username); ?>;
 		var data = $('#main_container').serialize();
-		data += "&hidden_username=" + $('input[name="hidden_username"]').val(); 
+		data += "&hidden_username=" + $('input[name="hidden_username"]').val();
 
 		$.ajax({
 			type: "post",
@@ -548,7 +548,7 @@ $(function() {
 
 		var username = <?php echo json_encode($username); ?>;
 		var data = $('#main_container').serialize();
-		data += "&hidden_username=" + $('input[name="hidden_username"]').val(); 
+		data += "&hidden_username=" + $('input[name="hidden_username"]').val();
 
 		if($('#main_container input[name="certification[]"]:checked').length == 0)
 			data += '&certification=';
@@ -557,10 +557,10 @@ $(function() {
 			alert("ユーザー名が入力されていません");
 			return;
 		}
-		
+
 		if( ($('select[name="birthday_year"]').val() == "" || $('select[name="birthday_month"]').val() == "" || $('select[name="birthday_day"]').val() == "") &&
-		   !($('select[name="birthday_year"]').val() == "" && $('select[name="birthday_month"]').val() == "" && $('select[name="birthday_day"]').val() == "")) {  
-			
+		   !($('select[name="birthday_year"]').val() == "" && $('select[name="birthday_month"]').val() == "" && $('select[name="birthday_day"]').val() == "")) {
+
 			alert("生年月日を正しく入力してください");
 			return;
 		}
@@ -666,8 +666,8 @@ $(function() {
 		var reader = new FileReader(); // Create a file reader
 		var file = $(this).prop("files")[0];
 
-		reader.onload = function(e) {        
-        
+		reader.onload = function(e) {
+
    			var width = img_obj.width();
 			var height = img_obj.height();
             var formdata = new FormData();
@@ -677,7 +677,7 @@ $(function() {
             status.css({"display":"block"});
             total.css({"display":"block"});
 			img_obj.attr("src", e.target.result);
-			
+
             formdata.append("file1", file);
             formdata.append("username", $('input[name="hidden_email"]').val());
             formdata.append("max_width", 200);
