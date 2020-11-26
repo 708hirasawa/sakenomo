@@ -16,7 +16,7 @@ require_once("searchbar.php");
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
 <title>Sakenomo</title>
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-<link rel="stylesheet" type="text/css" href="css/hamburger.css">
+<link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/manage_edit_sakagura.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
