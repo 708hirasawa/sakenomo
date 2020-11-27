@@ -1051,10 +1051,6 @@ body {
   cursor: pointer;
 }
 
-.pageitems:hover {
-  opacity: 0.5;
-}
-
 /************************************************************/
 @media only screen and (min-width: 410px) {
   .search_result_brewery_date_container, .search_sakagura_result_pref_date_container, .search_syuhanten_result_pref_date_container {
