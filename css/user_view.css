@@ -1150,10 +1150,6 @@
   cursor: pointer;
 }
 
-.pageitems:hover {
-  opacity: 0.5;
-}
-
 /************************************************************/
 .search_result_rank {
   display: flex;
