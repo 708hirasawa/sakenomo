@@ -1068,14 +1068,6 @@
   cursor: pointer;
 }
 
-.pageitems:hover {
-  opacity: 0.5;
-}
-
-.pageitems:active {
-  border :1px solid #00dd00;
-}
-
 /*.tastingnote_tab_panel*******************/
 .tastingnote_tab_panel {
   display: flex;
