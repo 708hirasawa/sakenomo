@@ -850,14 +850,6 @@
   cursor: pointer;
 }
 
-.pageitems:hover {
-  border :1px solid #ff0000;
-}
-
-.pageitems:active {
-  border :1px solid #00dd00;
-}
-
 /*tab-comment(comment)*******************/
 .comment_sort .click_sort {
   margin-top: 0;
