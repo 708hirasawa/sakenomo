@@ -20,7 +20,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 	<meta content='width=device-width, initial-scale=1' name='viewport'/>
 	<?php print('<title>' .$title .'</title>'); ?>
 	<link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-	<link rel="stylesheet" type="text/css" href="css/hamburger.css">
+	<link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 	<link rel="stylesheet" type="text/css" href="css/user_view.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 	<link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 	<link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
@@ -237,7 +237,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 	$page = $_GET['page'];
 	$from = ($page - 1) * $p_max;
 	$to = $from + $p_max;
-	
+
 	if(!$db = opendatabase("sake.db"))
 	{
 		die("データベース接続エラー .<br />");
@@ -255,9 +255,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 	print('<div id="all_container" data-username="' .$username .'" data-page="' .$page .'" data-from="' .$from .'" data-to="' .$to .'" data-max="' .$p_max .'" data-category="' .$category .'">');
 
-		if($row)
-		{
-			////////////////////////////////////////////////////////////////////////////////
+		if($row) {
 			print('<div id="user_information">');
 
 				$path = "images/icons/noimage_user30.svg";
@@ -273,29 +271,24 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 				}
 
 				print('<div class="user_image_name_container">');
-					//写真
 					print('<div class="user_image_container">');
 						print('<img src=' .$path .'>');
 					print('</div>');
 
-					//ユーザー名
 					print('<div id="profile_name">' .$row["username"] .'</div>');
 
-					//プロフィールボタン
 					print('<div class="user_profile_trigger">');
 						print('<p class="plus_minus_icon"><span></span><span></span></p>');
 					print('</div>');
 				print('</div>');
 
-				//プロフィール
 				print('<div class="user_profile_container">');
-					/*非表示中print('<h1 class="user_profile_title">プロフィール</h1>');*/
+					//非表示中print('<h1 class="user_profile_title">プロフィール</h1>');
 					print('<div class="user_profile_content">');
 
 						if($row['introduction']) {
 							print('<p class="user_profile_text">' .$row['introduction'] .'</p>');
-						}
-						else {
+						} else {
 							print('<p class="user_profile_text" style="color: #b2b2b2;">プロフィールが登録されていません</p>');
 						}
 
@@ -305,8 +298,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								if($row["bdate"]) {
 									print('<div class="user_profile_column2">' .$row['bdate'] .'</div>');
-								}
-								else {
+								} else {
 									print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
 								}
 
@@ -316,8 +308,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								if($row["sex"]) {
 									print('<div class="user_profile_column2">' .$row['sex'] .'</div>');
-								}
-								else {
+								} else {
 									print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
 								}
 
@@ -327,8 +318,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								if($row["pref"]) {
 									print('<div class="user_profile_column2">' .$row["pref"] .'</div>');
-								}
-								else {
+								} else {
 									print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
 								}
 
@@ -338,8 +328,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								if($row["certification"]) {
 									print('<div class="user_profile_column2">' .$row["certification"] .'</div>');
-								}
-								else {
+								} else {
 									print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
 								}
 
@@ -350,122 +339,77 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 				print('</div>');
 
 				print('<ul class="user_activity_info">');
-	        //飲んだ
-          print('<li>');
-            print('<span><svg class="user_activity_info_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span>');
-            print('<span id="user_activity_nonda">'.$count_nonda .'</span>');
-          print('</li>');
-          // お気に入り酒蔵
-          print('<li>');
-            print('<span><svg class="user_activity_info_brewery2016"><use xlink:href="#brewery2016"/></svg>お気に入り酒蔵</span>');
-            print('<span id="user_activity_sakagura"></span>');
-          print('</li>');
-					//お気に入り飲食店
-          /*print('<li>');
-            print('<span><svg class="user_activity_info_restaurant1816"><use xlink:href="#restaurant1816"/></svg>お気に入り飲食店</span>');
-            print('<span id="user_activity_restaurant">no code</span>');
-          print('</li>');*/
-					//お気に入り酒販店
-          /*print('<li>');
-            print('<span><svg class="user_activity_info_store3030"><use xlink:href="#store3030"/></svg>お気に入り酒販店</span>');
-            print('<span id="user_activity_store">no code</span>');
-          print('</li>');*/
-					//フォロー中
-          /*非表示中print('<li>');
-            print('<span><svg class="user_activity_info_pin1616"><use xlink:href="#pin1616"/></svg>フォロー中</span>');
-            print('<span id="user_activity_follow">no code</span>');
-          print('</li>');*/
-					//フォロワー
-          /*非表示中print('<li>');
-            print('<span><svg class="user_activity_info_people1616"><use xlink:href="#people1616"/></svg>フォロワー</span>');
-            print('<span id="user_activity_follower">no code</span>');
-          print('</li>');*/
-        print("</ul>");
+					print('<li>');
+						print('<span><svg class="user_activity_info_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span>');
+						print('<span id="user_activity_nonda">'.$count_nonda .'</span>');
+					print('</li>');
 
-		if($loginname == $row["email"]) {
-			print('<ul class="user_buttons">');
-			  print('<li id="user_mypage"><a href="user_view_config.php" class="mypage_config_link"><svg class="user_buttons_config1616"><use xlink:href="#config1616"/></svg>マイページ設定</a></li>');
-				  /*非表示中print('<li id="user_follow"><svg class="user_buttons_pin1616"><use xlink:href="#pin1616"/></svg>フォロー(他人のページのみ表示)</li>');
-			  print('<li id="user_trophy"><svg class="user_buttons_trophy1216"><use xlink:href="#trophy1216"/></svg>トロフィー</li>');*/
-			print("</ul>");
-		}
-		else {
-			print('<ul class="user_buttons">');
+					print('<li>');
+						print('<span><svg class="user_activity_info_brewery2016"><use xlink:href="#brewery2016"/></svg>お気に入り酒蔵</span>');
+						print('<span id="user_activity_sakagura"></span>');
+					print('</li>');
 
-			$sql = "SELECT * FROM FOLLOW_USER WHERE username = '$loginname' AND favoriteuser = '$username'";
-			$res = executequery($db, $sql);
+					/*print('<li>');
+						print('<span><svg class="user_activity_info_restaurant1816"><use xlink:href="#restaurant1816"/></svg>お気に入り飲食店</span>');
+						print('<span id="user_activity_restaurant">no code</span>');
+					print('</li>');
 
-			if($rd = getnextrow($res)) {
-				print('<li id="user_follow" style="background:linear-gradient(#EDCACA, #ffffff); border:1px solid #FF4545; transition: 0.3s"><svg class="user_buttons_pin1616" style="fill:#FF4545"><use xlink:href="#pin1616"/></svg><span>フォロー中</span></li>');
-			}
-			else {
-				print('<li id="user_follow"><svg class="user_buttons_pin1616"><use xlink:href="#pin1616"/></svg><span>フォロー</span></li>');
-			}
+					print('<li>');
+						print('<span><svg class="user_activity_info_store3030"><use xlink:href="#store3030"/></svg>お気に入り酒販店</span>');
+						print('<span id="user_activity_store">no code</span>');
+					print('</li>');
 
-			print("</ul>");
-		}
+					print('<li>');
+						print('<span><svg class="user_activity_info_pin1616"><use xlink:href="#pin1616"/></svg>フォロー中</span>');
+						print('<span id="user_activity_follow">no code</span>');
+					print('</li>');
+
+					print('<li>');
+						print('<span><svg class="user_activity_info_people1616"><use xlink:href="#people1616"/></svg>フォロワー</span>');
+						print('<span id="user_activity_follower">no code</span>');
+					print('</li>');*/
+				print("</ul>");
+
+				if($loginname == $row["email"]) {
+					print('<ul class="user_buttons">');
+						print('<li id="user_mypage"><a href="user_view_config.php" class="mypage_config_link"><svg class="user_buttons_config1616"><use xlink:href="#config1616"/></svg>マイページ設定</a></li>');
+						/*print('<li id="user_trophy"><svg class="user_buttons_trophy1216"><use xlink:href="#trophy1216"/></svg>トロフィー</li>');*/
+					print("</ul>");
+				} else {
+					print('<ul class="user_buttons">');
+						$sql = "SELECT * FROM FOLLOW_USER WHERE username = '$loginname' AND favoriteuser = '$username'";
+						$res = executequery($db, $sql);
+
+						if($rd = getnextrow($res)) {
+							print('<li id="user_follow" style="background:linear-gradient(#EDCACA, #ffffff); border:1px solid #FF4545; transition: 0.3s"><svg class="user_buttons_pin1616" style="fill:#FF4545"><use xlink:href="#pin1616"/></svg><span>フォロー中</span></li>');
+						} else {
+							print('<li id="user_follow"><svg class="user_buttons_pin1616"><use xlink:href="#pin1616"/></svg><span>フォロー</span></li>');
+						}
+					print("</ul>");
+				}
 
 			print("</div>");
 		}
 
 		print('<div id="main_banner_container">');
 			print('<div id="container_wrapper">');
-
 				print('<div id="table_wrapper">');
 
-					if($row)
-					{
-						////////////////////////////////////////////////////////////////////////////////
-						/*print('<div id="user_information">');
-							$path = "images/icons/users.jpg";
-
-							if($row["imagefile"])
-								$path = "images/profile/" .$row["imagefile"];
-
-							print('<img style="float:left; border-radius:4px; margin-left:4px; margin-right:4px; border:1px solid #e3e3e3; width:80px; height:auto;" src=' .$path .'>');
-
-							print('<div style="overflow:auto; font-size:12px; border:0px solid #e3e3e3">');
-
-								print('<div style="float:right; margin:2px"><button id="message_user" class="regular_button" style="width:42px; color:#404040; font-weight:bold">設定</button></div>');
-
-								// ユーザー名
-								print('<div id="profile_name" style="margin-left:8px; height:28px; margin:auto; font-size:11pt; font-weight:bold;\">' .$row["username"] .'</div>');
-
-								// 住所
-								print('<div style="margin-left:8px; height:28px; margin:auto; font-size:11pt; font-weight:bold;\">' .$row["pref"] .'</div>');
-
-								// フォロー
-								print('<div style="float:left; margin:2px"><span>フォロー</span><span>0</span></div>');
-								print('<div style="float:left; margin:2px"><span>フォロワー</span><span>0</span></div>');
-
-							print('</div>');
-
-							print('<div style="overflow:auto; clear:both">');
-								print('<button id="follow_user" class="regular_button" style="float:left; width:118px; color:#404040; font-weight:bold">フォローする</button>');
-								print('<button id="trigger_user_message" class="regular_button" style="float:left; width:118px; color:#404040; font-weight:bold">メッセージを送る</button>');
-							print('</div>');
-
-						print("</div>");*/
-
-						////////////////////////////////////////////////////////////////////////////////
+					if($row) {
 						print('<div id="tab_main" class="tab_container">');
 							print('<ul class="simpleTabs">');
 								print('<li><a href="#tab_sake" class="active"><span><svg class="simpleTabs_sake3630"><use xlink:href="#sake3630"/></svg><span>日本酒</span></span></a></li>');
 								print('<li><a href="#tab_sakagura"><span><svg class="simpleTabs_brewery3630"><use xlink:href="#brewery3630"/></svg><span>酒蔵</span></span></a></li>');
 								print('<li><a href="#tab_users"><span><svg class="simpleTabs_reviewers3030"><use xlink:href="#reviewers3030"/></svg><span>レビュアー</span></span></a></li>');
-
-								/*print('<li><a href="#tab_syuhanten"><span><svg class="simpleTabs_store3030"><use xlink:href="#store3030"/></svg><span>酒販店</span></span></a></li>');*/
-								/*print('<li><a href="#tab_inshokuten"><span><svg class="simpleTabs_restaurant3630"><use xlink:href="#restaurant3630"/></svg><span>飲食店</span></span></a></li>');*/
-								/*print('<li><a href="#tab_users"><span><svg class="simpleTabs_reviewers3030"><use xlink:href="#reviewers3030"/></svg><span>レビュアー</span></span></a></li>');*/
-								/*print('<li><a href="#tab_setting"><span><img src="images/icons/mypage.svg"><span>設定</span></span></a></li>');*/
+								/*print('<li><a href="#tab_syuhanten"><span><svg class="simpleTabs_store3030"><use xlink:href="#store3030"/></svg><span>酒販店</span></span></a></li>');
+								print('<li><a href="#tab_inshokuten"><span><svg class="simpleTabs_restaurant3630"><use xlink:href="#restaurant3630"/></svg><span>飲食店</span></span></a></li>');
+								print('<li><a href="#tab_users"><span><svg class="simpleTabs_reviewers3030"><use xlink:href="#reviewers3030"/></svg><span>レビュアー</span></span></a></li>');
+								print('<li><a href="#tab_setting"><span><img src="images/icons/mypage.svg"><span>設定</span></span></a></li>');*/
 							print("</ul>");
 
-							////////////////////////////////////////////////////////////
-							print('<!--/#sake.form-action-->');
+							//日本酒タブ//////////////////////////////////////////////////////////
 							print('<div id="tab_sake" class="show">');
-
 								print('<div class="tab_sake_sort_container">');
-
 									print('<div class="display_selection">');
 										print('<div class="display_selection_button selected"><span><svg class="display_selection_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span></div>');
 										print('<div class="display_selection_button"><span><svg class="display_selection_pin1616"><use xlink:href="#pin1616"/></svg>飲みたい</span></div>');
@@ -475,7 +419,6 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 										print('<div class="sake_search_icon"><svg class="sake_search_search2020"><use xlink:href="#search2020"/></svg></div>');
 
 										print('<div class="drop_down_select_container">');
-
 											print('<select id="sake_pref_option" class="sake_selection">');
 												print('<OPTION value="">都道府県</OPTION>');
 												print('<OPTION value="北海道">北海道</OPTION>');
@@ -529,7 +472,6 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 										print("</div>");
 
 										print('<div class="drop_down_select_container">');
-
 											print('<select id="special_name_option" class="sake_selection" >');
 												print('<OPTION value="">特定名称</OPTION>');
 												print('<OPTION value="11">普通酒</OPTION>');
@@ -545,7 +487,6 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 											print('</select>');
 
 											print('<div class="sake_option_trigger"><span class="drop_down_select_title" name="special_name" value=""></span></div>');
-
 										print("</div>");
 									print("</div>");*/
 
@@ -559,7 +500,6 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 										print('<span value="sake_rank"  class="click_sort_ranking">ランキング</span>');
 										print('<span value="sake_like"  class="click_sort_like">いいね!</span>');*/
 									print("</div>");
-
 								print("</div>");
 
 								print('<div class="review_count_container">');
@@ -576,16 +516,12 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 							print("</div>");
 
-							////////////////////////////////////////////////////////////
-							print("<!--/#sakagura.form-action-->");
-
+							//酒蔵タブ//////////////////////////////////////////////////////////
 							$in_disp_from = 0;
 							$p_max = 25;
 
 							print('<div id="tab_sakagura" class="form-action hide">');
-
 								print('<div class="tab_sakagura_sort_container">');
-
 									print('<div class="display_selection">');
 										print('<div class="display_selection_button"><span><svg class="display_selection_review1816"><use xlink:href="#review1816"/></svg>コメント</span></div>');
 										print('<div class="display_selection_button selected"><span><svg class="display_selection_pin1616"><use xlink:href="#pin1616"/></svg>お気に入り</span></div>');
@@ -603,8 +539,6 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 									$numPage = $count_result / $p_max;
 									$numPage = ($count_result % $p_max) ? ($numPage + 1) : $numPage;
 									$numPage = ($numPage > 5) ? 5 : $numPage;
-
-									///////////////////////////////////////////////////////////////////////////////////////////////
 
 									/*print('<div class="user_drop_down" name="sake_pref" value="">');
 										print('<div class="sake_search_icon"><svg class="sake_search_search2020"><use xlink:href="#search2020"/></svg></div>');
@@ -673,232 +607,39 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								print("</div>");
 
-								////////////////////////////////////////////////////////////
 								if($count_result == 0) {
-									print('<div class="navigate_page_no_registry">お気に入り登録されていません</div>');
-								}
-								else {
+									print('<div id="sakagura_table">');
+										print('<div class="navigate_page_no_registry">お気に入り登録されていません</div>');
+									print('</div>');
+								} else {
 									print('<div class="search_result_count">');
 										$p_max = ($count_result < 25) ? $count_result : 25;
 										print('<span id="count_result">1～' .$p_max .'件 / 全' .$count_result .'件</span>');
 									print('</div>');
 
 									print('<div id="sakagura_table">');
-
-										/*
-										$sql = "SELECT * FROM FOLLOW_J, SAKAGURA_J WHERE username = '$username' AND sakagura_id = id ORDER BY sakagura_read LIMIT " .$in_disp_from .", " ."25";
-										$res = executequery($db, $sql);
-										$i = 0;
-
-										while($row = getnextrow($res))
-										{
-											$path = "images/icons/noimage160.svg";
-
-											print('<a class="sakaguraRow_link" href="sda_view.php?id=' .$row["id"] .'">');
-
-												print('<div class="search_sakagura_result_name_container">');
-													$path = "images/icons/noimage160.svg";
-
-													print('<div class="search_sakagura_result_brewery_image"><img id="' .$path .'" src="' .$path  .'"></div>');
-
-													print('<div class="search_sakagura_result_brewery_pref_date_container">');
-
-														print('<div class="search_sakagura_result_brewery">' .$row["sakagura_name"] .'</div>');
-
-														print('<div class="search_result_brewery_date_container">');
-															print('<div class="search_result_brewery">'.$row["pref"].' ' .$row["address"] .'</div>');
-															print('<div class="search_result_date">' .gmdate("Y/m/d", $row["favorite_date"] + 9 * 3600) .'</div>');
-														print('</div>');
-
-													print('</div>');
-
-												if($username == $loginname) {
-													print('<div class="search_sakagura_result_button_container">');
-														print('<button class="custom_button followed" sakagura_id=' .$row["sakagura_id"] .'><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">お気に入り</span></button>');
-													print('</div>');
-												}
-
-												print('</div>');
-
-												print('<div class="spec">');
-
-													print('<div class="spec_item">');
-														print('<span class="spec_title">代表銘柄</span><span class="spec_info">' .$row["brand"] .'</span>');
-													print("</div>");
-													/////////////////////////////////////////////////
-													print('<div class="spec_item">');
-														print('<div class="spec_title">酒蔵見学</div>');
-														print('<div class="spec_info">');
-
-															if($row["observation"] == 1)
-																print('可');
-															else if($row["observation"] == 2)
-																print('不可');
-															else
-																print('--');
-
-														print('</div>');
-													print("</div>");
-													/////////////////////////////////////////////////
-													print('<div class="spec_item">');
-														print('<div class="spec_title">酒蔵直販店</div>');
-														print('<div class="spec_info">');
-
-															if($row["direct_sale"] == 1)
-																print('あり');
-															else if($row["direct_sale"] == 2)
-																print('なし');
-															else
-																print('--');
-
-														print('</div>');
-													print("</div>");
-
-													/////////////////////////////////////////////////
-													//公開中非表示print('<div class="spec_item">');
-
-													if(0) {
-													print('<div class="spec_title">酒造組合登録</div>');
-														print('<div class="spec_info">');
-
-															if($row["kumiai"] == 10)
-																print('あり');
-															else if($row["kumiai"] == 11)
-																print('なし');
-															else if($row["kumiai"] == 12)
-																print('不明');
-															else
-																print('--');
-
-														print('</div>');
-													print('</div>');
-													/////////////////////////////////////////////////
-													print('<div class="spec_item">');
-														print('<div class="spec_title">国税庁登録</div>');
-														print('<div class="spec_info">');
-
-															if($row["kokuzei"] == 10)
-																print('あり');
-															else if($row["kokuzei"] == 11)
-																print('なし');
-															else if($row["kokuzei"] == 12)
-																print('不明');
-															else
-																print('--');
-
-														print('</div>');
-													print('</div>');
-													/////////////////////////////////////////////////
-													print('<div class="spec_item">');
-														print('<div class="spec_title">プライオリティ</div>');
-														print('<div class="spec_info">');
-
-															if($row["sakagura"] == 1)
-																print('S');
-															else if($row["sakagura"] == 2)
-																print('A');
-															else if($row["sakagura"] == 3)
-																print('B');
-															else if($row["sakagura"] == 4)
-																print('C');
-															else if($row["sakagura"] == 5)
-																print('D');
-															else if($row["sakagura"] == 6)
-																print('E');
-															else
-																print('--');
-
-														print('</div>');
-													print('</div>');
-													/////////////////////////////////////////////////
-													print('<div class="spec_item">');
-														print('<div class="spec_title">ステータス</div>');
-														print('<div class="spec_info">');
-
-															if($row["status"] == 10)
-																print('active');
-															else if($row["status"] == 11)
-																print('inactive');
-															else if($row["status"] == 12)
-																print('一時製造休止');
-															else if($row["status"] == 13)
-																print('営業不明');
-															else
-																print('--');
-
-														print('</div>');
-													print('</div>');
-													}
-													////////////
-
-												print("</div>");
-											print("</a>");
-
-											$i++;
-										}
-									*/
 									print('</div>');
 								}
 
+								print('<div id="sakagurapage">');
+									if($count_result > 25) {
+										print('<button id="prev_sakagura" class="search_button">前の'.$p_max .'件</button>');
+										$i = 1;
 
-								////////////////////////////////////////////////////////////
-									print('<div id="sakagurapage">');
+										print('<button class="search_button pageitems selected">' .$i .'</button>');
 
-										if($count_result > 25) {
-
-											print('<button id="prev_sakagura" class="search_button">前の'.$p_max .'件</button>');
-											$i = 1;
-
-											print('<button class="search_button pageitems selected">' .$i .'</button>');
-
-											for($i++; $i <= $numPage; $i++)
-											{
-												 print('<button class="search_button pageitems">' .$i .'</button>');
-											}
-
-											print('<button id="next_sakagura" class="search_button active">次の' .$p_max .'件</button>');
+										for($i++; $i <= $numPage; $i++) {
+											 print('<button class="search_button pageitems">' .$i .'</button>');
 										}
 
-									print("</div>");
-								////////////////////////////////////////////////////////////
+										print('<button id="next_sakagura" class="search_button active">次の' .$p_max .'件</button>');
+									}
+								print("</div>");
 							print("</div>");
 
-							////////////////////////////////////////////////////////////
-							/*print("<!--/#syuhanten.form-action-->");
-							print("<div id=\"tab_syuhanten\" class=\"form-action hide\">");
+							//飲食店タブ//////////////////////////////////////////////////////////
 
-								print('<div style="overflow:auto; margin-top:0px; padding:8px 4px; border:1px solid #c6c6c6; background:#F5F5F5">');
-
-									print('<div style="position:relative; width:230px; float:left; overflow:auto; margin-top:0px; min-height:28px; font-size:14px; border:1px solid #c6c6c6">');
-										print("<div style=\"cursor:pointer; width:108px; height:14px; color:#fff; background:#22445B; text-align:center; margin-top:2px; margin-left:8px; float:left; box-shadow: 0 3px 3px -1px rgba(0,0,0,.9); padding:4px;  font-size:13px;\">お気に入り酒販店</div>");
-										print("<div style=\"cursor:pointer; width:72px; height:14px; color:#fff; background:#B2B2B2; text-align:center; margin-top:2px; margin-left:8px; float:left; box-shadow: 0 3px 3px -1px rgba(0,0,0,.9); padding:4px;  font-size:13px;\">コメント</div>");
-									print("</div>");
-
-								print('</div>');
-
-								print('<div id="syuhanten_table" style="margin-top:4px">');
-
-									$sql = "SELECT * FROM FOLLOW_SYUHANTEN_J, SYUHANTEN_J WHERE username = '$username' AND FOLLOW_SYUHANTEN_J.syuhanten_id = SYUHANTEN_J.syuhanten_id";
-									$res = executequery($db, $sql);
-
-									while($record = getnextrow($res))
-									{
-										print('<div style="overflow:auto; margin-top:4px; margin-bottom:4px; padding:4px; border:1px solid #c6c6c6">');
-
-											print('<input type="button" id="' .$record["syuhanten_id"] .'" class="user_button" style="background:linear-gradient(#c3c3c3, #e6e6e6); width:92px; font-size:13px; float:right" value="お気に入り解除">');
-											print('<div style="float:left; text-align:center; vertical-align:middle; margin:4px; width:70px; height:60px; border:1px solid #e3e3e3"><img class="preview" style="width:60px; height:auto" src="images/icons/camera20.svg"></div>');
-											print('<div style="font-size:14px"><a style="text-decoration:none" href="syuhan_view.php?syuhanten_id="' .$record["syuhanten_id"] .'">' .$record["syuhanten_name"] .'</a></div>');
-											print('<div style="font-size:13px"><span style="margin-left:2px">' .$record["syuhanten_pref"].'</span><span style="margin-left:2px">' .$record["syuhanten_address"] .'</span></div>');
-											print('<div class="follow_syuhanten" style="float:left; overflow:auto; height:22px; font-size:13px; font-weight:bold; cursor:pointer; text-overflow: ellipsis; color:#404040; border:1px solid #c6c6c6;" id="' .$record[id] .'"><img style="margin:2px 2px auto 2px" src="images/icons/favorite.svg">登録中 31人</div>');
-
-										print('</div>');
-										$i++;
-									}
-
-								print("</div>");
-							print("</div>");*/
-
-							////////////////////////////////////////////////////////////
+							//レビュアータブ//////////////////////////////////////////////////////////
 							print('<div id="tab_users" class="form-action hide">');
 								print('<div class="tab_users_sort_container">');
 
@@ -934,13 +675,6 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 									$in_disp_from = 0;
 									$p_max = 25;
-
-									print('<div id="sakagura_sort">');
-										print('<div class="sake_sort_icon"><svg class="sake_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
-										print('<span value="favorite_date" class="click_sort_date">更新日</span>');
-										print('<span value="sake_read"  class="click_sort_read">読み</span>');
-										print('<span value="sake_rank"  class="click_sort_ranking">ランキング</span>');
-									print("</div>");
 									*/
 
 									print('<div id="user_sort">');
@@ -953,69 +687,14 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 								print('<div class="search_result_count">');
 									$p_max = ($count_result < 25) ? $count_result : 25;
 									print('<span>1～' .$p_max .'件 / 全' .$count_result .'件</span>');
-
 								print('</div>');
 
 								print('<div id="users_table">');
-
-									/*
-									print('<a class="usersRow_link" href="">');
-
-										print('<div class="search_users_result_name_container">');
-											$path = "images/icons/noimage160.svg";
-
-											print('<div class="search_users_result_brewery_image"><img id="' .$path .'" src="' .$path  .'"></div>');
-
-											print('<div class="search_users_result_name_profile_date_container">');
-
-												print('<div class="search_users_result_name">ユーザー名</div>');
-
-												print('<div class="search_result_profile_date_container">');
-													print('<div class="search_result_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
-													print('<div class="search_result_date">20??/??/??');
-													print('</div>');
-												print('</div>');
-
-											print('</div>');
-
-											print('<div class="search_users_result_button_container">');
-												print('<button class="custom_button"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>');
-											print('</div>');
-
-										print('</div>');
-
-										print('<div class="spec">');
-
-											print('<div class="spec_item">');
-												print('<span class="spec_title">飲んだ</span><span class="spec_info">123</span>');
-											print("</div>");
-											/////////////////////////////////////////////////
-											print('<div class="spec_item">');
-												print('<div class="spec_title">フォロー中</div>');
-												print('<div class="spec_info">456');
-												print('</div>');
-											print("</div>");
-											/////////////////////////////////////////////////
-											print('<div class="spec_item">');
-												print('<div class="spec_title">フォロワー</div>');
-												print('<div class="spec_info">789');
-												print('</div>');
-											print("</div>");
-
-										print("</div>");
-									print("</a>");
-									*/
-
 									print('<div id="userfollowpage"></div>');
-
 								print('</div>');
 							print('</div>');
-
-							////////////////////////////////////////////////////////////
-						print("</div>");
-					}
-					else
-					{
+						print("</div>");//tab_main
+					} else {
 						print("no data");
 					}
 
@@ -1031,19 +710,18 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 	print("</div>");
 	writefooter();
 
-	?>
+?>
 
-	<!-- dialog_background -->
-	<div id="search_background">
-		<div id="inner_background">
-			<div class="loader"></div>
-		</div>
+<!-- dialog_background -->
+<div id="search_background">
+	<div id="inner_background">
+		<div class="loader"></div>
 	</div>
+</div>
 
 </body>
 <script type="text/javascript">
 
-/*hirasawa追加*/
 $(function() {
 	$('.user_profile_trigger').click(function() {
 
@@ -1319,6 +997,7 @@ $(function() {
 							var innerText = '<div class="navigate_page_no_registry">飲んだ登録されていません</div>';
 							$('#disp_sake').css({"display":"none"});
 							$("#sake_sort").css({"display":"none"});
+							$("#tab_sake .review_count_container").css({"display":"none"});
 							$('#sake_table').html(innerText);
 							$('#review_result_turn_page').empty();
 							removeLoading();
@@ -2083,7 +1762,7 @@ $(function() {
 									innerHTML += '<div class="spec_item">';
 										innerHTML += '<div class="spec_title"><svg class="spec_item_nihonshudo1616"><use xlink:href="#nihonshudo1616"/></svg>日本酒度</div>';
 										innerHTML += '<div class="spec_info">';
-											if(sake[i].jsake_level != "") {
+											if(sake[i].jsake_level && sake[i].jsake_level != "") {
 												var syudo_array = sake[i].jsake_level.split(',');
 												if(syudo_array.length == 1) {
 													innerHTML += parseFloat(syudo_array[0]).toFixed(1);
@@ -2666,7 +2345,7 @@ $(function() {
 				});
 		}
 
-		function sakagura_serialize(in_disp_from, disp_max, query_count, mode) 
+		function sakagura_serialize(in_disp_from, disp_max, query_count, mode)
 		{
 			var category = 2;
 			var orderby = $("#order_sakagura").val();
@@ -2696,7 +2375,7 @@ $(function() {
 			return data;
 		}
 
-		$("body").on("tab_sakagura_click", function(event, in_disp_from, in_disp_to, username, href, position, bCount) 
+		$("body").on("tab_sakagura_click", function(event, in_disp_from, in_disp_to, username, href, position, bCount)
 		{
 			var search_type = 2;
 			var category = 2;
@@ -3119,7 +2798,7 @@ $(function() {
 			});
 	}
 
-	$('#user_sort').click(function() {
+	$('#user_sort .click_sort_date').click(function() {
 
 		var data = "username=" + $('#all_container').data('username');
 
@@ -3169,7 +2848,7 @@ $(function() {
 
 	});
 
-	$("body").on("tab_users_click", function(event, in_disp_from, in_disp_to, username, href, position, bCount) 
+	$("body").on("tab_users_click", function(event, in_disp_from, in_disp_to, username, href, position, bCount)
 	{
 		var search_type = 3;
 		var in_disp_from = 0;
@@ -3294,7 +2973,7 @@ jQuery(document).ready(function($) {
 		var username = $('#all_container').data('username');
 		var in_disp_from = 0;
 		var in_disp_to = 25;
-		
+
 		if(href == "#tab_sake")
 		{
 			$("body").trigger("tab_sake_click", [ in_disp_from, in_disp_to, username, href, position, true ] );
@@ -3317,7 +2996,7 @@ jQuery(document).ready(function($) {
 		var curr = $('.simpleTabs').find(".active");
 		var href = state.href;
 		var prev = $('.simpleTabs').find('a[href="' + state.href +'"]');
-		
+
 		curr.removeClass('active');
 		prev.addClass('active');
 
