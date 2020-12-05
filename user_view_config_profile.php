@@ -3,7 +3,6 @@ require_once("db_functions.php");
 require_once("html_disp.php");
 require_once("hamburger.php");
 require_once("searchbar.php");
-require_once("nonda.php");
 ?>
 
 <!DOCTYPE html>
@@ -18,12 +17,10 @@ require_once("nonda.php");
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-<link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/user_view_config_profile.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/sakenomuui.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
-<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 </head>
 
@@ -34,7 +31,6 @@ require_once("nonda.php");
 	write_side_menu();
 	write_HamburgerLogo();
 	write_search_bar();
-	write_Nonda();
 
 	//$username = $_SESSION['loginname'];
 	$username = $_COOKIE['login_cookie'];
@@ -155,13 +151,13 @@ require_once("nonda.php");
 									print('<div class="profile_status">status</div>');
 									print('<div class="profile_total">total</div>');
 								print('</div>');
-							print('</div>');
-							print('<span class="profile_photo_button_container">');
-								print('<input type="button" class="change_pic" value="登録">');
-								print('<input type="button" class="remove_profile_pic" value="削除">');
+								print('<div class="profile_photo_button_container">');
+									print('<input type="button" class="change_pic" value="登録">');
+									print('<input type="button" class="remove_profile_pic" value="削除">');
+								print('</div>');
 								print('<input type="hidden" name="delete_image" value=0>');
 								print('<input type="file" id="file1">');
-							print('</span>');
+							print('</div>');
 						print('</div>');
 					print('</div>');
 
@@ -649,7 +645,7 @@ $(function() {
 		$('#file1').trigger("click");
 	});
 
-	$('.profile_photo_button_container .remove_profile_pic').click(function() {
+	$('.remove_profile_pic').click(function() {
 
 		var path = "images/icons/noimage_user30.svg";
 		$('#main_container .profile_photo img').attr("src", path);
