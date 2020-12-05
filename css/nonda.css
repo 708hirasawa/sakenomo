@@ -454,7 +454,7 @@ input[name="nonda_image_caption"] {
   display: none;
 }
 
-.change_pic {
+.nonda_image_post_button_container .change_pic {
   display: flex;
   justify-content: center;
   align-items: center;
