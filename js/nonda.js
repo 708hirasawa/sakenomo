@@ -137,15 +137,13 @@ $(function() {
         var icon = this;
 
         if($(this).hasClass('flavor_highlight')) {
-            $(this).removeClass('flavor_highlight');
-						$(this).children("p").css({"visibility": "hidden"});
-	        $('.nonda_flavor_category').slideUp();
+          $(this).removeClass('flavor_highlight');
+          $('.nonda_flavor_category').slideUp();
+          $('.nonda_flavor_list_note').html('2つまで選択可');
         }
         else {
             $('.nonda_flavor_list > div').removeClass('flavor_highlight');
             $(this).addClass('flavor_highlight');
-						$('.nonda_flavor_list > div').children("p").css({"visibility": "hidden"});
-						$(this).children("p").css({"visibility": "visible"});
             $('.nonda_flavor_item_container input[name="flavor[]"]').prop("checked", false);
 
             if($(icon).data("flavor") && $(icon).data("flavor") != undefined) {
@@ -161,6 +159,16 @@ $(function() {
 
 	        $('.nonda_flavor_category').slideDown();
         }
+    });
+
+    $('.nonda_flavor_list div:first-child').click(function() {
+      $('.nonda_flavor_list_note').html('フレーバー<span>1</span>選択');
+      $('.nonda_flavor_type_sign').css({"background":"#117DA8"});
+    });
+
+    $('.nonda_flavor_list div:last-child').click(function() {
+      $('.nonda_flavor_list_note').html('フレーバー<span>2</span>選択');
+      $('.nonda_flavor_type_sign').css({"background":"#A30D0D"});
     });
 
     $(document).on('click', '#nonda_flavor_type_name', function(e){
@@ -1067,13 +1075,13 @@ $(function() {
             var index = $('.nonda_flavor_list div.flavor_highlight').index();
 	        $(this).prop("checked", false);
             $('.nonda_flavor_list div.flavor_highlight').data('flavor', 0);
-            $('.nonda_flavor_list div.flavor_highlight').html('<span>' + (index + 1) + '</span><p></p>');
+            $('.nonda_flavor_list div.flavor_highlight').html('<span>' + (index + 1) + '</span>');
         }
         else {
             $('.nonda_flavor_item_container input[name="flavor[]"]:checked').prop("checked", false);
 	        $(this).prop("checked", true);
             $('.nonda_flavor_list div.flavor_highlight').data('flavor', this.value);
-            $('.nonda_flavor_list div.flavor_highlight').html('<svg><use xlink:href="#' + $(this).data("img") + '"/></svg><p></p>');
+            $('.nonda_flavor_list div.flavor_highlight').html('<svg><use xlink:href="#' + $(this).data("img") + '"/></svg>');
         }
     });
 
@@ -1703,7 +1711,7 @@ $(function() {
                     if(val == this.value || val == parseInt(this.value))
                     {
                         this.checked = true;
-                        var htmlText = '<div class="nonda_flavor" data-flavor= ' + this.value + '><svg><use xlink:href="#' + $(this).data("img") + '"/></svg><p></p></div>';
+                        var htmlText = '<div class="nonda_flavor" data-flavor= ' + this.value + '><svg><use xlink:href="#' + $(this).data("img") + '"/></svg></div>';
                         $('.nonda_flavor_list').append(htmlText);
                         count++;
                     }
@@ -1716,6 +1724,16 @@ $(function() {
                 $('.nonda_flavor_list').append(htmlText);
             }
         }
+
+				$('.nonda_flavor_list div:first-child').click(function() {
+					$('.nonda_flavor_list_note').html('フレーバー<span>1</span>選択');
+					$('.nonda_flavor_type_sign').css({"background":"#117DA8"});
+				});
+
+				$('.nonda_flavor_list div:last-child').click(function() {
+					$('.nonda_flavor_list_note').html('フレーバー<span>2</span>選択');
+					$('.nonda_flavor_type_sign').css({"background":"#A30D0D"});
+				});
 
         // alert("open_nonda subject:" + subject + " message:" + message);
 		//$('#tabs-1 .rating-input').val(rank);
@@ -1908,7 +1926,7 @@ $(function() {
 
         $('.nonda_flavor_list div').each(function() {
             $(this).data('flavor', 0);
-            $(this).html('<span>' + (i + 1) + '</span><p></p>');
+            $(this).html('<span>' + (i + 1) + '</span>');
             i++;
         });
     });
