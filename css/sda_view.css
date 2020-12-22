@@ -743,62 +743,6 @@
   margin-right: 5px;
 }
 
-/************************************************************/
-.search_result_turn_page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  font-size: 12px;
-}
-
-#prev_sake, #next_sake {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  outline: none;
-  margin: 0;
-  width: 24px;
-  height: 24px;
-  border-radius: 12px;
-}
-
-#prev_sake {
-  background: #b2b2b2;
-  margin-right: 8px;
-  cursor: default;
-}
-
-#next_sake {
-  background: #22445B;
-  margin-left: 8px;
-  cursor: pointer;
-}
-
-.prev_button_prev2020, .next_button_next2020 {
-  fill: #ffffff;
-  width: 14px;
-  height: 14px;
-}
-
-.pageitems {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #b2b2b2;
-  color: #ffffff;
-  font-size: 11px;
-  border: none;
-  outline: none;
-  width: 24px;
-  height: 24px;
-  margin: 0 4px;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
 /*tab-comment(comment)*******************/
 .comment_sort .click_sort {
   margin-top: 0;
