@@ -1,76 +1,69 @@
 #all_container {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	width: 100%;
-	height: auto;
-	margin-top: 105px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 105px;
 }
 
 #user_information {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	color: #3f3f3f;
-	width: 1200px;
-	max-width: 96%;
-	height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #3f3f3f;
+  width: 1200px;
+  max-width: 96%;
+  height: auto;
 }
 
 #main_banner_container {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	width: 1200px;
-	max-width: 96%;
-	height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 1200px;
+  max-width: 96%;
+  height: auto;
 }
 
 #container_wrapper {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   overflow: hidden;
-	width: 1200px;
-	max-width: 100%;
-	height: auto;
-	margin-top: 15px;
+  width: 1200px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 15px;
 }
 
 #banner {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	overflow: hidden;
-	width: 1200px;
-	max-width: 100%;
-	height: auto;
-	margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  width: 1200px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 40px;
 }
 
 /************************************************************/
 .user_image_name_container {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-start;
-	width: 100%;
-	height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
 }
 
 .user_image_container {
-	overflow: hidden;
+  overflow: hidden;
   min-width: 40px;
   max-width: 40px;
   height: 40px;
@@ -79,9 +72,9 @@
 }
 
 .user_image_container img {
-	object-fit: cover;
-	width: 100%;
-	height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #profile_name {
@@ -152,7 +145,7 @@
 }
 /*＋、－切り替え*/
 .user_profile_trigger .plus_minus_icon.active span:nth-of-type(1) {
-	display: none;
+  display: none;
 }
 
 .user_profile_trigger .plus_minus_icon.active span:nth-of-type(2) {
@@ -168,13 +161,12 @@
 /************************************************************/
 .user_profile_container {
   display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   color: #3f3f3f;
-	width: 100%;
-	height: auto;
+  width: 100%;
+  height: auto;
   display: none;
 }
 
@@ -213,7 +205,6 @@
 .user_profile_column1 {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -240,7 +231,7 @@
 
 .user_profile_column1:after {
   content:"\00a0";
-  display:block;
+  display: block;
   width: 3px;
   height: 6px;
   border: solid #f5f5f5;
@@ -258,7 +249,6 @@
 .user_profile_column2 {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   font-size: 14px;
@@ -271,7 +261,6 @@
 .user_activity_info {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   font-size: 12px;
@@ -281,8 +270,6 @@
 
 .user_activity_info li {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-top: 4px;
@@ -295,8 +282,6 @@
 
 .user_activity_info li span {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
@@ -331,7 +316,6 @@
 .user_buttons {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: 8px;
@@ -340,8 +324,6 @@
 .user_buttons li, #user_follow {
   overflow: hidden;
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: linear-gradient(#e6e6e6, #ffffff);
@@ -371,8 +353,6 @@
 
 .mypage_config_link {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   color: #666666;
@@ -403,7 +383,7 @@
 
 /************************************************************/
 #table_wrapper {
-	width: 100%;
+  width: 100%;
 }
 
 #tab_main {
@@ -413,8 +393,6 @@
 
 .simpleTabs {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background: #ffffff;
@@ -424,8 +402,6 @@
 
 .simpleTabs li {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
@@ -436,7 +412,6 @@
 .simpleTabs li a {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -460,7 +435,6 @@
 
 .simpleTabs li a span {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -518,7 +492,6 @@
 .display_selection {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   height: auto;
@@ -528,7 +501,6 @@
 .display_selection_button {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #d2d2d2;
@@ -558,8 +530,6 @@
 
 .display_selection_button span {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   color: #ffffff;
@@ -584,7 +554,6 @@
 .user_drop_down {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -593,8 +562,6 @@
 
 .drop_down_select_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-left: 12px;
@@ -602,8 +569,6 @@
 
 .sake_selection {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #3f3f3f;
@@ -618,7 +583,6 @@
 #sake_sort, #user_sort {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -628,7 +592,6 @@
 .sake_search_icon, .sake_sort_icon {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #e6e6e6;
@@ -662,10 +625,9 @@
 }
 
 /************************************************************/
-.review_count_container, .search_result_count {
+.result_count_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -677,8 +639,7 @@
 
 /************************************************************/
 .user_nonda_link {
-	display: flex;
-  flex-wrap: nowrap;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -698,8 +659,6 @@
 
 .user_nonda_sake_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -708,7 +667,6 @@
 
 .user_nonda_sake_brewery_date_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -729,7 +687,6 @@
 .user_nonda_brewery_date_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   font-size: 13px;
@@ -749,8 +706,6 @@
 
 .custom_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: linear-gradient(#e6e6e6, #ffffff);
@@ -782,8 +737,6 @@
 
 .button_icon {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -805,8 +758,6 @@
 
 .button_text {
   display: none;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #666666;
@@ -844,16 +795,15 @@
 
 .review_sake_rate {
   color: #E05314;
-	font-size: 18px;
-	font-weight: bold;
-	margin-left: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 5px;
   margin-top: 8px;
 }
 
 /************************************************************/
 .user_nonda_subject_message_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -890,7 +840,6 @@
 .review_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -922,7 +871,6 @@
 .tastes, .spec {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -933,7 +881,6 @@
 
 .tastes_item, .spec_item {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -964,8 +911,6 @@
 
 .tastes_title, .spec_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -1004,8 +949,6 @@
 
 .tastes_value_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -1036,8 +979,6 @@
 
 .tastes_bar_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 40px;
@@ -1077,7 +1018,6 @@
 #sake_table, #sakagura_table, #users_table {
   width: 100%;
   margin-top: 8px;
-  margin-bottom: 16px;
 }
 
 .navigate_page_no_registry {
@@ -1090,52 +1030,63 @@
   border: 2px dotted #d2d2d2;
 }
 
-#review_result_turn_page, #sakagurapage {
+#review_result_turn_page, #sakagura_result_turn_page {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   font-size: 12px;
+  margin-top: 15px;
 }
 
-#review_result_turn_page .selected, #sakagurapage .selected {
+#review_result_turn_page .selected, #sakagura_result_turn_page .selected {
   background:#22445B;
   color:#fff;
 }
 
-#prev_review, #next_review {
+#prev_review, #next_review, #prev_sakagura, #next_sakagura {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  color:#b2b2b2;
   background: none;
   border: none;
   outline: none;
   margin: 0;
-  width: auto;
+  width: 24px;
   height: 24px;
-  border-bottom: 1px dotted #b2b2b2;
+  border-radius: 12px;
   cursor: pointer;
 }
 
-#prev_sake {
-  margin-right: 4px;
-  color: #b2b2b2;
+#prev_review, #prev_sakagura {
+  background: #b2b2b2;
+  margin-right: 8px;
+  cursor: default;
 }
 
-#next_sake {
-  margin-left: 4px;
-  color: #0740A5;
+#next_review, #next_sakagura {
+  background: #b2b2b2;
+  margin-left: 8px;
+  cursor: default;
+}
+
+#prev_review.active, #prev_sakagura.active {
+  background: #22445B;
+  cursor: pointer;
+}
+
+#next_review.active, #next_sakagura.active {
+  background: #22445B;
+  cursor: pointer;
+}
+
+.prev_button_prev2020, .next_button_next2020 {
+  fill: #ffffff;
+  width: 14px;
+  height: 14px;
 }
 
 .pageitems {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #b2b2b2;
@@ -1189,7 +1140,6 @@
 /************************************************************/
 .searchRow_link, .sakaguraRow_link, .syuhantenRow_link, .usersRow_link  {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1209,8 +1159,6 @@
 
 .search_result_name_container, .search_sakagura_result_name_container, .search_syuhanten_result_name_container, .search_users_result_name_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1254,7 +1202,6 @@
 
 .search_result_sake_brewery_date_container, .search_sakagura_result_brewery_pref_date_container, .search_syuhanten_result_store_pref_date_container, .search_users_result_name_profile_date_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1279,7 +1226,6 @@
 
 .search_result_button_container, .search_sakagura_result_button_container, .search_syuhanten_result_button_container, .search_users_result_button_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
@@ -1324,33 +1270,6 @@
 }
 
 /*********************************************************/
-#prev_sakagura, #next_sakagura {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  background: none;
-  border: none;
-  outline: none;
-  margin: 0;
-  margin-right: 4px;
-  width: auto;
-  height: 24px;
-  color: #b2b2b2;
-  border-bottom: 1px dotted #b2b2b2;
-  cursor: pointer;
-}
-
-#prev_review.active, #prev_sakagura.active {
-  color: #0740A5;
-}
-
-#next_review.active, #next_sakagura.active {
-  color: #0740A5;
-}
-
 #ad1 {
   display: flex;
   justify-content: space-around;
@@ -1361,46 +1280,46 @@
 }
 
 #search_background {
-	z-index: 100;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	display: none;
-	position: fixed;
-	background-color: #ffffff;
-	color: #aaaaaa;
-	opacity: .9;
-	filter: alpha(opacity = 90);
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  position: fixed;
+  background-color: #ffffff;
+  color: #aaaaaa;
+  opacity: .9;
+  filter: alpha(opacity = 90);
 }
 
 #inner_background {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .loader {
-	border: 2px solid #3498db;
-	border-radius: 50%;
-	border-top: 2px solid #ffffff;
-	width: 40px;
-	height: 40px;
-	-webkit-animation: spin 1s linear infinite; /* Safari */
-	animation: spin 1s linear infinite;
+  border: 2px solid #3498db;
+  border-radius: 50%;
+  border-top: 2px solid #ffffff;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
 }
 
 /* Safari */
 @-webkit-keyframes spin {
-	0% { -webkit-transform: rotate(0deg); }
-	100% { -webkit-transform: rotate(360deg); }
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
 }
 
 @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 /*********************************************************/
 @media only screen and (min-width: 340px) {
