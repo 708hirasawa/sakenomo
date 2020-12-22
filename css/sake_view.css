@@ -1,29 +1,26 @@
 #container {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	width: 100%;
-	height: auto;
-	margin-top: 105px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 105px;
 }
 
 #sakeheader {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	color: #3f3f3f;
-	width: 1200px;
-	max-width: 96%;
-	height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #3f3f3f;
+  width: 1200px;
+  max-width: 96%;
+  height: auto;
 }
 
 #saketable_banner_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -33,21 +30,19 @@
 }
 
 #saketable {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   overflow: hidden;
-	width: 1200px;
-	max-width: 100%;
-	height: auto;
+  width: 1200px;
+  max-width: 100%;
+  height: auto;
   margin-top: 15px;
 }
 
 #banner_frame {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -61,39 +56,38 @@
 /*sakeheader*******************/
 #sakeheader #sake_name {
   color: #000000;
-	font-size: 16px;
-	font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
   line-height: 140%;
 }
 
 #sakeheader #sake_read {
-	display: none;
+  display: none;
   color: #000000;
-	font-size: 13px;
+  font-size: 13px;
   line-height: 140%;
-	margin-top: 4px;
-}/*非表示設定*/
+  margin-top: 4px;
+}
 
 #sakeheader #sake_english {
   color: #000000;
-	font-size: 13px;
+  font-size: 13px;
   line-height: 140%;
-	margin-top: 4px;
+  margin-top: 4px;
 }
 
 .rank_sakagura_container {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
   line-height: 180%;
   margin-top: 4px;
 }
 
 #sake_rank {
-	display: flex;
-	align-items: baseline;
+  display: flex;
+  align-items: baseline;
   margin-right: 20px;
 }
 
@@ -119,18 +113,16 @@
 }
 
 #sake_rate {
-	color: #E05314;
-	font-size: 18px;
-	font-weight: bold;
-	margin-left: 5px;
+  color: #E05314;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 5px;
 }
 
 .nomitai_info {
   display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
+  justify-content: flex-start;
+  align-items: center;
   color: #3f3f3f;
   font-size: 13px;
   height: auto;
@@ -139,10 +131,8 @@
 
 .nomitai_count_container {
   display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
+  justify-content: flex-start;
+  align-items: center;
   height: auto;
 }
 
@@ -159,11 +149,9 @@
 }
 
 .sakagura_info {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-size: 13px;
   color: #0740A5;
   text-decoration: none;
@@ -172,10 +160,8 @@
 
 .sakagura_name_container {
   display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
+  justify-content: flex-start;
+  align-items: center;
   height: auto;
 }
 
@@ -202,7 +188,6 @@
 #personal {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: 8px;
@@ -210,8 +195,6 @@
 
 #personal #button_bbs, #personal .follow {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: linear-gradient(#e6e6e6, #ffffff);
@@ -250,8 +233,6 @@
 
 .simpleTabs {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background: #fff;
@@ -261,8 +242,6 @@
 
 .simpleTabs li {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
@@ -273,7 +252,6 @@
 .simpleTabs li a {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -298,7 +276,6 @@
 
 .simpleTabs li a span {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -352,8 +329,6 @@
 
 .top_note a {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #0740A5;
@@ -382,7 +357,6 @@
 /*preview_frame*******************/
 #preview_frame {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -418,7 +392,6 @@
 #preview_thumbnail_container {
   display: none;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -456,7 +429,6 @@
 /*sake_profile*******************/
 #sake_profile_frame, #sake_basicspec, #sake_category_frame, #flavor_information, #sake_award_information {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -472,8 +444,6 @@
 
 .sake_profile_title, .sake_basicspec_title, .sake_category_title, .flavor_information_title, .sake_award_information_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-size: 15px;
@@ -493,7 +463,6 @@
 /*basicspec*******************/
 .sake_basicspec_item_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -503,8 +472,6 @@
 
 .sake_basicspec_item {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-size: 14px;
@@ -541,7 +508,6 @@
 #sake_category, #flavor_category, .sake_award_item {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -601,7 +567,6 @@
 .click_sort {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -610,7 +575,6 @@
 .click_sort div:first-child {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #e6e6e6;
@@ -641,7 +605,6 @@
 .review_count_container, .photo_count_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -665,7 +628,6 @@
 .search_button {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
@@ -686,7 +648,6 @@
 
 #threads .review {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -707,8 +668,6 @@
 /*user_container*******************/
 .nonda_user_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -731,7 +690,6 @@
 
 .nonda_user_name_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -798,7 +756,6 @@
 /*nonda_subject_message*******************/
 .nonda_subject_message_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -835,7 +792,6 @@
 .review_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -867,7 +823,6 @@
 .tastes {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -878,7 +833,6 @@
 
 .tastes_item {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -897,8 +851,6 @@
 
 .tastes_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -930,8 +882,6 @@
 
 .tastes_value_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -954,8 +904,6 @@
 
 .tastes_bar_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 40px;
@@ -994,66 +942,66 @@
 /************************************************************/
 .search_result_turn_page {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-top: 15px;
   font-size: 12px;
-  border: 1px solid #ff0000;
 }
 
-#prev_sake, #next_sake {
+#prev_sake, #next_sake, #prev_photo, #next_photo {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
   background: none;
   border: none;
   outline: none;
   margin: 0;
-  width: auto;
+  width: 24px;
   height: 24px;
-  border-bottom: 1px dotted #b2b2b2;
+  border-radius: 12px;
   cursor: pointer;
 }
 
 #prev_sake {
-  margin-right: 4px;
-  color: #b2b2b2;
+  background: #b2b2b2;
+  margin-right: 8px;
 }
 
 #next_sake {
-  margin-left: 4px;
-  color: #0740A5;
+  background: #22445B;
+  margin-left: 8px;
 }
 
 #prev_photo {
-  margin-right: 4px;
-  color: #b2b2b2;
+  background: #b2b2b2;
+  margin-right: 8px;
+  cursor: default;
 }
 
 #next_photo {
-  margin-left: 4px;
-  color: #b2b2b2;
+  background: #b2b2b2;
+  margin-left: 8px;
+  cursor: default;
 }
 
 #prev_photo.active {
-  color: #0740A5;
+  background: #22445B;
   cursor: pointer;
 }
 
 #next_photo.active {
-  color: #0740A5;
+  background: #22445B;
   cursor: pointer;
+}
+
+.prev_button_prev2020, .next_button_next2020 {
+  fill: #ffffff;
+  width: 14px;
+  height: 14px;
 }
 
 .pageitems {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #b2b2b2;
@@ -1071,7 +1019,6 @@
 /*.tastingnote_tab_panel*******************/
 .tastingnote_tab_panel {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1082,7 +1029,6 @@
 
 .tastingnote_chart {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1094,8 +1040,6 @@
 /*sort*******************/
 .tastingnote_sort {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -1104,7 +1048,6 @@
 #tastingnote_sort_all, #tastingnote_sort_user {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   font-size: 16px;
@@ -1133,8 +1076,6 @@
 
 .tastingnote_tasting_box_flavor {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1143,8 +1084,6 @@
 
 .tastingnote_tasting_flavor_title_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   min-width: 80px;
@@ -1154,15 +1093,12 @@
 
 .tastingnote_tasting_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
 .tastingnote_flavor_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1203,8 +1139,6 @@
 
 .tastingnote_flavor_caption {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-size: 12px;
@@ -1231,8 +1165,6 @@
 /*aroma~yoin*******************/
 .tastingnote_tasting_box {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1241,8 +1173,6 @@
 
 .tastingnote_tasting_title_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   min-width: 80px;
@@ -1252,7 +1182,6 @@
 
 .tastingnote_tasting_bar_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1263,8 +1192,6 @@
 
 .tastingnote_input_range_container{
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -1314,8 +1241,6 @@
 
 .tastingnote_tasting_caption {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   color: #8c8c8c;
@@ -1342,8 +1267,6 @@
 /*tastingnote_tasting_icon*******************/
 .tastingnote_icon_adjust {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 30px;
@@ -1374,7 +1297,6 @@
 /*tastingnote_caption*******************/
 .tastingnote_caption {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1390,8 +1312,6 @@
 
 .tastingnote_caption_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #887766;
@@ -1417,7 +1337,6 @@
 
 .tastingnote_caption_content {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1425,8 +1344,6 @@
 
 .tastingnote_caption_content_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #ffddaa;
@@ -1439,7 +1356,6 @@
 .tastingnote_caption_item {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-top: 4px;
@@ -1488,7 +1404,6 @@
 .photo_filter_button_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   height: auto;
@@ -1497,7 +1412,6 @@
 .photo_filter_button {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 128px;
@@ -1538,7 +1452,6 @@
 #photoframe {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1592,7 +1505,6 @@
 .edit_sake_bar {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
@@ -1603,8 +1515,6 @@
 
 #edit_sake, #add_sake, .edit_sake, .add_sake {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: transparent;
@@ -1650,7 +1560,6 @@
 /*sake_spec*******************/
 #sake_spec {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1661,8 +1570,6 @@
 
 #sake_spec > div:first-child {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #000000;
@@ -1692,7 +1599,6 @@
 .sakecolumn1 {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1740,7 +1646,6 @@
 .sakecolumn2 {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   color: #000000;
@@ -1789,7 +1694,6 @@
   bottom: 0;
   margin: auto;
   display: none;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -1804,7 +1708,6 @@
 
 .dialog_preview_position_adjust {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -1815,8 +1718,6 @@
 
 .dialog_preview_date_close_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -1846,7 +1747,6 @@
 
 #dialog_preview_image_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -1862,7 +1762,6 @@
 
 .dialog_preview_container2 {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1873,7 +1772,6 @@
 .dialog_preview_user_name {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   color: #0740A5;
@@ -1886,7 +1784,6 @@
 .dialog_preview_caption {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   line-height: 140%;
