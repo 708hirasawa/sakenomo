@@ -1298,7 +1298,8 @@ print('<div id="container" data-category=' .$category
 
 								print('<a class="searchRow_link" href="sake_view.php?sake_id='.$row["id"].'">');
 									$path = "images/icons/noimage160.svg";
-									$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$row["id"] ."' LIMIT 8");
+									//$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$row["id"] ."' LIMIT 1");
+									$result_set = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '" .$row["id"] ."' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 1");
 
 									if($rd = getnextrow($result_set)) {
 										$path = "images/photo/thumb/" .$rd["filename"];
@@ -1609,7 +1610,7 @@ print('<div id="container" data-category=' .$category
 					print('<div id="allpage" class="search_result_turn_page">');
 						if($count_result > 25)
 						{
-							print('<button id="prev_all" class="search_button">前の'.$p_max .'件</button>');
+							print('<button id="prev_all" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 							for($i = 0; $i < $numPage; $i++)
 							{
@@ -1622,7 +1623,7 @@ print('<div id="container" data-category=' .$category
 								}
 							}
 
-							print('<button id="next_all" class="search_button">次の' .$p_max .'件</button>');
+							print('<button id="next_all" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 						}
 					print("</div>");
 				}
@@ -1668,7 +1669,7 @@ print('<div id="container" data-category=' .$category
 
 						if($count_result > 25)
 						{
-							print('<button id="prev_all" class="search_button">前の'.$p_max .'件</button>');
+							print('<button id="prev_all" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 							$i = 1;
 
 							print('<button class="search_button pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -1678,7 +1679,7 @@ print('<div id="container" data-category=' .$category
 								print('<button class="search_button pageitems">' .$i .'</button>');
 							}
 
-							print('<button id="next_all" class="search_button">次の' .$p_max .'件</button>');
+							print('<button id="next_all" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 						}
 					print("</div>");
 					//////////////////////////////////////////////////////////////////////////////////////
@@ -2562,7 +2563,7 @@ print('<div id="container" data-category=' .$category
 					print('<div id="sakepage" class="search_result_turn_page"' .$sakePageText .'>');
 
 							if($count_result > 25) {
-								print('<button id="prev_sake" class="search_button">前の'.$p_max .'件</button>');
+								print('<button id="prev_sake" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 								for($i = 0; $i < $numPage; $i++) {
 
@@ -2573,7 +2574,7 @@ print('<div id="container" data-category=' .$category
 										print('<button class="search_button pageitems">' .($showPos + $i + 1) .'</button>');
 									}
 								}
-								print('<button id="next_sake" class="search_button">次の' .$p_max .'件</button>');
+								print('<button id="next_sake" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 
 							}
 					print("</div>");
@@ -2621,7 +2622,7 @@ print('<div id="container" data-category=' .$category
 					$numPage = 5;
 
 					print('<div id="sakepage" class="search_result_turn_page">');
-						print('<button id="prev_sake" class="search_button">前の'.$p_max .'件</button>');
+						print('<button id="prev_sake" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 						$i = 1;
 
 						print('<button class="search_button pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -2631,7 +2632,7 @@ print('<div id="container" data-category=' .$category
 							print('<button class="search_button pageitems">' .$i .'</button>');
 						}*/
 
-						print('<button id="next_sake" class="search_button">次の' .$p_sake_max .'件</button>');
+						print('<button id="next_sake" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 					print("</div>");
 
 				}
@@ -2966,7 +2967,7 @@ print('<div id="container" data-category=' .$category
 
 						if($count_result > $p_max) {
 
-							print('<button id="prev_sakagura" class="search_button">前の'.$p_max .'件</button>');
+							print('<button id="prev_sakagura" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 							for($i = 0; $i < $numPage; $i++)
 							{
@@ -2979,7 +2980,7 @@ print('<div id="container" data-category=' .$category
 								}
 							}
 
-							print('<button id="next_sakagura" class="search_button">次の' .$p_max .'件</button>');
+							print('<button id="next_sakagura" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 						}
 
 					print("</div>");
@@ -3021,7 +3022,7 @@ print('<div id="container" data-category=' .$category
 					print('<div id="search_sakagura_result"></div>');
 
 					print('<div id="sakagurapage" class="search_result_turn_page">');
-						print('<button id="prev_sakagura" class="search_button">前の'.$p_sakagura_max .'件</button>');
+						print('<button id="prev_sakagura" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 						/*$i = 1;
 
 						print('<button class="search_button pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -3031,7 +3032,7 @@ print('<div id="container" data-category=' .$category
 							print('<button class="search_button pageitems">' .$i .'</button>');
 						}*/
 
-						print('<button id="next_sakagura" class="search_button">次の' .$p_sakagura_max .'件</button>');
+						print('<button id="next_sakagura" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 					print("</div>");
 
 				}
@@ -3174,7 +3175,7 @@ print('<div id="container" data-category=' .$category
 					print("</div>"); // search_syuhanten_result
 
 					print('<div id="syuhantenpage" class="search_result_turn_page">');
-						print('<button id="prev_syuhanten" class="search_button">前の'.$p_max .'件</button>');
+						print('<button id="prev_syuhanten" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 						/*$i = 1;
 
 						print('<button class="search_button pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -3184,7 +3185,7 @@ print('<div id="container" data-category=' .$category
 							print('<button class="search_button pageitems">' .$i .'</button>');
 						}*/
 
-						print('<button id="next_syuhanten" class="search_button">次の' .$p_max .'件</button>');
+						print('<button id="next_syuhanten" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#next2020"/></svg></button>');
 					print("</div>");
 
 				}
@@ -3224,7 +3225,7 @@ print('<div id="container" data-category=' .$category
 					print('<div id="search_syuhanten_result" style="margin-top:4px"></div>');
 
 					print('<div id="syuhantenpage" class="search_result_turn_page">');
-						print('<button id="prev_syuhanten" class="search_button">前の'.$p_syuhanten_max .'件</button>');
+						print('<button id="prev_syuhanten" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 						/*$i = 1;
 
 						print('<button class="search_button pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -3234,7 +3235,7 @@ print('<div id="container" data-category=' .$category
 							print('<button class="search_button pageitems">' .$i .'</button>');
 						}*/
 
-						print('<button id="next_syuhanten" class="search_button">次の'.$p_syuhanten_max .'件</button>');
+						print('<button id="next_syuhanten" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 					print("</div>");
 
 				}
@@ -3814,7 +3815,7 @@ $(function() {
 										numPage = (numPage > 5) ? 5 : numPage;
 
 										$('#allpage').empty();
-										$('#allpage').append('<button id="prev_all" class="search_button" style="margin-right:2px">前の' + p_max + '件</button>');
+										$('#allpage').append('<button id="prev_all" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 										for(i = 1; i <= numPage; i++) {
 											if(i == 1)
@@ -3823,7 +3824,7 @@ $(function() {
 												$('#allpage').append('<button class="search_button pageitems" style="text-align:center; width:26px; margin-right:2px">' + i + '</button>');
 										}
 
-										$('#allpage').append('<button id="next_all" class="search_button" style="margin-right:2px; visibility:visible">次の' + p_max + '件</button>');
+										$('#allpage').append('<button id="next_all" class="search_button" style="visibility:visible"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 								}
 
 								var limit = (in_disp_to >= $("#hidden_all_count_query").val()) ? $("#hidden_all_count_query").val() : in_disp_to;
@@ -3867,17 +3868,17 @@ $(function() {
 						////////////////////////////////////////////////////////////////////////
 						// prev, next grey
 						if($('#in_disp_all_from').val() >= 25) {
-						    $('#prev_all').css({"color":"#0740A5", "cursor":"pointer"});
+						    $('#prev_all').css({"background":"#22445B", "cursor":"pointer"});
 						}
 						else {
-							$('#prev_all').css({"color":"#b2b2b2", "cursor":"default"});
+							$('#prev_all').css({"background":"#b2b2b2", "cursor":"default"});
 						}
 
 						if((parseInt($('#in_disp_all_from').val()) + 25) < $("#hidden_all_count_query").val()) {
-							$('#next_all').css({"color":"#0740A5", "cursor":"pointer"});
+							$('#next_all').css({"background":"#22445B", "cursor":"pointer"});
 						}
 						else {
-							$('#next_all').css({"color":"#b2b2b2", "cursor":"default"});
+							$('#next_all').css({"background":"#b2b2b2", "cursor":"default"});
 						}
 
 						removeLoading();
@@ -3935,7 +3936,7 @@ $(function() {
 				history.pushState(stateObj, "test1", my_url);
 				searchAll(data, in_disp_from, in_disp_to, 0);
 
-				$('#prev_all').css({"color":"#0740A5"});
+				$('#prev_all').css({"background":"#22445B"});
 			}
 		});
 
@@ -4389,7 +4390,7 @@ $(function() {
 								numPage = (numPage > 5) ? 5 : numPage;
 
 								$('#sakepage').empty();
-								$('#sakepage').append('<button id="prev_sake" class="search_button" style="margin-right:2px">前の' + p_max + '件</button>');
+								$('#sakepage').append('<button id="prev_sake" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 								for(i = 1; i <= numPage; i++) {
 									if(i == 1)
@@ -4398,7 +4399,7 @@ $(function() {
 										$('#sakepage').append('<button class="search_button pageitems" style="text-align:center; width:26px; margin-right:2px">' + i + '</button>');
 								}
 
-								$('#sakepage').append('<button id="next_sake" class="search_button" style="margin-right:2px; visibility:visible">次の' + p_max + '件</button>');
+								$('#sakepage').append('<button id="next_sake" class="search_button" style="visibility:visible"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 							}
 							else {
 								$('#sakepage').empty();
@@ -4435,7 +4436,7 @@ $(function() {
 						}
 
 						//alert("pagenum:" + pagenum + " showPos:" + showPos + " nth:" + position);
-						$('#sakepage .pageitems').css({"background": "#c6c6c6", "color":"#404040"});
+						$('#sakepage .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
 						$('#sakepage .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
 
 						//////////////////////////////////////////////////////////////////////////////
@@ -4457,14 +4458,14 @@ $(function() {
 					}
 
 					if(parseInt($('#in_disp_sake_from').val()) >= 25)
-						$('#prev_sake').css({"color":"#0740A5", "cursor":"pointer"});
+						$('#prev_sake').css({"background":"#22445B", "cursor":"pointer"});
 					else
-						$('#prev_sake').css({"color":"#b2b2b2", "cursor":"default"});
+						$('#prev_sake').css({"background":"#b2b2b2", "cursor":"default"});
 
 					if((parseInt($('#in_disp_sake_from').val()) + 25) < parseInt($("#hidden_sake_count_result").val()))
-						$('#next_sake').css({"color":"#0740A5", "cursor":"pointer"});
+						$('#next_sake').css({"background":"#22445B", "cursor":"pointer"});
 					else
-						$('#next_sake').css({"color":"#b2b2b2", "cursor":"default"});
+						$('#next_sake').css({"background":"#b2b2b2", "cursor":"default"});
 
 				}).fail(function(data){
 						alert("Failed:" + data);
@@ -4520,7 +4521,7 @@ $(function() {
 								'to': in_disp_to };
 
 				history.pushState(stateObj, "test1", my_url);
-				$('#next_sake').css({"color":"#0740A5"});
+				$('#next_sake').css({"background":"#22445B"});
 				searchSake(data, in_disp_from, in_disp_to, 0);
 			}
 		});
@@ -4611,8 +4612,8 @@ $(function() {
 				$('#tabs-30_content').css('display', 'block');
 				$('#category').val(2);
 
-				$('#prev_sake').css({"color":"#b2b2b2"});
-				$('#next_sake').css({"color":"#0740A5"});
+				$('#prev_sake').css({"background":"#b2b2b2"});
+				$('#next_sake').css({"background":"#22445B"});
 				$('.accordion_title').css({"display": "block"});
 
 				var data = sake_serialize(in_disp_from, in_disp_to) + "&count_query=1";
@@ -4949,7 +4950,7 @@ $(function() {
 
 										//alert("count:" + $('#hidden_sakagura_count_result').val());
 										$('#sakagurapage').empty();
-										$('#sakagurapage').append('<button id="prev_sakagura" class="search_button" style="margin-right:2px">前の' + p_max + '件</button>');
+										$('#sakagurapage').append('<button id="prev_sakagura" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 										for(i = 1; i <= numPage; i++) {
 											if(i == 1)
@@ -4958,7 +4959,7 @@ $(function() {
 												$('#sakagurapage').append('<button class="search_button pageitems" style="text-align:center; width:26px; margin-right:2px">' + i + '</button>');
 										}
 
-										$('#sakagurapage').append('<button id="next_sakagura" class="search_button" style="margin-right:2px; visibility:visible">次の' + p_max + '件</button>');
+										$('#sakagurapage').append('<button id="next_sakagura" class="search_button" style="visibility:visible"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 									}
 									else {
 										$('#sakagurapage').empty();
@@ -4996,6 +4997,11 @@ $(function() {
 								$('#view_sakagura_result').text(parseInt($('#in_disp_sakagura_from').val()) + 1 + '～' + limit);
 
 								$('html, body').animate({scrollTop:0}, 'fast');
+
+								if($('.mobilesake_container').css('display') != 'none') {
+									$('#tabs-31_content').css('display', 'none');
+						}
+
 						}
 						else {
 							$("#count_sakagura_result").css({"display":"none"});
@@ -5005,14 +5011,14 @@ $(function() {
 						}
 
 						if(parseInt($('#in_disp_sakagura_from').val()) >= 25)
-							$('#prev_sakagura').css({"color":"#0740A5", "cursor":"pointer"});
+							$('#prev_sakagura').css({"background":"#22445B", "cursor":"pointer"});
 						else
-							$('#prev_sakagura').css({"color":"#b2b2b2", "cursor":"default"});
+							$('#prev_sakagura').css({"background":"#b2b2b2", "cursor":"default"});
 
 						if((parseInt($('#in_disp_sakagura_from').val()) + 25) < parseInt($("#hidden_sakagura_count_result").val()))
-							$('#next_sakagura').css({"color":"#0740A5", "cursor":"pointer"});
+							$('#next_sakagura').css({"background":"#22445B", "cursor":"pointer"});
 						else
-							$('#next_sakagura').css({"color":"#b2b2b2", "cursor":"default"});
+							$('#next_sakagura').css({"background":"#b2b2b2", "cursor":"default"});
 
 				}).fail(function(data){
 						alert("Failed:" + data);
@@ -5330,17 +5336,17 @@ jQuery(document).ready(function($) {
 			////////////////////////////////////////////////////////////////////////
 			// prev, next grey
 			if($('#in_disp_all_from').val() >= 25) {
-			    $('#prev_all').css({"color":"#0740A5", "cursor":"pointer"});
+			    $('#prev_all').css({"background":"#22445B", "cursor":"pointer"});
 			}
 			else {
-				$('#prev_all').css({"color":"#b2b2b2", "cursor":"default"});
+				$('#prev_all').css({"background":"#b2b2b2", "cursor":"default"});
 			}
 
 			if((parseInt($('#in_disp_all_from').val()) + 25) < $("#hidden_all_count_query").val()) {
-				$('#next_all').css({"color":"#0740A5", "cursor":"pointer"});
+				$('#next_all').css({"background":"#22445B", "cursor":"pointer"});
 			}
 			else {
-				$('#next_all').css({"color":"#b2b2b2", "cursor":"default"});
+				$('#next_all').css({"background":"#b2b2b2", "cursor":"default"});
 			}
 
 			$('.accordion_title').css({"display": "block"});
@@ -5430,10 +5436,10 @@ jQuery(document).ready(function($) {
 			}
 
 			if($('#container').data('from') > 25) {
-				$('#prev_sake').css({"color":"#0740A5", "cursor":"default"});
+				$('#prev_sake').css({"background":"#22445B", "cursor":"default"});
 			}
 
-			$('#next_sake').css({"color":"#0740A5"});
+			$('#next_sake').css({"background":"#22445B"});
 			$('.accordion_title').css({"display": "block"});
 		}
 		else if($('#category').val() == "3")
@@ -5481,14 +5487,14 @@ jQuery(document).ready(function($) {
 
 			////////////////////////////////////////////////////////////////////////////////////////////////
 			if(parseInt($('#in_disp_sakagura_from').val()) >= 25)
-				$('#prev_sakagura').css({"color":"#0740A5", "cursor":"pointer"});
+				$('#prev_sakagura').css({"background":"#22445B", "cursor":"pointer"});
 			else
-				$('#prev_sakagura').css({"color":"#b2b2b2", "cursor":"default"});
+				$('#prev_sakagura').css({"background":"#b2b2b2", "cursor":"default"});
 
 			if((parseInt($('#in_disp_sakagura_from').val()) + 25) < parseInt($("#hidden_sakagura_count_result").val()))
-				$('#next_sakagura').css({"color":"#0740A5", "cursor":"pointer"});
+				$('#next_sakagura').css({"background":"#22445B", "cursor":"pointer"});
 			else
-				$('#next_sakagura').css({"color":"#b2b2b2", "cursor":"default"});
+				$('#next_sakagura').css({"background":"#b2b2b2", "cursor":"default"});
 			////////////////////////////////////////////////////////////////////////////////////////////////
 
 			$('#prev_sakagura').css({"visibility":"visible"});
