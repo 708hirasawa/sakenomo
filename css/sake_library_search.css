@@ -861,61 +861,6 @@ body {
 }
 
 /************************************************************/
-.search_result_turn_page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  font-size: 12px;
-}
-
-#prev_all, #next_all, #prev_sake, #next_sake, #prev_sakagura, #next_sakagura {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  outline: none;
-  margin: 0;
-  width: 24px;
-  height: 24px;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-#prev_all, #prev_sake, #prev_sakagura {
-  background: #b2b2b2;
-  margin-right: 8px;
-}
-
-#next_all, #next_sake, #next_sakagura {
-  background: #22445B;
-  margin-left: 8px;
-}
-
-.prev_button_prev2020, .next_button_next2020 {
-  fill: #ffffff;
-  width: 14px;
-  height: 14px;
-}
-
-.pageitems {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #b2b2b2;
-  color: #ffffff;
-  font-size: 11px;
-  border: none;
-  outline: none;
-  width: 24px;
-  height: 24px;
-  margin: 0 4px;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-/************************************************************/
 @media only screen and (min-width: 410px) {
   .search_result_brewery_date_container, .search_sakagura_result_pref_date_container, .search_syuhanten_result_pref_date_container {
     flex-direction: row;
