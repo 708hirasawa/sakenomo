@@ -41,39 +41,39 @@ require_once("searchbar.php");
 		write_Nonda();
 
 		$flavor_table = array(array("10", "greenapple4040", "青りんご"),
-							 array("11", "strawberry4040", "いちご"),
-							 array("12", "orange4040", "オレンジ"),
-							 array("41", "kiwi4040", "キウイ"),
-							 array("13", "grapefruit4040", "グレープフルーツ"),
-							 array("43", "watermelon4040", "スイカ"),
-							 array("14", "nashi4040", "梨"),
-							 array("15", "pineapple4040", "パイナップル"),
-							 array("16", "banana4040", "バナナ"),
-							 array("42", "grape4040", "ぶどう"),
-							 array("17", "muscat4040", "マスカット"),
-							 array("18", "mango4040", "マンゴー"),
-							 array("19", "melon4040", "メロン"),
-							 array("20", "peach4040", "桃"),
-							 array("21", "pear4040", "洋梨"),
-							 array("22", "lychee4040", "ライチ"),
-							 array("23", "apple4040", "りんご"),
-							 array("24", "lemon4040", "レモン"),
-							 array("25", "flower4040", "花"),
-							 array("26", "mineralwater4040", "天然水・ミネラル"),
-							 array("27", "soda4040", "ソーダ・ラムネ"),
-							 array("28", "herb4040", "ハーブ・若草・根菜"),
-							 array("29", "tree4040", "木"),
-							 array("30", "rice4040", "ご飯・餅"),
-							 array("31", "nuts4040", "ナッツ・豆"),
-							 array("32", "butter4040", "バター・クリーム・バニラ・チーズ"),
-							 array("33", "driedfruit4040", "ドライフルーツ・乾物"),
-							 array("34", "soysauce4040", "しょうゆ・みりん"),
-							 array("35", "spice4040", "スパイス"),
-							 array("36", "caramel4040", "カラメル"),
-							 array("37", "cacao4040", "カカオ・ビターチョコ"),
-							 array("38", "cemedine4040", "セメダイン"),
-							 array("39", "yogurt4040", "ヨーグルト"),
-							 array("40", "other4040", "その他"));
+			array("11", "strawberry4040", "いちご"),
+			array("12", "orange4040", "オレンジ"),
+			array("41", "kiwi4040", "キウイ"),
+			array("13", "grapefruit4040", "グレープフルーツ"),
+			array("43", "watermelon4040", "スイカ"),
+			array("14", "nashi4040", "梨"),
+			array("15", "pineapple4040", "パイナップル"),
+			array("16", "banana4040", "バナナ"),
+			array("42", "grape4040", "ぶどう"),
+			array("17", "muscat4040", "マスカット"),
+			array("18", "mango4040", "マンゴー"),
+			array("19", "melon4040", "メロン"),
+			array("20", "peach4040", "桃"),
+			array("21", "pear4040", "洋梨"),
+			array("22", "lychee4040", "ライチ"),
+			array("23", "apple4040", "りんご"),
+			array("24", "lemon4040", "レモン"),
+			array("25", "flower4040", "花"),
+			array("26", "mineralwater4040", "天然水・ミネラル"),
+			array("27", "soda4040", "ソーダ・ラムネ"),
+			array("28", "herb4040", "ハーブ・若草・根菜"),
+			array("29", "tree4040", "木"),
+			array("30", "rice4040", "ご飯・餅"),
+			array("31", "nuts4040", "ナッツ・豆"),
+			array("32", "butter4040", "バター・クリーム・バニラ・チーズ"),
+			array("33", "driedfruit4040", "ドライフルーツ・乾物"),
+			array("34", "soysauce4040", "しょうゆ・みりん"),
+			array("35", "spice4040", "スパイス"),
+			array("36", "caramel4040", "カラメル"),
+			array("37", "cacao4040", "カカオ・ビターチョコ"),
+			array("38", "cemedine4040", "セメダイン"),
+			array("39", "yogurt4040", "ヨーグルト"),
+			array("40", "other4040", "その他"));
 
 		function GetFlavorNames($flavors) {
 
@@ -111,7 +111,7 @@ require_once("searchbar.php");
 
 			for($i = 0; $i < count($flavor_table); $i++) {
 
-				if(intval($value) == intval($flavor_table[$i][0])) {
+				if($value == $flavor_table[$i][0]) {
 					$image_value = $flavor_table[$i][1];
 					$flavor_name = $flavor_table[$i][2];
 					break;
@@ -805,7 +805,7 @@ require_once("searchbar.php");
 		$rd_favorite = getnextrow($res);
 
 		//$sql = "SELECT * FROM TABLE_NONDA WHERE contributor = '$username' AND sake_id = '$sake_id' AND committed = 1";
-		$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE contributor = '$username' AND sake_id = '$sake_id' AND USERS_J.email = TABLE_NONDA.contributor";
+		$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE contributor = '$username' AND sake_id = '$sake_id' AND USERS_J.email = TABLE_NONDA.contributor AND committed = 1";
 
 		$res = executequery($db, $sql);
 		$rd_nonda = getnextrow($res);
@@ -840,15 +840,16 @@ require_once("searchbar.php");
 		// creating a flavor lookup table
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		$flavor_lookupTable1 = [];
-		$flavor_lookupTable2 = [];
-		$lookupTable_count1 = 0;
-		$lookupTable_count2 = 0;
-		$bFound1 = false;
-		$bFound2 = false;
-
 		$sql = "SELECT * FROM TABLE_NONDA WHERE sake_id = '$sake_id'";
 		$res = executequery($db, $sql);
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// creating a lookup table
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		$flavor_lookupTable = [];
+		$lookupTable_count = 0;
+		$bFound = false;
 
 		while($rd = getnextrow($res)) {
 			$flavor_array = explode(',', $rd["flavor"]);
@@ -856,44 +857,44 @@ require_once("searchbar.php");
 			if(count($flavor_array) >= 1) {
 
 				/* first flavor */
-				for($j = 0; $j < count($flavor_lookupTable1); $j++) {
-					if($flavor_array[0] == $flavor_lookupTable1[$j]['flavor']) {
-						$flavor_lookupTable1[$j]['count']++;
-						$lookupTable_count1++;
-						$bFound1 = true;
+				for($j = 0; $j < count($flavor_lookupTable); $j++) {
+					if($flavor_array[0] == $flavor_lookupTable[$j]['flavor']) {
+						$flavor_lookupTable[$j]['count']++;
+						$lookupTable_count++;
+						$bFound = true;
 						break;
 					}
 				}
 
-				if(!$bFound1 && $flavor_array[0]) {
-					$flavor_lookupTable1[] = array('flavor' => $flavor_array[0], 'count' => 1);
-					$lookupTable_count1++;
+				if(!$bFound && $flavor_array[0]) {
+					$flavor_lookupTable[] = array('flavor' => $flavor_array[0], 'count' => 1);
+					$lookupTable_count++;
 				}
 
+				$bFound = false;
+
 				/* second flavor */
-				if(count($flavor_array) >= 2) {
-					for($j = 0; $j < count($flavor_lookupTable2); $j++) {
-						if($flavor_array[1] == $flavor_lookupTable2[$j]['flavor']) {
-							$flavor_lookupTable2[$j]['count']++;
-							$lookupTable_count2++;
-							$bFound2 = true;
+				if(count($flavor_array) > 1) {
+					for($j = 0; $j < count($flavor_lookupTable); $j++) {
+						if($flavor_array[1] == $flavor_lookupTable[$j]['flavor']) {
+							$flavor_lookupTable[$j]['count']++;
+							$lookupTable_count++;
+							$bFound = true;
 							break;
 						}
 					}
 
-					if(!$bFound2 && $flavor_array[1]) {
-						$flavor_lookupTable2[] = array('flavor' => $flavor_array[1], 'count' => 1);
-						$lookupTable_count2++;
+					if(!$bFound && $flavor_array[0]) {
+						$flavor_lookupTable[] = array('flavor' => $flavor_array[1], 'count' => 1);
+						$lookupTable_count++;
 					}
 				}
 
-				$bFound1 = false;
-				$bFound2 = false;
+				$bFound = false;
 			}
 		}
 
-		usort($flavor_lookupTable1, 'sortByCount');
-		usort($flavor_lookupTable2, 'sortByCount');
+		usort($flavor_lookupTable, 'sortByCount');
 
 		/////////////////////////////////////////////////////////
 		// 内容量
@@ -1139,22 +1140,30 @@ require_once("searchbar.php");
 						print('<div id="preview_definition_container">');
 							print('<div id="preview_frame">');
 
-								$rd = executequery($db, "SELECT FILENAME FROM SAKE_IMAGE WHERE sake_id = '$sake_id' limit 9");
-								$image = getnextrow($rd);
+							//$image_result = executequery($db, "SELECT * FROM SAKE_IMAGE WHERE sake_id = '$sake_id' AND contributor = '$username' ORDER BY added_date");
+							//$result = executequery($db, "SELECT FILENAME FROM SAKE_IMAGE WHERE sake_id = '$sake_id' ORDER BY SAKE_IMAGE.added_date DESC limit 10");
+							//$result = executequery($db, "SELECT FILENAME FROM SAKE_IMAGE, TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date ORDER BY SAKE_IMAGE.added_date DESC limit 9");
+							//$result = executequery($db, "SELECT DISTINCT FILENAME FROM SAKE_IMAGE, TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date ORDER BY SAKE_IMAGE.added_date DESC limit 10");
+							//$result = executequery($db, "SELECT	FILENAME FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id IN (SELECT TABLE_NONDA.sake_id FROM TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' ORDER BY TABLE_NONDA.update_date DESC) ORDER BY SAKE_IMAGE.added_date ASC limit 10");
+							//$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date DESC limit 10");
+							$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 10");
 
-								if($image)
+								$rd = getnextrow($result);
+
+								if($rd)
 								{
 									// プレビュー
 									print('<ul id="preview_main_container">');
-										$path = "images\\photo\\".$image["filename"];
+										$path = "images\\photo\\".$rd["filename"];
 										$i = 1;
 										print('<li class="sakeimage">');
 											print('<img src="' .$path  .'">');
+											//print('<div>' .$rd["update_date"] .'</div>');
 										print('</li>');
 
-										while($image = getnextrow($rd))
+										while($rd = getnextrow($result))
 										{
-											$path = "images\\photo\\".$image["filename"];
+											$path = "images\\photo\\".$rd["filename"];
 											print('<li class="sakeimage">');
 											print('<img src="' .$path .'">');
 											print('</li>');
@@ -1164,17 +1173,23 @@ require_once("searchbar.php");
 
 									// サムネ
 									print('<ul id="preview_thumbnail_container">');
-										$rd = executequery($db, "SELECT FILENAME FROM SAKE_IMAGE WHERE sake_id = '$sake_id' limit 10");
+									//$rd = executequery($db, "SELECT FILENAME FROM SAKE_IMAGE WHERE sake_id = '$sake_id' ORDER BY SAKE_IMAGE.added_date DESC limit 10");
+									//$rd = executequery($db, "SELECT FILENAME FROM SAKE_IMAGE, TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date DESC limit 9");
+									//$rd = executequery($db, "SELECT	FILENAME FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id IN (SELECT TABLE_NONDA.sake_id FROM TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' ORDER BY TABLE_NONDA.update_date DESC) ORDER BY SAKE_IMAGE.added_date ASC limit 10");
+									//$rd = executequery($db, "SELECT DISTINCT FILENAME FROM SAKE_IMAGE, TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date ORDER BY SAKE_IMAGE.added_date DESC limit 9");
+									//$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date DESC limit 10");
+									$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 10");
 
-										while($image = getnextrow($rd))
+										while($rd = getnextrow($result))
 										{
 											$i = 1;
 											print('<li class="sakeimage_thumbnail">');
-												$path = "images\\photo\\".$image["filename"];
+												$path = "images\\photo\\".$rd["filename"];
 												print('<img src="' .$path  .'">');
 												$i = $i + 1;
 											print('</li>');
 										}
+
 									print("</ul>");
 								}
 								else
@@ -1481,15 +1496,15 @@ require_once("searchbar.php");
 										$image_value = "";
 										$flavor_name = "";
 
-										if($flavor_lookupTable1 || $flavor_lookupTable2) {
+										if($flavor_lookupTable) {
 											/* フレーバー1 */
-											if(count($flavor_lookupTable1) > 0) {
-												getFlavorValue($flavor_lookupTable1[0]['flavor'], $image_value, $flavor_name);
+											if(count($flavor_lookupTable) > 0) {
+												getFlavorValue($flavor_lookupTable[0]['flavor'], $image_value, $flavor_name);
 												print('<li><svg><use xlink:href="#' .$image_value .'"/></svg><div>' .$flavor_name .'</div></li>');
 											}
 											/* フレーバー2 */
-											if(count($flavor_lookupTable2) > 0) {
-												getFlavorValue($flavor_lookupTable2[0]['flavor'], $image_value, $flavor_name);
+											if(count($flavor_lookupTable) > 1) {
+												getFlavorValue($flavor_lookupTable[1]['flavor'], $image_value, $flavor_name);
 												print('<li><svg><use xlink:href="#' .$image_value .'"/></svg><div>' .$flavor_name .'</div></li>');
 											}
 										} else {
@@ -1541,7 +1556,7 @@ require_once("searchbar.php");
 					////////////////////////////////////////
 					print('<div id="review" class="form-action hide">');
 
-						$sql = "SELECT COUNT(*) FROM TABLE_NONDA WHERE sake_id = '$sake_id' AND (subject IS NOT '' OR message IS NOT '')";
+						$sql = "SELECT COUNT(*) FROM TABLE_NONDA WHERE sake_id = '$sake_id' AND committed = 1 AND (subject IS NOT '' OR message IS NOT '')";
 						$res = executequery($db, $sql);
 						$record = getnextrow($res);
 						$count_result = $record["COUNT(*)"];
@@ -1578,7 +1593,7 @@ require_once("searchbar.php");
 								}
 							print('</div>');
 
-							$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND USERS_J.email = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY update_date DESC";
+							$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.email = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY update_date DESC";
 							$result = executequery($db, $sql);
 
 							print('<div id="threads">');
@@ -1820,7 +1835,7 @@ require_once("searchbar.php");
 
 								if($p_max > 25) {
 
-									print('<button id="prev_sake">前の'.$p_max .'件</button>');
+									print('<button id="prev_sake"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 									$i = 1;
 
 									print('<button class="pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -1830,7 +1845,7 @@ require_once("searchbar.php");
 										print('<button class="pageitems">' .$i .'</button>');
 									}
 
-									print('<button id="next_sake">次の' .$p_max .'件</button>');
+									print('<button id="next_sake"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 								}
 							print("</div>");
 						}
@@ -1944,8 +1959,8 @@ require_once("searchbar.php");
 
 									print('<div class="tastingnote_flavor_container">');
 
-										if(count($flavor_lookupTable1) > 0) {
-											getFlavorValue($flavor_lookupTable1[0]['flavor'], $image_value, $flavor_name);
+										if(count($flavor_lookupTable) > 0) {
+											getFlavorValue($flavor_lookupTable[0]['flavor'], $image_value, $flavor_name);
 
 											print('<div id="tastingnote_flavor_content">');
 												print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
@@ -1953,7 +1968,7 @@ require_once("searchbar.php");
 													print('<span>' .$flavor_name .'</span>');
 												print('</div>');
 												print('<div class="tastingnote_flavor_ratio">');
-													$average_all = ($flavor_lookupTable1[0]['count'] / $lookupTable_count1) * 100;
+													$average_all = ($flavor_lookupTable[0]['count'] / $lookupTable_count) * 100;
 													print('<span>' .number_format($average_all, 1) .'%</span>');
 												print('</div>');
 											print('</div>');
@@ -1975,8 +1990,8 @@ require_once("searchbar.php");
 
 										/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-										if(count($flavor_lookupTable2) > 0) {
-											getFlavorValue($flavor_lookupTable2[0]['flavor'], $image_value, $flavor_name);
+										if(count($flavor_lookupTable) > 0) {
+											getFlavorValue($flavor_lookupTable[1]['flavor'], $image_value, $flavor_name);
 
 											print('<div id="tastingnote_flavor_content">');
 												print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
@@ -1984,7 +1999,7 @@ require_once("searchbar.php");
 													print('<span>' .$flavor_name .'</span>');
 												print('</div>');
 												print('<div class="tastingnote_flavor_ratio">');
-													$average_all = ($flavor_lookupTable2[0]['count'] / $lookupTable_count2) * 100;
+													$average_all = ($flavor_lookupTable[1]['count'] / $lookupTable_count) * 100;
 													print('<span>' .number_format($average_all, 1) .'%</span>');
 												print('</div>');
 											print('</div>');
@@ -2577,9 +2592,11 @@ require_once("searchbar.php");
 								$limit = 12;
 								$p_max = $limit;
 
-								//$sql = "SELECT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date, sake_name FROM SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND SAKE_IMAGE.sake_id = '$sake_id' ORDER BY filename"." LIMIT $limit";
-								$sql = "SELECT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date, sake_name FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.email = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id' ORDER BY filename"." LIMIT $limit";
+								//$sql = "SELECT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date, sake_name FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.email = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id' ORDER BY filename"." LIMIT $limit";
+								$sql = "SELECT DISTINCT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date FROM TABLE_NONDA, SAKE_IMAGE, USERS_J WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND USERS_J.email = SAKE_IMAGE.contributor AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC LIMIT $limit";
 								$result = executequery($db, $sql);
+
+
 
 								if($count_result > $p_max) {
 									$p_next = $p_max;
@@ -2628,7 +2645,7 @@ require_once("searchbar.php");
 									$i = 0;
 									$numPage = ceil($count_result / $limit);
 
-									print('<button id="prev_photo">前の'.$p_max .'件</button>');
+									print('<button id="prev_photo"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 									print('<button class="pageitems" style="background:#22445B; color:#ffffff;">' .($i + 1) .'</button>');
 
@@ -2637,7 +2654,7 @@ require_once("searchbar.php");
 										print('<button class="pageitems">' .($i + 1) .'</button>');
 									}
 
-									print('<button id="next_photo" class="active">次の' .$p_max .'件</button>');
+									print('<button id="next_photo" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 							}
 
 							print("</div>");
