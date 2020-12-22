@@ -1835,7 +1835,7 @@ require_once("searchbar.php");
 
 								if($p_max > 25) {
 
-									print('<button id="prev_sake"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
+									print('<button id="prev_sake_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 									$i = 1;
 
 									print('<button class="pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -1845,7 +1845,7 @@ require_once("searchbar.php");
 										print('<button class="pageitems">' .$i .'</button>');
 									}
 
-									print('<button id="next_sake"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
+									print('<button id="next_sake_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 								}
 							print("</div>");
 						}
@@ -2645,7 +2645,7 @@ require_once("searchbar.php");
 									$i = 0;
 									$numPage = ceil($count_result / $limit);
 
-									print('<button id="prev_photo"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
+									print('<button id="prev_sake_photo"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 									print('<button class="pageitems" style="background:#22445B; color:#ffffff;">' .($i + 1) .'</button>');
 
@@ -2654,7 +2654,7 @@ require_once("searchbar.php");
 										print('<button class="pageitems">' .($i + 1) .'</button>');
 									}
 
-									print('<button id="next_photo" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
+									print('<button id="next_sake_photo" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 							}
 
 							print("</div>");
@@ -4009,14 +4009,14 @@ $(function() {
 			////////////////////////////////////////
 
 			if(in_disp_from >= disp_max)
-				$('#prev_photo').addClass('active');
+				$('#prev_sake_photo').addClass('active');
 			else
-				$('#prev_photo').removeClass('active');
+				$('#prev_sake_photo').removeClass('active');
 
 			if((in_disp_from + disp_max) > $('#photoframe').data('count'))
-				$('#next_photo').removeClass('active');
+				$('#next_sake_photo').removeClass('active');
 			else
-				$('#next_photo').addClass('active');
+				$('#next_sake_photo').addClass('active');
 			////////////////////////////////////////
 
 			$('#photoframe').data('in_disp_from', in_disp_from)
@@ -4050,7 +4050,7 @@ $(function() {
 		searchPhoto(in_disp_from, disp_max, data, false);
 	});
 
-	$(document).on('click', '#prev_photo', function(){
+	$(document).on('click', '#prev_sake_photo', function(){
 
 		var numPages = 5;
 		var limit = $('#photoframe').data('limit');
@@ -4065,7 +4065,7 @@ $(function() {
 		searchPhoto(in_disp_from, disp_max, data, false);
 	});
 
-	$(document).on('click', '#next_photo', function(){
+	$(document).on('click', '#next_sake_photo', function(){
 
 		var in_disp_from = $('#photoframe').data('in_disp_from') + $('#photoframe').data('limit');
 		var disp_max = 12;
