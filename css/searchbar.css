@@ -598,6 +598,86 @@
 }
 
 /********************
+ * turn_page
+********************/
+.search_result_turn_page, #review_result_turn_page, #sakagura_result_turn_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  margin-top: 24px;
+}
+
+#review_result_turn_page .selected, #sakagura_result_turn_page .selected {
+  background:#22445B;
+  color:#fff;
+}
+
+#prev_search_all, #next_search_all, #prev_search_sake, #next_search_sake, #prev_search_sakagura, #next_search_sakagura, #prev_sake_review, #next_sake_review, #prev_sake_photo, #next_sake_photo, #prev_sakagura_sake, #next_sakagura_sake, #prev_mypage_review, #next_mypage_review, #prev_mypage_sakagura, #next_sakagura {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  outline: none;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+}
+
+#prev_search_all, #prev_search_sake, #prev_search_sakagura, #prev_sake_review {
+  background: #b2b2b2;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+#next_search_all, #next_search_sake, #next_search_sakagura, #next_sake_review, #next_sakagura_sake {
+  background: #22445B;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+#prev_sake_photo, #prev_sakagura_sake, #prev_mypage_review, #prev_mypage_sakagura {
+  background: #b2b2b2;
+  margin-right: 8px;
+  cursor: default;
+}
+
+#next_sake_photo, #next_mypage_review, #next_sakagura {
+  background: #b2b2b2;
+  margin-left: 8px;
+  cursor: default;
+}
+
+#prev_sake_photo.active, #next_sake_photo.active, #prev_mypage_review.active, #prev_mypage_sakagura.active, #next_mypage_review.active, #next_sakagura.active {
+  background: #22445B;
+  cursor: pointer;
+}
+
+.prev_button_prev2020, .next_button_next2020 {
+  fill: #ffffff;
+  width: 14px;
+  height: 14px;
+}
+
+.pageitems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #b2b2b2;
+  color: #ffffff;
+  font-size: 11px;
+  border: none;
+  outline: none;
+  width: 32px;
+  height: 32px;
+  margin: 0 4px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/********************
  * footer
 ********************/
 .sakenomu_footer {
