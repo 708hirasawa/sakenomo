@@ -475,8 +475,8 @@ print('<div id="container"
 
             if($result)
             {
-				$rd = getnextrow($result);
-				$count_result = $rd["COUNT(*)"];
+              $rd = getnextrow($result);
+              $count_result = $rd["COUNT(*)"];
             }
 
             $numPage = ($count_result % 25) ? ($count_result / 25) + 1 : $count_result / 25;
@@ -487,8 +487,8 @@ print('<div id="container"
             $in_disp_from = 0;
             $in_disp_to = 25;
 
-            //$sql = "SELECT * FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKAGURA_J.id = '$id' ORDER BY SAKE_J.sake_read ASC";
-            $sql = "SELECT * FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKAGURA_J.id = '$id' ORDER BY SAKE_J.write_update DESC LIMIT $in_disp_from, $in_disp_to";
+            $sql = "SELECT * FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKAGURA_J.id = '$id' ORDER BY SAKE_J.sake_read ASC LIMIT $in_disp_from, $in_disp_to";
+            //$sql = "SELECT * FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKAGURA_J.id = '$id' ORDER BY SAKE_J.write_update DESC LIMIT $in_disp_from, $in_disp_to";
             //print("<div>sql:".$sql."</div>");
 
             $result = executequery($db, $sql);
@@ -560,16 +560,16 @@ print('<div id="container"
 
                     if($record["setting"] != "" && $record["setting"] != undefined)
                     {
-						$path = "images/photo/thumb/" .$record["setting"];
+                      $path = "images/photo/thumb/" .$record["setting"];
                     }
                     else
                     {
-						$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
+                      $result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
 
-						if($rd = getnextrow($result_set))
-						{
-							$path = "images/photo/thumb/" .$rd["filename"];
-						}
+                      if($rd = getnextrow($result_set))
+                      {
+                        $path = "images/photo/thumb/" .$rd["filename"];
+                      }
                     }
 
                     print('<div class="search_sake_result_name_container">');
@@ -666,9 +666,12 @@ print('<div id="container"
 
                           if($record["rice_used"] && $record["rice_used"] != "") {
                             $rice_array = explode('/', $record["rice_used"]);
-
                             for($i = 0; $i < count($rice_array); $i++) {
                               $rice_entry = explode(',', $rice_array[$i]);
+
+                              if($i > 0 && $rice_entry[0] != "") {
+                                print(" / ");
+                              }
 
                               $sql = "SELECT SAKE_RICE.rice_name, SAKE_RICE.rice_kanji, SAKE_RICE.rice_kana FROM SAKE_RICE WHERE SAKE_RICE.rice_name = '$rice_entry[0]'";
                               $sake_result = executequery($db, $sql);
@@ -681,12 +684,13 @@ print('<div id="container"
                               }
 
                               if($rice_entry[0] != "") {
-                                $rice_kanji = $rd ? $rd["rice_kanji"] : $rice_used;
-                                print($rice_kanji);
-	                            }
-
-                              if($i < (count($rice_array) - 1))
-                                print(" / ");
+                                if($rice_entry[0] == "other") {
+                                  print($rice_entry[3]);
+                                } else {
+                                  $rice_kanji = $record ? $rd["rice_kanji"] : $rice_used;
+                                  print($rice_kanji ." ");
+                                }
+                              }
                             }
                           } else {
                             print('<span style="color: #b2b2b2;">--</span>');
@@ -758,7 +762,7 @@ print('<div id="container"
               print('<div class="search_result_turn_page">');
 
 					if($count_result > 25) {
-						print('<button id="prev_sake">前の'.$p_max .'件</button>');
+						print('<button id="prev_sake"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 						$i = 1;
 
 						print('<button class="pageitems" style="background:#22445B; color:#ffffff">' .$i .'</button>');
@@ -768,7 +772,7 @@ print('<div id="container"
 						    print('<button class="pageitems">' .$i .'</button>');
 						}
 
-						print('<button id="next_sake">次の' .$p_max .'件</button>');
+						print('<button id="next_sake"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 					}
 
 			  print("</div>");
@@ -1098,18 +1102,6 @@ print('<div id="container"
       /* advertisement */
       print('<div id="banner_frame">');
         print('<div id="ad1"><img src="images/icons/notice_banner.svg"></div>');
-
-        /*一時的に非表示write_sakagura($db);*/
-
-        print('<div class="recommend_sake">');
-          print('<div><svg class="top_recommend3630"><use xlink:href="#recommend3630"/></svg>おすすめの日本酒</div>');
-
-          $sql = "SELECT SAKE_J.sake_id as sake_id, sake_name, sakagura_name, pref, filename FROM SAKE_J, SAKAGURA_J, SAKE_IMAGE WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKE_J.sake_id = SAKE_IMAGE.sake_id ORDER BY RANDOM() LIMIT 8";
-          $res = executequery($db, $sql);
-          write_sake_list($db, $res);
-
-        print("</div>");
-
       print("</div>");
 
     print('</div>');/*main_banner_container*/
@@ -1438,379 +1430,6 @@ $('#close_sakagura_review_button').click(function() {
 });
 
 ////////////////////////////////////////////////////////////////////////////
-$(function() {
-
-  $('.multiple-brewery-image').slick({
-    infinite: true,
-    centerMode: true,
-    centerPadding: '120px',
-    slidesToShow: 2,
-    swipeToSlide: true,
-
-    responsive: [{
-      breakpoint: 1260, settings: {
-        centerMode: true,
-        centerPadding: '100px',
-        slidesToShow: 3,}
-      },
-      {
-      breakpoint: 1200, settings: {
-        centerMode: true,
-        centerPadding: '70px',
-        slidesToShow: 3,}
-      },
-      {
-      breakpoint: 1140, settings: {
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 3,}
-      },
-      {
-      breakpoint: 1080, settings: {
-        centerMode: true,
-        centerPadding: '15px',
-        slidesToShow: 3,}
-      },
-      {
-      breakpoint: 1020, settings: {
-        centerMode: true,
-        centerPadding: '145px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 960, settings: {
-        centerMode: true,
-        centerPadding: '110px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 900, settings: {
-        centerMode: true,
-        centerPadding: '85px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 840, settings: {
-        centerMode: true,
-        centerPadding: '60px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 780, settings: {
-        centerMode: true,
-        centerPadding: '30px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 720, settings: {
-        centerMode: true,
-        centerPadding: '0px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 660, settings: {
-        centerMode: true,
-        centerPadding: '130px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 600, settings: {
-        centerMode: true,
-        centerPadding: '100px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 540, settings: {
-        centerMode: true,
-        centerPadding: '70px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 480, settings: {
-        centerMode: true,
-        centerPadding: '55px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 447, settings: {
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 415, settings: {
-        centerMode: true,
-        centerPadding: '34px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 401, settings: {
-        centerMode: true,
-        centerPadding: '24px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 376, settings: {
-        centerMode: true,
-        centerPadding: '18px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 370, settings: {
-        centerMode: false,
-        slidesToShow: 1,}
-      }
-    ]
-  });
-
-  $('.multiple-brewery, .multiple-restaurant, .multiple-store').slick({
-    centerMode: true,
-    centerPadding: '0px',
-    slidesToShow: 1,
-    swipeToSlide: true,
-
-    responsive: [{
-      breakpoint: 1260, settings: {
-        centerMode: true,
-        centerPadding: '100px',
-        slidesToShow: 3,}
-      },
-      {
-      breakpoint: 1200, settings: {
-        centerMode: true,
-        centerPadding: '70px',
-        slidesToShow: 3,}
-      },
-      {
-      breakpoint: 1140, settings: {
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 3,}
-      },
-      {
-      breakpoint: 1080, settings: {
-        centerMode: true,
-        centerPadding: '15px',
-        slidesToShow: 3,}
-      },
-      {
-      breakpoint: 1020, settings: {
-        centerMode: true,
-        centerPadding: '145px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 960, settings: {
-        centerMode: true,
-        centerPadding: '110px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 900, settings: {
-        centerMode: true,
-        centerPadding: '85px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 840, settings: {
-        centerMode: true,
-        centerPadding: '60px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 780, settings: {
-        centerMode: true,
-        centerPadding: '30px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 720, settings: {
-        centerMode: true,
-        centerPadding: '0px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 660, settings: {
-        centerMode: true,
-        centerPadding: '130px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 600, settings: {
-        centerMode: true,
-        centerPadding: '100px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 540, settings: {
-        centerMode: true,
-        centerPadding: '70px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 480, settings: {
-        centerMode: true,
-        centerPadding: '55px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 447, settings: {
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 415, settings: {
-        centerMode: true,
-        centerPadding: '34px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 401, settings: {
-        centerMode: true,
-        centerPadding: '24px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 376, settings: {
-        centerMode: true,
-        centerPadding: '18px',
-        slidesToShow: 1,}
-      },
-      {
-      breakpoint: 370, settings: {
-        centerMode: false,
-        slidesToShow: 1,}
-      }
-    ]
-  });
-
-  $('.multiple-sake').slick({
-    infinite: true,
-    centerMode: true,
-    centerPadding: '0px',
-    slidesToShow: 2,
-    swipeToSlide: true,
-
-    responsive: [{
-      breakpoint: 1260, settings: {
-        centerMode: true,
-        centerPadding: '100px',
-        slidesToShow: 6,}
-      },
-      {
-      breakpoint: 1200, settings: {
-        centerMode: true,
-        centerPadding: '70px',
-        slidesToShow: 6,}
-      },
-      {
-      breakpoint: 1140, settings: {
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 6,}
-      },
-      {
-      breakpoint: 1080, settings: {
-        centerMode: true,
-        centerPadding: '15px',
-        slidesToShow: 6,}
-      },
-      {
-      breakpoint: 1020, settings: {
-        centerMode: true,
-        centerPadding: '145px',
-        slidesToShow: 4,}
-      },
-      {
-      breakpoint: 960, settings: {
-        centerMode: true,
-        centerPadding: '110px',
-        slidesToShow: 4,}
-      },
-      {
-      breakpoint: 900, settings: {
-        centerMode: true,
-        centerPadding: '85px',
-        slidesToShow: 4,}
-      },
-      {
-      breakpoint: 840, settings: {
-        centerMode: true,
-        centerPadding: '60px',
-        slidesToShow: 4,}
-      },
-      {
-      breakpoint: 780, settings: {
-        centerMode: true,
-        centerPadding: '30px',
-        slidesToShow: 4,}
-      },
-      {
-      breakpoint: 720, settings: {
-        centerMode: true,
-        centerPadding: '0px',
-        slidesToShow: 4,}
-      },
-      {
-      breakpoint: 660, settings: {
-        centerMode: true,
-        centerPadding: '130px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 600, settings: {
-        centerMode: true,
-        centerPadding: '100px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 540, settings: {
-        centerMode: true,
-        centerPadding: '70px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 480, settings: {
-        centerMode: true,
-        centerPadding: '55px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 447, settings: {
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 415, settings: {
-        centerMode: true,
-        centerPadding: '34px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 401, settings: {
-        centerMode: true,
-        centerPadding: '24px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 376, settings: {
-        centerMode: true,
-        centerPadding: '18px',
-        slidesToShow: 2,}
-      },
-      {
-      breakpoint: 370, settings: {
-        centerMode: false,
-        slidesToShow: 2,}
-      }
-    ]
-  });
-
-});
-
-//hirasawa追加ここまで//////////////////////////////////////////////////////////////////////////
 
 function AutoLink(str) {
     var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
@@ -1851,7 +1470,7 @@ $(function() {
 
 		var innerHTML = '<div class="sakagura_photo">' +
 				'<img src="' + path + '">' +
-				'<button class="navigate_button" filename ="' + responseArray[0] + '" class="navigate_button">削除</button>' +
+				'<button class="navigate_button" filename ="' + responseArray[0] + '">削除</button>' +
 				'<span>' + responseArray[0] + '</span></div></div>';
 
 		$element = $('#addimage_container').prepend(innerHTML);
@@ -2379,14 +1998,14 @@ $(function() {
 				$('#disp_sake').text((in_disp_from + 1) + "～" + limit + "件 / 全" + $("#hidden_sake_count_query").val() + "件");
 
 				if(in_disp_from >= disp_max)
-					$('#prev_sake').css({"color":"#0740A5"});
+					$('#prev_sake').css({"background":"#22445B", "cursor":"pointer"});
 				else
-					$('#prev_sake').css({"color":"#b2b2b2"});
+					$('#prev_sake').css({"background":"#b2b2b2", "cursor":"default"});
 
 				if((in_disp_from + disp_max) > parseInt($("#hidden_sake_count_query").val()))
-					$('#next_sake').css({"color":"#b2b2b2"});
+					$('#next_sake').css({"background":"#b2b2b2", "cursor":"default"});
 				else
-					$('#next_sake').css({"color":"#0740A5"});
+					$('#next_sake').css({"background":"#22445B", "cursor":"pointer"});
 
 				//////////////////////////////////////////////////////////////////////////////////////////////////////
 				//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2408,7 +2027,8 @@ $(function() {
 
 		if(in_disp_from < $("#hidden_sake_count_query").val())
 		{
-			var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.write_update" + "&desc=DESC";
+			//var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.write_update" + "&desc=DESC";
+			var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.sake_read" + "&desc=ASC";
 			searchSake(in_disp_from, disp_max, data, false);
 		}
 	});
@@ -2421,7 +2041,7 @@ $(function() {
 
 		if(in_disp_from >= 0)
 		{
-			var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.write_update" + "&desc=DESC";
+			var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.sake_read" + "&desc=ASC";
 			searchSake(in_disp_from, disp_max, data, false);
 		}
 	});
@@ -2433,7 +2053,7 @@ $(function() {
 		var in_disp_from = (position - 1) * disp_max;
 		var in_disp_to = in_disp_from + disp_max;
 		var my_url = "?" + data;
-		var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.write_update" + "&desc=DESC";
+		var data = "category=2" + "&sakagura_id="+sakagura_id+"&from="+in_disp_from+"&to="+in_disp_to + "&orderby=SAKE_J.sake_read" + "&desc=ASC";
 		searchSake(in_disp_from, disp_max, data, false);
 	});
 
