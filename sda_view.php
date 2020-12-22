@@ -762,7 +762,7 @@ print('<div id="container"
               print('<div class="search_result_turn_page">');
 
 					if($count_result > 25) {
-						print('<button id="prev_sake"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
+						print('<button id="prev_sakagura_sake"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 						$i = 1;
 
 						print('<button class="pageitems" style="background:#22445B; color:#ffffff">' .$i .'</button>');
@@ -772,7 +772,7 @@ print('<div id="container"
 						    print('<button class="pageitems">' .$i .'</button>');
 						}
 
-						print('<button id="next_sake"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
+						print('<button id="next_sakagura_sake"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 					}
 
 			  print("</div>");
@@ -1998,14 +1998,14 @@ $(function() {
 				$('#disp_sake').text((in_disp_from + 1) + "～" + limit + "件 / 全" + $("#hidden_sake_count_query").val() + "件");
 
 				if(in_disp_from >= disp_max)
-					$('#prev_sake').css({"background":"#22445B", "cursor":"pointer"});
+					$('#prev_sakagura_sake').css({"background":"#22445B", "cursor":"pointer"});
 				else
-					$('#prev_sake').css({"background":"#b2b2b2", "cursor":"default"});
+					$('#prev_sakagura_sake').css({"background":"#b2b2b2", "cursor":"default"});
 
 				if((in_disp_from + disp_max) > parseInt($("#hidden_sake_count_query").val()))
-					$('#next_sake').css({"background":"#b2b2b2", "cursor":"default"});
+					$('#next_sakagura_sake').css({"background":"#b2b2b2", "cursor":"default"});
 				else
-					$('#next_sake').css({"background":"#22445B", "cursor":"pointer"});
+					$('#next_sakagura_sake').css({"background":"#22445B", "cursor":"pointer"});
 
 				//////////////////////////////////////////////////////////////////////////////////////////////////////
 				//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2019,7 +2019,7 @@ $(function() {
 			});
     }
 
-	$(document).on('click', '#next_sake', function(e){
+	$(document).on('click', '#next_sakagura_sake', function(e){
 
 		var sakagura_id = <?php echo json_encode($id); ?>;
 		var in_disp_from = parseInt($("#in_disp_from").val()) + disp_max;
@@ -2033,7 +2033,7 @@ $(function() {
 		}
 	});
 
-	$(document).on('click', '#prev_sake', function(e){
+	$(document).on('click', '#prev_sakagura_sake', function(e){
 
 		var sakagura_id = <?php echo json_encode($id); ?>;
 		var in_disp_from = parseInt($("#in_disp_from").val()) - disp_max;
