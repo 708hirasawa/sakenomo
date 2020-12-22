@@ -621,7 +621,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								print('<div id="sakagura_result_turn_page">');
 									if($count_result > 25) {
-										print('<button id="prev_sakagura" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
+										print('<button id="prev_mypage_sakagura" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 										$i = 1;
 
 										print('<button class="search_button pageitems selected">' .$i .'</button>');
@@ -1275,16 +1275,16 @@ $(function() {
 								$("#count_sake").val(count_result);
 
 								if(count_result > 25) {
-									innerText = '<button id="prev_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
+									innerText = '<button id="prev_mypage_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
 									innerText += '<button class="pageitems selected">' + i + '</button>';
 
 									for(i++; i <= numPage; i++)
 										 innerText += '<button class="pageitems">' + i + '</button>';
 
 									if(count_result > p_max)
-										 innerText += '<button id="next_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
+										 innerText += '<button id="next_mypage_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 									else
-										 innerText += '<button id="next_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
+										 innerText += '<button id="next_mypage_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 
 									$('#review_result_turn_page').empty();
 									$('#review_result_turn_page').append(innerText);
@@ -1333,14 +1333,14 @@ $(function() {
 							///////////////////////////////////////////////////////////////////////////////////////////////////
 
 							if(in_disp_from >= disp_max)
-								$('#prev_review').addClass('active');
+								$('#prev_mypage_review').addClass('active');
 							else
-								$('#prev_review').removeClass('active');
+								$('#prev_mypage_review').removeClass('active');
 
 							if((in_disp_from + disp_max) > $("#count_sake").val())
-								$('#next_review').removeClass('active');
+								$('#next_mypage_review').removeClass('active');
 							else
-								$('#next_review').addClass('active');
+								$('#next_mypage_review').addClass('active');
 
 							var limit = ((in_disp_from + disp_max) >= $("#count_sake").val()) ? $("#count_sake").val() : (in_disp_from + disp_max);
 
@@ -1403,7 +1403,7 @@ $(function() {
 		});
 
 		/* 次の飲んだ */
-		$(document).on('click', '.nonda_set #next_review', function() {
+		$(document).on('click', '.nonda_set #next_mypage_review', function() {
 
 				var search_type = 1;
 				var category = 1;
@@ -1437,7 +1437,7 @@ $(function() {
 		});
 
 		/* 前の飲んだ */
-		$(document).on('click', '.nonda_set #prev_review', function() {
+		$(document).on('click', '.nonda_set #prev_mypage_review', function() {
 
 				var search_type = 1;
 				var category = 1;
@@ -1453,7 +1453,7 @@ $(function() {
 
 				if(in_disp_from < 0)
 				{
-					$('#prev_review').removeClass('active');
+					$('#prev_mypage_review').removeClass('active');
 					return false;
 				}
 
@@ -1806,7 +1806,7 @@ $(function() {
 							$("#count_sake").val(count_result);
 
 							if(count_result > p_max) {
-								innerText = '<button id="prev_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
+								innerText = '<button id="prev_mypage_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
 								innerText += '<button class="pageitems selected">' + i + '</button>';
 
 								for(i++; i <= numPage; i++) {
@@ -1814,9 +1814,9 @@ $(function() {
 								}
 
 								if(numPage > 1)
-									innerText += '<button id="next_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
+									innerText += '<button id="next_mypage_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 								else
-									innerText += '<button id="next_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
+									innerText += '<button id="next_mypage_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 
 								$('#review_result_turn_page').empty();
 								$('#review_result_turn_page').append(innerText);
@@ -1868,14 +1868,14 @@ $(function() {
 						$('#review_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
 
 						if(in_disp_from >= p_max)
-							$('#prev_review').addClass('active');
+							$('#prev_mypage_review').addClass('active');
 						else
-							$('#prev_review').removeClass('active');
+							$('#prev_mypage_review').removeClass('active');
 
 						if((in_disp_from + p_max) > $("#count_sake").val())
-							$('#next_review').removeClass('active');
+							$('#next_mypage_review').removeClass('active');
 						else
-							$('#next_review').addClass('active');
+							$('#next_mypage_review').addClass('active');
 
 						$('html, body').animate({scrollTop:0}, '100');
 					}
@@ -1888,7 +1888,7 @@ $(function() {
 	    }
 
 		/* 次の飲みたい */
-		$(document).on('click', '.nomitai_set #next_review', function() {
+		$(document).on('click', '.nomitai_set #next_mypage_review', function() {
 
 				var search_type = 1;
 				var category = 2;
@@ -1931,7 +1931,7 @@ $(function() {
 		});
 
 		/* 前の飲みたい */
-		$(document).on('click', '.nomitai_set #prev_review', function() {
+		$(document).on('click', '.nomitai_set #prev_mypage_review', function() {
 
 				var search_type = 1;
 				var category = 2;
@@ -2330,9 +2330,9 @@ $(function() {
 							$('html, body').animate({scrollTop:0}, '100');
 
 							if(parseInt($('#in_sakagura_disp_from').val()) >= 25)
-								$('#prev_sakagura').addClass('active');
+								$('#prev_mypage_sakagura').addClass('active');
 							else
-								$('#prev_sakagura').removeClass('active');
+								$('#prev_mypage_sakagura').removeClass('active');
 
 							if((parseInt($('#in_sakagura_disp_from').val()) + 25) < parseInt($("#count_sakagura").val()))
 								$('#next_sakagura').addClass('active');
@@ -2513,7 +2513,7 @@ $(function() {
 				searchSakagura(data, in_disp_from, in_disp_to);
 		});
 
-		$(document).on('click', '#prev_sakagura', function() {
+		$(document).on('click', '#prev_mypage_sakagura', function() {
 
 				var search_type = 2;
 				var disp_max = 25;
@@ -2723,7 +2723,7 @@ $(function() {
 							$("#count_user").val(count_result);
 
 							if(count_result > p_max) {
-								innerText = '<button id="prev_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
+								innerText = '<button id="prev_mypage_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
 								innerText += '<button class="pageitems selected">' + i + '</button>';
 
 								for(i++; i <= numPage; i++) {
@@ -2731,9 +2731,9 @@ $(function() {
 								}
 
 								if(numPage > 1)
-									innerText += '<button id="next_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
+									innerText += '<button id="next_mypage_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 								else
-									innerText += '<button id="next_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
+									innerText += '<button id="next_mypage_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 
 								$('#userfollowpage').empty();
 								$('#userfollowpage').append(innerText);
