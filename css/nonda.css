@@ -20,23 +20,8 @@
     -ms-transform: rotate(180deg);
 }
 
-#file2 {
-    display:none;
-}
-
-#nonda_sake_ok {
-    margin-top:4px;
-    height:24px;
-}
-
-#nonda_sake_cancel {
-    margin-top:4px;
-    height:24px;
-}
-
 #dialog_bbs {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -50,8 +35,6 @@
 
 .dialog_bbs_title_close_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background: #3f3f3f;
@@ -106,7 +89,6 @@
 /*tab_bbs*******************/
 #tab_bbs_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -118,8 +100,6 @@
 
 .nondaTabs {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -128,8 +108,6 @@
 
 .nondaTabs_click {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   overflow: hidden;
@@ -140,8 +118,6 @@
 
 .nondaTabs_click a {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
@@ -172,8 +148,6 @@
 
 .nondaTabs_click a span {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: auto;
@@ -207,7 +181,6 @@
 
 .star_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -217,8 +190,6 @@
 
 .star_rate {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -226,8 +197,6 @@
 
 .satisfaction_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #e6e6e6;
@@ -238,16 +207,12 @@
 
 .rating-box {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
 .rating-input {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: none;
@@ -264,8 +229,6 @@
 
 .star_delete, .review_article_delete, .nonda_tastingnote_delete {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -274,8 +237,6 @@
 
 .star_delete_button, .review_article_delete_button, .nonda_tastingnote_delete_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
@@ -294,7 +255,6 @@
 
 .review_article_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -309,8 +269,6 @@
 
 #custom_dialog_input_argument {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   background: #e6e6e6;
@@ -359,7 +317,6 @@
 #nonda_image_post {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
 }
@@ -415,8 +372,6 @@
 #dialog_bbs .nonda_status_total_container {
   position: absolute;
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 98%;
@@ -440,7 +395,6 @@
 input[name="nonda_image_caption"] {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   background: #f5f5f5;
@@ -454,7 +408,7 @@ input[name="nonda_image_caption"] {
   display: none;
 }
 
-.change_pic {
+.nonda_image_post_button_container .change_pic {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -473,7 +427,6 @@ input[name="nonda_image_caption"] {
 /*tabs-3*******************/
 #nonda_tastingnote_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -484,28 +437,9 @@ input[name="nonda_image_caption"] {
   margin: 16px 0;
 }
 
-.graph {
-	/*display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	width: 100%;
-	height: auto;*/
-	/*border: 1px solid #0000ff;*/
-	/*overflow:hidden;
-	text-align:left;
-	width:99%;
-	margin-top:2px;
-	padding:1px;
-	border: 1px solid #c6c6c6;
-	background-color: #fff;*/
-}
-
 /*flavor_box*******************/
 .flavor_box_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -516,8 +450,6 @@ input[name="nonda_image_caption"] {
 
 .flavor_box {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -527,8 +459,6 @@ input[name="nonda_image_caption"] {
 
 .nonda_tastingitem_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 80px;
@@ -538,8 +468,6 @@ input[name="nonda_image_caption"] {
 
 .nonda_tastingitem_icon {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 30px;
@@ -566,8 +494,6 @@ input[name="nonda_image_caption"] {
 
 .nonda_flavor_list {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
@@ -575,7 +501,6 @@ input[name="nonda_image_caption"] {
 .nonda_flavor_list div {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -599,8 +524,6 @@ input[name="nonda_image_caption"] {
   visibility: visible;
   position: absolute;
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #b2b2b2;
@@ -612,24 +535,10 @@ input[name="nonda_image_caption"] {
   border-radius: 4px;
 }
 
-.nonda_flavor_list div p {
-  visibility: hidden;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.5);
-  width: 40px;
-  height: 40px;
-  z-index: 999;
-}
-
 .nonda_flavor_list svg {
   visibility: visible;
   position: absolute;
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 40px;
@@ -638,19 +547,22 @@ input[name="nonda_image_caption"] {
 
 .nonda_flavor_list_note {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-left: 8px;
   height: 40px;
 }
 
+.nonda_flavor_list_note span {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0 4px;
+}
+
 /*flavor_category*******************/
 .nonda_flavor_category {
   overflow: hidden;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -663,9 +575,7 @@ input[name="nonda_image_caption"] {
 
 #nonda_flavor_type_name {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 40px;
@@ -674,48 +584,93 @@ input[name="nonda_image_caption"] {
   cursor: pointer;
 }
 
-.nonda_flavor_type_title {
+.nonda_flavor_type_sign {
   position: relative;
-  font-weight: bold;
-  padding-left: 24px;
+  background: #1E465A;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
 }
 
-.nonda_flavor_type_title:before {
+.nonda_flavor_type_sign:before {
   content:"\00a0";
-  display: block;
-  border: solid 9px #1E465A;
-  border-radius: 9px;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  height: 0;
-  width: 0;
-  position: absolute;
-  left: 0;
-  top: 46%;
-  margin-top: -8px;
-}
-
-.nonda_flavor_type_title:after {
-  content:"\00a0";
+  position:absolute;
+  top: 9px;
+  left: 8px;
   display:block;
   width: 4px;
   height: 4px;
   border: solid #ffffff;
   border-width: 0 2px 2px 0;
-  position:absolute;
-  left: 5px;
-  top: 46%;
-  margin-top: -2px;
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
 
+.nonda_flavor_type_title {
+  font-weight: bold;
+  padding-left: 24px;
+}
+
+#nonda_flavor_type_name .plus_minus_icon, #nonda_flavor_type_name .plus_minus_icon span {
+  display: inline-block;
+  transition: all .3s;
+  box-sizing: border-box;
+}
+
+#nonda_flavor_type_name .plus_minus_icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  margin-left: auto;
+}
+
+#nonda_flavor_type_name .plus_minus_icon span {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #d2d2d2;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+#nonda_flavor_type_name .plus_minus_icon span:nth-of-type(1) {
+  top: 5px;
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+}
+
+#nonda_flavor_type_name .plus_minus_icon span:nth-of-type(2) {
+  top: 5px;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
+
+#nonda_flavor_type_name .plus_minus_icon.active span:nth-of-type(1) {
+	display: none;
+}
+
+#nonda_flavor_type_name .plus_minus_icon.active span:nth-of-type(2) {
+  top: 5px;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+
 .nonda_flavor_item_container {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -729,7 +684,6 @@ input[name="nonda_image_caption"] {
 .nonda_flavor_item_container label {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   float: left;
@@ -744,8 +698,6 @@ input[name="nonda_image_caption"] {
 /*frame_box*******************/
 .frame_box {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -755,7 +707,6 @@ input[name="nonda_image_caption"] {
 
 .frame_bar_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -765,8 +716,6 @@ input[name="nonda_image_caption"] {
 
 .input_range_container{
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -807,8 +756,6 @@ input[name="nonda_image_caption"] {
 
 .horizontal_bar_caption {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   color: #8c8c8c;
@@ -819,8 +766,6 @@ input[name="nonda_image_caption"] {
 
 .tasting_score {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   color: #666666;
@@ -833,8 +778,6 @@ input[name="nonda_image_caption"] {
 /*tab_bbs_button*******************/
 .tab_bbs_button_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -876,4 +819,12 @@ input[name="nonda_image_caption"] {
   border: 1px solid #b2b2b2;
 }
 
-/********************/
+@media only screen and (min-width: 560px) {
+  #dialog_bbs {
+    width: 86%;
+    max-width: 480px;
+    height: auto;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}

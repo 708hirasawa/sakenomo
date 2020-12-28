@@ -2,7 +2,7 @@ $(function() {
 
     $('.hamburger').click(function () {
 
-
+        
         if($('.hamburger').hasClass('is-open'))
         {
             $('.overlay').hide();
@@ -60,9 +60,9 @@ $(function() {
         alert("ログアウトしました");
         window.open('sake_search.php', '_self');
     });
-
+    
     $('#side_mypage').click(function() {
-         var username = getCookie('login_cookie');
+         var username = getCookie('login_cookie'); 
          window.open("user_view.php?username=" + username, '_self');
     });
 

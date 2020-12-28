@@ -1,8 +1,19 @@
 $(function() {
 
+	/*//ジャンルチェックボックス選択制限
+	$('.column2_checkradio input[name="inshokuten_main_genre[]"]').click(function() {
+		var checked_length = $('.column2_checkradio input[name="inshokuten_main_genre[]"]:checked').length;
+		// 選択上限は3つまで
+		if (checked_length >= 3) {
+			$('.column2_checkradio input[name="inshokuten_main_genre[]"]:not(:checked)').attr('disabled', 'disabled');
+		} else {
+			$('.column2_checkradio input[name="inshokuten_main_genre[]"]:not(:checked)').removeAttr('disabled');
+		}
+	});*/
+
 	//日本酒メニューラジオボタン選択解除
 	var nowchecked = $('.column2_checkradio input[name="inshokuten_sake_count"]:checked').val();
-	$('.column2_checkradio input[name="inshokuten_sake_count"]').click(function() {
+	$('.column2_checkradio input[name="inshokuten_sake_count"]').click(function(){
 		if($(this).val() == nowchecked) {
 			$(this).prop('checked', false);
 			nowchecked = false;
@@ -14,7 +25,7 @@ $(function() {
 
 	//予約ラジオボタン選択解除
 	var nowchecked = $('.column2_checkradio input[name="inshokuten_reservation"]:checked').val();
-	$('.column2_checkradio input[name="inshokuten_reservation"]').click(function() {
+	$('.column2_checkradio input[name="inshokuten_reservation"]').click(function(){
 		if($(this).val() == nowchecked) {
 			$(this).prop('checked', false);
 			nowchecked = false;
@@ -26,7 +37,7 @@ $(function() {
 
 	//駐車場ラジオボタン選択解除
 	var nowchecked = $('.column2_checkradio input[name="inshokuten_parking"]:checked').val();
-	$('.column2_checkradio input[name="inshokuten_parking"]').click(function() {
+	$('.column2_checkradio input[name="inshokuten_parking"]').click(function(){
 		if($(this).val() == nowchecked) {
 			$(this).prop('checked', false);
 			nowchecked = false;
@@ -109,6 +120,17 @@ $(function() {
 			$('.dialog_inshokuten_remarks').text($('textarea[name="inshokuten_remarks"]').val());
 		}
 
+
+
+
+
+
+
+
+
+
+
+
 		//飲食店編集ページ確認モーダルウィンドウ表示
 		var touch_start_y;
 		// タッチしたとき開始位置を保存しておく
@@ -124,8 +146,8 @@ $(function() {
 
 			// スクロール対応モーダルの上端または下端のとき
 			if (is_top || is_bottom) {
-				// スクロール禁止
-				event.preventDefault();
+			// スクロール禁止
+			event.preventDefault();
 			}
 		});
 
@@ -146,116 +168,133 @@ $(function() {
 
 
 
-	$('#edit_inshokuten_close').click(function() {
-		$("body").trigger( "edit_inshokuten_close", [ this ] );
+
+
+
+
+
+
+	$('#edit_sakagura_close').click(function() {
+
+        $("body").trigger( "edit_sakagura_close", [ this ] );
 	});
 
-	$('#edit_inshokuten_delete').click(function() {
-		var data = "inshokuten_id=" + $('.inshokuten_container').data('inshokuten_id');
+	$('#edit_sakagura_delete').click(function() {
 
-		$.ajax({
-			type: "POST",
-			url: "inshokuten_delete.php",
-			data: data,
-		}).done(function(xml) {
-			var str = $(xml).find("str").text();
+        var data = "sakagura_id=" + $('#sakagura_container').data('sakagura_id');
 
-			if(str != "success")
-			{
-				var str = $(xml).find("sql").text();
-				alert("success:" + str);
-			}
+	    $.ajax({
+		    type: "POST",
+		    url: "sakagura_delete.php",
+		    data: data,
+        }).done(function(xml){
+            var str = $(xml).find("str").text();
 
-		}).fail(function(data) {
-			alert("Failed:" + data);
-		}).complete(function(data) {
-			; //removeLoading();
+            if(str != "success")
+            {
+                var str = $(xml).find("sql").text();
+		        alert("success:" + str);
+            }
+
+	    }).fail(function(data){
+		    alert("Failed:" + data);
+	    }).complete(function(data){
+            ; //removeLoading();
 		});
-	});
+    });
 
-	$("body").on( "open_edit_inshokuten", function( event, inshokuten_id, inshokuten_name) {
+    $("body").on( "open_edit_sakagura", function( event, sakagura_id, sakagura_name) {
 
-		var data = "search_category=6&in_disp_from=0&inshokuten_id=" + inshokuten_id;
-		//alert("open_edit_sakagura:" + sakagura_name);
+        var data = "category=3&in_disp_from=0&sakagura_id=" + sakagura_id;
+        //alert("open_edit_sakagura:" + sakagura_name);
 
-		$('.inshokuten_container').data('inshokuten_id', inshokuten_id);
+        $('.sakagura_container').data('sakagura_id', sakagura_id);
 
-		//alert("open_edit_sake:data:" + data);
-		//dispLoading("処理中...");
+        //alert("open_edit_sake:data:" + data);
+        //dispLoading("処理中...");
 
-		$.ajax({
-			type: "POST",
-			url: "complex_search.php",
-			data: data,
-			dataType: 'json',
-		}).done(function(data) {
+	    $.ajax({
+		    type: "POST",
+		    url: "complex_search.php",
+		    data: data,
+		    dataType: 'json',
 
-			//alert("success");
-			var inshokuten = data[0].result;
-			//alert("sakagura_english:" + sakagura[0].sakagura_english);
-			//alert("establishment:" + $('input[name="establishment"]').val());
+	    }).done(function(data){
 
-			$('input[name="inshokuten_name"]').val(inshokuten_name);
-			$('input[name="inshokuten_read"]').val(inshokuten[0].inshokuten_read);
-			$('input[name="inshokuten_english"]').val(inshokuten[0].inshokuten_english);
-			$('input[name="inshokuten_postal_code"]').val(inshokuten[0].inshokuten_postal_code);
+            //alert("success");
+		    var sakagura = data[0].result;
+            //alert("sakagura_english:" + sakagura[0].sakagura_english);
+            //alert("establishment:" + $('input[name="establishment"]').val());
 
+            $('input[name="sakagura_name"]').val(sakagura_name);
+            $('input[name="sakagura_read"]').val(sakagura[0].sakagura_read);
+            $('input[name="sakagura_english"]').val(sakagura[0].sakagura_english);
+            $('input[name="pref"]').val(sakagura[0].pref);
+            $('input[name="postal_code"]').val(sakagura[0].postal_code);
+            $('input[name="address"]').val(sakagura[0].address);
+            $('input[name="phone"]').val(sakagura[0].phone);
+            $('input[name="representative"]').val(sakagura[0].representative);
+            $('input[name="touji"]').val(sakagura[0].touji);
+            $('input[name="email"]').val(sakagura[0].email);
+            $('input[name="observation"]').val(sakagura[0].observation);
+            $('input[name="direct_sale"]').val(sakagura[0].direct_sale);
+            $('input[name="brand"]').val(sakagura[0].brand);
 
+            $('select[name="pref"] option').each(function(){
 
-
-			/*$('input[name="pref"]').val(sakagura[0].pref);
-			$('input[name="address"]').val(sakagura[0].address);
-			$('input[name="phone"]').val(sakagura[0].phone);
-			$('input[name="representative"]').val(sakagura[0].representative);
-			$('input[name="touji"]').val(sakagura[0].touji);
-			$('input[name="email"]').val(sakagura[0].email);
-			$('input[name="observation"]').val(sakagura[0].observation);
-			$('input[name="direct_sale"]').val(sakagura[0].direct_sale);
-			$('input[name="brand"]').val(sakagura[0].brand);
-
-			$('select[name="pref"] option').each(function(){
-				if(this.value == sakagura[0].pref) {
-					$('select[name="pref"]').val(sakagura[0].pref);
-					return false;
+                if(this.value == sakagura[0].pref)
+				{
+					 $('select[name="pref"]').val(sakagura[0].pref);
+					 return false;
 				}
 			});
 
-			$('select[name="establishment"] option').each(function() {
-				if(this.value == sakagura[0].establishment) {
-					$('select[name="establishment"]').val(sakagura[0].establishment);
-					return false;
+            $('select[name="establishment"] option').each(function(){
+
+                if(this.value == sakagura[0].establishment)
+				{
+					 $('select[name="establishment"]').val(sakagura[0].establishment);
+					 return false;
 				}
 			});
 
-			$('select[name="observation"] option').each(function() {
-				if(this.value == sakagura[0].observation) {
-					$('select[name="observation"]').val(sakagura[0].observation);
-					return false;
+            $('select[name="observation"] option').each(function(){
+
+                if(this.value == sakagura[0].observation)
+				{
+					 $('select[name="observation"]').val(sakagura[0].observation);
+					 return false;
 				}
 			});
 
-			$('select[name="direct_sale"] option').each(function() {
-				if(this.value == sakagura[0].direct_sale) {
-					$('select[name="direct_sale"]').val(sakagura[0].direct_sale);
-					return false;
+            $('select[name="direct_sale"] option').each(function(){
+
+                if(this.value == sakagura[0].direct_sale)
+				{
+					 $('select[name="direct_sale"]').val(sakagura[0].direct_sale);
+					 return false;
 				}
 			});
 
-			$('input[name="url"]').val(sakagura[0].url);
-			if(sakagura[0].url && sakagura[0].url != "") {
-				var url_array = sakagura[0].url.split(',');
-				var i = 0;
-				$('input[name="url[]"]').each(function() {
-					if(i < url_array.length) {
-						$(this).val(url_array[i]);
-					}
-					i++
-				});
-			}*/
-		}).fail(function(data){
-			alert("Failed:" + data);
-		}).complete(function(data){
-			; //removeLoading();
+            $('input[name="url"]').val(sakagura[0].url);
+
+            if(sakagura[0].url && sakagura[0].url != "") {
+                var url_array = sakagura[0].url.split(',');
+                var i = 0;
+
+		        $('input[name="url[]"]').each(function(){
+                    if(i < url_array.length) {
+                        $(this).val(url_array[i]);
+                    }
+
+                    i++
+		        });
+            }
+
+	    }).fail(function(data){
+		    alert("Failed:" + data);
+	    }).complete(function(data){
+            ; //removeLoading();
 		});
-	});
+ 	});
 });

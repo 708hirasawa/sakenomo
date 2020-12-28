@@ -355,7 +355,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  margin-top: 10px;
+  margin: 10px 0px;
 }
 
 .sort_search2020 {
@@ -486,7 +486,7 @@ body {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 10px;
+  margin: 10px 0px;
   cursor: pointer;
 }
 
@@ -648,7 +648,7 @@ body {
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: baseline;
+  align-items: center;
   width: 100%;
   height: auto;
   margin-top: 8px;
