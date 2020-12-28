@@ -402,9 +402,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 								print('<li><a href="#tab_sakagura"><span><svg class="simpleTabs_brewery3630"><use xlink:href="#brewery3630"/></svg><span>酒蔵</span></span></a></li>');
 								print('<li><a href="#tab_users"><span><svg class="simpleTabs_reviewers3030"><use xlink:href="#reviewers3030"/></svg><span>レビュアー</span></span></a></li>');
 								/*print('<li><a href="#tab_syuhanten"><span><svg class="simpleTabs_store3030"><use xlink:href="#store3030"/></svg><span>酒販店</span></span></a></li>');
-								print('<li><a href="#tab_inshokuten"><span><svg class="simpleTabs_restaurant3630"><use xlink:href="#restaurant3630"/></svg><span>飲食店</span></span></a></li>');
-								print('<li><a href="#tab_users"><span><svg class="simpleTabs_reviewers3030"><use xlink:href="#reviewers3030"/></svg><span>レビュアー</span></span></a></li>');
-								print('<li><a href="#tab_setting"><span><img src="images/icons/mypage.svg"><span>設定</span></span></a></li>');*/
+								print('<li><a href="#tab_inshokuten"><span><svg class="simpleTabs_restaurant3630"><use xlink:href="#restaurant3630"/></svg><span>飲食店</span></span></a></li>');*/
 							print("</ul>");
 
 							//日本酒タブ//////////////////////////////////////////////////////////
@@ -502,7 +500,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 									print("</div>");
 								print("</div>");
 
-								print('<div class="review_count_container">');
+								print('<div class="result_count_container">');
 									print('<span id="disp_sake"></span>');
 								print('</div>');
 
@@ -612,7 +610,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 										print('<div class="navigate_page_no_registry">お気に入り登録されていません</div>');
 									print('</div>');
 								} else {
-									print('<div class="search_result_count">');
+									print('<div class="result_count_container">');
 										$p_max = ($count_result < 25) ? $count_result : 25;
 										print('<span id="count_result">1～' .$p_max .'件 / 全' .$count_result .'件</span>');
 									print('</div>');
@@ -621,9 +619,9 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 									print('</div>');
 								}
 
-								print('<div id="sakagurapage">');
+								print('<div id="sakagura_result_turn_page">');
 									if($count_result > 25) {
-										print('<button id="prev_sakagura" class="search_button">前の'.$p_max .'件</button>');
+										print('<button id="prev_mypage_sakagura" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 										$i = 1;
 
 										print('<button class="search_button pageitems selected">' .$i .'</button>');
@@ -632,7 +630,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 											 print('<button class="search_button pageitems">' .$i .'</button>');
 										}
 
-										print('<button id="next_sakagura" class="search_button active">次の' .$p_max .'件</button>');
+										print('<button id="next_sakagura" class="search_button active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 									}
 								print("</div>");
 							print("</div>");
@@ -684,7 +682,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								print("</div>");
 
-								print('<div class="search_result_count">');
+								print('<div class="result_count_container">');
 									$p_max = ($count_result < 25) ? $count_result : 25;
 									print('<span>1～' .$p_max .'件 / 全' .$count_result .'件</span>');
 								print('</div>');
@@ -997,14 +995,15 @@ $(function() {
 							var innerText = '<div class="navigate_page_no_registry">飲んだ登録されていません</div>';
 							$('#disp_sake').css({"display":"none"});
 							$("#sake_sort").css({"display":"none"});
-							$("#tab_sake .review_count_container").css({"display":"none"});
+							$("#tab_sake .result_count_container").css({"display":"none"});
 							$('#sake_table').html(innerText);
-							$('#review_result_turn_page').empty();
+							$('#review_result_turn_page').css({"display": "none"});
 							removeLoading();
 						}
 						else {
 							$("#sake_sort").css({"display":"flex"});
 							$('#disp_sake').css({"display":"block"});
+							$("#tab_sake .result_count_container").css({"display":"flex"});
 
 							for(i = 0; i < sake.length; i++)
 							{
@@ -1276,16 +1275,16 @@ $(function() {
 								$("#count_sake").val(count_result);
 
 								if(count_result > 25) {
-									innerText = '<button id="prev_review">前の' + p_max + '件</button>';
+									innerText = '<button id="prev_mypage_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
 									innerText += '<button class="pageitems selected">' + i + '</button>';
 
 									for(i++; i <= numPage; i++)
 										 innerText += '<button class="pageitems">' + i + '</button>';
 
 									if(count_result > p_max)
-										 innerText += '<button id="next_review" class="active">次の' + p_max + '件</button>';
+										 innerText += '<button id="next_mypage_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 									else
-										 innerText += '<button id="next_review">次の' + p_max + '件</button>';
+										 innerText += '<button id="next_mypage_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 
 									$('#review_result_turn_page').empty();
 									$('#review_result_turn_page').append(innerText);
@@ -1334,14 +1333,14 @@ $(function() {
 							///////////////////////////////////////////////////////////////////////////////////////////////////
 
 							if(in_disp_from >= disp_max)
-								$('#prev_review').addClass('active');
+								$('#prev_mypage_review').addClass('active');
 							else
-								$('#prev_review').removeClass('active');
+								$('#prev_mypage_review').removeClass('active');
 
 							if((in_disp_from + disp_max) > $("#count_sake").val())
-								$('#next_review').removeClass('active');
+								$('#next_mypage_review').removeClass('active');
 							else
-								$('#next_review').addClass('active');
+								$('#next_mypage_review').addClass('active');
 
 							var limit = ((in_disp_from + disp_max) >= $("#count_sake").val()) ? $("#count_sake").val() : (in_disp_from + disp_max);
 
@@ -1404,7 +1403,7 @@ $(function() {
 		});
 
 		/* 次の飲んだ */
-		$(document).on('click', '.nonda_set #next_review', function() {
+		$(document).on('click', '.nonda_set #next_mypage_review', function() {
 
 				var search_type = 1;
 				var category = 1;
@@ -1438,7 +1437,7 @@ $(function() {
 		});
 
 		/* 前の飲んだ */
-		$(document).on('click', '.nonda_set #prev_review', function() {
+		$(document).on('click', '.nonda_set #prev_mypage_review', function() {
 
 				var search_type = 1;
 				var category = 1;
@@ -1454,7 +1453,7 @@ $(function() {
 
 				if(in_disp_from < 0)
 				{
-					$('#prev_review').removeClass('active');
+					$('#prev_mypage_review').removeClass('active');
 					return false;
 				}
 
@@ -1590,7 +1589,7 @@ $(function() {
 					data += "&username=" + loginname;
 			}
 			else if(mode == 2) { // for url
-				data += "&page=" + in_disp_from;
+				data += "&page=" + (in_disp_from / $('#all_container').data('max') + 1);
 
 				if(username && username != "")
 					data += "&username=" + username;
@@ -1633,18 +1632,23 @@ $(function() {
 							var innerText = '<div class="navigate_page_no_registry">飲みたい登録されていません</div>';
 							$("#sake_sort").css({"display":"none"});
 							$('#disp_sake').css({"display":"none"});
+							$("#tab_sake .result_count_container").css({"display":"none"});
 							$('#sake_table').html(innerText);
+							$('#review_result_turn_page').css({"display": "none"});
 							removeLoading();
 						}
 						else if(count_result == 0 && sake == null) {
 							var innerText = '<div class="navigate_page_no_registry"></div>';
 							$("#sake_sort").css({"display":"none"});
 							$('#disp_sake').css({"display":"none"});
+							$("#tab_sake .result_count_container").css({"display":"none"});
 							$('#sake_table').html(innerText);
+							$('#review_result_turn_page').css({"display": "none"});
 							removeLoading();
 						}
 						else {
 							$("#sake_sort").css({"display":"flex"});
+							$("#tab_sake .result_count_container").css({"display":"flex"});
 							$('#disp_sake').css({"display":"block"});
 
 							var username = $('#all_container').data('username');
@@ -1787,7 +1791,7 @@ $(function() {
 							innerHTML += '</a>'; // searchRow_link
 						} // for
 
-						innerHTML += '</div>';
+						//innerHTML += '</div>';//hirasawaこれ必要？
 
 						$('#sake_table').append(innerHTML);
 
@@ -1802,7 +1806,7 @@ $(function() {
 							$("#count_sake").val(count_result);
 
 							if(count_result > p_max) {
-								innerText = '<button id="prev_review">前の' + p_max + '件</button>';
+								innerText = '<button id="prev_mypage_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
 								innerText += '<button class="pageitems selected">' + i + '</button>';
 
 								for(i++; i <= numPage; i++) {
@@ -1810,9 +1814,9 @@ $(function() {
 								}
 
 								if(numPage > 1)
-									innerText += '<button id="next_review" class="active">次の' + p_max + '件</button>';
+									innerText += '<button id="next_mypage_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 								else
-									innerText += '<button id="next_review">次の' + p_max + '件</button>';
+									innerText += '<button id="next_mypage_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 
 								$('#review_result_turn_page').empty();
 								$('#review_result_turn_page').append(innerText);
@@ -1864,14 +1868,14 @@ $(function() {
 						$('#review_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
 
 						if(in_disp_from >= p_max)
-							$('#prev_review').addClass('active');
+							$('#prev_mypage_review').addClass('active');
 						else
-							$('#prev_review').removeClass('active');
+							$('#prev_mypage_review').removeClass('active');
 
 						if((in_disp_from + p_max) > $("#count_sake").val())
-							$('#next_review').removeClass('active');
+							$('#next_mypage_review').removeClass('active');
 						else
-							$('#next_review').addClass('active');
+							$('#next_mypage_review').addClass('active');
 
 						$('html, body').animate({scrollTop:0}, '100');
 					}
@@ -1884,7 +1888,7 @@ $(function() {
 	    }
 
 		/* 次の飲みたい */
-		$(document).on('click', '.nomitai_set #next_review', function() {
+		$(document).on('click', '.nomitai_set #next_mypage_review', function() {
 
 				var search_type = 1;
 				var category = 2;
@@ -1927,7 +1931,7 @@ $(function() {
 		});
 
 		/* 前の飲みたい */
-		$(document).on('click', '.nomitai_set #prev_review', function() {
+		$(document).on('click', '.nomitai_set #prev_mypage_review', function() {
 
 				var search_type = 1;
 				var category = 2;
@@ -2102,7 +2106,9 @@ $(function() {
 						if(sakagura == null || sakagura.length == 0) {
 							var innerText = '<div class="navigate_page_no_registry">お気に入り登録されていません</div>';
 							$('#sakagura_table').html(innerText);
-							$('#sakagurapage').css({"display": "none"});
+							$('#sakagura_result_turn_page').css({"display": "none"});
+							$("#tab_sakagura #sake_sort").css({"display":"none"});
+							$("#tab_sakagura .result_count_container").css({"display":"none"});
 							removeLoading();
 						}
 						else {
@@ -2278,29 +2284,29 @@ $(function() {
 
 							var limit = (in_disp_to >= $("#count_sakagura").val()) ? $("#count_sakagura").val() : in_disp_to;
 							var pagenum = $('#in_sakagura_disp_from').val() / 25;
-							var showPos = parseInt($('#sakagurapage .pageitems:nth(0)').text()) - 1;
+							var showPos = parseInt($('#sakagura_result_turn_page .pageitems:nth(0)').text()) - 1;
 							var pagenum = $('#in_sakagura_disp_from').val() / 25;
 							var position = pagenum - showPos;
 
-							if(position >= $('#sakagurapage .pageitems').length)
+							if(position >= $('#sakagura_result_turn_page .pageitems').length)
 							{
-								var showPos = parseInt($('#sakagurapage .pageitems:nth(0)').text());
+								var showPos = parseInt($('#sakagura_result_turn_page .pageitems:nth(0)').text());
 								var i = 1;
 
-								$('#sakagurapage .pageitems').each(function() {
+								$('#sakagura_result_turn_page .pageitems').each(function() {
 										$(this).text(showPos + i);
 										i++;
 								});
 
-								position = $('#sakagurapage .pageitems').length - 1;
+								position = $('#sakagura_result_turn_page .pageitems').length - 1;
 							}
 							else if(position < 0)
 							{
 								//alert("case 2");
-								var showPos = parseInt($('#sakagurapage .pageitems:nth(0)').text()) - 2;
+								var showPos = parseInt($('#sakagura_result_turn_page .pageitems:nth(0)').text()) - 2;
 								var i = 1;
 
-								$('#sakagurapage .pageitems').each(function() {
+								$('#sakagura_result_turn_page .pageitems').each(function() {
 										$(this).text(showPos + i);
 										i++;
 								});
@@ -2308,9 +2314,9 @@ $(function() {
 								position = 0;
 							}
 
-							$('#sakagurapage .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
-							$('#sakagurapage .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
-							$('#sakagurapage').css({"display": "flex"});
+							$('#sakagura_result_turn_page .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
+							$('#sakagura_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
+							$('#sakagura_result_turn_page').css({"display": "flex"});
 
 							if(parseInt($('#in_sakagura_disp_from').val()) + 1 == limit) {
 								var text = parseInt($('#in_sakagura_disp_from').val()) + 1 + '件 / 全' + $('#count_sakagura').val() + '件'
@@ -2324,9 +2330,9 @@ $(function() {
 							$('html, body').animate({scrollTop:0}, '100');
 
 							if(parseInt($('#in_sakagura_disp_from').val()) >= 25)
-								$('#prev_sakagura').addClass('active');
+								$('#prev_mypage_sakagura').addClass('active');
 							else
-								$('#prev_sakagura').removeClass('active');
+								$('#prev_mypage_sakagura').removeClass('active');
 
 							if((parseInt($('#in_sakagura_disp_from').val()) + 25) < parseInt($("#count_sakagura").val()))
 								$('#next_sakagura').addClass('active');
@@ -2391,8 +2397,8 @@ $(function() {
 			$('#tab_sake .display_selection_button.selected').removeClass('selected');
 			$('#tab_sake .display_selection div:first-child').addClass('selected');
 
-			$('#sakagurapage .pageitems.selected').removeClass('selected');
-			$('#sakagurapage .pageitems:nth(0)').addClass('selected');
+			$('#sakagura_result_turn_page .pageitems.selected').removeClass('selected');
+			$('#sakagura_result_turn_page .pageitems:nth(0)').addClass('selected');
 
 			var stateObj = { 'search_type': search_type,
 							 'category': category,
@@ -2507,7 +2513,7 @@ $(function() {
 				searchSakagura(data, in_disp_from, in_disp_to);
 		});
 
-		$(document).on('click', '#prev_sakagura', function() {
+		$(document).on('click', '#prev_mypage_sakagura', function() {
 
 				var search_type = 2;
 				var disp_max = 25;
@@ -2538,7 +2544,7 @@ $(function() {
 				searchSakagura(data, in_disp_from, in_disp_to);
 		});
 
-		$(document).on('click', '#sakagurapage .pageitems', function(e){
+		$(document).on('click', '#sakagura_result_turn_page .pageitems', function(e){
 
 				var search_type = 2;
 				var disp_max = 25;
@@ -2573,9 +2579,9 @@ $(function() {
 
 $(function() {
 
-	function users_serialize(in_disp_from, in_disp_to, bCount, mode)
+	function users_serialize(category, in_disp_from, in_disp_to, bCount, mode)
 	{
-		var data = "search_type=3";
+		var data = "search_type=3&category=" + category;
 		var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
 		var username =  <?php echo json_encode($_GET['username']); ?>;
 
@@ -2601,7 +2607,7 @@ $(function() {
 		return data;
 	}
 
-	function searchUsers(data, in_disp_from, in_disp_to, bCount)
+	function searchUsers(data, category, in_disp_from, in_disp_to, bCount)
 	{
 			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
 			var username = $('#all_container').data('username');
@@ -2633,7 +2639,7 @@ $(function() {
 						$('#user_sort').css({"display":"none"});
 
 						//alert("count_result:" + count_result + " users:" + users);
-						$("#tab_users .search_result_count").css({"display":"none"});
+						$("#tab_users .result_count_container").css({"display":"none"});
 						$('#userfollowpage').empty();
 					}
 					else {
@@ -2663,8 +2669,18 @@ $(function() {
 									innerHTML += '<div class="search_users_result_button_container">';
 
 										if(username == loginname) {
-											//innerHTML += '<button class="custom_button"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
-											innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
+											if(category == 1) {
+												//innerHTML += '<button class="custom_button"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
+												innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
+											}
+											else if(category == 2) {
+												if(users[i].followed) {
+													innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
+												}
+												else {
+													innerHTML += '<button class="custom_button" data-username="' + users[i].email + '"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
+												}
+											}
 										}
 
 									innerHTML += '</div>';
@@ -2678,21 +2694,20 @@ $(function() {
 									/////////////////////////////////////////////////
 									innerHTML += '<div class="spec_item">';
 										innerHTML += '<div class="spec_title"><svg class="spec_item_pin1616"><use xlink:href="#pin1616"/></svg>フォロー中</div>';
-										innerHTML += '<div class="spec_info">' + users[i].nomitai_count + '</div>';
+										innerHTML += '<div class="spec_info">' + users[i].follow_count + '</div>';
 									innerHTML += '</div>';
 
 									/////////////////////////////////////////////////
 									innerHTML += '<div class="spec_item">';
 										innerHTML += '<div class="spec_title"><svg class="spec_item_people1616"><use xlink:href="#people1616"/></svg>フォロワー</div>';
-										innerHTML += '<div class="spec_info">' + users[i].nomitai_count + '</div>';
+										innerHTML += '<div class="spec_info">' + users[i].follower_count + '</div>';
 									innerHTML += '</div>';
 								innerHTML += '</div>';
 
 							innerHTML += '</a>';
 
-
 							$('#users_table').append(innerHTML);
-							$("#tab_users .search_result_count").css({"display":"block"});
+							$("#tab_users .result_count_container").css({"display":"flex"});
 						}
 
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2708,7 +2723,7 @@ $(function() {
 							$("#count_user").val(count_result);
 
 							if(count_result > p_max) {
-								innerText = '<button id="prev_review">前の' + p_max + '件</button>';
+								innerText = '<button id="prev_mypage_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
 								innerText += '<button class="pageitems selected">' + i + '</button>';
 
 								for(i++; i <= numPage; i++) {
@@ -2716,9 +2731,9 @@ $(function() {
 								}
 
 								if(numPage > 1)
-									innerText += '<button id="next_review" class="active">次の' + p_max + '件</button>';
+									innerText += '<button id="next_mypage_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 								else
-									innerText += '<button id="next_review">次の' + p_max + '件</button>';
+									innerText += '<button id="next_mypage_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 
 								$('#userfollowpage').empty();
 								$('#userfollowpage').append(innerText);
@@ -2774,7 +2789,7 @@ $(function() {
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-						$('#tab_users .search_result_count').text(text);
+						$('#tab_users .result_count_container').text(text);
 						$('html, body').animate({scrollTop:0}, '100');
 
 						if(parseInt($('#in_user_disp_from').val()) >= 25)
@@ -2801,6 +2816,7 @@ $(function() {
 	$('#user_sort .click_sort_date').click(function() {
 
 		var data = "username=" + $('#all_container').data('username');
+		var category = 1;
 
 		$('#user_sort').toggleClass('sort_user_desc');
 
@@ -2813,7 +2829,7 @@ $(function() {
 		}
 
 		//alert("data:" + data);
-		searchUsers(data, 0, 25, false);
+		searchUsers(data, category, 0, 25, false);
 	});
 
 	$(document).on('click', '#tab_users .custom_button', function(e) {
@@ -2854,9 +2870,73 @@ $(function() {
 		var in_disp_from = 0;
 		var in_disp_to = 25;
 		var bCount = 1;
-		var data = users_serialize(in_disp_from, in_disp_to, bCount, 1);
-		var my_url = "?" + users_serialize(in_disp_from, in_disp_to, bCount, 2) + href;
+		var data = users_serialize(1, in_disp_from, in_disp_to, bCount, 1);
+		var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, bCount, 2) + href;
+		var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
 
+		var stateObj = { 'search_type': search_type,
+						'category': 3,
+						'data': data,
+						'url': my_url,
+						'href': href,
+						'username': username,
+						'orderby': $("#order_user").val(),
+						'from': 0,
+						'to': 25 };
+
+		history.pushState(stateObj, "user", my_url);
+		$("body").trigger("search_users", [ data, category, in_disp_from, in_disp_to, 1 ] );
+	});
+
+	$("body").on("search_users", function(event, data, category, in_disp_from, in_disp_to) {
+		searchUsers(data, category, in_disp_from, in_disp_to, true)
+	});
+
+	$('#tab_users .display_selection div:first-child').on( "click", function(event) {
+
+		$('#tab_users .display_selection_button.selected').removeClass('selected');
+		$(this).addClass('selected');
+
+		var href = "#tab_users";
+		var search_type = 3;
+		var category = 1;
+		var in_disp_from = 0;
+		var in_disp_to = 25;
+		var bCount = 1;
+		var username = $('#all_container').data('username');
+		var data = users_serialize(category, in_disp_from, in_disp_to, bCount, 1);
+		var my_url = "?" + users_serialize(category, in_disp_from, in_disp_to, bCount, 2) + href;
+
+		var stateObj = { 'search_type': search_type,
+						'category': category,
+						'data': data,
+						'url': my_url,
+						'href': href,
+						'username': username,
+						'orderby': $("#order_user").val(),
+						'from': 0,
+						'to': 25 };
+
+		history.pushState(stateObj, "user", my_url);
+		//$("body").trigger("search_users", [ data, in_disp_from, in_disp_to, 1 ] );
+		searchUsers(data, category, in_disp_from, in_disp_to, true);
+	});
+
+	/* お気に入り */
+	$('#tab_users .display_selection div:nth-child(2)').on( "click", function(event) {
+
+		$('#tab_users .display_selection_button.selected').removeClass('selected');
+		$(this).addClass('selected');
+
+		var href = "#tab_users";
+		var search_type = 3;
+		var category = 2;
+		var in_disp_from = 0;
+		var in_disp_to = 25;
+		var bCount = 1;
+		var username = $('#all_container').data('username');
+		var data = users_serialize(category, in_disp_from, in_disp_to, bCount, 1);
+		var my_url = "?" + users_serialize(category, in_disp_from, in_disp_to, bCount, 2) + href;
 		//alert("data:" + data);
 
 		var stateObj = { 'search_type': search_type,
@@ -2870,11 +2950,9 @@ $(function() {
 						'to': 25 };
 
 		history.pushState(stateObj, "user", my_url);
-		$("body").trigger("search_users", [ data, in_disp_from, in_disp_to, 1 ] );
-	});
-
-	$("body").on("search_users", function(event, data, in_disp_from, in_disp_to) {
-		searchUsers(data, in_disp_from, in_disp_to, true)
+		//$("body").trigger("search_users", [ data, in_disp_from, in_disp_to, 1 ] );
+		//alert("category:" + data);
+		searchUsers(data, category, in_disp_from, in_disp_to, true);
 	});
 
 	/*
@@ -3159,8 +3237,8 @@ jQuery(document).ready(function($) {
 		}
 		else if(hash == "#tab_sakagura")
 		{
-			var category = 2;
-			var data = "search_type=" + category +
+			var search_type = 2;
+			var data = "search_type=" + search_type +
 						"&from=" + in_disp_from +
 						"&to=" + in_disp_to +
 						"&username=" + $('#all_container').data('username') +
@@ -3171,15 +3249,22 @@ jQuery(document).ready(function($) {
 		}
 		else if(hash == "#tab_users")
 		{
-			var category = 3;
-			var data = "search_type=" + category +
+			var search_type = 3;
+			var category = $('#all_container').data('category');
+			//alert("category:" + category);
+			var data = "search_type=" + search_type +
+						"&category=" + category +
 						"&from=" + in_disp_from +
 						"&to=" + in_disp_to +
 						"&username=" + $('#all_container').data('username') +
 						"&count_query=1" +
 						"&orderby=" + $('#order_sakagura').val();
 
-			$("body").trigger("search_users", [ data, in_disp_from, in_disp_to ] );
+			//alert("data:" + data);
+			$('#tab_users .display_selection_button.selected').removeClass('selected');
+			$('#tab_users .display_selection div:nth(' + (category - 1) + ')').addClass('selected');
+
+			$("body").trigger("search_users", [ data, category, in_disp_from, in_disp_to ] );
 		}
 	}
 	else

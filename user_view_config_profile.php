@@ -3,7 +3,6 @@ require_once("db_functions.php");
 require_once("html_disp.php");
 require_once("hamburger.php");
 require_once("searchbar.php");
-require_once("nonda.php");
 ?>
 
 <!DOCTYPE html>
@@ -16,14 +15,12 @@ require_once("nonda.php");
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
 <title>プロフィール編集 [Sakenomo]</title>
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-<link rel="stylesheet" type="text/css" href="css/hamburger.css">
+<link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-<link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/user_view_config_profile.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/sakenomuui.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
-<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 </head>
 
@@ -34,7 +31,6 @@ require_once("nonda.php");
 	write_side_menu();
 	write_HamburgerLogo();
 	write_search_bar();
-	write_Nonda();
 
 	//$username = $_SESSION['loginname'];
 	$username = $_COOKIE['login_cookie'];
@@ -155,13 +151,13 @@ require_once("nonda.php");
 									print('<div class="profile_status">status</div>');
 									print('<div class="profile_total">total</div>');
 								print('</div>');
-							print('</div>');
-							print('<span class="profile_photo_button_container">');
-								print('<input type="button" class="change_pic" value="登録">');
-								print('<input type="button" class="remove_profile_pic" value="削除">');
+								print('<div class="profile_photo_button_container">');
+									print('<input type="button" class="change_pic" value="+">');
+									print('<input type="button" class="remove_profile_pic" value="削除">');
+								print('</div>');
 								print('<input type="hidden" name="delete_image" value=0>');
 								print('<input type="file" id="file1">');
-							print('</span>');
+							print('</div>');
 						print('</div>');
 					print('</div>');
 
@@ -519,7 +515,7 @@ $(function() {
 		//<a href="javascript:history.back()">
 		var username = <?php echo json_encode($username); ?>;
 		var data = $('#main_container').serialize();
-		data += "&hidden_username=" + $('input[name="hidden_username"]').val(); 
+		data += "&hidden_username=" + $('input[name="hidden_username"]').val();
 
 		$.ajax({
 			type: "post",
@@ -548,7 +544,7 @@ $(function() {
 
 		var username = <?php echo json_encode($username); ?>;
 		var data = $('#main_container').serialize();
-		data += "&hidden_username=" + $('input[name="hidden_username"]').val(); 
+		data += "&hidden_username=" + $('input[name="hidden_username"]').val();
 
 		if($('#main_container input[name="certification[]"]:checked').length == 0)
 			data += '&certification=';
@@ -557,10 +553,10 @@ $(function() {
 			alert("ユーザー名が入力されていません");
 			return;
 		}
-		
+
 		if( ($('select[name="birthday_year"]').val() == "" || $('select[name="birthday_month"]').val() == "" || $('select[name="birthday_day"]').val() == "") &&
-		   !($('select[name="birthday_year"]').val() == "" && $('select[name="birthday_month"]').val() == "" && $('select[name="birthday_day"]').val() == "")) {  
-			
+		   !($('select[name="birthday_year"]').val() == "" && $('select[name="birthday_month"]').val() == "" && $('select[name="birthday_day"]').val() == "")) {
+
 			alert("生年月日を正しく入力してください");
 			return;
 		}
@@ -579,7 +575,7 @@ $(function() {
 			if(str == "success") {
 				alert("データを更新しました");
 				//location.reload();
-				window.open('user_view_config.php?username=' + new_username, '_self');
+				window.open('user_view_config.php', '_self');
 				return;
 			}
 			else if(str == "exist") {
@@ -649,7 +645,7 @@ $(function() {
 		$('#file1').trigger("click");
 	});
 
-	$('.profile_photo_button_container .remove_profile_pic').click(function() {
+	$('.remove_profile_pic').click(function() {
 
 		var path = "images/icons/noimage_user30.svg";
 		$('#main_container .profile_photo img').attr("src", path);
@@ -666,8 +662,8 @@ $(function() {
 		var reader = new FileReader(); // Create a file reader
 		var file = $(this).prop("files")[0];
 
-		reader.onload = function(e) {        
-        
+		reader.onload = function(e) {
+
    			var width = img_obj.width();
 			var height = img_obj.height();
             var formdata = new FormData();
@@ -677,7 +673,7 @@ $(function() {
             status.css({"display":"block"});
             total.css({"display":"block"});
 			img_obj.attr("src", e.target.result);
-			
+
             formdata.append("file1", file);
             formdata.append("username", $('input[name="hidden_email"]').val());
             formdata.append("max_width", 200);

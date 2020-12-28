@@ -12,7 +12,7 @@ require_once("nonda.php");
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Style-Type" content="text/css">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta content='width=device-width, initial-scale=1, user-scalable=0' name='viewport'/>
+	<meta content='width=device-width, initial-scale=1, user-scalable=0' name='viewport'/>  
 
 	<title>検索結果</title>
 	<link rel="stylesheet" href="slick/slick-theme.css">
@@ -31,7 +31,7 @@ require_once("nonda.php");
 </head>
 <body>
 
-<?php
+<?php 
 
 include_once('images/icons/svg_sprite.svg');
 write_side_menu();
@@ -52,14 +52,14 @@ $res = executequery($db, $sql);
 $row = getnextrow($res);
 
 $syuhanten_id = $_GET['syuhanten_id'];
-//print("酒販店のID". $syuhanten_id);
+//print("酒販店のID". $syuhanten_id);	 
 
 if(!$db = opendatabase("sake.db"))
 {
    die("データベース接続エラー .<br />");
 }
 
-//print("酒蔵のID". $sake_id);
+//print("酒蔵のID". $sake_id);	 
 $sql = "SELECT * FROM SYUHANTEN_J WHERE syuhanten_id = '$syuhanten_id'";
 $res = executequery($db, $sql);
 $row = getnextrow($res);
@@ -67,7 +67,7 @@ $address = $row["syuhanten_pref"] ." " .$row["syuhanten_address"];
 
 print('<div id="container">');
 
-if($row)
+if($row) 
 {
   print('<input type="hidden" id="hidden_syuhanten_id" value="' .$row["syuhanten_id"]  .'">');
   print('<input type="hidden" id="hidden_syuhanten_country" value="' .$row["syuhanten_country"]  .'">');
@@ -79,10 +79,10 @@ if($row)
   print('<input type="hidden" id="hidden_syuhanten_sake"		value="' .$row["syuhanten_sake"] .'">');
 
   print('<div id="syuhantable">');
-		print('<div id="syuhantentitle" class="syuhantenRow" style="border:0px solid #c6c6c6; background:#fff">');
+		print('<div id="syuhantentitle" class="syuhantenRow" style="border:0px solid #c6c6c6; background:#fff">'); 
 			 print('<div id="syuhanpanel1">');
 
-					// 酒販店名
+					// 酒販店名 
 					print('<div id="syuhanten_name" style="font-size:16px; font-weight: bold; color:#000">' .$row["syuhanten_name"] .'</div>');
 					print('<div id="syuhanten_read" style="margin-top:4px; font-size:12px; color: #000">' .stripslashes($row["syuhanten_read"]) .'</div>');
 					print('<div id="syuhanten_english" style="margin-top:4px; font-size:12px; color: #000">' .stripslashes($row["syuhanten_english"]) .'</div>');
@@ -94,7 +94,7 @@ if($row)
 			print('<div id="syuhanpanel2">');
 				print('<ul class="info" style="overflow:auto; margin-top:4px; min-height:24px; margin-left:6px; border:0px solid #c6c6c6">');
 				print('<li id="button_bbs"><span style="float:left; margin-right:6px; border-radius:2px; width:18px; height:18px; text-align:left; border:0px solid #404040"><img style="vertical-align:middle; height:18px; margin-right:4px" src="images/icons/writing.svg"></span>コメント・写真</li>');
-
+	
 				$result = executequery($db, "SELECT * FROM FOLLOW_SYUHANTEN_J WHERE username = '$username' AND syuhanten_id = '$id'");
 
 				if($rd = getnextrow($result))
@@ -125,7 +125,7 @@ if($row)
 				print('<div style="overflow:auto; margin-top:4px; border:0px solid #c6c6c6">');
 
 						////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// 住所
+						// 住所 
 						print('<div class="syuhanten_item">');
 							print('<span class="label">住所</span>');
 							print('<span id="syuhanten_address_location" style="overflow:auto; padding-top:2px; color:#000">');
@@ -136,14 +136,14 @@ if($row)
 						print('</div>');
 
 						////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// 定休日
+						// 定休日 
 						print('<div class="syuhanten_item">');
 							print('<span class="label">定休日</span>');
 							print('<span id="syuhanten_closed" style="overflow:auto; padding-top:2px; color:#000">'.$row["syuhanten_closed"].'</span>');
 						print('</div>');
 
 						////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// 電話番号
+						// 電話番号 
 						print('<div class="syuhanten_item">');
 							print('<span class="label">&#9742</span>');
 							print('<span id="syuhanten_phone" style="overflow:auto; padding-top:2px; color:#000">' .$row["syuhanten_phone"] .'</span>');
@@ -155,9 +155,9 @@ if($row)
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // tabs
+  // tabs 
   print('<div class="syuhantenRow" style="border:1px solid #c6c6c6; margin-top:12px">');
-
+		
 		print('<div id="tab_main" class="tab_container">');
 				print('<ul class="simpleTabs">');
 						print('<li><a class="active" href="#tabs-40"><img style="height:18px; margin:2px;" src="images/icons/top.svg"><div>トップ</div></a></li>');
@@ -165,10 +165,10 @@ if($row)
 						print('<li><a href="#tabs-42"><img style="height:18px; margin:2px;" src="images/icons/camera30.svg"><div>写真</div></a></li>');
 						print('<li><a href="#tabs-43"><img style="height:18px; margin:2px;" src="images/icons/reviewicon.svg"><div>コメント</div></a></li>');
 				print('</ul>');
-
+		
 				print('<div id="tabs-40" style="overflow:auto; padding:0px 0px 4px 0px; border:0px solid #c6c6c6" class="form-action show">');
-
-					print('<div style="overflow:auto; font-size:9pt; margin:0px 0px 8px 0px; padding:4px 8px 4px 8px; background:#F5F5F5"><div>一般ユーザーのご協力によって編集された詳細や投稿されたコメント・写真の内容は最新の情報と異なる場合があります。ご了承ください。</div><div style="color:#8BA340">酒蔵様は無料会員登録をご利用いただくと、自社ページの詳細情報や写真を編集することができます。</div></div>');
+		 
+					print('<div style="overflow:auto; font-size:9pt; margin:0px 0px 8px 0px; padding:4px 8px 4px 8px; background:#F5F5F5"><div>一般ユーザーのご協力によって編集された詳細や投稿されたコメント・写真の内容は最新の情報と異なる場合があります。ご了承ください。</div><div style="color:#8BA340">酒蔵様は無料会員登録をご利用いただくと、自社ページの詳細情報や写真を編集することができます。</div></div>'); 
 					print('<div id="panel1">');
 
 							print('<div style="height:100px; padding:4px">');
@@ -195,7 +195,7 @@ if($row)
 								c0,1.787,1.479,3.727,1.479,3.727c0.051,0.152,0.081,0.312,0.081,0.475v0.34c0,0.423-0.251,0.809-0.642,0.985l-2.354,0.947
 								c-0.546,0.245-1.706,0.738-1.813,1.321V20h6.5H24v-1.53C23.893,17.887,22.732,17.394,22.187,17.148z"/>
 						</svg>');
-						print("ここが自慢</div>");
+						print("ここが自慢</div>");			
 
 						$row["syuhanten_intro"] = nl2br($row["syuhanten_intro"]);
 						print("<div id=\"syuhanten_intro\" style=\"font-size:9pt; margin:4px\">".stripslashes($row["syuhanten_intro"])."</div>");
@@ -205,13 +205,13 @@ if($row)
 
 
 				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				// 取扱い銘柄
+				// 取扱い銘柄 
 				print('<div id="tabs-41" style="overflow:auto; min-height:80px; padding:4px 2px 4px 2px; border:0px solid #c6c6c6" class="form-action hide">');
 
 					$sake_array = explode(',', $row["syuhanten_sake"]);
-
+					
 					print("<button id=\"addsake\">酒を追加する</button>");
-
+					
 					print('<div id="gridframe" style="position:relative">');
 
 					for($i = 0; $i < count($sake_array); $i++)
@@ -223,10 +223,10 @@ if($row)
 							{
 									print('<div class="griditem" style="position:relative; float:left; height:200px; min-width:120px; margin:8px; padding:4px; background:#c6c6c6; border:1px solid #c6c6ff;"><div style="position:relative;">'); // float position
 
-										$path = "images/icons/NoPhotoSake.jpg";
+										$path = "images/icons/NoPhotoSake.jpg";							  
 										$sql = "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$sake_array[$i] ."' LIMIT 2";
 										$result_set = executequery($db, $sql);
-
+							 
 										if($record = getnextrow($result_set))
 										{
 											$path = "images/photo/thumb/".$record["filename"];
@@ -243,16 +243,16 @@ if($row)
 				print("</div>"); // tabs-41
 
 				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				// 写真
+				// 写真 
 				print('<div id="tabs-42" style="overflow:auto; min-height:80px; padding:4px 2px 4px 2px; border:0px solid #c6c6c6" class="form-action hide">');
-
+			    
 					$result = executequery($db, "SELECT SYUHANTEN_IMAGE.syuhanten_id, SYUHANTEN_IMAGE.filename, syuhanten_name FROM SYUHANTEN_IMAGE, SYUHANTEN_J WHERE SYUHANTEN_IMAGE.syuhanten_id = SYUHANTEN_J.id AND SYUHANTEN_IMAGE.syuhanten_id = '$id' ORDER BY filename"." LIMIT 20");
 					print('<button id="addimage" class="navigate_button">写真を追加する</button>');
 
 					//print("<table id=\"gridframe\" border=\"0\">");
-					//while($record = getnextrow($result))
+					//while($record = getnextrow($result)) 
 					//{
-							//$path = "images/syuhanten/".$record["filename"];
+							//$path = "images/syuhanten/".$record["filename"];    
 							//print("<tr>");
 							//print("<td><center><img style=\"width:140px; height: auto; border-radius: 6px; box-shadow: 1px 1px 1px -1px rgba(0,0,0,.9);\" id=\"" .$record["filename"] ."\" class=\"preview\"  src=\"" .$path  ."\"></center></td>");
 							//print("<td>");
@@ -264,12 +264,12 @@ if($row)
 
 				print('</div>');
 
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				// コメント
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+				// コメント 
 				print('<div id="tabs-41" style="overflow:auto; min-height:80px; padding:4px 2px 4px 2px; border:0px solid #c6c6c6" class="form-action hide">');
-
+			  
 				if(!$db_bbs = opendatabase("sake.db"))
 				{
 					  die("データベース接続エラー .<br />");
@@ -284,7 +284,7 @@ if($row)
 
 				print('<div class="threads" id="threads" style="position:relative">');
 
-				while($record = getnextrow($result))
+				while($record = getnextrow($result)) 
 				{
 					if($_COOKIE['usertype_cookie'] == 9)
 					{
@@ -342,41 +342,41 @@ if($row)
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		// 地図
+		// 地図 
 		print("<div id=\"syuhanten_map\" class=\"syuhantenRow\" style=\"margin-top:8px; border:1px solid #c6c6c6; text-align:center; height:300px;\">");
 			print("<iframe style=\"width:100%; height:100%; pointer-events: none;\" class=\"map\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" src=\"https://maps.google.co.jp/maps?hl=&amp;ie=UTF8&amp;q=loc:".$address."&amp;z=18&amp;iwloc=B&amp;output=embed\"></iframe>");
 		print("</div>");
-
+	  
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////
 		print('<div class="syuhantenRow" style="float:none; border:1px solid #c6c6c6; margin-top:18px">');
 		print('<table class="syuhantentable" style="font-size:9pt">');
 
-			// 酒販店
+			// 酒販店 
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">酒販店</td>');
 				print("<td style=\"margin-left:4px;\" id=\"syuhanten_code\">".$row["syuhanten"]."</td>");
 			print("</tr>");
 
-			// 都道府県よみ
+			// 都道府県よみ 
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">都道府県よみ</td>');
 				print('<td style="margin-left:4px" id="spec_syuhanten_pref_read">'.$row["syuhanten_pref_read"].'</td>');
 			print("</tr>");
 
-			// URL
+			// URL 
 			print('<tr>');
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">URL</td>');
 				print('<td style="margin-left:4px; id="syuhanten_url"><a href="' .$row["syuhanten_url"] .'">' .$row["syuhanten_url"]. '</a></td>');
 			print('</div>');
 
-			// FAX番号
+			// FAX番号 
 			print('<tr>');
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">FAX</td>');
 				print('<td style="margin-left:4px; id="syuhanten_fax">'.$row["syuhanten_fax"].'</td>');
 			print('</tr>');
 
-			// Email
+			// Email 
 			print('<tr>');
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">Email</td>');
 				print('<td id="syuhanten_email" style="margin-left:4px; id="syuhanten_fax">'.$row["syuhanten_email"].'</td>');
@@ -387,47 +387,47 @@ if($row)
 				print("<td style=\"margin-left:4px; id=\"syuhanten_id\">".$row["syuhanten_id"]."</td>");
 			print("</tr>");
 
-			// タイプ
+			// タイプ 
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">酒販店タイプ</td>');
 				print("<td style=\"margin-left:4px; id=\"syuhanten_type\">".$row["syuhanten_type"]."</td>");
 			print("</tr>");
 
-			// 営業時間
+			// 営業時間 
 			print('<tr>');
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">営業時間</td>');
 				print('<td style="margin-left:4px" id="syuhanten_hours">'.$row["syuhanten_hours"].'</td>');
 			print('</tr>');
 
-			// 駐車場
+			// 駐車場 
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">駐車場</td>');
 				print("<td style=\"margin-left:4px;\" id=\"syuhanten_parking\">".$row["syuhanten_parking"]."</td>");
 			print("</tr>");
 
-			// 酒販店ソート
+			// 酒販店ソート 
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">酒販店ソート</td>');
 				print("<td style=\"margin-left:4px;\" id=\"syuhanten_sort\">".$row["syuhanten_sort"]."</td>");
 			print("</tr>");
 
-			// 酒販店検索用
+			// 酒販店検索用 
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">酒販店検索用</td>');
 				print("<td style=\"margin-left:4px;\" id=\"syuhanten_search\">".$row["syuhanten_search"]."</td>");
 			print("</tr>");
 
-			// メモ
+			// メモ 
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">メモ</td>');
 				print("<td style=\"margin-left:4px;\" id=\"memo\" style=\"margin-left:8px; min-height:80px;\">".$row["syuhanten_memo"]."</td>");
 			print("</tr>");
-
+		  
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">最終更新日</td>');
 				print("<td style=\"margin-left:4px;\" id=\"syuhanten_datasource\">".$row["syuhanten_datasource"]."</td>");
 			print("</tr>");
-
+		  
 			print("<tr>");
 				print('<td style="background:#f6f5ff; border-right:1px solid #e3e3e3; margin-left:4px; width:100px">Last Contacted</td>');
 				print("<td style=\"margin-left:4px;\" id=\"syuhanten_lastcontacted\">".$row["syuhanten_lastcontacted"]."</td>");
@@ -438,7 +438,7 @@ if($row)
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////
-		// 編集
+		// 編集 
 		if($_COOKIE['usertype_cookie'] == 9)
 		{
 				print("<div class=\"syuhantenRow\" style=\"margin-top:12px; margin-top:12px; border:1px solid #c6c6c6;\"><center>");
@@ -461,7 +461,7 @@ if($row)
 
 		while($record = getnextrow($result))
 		{
-				$path = "images\\photo\\thumb\\".$record["filename"];
+				$path = "images\\photo\\thumb\\".$record["filename"];    
 				print("<li class=\"static\" id=\"" .$record["sake_id"] ."\" value=\"sake_view.php?sake_id=\" style=\"margin:auto;\">");
 
 				print("<img id=\"" .$path ."\" style=\"border-radius: 6px; box-shadow: 1px 1px 1px -1px rgba(0,0,0,.9);\" src=\"" .$path  ."\">");
@@ -483,16 +483,16 @@ else
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /* advertisement */
 print('<div id="banner_frame">');
-
+  
 	print('<div id="ad1" style="float:left; padding:4px">
 							<img style="width:100%" src="images/ad/ad4.jpg">
-							<hr style="position:relative; width:90%; margin-left:12px">
+							<hr style="position:relative; width:90%; margin-left:12px">  
 							</div>');
-
+  
 	print('<div id="ad2" style="float:left; padding:4px">
 							<img style="width:100%" src="images/ad/ad5.jpg">
-							<hr style="position:relative; width:90%;  margin-left:12px">
-							</div>');
+							<hr style="position:relative; width:90%;  margin-left:12px">  
+							</div>');  
 
 	print("<div id=\"tokusyu\" style=\"position:relative; float:left; text-align:center;  margin: 0 auto 0 auto; width:300px; height:250px; border:1px solid #e3e3e3;\">");
 		print("<span style=\"position:absolute; left:1%; width:98%;  height:48px; top:0px; text-align:left; font-size:10pt; font-weight:bold; color:0740A5;\">Sakenomu特集</span>");
@@ -517,7 +517,7 @@ writefooter();
 <div id="dialog_background"></div>
 
 <div id="dialog_edit_syuhanten">
-	<div>酒販店を編集する</div>
+	<div>酒販店を編集する</div> 
 	<span style="position:absolute; top:0%; right:0%; margin:2px;"><button id="close_edit_syuhanten_button" style="position:relative; background:#1F2735; box-shadow:1px 1px 1px -1px rgba(0,0,0,.9); top:-2; color:#fff; width:40px;">x</button></span>
 	<center>
 
@@ -682,7 +682,7 @@ writefooter();
 			<td colspan="3"><textarea id="dialog_syuhanten_memo" rows="4" style="width:100%" name="syuhanten_memo"></textarea></td>
 			</tr>
 
-			<tr class="alt">
+			<tr class="alt"> 
 			<td>データ状況</td>
 			<td colspan="3"><SELECT id="dialog_syuhanten_develop" name="syuhanten_develop">
 			<OPTION VALUE="0">未完成</OPTION>
@@ -696,7 +696,7 @@ writefooter();
 </div>
 
 <div id="dialog_send_syuhanten">
-	<div>酒販店にメールを送る</div>
+	<div>酒販店にメールを送る</div> 
 	<span style="position:absolute; top:0%; right:0%; margin:2px;"><button id="close_mail_button" style="position:relative; background:#1F2735; box-shadow:1px 1px 1px -1px rgba(0,0,0,.9); top:-2; color:#fff; width:40px;">x</button></span>
 	<div id="dialog_send_syuhanten_container" style="position:relative; overflow:auto; padding:4px; height:92%; border:1px solid #626262;">
 	<center>
@@ -720,16 +720,16 @@ writefooter();
 <!-- Add Image -->
 <div id="dialog_addimage">
 
-		<div id="dialog_title">写真の追加</div>
+		<div id="dialog_title">写真の追加</div> 
 		<span style="position:absolute; top:0%; right:0%; margin:2px;"><button id="close_addimage_button" style="position:relative; background:#1F2735; box-shadow:1px 1px 1px -1px rgba(0,0,0,.9); top:-2; color:#fff; width:40px;">x</button></span>
 
 		<div id="dialog_addimage_container" style="position:relative; overflow:auto; padding:4px; height:92%; border:1px solid #626262;">
 
-						<center>
+						<center> 
 						<div style="overflow:auto; width:70%; height:88%; margin:auto; border: 1px solid #ccc;">
 								<img style="position:relative; margin-top:18px; height:80%; width:auto; image-orientation:from-image; background: rgba(31, 39, 53);" src="" id="image">
 						</div>
-
+						
 						<progress style="width:70%; margin:auto" id="progressBar" value="0" max="100"></progress>
 						<div id="status"></div>
 						<div id="loaded_n_total"></div>
@@ -743,10 +743,10 @@ writefooter();
 
 <!-- dialog preview -->
 <div id="dialog_preview">
-		<div>写真の表示</div>
+		<div>写真の表示</div> 
 		<span style="position:absolute; top:0%; right:0%; margin:2px;"><button id="close_preview_button" style="position:relative; background:#1F2735; box-shadow:1px 1px 1px -1px rgba(0,0,0,.9); top:-2; color:#fff; width:40px;">x</button></span>
 		<div id="dialog_preview_container" style="position:relative; overflow:auto; padding:4px; height:92%; border:1px solid #626262;">
-					<center>
+					<center> 
 					<div style="overflow:auto; width:70%; height:88%; margin:auto; border: 1px solid #ccc; rgba(31, 39, 53);">
 							<img class="full" style="position:relative; margin-top:18px; height:88%; width:auto; image-orientation: from-image;" src="" id="previe_image">
 					</div>
@@ -758,7 +758,7 @@ writefooter();
 
 <!-- dialog bbs -->
 <div id="dialog_syuhanten_bbs">
-	<div>コメントを投稿する</div>
+	<div>コメントを投稿する</div> 
 	<span style="position:absolute; top:0%; right:0%; margin:2px;"><button id="close_syuhanten_bbs_button" style="position:relative; background:#1F2735; box-shadow:1px 1px 1px -1px rgba(0,0,0,.9); top:-2; color:#fff; width:40px;">x</button></span>
 	<div id="dialog_syuhanten_bbs_container" style="position:relative; overflow:auto; padding:4px; height:92%; border:1px solid #626262;">
 	<center>
@@ -766,7 +766,7 @@ writefooter();
 					<div>
 						<span style="float:left; margin-left:4px; width:100px; text-align:left;">題名</span>
 						<span><input id="bbs_subject" value="" style="text-align:left; width:100%" placeholder="題名を入力してください"></span>
-					</div>
+					</div>	
 					<div>
 							<span style="float:left; margin-left:4px; width:120px; text-align:left;">メッセージ</span>
 							<span style="float:right; width:60px"><SELECT id="bbs_rank" name="sake_rank">
@@ -789,7 +789,7 @@ writefooter();
 </div>
 
 <div id="dialog_add_sake">
-	<div>酒を追加する</div>
+	<div>酒を追加する</div> 
 	<span style="position:absolute; top:0%; right:0%; margin:2px;"><button id="close_add_sake_button" style="position:relative; background:#1F2735; box-shadow:1px 1px 1px -1px rgba(0,0,0,.9); top:-2; color:#fff; width:40px;">x</button></span>
 	<div id="dialog_syuhanten_bbs_container" style="position:relative; overflow:auto; padding:4px; height:92%; border:1px solid #626262;">
 	<center>
@@ -808,7 +808,7 @@ writefooter();
 
 <script type="text/javascript">
 
-Array.prototype.remove = function(x) {
+Array.prototype.remove = function(x) { 
     var i;
 
     for(i in this){
@@ -892,14 +892,14 @@ $(function() {
 
 						if(str == "success")
 						{
-								//alert("success:" + $(xml).find("sql").text());
+								//alert("success:" + $(xml).find("sql").text());					
 								var path = "images/icons/NoPhotoSake.jpg";
 
 								for(var i = 0; i < sake_ids.length; i++)
 								{
 										//alert("sake_names[i]:" + sake_names[i]);
-										var innerHTML = '<div class="griditem" style="position:relative; float:left; height:200px; min-width:120px; margin:8px; padding:4px; background:#c6c6c6; border: 1px solid #c6c6c6;"><div style="position:relative;">' +
-												'<img style="height:180px; width:auto; border-radius: 6px; box-shadow: 1px 1px 1px -1px rgba(0,0,0,.9);" src="' + sake_images[i] + '">' +
+										var innerHTML = '<div class="griditem" style="position:relative; float:left; height:200px; min-width:120px; margin:8px; padding:4px; background:#c6c6c6; border: 1px solid #c6c6c6;"><div style="position:relative;">' + 
+												'<img style="height:180px; width:auto; border-radius: 6px; box-shadow: 1px 1px 1px -1px rgba(0,0,0,.9);" src="' + sake_images[i] + '">' + 
 												'<button style="position:absolute; right:0px; top:0px; width:46; height:22" id="' + sake_ids[i] + '" class="navigate_button" sake_name = "' + sake_names[i] + '">削除</button>' +
 												'<span style="position:absolute; width:98%; left:0px; top:164px; background:#404040; color:fff">' + sake_names[i] + '</span>' +
 												'</div></div>';
@@ -907,7 +907,7 @@ $(function() {
 										$(innerHTML).hide().prependTo('#gridframe').fadeIn(900);
 										//$('#gridframe').prepend(innerHTML);
 								}
-
+									
 								$('#hidden_syuhanten_sake').val(sake_array);
 						}
 						else
@@ -933,7 +933,7 @@ $(function() {
       $('#add_sake_input').val('');
 	});
 
-  // 追加する酒の検索
+  // 追加する酒の検索       
   $('#add_sake_input').on('keyup', function() {
 
     var inputText = $("#add_sake_input").val();
@@ -943,20 +943,20 @@ $(function() {
 
     var data = "search_type=" + search_type + "&search_limit=" + search_limit + "&search_text=" + inputText;
 
-		if(count >= 1)
-    {
+		if(count >= 1) 
+    {  
         $.ajax({
             type: "POST",
             url: "auto_complete.php",
 			      data: data,
             dataType: 'json',
-
+        
         }).done(function(data){
-
+            
             //alert("succeded:" + data + "length:" + data.length);
             $('#add_sake_content').empty();
 
-            for(var i = 0; i < data.length; i++)
+            for(var i = 0; i < data.length; i++) 
             {
 								//alert("filename: " + data[i].filename);
                 $('#add_sake_content').append('<li class="message_class" sake_id="' + data[i].sake_id + '"><span style="width:28px"><img style="height:28px; width:auto;" src="' + data[i].filename + '"></span><span style="margin-left:4px">' + data[i].sake_name + '</span><span style="margin-left:8px">' + data[i].sakagura_name + '</span><span style="margin-left:8px">' + data[i].pref + '</span></li>');
@@ -967,8 +967,8 @@ $(function() {
         }).fail(function(data){
             //alert("Failed:" + data);
         });
-    }
-    else
+    } 
+    else 
     {
         $('#add_sake_content').empty();
     }
@@ -977,7 +977,7 @@ $(function() {
 
 $(function() {
 		$('#addimage').click(function(){
-
+		    
 				var element_width  = $("#dialog_addimage").width();
 				var element_height = $("#dialog_addimage").height();
 				var w = $(window).width();
@@ -991,7 +991,7 @@ $(function() {
 				$("#dialog_addimage").css({left:element_x + offset_x, top:element_y + offset_y});
 				$("#dialog_background").css({"display":"block"});
 				$("#dialog_addimage").css({"display":"block"});
-		});
+		});    
 
 		$('#close_addimage_button').click(function(){
 				$("#dialog_background").css({"display":"none"});
@@ -1010,7 +1010,7 @@ $(function() {
 
 			$('#dialog_syuhanten_pref option').each(function(){
 
-					if(this.value == $("#syuhanten_prefecture").text())
+					if(this.value == $("#syuhanten_prefecture").text()) 
 					{
 						 //alert("match pref:" + this.value);
 						 $("#dialog_syuhanten_pref").val($("#syuhanten_prefecture").text());
@@ -1020,7 +1020,7 @@ $(function() {
 
 			var hidden_syuhanten_rank = document.getElementById("hidden_syuhanten_rank");
 			var hidden_syuhanten_country = document.getElementById("hidden_syuhanten_country");
-
+		
 			//alert("syuhanten_id:" + $("#hidden_syuhanten_id").val());
 			$("#dialog_syuhanten_id").text($("#hidden_syuhanten_id").val());
 			$("#dialog_syuhanten").val($("#hidden_syuhanten").val());
@@ -1053,7 +1053,7 @@ $(function() {
 			{
 					$('#dialog_syuhanten_develop option').each(function(){
 
-							if(this.value == $("#hidden_syuhanten_develop").val())
+							if(this.value == $("#hidden_syuhanten_develop").val()) 
 							{
 									 $("#dialog_syuhanten_develop").val($("#hidden_syuhanten_develop").val());
 									 return false;
@@ -1085,9 +1085,9 @@ $(function() {
 						//alert("success:" + str);
 
 						if(str == "success")
-						{
+						{	
 								//alert("success:" + $(xml).find("sql").text());
-								//alert("success:" + $(xml).find("sakagura_name").text() + " done");
+								//alert("success:" + $(xml).find("sakagura_name").text() + " done");					
 								$("#syuhanten_code").text($(xml).find("syuhanten").text());
 
 								///////////////////
@@ -1117,7 +1117,7 @@ $(function() {
 								$("#syuhanten_search").text($("#dialog_syuhanten_search").val());
 								$("#syuhanten_sort").text($("#dialog_syuhanten_sort").val());
 								$("#syuhanten_hours").text($("#dialog_syuhanten_hours").val());
-
+								
 								//var intro = nl2br($(xml).find("syuhanten_intro").text());
 								//var intro = nl2br(input_syuhanten_intro.value);
 								$("#syuhanten_intro").html(nl2br($("#dialog_syuhanten_intro").val()));
@@ -1175,8 +1175,8 @@ $(function() {
 
 	$("#mail_syuhanten_ok").click(function() {
 
-      var syuhanten_id = <?php echo json_encode($syuhanten_id); ?>;
-      var syuhanten_name = <?php echo json_encode($syuhanten_name); ?>;
+      var syuhanten_id = <?php echo json_encode($syuhanten_id); ?>; 
+      var syuhanten_name = <?php echo json_encode($syuhanten_name); ?>; 
 
       var data = "sakagura_id="    +syuhanten_id +
                  "&sakagura_name=" +syuhanten_name +
@@ -1203,7 +1203,7 @@ $(function() {
           }
       }).fail(function(data){
           alert("This is Error");
-      });
+      });     
 
 			$("#dialog_background").css({"display":"none"});
 			$("#dialog_send_syuhanten").css({"display":"none"});
@@ -1254,7 +1254,7 @@ function completeHandler(event){
     var responseText = event.target.responseText;
     var responseArray = JSON.parse(responseText);
     var path = "images\\photo\\" + responseArray[0];
-
+   
     if($('#hidden_data_type').val() == "sakagura")
     {
         path = "images\\sakagura\\" + responseArray[0];
@@ -1263,7 +1263,7 @@ function completeHandler(event){
     _("status").innerHTML = responseArray[0];
     _("progressBar").value = 0;
 
-    var innerHTML = '<tr><td><center>' +
+    var innerHTML = '<tr><td><center>' + 
         '<img id="' + responseArray[0] + '" style="width:140px; height: auto;" class="preview" src="' + path + '"></center></td>' +
         '<td><button filename =' + responseArray[0] + ' class="navigate_button" style="width:46; height:22">削除</button>' + responseArray[0] + '</td></tr>';
 
@@ -1314,10 +1314,10 @@ function handleFiles()
     var reader = new FileReader(); // Create a file reader
 
     // Set the image once loaded into file reader
-    reader.onload = function(e) {
-
+    reader.onload = function(e) {        
+        
         img.src = e.target.result;
-
+        
         //var canvas = $("<canvas>", {"id":"testing"})[0];
         var canvas = document.createElement("canvas");
         var MAX_WIDTH = 500;
@@ -1325,17 +1325,17 @@ function handleFiles()
         var width = img.width;
         var height = img.height;
 
-        if(width > height)
+        if(width > height) 
         {
-            if (width > MAX_WIDTH)
+            if (width > MAX_WIDTH) 
             {
                 height *= MAX_WIDTH / width;
                 width = MAX_WIDTH;
             }
-        }
-        else
+        } 
+        else 
         {
-            if(height > MAX_HEIGHT)
+            if(height > MAX_HEIGHT) 
             {
                 width *= MAX_HEIGHT / height;
                 height = MAX_HEIGHT;
@@ -1344,13 +1344,13 @@ function handleFiles()
 
         canvas.width = width;
         canvas.height = height;
-
+        
         var ctx = canvas.getContext("2d");
-
+        
         ctx.drawImage(img, 0, 0, width, height);
         //var dataurl = canvas.toDataURL("image/png");
         var dataurl = canvas.toDataURL("image/jpg");
-        document.getElementById('image').src = dataurl;
+        document.getElementById('image').src = dataurl;     
     }
 
     reader.readAsDataURL(file);
@@ -1365,19 +1365,19 @@ function nl2br(str, is_xhtml) {
 
 jQuery(document).ready(function(){
 
-  $("body").wrapInner('<div id="wrapper"></div>');
+  $("body").wrapInner('<div id="wrapper"></div>'); 
 
 	$('#tab_main').createTabs({
 			text : $('#tab_main ul')
 	});
 
-    $("body").fadeIn(400);
+    $("body").fadeIn(400); 
 
 	$(document).on('click','#follow', function(){
-	    var data = $("#form").serialize();
-
+	    var data = $("#form").serialize(); 
+	 
 	    //alert("data:" + data);
-
+	 			 
 		  $.ajax({
 					type: "post",
 					url: "syuhan_follow.php?syuhanten_id=<?php print($_GET['syuhanten_id']);?>",
@@ -1389,7 +1389,7 @@ jQuery(document).ready(function(){
 					if(str == "follow")
 					{
 							$("#follow").text("フォローする");
-					}
+					}  
 					else if(str == "followed")
 					{
 							$("#follow").text("フォロー中");
@@ -1402,9 +1402,9 @@ jQuery(document).ready(function(){
 
 	$('#delete_syuhanten').click(function(){
 
-    var syuhanten_id = $(this).attr('syuhanten_id');
-
-    if(confirm("削除しますか:" + syuhanten_id) == true)
+    var syuhanten_id = $(this).attr('syuhanten_id');  
+  		
+    if(confirm("削除しますか:" + syuhanten_id) == true) 
 		{
 			var data = "id="+syuhanten_id;
 
@@ -1425,21 +1425,21 @@ jQuery(document).ready(function(){
 				  var str = $(xml).find("str").text();
 				  alert("Failed:" +str);
 			  });
-		  }
+		  } 
   });
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
   // gridframe events
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
   $("#gridframe").delegate('div', 'mouseover', function() {
-			//alert("syuhanten mouseover");
+			//alert("syuhanten mouseover");              
 			$(this).css('background-color', '#ffc6c6');
 	});
-
+	    
   $("#gridframe").delegate('div', 'mouseleave', function() {
 			$(this).css('background-color', '#c6c6c6');
 	});
-
+      
   $("#gridframe").delegate('button', 'click', function() {
 
 			var sake_id = $(this).attr('id');
@@ -1447,7 +1447,7 @@ jQuery(document).ready(function(){
 
 			//alert("button clicked:" + sake_name);
 
-      if(confirm(sake_name + "を削除しますか?") == true)
+      if(confirm(sake_name + "を削除しますか?") == true) 
       {
 				  var data = "syuhanten_id=" + $('#hidden_syuhanten_id').val();
 					var sake_array = $('#hidden_syuhanten_sake').val().split(',');
@@ -1484,11 +1484,11 @@ jQuery(document).ready(function(){
 			}
    });
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
   // recommended sake events
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 
-  $(".static").draggable({
+  $(".static").draggable({      
     start: function(event, ui) {
 				//alert("no click");
         $(this).addClass('noclick');
@@ -1502,51 +1502,51 @@ jQuery(document).ready(function(){
 			else {
 				var url = $(this).attr('value');
 
-				//alert("url:" + url + " id:" + this.id);
+				//alert("url:" + url + " id:" + this.id);   
 				//var sake_id = $(this).attr('sake_id');
 				//alert("image id:" + sake_id);
 				window.open(url + this.id, '_self');
 		 }
   });
-
-  $(".static").mouseover(function() {
+      
+  $(".static").mouseover(function() {      
       $(this).find("h2").css('visibility','visible');
       $(this).find("h2").fadeIn();
   });
-
+      
   $(".static").mouseleave(function() {
       $(this).find("h2").fadeOut();　
       $(this).find("h2").css('visibility','hidden');
   });
-
+      
   /*************************************************************************************/
   $(".syuhanten").click(function() {
-      //alert("syuhanten click");
+      //alert("syuhanten click");              
       var url = $(this).attr('value');
       window.open(url + this.id, '_self');
   });
-
-  $(".syuhanten").mouseover(function() {
-      //alert("syuhanten mouseover");
+      
+  $(".syuhanten").mouseover(function() {     
+      //alert("syuhanten mouseover");              
       $(this).find("h1").css('background-color', '#404040');
       $(this).find("h1").css('color', '#fff');
   });
-
+      
   $(".syuhanten").mouseleave(function() {
       $(this).find("h1").css('background-color', '#e3e3e3');
       $(this).find("h1").css('color', '#404040');
   });
-
+  
   /*************************************************************************************/
   $('div#head_left div').on('mousedown', 'li, a', function() {
       //brand_id = $(this).attr('brand_id');
       //location.href = '/brands/' + brand_id + '/';
   });
-
+ 
   $('input').blur(function() {
       $("div#suggest_ulbox ul").remove();
   });
-
+    
   $("ul#content").mouseleave(function () {
       $("#content").css({"visibility": "hidden"});
   });
@@ -1566,7 +1566,7 @@ jQuery(document).ready(function(){
 								$('.hamburger').addClass('is-closed');
 								$('#wrapper').toggleClass('toggled');
 								$('.header').toggleClass('toggled');
-							}
+							} 
 					}
 
 					update_dialog("#dialog_add_sake");
@@ -1578,7 +1578,7 @@ jQuery(document).ready(function(){
           window.setTimeout(ScaleSlider, 30);
 
   } // resize
-
+  
   ScaleSlider();
   $(window).bind("load", ScaleSlider);
   $(window).bind("resize", ScaleSlider);

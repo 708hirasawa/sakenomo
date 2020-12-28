@@ -407,6 +407,9 @@ else
 	$return = "success";
 
 	setcookie("username", $username, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("login_cookie", $email, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("password_cookie", $password, time() + (10 * 365 * 24 * 60 * 60));
+	//setcookie("usertype_cookie", $usertype, time() + (10 * 365 * 24 * 60 * 60));
 
 	header("Content-type: application/xml");
 	echo '<?xml version="1.0" encoding="utf-8" ?> ' . "\n";

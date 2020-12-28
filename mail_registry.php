@@ -18,7 +18,15 @@
       $to = $_POST['email'];
       $password = $_POST['user_password'];
       $title = "Sakenomo会員登録のご案内";
-      $content = "Sakenomoに仮登録いただき誠にありがとうございます。\r\nまだ登録は完了しておりません。お手数ですが、以下のURLをクリックして本登録の手続きを行ってください。\r\n\r\n http://sakenomo.xsrv.jp/sakenomo/add_user.php?email=".$to ."&password=".$password ."\r\n\r\n※上記のURLの有効期限は24時間となります。期限をすぎてしまった場合は、再び登録手続きを行ってください。\r\n※このメールはご入力いただいたメールアドレスに自動で送信されています。送信専用のメールアドレスのため、こちらではご返信メールを受け付けることができません。ご了承ください。\r\n※本メールにお心当たりがない場合は、恐れ入りますが、破棄してくださいますようお願い申し上げます。";
+
+      if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+          $url = "https://";   
+      else  
+          $url = "http://";   
+
+      // Append the host(domain name, ip) to the URL.   
+      $url.= $_SERVER['HTTP_HOST'] ."/" .basename(__DIR__);   
+      $content = "Sakenomoに仮登録いただき誠にありがとうございます。\r\nまだ登録は完了しておりません。お手数ですが、以下のURLをクリックして本登録の手続きを行ってください。\r\n\r\n " .$url ."/add_user.php?email=".$to ."&password=".$password ."\r\n\r\n※上記のURLの有効期限は24時間となります。期限をすぎてしまった場合は、再び登録手続きを行ってください。\r\n※このメールはご入力いただいたメールアドレスに自動で送信されています。送信専用のメールアドレスのため、こちらではご返信メールを受け付けることができません。ご了承ください。\r\n※本メールにお心当たりがない場合は、恐れ入りますが、破棄してくださいますようお願い申し上げます。";
 
       print('<div id="container">');
         print('<div id="registry_user_container">');

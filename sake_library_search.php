@@ -1298,7 +1298,8 @@ print('<div id="container" data-category=' .$category
 
 								print('<a class="searchRow_link" href="sake_view.php?sake_id='.$row["id"].'">');
 									$path = "images/icons/noimage160.svg";
-									$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$row["id"] ."' LIMIT 8");
+									//$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$row["id"] ."' LIMIT 1");
+									$result_set = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '" .$row["id"] ."' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 1");
 
 									if($rd = getnextrow($result_set)) {
 										$path = "images/photo/thumb/" .$rd["filename"];

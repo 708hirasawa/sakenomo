@@ -7,13 +7,7 @@ $tablename = $_POST['tablename'];
 
 //$sake_id = sqlite3::escapeString($_GET['sake_id']);
 $title = $_POST['title'];
-//$title = mb_convert_encoding($title, "UTF-8", "SJIS");
-$title = mb_convert_encoding($title, "SJIS", "UTF-8");
-
 $message = $_POST['message'];
-//$message = mb_convert_encoding($message, "UTF-8", "SJIS");
-$message = mb_convert_encoding($message, "SJIS", "UTF-8");
-
 $in_time = time();
 
 if(!$db = opendatabase("sake.db"))

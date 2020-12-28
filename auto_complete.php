@@ -133,7 +133,7 @@ else if($_POST["search_type"] == 4)
 	/**************
 	 * ユーザー
 	 **************/
-	$condition = "WHERE username LIKE \"" .$sake_name. "%\" OR fname LIKE \"" .$sake_name."%\"";
+	$condition = "WHERE username LIKE \"" .$sake_name. "%\" OR fname LIKE \"" .$sake_name."%\" OR email LIKE \"" .$sake_name."%\"";
 	$sql = "SELECT username, fname, lname, bdate, email, phone FROM USERS_J " .$condition." ORDER BY username"." LIMIT ".$_POST["search_limit"];
 
 	$res = executequery($db, $sql);
