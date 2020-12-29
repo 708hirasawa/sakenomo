@@ -1343,11 +1343,7 @@ $(function() {
 								$('#next_mypage_review').addClass('active');
 
 							var limit = ((in_disp_from + disp_max) >= $("#count_sake").val()) ? $("#count_sake").val() : (in_disp_from + disp_max);
-
-							if((parseInt($('#in_disp_from').val()) + 1) == limit)
-								$('#disp_sake').text((parseInt($('#in_disp_from').val()) + 1) + "件 / 全" + $("#count_sake").val() + "件");
-							else
-								$('#disp_sake').text((parseInt($('#in_disp_from').val()) + 1) + "～" + limit + "件 / 全" + $("#count_sake").val() + "件");
+							$('#disp_sake').text((parseInt($('#in_disp_from').val()) + 1) + "～" + limit + "件 / 全" + $("#count_sake").val() + "件");
 
 							$('html, body').animate({scrollTop:0}, '100');
 							removeLoading();
@@ -2318,14 +2314,8 @@ $(function() {
 							$('#sakagura_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
 							$('#sakagura_result_turn_page').css({"display": "flex"});
 
-							if(parseInt($('#in_sakagura_disp_from').val()) + 1 == limit) {
-								var text = parseInt($('#in_sakagura_disp_from').val()) + 1 + '件 / 全' + $('#count_sakagura').val() + '件'
-								$('#count_result').text(text);
-							}
-							else {
-								var text = parseInt($('#in_sakagura_disp_from').val()) + 1 + '～' + limit + '件 / 全' + $('#count_sakagura').val() + '件'
-								$('#count_result').text(text);
-							}
+							var text = parseInt($('#in_sakagura_disp_from').val()) + 1 + '～' + limit + '件 / 全' + $('#count_sakagura').val() + '件'
+							$('#count_result').text(text);
 
 							$('html, body').animate({scrollTop:0}, '100');
 
