@@ -152,7 +152,7 @@ require_once("searchbar.php");
 									print('<div class="profile_total">total</div>');
 								print('</div>');
 								print('<div class="profile_photo_button_container">');
-									print('<input type="button" class="change_pic" value="登録">');
+									print('<input type="button" class="change_pic" value="+">');
 									print('<input type="button" class="remove_profile_pic" value="削除">');
 								print('</div>');
 								print('<input type="hidden" name="delete_image" value=0>');
@@ -575,7 +575,7 @@ $(function() {
 			if(str == "success") {
 				alert("データを更新しました");
 				//location.reload();
-				window.open('user_view_config.php?username=' + new_username, '_self');
+				window.open('user_view_config.php', '_self');
 				return;
 			}
 			else if(str == "exist") {
