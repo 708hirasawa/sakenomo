@@ -1,20 +1,27 @@
 /********************
- * navigation
- *******************/
+* container
+*******************/
+#container, #all_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 16px;
+}
+
+/********************
+* navigation
+*******************/
 .header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #ffffff;
-  position:fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
   height: auto;
   border-bottom: 1px solid #e6e6e6;
-  z-index: 10;
-  transition: all 0.3s ease;
 }
 
 .logo_navi_container {
@@ -174,12 +181,8 @@
   background: #B4DCE6;
 }
 
-.header.toggled {
-  margin-left: 220px;
-}
-
 /********************
- * side:sidebar on left invoked by humburger
+* side:sidebar on left invoked by humburger
 ********************/
 #wrapper {
   -moz-transition: all 0.3s ease;
@@ -220,7 +223,7 @@
 }
 
 /********************
- * searchbar
+* searchbar
 ********************/
 .searchbar_container {
   display: flex;
@@ -243,7 +246,7 @@
 }
 
 /********************
- * category_menu
+* category_menu
 ********************/
 #category_menu {
   overflow: hidden;
@@ -292,7 +295,7 @@
 }
 
 /********************
- *search_content
+*search_content
 *********************/
 #search_content_position_adjust {
   position: fixed;
@@ -380,7 +383,7 @@
 }
 
 /********************
- * sake
+* sake
 ********************/
 #sake {
   width: 100%;
@@ -468,7 +471,7 @@
 }
 
 /********************
- * auto complete list box
+* auto complete list box
 ********************/
 #sake_content {
   position: fixed;
@@ -531,7 +534,7 @@
 }
 
 /********************
- * dialog_background
+* dialog_background
 ********************/
 #dialog_background, #dialog_edit_sake_background, .dialog_add_sakagura_background, .dialog_add_sake_background, #dialog_kura_bbs_background, #dialog_sakagura_review_background, #dialog_edit_sakagura_background, #dialog_add_inshokuten_background {
   overflow: auto;
@@ -564,7 +567,7 @@
 }
 
 /********************
- * turn_page
+* turn_page
 ********************/
 .search_result_turn_page, #review_result_turn_page, #sakagura_result_turn_page {
   display: flex;
@@ -644,7 +647,7 @@
 }
 
 /********************
- * footer
+* footer
 ********************/
 .sakenomu_footer {
   display: flex;
