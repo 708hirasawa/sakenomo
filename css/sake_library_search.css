@@ -2,16 +2,6 @@ body {
   background: #E8EAEC;
 }
 
-#container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  margin-top: 105px;
-}
-
 #search_main_container {
   display: flex;
   flex-direction: column;
