@@ -1,15 +1,9 @@
-#container {
+body {
   background-image:url("../images/icons/background_ochoko.png");
   background-size: cover;
   background-position: center right;
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	width: 100%;
-	height: auto;
-	margin-top: 85px;
+  width: 100vw;
+  height: 100vh;
 }
 
 #registry_user_container {
