@@ -453,7 +453,7 @@ button, input, select, textarea {
   margin-top: 20px;
 }
 
-#button_cancel {
+#button_cancel, #update_user, #delete_user {
   background: #e6e6e6;
   outline: none;
   color: #8c8c8c;
