@@ -1,0 +1,449 @@
+#user_information {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	color: #3f3f3f;
+	width: 1200px;
+	max-width: 96%;
+	height: auto;
+}
+
+#main_sub_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 1200px;
+	max-width: 96%;
+	height: auto;
+}
+
+#main_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+  overflow: hidden;
+	width: 1200px;
+	max-width: 100%;
+	height: auto;
+	margin-top: 10px;
+}
+
+#sub_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	overflow: hidden;
+	width: 1200px;
+	max-width: 100%;
+	height: auto;
+	margin-top: 15px;
+	display: none;
+}
+
+/************************************************************/
+.user_image_name_container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100%;
+	height: auto;
+}
+
+.user_image_container {
+	overflow: hidden;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  border: 1px solid #d2d2d2;
+}
+
+.user_image_container img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+#profile_name {
+  color: #3f3f3f;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 140%;
+  margin-right: 8px;
+}
+
+/************************************************************/
+.mypage_config_title_button_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.mypage_config_title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.config_title_config1616 {
+  fill: #b2b2b2;
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+}
+
+.mypage_config_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 2px 0;
+  margin-right: 4px;
+}
+
+.mypage_config_button span {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 126px;
+}
+
+.mypage_config_button span:after {
+  content:"\00a0";
+  display:block;
+  width: 4px;
+  height: 4px;
+  border: solid #b2b2b2;
+  border-width: 0 2px 2px 0;
+  position:absolute;
+  left: 2px;
+  top: 46%;
+  margin-top: -2px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+/************************************************************/
+#config_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: #f5f5f5;
+  color: #3f3f3f;
+  font-size: 14px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+  overflow: hidden;
+}
+
+.config_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding: 16px 8px;
+  border-top: 1px solid #d2d2d2;
+}
+
+.config_item:first-child {
+  border-top: none;
+}
+
+.config_item_title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/************************************************************/
+.profile_photo_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.profile_photo_container input[type="file"] {
+  display: none;
+}
+
+.profile_photo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 104px;
+  height: 104px
+}
+
+.profile_photo img {
+  object-fit: cover;
+  width: 104px;
+  height: 104px;
+  image-orientation: from-image;
+}
+
+.profile_photo_progress {
+  position: absolute;
+  width: 60%;
+  display: none;
+}
+
+.profile_status_total_container {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+}
+
+.profile_status {
+  color: #ffffff;
+  display: none;
+}
+
+.profile_total {
+  color: #ffffff;
+  display: none;
+}
+
+.profile_photo_button_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  width: 104px;
+  height: 104px;
+  padding: 16px 0;
+  border: 2px solid #d2d2d2;
+}
+
+.profile_photo_button_container .change_pic, .profile_photo_button_container .remove_profile_pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  color: #ffffff;
+  outline: none;
+  cursor: pointer;
+}
+
+.profile_photo_button_container .change_pic {
+  font-size: 32px;
+  font-weight: bold;
+  width: 104px;
+  height: 104px;
+}
+
+.profile_photo_button_container .remove_profile_pic {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 11px;
+  width: 40px;
+  height: 24px;
+  border: none;
+  border-radius: 12px;
+}
+
+/************************************************************/
+.user_name_container, .user_birthday_container, .user_age_container, .user_sex_container, .user_address_container, .user_introduction_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.user_name_inputform {
+  background: #ffffff;
+  color: #3f3f3f;
+  font-size: 16px;
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+/************************************************************/
+.config_item_title span {
+  color: #8BA340;
+  font-size: 13px;
+  line-height: 120%;
+  margin-left: 8px;
+}
+
+.user_birthday_select_item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.user_birthday_select_item:first-child {
+  margin-left: 0px;
+}
+
+.user_birthday_select_item SELECT, .disclose_select_item SELECT, .user_sex_select_item SELECT, .user_address_select_item SELECT {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 16px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user_birthday_select_item span {
+  margin-left: 8px;
+}
+
+/************************************************************/
+.disclose_select_item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.user_certification_container .disclose_select_item {
+  margin-top: 16px;
+  margin-left: 0;
+}
+
+/************************************************************/
+.user_sex_select_item, .user_address_select_item, .user_certification_select_item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/************************************************************/
+.user_certification_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.user_certification_select_item label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 16px;
+}
+
+.user_certification_select_item label:first-child {
+  margin-left: 0;
+}
+
+/************************************************************/
+.user_introduction_select_item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.user_introduction_select_item textarea {
+  color: #3f3f3f;
+  font-size: 16px;
+  width: 100%;
+  height: 100px;
+  padding: 0 8px;
+}
+
+/************************************************************/
+.user_config_button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#button_cancel {
+  background: #e6e6e6;
+  outline: none;
+  color: #8c8c8c;
+  font-size: 15px;
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+	margin-right: 20px;
+  cursor: pointer;
+}
+
+#submit_button, #add_sakagura_ok {
+  background: #C5CE51;
+  color: #3f3f3f;
+  font-size: 15px;
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+	cursor: pointer;
+}
+
+/************************************************************/
+@media only screen and (min-width: 560px) {
+  .config_item {
+    padding: 20px;
+  }
+
+  .user_certification_container {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .user_certification_container .disclose_select_item {
+    margin-top: 0;
+    margin-left: 20px;
+  }
+}
+
+@media only screen and (min-width: 1260px) {
+	#main_sub_container {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+}

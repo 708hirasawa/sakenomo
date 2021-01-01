@@ -1,0 +1,1381 @@
+#user_information {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #3f3f3f;
+  width: 1200px;
+  max-width: 96%;
+  height: auto;
+}
+
+#main_banner_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 1200px;
+  max-width: 96%;
+  height: auto;
+}
+
+#container_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  width: 1200px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 15px;
+}
+
+#banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  width: 1200px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 40px;
+}
+
+/************************************************************/
+.user_image_name_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+}
+
+.user_image_container {
+  overflow: hidden;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  border: 1px solid #d2d2d2;
+}
+
+.user_image_container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+#profile_name {
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 140%;
+  margin-right: 8px;
+}
+
+/************************************************************/
+.user_profile_trigger {
+  position: relative;
+  min-width: 20px;
+  max-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: 2px solid #d2d2d2;
+  cursor: pointer;
+}
+
+.user_profile_trigger .plus_minus_icon, .user_profile_trigger .plus_minus_icon span {
+  display: inline-block;
+  transition: all .3s;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
+
+.user_profile_trigger .plus_minus_icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.user_profile_trigger .plus_minus_icon span {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #d2d2d2;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.user_profile_trigger .plus_minus_icon span:nth-of-type(1) {
+  top: 6px;
+  left: 2px;
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+}
+
+.user_profile_trigger .plus_minus_icon span:nth-of-type(2) {
+  top: 6px;
+  left: 2px;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
+/*＋、－切り替え*/
+.user_profile_trigger .plus_minus_icon.active span:nth-of-type(1) {
+  display: none;
+}
+
+.user_profile_trigger .plus_minus_icon.active span:nth-of-type(2) {
+  top: 6px;
+  left: 2px;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+
+/************************************************************/
+.user_profile_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #3f3f3f;
+  width: 100%;
+  height: auto;
+  display: none;
+}
+
+.user_profile_title {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px;
+}
+
+.user_profile_content {
+  width: 100%;
+}
+
+.user_profile_text {
+  font-size: 13px;
+  line-height: 140%;
+  padding: 8px 16px;
+}
+
+.user_profile_column_container {
+  background: #f0f0f0;
+  margin: 4px 16px 8px 16px;
+}
+
+.user_profile_row {
+  color: #3f3f3f;
+  width: 100%;
+  height: auto;
+  border-top: 1px solid #ffffff;
+}
+
+.user_profile_row:first-child {
+  border-top: none;
+}
+
+.user_profile_column1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px 0 8px 0;
+  padding-left: 40px;
+}
+
+.user_profile_column1:before {
+  content:"\00a0";
+  display: block;
+  border: solid 9px #3f3f3f;
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: 16px;
+  top: 22px;
+  margin-top: -8px;
+}
+
+.user_profile_column1:after {
+  content:"\00a0";
+  display: block;
+  width: 3px;
+  height: 6px;
+  border: solid #f5f5f5;
+  border-width: 0 2px 2px 0;
+  position:absolute;
+  left: 23px;
+  top: 22px;
+  margin-top: -4px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.user_profile_column2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 140%;
+  width: 100%;
+  padding: 4px 8px 8px 24px;
+}
+
+/************************************************************/
+.user_activity_info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 12px;
+  line-height: 180%;
+  margin-top: 4px;
+}
+
+.user_activity_info li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 4px;
+  margin-right: 15px;
+}
+
+.user_activity_info li:last-child {
+  margin-right: 0px;
+}
+
+.user_activity_info li span {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#user_activity_nonda, #user_activity_sakagura, #user_activity_restaurant, #user_activity_store, #user_activity_follow, #user_activity_follower {
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.user_activity_info_heart2020, .user_activity_info_store3030, .user_activity_info_pin1616, .user_activity_info_people1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.user_activity_info_brewery2016 {
+  fill: #b2b2b2;
+  width: 20px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.user_activity_info_restaurant1816 {
+  fill: #b2b2b2;
+  width: 18px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+/************************************************************/
+.user_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.user_buttons li, #user_follow {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#e6e6e6, #ffffff);
+  color: #666666;
+  font-size: 13px;
+  font-weight: bold;
+  height: 28px;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  padding: 0 16px;
+  margin-right: 20px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.user_buttons li:last-child {
+  margin-right: 0;
+}
+
+.user_buttons li:first-child {
+  padding: 0;
+}
+
+.user_buttons li span {
+  font-weight: bold;
+}
+
+.mypage_config_link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666666;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  padding: 0 16px;
+}
+
+.user_buttons_config1616, .user_buttons_pin1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.user_buttons_trophy1216 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.user_buttons li:hover {
+  border: 1px solid #FF4545;
+}
+
+/************************************************************/
+#table_wrapper {
+  width: 100%;
+}
+
+#tab_main {
+  width: 1200px;
+  max-width: 100%;
+}
+
+.simpleTabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  width: 100%;
+  height: auto;
+}
+
+.simpleTabs li {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  flex-grow: 1;
+}
+
+.simpleTabs li a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+  color: #8c8c8c;
+  font-size: 11px;
+  width: 100%;
+  height: 56px;
+  margin-left: 2px;
+}
+
+.simpleTabs li:first-child a {
+  margin-left: 0;
+}
+
+.simpleTabs li a.active {
+  background: #D8E460;
+  color: #000000;
+  font-weight: bold;
+}
+
+.simpleTabs li a span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.simpleTabs li a:before {
+  position: absolute;
+  content: '';
+  bottom: -8px;
+  border-top: 8px solid #D8E460;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  display: none;
+}
+
+.simpleTabs li a.active:before {
+  display: block;
+}
+
+.simpleTabs li a span span {
+  font-weight: bold;
+}
+
+.simpleTabs_sake3630, .simpleTabs_brewery3630, .simpleTabs_restaurant3630, .simpleTabs_camera3630 {
+  fill: #8c8c8c;
+  width: 24px;
+  height: 20px;
+  margin-bottom: 4px;
+}
+
+.simpleTabs_store3030, .simpleTabs_reviewers3030 {
+  fill: #8c8c8c;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 4px;
+}
+
+.simpleTabs a.active .simpleTabs_sake3630, .simpleTabs a.active .simpleTabs_brewery3630, .simpleTabs a.active .simpleTabs_restaurant3630, .simpleTabs a.active .simpleTabs_store3030, .simpleTabs a.active .simpleTabs_camera3630, .simpleTabs a.active .simpleTabs_reviewers3030 {
+  fill: #000000;
+}
+
+/************************************************************/
+#tab_sake, #tab_sakagura, #tab_syuhanten, #tab_users {
+  width: 100%;
+  height: auto;
+}
+
+.tab_sake_sort_container, .tab_sakagura_sort_container, .tab_users_sort_container {
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+/************************************************************/
+.display_selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+  width: 100%;
+}
+
+.display_selection_button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: #d2d2d2;
+  color: #ffffff;
+  width: 128px;
+  height: 32px;
+  margin-right: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.display_selection_button:last-child {
+  margin-right: 0;
+}
+
+.display_selection .selected {
+  background: #22445B;
+}
+
+.display_selection .selected span {
+  color: #ffffff;
+}
+
+.display_selection .selected svg {
+  fill: #ffffff;
+}
+
+.display_selection_button span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.display_selection_heart2020, .display_selection_pin1616, .display_selection_people1616 {
+  fill: #ffffff;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.display_selection_review1816 {
+  fill: #ffffff;
+  width: 18px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+/************************************************************/
+.user_drop_down {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.drop_down_select_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.sake_selection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 16px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/************************************************************/
+#sake_sort, #user_sort {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.sake_search_icon, .sake_sort_icon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: #e6e6e6;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.sake_search_search2020 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 12px;
+}
+
+.sake_sort_sort1214 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 14px;
+}
+
+.click_sort_date, .click_sort_read, .click_sort_ranking {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0740A5;
+  font-size: 13px;
+  height: 20px;
+  padding: 0 4px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+/************************************************************/
+.result_count_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  color: #3f3f3f;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+/************************************************************/
+.user_nonda_link {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #000000;
+  text-decoration: none;
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+.user_nonda_link:first-child {
+  margin-top: 0;
+}
+
+.user_nonda_sake_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+}
+
+.user_nonda_sake_brewery_date_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: auto;
+  height: auto;
+  margin-right: 0;
+  flex-grow: 1;
+}
+
+.user_nonda_sake_name {
+  color: #0740A5;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 140%;
+}
+
+.user_nonda_brewery_date_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 140%;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.user_nonda_brewery_date_container div:first-child {
+  margin-right: 8px;
+}
+
+.user_nonda_date {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.custom_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#e6e6e6, #ffffff);
+  height: 28px;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  padding: 0 16px;
+  transition: 0.3s;
+}
+
+.custom_button:first-child {
+  margin-bottom: 8px;
+}
+
+.custom_button:hover {
+  border: 1px solid #FF4545;
+}
+
+.followed {
+  background: linear-gradient(#EDCACA, #ffffff);
+  border: 1px solid #FF4545;
+  transition: 0.3s;
+}
+
+.followed .search_result_button_pin1616 {
+  fill: #FF4545;
+	transition: 0.3s;
+}
+
+.button_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_result_button_pin1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+  transition: 0.3s;
+}
+
+.search_result_button_writing1816 {
+  fill: #b2b2b2;
+  width: 18px;
+  height: 16px;
+  margin-right: 5px;
+  transition: 0.3s;
+}
+
+.button_text {
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  color: #666666;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/************************************************************/
+.nonda_rank {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-top: 1px dotted #d2d2d2;
+}
+
+.review_star_rating {
+  position: relative;
+  width: 100px;
+  height: 20px;
+  font-size: 20px;
+  margin-top: 8px;
+}
+.review_star_rating_front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  color: #AAC81E;
+}
+.review_star_rating_back {
+  color: #d2d2d2;
+}
+
+.review_sake_rate {
+  color: #E05314;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 8px;
+}
+
+/************************************************************/
+.user_nonda_subject_message_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-top: 1px dotted #d2d2d2;
+}
+
+.user_nonda_subject {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.user_nonda_message {
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 140%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  width: 100%;
+  max-height: 56px;
+  margin: 8px 0;
+}
+
+/************************************************************/
+.review_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-top: 1px dotted #d2d2d2;
+}
+
+.review_image {
+  overflow: hidden;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #d2d2d2;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.review_image:last-child {
+  margin-right: 0;
+}
+
+.review_image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/************************************************************/
+.tastes, .spec {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-top: 1px dotted #d2d2d2;
+}
+
+.tastes_item, .spec_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  width: 33.333333%;
+  height: 36px;
+  padding: 0 8px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  border-right: 1px solid #e6e6e6;
+}
+
+.tastes_item:nth-child(3n) {
+  border-right: none;
+}
+
+#sake_table .spec_item:nth-child(1), #sake_table .spec_item:nth-child(5) {
+  display: none;
+}
+
+#sake_table .spec_item:nth-child(4) {
+  border-right: none;
+}
+
+#sakagura_table .spec_item:nth-child(3), #users_table .spec_item:nth-child(3) {
+  border-right: none;
+}
+
+.tastes_title, .spec_title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.tastes_item:first-child .tastes_title {
+  font-size: 8px;
+}
+
+.tastes_item_flavor1816, .tastes_item_aroma1216, .tastes_item_body1216, .tastes_item_clear3030, .tastes_item_sweetness3030, .tastes_item_umami3030, .tastes_item_acidity3030, .tastes_item_bitter1216, .tastes_item_yoin3030 {
+  fill: #b2b2b2;
+  margin-right: 5px;
+}
+
+.tastes_item_flavor1816 {
+  width: 18px;
+  height: 16px;
+}
+
+.tastes_item_clear3030, .tastes_item_sweetness3030, .tastes_item_umami3030, .tastes_item_acidity3030, .tastes_item_yoin3030 {
+  width: 16px;
+  height: 16px;
+}
+
+.tastes_item_aroma1216, .tastes_item_body1216, .tastes_item_bitter1216 {
+  width: 12px;
+  height: 16px;
+}
+
+.spec_item_tokuteimeisho1616, .spec_item_alc1616, .spec_item_rice1616, .spec_item_cleanedrice1616, .spec_item_nihonshudo1616, .spec_item_sando1616, .spec_item_aminosando1616, .spec_item_bottle1616, .spec_item_visit1616, .spec_item_kurashop1616, .spec_item_heart2020, .spec_item_pin1616, .spec_item_people1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.tastes_value_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.taste_value {
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-left: 4px;
+}
+
+.spec_info {
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.taste_value_flavor {
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.tastes_bar_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 10px;
+}
+
+.tastes_bar_container .user_input_range {
+  width: 100%;
+}
+
+.tastes_bar_container .user_input_range[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #d2d2d2;
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+}
+.tastes_bar_container .user_input_range[type="range"]:focus, .tastes_bar_container .user_input_range[type="range"]:active {
+  outline: none;
+}
+
+.tastes_bar_container .user_input_range[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  width: 10px;
+  height: 10px;
+  display: block;
+  border: 2px solid #009696;
+  background-color: #ffffff;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+/************************************************************/
+#sake_table, #sakagura_table, #users_table {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.navigate_page_no_registry {
+  background: #f5f5f5;
+  color: #8c8c8c;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px;
+  margin-top: 24px;
+  border: 2px dotted #d2d2d2;
+}
+
+/************************************************************/
+.search_result_rank {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-top: 1px dotted #d2d2d2;
+}
+
+.search_result_star_rating {
+  position: relative;
+  width: 100px;
+  height: 20px;
+  font-size: 20px;
+  margin-top: 8px;
+}
+.search_result_star_rating_front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  color: #AAC81E;
+}
+.search_result_star_rating_back {
+  color: #d2d2d2;
+}
+
+.search_result_sake_rate {
+  color: #E05314;
+	font-size: 18px;
+	font-weight: bold;
+	margin-left: 5px;
+  margin-top: 8px;
+}
+
+/************************************************************/
+.searchRow_link, .sakaguraRow_link, .syuhantenRow_link, .usersRow_link  {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #000000;
+  text-decoration: none;
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+}
+
+.searchRow_link:first-child, .sakaguraRow_link:first-child, .syuhantenRow_link:first-child, .usersRow_link:first-child {
+  margin-top: 0;
+}
+
+.search_result_name_container, .search_sakagura_result_name_container, .search_syuhanten_result_name_container, .search_users_result_name_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.search_result_brewery_date_container, .search_sakagura_result_pref_date_container, .search_syuhanten_result_pref_date_container, .search_result_profile_date_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 140%;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.search_sakagura_result_brewery_image, .search_users_result_brewery_image {
+  overflow: hidden;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border: 1px solid #d2d2d2;
+  margin-right: 8px;
+}
+
+.search_result_sake_image img, .search_sakagura_result_brewery_image img, .search_syuhanten_result_store_image img, .search_users_result_brewery_image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.search_result_sake_image {
+  overflow: hidden;
+  width: 70px;
+  min-width: 70px;
+  height: 80px;
+  border: 1px solid #d2d2d2;
+  margin-right: 8px;
+}
+
+.search_result_sake_brewery_date_container, .search_sakagura_result_brewery_pref_date_container, .search_syuhanten_result_store_pref_date_container, .search_users_result_name_profile_date_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: auto;
+  height: auto;
+  margin-right: 8px;
+  flex-grow: 1;
+}
+
+.search_result_sake, .search_sakagura_result_brewery, .search_syuhanten_result_store, .search_users_result_name {
+  color: #0740A5;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 140%;
+}
+
+.search_result_date {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.search_result_button_container, .search_sakagura_result_button_container, .search_syuhanten_result_button_container, .search_users_result_button_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: auto;
+  min-width: 54px;
+  height: auto;
+}
+
+/************************************************************/
+#dialog_addimage {
+	position: fixed;
+	display: none;
+
+	width:98%;
+	height:560px;
+
+	top: 50%;
+	left: 50%;
+	z-index:200;
+
+	margin-top: -280px; /* Negative half of height. */
+	margin-left: -49%; /* Negative half of width. */
+
+	text-align: left;
+	background-color: #1F2735;
+	color:#fff;
+	padding:4px;
+	font-size: 9pt;
+
+	//opacity: .85;
+	//filter: alpha(opacity = 50);
+	background: rgba(31, 39, 53, 0.85);
+}
+
+/*********************************************************/
+.nondaview {
+	overflow:auto;
+	min-height:34px;
+	padding:2px;
+	margin:4px;
+	border:1px solid #c6c6c6;
+}
+
+/*********************************************************/
+#ad1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+  border-top: 1px solid #d2d2d2;
+}
+
+#search_background {
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  position: fixed;
+  background-color: #ffffff;
+  color: #aaaaaa;
+  opacity: .9;
+  filter: alpha(opacity = 90);
+}
+
+#inner_background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.loader {
+  border: 2px solid #3498db;
+  border-radius: 50%;
+  border-top: 2px solid #ffffff;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/*********************************************************/
+@media only screen and (min-width: 340px) {
+  .tastes_item:first-child .tastes_title {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (min-width: 370px) {
+  .tastes_item:first-child .tastes_title {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (min-width: 560px) {
+  .search_result_sake_image {
+    width: 80px;
+    min-width: 80px;
+  }
+
+  .search_result_sake {
+    font-size: 16px;
+  }
+
+  .search_result_brewery_date_container, .search_sakagura_result_pref_date_container, .search_syuhanten_result_pref_date_container, .search_result_profile_date_container {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .search_result_brewery, .search_result_profile {
+    margin-right: 20px;
+  }
+
+  .search_result_button_container {
+    min-width: 110px;
+  }
+
+  .search_sakagura_result_button_container, .search_syuhanten_result_button_container {
+    min-width: 124px;
+  }
+
+  .search_users_result_button_container {
+    min-width: 112px;
+  }
+
+  .search_result_button_pin1616 {
+    margin-right: 5px;
+  }
+
+  .button_text {
+    display: flex;
+  }
+
+  .user_nonda_sake_brewery_date_container {
+    margin-right: 8px;
+  }
+
+  .user_nonda_date {
+    margin-left: 20px;
+  }
+
+  .tastes_item, .spec_item {
+    width: auto;
+    max-width: 120px;
+    padding: 0 10px;
+  }
+
+  .tastes_item:nth-child(3n) {
+    border-right: 1px solid #e6e6e6;
+  }
+
+  .tastes_item:last-child {
+    border-right: none;
+  }
+
+  #sake_table .spec_item:nth-child(1), #sake_table .spec_item:nth-child(5) {
+    display: flex;
+  }
+
+  #sake_table .spec_item:nth-child(4) {
+    border-right: 1px solid #e6e6e6;
+  }
+
+  #sake_table .spec_item:last-child {
+    border-right: none;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .simpleTabs li a {
+    font-size: 15px;
+    height: 40px;
+  }
+
+  .simpleTabs li a span {
+    flex-direction: row;
+  }
+
+  .simpleTabs_sake3630, .simpleTabs_brewery3630, .simpleTabs_restaurant3630, .simpleTabs_store3030, .simpleTabs_reviewers3030, .simpleTabs_camera3630 {
+    margin-right: 8px;
+    margin-bottom: 0px;
+  }
+
+  .simpleTabs_sake3630, .simpleTabs_brewery3630, .simpleTabs_restaurant3630, .simpleTabs_camera3630 {
+    width: 30px;
+    height: 25px;
+  }
+
+  .simpleTabs_store3030, .simpleTabs_reviewers3030 {
+    width: 25px;
+    height: 25px;
+  }
+
+  .user_nonda_sake_name {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1260px) {
+  #main_banner_container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  #container_wrapper {
+    width: 880px;
+  }
+
+  #banner {
+    width: 300px;
+    margin-top: 15px;
+  }
+
+  #ad1 {
+    padding-top: 0;
+    border-top: none;
+  }
+}
