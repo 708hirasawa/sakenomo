@@ -1,0 +1,139 @@
+#registry_user_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 96%;
+  max-width: 600px;
+  height: auto;
+	color: #3f3f3f;
+  font-size: 14px;
+}
+
+/************************************************************/
+.registry_user_title {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  padding: 8px;
+  margin-top: 20px;
+}
+
+#registry_user_content {
+  background: #f5f5f5;
+  width: 100%;
+  height: auto;
+  padding: 24px 16px;
+  border-radius: 8px;
+  margin-top: 20px;
+  border: 1px solid #d2d2d2;
+}
+
+/************************************************************/
+.row_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.column1_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  line-height: 140%;
+}
+
+.column1 {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #8BA340;
+  font-size: 16px;
+}
+
+.column2 {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 140%;
+  width: 100%;
+}
+
+.column2 a {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #C5CE51;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+  width: 240px;
+  height: 40px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.top_link_button {
+  background: #e6e6e6;
+  text-decoration: none;
+  height: 40px;
+  padding: 0 16px;
+  margin-top: 40px;
+  border-radius: 20px;
+  border: 1px solid #d2d2d2;
+}
+
+.top_link_button span {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8c8c8c;
+  font-size: 16px;
+  width: 90px;
+  height: 40px;
+}
+
+.top_link_button span:after {
+  content:"\00a0";
+  display:block;
+  width: 4px;
+  height: 4px;
+  border: solid #b2b2b2;
+  border-width: 0 2px 2px 0;
+  position:absolute;
+  right: 0;
+  top: 46%;
+  margin-top: -2px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/************************************************************/
+@media only screen and (min-width: 560px) {
+  #registry_user_content {
+    padding: 32px;
+  }
+}
