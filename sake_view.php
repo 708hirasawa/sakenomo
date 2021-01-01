@@ -108,16 +108,16 @@ require_once("searchbar.php");
 
 			global $flavor_table;
 			$i = 0;
-	
+
 			for($i = 0; $i < count($flavor_table); $i++) {
-	
+
 				if($value == $flavor_table[$i][0]) {
 					$image_value = $flavor_table[$i][1];
 					$flavor_name = $flavor_table[$i][2];
 					break;
 				}
 			}
-	
+
 			return 1;
 		}
 
@@ -842,20 +842,20 @@ require_once("searchbar.php");
 
 		$sql = "SELECT * FROM TABLE_NONDA WHERE sake_id = '$sake_id'";
 		$res = executequery($db, $sql);
-	
+
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// creating a lookup table
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 		$flavor_lookupTable = [];
 		$lookupTable_count = 0;
 		$bFound = false;
-	
+
 		while($rd = getnextrow($res)) {
 			$flavor_array = explode(',', $rd["flavor"]);
-	
+
 			if(count($flavor_array) >= 1) {
-	
+
 				/* first flavor */
 				for($j = 0; $j < count($flavor_lookupTable); $j++) {
 					if($flavor_array[0] == $flavor_lookupTable[$j]['flavor']) {
@@ -865,14 +865,14 @@ require_once("searchbar.php");
 						break;
 					}
 				}
-	
+
 				if(!$bFound && $flavor_array[0]) {
 					$flavor_lookupTable[] = array('flavor' => $flavor_array[0], 'count' => 1);
 					$lookupTable_count++;
 				}
-	
+
 				$bFound = false;
-	
+
 				/* second flavor */
 				if(count($flavor_array) > 1) {
 					for($j = 0; $j < count($flavor_lookupTable); $j++) {
@@ -883,17 +883,17 @@ require_once("searchbar.php");
 							break;
 						}
 					}
-	
+
 					if(!$bFound && $flavor_array[0]) {
 						$flavor_lookupTable[] = array('flavor' => $flavor_array[1], 'count' => 1);
 						$lookupTable_count++;
 					}
 				}
-	
+
 				$bFound = false;
 			}
 		}
-	
+
 		usort($flavor_lookupTable, 'sortByCount');
 
 		/////////////////////////////////////////////////////////
@@ -1189,7 +1189,7 @@ require_once("searchbar.php");
 												$i = $i + 1;
 											print('</li>');
 										}
-										
+
 									print("</ul>");
 								}
 								else
@@ -1835,7 +1835,7 @@ require_once("searchbar.php");
 
 								if($p_max > 25) {
 
-									print('<button id="prev_sake">前の'.$p_max .'件</button>');
+									print('<button id="prev_sake_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 									$i = 1;
 
 									print('<button class="pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -1845,7 +1845,7 @@ require_once("searchbar.php");
 										print('<button class="pageitems">' .$i .'</button>');
 									}
 
-									print('<button id="next_sake">次の' .$p_max .'件</button>');
+									print('<button id="next_sake_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 								}
 							print("</div>");
 						}
@@ -2595,7 +2595,7 @@ require_once("searchbar.php");
 								//$sql = "SELECT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date, sake_name FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.email = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id' ORDER BY filename"." LIMIT $limit";
 								$sql = "SELECT DISTINCT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date FROM TABLE_NONDA, SAKE_IMAGE, USERS_J WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND USERS_J.email = SAKE_IMAGE.contributor AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC LIMIT $limit";
 								$result = executequery($db, $sql);
-								
+
 
 
 								if($count_result > $p_max) {
@@ -2645,7 +2645,7 @@ require_once("searchbar.php");
 									$i = 0;
 									$numPage = ceil($count_result / $limit);
 
-									print('<button id="prev_photo">前の'.$p_max .'件</button>');
+									print('<button id="prev_sake_photo"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 
 									print('<button class="pageitems" style="background:#22445B; color:#ffffff;">' .($i + 1) .'</button>');
 
@@ -2654,7 +2654,7 @@ require_once("searchbar.php");
 										print('<button class="pageitems">' .($i + 1) .'</button>');
 									}
 
-									print('<button id="next_photo" class="active">次の' .$p_max .'件</button>');
+									print('<button id="next_sake_photo" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 							}
 
 							print("</div>");
@@ -4009,14 +4009,14 @@ $(function() {
 			////////////////////////////////////////
 
 			if(in_disp_from >= disp_max)
-				$('#prev_photo').addClass('active');
+				$('#prev_sake_photo').addClass('active');
 			else
-				$('#prev_photo').removeClass('active');
+				$('#prev_sake_photo').removeClass('active');
 
 			if((in_disp_from + disp_max) > $('#photoframe').data('count'))
-				$('#next_photo').removeClass('active');
+				$('#next_sake_photo').removeClass('active');
 			else
-				$('#next_photo').addClass('active');
+				$('#next_sake_photo').addClass('active');
 			////////////////////////////////////////
 
 			$('#photoframe').data('in_disp_from', in_disp_from)
@@ -4050,7 +4050,7 @@ $(function() {
 		searchPhoto(in_disp_from, disp_max, data, false);
 	});
 
-	$(document).on('click', '#prev_photo', function(){
+	$(document).on('click', '#prev_sake_photo', function(){
 
 		var numPages = 5;
 		var limit = $('#photoframe').data('limit');
@@ -4065,7 +4065,7 @@ $(function() {
 		searchPhoto(in_disp_from, disp_max, data, false);
 	});
 
-	$(document).on('click', '#next_photo', function(){
+	$(document).on('click', '#next_sake_photo', function(){
 
 		var in_disp_from = $('#photoframe').data('in_disp_from') + $('#photoframe').data('limit');
 		var disp_max = 12;

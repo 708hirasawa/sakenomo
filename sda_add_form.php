@@ -20,7 +20,6 @@ require_once("searchbar.php");
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/manage_edit_sakagura.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-<link rel="stylesheet" type="text/css" href="css/sda_add_form.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>

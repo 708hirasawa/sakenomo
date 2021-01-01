@@ -20,7 +20,6 @@ require_once("searchbar.php");
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/manage_edit_inshokuten.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-<link rel="stylesheet" type="text/css" href="css/inshokuten_add_form.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
@@ -38,6 +37,9 @@ require_once("searchbar.php");
     write_HamburgerLogo();
     write_search_bar();
     write_Nonda();
+
+    $inshokuten_id   = $_GET['inshokuten_id'];
+    $inshokuten_name = $_GET['inshokuten_name'];
   ?>
 
   <div id="container">
@@ -160,15 +162,17 @@ require_once("searchbar.php");
 
 jQuery(document).ready(function(){
 
+  var inshokuten_id   = <?php echo json_encode($inshokuten_id); ?>;
+  var inshokuten_name = <?php echo json_encode($inshokuten_name); ?>;
+
   $("body").wrapInner('<div id="wrapper"></div>');
   $('.inshokuten_container').css({"display":"flex"});
 
   $('.hamburger').click(function () {
-
     if($('.hamburger').hasClass('is-open')) {
-			$('.overlay').hide();
-			$('.hamburger').removeClass('is-open');
-			$('.hamburger').addClass('is-closed');
+      $('.overlay').hide();
+      $('.hamburger').removeClass('is-open');
+      $('.hamburger').addClass('is-closed');
     } else {
       $('.overlay').show();
       $('.hamburger').removeClass('is-closed');
@@ -176,45 +180,62 @@ jQuery(document).ready(function(){
     }
 
     $('#wrapper').toggleClass('toggled');
-		$('.header').toggleClass('toggled');
+    $('.header').toggleClass('toggled');
   });
 
-	$('#container').createAutoKana({
-			sakagura_name : $('input[name="syuhanten_name"]'),
-			sakagura_read : $('input[name="syuhanten_read"]'),
-			sakagura_english : $('input[name="syuhanten_english"]')
-	});
+  $('#container').createAutoKana({
+    sakagura_name : $('input[name="syuhanten_name"]'),
+    sakagura_read : $('input[name="syuhanten_read"]'),
+    sakagura_english : $('input[name="syuhanten_english"]')
+  });
+
+  if(inshokuten_id && inshokuten_id != "") {
+    /* 確認画面ボタン　更新用 */
+    $('input[name="submit_button"]').css({"display":"none"});
+    $('input[name="update_button"]').css({"display":"block"});
+    $("body").trigger( "open_edit_inshokuten", [ inshokuten_id, inshokuten_name ] );
+  } else {
+    /* 確認画面ボタン　登録用 */
+    $('#container input[name="submit_button"]').css({"display":"block"});
+    $('#container input[name="update_button"]').css({"display":"none"});
+
+    /* 自動カナ、ローマ字入力 */
+    /*$('#container .sakedata').createAutoKana({
+      inshokuten_name : $('#container input[name="inshokuten_name"]'),
+      inshokuten_read : $('#container input[name="inshokuten_read"]'),
+      inshokuten_english : $('#container input[name="inshokuten_english"]')
+    });*/
+  }
 
   var dialog_message = $("#dialog-message").dialog({
-      autoOpen: false,
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $(this).dialog( "close" );
-        }
+    autoOpen: false,
+    modal: true,
+    buttons: {
+      Ok: function() {
+        $(this).dialog( "close" );
       }
+    }
   });
 
   var dialog = $("#dialog-confirm").dialog({
-        autoOpen: false,
-        resizable: false,
-        height:640,
-        width:840,
-        modal: true,
+    autoOpen: false,
+    resizable: false,
+    height:640,
+    width:840,
+    modal: true,
 
-        buttons: {
-          追加: function() {
+    buttons: {
+      追加: function() {
+        var data = $("#form").serialize();
+        //alert("data:" + data);
 
-            var data = $("#form").serialize();
-            //alert("data:" + data);
-
-            $.ajax({
-                type: "post",
-                url: "syuhan_add.php",
-                data: data,
-            }).done(function(xml){
-                var str = $(xml).find("str").text();
-                //alert("success:" + str);
+        $.ajax({
+          type: "post",
+          url: "syuhan_add.php",
+          data: data,
+        }).done(function(xml){
+          var str = $(xml).find("str").text();
+          //alert("success:" + str);
 
                 if(str == "success")
                 {
