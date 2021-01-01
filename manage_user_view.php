@@ -2248,7 +2248,7 @@ $(function() {
 					var username = <?php echo json_encode($username); ?>;
 					var i = 0;
 
-					//alert("success:" + count_result);
+					//alert("success:" + sake.length);
 					//alert("success:" + data[0].sql);
 					//alert("sake.length:" + sake.length);
 					$('#sake_nomitai .review_result_sake_page').empty()
@@ -2308,13 +2308,13 @@ $(function() {
 		}).done(function(data){
 
 					var i = 0;
-					var sake = data[0].sake;
+					var sake = data[0].result;
 					var path = "images/icons/noimage_user30.svg";
 
 					$('#sake_edit .review_result_sake_page').empty();
 
 					//alert("success:" + data[0].sql);
-					//alert("success: count:" + data[0].count);
+					//alert("success: count:" + sake);
 
 					for(i = 0; i < sake.length; i++)
 					{
@@ -2373,11 +2373,11 @@ $(function() {
 			//alert("showPos:" + showPos + " position:" + position);
 
 			var data = "&count_query=" + count_query +
-									"&search_category=" + search_category +
+									"&category=" + search_category +
 									"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
 									"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-									"&in_disp_from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sake_edit .page_number_container").data('in_disp_to') +
+									"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
+									"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
 									"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
@@ -2421,12 +2421,12 @@ $(function() {
 					$("#sake_edit .page_number_container").data('in_disp_to', in_disp_to);
 
 					var data = "&count_query=" + count_query +
-											"&search_category=" + search_category +
+											"&category=" + search_category +
 											"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
 											"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-											"&in_disp_from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sake_edit .page_number_container").data('in_disp_to') +
-											"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
+											"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
+											"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
+											"&in_disp_max=" + $("#sake_edit .page_number_container").data('in_disp_max');
 
 					//alert("search_sake:" + data);
 					searchSake(data);
@@ -2469,11 +2469,11 @@ $(function() {
 					$("#sake_edit .page_number_container").data('in_disp_to', in_disp_to);
 
 					var data = "&count_query=" + count_query +
-											"&search_category=" + search_category +
+											"&category=" + search_category +
 											"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
 											"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-											"&in_disp_from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sake_edit .page_number_container").data('in_disp_to') +
+											"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
+											"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
 											"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
 
 					//alert("search_sake:" + data);
@@ -2498,12 +2498,12 @@ $(function() {
 			//alert("showPos:" + showPos + " position:" + position);
 
 			var data = "&count_query=" + count_query +
-									"&search_category=" + search_category +
+									"&category=" + search_category +
 									"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
 									"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-									"&in_disp_from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sake_edit .page_number_container").data('in_disp_to') +
-									"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
+									"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
+									"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
+									"&in_disp_max=" + $("#sake_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
 			searchSake(data);
@@ -2531,12 +2531,12 @@ $(function() {
 			//alert("showPos:" + showPos + " position:" + position);
 
 			var data = "&count_query=" + count_query +
-									"&search_category=" + search_category +
+									"&category=" + search_category +
 									"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
 									"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-									"&in_disp_from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sake_edit .page_number_container").data('in_disp_to') +
-									"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
+									"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
+									"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
+									"&in_disp_max=" + $("#sake_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
 			searchSake(data);
@@ -2564,12 +2564,12 @@ $(function() {
 			//alert("showPos:" + showPos + " position:" + position);
 
 			var data = "&count_query=" + count_query +
-									"&search_category=" + search_category +
+									"&category=" + search_category +
 									"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
 									"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-									"&in_disp_from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sake_edit .page_number_container").data('in_disp_to') +
-									"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
+									"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
+									"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
+									"&in_disp_max=" + $("#sake_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
 			searchSake(data);
@@ -2669,12 +2669,12 @@ $(function() {
 			$("#sake_edit .page_number_container").data('write_date_to', date2);
 
 			var data = "&count_query=" + count_query +
-									"&search_category=" + search_category +
+									"&category=" + search_category +
 									"&write_date_from=" + date1 +
 									"&write_date_to="   + date2 +
-									"&in_disp_from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sake_edit .page_number_container").data('in_disp_to') +
-									"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
+									"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
+									"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
+									"&in_disp_max=" + $("#sake_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
 			searchSake(data);
@@ -2724,12 +2724,11 @@ $(function() {
 					$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
 
 					var data = "search_type=" + search_type +
-											"&in_disp_from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sake_nomitai .page_number_container").data('in_disp_to') +
+											"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
+											"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
 											"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
 											"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
 											"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
-											"&username="+ username+
 											"&orderby="  + orderby;
 
 					//alert("search_sake:" + data);
@@ -2780,12 +2779,11 @@ $(function() {
 					$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
 
 					var data = "search_type=" + search_type +
-											"&in_disp_from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sake_nomitai .page_number_container").data('in_disp_to') +
+											"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
+											"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
 											"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
 											"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
 											"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
-											"&username="+username +
 											"&orderby="  + orderby;
 
 					//alert("search_sake:" + data);
@@ -2811,12 +2809,11 @@ $(function() {
 			//alert("showPos:" + showPos + " position:" + position);
 
 			var data = "search_type=" + search_type +
-									"&in_disp_from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sake_nomitai .page_number_container").data('in_disp_to') +
+									"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
+									"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
 									"&write_date_from=" + $("#sake_nomitai .page_number_container").data('write_date_from') +
 									"&write_date_to="   + $("#sake_nomitai .page_number_container").data('write_date_to') +
 									"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
-									"&username="+username+
 									"&orderby="  + orderby;
 
 			//alert("data:" + data);
@@ -2906,12 +2903,11 @@ $(function() {
 			//alert("showPos:" + showPos + " position:" + position);
 			var data = "&count_query=" + count_query +
 									"&search_type=" + search_type +
-									"&in_disp_from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
+									"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
 									"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
 									"&write_date_from=" + date1 +
 									"&write_date_to="   + date2 +
 									"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
-									"&username="+username+
 									"&orderby="  + orderby;
 
 			//alert("data:" + data);
@@ -3003,8 +2999,8 @@ $(function() {
 
 			var data = "&count_query=" + count_query +
 									"&search_type=" + search_type +
-									"&in_disp_from=" + $("#sakagura_favorite .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sakagura_favorite .page_number_container").data('in_disp_to') +
+									"&from=" + $("#sakagura_favorite .page_number_container").data('in_disp_from') +
+									"&to="	 + $("#sakagura_favorite .page_number_container").data('in_disp_to') +
 									"&write_date_from=" + date1 +
 									"&write_date_to="   + date2 +
 									"&username="+ username+
@@ -3075,14 +3071,14 @@ $(function() {
 
 			var index = $(this).parent().index();
 			var count_query = 1;
-		  var val1 = $("#user_account .sort_content SELECT:nth(0)").val();
+			var val1 = $("#user_account .sort_content SELECT:nth(0)").val();
 			var val2 = $("#user_account .sort_content SELECT:nth(1)").val();
 			var val3 = $("#user_account .sort_content SELECT:nth(2)").val();
 			var str1 = "", str2 = "";
 			var date1 = "", date2 = "";
 			var i = 1;
 
-		  $("#user_account .sort_content SELECT").prop("disabled", false);
+			$("#user_account .sort_content SELECT").prop("disabled", false);
 
 			if(val1 && val2 && val3)
 			{
@@ -3151,9 +3147,9 @@ $(function() {
 			//alert("showPos:" + showPos + " position:" + position);
 
 			var data = "&count_query=" + count_query +
-									"&search_category=" + search_category +
-									"&in_disp_from=" + $("#user_account .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#user_account .page_number_container").data('in_disp_to') +
+									"&category=" + search_category +
+									"&from=" + $("#user_account .page_number_container").data('in_disp_from') +
+									"&to="	 + $("#user_account .page_number_container").data('in_disp_to') +
 									"&write_date_from=" + date1 +
 									"&write_date_to="   + date2 +
 									"&disp_max="  + $("#user_account .page_number_container").data('in_disp_max');
@@ -3282,7 +3278,7 @@ $(function() {
 					$("#sake_nonda .page_number_container").data('in_disp_to', in_disp_to);
 
 					var data = "search_type=" + search_type +
-											"&in_disp_from=" + $("#sake_nonda .page_number_container").data('in_disp_from') +
+											"&from=" + $("#sake_nonda .page_number_container").data('in_disp_from') +
 											"&in_disp_to="	 + $("#sake_nonda .page_number_container").data('in_disp_max') +
 											"&disp_max="  + $("#sake_nonda .page_number_container").data('in_disp_max') +
 											"&orderby="  + orderby;
@@ -3328,7 +3324,7 @@ $(function() {
 					$("#sake_nonda .page_number_container").data('in_disp_to', in_disp_to);
 
 					var data = "search_type=" + search_type +
-											"&in_disp_from=" + $("#sake_nonda .page_number_container").data('in_disp_from') +
+											"&from=" + $("#sake_nonda .page_number_container").data('in_disp_from') +
 											"&in_disp_to="	 + $("#sake_nonda .page_number_container").data('in_disp_max') +
 											"&disp_max="  + $("#sake_nonda .page_number_container").data('in_disp_max') +
 											"&orderby="  + orderby;
@@ -3414,9 +3410,9 @@ $(function() {
 			//alert("showPos:" + showPos + " position:" + position);
 
 			var data = "&count_query=" + count_query +
-									"&search_category=" + search_category +
-									"&in_disp_from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
+									"&category=" + search_category +
+									"&from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
+									"&to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
 									"&in_disp_max="  + $("#sakagura_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
@@ -3457,9 +3453,9 @@ $(function() {
 					$("#sakagura_edit .page_number_container").data('in_disp_to', in_disp_to);
 
 					var data = "&count_query=" + count_query +
-											"&search_category=" + search_category +
-											"&in_disp_from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
+											"&category=" + search_category +
+											"&from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
+											"&to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
 											"&in_disp_max="  + $("#sakagura_edit .page_number_container").data('in_disp_max');
 
 					//alert("search_sake:" + data);
@@ -3504,9 +3500,9 @@ $(function() {
 					$("#sakagura_edit .page_number_container").data('in_disp_to', in_disp_to);
 
 					var data = "&count_query=" + count_query +
-											"&search_category=" + search_category +
-											"&in_disp_from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
+											"&category=" + search_category +
+											"&from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
+											"&to=" + $("#sakagura_edit .page_number_container").data('in_disp_to') +
 											"&in_disp_max="  + $("#sakagura_edit .page_number_container").data('in_disp_max');
 
 					//alert("search_sake:" + data);
@@ -3593,11 +3589,11 @@ $(function() {
 			});
 
 			var data = "&count_query=" + count_query +
-									"&search_category=" + search_category +
+									"&category=" + search_category +
 									"&write_date_from=" + date1 +
 									"&write_date_to="   + date2 +
-									"&in_disp_from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
+									"&from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
+									"&to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
 									"&in_disp_max="  + $("#sakagura_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
@@ -3695,8 +3691,8 @@ $(function() {
 
 			var data = "&count_query=" + count_query +
 									"&search_type=" + search_type +
-									"&in_disp_from=" + $("#sakagura_favorite .page_number_container").data('in_disp_from') +
-									"&in_disp_to="	 + $("#sakagura_favorite .page_number_container").data('in_disp_to') +
+									"&from=" + $("#sakagura_favorite .page_number_container").data('in_disp_from') +
+									"&to="	 + $("#sakagura_favorite .page_number_container").data('in_disp_to') +
 									"&write_date_from=" + $("#sakagura_favorite .page_number_container").data('write_date_from') +
 									"&write_date_to="  + $("#sakagura_favorite .page_number_container").data('write_date_to') +
 									"&in_disp_max="  + $("#sakagura_favorite .page_number_container").data('in_disp_max');
@@ -3743,8 +3739,8 @@ $(function() {
 
 					var data = "&count_query=" + count_query +
 											"&search_type=" + search_type +
-											"&in_disp_from=" + $("#sakagura_favorite .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sakagura_favorite .page_number_container").data('in_disp_to') +
+											"&from=" + $("#sakagura_favorite .page_number_container").data('in_disp_from') +
+											"&to="	 + $("#sakagura_favorite .page_number_container").data('in_disp_to') +
 											"&write_date_from=" + $("#sakagura_favorite .page_number_container").data('write_date_from') +
 											"&write_date_to="  + $("#sakagura_favorite .page_number_container").data('write_date_to') +
 											"&in_disp_max="  + $("#sakagura_favorite .page_number_container").data('in_disp_max');
@@ -3792,8 +3788,8 @@ $(function() {
 
 					var data = "&count_query=" + count_query +
 											"&search_type=" + search_type +
-											"&in_disp_from=" + $("#sakagura_favorite .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sakagura_favorite .page_number_container").data('in_disp_to') +
+											"&from=" + $("#sakagura_favorite .page_number_container").data('in_disp_from') +
+											"&to=" + $("#sakagura_favorite .page_number_container").data('in_disp_to') +
 											"&write_date_from=" + $("#sakagura_favorite .page_number_container").data('write_date_from') +
 											"&write_date_to="  + $("#sakagura_favorite .page_number_container").data('write_date_to') +
 											"&in_disp_max="  + $("#sakagura_favorite .page_number_container").data('in_disp_max');
