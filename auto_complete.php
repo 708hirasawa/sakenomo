@@ -1,9 +1,9 @@
-ï»¿<?php
+<?php
 require_once("db_functions.php");
 
 if(isset($_POST["search_text"]) && $_POST["search_text"] == "")
 {
-	die("å…¥åŠ›ã‚¨ãƒ©ãƒ¼ .<br />");
+	die("“ü—ÍƒGƒ‰[ .<br />");
 }
 
 $username = $_COOKIE['login_cookie'];
@@ -11,18 +11,18 @@ $sake_name = sqlite3::escapeString( $_POST["search_text"] );
 
 if(!$db = opendatabase("sake.db"))
 {
-	die("ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æ¥ç¶šã‚¨ãƒ©ãƒ¼ .<br />");
+	die("ƒf[ƒ^ƒx[ƒXÚ‘±ƒGƒ‰[ .<br />");
 }
 
 if($_POST["search_type"] == 1)
 {
 	/***********
-	 * é…’
+	 * ğ
 	 ***********/
 	//$condition = "WHERE (sake_name LIKE \"".$sake_name."%\" OR sake_read LIKE \"".$sake_name."%\") AND SAKE_J.sakagura_id = SAKAGURA_J.id";
 
 	$sake_name = sqlite3::escapeString($_POST["search_text"]);
-	$sake_name = str_replace("ã€€", " ", $sake_name);
+	$sake_name = str_replace("@", " ", $sake_name);
 	$keyword_elements = explode(' ', $sake_name);
 	$condition = "";
 
@@ -79,7 +79,7 @@ if($_POST["search_type"] == 1)
 else if($_POST["search_type"] == 2)
 {
 	/**************
-	 * é…’è”µ
+	 * ğ‘ 
 	 **************/
 	$condition = "WHERE sakagura_name LIKE \"" .$sake_name. "%\" OR sakagura_read LIKE \"" .$sake_name."%\" OR sakagura_search LIKE \"" .$sake_name."%\"";
 	$sql = "SELECT sakagura_name as sake_name, sakagura_read as sake_read, id as sake_id, pref, address, phone, url FROM SAKAGURA_J " .$condition." ORDER BY sakagura_read"." LIMIT ".$_POST["search_limit"];
@@ -106,7 +106,7 @@ else if($_POST["search_type"] == 2)
 else if($_POST["search_type"] == 3)
 {
 	/**************
-	 * é…’è²©åº—
+	 * ğ”Ì“X
 	 **************/
 	$condition = "WHERE syuhanten_name LIKE \"" .$sake_name. "%\" OR syuhanten_read LIKE \"" .$sake_name."%\"";
 	$sql = "SELECT syuhanten_name as sake_name, syuhanten_read as sake_read, syuhanten_id as sake_id FROM SYUHANTEN_J " .$condition." ORDER BY syuhanten_read"." LIMIT ".$_POST["search_limit"];
@@ -131,7 +131,7 @@ else if($_POST["search_type"] == 3)
 else if($_POST["search_type"] == 4)
 {
 	/**************
-	 * ãƒ¦ãƒ¼ã‚¶ãƒ¼
+	 * ƒ†[ƒU[
 	 **************/
 	$condition = "WHERE username LIKE \"" .$sake_name. "%\" OR fname LIKE \"" .$sake_name."%\" OR email LIKE \"" .$sake_name."%\"";
 	$sql = "SELECT username, fname, lname, bdate, email, phone FROM USERS_J " .$condition." ORDER BY username"." LIMIT ".$_POST["search_limit"];
