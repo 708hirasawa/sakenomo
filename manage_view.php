@@ -391,7 +391,7 @@ $(function() {
         $.ajax({
             type: "POST",
             url: "auto_complete.php",
-						data: data,
+			data: data,
             dataType: 'json',
 
         }).done(function(data){
@@ -856,7 +856,7 @@ $(function() {
 
 				for(var i = 0; i < data.length; i++)
 				{
-					var retobj = $('#tab_user .user_content').append('<li data-username=' + data[i].username + ' data-fname=' + data[i].fname + ' data-email=' + data[i].email + '><img src="images/icons/noimage80.svg">' + data[i].username + '</li>');
+					var retobj = $('#tab_user .user_content').append('<li data-username=' + data[i].username + ' data-fname=' + data[i].fname + ' data-email=' + data[i].email + '><img src="images/icons/noimage80.svg">' + data[i].username + '\t' + data[i].email + '</li>');
 				}
 
 				if($("#tab_user .user_input").val().length > 0)
