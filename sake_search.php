@@ -6,6 +6,77 @@ require_once("nonda.php");
 require_once("searchbar.php");
 //require_once("portal_menu.php");
 //require_once("user_mail.php");
+
+$flavor_table = array(array("10", "greenapple4040", "青りんご"),
+    array("11", "strawberry4040", "いちご"),
+    array("12", "orange4040", "オレンジ"),
+    array("41", "kiwi4040", "キウイ"),
+    array("13", "grapefruit4040", "グレープフルーツ"),
+    array("43", "watermelon4040", "スイカ"),
+    array("14", "nashi4040", "梨"),
+    array("15", "pineapple4040", "パイナップル"),
+    array("16", "banana4040", "バナナ"),
+    array("42", "grape4040", "ぶどう"),
+    array("17", "muscat4040", "マスカット"),
+    array("18", "mango4040", "マンゴー"),
+    array("19", "melon4040", "メロン"),
+    array("20", "peach4040", "桃"),
+    array("21", "pear4040", "洋梨"),
+    array("22", "lychee4040", "ライチ"),
+    array("23", "apple4040", "りんご"),
+    array("24", "lemon4040", "レモン"),
+    array("25", "flower4040", "花"),
+    array("26", "mineralwater4040", "天然水・ミネラル"),
+    array("27", "soda4040", "ソーダ・ラムネ"),
+    array("28", "herb4040", "ハーブ・若草・根菜"),
+    array("29", "tree4040", "木"),
+    array("30", "rice4040", "ご飯・餅"),
+    array("31", "nuts4040", "ナッツ・豆"),
+    array("32", "butter4040", "バター・クリーム・バニラ・チーズ"),
+    array("33", "driedfruit4040", "ドライフルーツ・乾物"),
+    array("34", "soysauce4040", "しょうゆ・みりん"),
+    array("35", "spice4040", "スパイス"),
+    array("36", "caramel4040", "カラメル"),
+    array("37", "cacao4040", "カカオ・ビターチョコ"),
+    array("38", "cemedine4040", "セメダイン"),
+    array("39", "yogurt4040", "ヨーグルト"),
+    array("40", "other4040", "その他"));
+
+function GetFlavorNames($flavors) {
+
+  if($flavors && $flavors != "") {
+    global $flavor_table;
+    $flavor_array = explode(',', $flavors);
+    $ret_value = "";
+    $i = 0;
+    $j = 0;
+
+    for($i = 0; $i < count($flavor_array); $i++) {
+
+      for($j = 0; $j < count($flavor_table); $j++) {
+
+        if(intval($flavor_array[$i]) == intval($flavor_table[$j][0])) {
+
+          if($ret_val == "") {
+            $ret_val = $flavor_table[$j][2];
+          }
+          else {
+            $ret_val .= '/' .$flavor_table[$j][2];
+          }
+
+          break;
+        }
+      }
+    }
+
+    return $ret_val;
+  }
+  else {
+    $ret_value = "--";
+    return $ret_val;
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -195,12 +266,19 @@ print('<div id="container">');
               } else {
                 print('');
               }
-              ////////////////////////////////////////
+            
+            ////////////////////////////////////////
+            ////////////////////////////////////////
+            if($record["flavor"] || $record["tastes"]) {
+              if($record["tastes"])
+                $tastes_values = explode(',', $record["tastes"]);
+              else
+                $tastes_values = Array(0, 0, 0, 0, 0, 0, 0, 0);
+
               print('<div class="tastes">');
                 print('<div class="tastes_item">');
                   print('<div class="tastes_title"><svg class="tastes_item_flavor1816"><use xlink:href="#flavor1816"/></svg>フレーバー</div>');
-                  //print('<div class="taste_value_flavor">' .GetFlavorNames($record["flavor"]) .'</div>');
-                  print('<div class="taste_value_flavor">ここにフレーバーが入ります</div>');
+                  print('<div class="taste_value_flavor">' .GetFlavorNames($record["flavor"]) .'</div>');
                 print('</div>');
                 ////////////////////////////////////////
                 print('<div class="tastes_item">');
@@ -315,6 +393,7 @@ print('<div id="container">');
                   print('</div>');
                 print('</div>');
               print('</div>');//tastes
+            }
             print('</a>');//review
           }
         print("</div>"); //thread;
