@@ -44,11 +44,20 @@ if(!$res)
 }
 else
 {
-	setcookie("login_cookie", $username);
+	setcookie("login_cookie", $email);
     setcookie("password_cookie", $password);
 	setcookie("usertype_cookie", 9);
 
-	header('Location: http://sakenomo.xsrv.jp/sakenomo/mail_registry_complete.php?username=' .$username);
+	$url = "";
+
+	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+		$url = "https://";   
+	else  
+		$url = "http://";   
+
+	// Append the host(domain name, ip) to the URL.   
+	$url.= $_SERVER['HTTP_HOST'] ."/" .basename(__DIR__);   
+	header('Location: ' .$url . '/mail_registry_complete.php?username=' .$username);
 }
 
 ?>

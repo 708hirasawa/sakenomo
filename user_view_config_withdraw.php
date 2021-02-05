@@ -38,44 +38,51 @@ require_once("nonda.php");
 	write_search_bar();
 	write_Nonda();
 
-	$username = $_GET['username'];
+	$username = $_COOKIE['login_cookie'];
 
 	if(!$db = opendatabase("sake.db"))
 	{
 		die("データベース接続エラー .<br />");
 	}
 
-	$sql = "SELECT * FROM USERS_J WHERE username = '$username'";
+	$sql = "SELECT * FROM USERS_J WHERE username = '$username' OR email = '$username'";
 	$res = executequery($db, $sql);
 	$row = getnextrow($res);
 
-	//var responseArray = JSON.parse(responseText);
-	//var path = "images\\profile\\" + responseArray[0];
+	if(!$row)
+	{
+		die("failed to find the user: " .$username ."<br />");
+	}
 
-	print('<div id="all_container">');
+	$username = $row["username"];
+	$email = $row["email"];
+	
+	print('<div id="all_container" data-username="' .$username .'" data-email="' .$email .'">');
 
-		/*if($row)
-		{*/
-			print('<div id="user_information">');
+		print('<div id="user_information">');
 
-				$path = "images/icons/noimage_user30.svg";
+			$path = "images/icons/noimage_user30.svg";
+			$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
+			$result = executequery($db, $sql);
+			$rd = getnextrow($result);
 
-				if($row["imagefile"])
-				$path = "images/profile/" .$row["imagefile"];
+			if($rd) {
+				$imagefile = $rd["filename"];
+				$path = "images/profile/" .$imagefile;
+			}
 
-				print('<div class="user_image_name_container">');
-					//写真
-					print('<div class="user_image_container">');
-						print('<img src=' .$path .'>');
-					print('</div>');
-
-					//ユーザー名
-					print('<div id="profile_name">' .$row["username"] .'</div>');
-
+			print('<div class="user_image_name_container">');
+				//写真
+				print('<div class="user_image_container">');
+					print('<img src=' .$path .'>');
 				print('</div>');
 
-			print("</div>");
-		/*}*/
+				//ユーザー名
+				print('<div id="profile_name">' .$row["username"] .'</div>');
+
+			print('</div>');
+
+		print("</div>");
 
 		print('<div id="main_sub_container">');
 
@@ -128,6 +135,37 @@ require_once("nonda.php");
 
 </body>
 <script type="text/javascript">
+
+	$('#submit_button').click(function() {
+
+		var username = $("#all_container").data("username");
+	
+		if(confirm("" + username + "を削除してもいいですか？") == true)
+		{
+			var data = "username=" + username;
+
+			$.ajax({
+				type: "POST",
+				url: "user_delete.php",
+				data: data,
+			}).done(function(xml){
+
+				var str = $(xml).find("str").text();
+				var sql = $(xml).find("sql").text();
+
+				//alert("succeeded:" + sql);
+
+				if(str == "success")
+				{
+					alert("ユーザー" + username +"を削除しました");
+					window.open('sake_search.php', '_self');
+				}
+
+			}).fail(function(data){
+				alert("Failed:" + data);
+			});
+		}
+	});
 
 	jQuery(document).ready(function($) {
 

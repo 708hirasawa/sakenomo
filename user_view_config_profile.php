@@ -55,7 +55,7 @@ require_once("searchbar.php");
 
 	$imagefile = null;
 	$email = stripslashes($row["email"]);
-	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email'";
+	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
 	$result = executequery($db, $sql);
 	$rd = getnextrow($result);
 

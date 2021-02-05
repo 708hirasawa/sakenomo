@@ -289,7 +289,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 						if($row['introduction']) {
 							print('<p class="user_profile_text">' .$row['introduction'] .'</p>');
 						} else {
-							print('<p class="user_profile_text" style="color: #b2b2b2;">プロフィールが登録されていません</p>');
+							print('<p class="user_profile_text" style="color: #b2b2b2">プロフィールが登録されていません</p>');
 						}
 
 						print('<div class="user_profile_column_container">');
@@ -650,6 +650,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 									print('<input type="hidden" id="count_user" value=0>');
 									print('<input type="hidden" id="order_user" value="date_followed">');
 
+
 									/*
 									print('<div class="user_drop_down">');
 										print('<div class="sake_search_icon"><svg class="sake_search_search2020"><use xlink:href="#search2020"/></svg></div>');
@@ -687,13 +688,18 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 									print('<span>1～' .$p_max .'件 / 全' .$count_result .'件</span>');
 								print('</div>');
 
-								print('<div id="users_table">');
-									print('<div id="userfollowpage"></div>');
-								print('</div>');
+								print('<div id="users_table"></div>');
+								print('<div id="userfollowpage"></div>');
+
 							print('</div>');
 						print("</div>");//tab_main
 					} else {
-						print("no data");
+						?>
+						<script type="text/javascript">
+						window.open('user_login_form.php', '_self');
+						</script>
+						<?php
+						//print("no data");
 					}
 
 				print("</div>");//table_wrapper
@@ -1303,7 +1309,9 @@ $(function() {
 
 							if(position >= $('#review_result_turn_page .pageitems').length)
 							{
-								var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text());
+								//var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text());
+								var showPos = (pagenum - $('#review_result_turn_page .pageitems').length) + 1;
+
 								var i = 1;
 
 								$('#review_result_turn_page .pageitems').each(function() {
@@ -1834,7 +1842,8 @@ $(function() {
 
 						if(position >= $('#review_result_turn_page .pageitems').length)
 						{
-							var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text());
+							//var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text());
+							var showPos = (pagenum - $('#review_result_turn_page .pageitems').length) + 1;
 							var i = 1;
 
 							$('#review_result_turn_page .pageitems').each(function() {
@@ -2280,13 +2289,17 @@ $(function() {
 
 							var limit = (in_disp_to >= $("#count_sakagura").val()) ? $("#count_sakagura").val() : in_disp_to;
 							var pagenum = $('#in_sakagura_disp_from').val() / 25;
+
 							var showPos = parseInt($('#sakagura_result_turn_page .pageitems:nth(0)').text()) - 1;
 							var pagenum = $('#in_sakagura_disp_from').val() / 25;
 							var position = pagenum - showPos;
 
+							//alert("showPos:" + showPos + " pagenum:" + pagenum + " position:" + position);
+
 							if(position >= $('#sakagura_result_turn_page .pageitems').length)
 							{
-								var showPos = parseInt($('#sakagura_result_turn_page .pageitems:nth(0)').text());
+								//var showPos = parseInt($('#sakagura_result_turn_page .pageitems:nth(0)').text());
+								var showPos = (pagenum - $('#sakagura_result_turn_page .pageitems').length) + 1;
 								var i = 1;
 
 								$('#sakagura_result_turn_page .pageitems').each(function() {
@@ -2298,8 +2311,8 @@ $(function() {
 							}
 							else if(position < 0)
 							{
-								//alert("case 2");
-								var showPos = parseInt($('#sakagura_result_turn_page .pageitems:nth(0)').text()) - 2;
+								//var showPos = parseInt($('#sakagura_result_turn_page .pageitems:nth(0)').text()) - 2;
+								var showPos = showPos + position;
 								var i = 1;
 
 								$('#sakagura_result_turn_page .pageitems').each(function() {
@@ -2384,6 +2397,7 @@ $(function() {
 			}
 
 			my_url += href;
+
 			$('#tab_sake .display_selection_button.selected').removeClass('selected');
 			$('#tab_sake .display_selection div:first-child').addClass('selected');
 
@@ -2622,6 +2636,7 @@ $(function() {
 
 					$('#users_table').empty();
 					//alert("sql:" + sql);
+					//alert("count_result:" + count_result);
 
 					if(count_result == 0 && users == null) {
 						var innerText = '<div class="navigate_page_no_registry">ユーザーをフォローしていません</div>';
@@ -2734,18 +2749,17 @@ $(function() {
 						}
 
 						var limit = (in_disp_to >= $("#count_user").val()) ? $("#count_user").val() : in_disp_to;
-						var text = parseInt($('#in_user_disp_from').val()) + 1 + '～' + limit + '件 / 全' + $('#count_user').val() + '件'
+						var text = parseInt($('#in_user_disp_from').val()) + in_disp_from + 1 + '～' + limit + '件 / 全' + $('#count_user').val() + '件'
 
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-						var pagenum = $('#in_user_disp_from').val() / 25;
-						var showPos = parseInt($('#userfollowpage .pageitems:nth(0)').text()) - 1;
-						var position = pagenum - showPos;
+						$("#in_user_disp_from").val(in_disp_from);
 
-						var showPos = parseInt($('#userfollowpage .pageitems:nth(0)').text()) - 1;
 						var pagenum = $('#in_user_disp_from').val() / 25;
+						var showPos = parseInt($('#userfollowpage .pageitems:nth(0)').text()) - 1;
 						var position = pagenum - showPos;
+						var p_max = 25;
 
 						if(position >= $('#userfollowpage .pageitems').length)
 						{
@@ -2776,21 +2790,22 @@ $(function() {
 						$('#userfollowpage .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
 						$('#userfollowpage .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
 
+
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 						$('#tab_users .result_count_container').text(text);
 						$('html, body').animate({scrollTop:0}, '100');
 
-						if(parseInt($('#in_user_disp_from').val()) >= 25)
-							$('#prev_user').addClass('active');
+						if(in_disp_from >= p_max)
+							$('#userfollowpage #prev_mypage_review').addClass('active');
 						else
-							$('#prev_user').removeClass('active');
+							$('#userfollowpage #prev_mypage_review').removeClass('active');
 
-						if((parseInt($('#in_user_disp_from').val()) + 25) < parseInt($("#count_user").val()))
-							$('#next_user').addClass('active');
+						if((in_disp_from + p_max) > $("#count_user").val())
+							$('#userfollowpage #next_mypage_review').removeClass('active');
 						else
-							$('#next_user').removeClass('active');
+							$('#userfollowpage #next_mypage_review').addClass('active');
 					}
 
 			}).fail(function(data){
@@ -2802,6 +2817,111 @@ $(function() {
 					removeLoading();
 			});
 	}
+
+
+	$(document).on('click', '#userfollowpage #next_mypage_review', function() 
+	{
+
+			var search_type = 3;
+			var disp_max = 25;
+			var username = $('#all_container').data('username');
+			var orderby = $("#order_sakagura").val();
+			var in_disp_from = parseInt($("#in_user_disp_from").val()) + disp_max;
+			var in_disp_to = ((in_disp_from + disp_max) > $('#count_user').val()) ? $('#count_user').val() : in_disp_from + disp_max;
+			var bCount = 0;
+
+			var href = $('.simpleTabs li a:nth(2)').attr('href');
+			var data = users_serialize(1, in_disp_from, in_disp_to, bCount, 1);
+			var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, bCount, 2) + href;
+			var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
+
+
+			if((parseInt($("#in_user_disp_from").val()) + disp_max) >= $("#count_user").val())
+				return false;
+
+			var stateObj = { 'search_type': search_type,
+							'category': 3,
+							'data': data,
+							'url': my_url,
+							'href': href,
+							'username': username,
+							'orderby': $("#order_user").val(),
+							'from': 0,
+							'to': 25 };
+
+
+			history.pushState(stateObj, "user", my_url);
+			searchUsers(data, category, in_disp_from, in_disp_to, bCount);
+
+			//alert("sakagura data:" + data);
+			//alert("next user");
+	});
+
+	$(document).on('click', '#userfollowpage #prev_mypage_review', function() 
+	{
+			var search_type = 3;
+			var disp_max = 25;
+			var username = $('#all_container').data('username');
+			var orderby = $("#order_sakagura").val();
+			var in_disp_from = parseInt($("#in_user_disp_from").val()) - disp_max;
+			var in_disp_to = ((in_disp_from + disp_max) > $('#count_user').val()) ? $('#count_user').val() : in_disp_from + disp_max;
+			var bCount = 0;
+
+			var href = $('.simpleTabs li a:nth(2)').attr('href');
+			var data = users_serialize(1, in_disp_from, in_disp_to, bCount, 1);
+			var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, bCount, 2) + href;
+			var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
+
+			if(($("#in_user_disp_from").val() - disp_max) < 0)
+				return false;
+
+			var stateObj = { 'search_type': search_type,
+							'category': 3,
+							'data': data,
+							'url': my_url,
+							'href': href,
+							'username': username,
+							'orderby': $("#order_user").val(),
+							'from': 0,
+							'to': 25 };
+
+			history.pushState(stateObj, "user", my_url);
+			searchUsers(data, category, in_disp_from, in_disp_to, bCount);
+	});
+
+
+	$(document).on('click', '#userfollowpage .pageitems', function(e){
+
+			var search_type = 3;
+			var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
+			var disp_max = 25;
+			var showPos = parseInt($('#userfollowpage .pageitems:nth(0)').text());
+			var position = $(this).index();
+			var in_disp_from = (showPos + position - 2) * disp_max;
+			var in_disp_to = in_disp_from + disp_max;
+			var orderby = $("#order_user").val();
+			var username = $('#all_container').data('username');
+			var href = $('.simpleTabs li a:nth(2)').attr('href');
+			var data = users_serialize(1, in_disp_from, in_disp_to, 0, 1);
+			var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, 0, 2) + href;
+
+			$('#userfollowpage .pageitems.selected').removeClass("selected");
+
+			var stateObj = { 'search_type': search_type,
+							 'category': category,
+							 'data': data,
+							 'url': my_url,
+							 'href': href,
+							 'from': in_disp_from,
+							 'to': in_disp_to,
+							 'username': username,
+							 'orderby': orderby };
+
+			history.pushState(stateObj, "user", my_url);
+			//alert("pageitems click:" + $(this).index());
+			searchUsers(data, category, in_disp_from, in_disp_to, 0);
+	});
+
 
 	$('#user_sort .click_sort_date').click(function() {
 
@@ -2878,7 +2998,8 @@ $(function() {
 		$("body").trigger("search_users", [ data, category, in_disp_from, in_disp_to, 1 ] );
 	});
 
-	$("body").on("search_users", function(event, data, category, in_disp_from, in_disp_to) {
+	$("body").on("search_users", function(event, data, category, in_disp_from, in_disp_to) 
+	{
 		searchUsers(data, category, in_disp_from, in_disp_to, true)
 	});
 
@@ -3234,6 +3355,8 @@ jQuery(document).ready(function($) {
 						"&username=" + $('#all_container').data('username') +
 						"&count_query=1" +
 						"&orderby=" + $('#order_sakagura').val();
+
+			//alert("sakagura:" + in_disp_from);
 
 			$("body").trigger("search_sakagura", [ data, in_disp_from, in_disp_to ] );
 		}

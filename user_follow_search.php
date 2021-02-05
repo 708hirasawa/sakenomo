@@ -33,6 +33,8 @@ else
 }
 
 $category = 1;
+$from = $_POST["from"];
+$to = 25;
 
 if(isset($_POST["category"]) && ($_POST["category"] != ""))
 {
@@ -41,8 +43,19 @@ if(isset($_POST["category"]) && ($_POST["category"] != ""))
 
 if($category == 1)
 {
+	$count_result = 0;
+	
+	if($_POST["count_query"] == "1")
+	{
+		$sql1 = "SELECT COUNT(*) FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.favoriteuser AND FOLLOW_USER.username = '$username'";
+		$res = executequery($db, $sql1);
+		$record = getnextrow($res); 
+		$count_result = $record["COUNT(*)"];
+	}
+
 	//$sql = "SELECT * FROM USERS_J AS USERS_1 WHERE USERS_1.username IN (SELECT FOLLOW_USER.favoriteuser FROM USERS_J AS USERS_2, FOLLOW_USER WHERE USERS_2.username = '$username' AND USERS_2.username = FOLLOW_USER.username)";
-	$sql1 = "SELECT * FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.favoriteuser AND FOLLOW_USER.username = '$username' ORDER BY DATE_FOLLOWED " .$desc;
+	$sql1 = "SELECT * FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.favoriteuser AND FOLLOW_USER.username = '$username' ORDER BY DATE_FOLLOWED " .$desc ." LIMIT ".$from.", ".$to;
+
 	$res = executequery($db, $sql1);
 
 	if(!$res)
@@ -71,7 +84,7 @@ if($category == 1)
 		}
 
 		// follow count 
-		$sql = "SELECT count(FOLLOW_USER.username) FROM FOLLOW_USER WHERE '$username' = FOLLOW_USER.username";
+		$sql = "SELECT count(FOLLOW_USER.username) FROM FOLLOW_USER WHERE FOLLOW_USER.username = '$username'";
 		$res3 = executequery($db, $sql);
 
 		if($row3 = getnextrow($res3)) {
@@ -79,9 +92,10 @@ if($category == 1)
 		}
 
 		// follower count 
-		$sql = "SELECT count(FOLLOW_USER.favoriteuser) FROM FOLLOW_USER WHERE '$username' = FOLLOW_USER.favoriteuser";
+		$sql = "SELECT count(FOLLOW_USER.favoriteuser) FROM FOLLOW_USER WHERE FOLLOW_USER.favoriteuser = '$username'";
 		$res3 = executequery($db, $sql);
 
+		
 		if($row3 = getnextrow($res3)) {
 			$follower_count = $row3["count(FOLLOW_USER.favoriteuser)"];
 		}
@@ -119,7 +133,6 @@ if($category == 1)
 							'nonda_count' => $nonda_count,
 							'follow_count' => $follow_count,
 							'follower_count' => $follower_count);
-		$count_result++;
 	}
 
 	$result[] = array('result' => $result1, 'sql' => $sql1, 'count' => $count_result);
@@ -127,9 +140,19 @@ if($category == 1)
 	echo json_encode($result);
 	return 0;
 }
-else if($category == 2) {
+else if($category == 2) 
+{
+	if($_POST["count_query"] == "1")
+	{
+		$sql1 = "SELECT COUNT(*) FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.username AND FOLLOW_USER.favoriteuser = '$username'";
+		$res = executequery($db, $sql1);
+		$record = getnextrow($res); 
+		$count_result = $record["COUNT(*)"];
+	}
+
+
 	//$sql = "SELECT * FROM USERS_J AS USERS_1 WHERE USERS_1.username IN (SELECT FOLLOW_USER.favoriteuser FROM USERS_J AS USERS_2, FOLLOW_USER WHERE USERS_2.username = '$username' AND USERS_2.username = FOLLOW_USER.username)";
-	$sql1 = "SELECT * FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.username AND FOLLOW_USER.favoriteuser = '$username' ORDER BY DATE_FOLLOWED " .$desc;
+	$sql1 = "SELECT * FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.username AND FOLLOW_USER.favoriteuser = '$username' ORDER BY DATE_FOLLOWED " .$desc ." LIMIT ".$from.", ".$to;
 	$res = executequery($db, $sql1);
 
 	if(!$res)
@@ -144,7 +167,7 @@ else if($category == 2) {
 	while($row = getnextrow($res))
 	{
 		//$username = $row["favoriteuser"];
-		$follower_name = $row["username"];	
+		$follower_name = $row["email"];	
 		$nonda_count = 0;
 		$nomitai_count = 0;
 		$follow_count = 0;
@@ -159,7 +182,7 @@ else if($category == 2) {
 		}
 
 		// follow count 
-		$sql = "SELECT count(FOLLOW_USER.username) FROM FOLLOW_USER WHERE '$follower_name' = FOLLOW_USER.username";
+		$sql = "SELECT count(FOLLOW_USER.username) FROM FOLLOW_USER WHERE FOLLOW_USER.username = '$follower_name'";
 		$res3 = executequery($db, $sql);
 
 		if($row3 = getnextrow($res3)) {
@@ -167,7 +190,7 @@ else if($category == 2) {
 		}
 
 		// follower count 
-		$sql = "SELECT count(FOLLOW_USER.favoriteuser) FROM FOLLOW_USER WHERE '$follower_name' = FOLLOW_USER.favoriteuser";
+		$sql = "SELECT count(FOLLOW_USER.favoriteuser) FROM FOLLOW_USER WHERE FOLLOW_USER.favoriteuser = '$follower_name'";
 		$res3 = executequery($db, $sql);
 
 		if($row3 = getnextrow($res3)) {
@@ -213,7 +236,7 @@ else if($category == 2) {
 							'follow_count' => $follow_count,
 							'follower_count' => $follower_count,
 							'followed' => $followed);
-		$count_result++;
+		//$count_result++;
 	}
 
 	$result[] = array('result' => $result1, 'sql' => $sql1, 'count' => $count_result);

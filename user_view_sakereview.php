@@ -433,7 +433,7 @@ require_once("searchbar.php");
 					print('<p class="user_profile_text">' .$row['introduction'] .'</p>');
 				}
 				else {
-					print('<p class="user_profile_text">ここにプロフィール本文が入りますここにプロフィール本文が入りますここにプロフィール本文が入りますここにプロフィール本文が入りますここにプロフィール本文が入りますここにプロフィール本文が入りますここにプロフィール本文が入りますここにプロフィール本文が入ります</p>');
+					print('<p class="user_profile_text">ここにプロフィール本文が入ります</p>');
 				}
 
 				print('<div class="user_profile_column_container">');

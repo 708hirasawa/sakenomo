@@ -183,7 +183,6 @@ function writePageNumberContainer($count_result)
 								print('<li><a href="#tab_sakagura"><span>酒蔵</span></a></li>');
 							print("</ul>");
 
-
 							//////////////////////////////////////////////////////////////////////
 							// 日本酒ページ > 日本酒情報
 							print('<div id="sake_edit" class="form-action show">');
@@ -1329,7 +1328,7 @@ function writePageNumberContainer($count_result)
 									$row = getnextrow($res);
 									$count_result = $row["COUNT(*)"];
 
-									$res = executequery($db, "SELECT * FROM SAKAGURA_J LIMIT 10");
+									$res = executequery($db, "SELECT * FROM SAKAGURA_J ORDER BY sakagura_read LIMIT 25");
 
 									$in_disp_from = 0;
 									$in_disp_to = ($count_result < 25) ? $count_result : 25;
@@ -2404,14 +2403,14 @@ $(function() {
 					}
 					else
 					{
-								var showPos = parseInt($('#sake_edit .pageitems:nth(0)').text()) - 2;
-								var i = 1;
-								//alert("showPos:" + showPos + " pageitem:" + $('#sake_edit .pageitems:nth(0)').text());
+							var showPos = parseInt($('#sake_edit .pageitems:nth(0)').text()) - 2;
+							var i = 1;
+							//alert("showPos:" + showPos + " pageitem:" + $('#sake_edit .pageitems:nth(0)').text());
 
-								$('#sake_edit .pageitems').each(function() {
-										$(this).text(showPos + i);
-										i++;
-								});
+							$('#sake_edit .pageitems').each(function() {
+									$(this).text(showPos + i);
+									i++;
+							});
 					}
 
 					in_disp_from = $("#sake_edit .page_number_container").data('in_disp_from') - $("#sake_edit .page_number_container").data('in_disp_max');
@@ -3344,49 +3343,47 @@ $(function() {
 		//alert("searchSakagura data:" + data);
 
 		$.ajax({
-				type: "POST",
-				url: "complex_search.php",
-				data: data,
-				dataType: 'json',
+			type: "POST",
+			url: "complex_search.php",
+			data: data,
+			dataType: 'json',
 
 		}).done(function(data){
+			var i = 0;
+			var sakagura = data[0].result;
+			var path = "images/icons/noimage_user30.svg";
+			var username = <?php echo json_encode($username); ?>;
 
-					var i = 0;
-					var sakagura = data[0].sake;
-          var path = "images/icons/noimage_user30.svg";
-					var username = <?php echo json_encode($username); ?>;
+			$('#sakagura_edit .review_result_sake_page').empty();
+			//alert("success:" + data[0].count);
+			//alert("success:" + data[0].sql);
+			//alert("sakagura:" + sakagura.length);
 
-					$('#sakagura_edit .review_result_sake_page').empty();
-					//alert("success:" + data[0].count);
-					//alert("success:" + data[0].sql);
-					//alert("sakagura:" + sakagura.length);
-
-					for(i = 0; i < sakagura.length; i++)
-					{
-							var innerHTML = '<div class="brewery_registry_container" data-sakagura_id=' + sakagura[i].id + ' data-sakagura_name=' + sakagura[i].sakagura_name + '>';
-								innerHTML += '<div class="user_info_container">';
-									innerHTML += '<div class="user_image_container">';
-										innerHTML += '<img src="' + path + '">';
-									innerHTML += '</div>';
-
-									innerHTML += '<div class="user_registration_container">';
-										innerHTML += '<div class="user_name">' + username + '</div>';
-										innerHTML += '<div class="user_profile_date_container">';
-											innerHTML += '<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>';
-											innerHTML += '<div class="user_date">' + sakagura[i].write_date + '</div>';
-										innerHTML += '</div>';
-									innerHTML += '</div>';
-								innerHTML += '</div>';
-
-								innerHTML += '<div class="brewery_info_container">';
-									innerHTML += '<div class="brewery_name">' + sakagura[i].sakagura_name + '</div>';
-									innerHTML += '<div class="brewery_prefecture_name">' + sakagura[i].pref + '</div>';
-								innerHTML += '</div>';
+			for(i = 0; i < sakagura.length; i++)
+			{
+					var innerHTML = '<div class="brewery_registry_container" data-sakagura_id=' + sakagura[i].id + ' data-sakagura_name=' + sakagura[i].sakagura_name + '>';
+						innerHTML += '<div class="user_info_container">';
+							innerHTML += '<div class="user_image_container">';
+								innerHTML += '<img src="' + path + '">';
 							innerHTML += '</div>';
 
-							$('#sakagura_edit .review_result_sake_page').append(innerHTML);
-					 }
+							innerHTML += '<div class="user_registration_container">';
+								innerHTML += '<div class="user_name">' + username + '</div>';
+								innerHTML += '<div class="user_profile_date_container">';
+									innerHTML += '<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>';
+									innerHTML += '<div class="user_date">' + sakagura[i].write_date + '</div>';
+								innerHTML += '</div>';
+							innerHTML += '</div>';
+						innerHTML += '</div>';
 
+						innerHTML += '<div class="brewery_info_container">';
+							innerHTML += '<div class="brewery_name">' + sakagura[i].sakagura_name + '</div>';
+							innerHTML += '<div class="brewery_prefecture_name">' + sakagura[i].pref + '</div>';
+						innerHTML += '</div>';
+					innerHTML += '</div>';
+
+					$('#sakagura_edit .review_result_sake_page').append(innerHTML);
+				}
 			}).fail(function(data){
 					alert("Failed:" + data);
 			}).complete(function(data){
@@ -3412,7 +3409,7 @@ $(function() {
 			var data = "&count_query=" + count_query +
 									"&category=" + search_category +
 									"&from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
-									"&to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
+									"&to=" + $("#sakagura_edit .page_number_container").data('in_disp_to') +
 									"&in_disp_max="  + $("#sakagura_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
@@ -3455,7 +3452,7 @@ $(function() {
 					var data = "&count_query=" + count_query +
 											"&category=" + search_category +
 											"&from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
-											"&to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
+											"&to=" + $("#sakagura_edit .page_number_container").data('in_disp_to') +
 											"&in_disp_max="  + $("#sakagura_edit .page_number_container").data('in_disp_max');
 
 					//alert("search_sake:" + data);
@@ -3593,7 +3590,7 @@ $(function() {
 									"&write_date_from=" + date1 +
 									"&write_date_to="   + date2 +
 									"&from=" + $("#sakagura_edit .page_number_container").data('in_disp_from') +
-									"&to="	 + $("#sakagura_edit .page_number_container").data('in_disp_to') +
+									"&to=" + $("#sakagura_edit .page_number_container").data('in_disp_to') +
 									"&in_disp_max="  + $("#sakagura_edit .page_number_container").data('in_disp_max');
 
 			//alert("data:" + data);
