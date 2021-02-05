@@ -569,7 +569,7 @@
 /********************
 * turn_page
 ********************/
-.search_result_turn_page, #review_result_turn_page, #sakagura_result_turn_page {
+.search_result_turn_page, #review_result_turn_page, #sakagura_result_turn_page, #userfollowpage {
   display: flex;
   justify-content: center;
   align-items: center;
