@@ -558,18 +558,19 @@ print('<div id="container"
 
                     $path = "images/icons/noimage160.svg";
 
-                    if($record["setting"] != "" && $record["setting"] != undefined)
+                    //if($record["setting"] != "" && $record["setting"] != undefined)
+                    //{
+                    //  $path = "images/photo/thumb/" .$record["setting"];
+                    //}
+                    //else
                     {
-                      $path = "images/photo/thumb/" .$record["setting"];
-                    }
-                    else
-                    {
-                      $result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
+						//$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
+						$result_set = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 2");
 
-                      if($rd = getnextrow($result_set))
-                      {
-                        $path = "images/photo/thumb/" .$rd["filename"];
-                      }
+						if($rd = getnextrow($result_set))
+						{
+							$path = "images/photo/thumb/" .$rd["filename"];
+						}
                     }
 
                     print('<div class="search_sake_result_name_container">');

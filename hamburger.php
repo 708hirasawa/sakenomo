@@ -13,8 +13,8 @@ function write_HamburgerLogo()
 
 function write_side_menu()
 {
-	$loginname = $_COOKIE['login_cookie'];
-	$username = $_COOKIE['username'];
+	$username = $_COOKIE['login_cookie'];
+	$nickname = $_COOKIE['username'];
 
   print('<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">');
     print('<ul class="sidebar-nav">');
@@ -25,7 +25,7 @@ function write_side_menu()
           print('<div class="user-img-container">');
             print('<img src="' .$path .'">');
           print('</div>');
-          print('<span>'.$username.'</span>');
+          print('<span>'.$nickname.'</span>');
 
         print('</div>');
       print('</li>');
@@ -37,7 +37,7 @@ function write_side_menu()
         print('</li>');
       } else {
         print('<li class="sidebar-item">');
-          print('<a href="user_view.php?username=' .$loginname .'" class="fa fa-fw fa-mypage"><div class="img-container"><svg class="mobile_person2020"><use xlink:href="#person2020"/></svg></div><span>マイページ</span>');
+          print('<a href="user_view.php?username=' .$username .'" class="fa fa-fw fa-mypage"><div class="img-container"><svg class="mobile_person2020"><use xlink:href="#person2020"/></svg></div><span>マイページ</span>');
           print('</a>');
         print('</li>');
 

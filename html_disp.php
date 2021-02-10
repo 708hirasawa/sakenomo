@@ -565,36 +565,25 @@ function write_syuhanten($db)
 
 function writefooter()
 {
+	$username = $_COOKIE['login_cookie'];
+
 	print('<footer class="sakenomu_footer">');
 		print('<div class="footer_container">');
-
-			print('<span id="logo">');
-				print('<svg class="logoheartgray14024"><use xlink:href="#logoheartgray14024"/></svg>');
-				print('<p>Copyright © Sakenomo Inc. All rights reserved.</p>');
-			print('</span>');
-
-			print('<div class="footer_border_line"></div>');
-
-			print('<div class="sakenomu_footer_menu">');
-				print('<ul>');
-					print('<li><a href="serviceguide_user.html">Sakenomoとは</a></li>');
-					print('<li><a href="sake_add_form.php">日本酒登録</a></li>');
-					print('<li><a href="sda_add_form.php">酒蔵登録</a></li>');
-					/*print('<li><a href="syuhan_add_form.php">酒販店登録</a></li>');*/
-					/*print('<li><a href="serviceguide_brewery.html">酒蔵会員登録</a></li>');*/
-					print('<li><a href="agreement.php">利用規約</a></li>');
-					print('<li><a href="privacy_policy.php">PrivacyPolicy</a></li>');
-					/*print('<li><a href="company_aboutus.html">About us</a></li>');*/
-				print('</ul>');
-			print('</div>');
-
-			print('<div class="footer_border_line"></div>');
-
-			print('<div class="footer_question">');
-				print('<textarea placeholder="ご意見やご感想はこちらからお願いいたします"></textarea>');
-				print('<input class="regular_button" type="button" name="search_option" value="送信">');
-			print('</div>');
-
+			print('<a class="footer_icon" href="sake_search.php">');
+				print('<svg class="footer_home2020"><use xlink:href="#home2020"/></svg><span>Home</span>');
+			print('</a>');
+			print('<a class="footer_icon" href="search.php">');
+				print('<svg class="footer_search2020"><use xlink:href="#search2020"/></svg><span>検索</span>');
+			print('</a>');
+			if($username == "" || $username == null) {
+				print('<a class="footer_icon" href="user_login_form.php">');
+					print('<svg class="footer_login2020"><use xlink:href="#login2020"/></svg><span>ログイン</span>');
+				print('</a>');
+			} else {
+				print('<a class="footer_icon" href="user_view.php?username=' .$loginname .'">');
+					print('<svg class="footer_person2020"><use xlink:href="#person2020"/></svg><span>マイページ</span>');
+				print('</a>');
+			}
 		print('</div>');
 	print("</footer>");
 }

@@ -2398,8 +2398,8 @@ $(function() {
 
 			my_url += href;
 
-			$('#tab_sake .display_selection_button.selected').removeClass('selected');
-			$('#tab_sake .display_selection div:first-child').addClass('selected');
+			$('#tab_sakagura .display_selection_button.selected').removeClass('selected');
+			$('#tab_sakagura .display_selection_button:nth(1)').addClass('selected');
 
 			$('#sakagura_result_turn_page .pageitems.selected').removeClass('selected');
 			$('#sakagura_result_turn_page .pageitems:nth(0)').addClass('selected');
@@ -2983,6 +2983,9 @@ $(function() {
 		var data = users_serialize(1, in_disp_from, in_disp_to, bCount, 1);
 		var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, bCount, 2) + href;
 		var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
+
+		$('#tab_users .display_selection_button.selected').removeClass('selected');
+		$('#tab_users .display_selection_button:nth(0)').addClass('selected');
 
 		var stateObj = { 'search_type': search_type,
 						'category': 3,

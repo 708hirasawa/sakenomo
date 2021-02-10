@@ -46,6 +46,7 @@ else
 {
 	setcookie("login_cookie", $email);
     setcookie("password_cookie", $password);
+	setcookie("username", $username);
 	setcookie("usertype_cookie", 9);
 
 	$url = "";

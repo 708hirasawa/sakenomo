@@ -24,6 +24,7 @@ require_once("searchbar.php");
 	<link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 	<link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 	<script src="js/sakenomuui.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
@@ -1859,683 +1860,207 @@ require_once("searchbar.php");
 					print('<div id="tasting" class="form-action hide">');
 
 						print('<div class="tasting_note">');
-							print('<div>テイスティングノートは飲んだ日本酒の評価をまとめておける機能です。他のユーザーと自分の評価を比較することができます。</div>');
+							print('<div>テイスティングノートではみんなと自分の評価を比較することができます。</div>');
 						print('</div>');
 						////////////////////////////////////////
 						////////////////////////////////////////
 						print('<div class="tastingnote_tab_panel">');
 							print('<div class="tastingnote_chart">');
-			          print('<div class="tastingnote_sort">');
-								print('<div id="tastingnote_sort_all">みんな</div>');
-								print('<div id="tastingnote_sort_user">あなた</div>');
-			          print('</div>');
 
-							$sql = "SELECT * FROM TABLE_NONDA WHERE sake_id = '$sake_id'";
-							$res = executequery($db, $sql);
-
-							while($record = getnextrow($res)) {
-								$tastes_values = explode(',', $record["tastes"]);
-								//print("<div>taste:" .$record["tastes"] ."</div>");
-
-								if($tastes_values[0] && $tastes_values[0] != "") {
-									$tastes_all[0] += $tastes_values[0];
-									$count_tastes[0]++;
-								}
-
-								if($tastes_values[1] && $tastes_values[1] != "") {
-									$tastes_all[1] += $tastes_values[1];
-									$count_tastes[1]++;
-								}
-
-								if($tastes_values[2] && $tastes_values[2] != "") {
-									$tastes_all[2] += $tastes_values[2];
-									$count_tastes[2]++;
-								}
-
-								if($tastes_values[3] && $tastes_values[3] != "") {
-									$tastes_all[3] += $tastes_values[3];
-									$count_tastes[3]++;
-								}
-
-								if($tastes_values[4] && $tastes_values[4] != "") {
-									$tastes_all[4] += $tastes_values[4];
-									$count_tastes[4]++;
-								}
-
-								if($tastes_values[5] && $tastes_values[5] != "") {
-									$tastes_all[5] += $tastes_values[5];
-									$count_tastes[5]++;
-								}
-
-								if($tastes_values[6] && $tastes_values[6] != "") {
-									$tastes_all[6] += $tastes_values[6];
-									$count_tastes[6]++;
-								}
-
-								if($tastes_values[7] && $tastes_values[7] != "") {
-									$tastes_all[7] += $tastes_values[7];
-									$count_tastes[7]++;
-								}
-							}
-
-							if($count_result > 0) {
-
-								if($count_tastes[0] > 0)
-									$tastes_all[0] = floor($tastes_all[0] / $count_tastes[0] * 100) / 100;
-
-								if($count_tastes[1] > 0)
-									$tastes_all[1] = floor($tastes_all[1] / $count_tastes[1] * 100) / 100;
-
-								if($count_tastes[2] > 0)
-									$tastes_all[2] = floor($tastes_all[2] / $count_tastes[2] * 100) / 100;
-
-								if($count_tastes[3] > 0)
-									$tastes_all[3] = floor($tastes_all[3] / $count_tastes[3] * 100) / 100;
-
-								if($count_tastes[4] > 0)
-									$tastes_all[4] = floor($tastes_all[4] / $count_tastes[4] * 100) / 100;
-
-								if($count_tastes[5] > 0)
-									$tastes_all[5] = floor($tastes_all[5] / $count_tastes[5] * 100) / 100;
-
-								if($count_tastes[6] > 0)
-									$tastes_all[6] = floor($tastes_all[6] / $count_tastes[6] * 100) / 100;
-
-								if($count_tastes[7] > 0)
-									$tastes_all[7] = floor($tastes_all[7] / $count_tastes[7] * 100) / 100;
-							}
-
-							//みんなグラフ//////////////////////////////////////
-							print('<div id="tastingnote_graph_all">');
 								//フレーバー//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box_flavor">');
-									print('<div class="tastingnote_tasting_flavor_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_flavor3630"><use xlink:href="#flavor3630"/></svg></span>フレーバー</div>');
+								print('<div class="users_flavor_wrapper">');
+									print('<div class="users_flavor_title"><div></div>フレーバー</div>');
+									print('<div class="tastingnote_sort">');
+										print('<div id="tastingnote_sort_all"><span></span>みんなの評価</div>');
+										print('<div id="tastingnote_sort_user"><span></span>あなたの評価</div>');
 									print('</div>');
 
-									/////////////////////////////////////////////////////////////////////////////////////
-									$image_value = "";
-									$flavor_name = "";
+									$sql = "SELECT * FROM TABLE_NONDA WHERE sake_id = '$sake_id'";
+									$res = executequery($db, $sql);
 
-									print('<div class="tastingnote_flavor_container">');
+									while($record = getnextrow($res)) {
+										$tastes_values = explode(',', $record["tastes"]);
+										//print("<div>taste:" .$record["tastes"] ."</div>");
 
-										if(count($flavor_lookupTable) > 0) {
-											getFlavorValue($flavor_lookupTable[0]['flavor'], $image_value, $flavor_name);
-
-											print('<div id="tastingnote_flavor_content">');
-												print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
-												print('<div class="tastingnote_flavor_caption">');
-													print('<span>' .$flavor_name .'</span>');
-												print('</div>');
-												print('<div class="tastingnote_flavor_ratio">');
-													$average_all = ($flavor_lookupTable[0]['count'] / $lookupTable_count) * 100;
-													print('<span>' .number_format($average_all, 1) .'%</span>');
-												print('</div>');
-											print('</div>');
-										}
-										else {
-											print('<div id="tastingnote_flavor_content">');
-
-												print('<div class="tastingnote_flavor">');
-													print('<span>1</span>');
-												print('</div>');
-												print('<div class="tastingnote_flavor_caption">');
-													print('<span style="color: #b2b2b2;">--</span>');
-												print('</div>');
-												print('<div class="tastingnote_flavor_ratio">');
-													print('<span style="color: #b2b2b2;">--</span>');
-												print('</div>');
-											print('</div>');
+										if($tastes_values[0] && $tastes_values[0] != "") {
+											$tastes_all[0] += $tastes_values[0];
+											$count_tastes[0]++;
 										}
 
-										/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-										if(count($flavor_lookupTable) > 0) {
-											getFlavorValue($flavor_lookupTable[1]['flavor'], $image_value, $flavor_name);
-
-											print('<div id="tastingnote_flavor_content">');
-												print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
-												print('<div class="tastingnote_flavor_caption">');
-													print('<span>' .$flavor_name .'</span>');
-												print('</div>');
-												print('<div class="tastingnote_flavor_ratio">');
-													$average_all = ($flavor_lookupTable[1]['count'] / $lookupTable_count) * 100;
-													print('<span>' .number_format($average_all, 1) .'%</span>');
-												print('</div>');
-											print('</div>');
+										if($tastes_values[1] && $tastes_values[1] != "") {
+											$tastes_all[1] += $tastes_values[1];
+											$count_tastes[1]++;
 										}
-										else {
-											print('<div id="tastingnote_flavor_content">');
-												print('<div class="tastingnote_flavor">');
-													print('<span>2</span>');
-												print('</div>');
-												print('<div class="tastingnote_flavor_caption">');
-													print('<span style="color: #b2b2b2;">--</span>');
-												print('</div>');
-												print('<div class="tastingnote_flavor_ratio">');
-													print('<span style="color: #b2b2b2;">--</span>');
-												print('</div>');
-											print('</div>');
+
+										if($tastes_values[2] && $tastes_values[2] != "") {
+											$tastes_all[2] += $tastes_values[2];
+											$count_tastes[2]++;
 										}
-									print('</div>');
-									/////////////////////////////////////////////////////////////////////////////////////
 
-								print('</div>');
-
-								//香り//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box">');
-									print('<div class="tastingnote_tasting_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_aroma2430"><use xlink:href="#aroma2430"/></svg></span>香り</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_bar_container">');
-										print('<div class="tastingnote_input_range_container">');
-											print('<input type="range" name="aroma" step="0.1" min="0" max="5" value="' .$tastes_all[0] .'" disabled="disabled" class="everyone_input_range">');
-										print('</div>');
-										print('<div class="tastingnote_tasting_caption">');
-											print('<span>弱い</span>');
-											print('<span>強い</span>');
-										print('</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_score">');
-										if($tastes_all[0]) {
-											print('<span>'. number_format($tastes_all[0], 1).'</span>');
-										} else {
-											print('<span style="color: #b2b2b2;">--</span>');
+										if($tastes_values[3] && $tastes_values[3] != "") {
+											$tastes_all[3] += $tastes_values[3];
+											$count_tastes[3]++;
 										}
-									print('</div>');
-								print('</div>');
 
-								//ボディ//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box">');
-									print('<div class="tastingnote_tasting_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_body2430"><use xlink:href="#body2430"/></svg></span>ボディ</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_bar_container">');
-										print('<div class="tastingnote_input_range_container">');
-											print('<input type="range" name="body" step="0.1" min="0" max="5"  value="' .$tastes_all[1] .'" disabled="disabled" class="everyone_input_range">');
-										print('</div>');
-										print('<div class="tastingnote_tasting_caption">');
-											print('<span>味が軽い・淡麗</span>');
-											print('<span>味が重い・濃醇</span>');
-										print('</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_score">');
-										if($tastes_all[1]) {
-											print('<span>'. number_format($tastes_all[1], 1).'</span>');
-										} else {
-											print('<span style="color: #b2b2b2;">--</span>');
+										if($tastes_values[4] && $tastes_values[4] != "") {
+											$tastes_all[4] += $tastes_values[4];
+											$count_tastes[4]++;
 										}
-									print('</div>');
-								print('</div>');
 
-								//クリア//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box">');
-									print('<div class="tastingnote_tasting_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_clear3030"><use xlink:href="#clear3030"/></svg></span>クリア</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_bar_container">');
-										print('<div class="tastingnote_input_range_container">');
-											print('<input type="range" name="clear" step="0.1" min="0" max="5" value="' .$tastes_all[2] .'" disabled="disabled" class="everyone_input_range">');
-										print('</div>');
-										print('<div class="tastingnote_tasting_caption">');
-											print('<span>雑味がある</span>');
-											print('<span>味がきれい</span>');
-										print('</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_score">');
-										if($tastes_all[2]) {
-											print('<span>'. number_format($tastes_all[2], 1).'</span>');
-										} else {
-											print('<span style="color: #b2b2b2;">--</span>');
+										if($tastes_values[5] && $tastes_values[5] != "") {
+											$tastes_all[5] += $tastes_values[5];
+											$count_tastes[5]++;
 										}
-									print('</div>');
-								print('</div>');
 
-								//甘辛//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box">');
-									print('<div class="tastingnote_tasting_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_sweetness3030"><use xlink:href="#sweetness3030"/></svg></span>甘辛</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_bar_container">');
-										print('<div class="tastingnote_input_range_container">');
-											print('<input type="range" name="sweetness" step="0.1" min="0" max="5"  value="' .$tastes_all[3] .'" disabled="disabled" class="everyone_input_range">');
-										print('</div>');
-										print('<div class="tastingnote_tasting_caption">');
-											print('<span>ドライ・辛口</span>');
-											print('<span>スイート・甘口</span>');
-										print('</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_score">');
-										if($tastes_all[3]) {
-											print('<span>'. number_format($tastes_all[3],1).'</span>');
-										} else {
-											print('<span style="color: #b2b2b2;">--</span>');
+										if($tastes_values[6] && $tastes_values[6] != "") {
+											$tastes_all[6] += $tastes_values[6];
+											$count_tastes[6]++;
 										}
-									print('</div>');
-								print('</div>');
 
-								//旨味//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box">');
-									print('<div class="tastingnote_tasting_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_umami3030"><use xlink:href="#umami3030"/></svg></span>旨味</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_bar_container">');
-										print('<div class="tastingnote_input_range_container">');
-											print('<input type="range" name="umami" step="0.1" min="0" max="5" value="' .$tastes_all[4] .'" disabled="disabled" class="everyone_input_range">');
-										print('</div>');
-										print('<div class="tastingnote_tasting_caption">');
-											print('<span>弱い</span>');
-											print('<span>強い</span>');
-										print('</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_score">');
-										if($tastes_all[4]) {
-											print('<span>'. number_format($tastes_all[4], 1).'</span>');
-										} else {
-											print('<span style="color: #b2b2b2;">--</span>');
+										if($tastes_values[7] && $tastes_values[7] != "") {
+											$tastes_all[7] += $tastes_values[7];
+											$count_tastes[7]++;
 										}
-									print('</div>');
-								print('</div>');
-
-								//酸味//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box">');
-									print('<div class="tastingnote_tasting_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_acidity3030"><use xlink:href="#acidity3030"/></svg></span>酸味</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_bar_container">');
-										print('<div class="tastingnote_input_range_container">');
-											print('<input type="range" name="acidity" step="0.1" min="0" max="5" value="' .$tastes_all[5] .'" disabled="disabled" class="everyone_input_range">');
-										print('</div>');
-										print('<div class="tastingnote_tasting_caption">');
-											print('<span>弱い</span>');
-											print('<span>強い</span>');
-										print('</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_score">');
-										if($tastes_all[5]) {
-											print('<span>'. number_format($tastes_all[5], 1).'</span>');
-										} else {
-											print('<span style="color: #b2b2b2;">--</span>');
-										}
-									print('</div>');
-								print('</div>');
-
-								//ビター//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box">');
-									print('<div class="tastingnote_tasting_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_bitter2430"><use xlink:href="#bitter2430"/></svg></span>ビター</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_bar_container">');
-										print('<div class="tastingnote_input_range_container">');
-											print('<input type="range" name="bitter" step="0.1" min="0" max="5" value="' .$tastes_all[6] .'" disabled="disabled" class="everyone_input_range">');
-										print('</div>');
-										print('<div class="tastingnote_tasting_caption">');
-											print('<span>弱い</span>');
-											print('<span>強い</span>');
-										print('</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_score">');
-										if($tastes_all[6]) {
-											print('<span>'. number_format($tastes_all[6], 1).'</span>');
-										} else {
-											print('<span style="color: #b2b2b2;">--</span>');
-										}
-									print('</div>');
-								print('</div>');
-
-								//余韻//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box">');
-									print('<div class="tastingnote_tasting_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_yoin3030"><use xlink:href="#yoin3030"/></svg></span>余韻</div>');
-									print('</div>');
-
-									print('<div class="tastingnote_tasting_bar_container">');
-										print('<div class="tastingnote_input_range_container">');
-											print('<input type="range" name="yoin" step="0.1" min="0" max="5" value="' .$tastes_all[7] .'" disabled="disabled" class="everyone_input_range">');
-										print('</div>');
-										print('<div class="tastingnote_tasting_caption">');
-											print('<span>長く続く</span>');
-											print('<span>キレが良い</span>');
-										print('</div>');
-									print('</div>');
-
-										print('<div class="tastingnote_tasting_score">');
-											if($tastes_all[7]) {
-												print('<span>'. number_format($tastes_all[7], 1).'</span>');
-											} else {
-												print('<span style="color: #b2b2b2;">--</span>');
-											}
-									print('</div>');
-								print('</div>');
-
-							print('</div>');//tastingnote_graph_all
-							//あなたグラフ//////////////////////////////////////
-							print('<div id="tastingnote_graph_user">');
-								//フレーバー//////////////////////////////////////
-								print('<div class="tastingnote_tasting_box_flavor">');
-									print('<div class="tastingnote_tasting_flavor_title_container">');
-										print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_flavor3630"><use xlink:href="#flavor3630"/></svg></span>フレーバー</div>');
-									print('</div>');
-
-									////////////////////////////////////////////////////////////
-									////////////////////////////////////////////////////////////
-									$sql = "SELECT * FROM TABLE_NONDA WHERE TABLE_NONDA.sake_id='$sake_id' AND TABLE_NONDA.contributor='$username'";
-									$user_res = executequery($db, $sql);
-									$user_rd = getnextrow($user_res);
-
-									if($user_rd["tastes"]) {
-										$tastes_values = explode(',', $user_rd["tastes"]);
-									}
-									else {
-										$tastes_values[0] = $tastes_values[1] = $tastes_values[2] = $tastes_values[3] = $tastes_values[4] = $tastes_values[5] = $tastes_values[6] = $tastes_values[7] = 0;
 									}
 
-									if($user_rd["flavor"])
-									{
-										$flavors_array = explode(',', $user_rd["flavor"]);
-										$count = 0;
+									if($count_result > 0) {
 
+										if($count_tastes[0] > 0)
+											$tastes_all[0] = floor($tastes_all[0] / $count_tastes[0] * 100) / 100;
+
+										if($count_tastes[1] > 0)
+											$tastes_all[1] = floor($tastes_all[1] / $count_tastes[1] * 100) / 100;
+
+										if($count_tastes[2] > 0)
+											$tastes_all[2] = floor($tastes_all[2] / $count_tastes[2] * 100) / 100;
+
+										if($count_tastes[3] > 0)
+											$tastes_all[3] = floor($tastes_all[3] / $count_tastes[3] * 100) / 100;
+
+										if($count_tastes[4] > 0)
+											$tastes_all[4] = floor($tastes_all[4] / $count_tastes[4] * 100) / 100;
+
+										if($count_tastes[5] > 0)
+											$tastes_all[5] = floor($tastes_all[5] / $count_tastes[5] * 100) / 100;
+
+										if($count_tastes[6] > 0)
+											$tastes_all[6] = floor($tastes_all[6] / $count_tastes[6] * 100) / 100;
+
+										if($count_tastes[7] > 0)
+											$tastes_all[7] = floor($tastes_all[7] / $count_tastes[7] * 100) / 100;
+									}
+
+									print('<div id="tastingnote_graph_all">');
 										print('<div class="tastingnote_flavor_container">');
+											$image_value = "";
+											$flavor_name = "";
 
-											for($count = 0; $count < count($flavors_array) && $count < 2; $count++)
-											{
-												getFlavorValue($flavors_array[$count], $image_value, $flavor_name);
-
+											if(count($flavor_lookupTable) > 0) {
+												getFlavorValue($flavor_lookupTable[0]['flavor'], $image_value, $flavor_name);
 												print('<div id="tastingnote_flavor_content">');
+													print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
+													print('<div class="tastingnote_flavor_caption">');
+														$average_all = ($flavor_lookupTable[0]['count'] / $lookupTable_count) * 100;
+														print('<h6>' .$flavor_name .'<span>（' .number_format($average_all, 1) .'%のユーザーに選ばれています）</span></h6>');
+													print('</div>');
+												print('</div>');
+											} else {
+												print('<div id="tastingnote_flavor_content">');
+													print('<div class="tastingnote_flavor">');
+														print('<span>1</span>');
+													print('</div>');
+													print('<div class="tastingnote_flavor_caption">');
+														print('<h6 style="color: #b2b2b2;">--</h6>');
+													print('</div>');
+												print('</div>');
+											}
+
+											//////////////////////////////////////////////////////////
+
+											if(count($flavor_lookupTable) > 0) {
+												getFlavorValue($flavor_lookupTable[1]['flavor'], $image_value, $flavor_name);
+												print('<div id="tastingnote_flavor_content">');
+													print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
+													print('<div class="tastingnote_flavor_caption">');
+														$average_all = ($flavor_lookupTable[1]['count'] / $lookupTable_count) * 100;
+														print('<h6>' .$flavor_name .'<span>（' .number_format($average_all, 1) .'%のユーザーに選ばれています）</span></h6>');
+													print('</div>');
+												print('</div>');
+											} else {
+												print('<div id="tastingnote_flavor_content">');
+													print('<div class="tastingnote_flavor">');
+														print('<span>2</span>');
+													print('</div>');
+													print('<div class="tastingnote_flavor_caption">');
+														print('<h6 style="color: #b2b2b2;">--</h6>');
+													print('</div>');
+												print('</div>');
+											}
+										print('</div>');
+									print('</div>');//tastingnote_graph_all
+
+									print('<div id="tastingnote_graph_user">');
+										print('<div class="tastingnote_flavor_container">');
+											$sql = "SELECT * FROM TABLE_NONDA WHERE TABLE_NONDA.sake_id='$sake_id' AND TABLE_NONDA.contributor='$username'";
+											$user_res = executequery($db, $sql);
+											$user_rd = getnextrow($user_res);
+
+											if($user_rd["tastes"]) {
+												$tastes_values = explode(',', $user_rd["tastes"]);
+											} else {
+												$tastes_values[0] = $tastes_values[1] = $tastes_values[2] = $tastes_values[3] = $tastes_values[4] = $tastes_values[5] = $tastes_values[6] = $tastes_values[7] = 0;
+											}
+
+											if($user_rd["flavor"]) {
+												$flavors_array = explode(',', $user_rd["flavor"]);
+												$count = 0;
+
+												for($count = 0; $count < count($flavors_array) && $count < 2; $count++) {
+													getFlavorValue($flavors_array[$count], $image_value, $flavor_name);
+													print('<div id="tastingnote_flavor_content">');
 														print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
-
-													print('<div class="tastingnote_flavor_caption">');
-														print('<span>' .$flavor_name .'</span>');
+														print('<div class="tastingnote_flavor_caption">');
+															print('<h6>' .$flavor_name .'</h6>');
+														print('</div>');
 													print('</div>');
+												}
 
-												print('</div>');
+												for(; $count < 2; $count++) {
+													print('<div id="tastingnote_flavor_content">');
+														print('<div class="tastingnote_flavor">');
+															print('<span>' .($count + 1) .'</span>');
+														print('</div>');
+														print('<div class="tastingnote_flavor_caption">');
+															print('<h6 style="color: #b2b2b2;">--</h6>');
+														print('</div>');
+													print('</div>');
+												}
+
+											} else {
+												for($count = 0; $count < 2; $count++) {
+													print('<div id="tastingnote_flavor_content">');
+														print('<div class="tastingnote_flavor">');
+															print('<span>' .($count + 1) .'</span>');
+														print('</div>');
+														print('<div class="tastingnote_flavor_caption">');
+															print('<h6 style="color: #b2b2b2;">--</h6>');
+														print('</div>');
+													print('</div>');
+												}
 											}
-
-											for(; $count < 2; $count++)
-											{
-												print('<div id="tastingnote_flavor_content">');
-													print('<div class="tastingnote_flavor">');
-														print('<span>' .($count + 1) .'</span>');
-													print('</div>');
-													print('<div class="tastingnote_flavor_caption">');
-														print('<span style="color: #b2b2b2;">--</span>');
-													print('</div>');
-													print('<div class="tastingnote_flavor_ratio">');
-														/*print('<span></span>');*/
-													print('</div>');
-												print('</div>');
-											}
-
 										print('</div>');
-									}
-									else {
-
-										print('<div class="tastingnote_flavor_container">');
-
-											for($count = 0; $count < 2; $count++) {
-
-												print('<div id="tastingnote_flavor_content">');
-													print('<div class="tastingnote_flavor">');
-														print('<span>' .($count + 1) .'</span>');
-													print('</div>');
-													print('<div class="tastingnote_flavor_caption">');
-														print('<span style="color: #b2b2b2;">--</span>');
-													print('</div>');
-													print('<div class="tastingnote_flavor_ratio">');
-														/*print('<span></span>');*/
-													print('</div>');
-												print('</div>');
-											}
-
-										print('</div>');
-									}
-
-								////////////////////////////////////////////////////////////
-								////////////////////////////////////////////////////////////
+									print('</div>');//tastingnote_graph_user
 								print('</div>');
 
-
-			            //香り//////////////////////////////////////
-			            print('<div class="tastingnote_tasting_box">');
-			              print('<div class="tastingnote_tasting_title_container">');
-			                print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_aroma2430"><use xlink:href="#aroma2430"/></svg></span>香り</div>');
-			              print('</div>');
-
-			              print('<div class="tastingnote_tasting_bar_container">');
-								print('<div class="tastingnote_input_range_container">');
-									if($tastes_values[0]) {
-										print('<input type="range" name="aroma" step="0.1" min="0" max="5" value="'. $tastes_values[0].'" disabled="disabled" class="user_input_range">');
-									} else {
-										print('<input type="range" name="aroma" step="0.1" min="0" max="5" value="0" disabled="disabled" class="user_input_range">');
-									}
-												print('</div>');
-								print('<div class="tastingnote_tasting_caption">');
-								  print('<span>弱い</span>');
-								  print('<span>強い</span>');
+								//チャート//////////////////////////////////////
+								print('<div class="users_chart_wrapper">');
+									print('<div class="users_chart_title"><div></div>香味チャート</div>');
+									print('<div class="users_chart_container">');
+										print('<canvas id="users_chart"></canvas>');
+									print('</div>');
 								print('</div>');
-							  print('</div>');
-							print('<div class="tastingnote_tasting_score">');
-								if($tastes_values[0]) {
-									print('<span>'. number_format($tastes_values[0], 1).'</span>');
-								} else {
-									print('<span style="color: #b2b2b2;">--</span>');
-								}
-							print('</div>');
-			            print('</div>');
 
-			            //ボディ//////////////////////////////////////
-			            print('<div class="tastingnote_tasting_box">');
-			              print('<div class="tastingnote_tasting_title_container">');
-			                print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_body2430"><use xlink:href="#body2430"/></svg></span>ボディ</div>');
-			              print('</div>');
-
-			              print('<div class="tastingnote_tasting_bar_container">');
-											print('<div class="tastingnote_input_range_container">');
-												if($tastes_values[1]) {
-													print('<input type="range" name="body" step="0.1" min="0" max="5" value="'. $tastes_values[1].'" disabled="disabled" class="user_input_range">');
-												} else {
-													print('<input type="range" name="body" step="0.1" min="0" max="5" value="0" disabled="disabled" class="user_input_range">');
-												}
-											print('</div>');
-			                print('<div class="tastingnote_tasting_caption">');
-			                  print('<span>味が軽い・淡麗</span>');
-			                  print('<span>味が重い・濃醇</span>');
-			                print('</div>');
-			              print('</div>');
-										print('<div class="tastingnote_tasting_score">');
-											if($tastes_values[1]) {
-												print('<span>'. number_format($tastes_values[1], 1).'</span>');
-											} else {
-												print('<span style="color: #b2b2b2;">--</span>');
-											}
-										print('</div>');
-			            print('</div>');
-
-			            //クリア//////////////////////////////////////
-			            print('<div class="tastingnote_tasting_box">');
-			              print('<div class="tastingnote_tasting_title_container">');
-			                print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_clear3030"><use xlink:href="#clear3030"/></svg></span>クリア</div>');
-			              print('</div>');
-
-			              print('<div class="tastingnote_tasting_bar_container">');
-											print('<div class="tastingnote_input_range_container">');
-												if($tastes_values[2]) {
-													print('<input type="range" name="clear" step="0.1" min="0" max="5" value="'. $tastes_values[2].'" disabled="disabled" class="user_input_range">');
-												} else {
-													print('<input type="range" name="clear" step="0.1" min="0" max="5" value="0" disabled="disabled" class="user_input_range">');
-												}
-											print('</div>');
-			                print('<div class="tastingnote_tasting_caption">');
-			                  print('<span>雑味がある</span>');
-			                  print('<span>味がきれい</span>');
-			                print('</div>');
-			              print('</div>');
-										print('<div class="tastingnote_tasting_score">');
-											if($tastes_values[2]) {
-												print('<span>'. number_format($tastes_values[2], 1).'</span>');
-											} else {
-												print('<span style="color: #b2b2b2;">--</span>');
-											}
-										print('</div>');
-			            print('</div>');
-
-			            //甘辛//////////////////////////////////////
-			            print('<div class="tastingnote_tasting_box">');
-			              print('<div class="tastingnote_tasting_title_container">');
-			                print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_sweetness3030"><use xlink:href="#sweetness3030"/></svg></span>甘辛</div>');
-			              print('</div>');
-
-			              print('<div class="tastingnote_tasting_bar_container">');
-											print('<div class="tastingnote_input_range_container">');
-												if($tastes_values[3]) {
-													print('<input type="range" name="sweetness" step="0.1" min="0" max="5" value="'. $tastes_values[3].'" disabled="disabled" class="user_input_range">');
-												} else {
-													print('<input type="range" name="sweetness" step="0.1" min="0" max="5" value="0" disabled="disabled" class="user_input_range">');
-												}
-											print('</div>');
-			                print('<div class="tastingnote_tasting_caption">');
-			                  print('<span>ドライ・辛口</span>');
-			                  print('<span>スイート・甘口</span>');
-			                print('</div>');
-			              print('</div>');
-										print('<div class="tastingnote_tasting_score">');
-											if($tastes_values[3]) {
-												print('<span>'. number_format($tastes_values[3], 1).'</span>');
-											} else {
-												print('<span style="color: #b2b2b2;">--</span>');
-											}
-										print('</div>');
-			            print('</div>');
-
-			            //旨味//////////////////////////////////////
-			            print('<div class="tastingnote_tasting_box">');
-			              print('<div class="tastingnote_tasting_title_container">');
-			                print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_umami3030"><use xlink:href="#umami3030"/></svg></span>旨味</div>');
-			              print('</div>');
-
-			              print('<div class="tastingnote_tasting_bar_container">');
-											print('<div class="tastingnote_input_range_container">');
-											if($tastes_values[4]) {
-												print('<input type="range" name="umami" step="0.1" min="0" max="5" value="'. $tastes_values[4].'" disabled="disabled" class="user_input_range">');
-											} else {
-												print('<input type="range" name="umami" step="0.1" min="0" max="5" value="0" disabled="disabled" class="user_input_range">');
-											}
-											print('</div>');
-			                print('<div class="tastingnote_tasting_caption">');
-			                  print('<span>弱い</span>');
-			                  print('<span>強い</span>');
-			                print('</div>');
-			              print('</div>');
-										print('<div class="tastingnote_tasting_score">');
-											if($tastes_values[4]) {
-												print('<span>'. number_format($tastes_values[4], 1).'</span>');
-											} else {
-												print('<span style="color: #b2b2b2;">--</span>');
-											}
-										print('</div>');
-			            print('</div>');
-
-			            //酸味//////////////////////////////////////
-			            print('<div class="tastingnote_tasting_box">');
-			              print('<div class="tastingnote_tasting_title_container">');
-			                print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_acidity3030"><use xlink:href="#acidity3030"/></svg></span>酸味</div>');
-			              print('</div>');
-
-			              print('<div class="tastingnote_tasting_bar_container">');
-											print('<div class="tastingnote_input_range_container">');
-												if($tastes_values[5]) {
-													print('<input type="range" name="acidity" step="0.1" min="0" max="5" value="'. $tastes_values[5].'" disabled="disabled" class="user_input_range">');
-												} else {
-													print('<input type="range" name="acidity" step="0.1" min="0" max="5" value="0" disabled="disabled" class="user_input_range">');
-												}
-											print('</div>');
-			                print('<div class="tastingnote_tasting_caption">');
-			                  print('<span>弱い</span>');
-			                  print('<span>強い</span>');
-			                print('</div>');
-			              print('</div>');
-										print('<div class="tastingnote_tasting_score">');
-											if($tastes_values[5]) {
-												print('<span>'. number_format($tastes_values[5], 1).'</span>');
-											} else {
-												print('<span style="color: #b2b2b2;">--</span>');
-											}
-										print('</div>');
-			            print('</div>');
-
-			            //ビター//////////////////////////////////////
-			            print('<div class="tastingnote_tasting_box">');
-			              print('<div class="tastingnote_tasting_title_container">');
-			                print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_bitter2430"><use xlink:href="#bitter2430"/></svg></span>ビター</div>');
-			              print('</div>');
-
-			              print('<div class="tastingnote_tasting_bar_container">');
-											print('<div class="tastingnote_input_range_container">');
-												if($tastes_values[6]) {
-													print('<input type="range" name="bitter" step="0.1" min="0" max="5" value="'. $tastes_values[6].'" disabled="disabled" class="user_input_range">');
-												} else {
-													print('<input type="range" name="bitter" step="0.1" min="0" max="5" value="0" disabled="disabled" class="user_input_range">');
-												}
-											print('</div>');
-			                print('<div class="tastingnote_tasting_caption">');
-			                  print('<span>弱い</span>');
-			                  print('<span>強い</span>');
-			                print('</div>');
-			              print('</div>');
-										print('<div class="tastingnote_tasting_score">');
-											if($tastes_values[6]) {
-												print('<span>'. number_format($tastes_values[6], 1).'</span>');
-											} else {
-												print('<span style="color: #b2b2b2;">--</span>');
-											}
-										print('</div>');
-			            print('</div>');
-
-			            //余韻//////////////////////////////////////
-			            print('<div class="tastingnote_tasting_box">');
-			              print('<div class="tastingnote_tasting_title_container">');
-			                print('<div class="tastingnote_tasting_title"><span class="tastingnote_icon_adjust"><svg class="tastingnote_yoin3030"><use xlink:href="#yoin3030"/></svg></span>余韻</div>');
-			              print('</div>');
-
-			              print('<div class="tastingnote_tasting_bar_container">');
-											print('<div class="tastingnote_input_range_container">');
-												if($tastes_values[7]) {
-													print('<input type="range" name="yoin" step="0.1" min="0" max="5" value="'. $tastes_values[7].'" disabled="disabled" class="user_input_range">');
-												} else {
-													print('<input type="range" name="yoin" step="0.1" min="0" max="5" value="0" disabled="disabled" class="user_input_range">');
-												}
-											print('</div>');
-			                print('<div class="tastingnote_tasting_caption">');
-			                  print('<span>長く続く</span>');
-			                  print('<span>キレが良い</span>');
-			                print('</div>');
-			              print('</div>');
-										print('<div class="tastingnote_tasting_score">');
-											if($tastes_values[7]) {
-												print('<span>'. number_format($tastes_values[7], 1).'</span>');
-											} else {
-												print('<span style="color: #b2b2b2;">--</span>');
-											}
-										print('</div>');
-			            print('</div>');
-
-			          print('</div>');//tastingnote_graph_user
-
-			        print('</div>');//tastingnote_chart
+							print('</div>');//tastingnote_chart
 							//フレーバーキャプション//////////////////////////////////////
 							print('<div class="tastingnote_caption">');
 								print('<div class="tastingnote_caption_title"><svg class="tastingnote_caption_help2020"><use xlink:href="#help2020"/></svg>フレーバーについて</div>');
@@ -3166,6 +2691,76 @@ writefooter();
 
 <script type="text/javascript">
 
+$(function () {
+  var container = $('.users_chart_container');
+  ctx.attr('width', container.width());
+  ctx.attr('height', 360);
+});
+
+var tastes_all_kaori = <?php echo json_encode($tastes_all[0]); ?>;
+var tastes_all_body = <?php echo json_encode($tastes_all[1]); ?>;
+var tastes_all_clear = <?php echo json_encode($tastes_all[2]); ?>;
+var tastes_all_amakara = <?php echo json_encode($tastes_all[3]); ?>;
+var tastes_all_umami = <?php echo json_encode($tastes_all[4]); ?>;
+var tastes_all_sanmi = <?php echo json_encode($tastes_all[5]); ?>;
+var tastes_all_bitter = <?php echo json_encode($tastes_all[6]); ?>;
+var tastes_all_yoin = <?php echo json_encode($tastes_all[7]); ?>;
+
+var tastes_values_kaori = <?php echo json_encode($tastes_values[0]); ?>;
+var tastes_values_body = <?php echo json_encode($tastes_values[1]); ?>;
+var tastes_values_clear = <?php echo json_encode($tastes_values[2]); ?>;
+var tastes_values_amakara = <?php echo json_encode($tastes_values[3]); ?>;
+var tastes_values_umami = <?php echo json_encode($tastes_values[4]); ?>;
+var tastes_values_sanmi = <?php echo json_encode($tastes_values[5]); ?>;
+var tastes_values_bitter = <?php echo json_encode($tastes_values[6]); ?>;
+var tastes_values_yoin = <?php echo json_encode($tastes_values[7]); ?>;
+
+Chart.defaults.global.defaultFontColor = '#000000';
+Chart.defaults.global.defaultFontFamily = 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', 'sans-serif';
+var ctx = document.getElementById('users_chart');
+var users_chart = new Chart(ctx, {
+  type: 'radar',
+  data: {
+    labels: ['香り', 'ボディ', 'クリア', '甘辛', '旨味', '酸味', 'ビター', '余韻'],
+    datasets: [{
+      label: 'みんなの評価',
+      data: [tastes_all_kaori, tastes_all_body, tastes_all_clear, tastes_all_amakara, tastes_all_umami, tastes_all_sanmi, tastes_all_bitter, tastes_all_yoin],
+      backgroundColor: 'rgba(160,200,70, 0.2)',
+      borderColor: '#A0C846',
+      borderWidth: 2,
+      pointRadius: 0,
+    }, {
+      label: 'あなたの評価',
+      data: [tastes_values_kaori, tastes_values_body, tastes_values_clear, tastes_values_amakara, tastes_values_umami, tastes_values_sanmi, tastes_values_bitter, tastes_values_yoin],
+      backgroundColor: 'rgba(0,150,150, 0.2)',
+      borderColor: '#009696',
+      borderWidth: 2,
+      pointRadius: 0,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scale: {
+      ticks: {
+        suggestedMin: 0,
+        suggestedMax: 5,
+        stepSize: 1
+      }
+    },
+    legend: {
+      display: true,
+      onClick: function () { return false },
+      labels: {
+        boxWidth: 16,
+        fontColor: '#3f3f3f',
+        fontSize: 13,
+        padding: 8
+      }
+    }
+  }
+});
+
 var xmltext = <?php echo json_encode($xmltext); ?>;
 
 function getOrientation(imgDataURL)
@@ -3342,8 +2937,6 @@ function GetFlavorNames(flavors)
 	return ret_value;
 }
 
-
-
 /*slick***************************************/
 $(function(){
 	var slider = "#preview_main_container"; // スライダー
@@ -3447,16 +3040,20 @@ $(function() {
 	});
 
 	$('#tastingnote_sort_all').click(function() {
-		$('.tastingnote_sort div').css({"border": "2px solid #d2d2d2","color": "#8c8c8c"});
-		$(this).css({"border": "2px solid #A0C846","color": "#000000"});
+		$('.tastingnote_sort div span').css({"border": "2px solid #d2d2d2"});
+		$('.tastingnote_sort div span').css({"background": "rgba(210,210,210, 0.2)"});
+		$('#tastingnote_sort_all span').css({"border": "2px solid #A0C846"});
+		$('#tastingnote_sort_all span').css({"background": "rgba(160,200,70, 0.2)"});
 	});
 
 	$('#tastingnote_sort_user').click(function() {
-		$('.tastingnote_sort div').css({"border": "2px solid #d2d2d2","color": "#8c8c8c"});
-		$(this).css({"border": "2px solid #009696","color": "#000000"});
+		$('.tastingnote_sort div span').css({"border": "2px solid #d2d2d2"});
+		$('.tastingnote_sort div span').css({"background": "rgba(210,210,210, 0.2)"});
+		$('#tastingnote_sort_user span').css({"border": "2px solid #009696"});
+		$('#tastingnote_sort_user span').css({"background": "rgba(0,150,150, 0.2)"});
 	});
 
-	/*テイスティングソートキャプション*/
+	//テイスティングソートキャプション
 	$(document).on('click', '.tastingnote_caption', function(e){
 		$('.tastingnote_caption_invisible').slideToggle();
 	});

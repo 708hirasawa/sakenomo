@@ -134,6 +134,7 @@ if(!$res)
 }
 
 $return = "success";
+setcookie("login_cookie", "", 0);
 
 header("Content-type: application/xml");
 echo '<?xml version="1.0" encoding="utf-8" ?> ' . "\n";
