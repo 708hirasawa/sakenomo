@@ -56,76 +56,55 @@ require_once("nonda.php");
 
 	$username = $row["username"];
 	$email = $row["email"];
-	
+
 	print('<div id="all_container" data-username="' .$username .'" data-email="' .$email .'">');
 
 		print('<div id="user_information">');
-
 			$path = "images/icons/noimage_user30.svg";
 			$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
 			$result = executequery($db, $sql);
 			$rd = getnextrow($result);
-
 			if($rd) {
 				$imagefile = $rd["filename"];
 				$path = "images/profile/" .$imagefile;
 			}
-
 			print('<div class="user_image_name_container">');
-				//写真
 				print('<div class="user_image_container">');
 					print('<img src=' .$path .'>');
 				print('</div>');
-
-				//ユーザー名
 				print('<div id="profile_name">' .$row["username"] .'</div>');
-
 			print('</div>');
-
 		print("</div>");
 
-		print('<div id="main_sub_container">');
+		print('<div id="main_container">');
+			print('<div class="mypage_config_title_button_container">');
+				print('<div class="mypage_config_title"><svg class="config_title_config1616"><use xlink:href="#config1616"/></svg>Sakenomo退会</div>');
+				print('<a class="mypage_config_button" href="user_view_config.php?username=' .$username .'"><span>マイページ設定</span></a>');
+			print('</div>');
 
-			print('<div id="main_container">');
-				print('<div class="mypage_config_title_button_container">');
-					print('<div class="mypage_config_title"><svg class="config_title_config1616"><use xlink:href="#config1616"/></svg>Sakenomo退会</div>');
-					print('<a class="mypage_config_button" href="user_view_config.php?username=' .$username .'"><span>設定画面トップへ</span></a>');
-				print('</div>');
-
-				print('<div id="config_content">');
-
-					print('<div class="config_item">');
-						print('<div class="config_item_title">退会する前にご確認ください</div>');
-						print('<div class="user_withdraw_container">');
-							print('<div class="user_withdraw_note">Sakenomoを退会すると、現在ご利用中の機能が使用できなくなります。</div>');
-							print('<div class="user_withdraw_text_container">');
-								print('<div class="user_withdraw_text">飲んだ</div>');
-								print('<div class="user_withdraw_subtext">・満足度登録</div>');
-								print('<div class="user_withdraw_subtext">・レビュー投稿</div>');
-								print('<div class="user_withdraw_subtext">・写真投稿</div>');
-								print('<div class="user_withdraw_subtext">・テイスティングノート登録</div>');
-								print('<div class="user_withdraw_text">飲みたい</div>');
-								print('<div class="user_withdraw_text">お気に入り酒蔵</div>');
-								print('<div class="user_withdraw_text">フォロー</div>');
-								print('<div class="user_withdraw_subnote">以上の機能をはじめ、すべてのユーザー機能がお使いいただけなくなりますので、ご注意ください。</div>');
-							print('</div>');
+			print('<div id="config_content">');
+				print('<div class="config_item">');
+					print('<div class="config_item_title">退会する前にご確認ください</div>');
+					print('<div class="user_withdraw_container">');
+						print('<div class="user_withdraw_note">Sakenomoを退会すると、現在ご利用中の機能が使用できなくなります。</div>');
+						print('<div class="user_withdraw_text_container">');
+							print('<div class="user_withdraw_text">飲んだ</div>');
+							print('<div class="user_withdraw_text">飲みたい</div>');
+							print('<div class="user_withdraw_text">お気に入り</div>');
+							print('<div class="user_withdraw_text">フォロー</div>');
+							print('<div class="user_withdraw_subnote">以上の機能をはじめ、すべてのユーザー機能がお使いいただけなくなりますので、ご注意ください。</div>');
 						print('</div>');
 					print('</div>');
-
-				print('</div>');//config_content
-
-				//ボタン//////////////////////////////////////////////////////////////////////////
-				print('<div class="user_config_button_container">');
-					print('<a href="javascript:history.back()"><input id="button_cancel" type="button" value="戻る"></a>');
-					print('<input id="submit_button" type="button" value="退会する">');
 				print('</div>');
+			print('</div>');//config_content
 
-			print("</div>");//main_container
+			//ボタン//////////////////////////////////////////////////////////////////////////
+			print('<div class="user_config_button_container">');
+				print('<a href="javascript:history.back()"><input id="button_cancel" type="button" value="戻る"></a>');
+				print('<input id="submit_button" type="button" value="退会する">');
+			print('</div>');
 
-			print('<div id="sub_container">');
-			print('</div>');//sub_container
-
-		print("</div>");//main_sub_container
+		print("</div>");//main_container
 
 	print("</div>");//all_container
 
@@ -139,7 +118,7 @@ require_once("nonda.php");
 	$('#submit_button').click(function() {
 
 		var username = $("#all_container").data("username");
-	
+
 		if(confirm("" + username + "を削除してもいいですか？") == true)
 		{
 			var data = "username=" + username;

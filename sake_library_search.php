@@ -3868,17 +3868,17 @@ $(function() {
 						////////////////////////////////////////////////////////////////////////
 						// prev, next grey
 						if($('#in_disp_all_from').val() >= 25) {
-						    $('#prev_search_all').css({"background":"#22445B", "cursor":"pointer"});
+						    $('#prev_search_all').css({"background":"#8c8c8c", "cursor":"pointer"});
 						}
 						else {
-							$('#prev_search_all').css({"background":"#b2b2b2", "cursor":"default"});
+							$('#prev_search_all').css({"background":"#d2d2d2", "cursor":"default"});
 						}
 
 						if((parseInt($('#in_disp_all_from').val()) + 25) < $("#hidden_all_count_query").val()) {
-							$('#next_search_all').css({"background":"#22445B", "cursor":"pointer"});
+							$('#next_search_all').css({"background":"#8c8c8c", "cursor":"pointer"});
 						}
 						else {
-							$('#next_search_all').css({"background":"#b2b2b2", "cursor":"default"});
+							$('#next_search_all').css({"background":"#d2d2d2", "cursor":"default"});
 						}
 
 						removeLoading();
@@ -3936,7 +3936,7 @@ $(function() {
 				history.pushState(stateObj, "test1", my_url);
 				searchAll(data, in_disp_from, in_disp_to, 0);
 
-				$('#prev_search_all').css({"background":"#22445B"});
+				$('#prev_search_all').css({"background":"#8c8c8c"});
 			}
 		});
 
@@ -4458,14 +4458,14 @@ $(function() {
 					}
 
 					if(parseInt($('#in_disp_sake_from').val()) >= 25)
-						$('#prev_search_sake').css({"background":"#22445B", "cursor":"pointer"});
+						$('#prev_search_sake').css({"background":"#8c8c8c", "cursor":"pointer"});
 					else
-						$('#prev_search_sake').css({"background":"#b2b2b2", "cursor":"default"});
+						$('#prev_search_sake').css({"background":"#d2d2d2", "cursor":"default"});
 
 					if((parseInt($('#in_disp_sake_from').val()) + 25) < parseInt($("#hidden_sake_count_result").val()))
-						$('#next_search_sake').css({"background":"#22445B", "cursor":"pointer"});
+						$('#next_search_sake').css({"background":"#8c8c8c", "cursor":"pointer"});
 					else
-						$('#next_search_sake').css({"background":"#b2b2b2", "cursor":"default"});
+						$('#next_search_sake').css({"background":"#d2d2d2", "cursor":"default"});
 
 				}).fail(function(data){
 						alert("Failed:" + data);
@@ -4521,7 +4521,7 @@ $(function() {
 								'to': in_disp_to };
 
 				history.pushState(stateObj, "test1", my_url);
-				$('#next_search_sake').css({"background":"#22445B"});
+				$('#next_search_sake').css({"background":"#8c8c8c"});
 				searchSake(data, in_disp_from, in_disp_to, 0);
 			}
 		});
@@ -4612,8 +4612,8 @@ $(function() {
 				$('#tabs-30_content').css('display', 'block');
 				$('#category').val(2);
 
-				$('#prev_search_sake').css({"background":"#b2b2b2"});
-				$('#next_search_sake').css({"background":"#22445B"});
+				$('#prev_search_sake').css({"background":"#d2d2d2"});
+				$('#next_search_sake').css({"background":"#8c8c8c"});
 				$('.accordion_title').css({"display": "block"});
 
 				var data = sake_serialize(in_disp_from, in_disp_to) + "&count_query=1";
@@ -5011,14 +5011,14 @@ $(function() {
 						}
 
 						if(parseInt($('#in_disp_sakagura_from').val()) >= 25)
-							$('#prev_search_sakagura').css({"background":"#22445B", "cursor":"pointer"});
+							$('#prev_search_sakagura').css({"background":"#8c8c8c", "cursor":"pointer"});
 						else
-							$('#prev_search_sakagura').css({"background":"#b2b2b2", "cursor":"default"});
+							$('#prev_search_sakagura').css({"background":"#d2d2d2", "cursor":"default"});
 
 						if((parseInt($('#in_disp_sakagura_from').val()) + 25) < parseInt($("#hidden_sakagura_count_result").val()))
-							$('#next_search_sakagura').css({"background":"#22445B", "cursor":"pointer"});
+							$('#next_search_sakagura').css({"background":"#8c8c8c", "cursor":"pointer"});
 						else
-							$('#next_search_sakagura').css({"background":"#b2b2b2", "cursor":"default"});
+							$('#next_search_sakagura').css({"background":"#d2d2d2", "cursor":"default"});
 
 				}).fail(function(data){
 						alert("Failed:" + data);
@@ -5336,17 +5336,17 @@ jQuery(document).ready(function($) {
 			////////////////////////////////////////////////////////////////////////
 			// prev, next grey
 			if($('#in_disp_all_from').val() >= 25) {
-			    $('#prev_search_all').css({"background":"#22445B", "cursor":"pointer"});
+			    $('#prev_search_all').css({"background":"#8c8c8c", "cursor":"pointer"});
 			}
 			else {
-				$('#prev_search_all').css({"background":"#b2b2b2", "cursor":"default"});
+				$('#prev_search_all').css({"background":"#d2d2d2", "cursor":"default"});
 			}
 
 			if((parseInt($('#in_disp_all_from').val()) + 25) < $("#hidden_all_count_query").val()) {
-				$('#next_search_all').css({"background":"#22445B", "cursor":"pointer"});
+				$('#next_search_all').css({"background":"#8c8c8c", "cursor":"pointer"});
 			}
 			else {
-				$('#next_search_all').css({"background":"#b2b2b2", "cursor":"default"});
+				$('#next_search_all').css({"background":"#d2d2d2", "cursor":"default"});
 			}
 
 			$('.accordion_title').css({"display": "block"});
@@ -5436,10 +5436,10 @@ jQuery(document).ready(function($) {
 			}
 
 			if($('#container').data('from') > 25) {
-				$('#prev_search_sake').css({"background":"#22445B", "cursor":"default"});
+				$('#prev_search_sake').css({"background":"#8c8c8c", "cursor":"default"});
 			}
 
-			$('#next_search_sake').css({"background":"#22445B"});
+			$('#next_search_sake').css({"background":"#8c8c8c"});
 			$('.accordion_title').css({"display": "block"});
 		}
 		else if($('#category').val() == "3")
@@ -5487,14 +5487,14 @@ jQuery(document).ready(function($) {
 
 			////////////////////////////////////////////////////////////////////////////////////////////////
 			if(parseInt($('#in_disp_sakagura_from').val()) >= 25)
-				$('#prev_search_sakagura').css({"background":"#22445B", "cursor":"pointer"});
+				$('#prev_search_sakagura').css({"background":"#8c8c8c", "cursor":"pointer"});
 			else
-				$('#prev_search_sakagura').css({"background":"#b2b2b2", "cursor":"default"});
+				$('#prev_search_sakagura').css({"background":"#d2d2d2", "cursor":"default"});
 
 			if((parseInt($('#in_disp_sakagura_from').val()) + 25) < parseInt($("#hidden_sakagura_count_result").val()))
-				$('#next_search_sakagura').css({"background":"#22445B", "cursor":"pointer"});
+				$('#next_search_sakagura').css({"background":"#8c8c8c", "cursor":"pointer"});
 			else
-				$('#next_search_sakagura').css({"background":"#b2b2b2", "cursor":"default"});
+				$('#next_search_sakagura').css({"background":"#d2d2d2", "cursor":"default"});
 			////////////////////////////////////////////////////////////////////////////////////////////////
 
 			$('#prev_search_sakagura').css({"visibility":"visible"});

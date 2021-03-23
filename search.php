@@ -2,7 +2,7 @@
 require_once("db_functions.php");
 require_once("html_disp.php");
 require_once("hamburger.php");
-require_once("nonda.php");
+//require_once("nonda.php");
 //require_once("searchbar.php");
 ?>
 
@@ -18,12 +18,12 @@ require_once("nonda.php");
 	<link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 	<link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 	<link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
-	<link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
+	<!--<link rel="stylesheet" type="text/css" href="css/nonda.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />-->
 	<link rel="stylesheet" type="text/css" href="css/search.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="js/sakenomuui.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
-	<script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
-	<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+	<!--<script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+	<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>-->
 	<script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 </head>
 
@@ -31,10 +31,10 @@ require_once("nonda.php");
 
 <?php
 include_once('images/icons/svg_sprite.svg');
-write_side_menu();
+//write_side_menu();
 write_HamburgerLogo();
 //write_search_bar();
-write_Nonda();
+//write_Nonda();
 
 function GetSakeSpecialName($sake_code)
 {
@@ -249,18 +249,11 @@ function GetSakeCategory($category_code)
 		<?php print('<input type="hidden" id="hidden_desc" name="desc" value="DESC">'); ?>
 	</form>
 
-	<div id="search_header_container">
-		<div id="close_icon_container">
-			<svg class="close_icon_prev2020"><use xlink:href="#prev2020"/></svg>
-			<a href="sake_search.php"><svg class="logoheart14024"><use xlink:href="#logoheart14024"/></svg></a>
-			<div class="none"></div>
-		</div>
-	</div>
-
 	<div id="search_main_container">
 
 		<div id="accordion">
 			<div id="accordion_frame">
+				<svg class="close_icon_prev2020"><use xlink:href="#prev2020"/></svg>
 				<div id="tab_accordion">
 					<ul class="simpleTabs">
 						<li><a href="#tabs-30" class="active"><svg class="mobile_accordion_sake3630"><use xlink:href="#sake3630"/></svg><p>日本酒<span>を探す</span></p></a></li>
@@ -478,9 +471,9 @@ function GetSakeCategory($category_code)
 									  <OPTION VALUE="">16%以上17%未満</OPTION>
 									  <OPTION VALUE="">17%以上18%未満</OPTION>
 									  <OPTION VALUE="">18%以上</OPTION>
-									</SELECT>-->
+									</SELECT>
 
-									<!--<span class="sake_option_trigger">
+									<span class="sake_option_trigger">
 										<span>Alc度数</span>
 										<p class="arrow_icon"><span></span></p>
 									</span>
@@ -494,8 +487,8 @@ function GetSakeCategory($category_code)
 											<label><li style="width:108px"><input type="checkbox" name="alcohol_level[]" value="6">17度～18度</li></label>
 											<label><li style="width:108px"><input type="checkbox" name="alcohol_level[]" value="7">18度以上</li></label>
 										</ul>
-									</div>-->
-								<!--非表示中</div>-->
+									</div>
+								</div>-->
 
 								<!--非表示中<div class="sake_option">
 									<div class="search_option_row_container"><svg class="search_option_icon_nihonshudo1616"><use xlink:href="#nihonshudo1616"/></svg><p class="search_option_row_title">日本酒度</p></div>
@@ -508,9 +501,9 @@ function GetSakeCategory($category_code)
 									  <OPTION VALUE="">+1.5以上+3.5未満</OPTION>
 									  <OPTION VALUE="">+3.5以上+6.0未満</OPTION>
 									  <OPTION VALUE="">+6.0以上</OPTION>
-									</SELECT>-->
+									</SELECT>
 
-									<!--<span class="sake_option_trigger">
+									<span class="sake_option_trigger">
 										<span>日本酒度</span>
 										<p class="arrow_icon"><span></span></p>
 									</span>
@@ -524,8 +517,8 @@ function GetSakeCategory($category_code)
 											<label><li style="width:108px"><input type="checkbox" name="jsake_level[]" value="6">+3.5～+5.9</li></label>
 											<label><li style="width:108px"><input type="checkbox" name="jsake_level[]" value="7">+6.0以上</li></label>
 										</ul>
-									</div>-->
-								<!--非表示中</div>-->
+									</div>
+								</div>-->
 
 								<!--<div class="sake_option">
 									<span class="sake_option_trigger">
@@ -1002,19 +995,19 @@ function GetSakeCategory($category_code)
 						</div>
 					</div>
 
-				</div><!--tab_accordion-->
+				</div> <!--tab_accordion-->
 			</div> <!-- accordion_frame -->
 		</div> <!-- accordion -->
 
 	</div>
 </div>
 
-<div class="dialog_add_sakagura_background">
+<div class="dialog_sake_search_background">
 	<div class="dialog_table">
 		<div class="dialog_table-cell">
-			<div id="dialog_add_sakagura">
-				<span class="close_add_sakagura">
-					<button class="close_add_sakagura_button"><svg class="close_add_sakagura_prev2020"><use xlink:href="#prev2020"/></svg></button>
+			<div id="dialog_sake_search">
+				<span class="close_sake_search">
+					<button class="close_sake_search_button"><svg class="close_sake_search_prev2020"><use xlink:href="#prev2020"/></svg></button>
 				</span>
 
 				<!--<div class="add_sakagura_title">酒蔵 選択</div>
@@ -1022,11 +1015,11 @@ function GetSakeCategory($category_code)
 					以下のフォームに酒蔵名を入力し、登録・編集したい日本酒の酒蔵を選択して「決定する」を押してください。
 				</div>-->
 
-				<div class="add_sakagura_form_container">
-					<div class="add_sakagura_form">
-					<input class="add_sakagura_input" autocomplete="off" placeholder="日本酒名を入力してください" type="text" name="add_sake_name">
+				<div class="sake_search_form_container">
+					<div class="sake_search_form">
+						<input id="sake_input" class="sake_search_input" autocomplete="off" placeholder="日本酒名を入力してください" type="text" name="sake_search_name">
 					</div>
-					<ul class="add_sakagura_content"></ul>
+					<ul id="sake_search_content"></ul>
 				</div>
 
 				<!--<div class="add_sakagura_button_container">
@@ -1064,9 +1057,9 @@ $(function() {
 		// スワイプしているとき
 		$(window).on('touchmove.noscroll', function(event) {
 			var current_y = event.originalEvent.changedTouches[0].screenY,
-			height = $('.dialog_add_sakagura_background').outerHeight(),
-			is_top = touch_start_y <= current_y && $('.dialog_add_sakagura_background')[0].scrollTop === 0,
-			is_bottom = touch_start_y >= current_y && $('.dialog_add_sakagura_background')[0].scrollHeight - $('.dialog_add_sakagura_background')[0].scrollTop === height;
+			height = $('.dialog_sake_search_background').outerHeight(),
+			is_top = touch_start_y <= current_y && $('.dialog_sake_search_background')[0].scrollTop === 0,
+			is_bottom = touch_start_y >= current_y && $('.dialog_sake_search_background')[0].scrollHeight - $('.dialog_sake_search_background')[0].scrollTop === height;
 
 			// スクロール対応モーダルの上端または下端のとき
 			if (is_top || is_bottom) {
@@ -1077,14 +1070,14 @@ $(function() {
 
 		// スクロール禁止
 		$('html, body').css('overflow', 'hidden');
-		$(".dialog_add_sakagura_background").css({"display":"flex"});
+		$(".dialog_sake_search_background").css({"display":"flex"});
 	});
 
-	$('.close_add_sakagura_button').click(function() {
+	$('.close_sake_search_button').click(function() {
 		// イベントを削除
 		$(window).off('touchmove.noscroll');
 		$('html, body').css('overflow', '');
-		$(".dialog_add_sakagura_background").css({"display":"none"});
+		$(".dialog_sake_search_background").css({"display":"none"});
 	});
 
 	$('#sake_sidebar_form .sake_option_trigger').click(function(){
@@ -1119,6 +1112,120 @@ $(function() {
 		} else {
 			// activeを追加
 			$(this).children(".arrow_icon").addClass('active');
+		}
+	});
+
+	//日本酒入力 1////////////////////////////
+	$(document).on('keyup', '.all_mode', function(e){
+		var inputText = $("#sake_input").val().replace(/　/g, ' ');
+		var count = inputText.length;
+		var data = "search_text="+inputText;
+
+		if($("#sake_option").css("display") == "block")
+			return false;
+
+		if(event.keyCode == 13 && count > 0) {
+			$('#sake_search_content').empty();
+			return false;
+		}
+
+		//$('#general_content').empty();
+		$("#sake_search_content").css({"visibility": "hidden"});
+
+		if(count >= 1) {
+			$.ajax({
+				type: "POST",
+				url: "auto_multiple.php",
+				data: data,
+				dataType: 'json',
+			}).done(function(data){
+
+			//alert("input:" + $("#sake_input").val());
+
+				$('#sake_search_content').empty();
+				//alert("succeded:" + data + "length:" + data[0].sakagura);
+				var sake = data[0].sake;
+				var sakagura = data[0].sakagura;
+				var syuhanten = data[0].syuhanten;
+				var i = 0;
+
+				if(sake != null) {
+					for(i = 0; i < sake.length; i++) {
+						$('#sake_search_content').append('<li class="general_class1"><svg class="autocomplete_icon_sake"><use xlink:href="#bottle1616"/></svg>' + sake[i].sake_name + '<input type="hidden" value="' + sake[i].sake_id + '"></li>');
+					}
+				}
+
+				if(sakagura != null) {
+					$('#sake_search_content').append('<hr>');
+
+					for(i = 0; i < sakagura.length; i++) {
+						$('#sake_search_content').append('<li class="general_class2"><svg class="autocomplete_icon_brewery"><use xlink:href="#brewery3630"/></svg>' + sakagura[i].sake_name + '<input type="hidden" value="' + sakagura[i].sake_id + '"></li>');
+					}
+				}
+
+				if(syuhanten != null) {
+					$('#sake_search_content').append('<hr>');
+
+					for(i = 0; i < syuhanten.length; i++) {
+						$('#sake_search_content').append('<li class="general_class3"><svg class="autocomplete_icon_store"><use xlink:href="#store3030"/></svg>' + syuhanten[i].sake_name + '<input type="hidden" value="' + syuhanten[i].sake_id + '"></li>');
+					}
+				}
+
+				if(sake != null || sakagura != null)
+					$("#sake_search_content").css({"visibility": "visible"});
+
+			}).fail(function(data){
+				//alert("Failed:" + data);
+			});
+		} else {
+			$('#sake_search_content').empty();
+		}
+	});
+	//日本酒入力 2////////////////////////////
+	$(document).on('keyup', '#sake_input', function(){
+
+		var inputText = $("#sake_input").val().replace(/　/g, ' ');
+		var count = inputText.length;
+		var search_type = 1;
+		var search_limit = 24;
+		var data = "search_type=" + search_type + "&search_limit=" + search_limit + "&search_text=" + inputText;
+
+		if($("#sake_option").css("display") == "block")
+			return false;
+
+		$("#sake_search_content").css({"visibility": "hidden"})
+		$("#sake_search_content").empty();
+
+		if(count >= 1) {
+			$.ajax({
+				type: "POST",
+				url: "auto_complete.php",
+				data: data,
+				dataType: 'json',
+			}).done(function(data){
+
+				//alert("succeded:" + data + "length:" + data.length);
+				$('#sake_search_content').empty();
+
+				for(var i = 0; i < data.length; i++) {
+					$('#sake_search_content').append('<li class="message_class" sake_id=' + data[i].sake_id + '><svg class="autocomplete_icon_sake"><use xlink:href="#bottle1616"/></svg>' + data[i].sake_name + '</li>');
+				}
+
+				$('.message_class').click(function() {
+					var sake_id = $(this).attr('sake_id');
+					//alert("sake_id:" + sake_id);
+					$("#sake_input").val(this.innerText);
+					window.open('sake_view.php?sake_id=' + sake_id, '_self');
+				});
+
+				if(sake != null || sakagura != null)
+					$("#sake_search_content").css({"visibility": "visible"});
+
+			}).fail(function(data){
+				alert("Failed:" + data);
+			});
+		} else {
+			$('#sake_search_content').empty();
 		}
 	});
 

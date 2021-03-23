@@ -32,7 +32,7 @@ function write_side_menu()
 
       if($username == "" || $username == null) {
         print('<li class="sidebar-item">');
-          print('<a href="user_login_form.php" class="fa fa-fw fa-login"><div class="img-container"><svg class="header_login2020"><use xlink:href="#login2020"/></svg></div><span>ログイン</span>');
+          print('<a href="user_login_form.php" class="fa fa-fw fa-login"><div class="img-container"><svg class="mobile_login2020"><use xlink:href="#login2020"/></svg></div><span>ログイン</span>');
           print('</a>');
         print('</li>');
       } else {
@@ -48,29 +48,17 @@ function write_side_menu()
       }
 
       /*print('<li class="sidebar-item">');
-        print('<a href="#" class="fa fa-fw fa-nonda"><div class="img-container"><svg class="mobile_heart2020"><use xlink:href="#heart2020"/></svg></div><span>飲んだ</span>');
-        print('</a>');
-      print('</li>');
-      print('<li class="sidebar-item">');
         print('<a href="#" class="fa fa-fw fa-folder"><div class="img-container"><svg class="mobile_bell2020"><use xlink:href="#bell2020"/></svg></div><span>お知らせ</span>');
         print('</a>');
       print('</li>');
       print('<li class="sidebar-item">');
         print('<a href="#" class="fa fa-fw fa-folder"><div class="img-container"><svg class="mobile_mail2620"><use xlink:href="#mail2620"/></svg></div><span>メッセージ</span>');
         print('</a>');
-      print('</li>');
-      print('<li class="sidebar-item">');
-        print('<a href="#" class="fa fa-fw fa-folder"><div class="img-container"><svg class="mobile_help2020"><use xlink:href="#help2020"/></svg></div><span>ヘルプ</span>');
-        print('</a>');
-      print('</li>');
-      print('<li class="sidebar-item">');
-        print('<a href="#" class="fa fa-fw fa-folder"><div class="img-container"><svg class="mobile_sakenomo2020"><use xlink:href="#sakenomo2020"/></svg></div><span>Sakenomoとは</span>');
-        print('</a>');
-      print('</li>');
-      print('<li class="sidebar-item">');
-        print('<a href="#" class="fa fa-fw fa-folder"><div class="img-container"><svg class="mobile_beginner1620"><use xlink:href="#beginner1620"/></svg></div><span>日本酒を学ぶ</span>');
-        print('</a>');
       print('</li>');*/
+      print('<li class="sidebar-item">');
+        print('<a href="about_sakenomo.php"><span class="about_sakenomo_text">Sakenomoについて</span>');
+        print('</a>');
+      print('</li>');
     print('</ul>');
   print('</nav>');
 }

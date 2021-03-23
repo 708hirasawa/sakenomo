@@ -1,49 +1,78 @@
+.post_header_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  border-bottom: 1px solid #d2d2d2;
+}
+
+.post_header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 1200px;
+  max-width: 96%;
+}
+
+.post_header a {
+  margin-right: 48px;
+}
+
+.post_header_prev2020 {
+  fill: #8c8c8c;
+  width: 20px;
+  height: 20px;
+}
+
+.post_header_title {
+  color: #666666;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 #user_information {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	color: #3f3f3f;
-	width: 1200px;
-	max-width: 96%;
-	height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #3f3f3f;
+  width: 1200px;
+  max-width: 96%;
+  height: auto;
 }
 
 #main_container {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	width: 1200px;
-	max-width: 96%;
-	height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 1200px;
+  max-width: 96%;
+  height: auto;
 }
 
 #link_review_container {
   display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   overflow: hidden;
-	width: 1200px;
-	max-width: 100%;
-	height: auto;
-	margin-top: 15px;
+  width: 1200px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 16px;
 }
 
 #side_container {
-  display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	overflow: hidden;
-	width: 1200px;
-	max-width: 100%;
-	height: auto;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  width: 1200px;
+  max-width: 100%;
+  height: auto;
   margin-top: 40px;
 }
 
@@ -51,7 +80,6 @@
 .review_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -80,35 +108,35 @@
 }
 
 .user_image_name_container {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-start;
-	width: 100%;
-	height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
 }
 
 .user_image_container {
-	overflow: hidden;
-  min-width: 40px;
-  max-width: 40px;
-  height: 40px;
+  overflow: hidden;
+  min-width: 64px;
+  max-width: 64px;
+  height: 64px;
   margin-right: 8px;
-  border: 1px solid #d2d2d2;
+  border-radius: 32px;
+  border: 2px solid #d2d2d2;
 }
 
 .user_image_container img {
-	object-fit: cover;
-	width: 100%;
-	height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #profile_name {
-  color: #3f3f3f;
-  font-size: 16px;
+  color: #000000;
+  font-size: 18px;
   font-weight: bold;
   line-height: 140%;
+  word-break: break-all;
   margin-right: 8px;
   cursor: pointer;
 }
@@ -128,6 +156,10 @@
   display: inline-block;
   transition: all .3s;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
 }
 
 .user_profile_trigger .plus_minus_icon {
@@ -184,111 +216,65 @@
 
 /************************************************************/
 .user_profile_container {
-  display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-  color: #3f3f3f;
-	width: 100%;
-	height: auto;
   display: none;
-}
-
-.user_profile_title {
-  font-size: 14px;
-  font-weight: bold;
-  padding: 8px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #666666;
+  width: 100%;
 }
 
 .user_profile_content {
   width: 100%;
-}
-
-.user_profile_text {
-  font-size: 13px;
-  line-height: 140%;
-  padding: 8px 16px;
+  padding: 8px 0;
 }
 
 .user_profile_column_container {
-	background: #f0f0f0;
-  margin: 4px 16px 8px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8c8c8c;
+  font-size: 12px;
 }
 
 .user_profile_row {
-  color: #3f3f3f;
-  width: 100%;
-  height: auto;
-  border-top: 1px solid #ffffff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 8px 16px 0 0;
 }
 
-.user_profile_row:first-child {
-  border-top: none;
+.user_profile_row:last-child {
+  margin-right: 0;
 }
 
 .user_profile_column1 {
-	position: relative;
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 16px;
-  width: 100%;
-  padding: 16px 0 8px 0;
-  padding-left: 40px;
-}
-
-.user_profile_column1:before {
-	content:"\00a0";
-  display: block;
-  border: solid 9px #3f3f3f;
-  border-radius: 9px;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  height: 0;
-  width: 0;
-  position: absolute;
-  left: 16px;
-  top: 22px;
-  margin-top: -8px;
-}
-
-.user_profile_column1:after {
-	content:"\00a0";
-  display:block;
-  width: 3px;
-  height: 6px;
-  border: solid #f5f5f5;
-  border-width: 0 2px 2px 0;
-  position:absolute;
-  left: 23px;
-  top: 22px;
-  margin-top: -4px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
+  align-items: center;
+  background: #b2b2b2;
+  color: #ffffff;
+  padding: 4px 8px;
+  margin-right: 5px;
+  border-radius: 4px;
 }
 
 .user_profile_column2 {
-	display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 14px;
+  align-items: center;
+}
+
+.user_profile_text {
+  font-size: 15px;
   line-height: 140%;
-  width: 100%;
-  padding: 4px 8px 8px 24px;
+  margin-top: 8px;
 }
 
 /************************************************************/
 .mypage_top_link_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -297,8 +283,6 @@
 
 .mypage_top_link {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   text-decoration: none;
@@ -321,7 +305,6 @@
 /*user_sake_review*******************/
 #user_sake_review {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -333,7 +316,6 @@
 
 .user_sake_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -347,8 +329,6 @@
 /*user_sake_sake*******************/
 .user_sake_sake_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -357,7 +337,6 @@
 
 .user_sake_name_brewery_date_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -377,7 +356,6 @@
 .user_sake_brewery_date_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
@@ -389,8 +367,6 @@
 /*user_sake_tab*******************/
 .user_sake_tab_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -401,8 +377,6 @@
 
 .user_sake_tab_link {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 60px;
@@ -424,8 +398,6 @@
 
 .user_nonda_edit {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-size: 14px;
@@ -460,20 +432,9 @@
   display: none;
 }
 
-.note_caption_tab_panel {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-}
-
 /*user_sake_rank*******************/
 .user_sake_rank {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: baseline;
   width: 100%;
@@ -502,16 +463,15 @@
 
 .user_sake_sake_rate {
   color: #E05314;
-	font-size: 16px;
-	font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
   margin-top: 8px;
-	margin-left: 5px;
+  margin-left: 5px;
 }
 
 /*user_sake_subject_message*******************/
 .user_sake_subject_message_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -540,28 +500,20 @@
 
 /*user_sake_photo*******************/
 .user_sake_image_container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: grid;
+  grid-auto-rows: 144px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 2px;
   width: 100%;
-  height: auto;
+  padding-top: 8px;
   margin-top: 8px;
   border-top: 1px dotted #d2d2d2;
 }
 
 .user_sake_image {
   overflow: hidden;
-  width: 60px;
-  height: 60px;
   border: 1px solid #d2d2d2;
-  margin-top: 8px;
-  margin-right: 8px;
-}
-
-.user_sake_image:last-child {
-  margin-right: 0;
+  cursor: pointer;
 }
 
 .user_sake_image img {
@@ -570,10 +522,9 @@
   height: 100%;
 }
 
-/*.user_sake_chart*******************/
-.user_sake_chart {
+/*.note_caption_tab_panel*******************/
+.note_caption_tab_panel {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -582,236 +533,96 @@
   border-top: 1px dotted #d2d2d2;
 }
 
-.user_sake_chart_content {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  color: #000000;
-  font-size: 13px;
+.tasting_note {
   width: 100%;
   margin-top: 16px;
 }
 
-/*sort*******************/
-.user_sake_sort {
-	display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
+.tasting_note div {
+  color: #8BA340;
+  font-size: 12px;
+  line-height: 140%;
+}
+
+.tasting_chart_caption_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding-top: 16px;
+}
+
+.tastingnote_chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #3f3f3f;
+  font-size: 13px;
+  width: 100%;
+}
+
+.users_flavor_wrapper {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
-#user_sake_sort_all, #user_sake_sort_user {
+.users_flavor_title, .users_chart_title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.users_flavor_title div, .users_chart_title div {
+  background: #d2d2d2;
+  width: 4px;
+  height: 20px;
+  margin-right: 16px;
+}
+
+.tastingnote_sort {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
-  width: 120px;
-  height: 32px;
-  margin: 0 16px;
-  border-radius: 16px;
-  flex-grow: 1;
+  width: 100%;
+  margin-top: 16px;
+}
+
+#tastingnote_sort_user, #tastingnote_sort_all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3f3f3f;
+  font-size: 13px;
+  padding: 4px;
   cursor: pointer;
 }
 
-#user_sake_sort_user {
-  border: 2px solid #009696;
-}
-
-#user_sake_sort_all {
-	color: #8c8c8c;
-  border: 2px solid #d2d2d2;
-}
-
-/*tasting_box_flavor*******************/
-#user_sake_graph_user, #user_sake_graph_all {
-  /*flexがあるとグラフ切り替えできない*/
-  width: 100%;
-}
-
-.user_sake_tasting_box_flavor {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  margin-top: 24px;
-}
-
-.user_sake_tasting_flavor_title_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 80px;
-  max-width: 80px;
-  height: 40px;
-}
-
-.user_sake_tasting_title {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.user_sake_flavor_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-left: 4px;
-  flex-grow: 1;
-}
-
-#user_sake_flavor_content {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-}
-
-#user_sake_flavor_content:last-child {
-  margin-top: 4px;
-}
-
-.user_sake_flavor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border: 2px solid #d2d2d2;
-  border-radius: 4px;
-}
-
-.user_sake_flavor span {
-  color: #d2d2d2;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.user_sake_flavor_container svg {
-  width: 40px;
-  height: 40px;
-}
-
-.user_sake_flavor_caption {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 12px;
-  height: 40px;
-  margin-left: 4px;
-  flex-grow: 1;
-}
-
-.user_sake_flavor_ratio {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 56px;
-  max-width: 56px;
-  height: 40px;
-  margin-left: 8px;
-}
-
-.user_sake_flavor_ratio span {
-  font-size: 15px;
-  font-weight: bold;
-}
-
-/*aroma~yoin*******************/
-.user_sake_tasting_box {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  margin-top: 8px;
-}
-
-.user_sake_tasting_box:last-child {
-  margin-bottom: 8px;
-}
-
-.user_sake_tasting_title_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 80px;
-  max-width: 80px;
-  height: 25px;
-}
-
-.user_sake_tasting_bar_container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  margin-left: 4px;
-  flex-grow: 1;
-}
-
-.tastingnote_input_range_container{
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 25px;
-}
-
-.everyone_input_range, .user_input_range {
-  width: 100%;
-}
-
-.everyone_input_range[type="range"], .user_input_range[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: #e6e6e6;
-  width: 100%;
-  height: 2px;
-	border-radius: 1px;
-}
-.everyone_input_range[type="range"]:focus, .everyone_input_range[type="range"]:active, .user_input_range[type="range"]:focus, .user_input_range[type="range"]:active {
-  outline: none;
-}
-
-.everyone_input_range[type="range"]::-webkit-slider-thumb, .user_input_range[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  position: relative;
-  width: 22px;
-  height: 22px;
-  display: block;
-  border: 2px solid #A0C846;
-  background-color: #ffffff;
+#tastingnote_sort_user span, #tastingnote_sort_all span {
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  -webkit-border-radius: 50%;
+  margin-right: 4px;
 }
 
-.user_input_range[type="range"]::-webkit-slider-thumb {
+#tastingnote_sort_user span {
+  background: rgba(0,150,150, 0.2);
   border: 2px solid #009696;
+}
+
+#tastingnote_sort_all span {
+  background: rgba(210,210,210, 0.2);
+  border: 2px solid #d2d2d2;
 }
 
 .boxDisplay {
@@ -822,70 +633,95 @@
   display: none;
 }
 
-.user_sake_tasting_caption {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  color: #8c8c8c;
-  font-size: 11px;
+/*tasting_box_flavor*******************/
+#user_sake_graph_user, #user_sake_graph_all {
+  /*flexがあるとグラフ切り替えできない*/
   width: 100%;
+}
+
+.tastingnote_flavor_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+#tastingnote_flavor_content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+#tastingnote_flavor_content:last-child {
   margin-top: 4px;
 }
 
-.user_sake_tasting_score {
+#tastingnote_flavor_content svg {
+  min-width: 40px;
+  max-width: 40px;
+  min-height: 40px;
+  max-height: 40px;
+}
+
+.tastingnote_flavor {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #d2d2d2;
+  border-radius: 4px;
+}
+
+.tastingnote_flavor span {
+  color: #d2d2d2;
+  font-size: 24px;
   font-weight: bold;
-  min-width: 56px;
-  max-width: 56px;
-  height: 25px;
+}
+
+.tastingnote_flavor_caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 40px;
   margin-left: 8px;
+  flex-grow: 1;
 }
 
-.user_sake_tasting_score span {
-  font-size: 18px;
-  font-weight: bold;
+.tastingnote_flavor_caption h6 {
+  color: #000000;
+  font-size: 12px;
+  line-height: 140%;
 }
 
-/*user_sake_tasting_icon*******************/
-.user_sake_icon_adjust {
+.tastingnote_flavor_caption span {
+  color: #b2b2b2;
+}
+
+
+.users_chart_wrapper {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 25px;
-  margin-right: 4px;
+  width: 100%;
+  margin-top: 24px;
 }
 
-.user_sake_flavor3630 {
-  fill: #b2b2b2;
-  width: 30px;
-  height: 25px;
-}
-
-.user_sake_aroma2430, .user_sake_body2430, .user_sake_bitter2430 {
-  fill: #b2b2b2;
-  width: 20px;
-  height: 25px;
-  margin-right: 4px;
-}
-
-.user_sake_clear3030, .user_sake_sweetness3030, .user_sake_umami3030, .user_sake_acidity3030, .user_sake_yoin3030 {
-  fill: #b2b2b2;
-  width: 25px;
-  height: 25px;
-  margin-right: 4px;
+.users_chart_container {
+  position: relative;
+  width:  100%;
+  height: 360px;
+  margin-top: 16px;
 }
 
 /*tastingnote_caption*******************/
 .tastingnote_caption {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -902,8 +738,6 @@
 
 .tastingnote_caption_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #887766;
@@ -929,7 +763,6 @@
 
 .tastingnote_caption_content {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -937,8 +770,6 @@
 
 .tastingnote_caption_content_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #ffddaa;
@@ -951,7 +782,6 @@
 .tastingnote_caption_item {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-top: 4px;
@@ -999,8 +829,6 @@
 /*user_sake_like*******************/
 .user_sake_like_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -1011,8 +839,6 @@
 
 .user_sake_like {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #e6e6e6;
@@ -1047,8 +873,6 @@
 
 .user_sake_like_count {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -1093,8 +917,6 @@
 
 .next_prev_bar {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
@@ -1105,8 +927,6 @@
 
 #prev_button, #next_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #28809E;
@@ -1134,66 +954,12 @@
 }
 
 /************************************************************/
-#review_result_turn_page {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  font-size: 12px;
-  border: 1px solid #ff0000;
-}
-
-#review_result_turn_page .selected {
-    background:#22445B;
-    color:#fff;
-}
-
-#prev_review, #next_review {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  color:#b2b2b2;
-  background: none;
-  border: none;
-  outline: none;
-  margin: 0;
-  width: auto;
-  height: 24px;
-  border-bottom: 1px dotted #b2b2b2;
-  cursor: pointer;
-}
-
-.pageitems {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: #b2b2b2;
-  color: #ffffff;
-  font-size: 11px;
-  border: none;
-  outline: none;
-  width: 24px;
-  height: 24px;
-  margin: 0 4px;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-/************************************************************/
 #sake_table, #sakagura_table {
   width: 100%;
 }
 /************************************************************/
 .searchRow_link {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1203,131 +969,114 @@
   height: auto;
 }
 
-/************************************************************/
-#dialog_addimage {
-	position: fixed;
-	display: none;
-
-	width:98%;
-	height:560px;
-
-	top: 50%;
-	left: 50%;
-	z-index:200;
-
-	margin-top: -280px; /* Negative half of height. */
-	margin-left: -49%; /* Negative half of width. */
-
-	text-align: left;
-	background-color: #1F2735;
-	color:#fff;
-	padding:4px;
-	font-size: 9pt;
-
-	//opacity: .85;
-	//filter: alpha(opacity = 50);
-	background: rgba(31, 39, 53, 0.85);
-}
-
-#dialog_user {
-	position:fixed;
-	display:none;
-	width:96%;
-	height:468px;
-
-	top: 50%;
-	left: 50%;
-	margin-top: -234px; /* Negative half of height. */
-	margin-left: -48%;  /* Negative half of width. */
-
-	z-index:200;
-	background-color: #3F3F3F;
-	color:#fff;
-	padding:4px;
-	border-radius:4px;
-	font-size: 9pt;
-	opacity: .85;
-	filter: alpha(opacity = 50);
-	transition: all 0.5s linear;
-}
-
-.delete_nonda {
-    float:right;
-    background: #e3e3e3;
-    border: 1px solid #ccc;
-    color: #333;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 0px 0 0px;
-    text-align: center;
-    height: 20px;
-    width: 100px;
-    cursor:pointer;
-    text-shadow: 0px 1px 0px #fff;
-    border-radius: 4px;
-    box-shadow: 0px 0px 2px #fff inset;
-    margin:2px;
-}
-
-.delete_nonda:hover {
-    background: #d9d9d9;
-    box-shadow: 0px 0px 2px #eaeaea inset;
-    color: #222;
-}
-
-.delete_nonda:active {
-    background: #136899;
-}
-
-.user_button {
-	overflow:hidden;
-    float:right;
-    color: #333;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 2px 4px;
-    text-align: center;
-    cursor:pointer;
-    background: #e3e3e3;
-    margin:2px;
-    text-shadow: 0px 1px 0px #fff;
-    box-shadow: 0px 0px 2px #fff inset;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.user_button:hover {
-    background: #d9d9d9;
-    box-shadow: 0px 0px 2px #eaeaea inset;
-    color: #222;
-}
-
-.user_button:active {
-    background: #136899;
-}
-
-/*********************************************************/
-
-#next_review.active, #next_sakagura.active {
-  color: #0740A5;
-}
-
-.pageitems {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
+/*preview*******************/
+#dialog_preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #b2b2b2;
+  background: #000000;
   color: #ffffff;
-  font-size: 11px;
+  font-size: 13px;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  z-index: 200;
+}
+
+.dialog_preview_position_adjust {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 96%;
+  max-width: 1200px;
+  height: 100%;
+}
+
+.dialog_preview_date_close_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+}
+
+.dialog_preview_date {
+  font-size: 12px;
+}
+
+#close_preview_button {
+  width: 20px;
+  height: 20px;
+  background: none;
   border: none;
   outline: none;
-  width: 24px;
-  height: 24px;
-  margin: 0 4px;
-  border-radius: 2px;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
+}
+
+.close_preview_close2020 {
+  fill: #ffffff;
+  width: 20px;
+  height: 20px;
+}
+
+#dialog_preview_image_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80%;
+}
+
+#dialog_preview_image_container img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.dialog_preview_container2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+}
+
+.dialog_preview_user_name {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: #0740A5;
+  line-height: 140%;
+  text-decoration: none;
+  width: 100%;
+  height: auto;
+}
+
+.dialog_preview_caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  line-height: 140%;
+  width: 100%;
+  height: auto;
+  padding-top: 4px;
+  margin-top: 4px;
+  border-top: 1px dotted #3f3f3f;
+  flex-grow: 1;
 }
 
 /*********************************************************/
@@ -1362,50 +1111,50 @@
 }
 
 @media only screen and (min-width: 700px) {
-		.hamburger {
-			display:none;
-		}
+  .tastingnote_caption_invisible {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .hamburger {
+    display:none;
+  }
 }
 
 @media only screen and (min-width: 720px) {
-  .user_sake_chart {
+  .tasting_chart_caption_container {
     flex-direction: row;
-    width: 100%;
-  }
-
-  .note_caption_tab_panel {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
   }
 
   .tastingnote_caption {
     min-width: 320px;
     max-width: 320px;
-    margin-top: 16px;
+    margin-top: 0;
     margin-left: 50px;
     margin-bottom: 0;
   }
 }
 
 @media only screen and (min-width: 1260px) {
-	#main_container {
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-start;
-	}
+  #main_container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 
   #link_review_container {
   	width: 880px;
   }
 
   #side_container {
+		display: flex;
   	width: 300px;
-		margin-top: 15px;
+  	margin-top: 16px;
   }
 
-	.ad_banner {
-		padding-top: 0;
-		border-top: none;
-	}
+  .ad_banner {
+    padding-top: 0;
+    border-top: none;
+  }
 }

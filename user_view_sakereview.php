@@ -24,6 +24,7 @@ require_once("searchbar.php");
 	<link rel="stylesheet" type="text/css" href="css/user_view_sakereview.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 	<script src="js/sakenomuui.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
@@ -410,59 +411,74 @@ require_once("searchbar.php");
 			}
 
 			print('<div class="user_image_name_container">');
-			//写真
-			print('<div class="user_image_container">');
-				print('<img src=' .$path .'>');
-			print('</div>');
+				//写真
+				print('<div class="user_image_container">');
+					print('<img src=' .$path .'>');
+				print('</div>');
 
-			//ユーザー名
-			print('<div id="profile_name">' .$row["username"] .'</div>');
+				//ユーザー名
+				print('<div id="profile_name">' .$row["username"] .'</div>');
 
-			//プロフィールボタン
-			print('<div class="user_profile_trigger">');
-				print('<p class="plus_minus_icon"><span></span><span></span></p>');
+				//プロフィールボタン
+				print('<div class="user_profile_trigger">');
+					print('<p class="plus_minus_icon"><span></span><span></span></p>');
+				print('</div>');
 			print('</div>');
-		print('</div>');
 
 			//プロフィール
 			print('<div class="user_profile_container">');
-			/*print('<h1 class="user_profile_title">プロフィール</h1>');*/
-			print('<div class="user_profile_content">');
+				print('<div class="user_profile_content">');
 
-				if($row['introduction']) {
-					print('<p class="user_profile_text">' .$row['introduction'] .'</p>');
-				}
-				else {
-					print('<p class="user_profile_text">ここにプロフィール本文が入ります</p>');
-				}
+					print('<div class="user_profile_column_container">');
+						print('<div class="user_profile_row">');
+							print('<div class="user_profile_column1">年代 </div>');
 
-				print('<div class="user_profile_column_container">');
-					print('<div class="user_profile_row">');
-						if($row["bdate"]) {
-							print('<div class="user_profile_column1">年代</div><div class="user_profile_column2">' .$row['bdate'] .'</div>');
-						}
-						else {
-							print('<div class="user_profile_column1">年代</div><div class="user_profile_column2">ここに年代(例:30代)が入ります</div>');
-						}
+							if($row["bdate"] != 0) {
+								$bdateArray = explode("-", $row["bdate"]);
+								$bdate = str_pad($bdateArray[2], 4, 0, STR_PAD_LEFT) . str_pad ($bdateArray[0], 2, 0, STR_PAD_LEFT) . str_pad ($bdateArray[1], 2, 0, STR_PAD_LEFT);
+
+								$today = date('Ymd');
+
+								$age = floor(($today - $bdate ) / 100000) * 10;
+
+								print('<div class="user_profile_column2">' .$age .'代</div>');
+							} else {
+								print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
+							}
+
+						print('</div>');
+						print('<div class="user_profile_row">');
+							print('<div class="user_profile_column1">現住所 </div>');
+
+							if($row["pref"]) {
+								print('<div class="user_profile_column2">' .$row["pref"] .'</div>');
+							} else {
+								print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
+							}
+						print('</div>');
+						print('<div class="user_profile_row">');
+							print('<div class="user_profile_column1">利酒資格 </div>');
+
+							if($row["certification"]) {
+								$replace = str_replace('1', '利酒師', $row["certification"]);
+								$replace = str_replace('2', '酒匠', $replace);
+								print('<div class="user_profile_column2">' .$replace .'</div>');
+							} else {
+								print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
+							}
+
+						print('</div>');
 					print('</div>');
-					print('<div class="user_profile_row">');
-						if($row["sex"]) {
-							print('<div class="user_profile_column1">性別</div><div class="user_profile_column2">' .$row['sex'] .'</div>');
-						}
-						else {
-							print('<div class="user_profile_column1">性別</div><div class="user_profile_column2">ここに性別が入ります</div>');
-						}
-					print('</div>');
-					print('<div class="user_profile_row">');
-						print('<div class="user_profile_column1">現住所(都道府県)</div><div class="user_profile_column2">' .$row['pref'] .'</div>');
-					print('</div>');
-					print('<div class="user_profile_row">');
-						print('<div class="user_profile_column1">利酒資格</div><div class="user_profile_column2">' .$row['certification'] .'</div>');
-					print('</div>');
+
+					if($row['introduction']) {
+						print('<p class="user_profile_text">' .$row['introduction'] .'</p>');
+					}
+					else {
+						print('<p class="user_profile_text" style="color: #b2b2b2">自己紹介は登録されていません</p>');
+					}
+
 				print('</div>');
-
 			print('</div>');
-		print('</div>');
 
 			//マイページタブリンク
 			print('<div class="mypage_top_link_container">');
@@ -545,13 +561,13 @@ require_once("searchbar.php");
 									if($image_record) {
 										print('<div class="user_sake_image_container">');
 
-										$path = "images\\photo\\thumb\\". $image_record["filename"];
-										print('<div class="user_sake_image"><img src="' .$path .'" data-desc = "' .$image_record["desc"] .'"></div>');
+										$path = "images\\photo\\". $image_record["filename"];
+										print('<div class="user_sake_image" data-contributor="' .$image_record["contributor"] .'" data-desc = "' .$image_record["desc"] .'" data-added_date="' .gmdate("Y/m/d", $image_record["added_date"] + 9 * 3600) .'"><img src="' .$path .'"></div>');
 
 										while($image_record = getnextrow($image_result))
 										{
-											$path = "images\\photo\\thumb\\". $image_record["filename"];
-											print('<div class="user_sake_image"><img src="' .$path .'" data-desc = "' .$image_record["desc"] .'"></div>');
+											$path = "images\\photo\\". $image_record["filename"];
+											print('<div class="user_sake_image" data-contributor="' .$image_record["contributor"] .'" data-desc = "' .$image_record["desc"] .'" data-added_date="' .gmdate("Y/m/d", $image_record["added_date"] + 9 * 3600) .'"><img src="' .$path .'"></div>');
 										}
 										print('</div>');
 									} else {
@@ -562,296 +578,67 @@ require_once("searchbar.php");
 							////////////////////////////////////////
 							print('</div>');
 
-							print('<!--テイスティングノートタブ-->');
-
 							print('<div class="user_sake_tab_panel note_caption_tab_panel">');
-								print('<div class="user_sake_chart">');
-									print('<div class="user_sake_chart_content">');
-										print('<div class="user_sake_sort">');
-											print('<div id="user_sake_sort_user">レビュアー</div>');
-											print('<div id="user_sake_sort_all">みんな</div>');
-										print('</div>');
+								print('<div class="tasting_note">');
+									print('<div>テイスティングノートではレビュアーとみんなの評価を比較することができます。</div>');
+								print('</div>');
+								print('<div class="tasting_chart_caption_container">');
+									print('<div class="tastingnote_chart">');
 
-										print('<!--レビュアーグラフ-->');
-										print('<div id="user_sake_graph_user">');
-											print('<!--フレーバー-->');
-											print('<div class="user_sake_tasting_box_flavor">');
-												print('<div class="user_sake_tasting_flavor_title_container">');
-													print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_flavor3630"><use xlink:href="#flavor3630"/></svg></span>フレーバー</div>');
-												print('</div>');
+										//フレーバー//////////////////////////////////////
+										print('<div class="users_flavor_wrapper">');
+											print('<div class="users_flavor_title"><div></div>フレーバー</div>');
+											print('<div class="tastingnote_sort">');
+												print('<div id="tastingnote_sort_user"><span></span>レビュアーの評価</div>');
+												print('<div id="tastingnote_sort_all"><span></span>みんなの評価</div>');
+											print('</div>');
 
-												print('<div class="user_sake_flavor_container">');
-
-													if($record["flavor"])
-													{
+											print('<div id="user_sake_graph_user">');
+												print('<div class="tastingnote_flavor_container">');
+													if($record["flavor"]) {
 														$flavors_array = explode(',', $record["flavor"]);
 														$image_value = "";
 														$flavor_name = "";
 														$count = 1;
 
-														for($count = 0; $count < count($flavors_array) && $count < 2; $count++)
-														{
+														for($count = 0; $count < count($flavors_array) && $count < 2; $count++) {
 															getFlavorValue($flavors_array[$count], $image_value, $flavor_name);
-
-															print('<div id="user_sake_flavor_content">');
-
+															print('<div id="tastingnote_flavor_content">');
 																print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
-
-																print('<div class="user_sake_flavor_caption">');
-																	print('<span>' .$flavor_name .'</span>');
+																print('<div class="tastingnote_flavor_caption">');
+																	print('<h6>' .$flavor_name .'</h6>');
 																print('</div>');
-
 															print('</div>');
 														}
 
 														for(; $count < 2; $count++) {
-															print('<div id="user_sake_flavor_content">');
-																print('<div class="user_sake_flavor">');
+															print('<div id="tastingnote_flavor_content">');
+																print('<div class="tastingnote_flavor">');
 																	print('<span>' .($count + 1) .'</span>');
 																print('</div>');
-																print('<div class="user_sake_flavor_caption">');
-																	print('<span>--</span>');
-																print('</div>');
-																print('<div class="user_sake_flavor_ratio">');
-																	print('<!--<span></span>-->');
+																print('<div class="tastingnote_flavor_caption">');
+																	print('<h6 style="color: #b2b2b2;">--</h6>');
 																print('</div>');
 															print('</div>');
 														}
 
-														//var htmlText = '<div class="nonda_flavor"><svg><use xlink:href="#' + $(this).data("img") + '"/></svg></div>';
-													}
-													else
-													{
+													} else {
 														for($i = 0; $i < 2; $i++) {
-															print('<div id="user_sake_flavor_content">');
-																print('<div class="user_sake_flavor">');
+															print('<div id="tastingnote_flavor_content">');
+																print('<div class="tastingnote_flavor">');
 																	print('<span>' .($i + 1) .'</span>');
 																print('</div>');
-																print('<div class="user_sake_flavor_caption">');
-																	print('<span style="color: #b2b2b2;">--</span>');
-																print('</div>');
-																print('<div class="user_sake_flavor_ratio">');
-																	print('<!--<span></span>-->');
+																print('<div class="tastingnote_flavor_caption">');
+																	print('<h6 style="color: #b2b2b2;">--</h6>');
 																print('</div>');
 															print('</div>');
 														}
 													}
 												print('</div>');
+											print('</div>');//user_sake_graph_user
 
-											print('</div>');
-
-					            print('<!--香り-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_aroma2430"><use xlink:href="#aroma2430"/></svg></span>香り</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="aroma" step="0.1" min="0" max="5" value="' .$tastes_values[0] .'" disabled="disabled" class="user_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>弱い</span>');
-					                  print('<span>強い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_values[0]) {
-														print('<span>' .number_format($tastes_values[0], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--ボディ-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_body2430"><use xlink:href="#body2430"/></svg></span>ボディ</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="body" step="0.1" min="0" max="5" value="' .$tastes_values[1] .'" disabled="disabled" class="user_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>味が軽い・淡麗</span>');
-					                  print('<span>味が重い・濃醇</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_values[1]) {
-														print('<span>' .number_format($tastes_values[1], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--クリア-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_clear3030"><use xlink:href="#clear3030"/></svg></span>クリア</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="clear" step="0.1" min="0" max="5" value="' .$tastes_values[2] .'" disabled="disabled" class="user_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>雑味がある</span>');
-					                  print('<span>味がきれい</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_values[2]) {
-														print('<span>' .number_format($tastes_values[2], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--甘辛-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_sweetness3030"><use xlink:href="#sweetness3030"/></svg></span>甘辛</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="sweetness" step="0.1" min="0" max="5" value="' .$tastes_values[3] .'" disabled="disabled" class="user_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>ドライ・辛口</span>');
-					                  print('<span>スイート・甘口</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_values[3]) {
-														print('<span>' .number_format($tastes_values[3], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--旨味-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_umami3030"><use xlink:href="#umami3030"/></svg></span>旨味</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="umami" step="0.1" min="0" max="5" value="' .$tastes_values[4] .'" disabled="disabled" class="user_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>弱い</span>');
-					                  print('<span>強い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_values[4]) {
-														print('<span>' .number_format($tastes_values[4], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--酸味-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_acidity3030"><use xlink:href="#acidity3030"/></svg></span>酸味</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="acidity" step="0.1" min="0" max="5" value="' .$tastes_values[5] .'" disabled="disabled" class="user_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>弱い</span>');
-					                  print('<span>強い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_values[5]) {
-														print('<span>' .number_format($tastes_values[5], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--ビター-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_bitter2430"><use xlink:href="#bitter2430"/></svg></span>ビター</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="bitter" step="0.1" min="0" max="5" value="' .$tastes_values[6] .'" disabled="disabled" class="user_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>弱い</span>');
-					                  print('<span>強い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_values[6]) {
-														print('<span>' .number_format($tastes_values[6], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--余韻-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_yoin3030"><use xlink:href="#yoin3030"/></svg></span>余韻</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="yoin" step="0.1" min="0" max="5" value="' .$tastes_values[7] .'" disabled="disabled" class="user_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>長く続く</span>');
-					                  print('<span>キレが良い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_values[7]) {
-														print('<span>' .number_format($tastes_values[7], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-											print('</div>');
-
-										print('</div><!--user_sake_graph_user-->');
-
-										print('<!--みんなグラフ-->');
-										print('<div id="user_sake_graph_all">');
-											print('<!--フレーバー-->');
-											print('<div class="user_sake_tasting_box_flavor">');
-												print('<div class="user_sake_tasting_flavor_title_container">');
-													print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_flavor3630"><use xlink:href="#flavor3630"/></svg></span>フレーバー</div>');
-												print('</div>');
-
-												print('<div class="user_sake_flavor_container">');
-
+											print('<div id="user_sake_graph_all">');
+												print('<div class="tastingnote_flavor_container">');
 													if($flavor_lookupTable > 0) {
 														$image_value = "";
 														$flavor_name = "";
@@ -859,30 +646,19 @@ require_once("searchbar.php");
 														if(count($flavor_lookupTable) > 0) {
 															getFlavorValue($flavor_lookupTable[0]['flavor'], $image_value, $flavor_name);
 															$average_flavor = $flavor_lookupTable[0]['count'] / $lookupTable_count;
-
-															print('<div id="user_sake_flavor_content">');
+															print('<div id="tastingnote_flavor_content">');
 																print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
-
-																print('<div class="user_sake_flavor_caption">');
-																	print('<span>' .$flavor_name .'</span>');
-																print('</div>');
-
-																print('<div class="user_sake_flavor_ratio">');
-																	print('<span>' .number_format(($average_flavor * 100), 1) .'%</span>');
+																print('<div class="tastingnote_flavor_caption">');
+																	print('<h6>' .$flavor_name .'<span>（' .number_format(($average_flavor * 100), 1) .'%のユーザーに選ばれています）</span></h6>');
 																print('</div>');
 															print('</div>');
-														}
-														else
-														{
-															print('<div id="user_sake_flavor_content">');
-																print('<div class="user_sake_flavor">');
+														} else {
+															print('<div id="tastingnote_flavor_content">');
+																print('<div class="tastingnote_flavor">');
 																	print('<span>1</span>');
 																print('</div>');
-																print('<div class="user_sake_flavor_caption">');
-																	print('<span style="color: #b2b2b2;">--</span>');
-																print('</div>');
-																print('<div class="user_sake_flavor_ratio">');
-																	print('<span style="color: #b2b2b2;">--</span>');
+																print('<div class="tastingnote_flavor_caption">');
+																	print('<h6 style="color: #b2b2b2;">--</h6>');
 																print('</div>');
 															print('</div>');
 														}
@@ -890,256 +666,47 @@ require_once("searchbar.php");
 														if(count($flavor_lookupTable) > 1) {
 															getFlavorValue($flavor_lookupTable[1]['flavor'], $image_value, $flavor_name);
 															$average_flavor = $flavor_lookupTable[1]['count'] / $lookupTable_count;
-
-															print('<div id="user_sake_flavor_content">');
+															print('<div id="tastingnote_flavor_content">');
 																print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
-
-																print('<div class="user_sake_flavor_caption">');
-																	print('<span>' .$flavor_name .'</span>');
-																print('</div>');
-
-																print('<div class="user_sake_flavor_ratio">');
-																	print('<span>' .number_format(($average_flavor * 100), 1) .'%</span>');
+																print('<div class="tastingnote_flavor_caption">');
+																	print('<h6>' .$flavor_name .'<span>（' .number_format(($average_flavor * 100), 1) .'%のユーザーに選ばれています）</span></h6>');
 																print('</div>');
 															print('</div>');
-														}
-														else
-														{
-															print('<div id="user_sake_flavor_content">');
-																print('<div class="user_sake_flavor">');
+														} else {
+															print('<div id="tastingnote_flavor_content">');
+																print('<div class="tastingnote_flavor">');
 																	print('<span>2</span>');
 																print('</div>');
-																print('<div class="user_sake_flavor_caption">');
-																	print('<span style="color: #b2b2b2;">--</span>');
-																print('</div>');
-																print('<div class="user_sake_flavor_ratio">');
-																	print('<span style="color: #b2b2b2;">--</span>');
+																print('<div class="tastingnote_flavor_caption">');
+																	print('<h6 style="color: #b2b2b2;">--</h6>');
 																print('</div>');
 															print('</div>');
 														}
-													}
-													else
-													{
+													} else {
 														for($i = 0; $i < 2; $i++) {
-															print('<div id="user_sake_flavor_content">');
-																print('<div class="user_sake_flavor">');
+															print('<div id="tastingnote_flavor_content">');
+																print('<div class="tastingnote_flavor">');
 																	print('<span>' .($i + 1) .'</span>');
 																print('</div>');
-																print('<div class="user_sake_flavor_caption">');
-																	print('<span>--</span>');
-																print('</div>');
-																print('<div class="user_sake_flavor_ratio">');
-																	print('<!--<span></span>-->');
+																print('<div class="tastingnote_flavor_caption">');
+																	print('<h6>--</h6>');
 																print('</div>');
 															print('</div>');
 														}
 													}
 												print('</div>');
+											print('</div>');//user_sake_graph_all
+										print('</div>');//users_flavor_wrapper
+
+										//チャート//////////////////////////////////////
+										print('<div class="users_chart_wrapper">');
+											print('<div class="users_chart_title"><div></div>香味チャート</div>');
+											print('<div class="users_chart_container">');
+												print('<canvas id="users_chart"></canvas>');
 											print('</div>');
+										print('</div>');
 
-					            print('<!--香り-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_aroma2430"><use xlink:href="#aroma2430"/></svg></span>香り</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="aroma" step="0.1" min="0" max="5" value="' .$tastes_all[0] .'" disabled="disabled" class="everyone_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>弱い</span>');
-					                  print('<span>強い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_all[0] != 0) {
-														print('<span>' .number_format($tastes_all[0], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--ボディ-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_body2430"><use xlink:href="#body2430"/></svg></span>ボディ</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="body" step="0.1" min="0" max="5" value="' .$tastes_all[1] .'" disabled="disabled" class="everyone_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>味が軽い・淡麗</span>');
-					                  print('<span>味が重い・濃醇</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_all[1] != 0) {
-														print('<span>' .number_format($tastes_all[1], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--クリア-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_clear3030"><use xlink:href="#clear3030"/></svg></span>クリア</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="clear" step="0.1" min="0" max="5" value="' .$tastes_all[2] .'" disabled="disabled" class="everyone_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>雑味がある</span>');
-					                  print('<span>味がきれい</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_all[2] != 0) {
-														print('<span>' .number_format($tastes_all[2], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--甘辛-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_sweetness3030"><use xlink:href="#sweetness3030"/></svg></span>甘辛</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="sweetness" step="0.1" min="0" max="5" value="' .$tastes_all[3] .'" disabled="disabled" class="everyone_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>ドライ・辛口</span>');
-					                  print('<span>スイート・甘口</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_all[3] != 0) {
-														print('<span>' .number_format($tastes_all[3], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--旨味-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_umami3030"><use xlink:href="#umami3030"/></svg></span>旨味</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="umami" step="0.1" min="0" max="5" value="' .$tastes_all[4] .'" disabled="disabled" class="everyone_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>弱い</span>');
-					                  print('<span>強い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_all[4] != 0) {
-														print('<span>' .number_format($tastes_all[4], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--酸味-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_acidity3030"><use xlink:href="#acidity3030"/></svg></span>酸味</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="acidity" step="0.1" min="0" max="5" value="' .$tastes_all[5] .'" disabled="disabled" class="everyone_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>弱い</span>');
-					                  print('<span>強い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_all[5] != 0) {
-														print('<span>' .number_format($tastes_all[5], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--ビター-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_bitter2430"><use xlink:href="#bitter2430"/></svg></span>ビター</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="bitter" step="0.1" min="0" max="5" value="' .$tastes_all[6] .'" disabled="disabled" class="everyone_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>弱い</span>');
-					                  print('<span>強い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_all[6] != 0) {
-														print('<span>' .number_format($tastes_all[6], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					            print('<!--余韻-->');
-					            print('<div class="user_sake_tasting_box">');
-					              print('<div class="user_sake_tasting_title_container">');
-					                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_yoin3030"><use xlink:href="#yoin3030"/></svg></span>余韻</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_bar_container">');
-													print('<div class="tastingnote_input_range_container">');
-														print('<input type="range" name="yoin" step="0.1" min="0" max="5" value="' .$tastes_all[7] .'" disabled="disabled" class="everyone_input_range">');
-													print('</div>');
-					                print('<div class="user_sake_tasting_caption">');
-					                  print('<span>長く続く</span>');
-					                  print('<span>キレが良い</span>');
-					                print('</div>');
-					              print('</div>');
-
-					              print('<div class="user_sake_tasting_score">');
-													if ($tastes_all[7] != 0) {
-														print('<span>' .number_format($tastes_all[7], 1) .'</span>');
-													} else {
-														print('<span style="color: #b2b2b2;">--</span>');
-													}
-												print('</div>');
-					            print('</div>');
-
-					          print('</div><!--user_sake_graph_all-->');
-
-					        print('</div><!--user_sake_chart-->');
+									print('</div>');//tastingnote_chart
 									//フレーバーキャプション//////////////////////////////////////
 									print('<div class="tastingnote_caption">');
 										print('<div class="tastingnote_caption_title"><svg class="tastingnote_caption_help2020"><use xlink:href="#help2020"/></svg>フレーバーについて</div>');
@@ -1170,8 +737,8 @@ require_once("searchbar.php");
 										print('</div>');
 									print('</div>');//tastingnote_caption
 								print('</div>');
-				      print('</div><!--user_sake_tab_panel-->');
-				    print('</div><!--user_sake_tab_body-->');
+							print('</div>');//user_sake_tab_panel
+						print('</div>');//user_sake_tab_body
 
 				    print('<!--いいね-->');
 				    /*print('<div class="user_sake_like_container">');
@@ -1205,25 +772,121 @@ require_once("searchbar.php");
 
 	print("</div>");
 
+	print('<div id="dialog_preview">');
+		print('<div class="dialog_preview_position_adjust">');
+			print('<div class="dialog_preview_date_close_container">');
+				print('<div class="dialog_preview_date"></div>');
+				print('<button id="close_preview_button"><svg class="close_preview_close2020"><use xlink:href="#close2020"/></svg></button>');
+			print('</div>');
+
+			print('<div id="dialog_preview_image_container">');
+				print('<img src="" id="preview_image">');
+			print('</div>');
+
+			print('<div class="dialog_preview_container2">');
+				print('<a href="" class="dialog_preview_user_name"></a>');
+				print('<div class="dialog_preview_caption"></div>');
+			print('</div>');
+
+		print('</div>');
+	print('</div>');
+
 	writefooter();
 
 	?>
 
 <script type="text/javascript">
 
-//hirasawa追加
-//テイスティングソートキャプション
-$(document).on('click', '.tastingnote_caption', function(e){
-	$('.tastingnote_caption_invisible').slideToggle();
+$('.user_profile_trigger').click(function() {
+
+	$('.user_profile_container').slideToggle();
+
+	if ($(this).children(".plus_minus_icon").hasClass('active')) {
+		// activeを削除
+		$(this).children(".plus_minus_icon").removeClass('active');
+	}
+	else {
+		// activeを追加
+		$(this).children(".plus_minus_icon").addClass('active');
+	}
+});
+
+$(function () {
+  var container = $('.users_chart_container');
+  ctx.attr('width', container.width());
+  ctx.attr('height', 360);
+});
+
+var tastes_values_kaori = <?php echo json_encode($tastes_values[0]); ?>;
+var tastes_values_body = <?php echo json_encode($tastes_values[1]); ?>;
+var tastes_values_clear = <?php echo json_encode($tastes_values[2]); ?>;
+var tastes_values_amakara = <?php echo json_encode($tastes_values[3]); ?>;
+var tastes_values_umami = <?php echo json_encode($tastes_values[4]); ?>;
+var tastes_values_sanmi = <?php echo json_encode($tastes_values[5]); ?>;
+var tastes_values_bitter = <?php echo json_encode($tastes_values[6]); ?>;
+var tastes_values_yoin = <?php echo json_encode($tastes_values[7]); ?>;
+
+var tastes_all_kaori = <?php echo json_encode($tastes_all[0]); ?>;
+var tastes_all_body = <?php echo json_encode($tastes_all[1]); ?>;
+var tastes_all_clear = <?php echo json_encode($tastes_all[2]); ?>;
+var tastes_all_amakara = <?php echo json_encode($tastes_all[3]); ?>;
+var tastes_all_umami = <?php echo json_encode($tastes_all[4]); ?>;
+var tastes_all_sanmi = <?php echo json_encode($tastes_all[5]); ?>;
+var tastes_all_bitter = <?php echo json_encode($tastes_all[6]); ?>;
+var tastes_all_yoin = <?php echo json_encode($tastes_all[7]); ?>;
+
+Chart.defaults.global.defaultFontColor = '#000000';
+Chart.defaults.global.defaultFontFamily = 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', 'sans-serif';
+var ctx = document.getElementById('users_chart');
+var users_chart = new Chart(ctx, {
+  type: 'radar',
+  data: {
+    labels: ['香り', 'ボディ', 'クリア', '甘辛', '旨味', '酸味', 'ビター', '余韻'],
+    datasets: [{
+      label: 'レビュアーの評価',
+      data: [tastes_values_kaori, tastes_values_body, tastes_values_clear, tastes_values_amakara, tastes_values_umami, tastes_values_sanmi, tastes_values_bitter, tastes_values_yoin],
+      backgroundColor: 'rgba(0,150,150, 0.2)',
+      borderColor: '#009696',
+      borderWidth: 2,
+      pointRadius: 0,
+    }, {
+      label: 'みんなの評価',
+      data: [tastes_all_kaori, tastes_all_body, tastes_all_clear, tastes_all_amakara, tastes_all_umami, tastes_all_sanmi, tastes_all_bitter, tastes_all_yoin],
+      backgroundColor: 'rgba(160,200,70, 0.2)',
+      borderColor: '#A0C846',
+      borderWidth: 2,
+      pointRadius: 0,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scale: {
+      ticks: {
+        suggestedMin: 0,
+        suggestedMax: 5,
+        stepSize: 1
+      }
+    },
+    legend: {
+      display: true,
+      onClick: function () { return false },
+      labels: {
+        boxWidth: 16,
+        fontColor: '#3f3f3f',
+        fontSize: 13,
+        padding: 8
+      }
+    }
+  }
 });
 
 $(function() {
-
 	$('#button_bbs').click(function() {
 
 		var added_path = "";
 		var bFound = false;
-        var desc_array = [];
+		var desc_array = [];
 
 		//alert("sake_name:" + $('#user_information').data('sake_name'));
 
@@ -1262,31 +925,16 @@ $(function() {
 										  $('#user_information').data('committed') ] );
 
 	});
-
-	$('.user_profile_trigger').click(function() {
-
-		$('.user_profile_container').slideToggle();
-
-		if ($(this).children(".plus_minus_icon").hasClass('active')) {
-			// activeを削除
-			$(this).children(".plus_minus_icon").removeClass('active');
-		}
-		else {
-			// activeを追加
-			$(this).children(".plus_minus_icon").addClass('active');
-		}
-	});
 });
 
-/* レビューモーダルウィンドウ内タブ */
+//レビューモーダルウィンドウ内タブ
 $(function() {
-
-	/* 初期表示 */
+	//初期表示
 	$('.user_sake_tab_panel').hide();
 	$('.user_sake_tab_panel').eq(0).show();
 	$('.user_sake_tab_link').eq(0).addClass('is-active');
 
-	/* クリックイベント */
+	//クリックイベント
 	$('.user_sake_tab_link').each(function () {
 		$(this).on('click', function () {
 			  var index = $('.user_sake_tab_link').index(this);
@@ -1301,19 +949,14 @@ $(function() {
 		$('.user_sake_icon').css({"fill": "#8c8c8c"});
 		$(this).find(".user_sake_icon").css({"fill": "#3f3f3f"});
 	});
-
-	$("#edit_user_close, #cancel_user_button").click(function() {
-			$("#dialog_background").css({"display":"none"});
-			$("#dialog_user").css({"display":"none"});
-	});
 });
 
-/* レビューモーダルウィンドウ内タブ テイスティングソート */
+//レビューモーダルウィンドウ内タブ テイスティングソート
 $(function() {
 	'use strict';
 	var isA = 0; // 現在地判定
-	var btnA = document.getElementById('user_sake_sort_user');
-	var btnB = document.getElementById('user_sake_sort_all');
+	var btnA = document.getElementById('tastingnote_sort_user');
+	var btnB = document.getElementById('tastingnote_sort_all');
 	var divA = document.getElementById('user_sake_graph_user');
 	var divB = document.getElementById('user_sake_graph_all');
 
@@ -1338,509 +981,27 @@ $(function() {
 		setState(1);
 	});
 
-	$('#user_sake_sort_user').click(function() {
-		$('.user_sake_sort div').css({"border": "2px solid #d2d2d2","color": "#8c8c8c"});
-		$(this).css({"border": "2px solid #009696","color": "#000000"});
+	$('#tastingnote_sort_user').click(function() {
+		$('.tastingnote_sort div span').css({"border": "2px solid #d2d2d2"});
+		$('.tastingnote_sort div span').css({"background": "rgba(210,210,210, 0.2)"});
+		$('#tastingnote_sort_user span').css({"border": "2px solid #009696"});
+		$('#tastingnote_sort_user span').css({"background": "rgba(0,150,150, 0.2)"});
 	});
 
-	$('#user_sake_sort_all').click(function() {
-		$('.user_sake_sort div').css({"border": "2px solid #d2d2d2","color": "#8c8c8c"});
-		$(this).css({"border": "2px solid #A0C846","color": "#000000"});
+	$('#tastingnote_sort_all').click(function() {
+		$('.tastingnote_sort div span').css({"border": "2px solid #d2d2d2"});
+		$('.tastingnote_sort div span').css({"background": "rgba(210,210,210, 0.2)"});
+		$('#tastingnote_sort_all span').css({"border": "2px solid #A0C846"});
+		$('#tastingnote_sort_all span').css({"background": "rgba(160,200,70, 0.2)"});
 	});
 
-	$('#trigger_user_message').click(function() {
-		$('#mail_user').val($('#profile_name').text());
+	//テイスティングソートキャプション
+	$(document).on('click', '.tastingnote_caption', function(e){
+		$('.tastingnote_caption_invisible').slideToggle();
 	});
 });
 
 $(function() {
-
-		function nl2br(str, is_xhtml) {
-			var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>'; // Adjust comment to avoid issue on phpjs.org display
-
-			return (str + '')
-			.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-		}
-
-		function GetFlavorNames(flavors)
-		{
-			var flavor_array = flavors.split(',');
-			var ret_value = "";
-			var item = "";
-			var i = 0;
-
-			for(i = 0; i < flavor_array.lenth; i++)
-			{
-				if(flavor_array[i] == 1)
-					item = "フルーツ系";
-				else if(flavor_array[i] == 2)
-					item = "ハーブ・草葉系";
-				else if(flavor_array[i] == 3)
-					item = "木系";
-				else if(flavor_array[i] == 4)
-					item = "プレーン系";
-				else if(flavor_array[i] == 5)
-					item = "米・穀物系";
-				else if(flavor_array[i] == 6)
-					item = "ナッツ・木の実系";
-				else if(flavor_array[i] == 7)
-					item = "乳製品系";
-				else if(flavor_array[i] == 8)
-					item = "熟成系";
-				else if(flavor_array[i] == 9)
-					item = "その他";
-
-				if(ret_value == "")
-				{
-					ret_value = item;
-				}
-				else
-				{
-					ret_value += '/' + item;
-				}
-			}
-
-			return ret_value;
-		}
-
-		$(document).on('click', '.delete_nonda', function() {
-
-				var write_date = $(this).attr('write_date');
-				var tablename = $(this).attr('tablename');
-				var sake_id = $(this).attr('sake_id');
-				var imagepath = $(this).parent().find('.image_paths').val();
-				var data = "write_date="+write_date+"&sake_id="+sake_id+"&imagepath="+imagepath;
-				var obj = this;
-				//alert("data:" +data);
-
-				$.ajax({
-						type: "post",
-						url: "nonda_delete.php",
-						data: data,
-				}).done(function(xml){
-						var str = $(xml).find("str").text();
-						//alert("ret:" + str);
-
-						if(str == "success")
-						{
-								//$("#follow").text(str);
-								//$(obj).closest('div').fadeOut();
-								$(obj).parent().parent().fadeOut();
-						}
-
-				}).fail(function(data){
-						var str = $(xml).find("str").text();
-						alert("Failed:" +str);
-				});
-		});
-
-		function searchNonda(in_disp_from, disp_max, data, bCount)
-		{
-			  dispLoading("処理中...");
-
-				//alert("SearchNonda:" + data);
-
-				$.ajax({
-						type: "POST",
-						url: "nonda_list.php",
-						data: data,
-						dataType: 'json',
-
-				}).done(function(data){
-
-						var i = 0;
-						var count_result = data[0].count;
-						var sake = data[0].result;
-						var nonda_values = 0;
-
-						$('#sake_table').empty()
-
-						if(count_result > 0)
-						{
-							for(i = 0; i < sake.length; i++)
-							{
-									var tablename = "table_review" + sake[i].sake_id;
-									var innerText = '<div class="user_nonda_container">';
-
-									innerText += '<div class="user_nonda_sake_container">';
-									innerText += '<div class="user_nonda_sake_brewery_date_container">';
-									innerText += '<div class="user_nonda_sake_name">' + sake[i].sake_name + '</div>';
-									innerText += '<div class="user_nonda_brewery_date_container">';
-									innerText += '	<div>' + sake[i].sakagura_name + ' / ' + sake[i].pref + '</div>';
-									innerText += '	<div class="user_nonda_date"></div>';
-									innerText += '</div>';
-									innerText += '</div>';
-									innerText += '<div class="user_nonda_button_container">';
-									innerText += '<button class="custom_button"><span class="button_icon"><svg class="user_nonda_button_heart2020"><use xlink:href="#heart2020"/></svg></span><span class="button-text">飲んだ</span></button>';
-									innerText += '</div>';
-									innerText += '<button class="delete_nonda" sake_id = "' + sake[i].sake_id + '" write_date = "' + sake[i].write_date + '" style="border-radius:0px; background:transparent; width:28px"><img style="width:14px; margin:0px" src="images/icons/cross.svg"></button>';
-									innerText += '</div>';
-
-									////////////////////////////////////////
-									////////////////////////////////////////
-									var rank_width = (sake[i].sake_rank / 5) * 100 + '%';
-
-									innerText += '<div class="nonda_rank">';
-										innerText += '<div class="review_star_rating">';
-											innerText += '<div class="review_star_rating_front" style="width:' + rank_width + '">★★★★★</div>';
-											innerText += '<div class="review_star_rating_back">★★★★★</div>';
-										innerText += '</div>';
-
-									innerText += '<span class="review_sake_rate">' + sake[i].sake_rank + '</span>';
-									innerText += '</div>';
-
-									////////////////////////////////////////
-									////////////////////////////////////////
-									innerText += '<div class="user_nonda_subject_message_container">';
-										innerText += '<div class="user_nonda_subject">' + sake[i].subject + '</div>';
-										innerText += '<div class="user_nonda_message">' + nl2br(sake[i].message) + '</div>';
-									innerText += '</div>';
-									////////////////////////////////////////
-									////////////////////////////////////////
-
-									innerText += '<div class="review_container">';
-
-									if(sake[i].path != null && sake[i].path != "")
-									{
-											var pathArray = sake[i].path.split(',');
-
-											for(j = 0; j < pathArray.length; j++)
-											{
-												var path = "images\\photo\\thumb\\" + pathArray[j];
-												innerText += '<div class="review_image">' + '<img class="preview" src="' + path + '">' + '</div>';
-											}
-									}
-									else
-									{
-											var path = "images/icons/noimage160.svg";
-											innerText += '<div class="review_image">' + '<img src="' + path + '">' + path + '</div>';
-									}
-
-									innerText += '</div>';
-
-									////////////////////////////////////////
-									////////////////////////////////////////
-									if(sake[i].tastes != null)
-									{
-										var tastes_values = sake[i].tastes.split(',');
-										var taste1 = ((tastes_values[0] / 5) * 100) + "%";
-										var taste2 = ((tastes_values[1] / 5) * 100) + "%";
-										var taste3 = ((tastes_values[2] / 5) * 100) + "%";
-										var taste4 = ((tastes_values[3] / 5) * 100) + "%";
-										var taste5 = ((tastes_values[4] / 5) * 100) + "%";
-										var taste6 = ((tastes_values[5] / 5) * 100) + "%";
-										var taste7 = ((tastes_values[6] / 5) * 100) + "%";
-										var taste8 = ((tastes_values[7] / 5) * 100) + "%";
-
-										innerText += '<div class="tastes">';
-
-											innerText += '<div class="tastes_item">';
-												innerText += '<div class="tastes_title"><svg class="tastes_item_flavor1816"><use xlink:href="#flavor1816"/></svg>フレーバー</div>';
-												innerText += '<div class="taste_value_flavor">' + sake[i].flavor + '</div>';
-												//alert("innerText2:" + innerText);
-											innerText += '</div>';
-
-											////////////////////////////////////////
-											innerText += '<div class="tastes_border_line"></div>';
-											////////////////////////////////////////
-
-											innerText += '<div class="tastes_item">';
-												innerText += '	<div class="tastes_title"><svg class="tastes_item_aroma1216"><use xlink:href="#aroma1216"/></svg>香り</div>';
-												innerText += '	<div class="tastes_value_container">';
-													innerText += '<div class="tastes_bar_container">';
-													innerText += '<div style="width:' + taste1 + '" class="tastes_horizontal_bar"></div>';
-													innerText += '<div class="tastes_frame_bar"></div>';
-													innerText += '</div>';
-													innerText += '<div class="taste_value">' + tastes_values[0] + '</div>';
-												innerText += '	</div>';
-											innerText += '</div>';
-
-											////////////////////////////////////////
-											innerText += '<div class="tastes_item">';
-												innerText += '	<div class="tastes_title"><svg class="tastes_item_body1216"><use xlink:href="#body1216"/></svg>ボディ</div>';
-												innerText += '	<div class="tastes_value_container">';
-													innerText += '<div class="tastes_bar_container">';
-													innerText += '<div style="width:' + taste2 + '" class="tastes_horizontal_bar"></div>';
-													innerText += '<div class="tastes_frame_bar"></div>';
-													innerText += '</div>';
-													innerText += '<div class="taste_value">' + tastes_values[1] + '</div>';
-												innerText += '	</div>';
-											innerText += '</div>';
-
-											////////////////////////////////////////
-											innerText += '<div class="tastes_item">';
-												innerText += '	<div class="tastes_title"><svg class="tastes_item_clear3030"><use xlink:href="#clear3030"/></svg>クリア</div>';
-												innerText += '	<div class="tastes_value_container">';
-													innerText += '<div class="tastes_bar_container">';
-													innerText += '<div style="width:' + taste3 + '" class="tastes_horizontal_bar"></div>';
-													innerText += '<div class="tastes_frame_bar"></div>';
-													innerText += '</div>';
-													innerText += '<div class="taste_value">' + tastes_values[2] + '</div>';
-												innerText += '	</div>';
-											innerText += '</div>';
-											////////////////////////////////////////
-
-											innerText += '<div class="tastes_item">';
-												innerText += '	<div class="tastes_title"><svg class="tastes_item_sweetness3030"><use xlink:href="#sweetness3030"/></svg>甘辛</div>';
-												innerText += '	<div class="tastes_value_container">';
-													innerText += '<div class="tastes_bar_container">';
-													innerText += '<div style="width:' + taste4 + '" class="tastes_horizontal_bar"></div>';
-													innerText += '<div class="tastes_frame_bar"></div>';
-													innerText += '</div>';
-													innerText += '<div class="taste_value">' + tastes_values[3] + '</div>';
-												innerText += '	</div>';
-											innerText += '</div>';
-											////////////////////////////////////////
-
-											innerText += '<div class="tastes_item">';
-												innerText += '	<div class="tastes_title"><svg class="tastes_item_umami3030"><use xlink:href="#umami3030"/></svg>旨味</div>';
-												innerText += '	<div class="tastes_value_container">';
-													innerText += '<div class="tastes_bar_container">';
-													innerText += '<div style="width:' + taste5 + '" class="tastes_horizontal_bar"></div>';
-													innerText += '<div class="tastes_frame_bar"></div>';
-													innerText += '</div>';
-													innerText += '<div class="taste_value">' + tastes_values[4] + '</div>';
-												innerText += '	</div>';
-											innerText += '</div>';
-											////////////////////////////////////////
-
-											innerText += '<div class="tastes_item">';
-												innerText += '	<div class="tastes_title"><svg class="tastes_item_acidity3030"><use xlink:href="#acidity3030"/></svg>酸味</div>';
-												innerText += '	<div class="tastes_value_container">';
-													innerText += '<div class="tastes_bar_container">';
-													innerText += '<div style="width:' + taste6 + '" class="tastes_horizontal_bar"></div>';
-													innerText += '<div class="tastes_frame_bar"></div>';
-													innerText += '</div>';
-													innerText += '<div class="taste_value">' + tastes_values[5] + '</div>';
-												innerText += '	</div>';
-											innerText += '</div>';
-											////////////////////////////////////////
-
-											innerText += '<div class="tastes_item">';
-												innerText += '	<div class="tastes_title"><svg class="tastes_item_bitter1216"><use xlink:href="#bitter1216"/></svg>ビター</div>';
-												innerText += '	<div class="tastes_value_container">';
-													innerText += '<div class="tastes_bar_container">';
-													innerText += '<div style="width:' + taste7 + '" class="tastes_horizontal_bar"></div>';
-													innerText += '<div class="tastes_frame_bar"></div>';
-													innerText += '</div>';
-													innerText += '<div class="taste_value">' + tastes_values[5] + '</div>';
-												innerText += '	</div>';
-											innerText += '</div>';
-											////////////////////////////////////////
-
-											innerText += '<div class="tastes_item">';
-												innerText += '	<div class="tastes_title"><svg class="tastes_item_yoin3030"><use xlink:href="#yoin3030"/></svg>余韻</div>';
-												innerText += '	<div class="tastes_value_container">';
-													innerText += '<div class="tastes_bar_container">';
-													innerText += '<div style="width:' + taste8 + '" class="tastes_horizontal_bar"></div>';
-													innerText += '<div class="tastes_frame_bar"></div>';
-													innerText += '</div>';
-													innerText += '<div class="taste_value">' + tastes_values[5] + '</div>';
-												innerText += '	</div>';
-											innerText += '</div>';
-
-										innerText += '</div>';
-									} // tastes
-
-									innerText += '</div>';
-
-									$('#sake_table').append(innerText);
-							 }
-						}
-
-						if(bCount == true)
-						{
-							//alert("count:" + count_result);
-							//alert("count_result:" + count_result);
-							var p_max = 25;
-							var numPage = (count_result / p_max);
-							var numPage = (numPage < 5) ? numPage : 5;
-							var i = 1;
-
-							$("#count_sake").val(count_result);
-
-							innerText = '<button id="prev_review">前の' + p_max + '件</button>';
-							innerText += '<button class="pageitems selected">' + i + '</button>';
-
-							for(i++; i <= numPage; i++) {
-								 innerText += '<button class="pageitems">' + i + '</button>';
-							}
-
-							if(count_result > p_max) {
-								 innerText += '<button id="next_review" class="active">次の' + p_max + '件</button>';
-							}
-							else {
-								 innerText += '<button id="next_review">次の' + p_max + '件</button>';
-							}
-
-							$('#review_result_turn_page').empty();
-							$('#review_result_turn_page').append(innerText);
-						}
-
-						$('#in_disp_from').val(in_disp_from);
-						var limit = ((in_disp_from + disp_max) >= $("#count_sake").val()) ? $("#count_sake").val() : (in_disp_from + disp_max);
-						$('#disp_sake').text($('#in_disp_from').val() + " ～ " + limit + "/全" + $("#count_sake").val() + "件");
-
-				}).fail(function(data){
-						alert("Failed:" + data);
-				}).complete(function(data){
-						// Loadingイメージを消す
-						removeLoading();
-				});
-	    }
-
-		/* 次の飲みたい */
-		$(document).on('click', '.nomitai_set #next_review', function() {
-
-				var search_type = 1;
-				var disp_max = 25;
-				var in_disp_from = parseInt($("#in_disp_from").val()) + disp_max;
-				var in_disp_to = ((in_disp_from + disp_max) > $("#count_sake").val()) ? $("#count_sake").val() : in_disp_from + disp_max;
-				var username = <?php echo json_encode($username); ?>;
-				var data = "search_type="+search_type+"&in_disp_from="+in_disp_from+"&disp_max="+disp_max.toString()+"&username="+username+"&orderby="+ $("#hidden_order_by").val()+"&pref="+$('span[name="sake_pref"]').attr("value")+"&special_name="+$('span[name="special_name"]').attr("value");
-				var position = $('#review_result_turn_page .pageitems.selected').index();
-
-				if(in_disp_from >= $("#count_sake").val())
-					return false;
-
-				if(position < $('#review_result_turn_page .pageitems').length)
-				{
-					//alert("position:" + position + " length:" + $('#review_result_turn_page .pageitems').length);
-					$('#review_result_turn_page .pageitems.selected').removeClass("selected");
-					$('#review_result_turn_page .pageitems:nth(' + position + ')').addClass("selected");
-				}
-				else
-				{
-					var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text());
-					var i = 1;
-
-					$('#review_result_turn_page .pageitems').each(function() {
-							$(this).text(showPos + i);
-							i++;
-					});
-				}
-
-				searchSake(in_disp_from, disp_max, data, false);
-
-			  $('#prev_review').addClass('active');
-
-				$("#in_disp_from").val(in_disp_from);
-				$("#in_disp_to").val(in_disp_to);
-				$('#disp_sake').text((in_disp_from + 1) + ' ～ ' + in_disp_to + ' / 全' +　$("#count_sake").val());
-		});
-
-		/* 前の飲みたい */
-		$(document).on('click', '.nomitai_set #prev_review', function() {
-
-				var search_type = 1;
-				var disp_max = 25;
-				var in_disp_from = parseInt($("#in_disp_from").val()) - disp_max;
-				var username = <?php echo json_encode($username); ?>;
-				var data = "search_type="+search_type+"&in_disp_from="+in_disp_from+"&disp_max="+disp_max.toString()+"&username="+username+"&orderby="+ $("#hidden_order_by").val()+"&pref="+$('span[name="sake_pref"]').attr("value")+"&special_name="+$('span[name="special_name"]').attr("value");
-				var position = $('#review_result_turn_page .pageitems.selected').index();
-
-				if(in_disp_from < 0)
-				{
-					//alert("return false");
-					return false;
-				}
-
-				if(position > 1)
-				{
-					//alert("position:" + position + " length:" + $('#review_result_turn_page .pageitems').length);
-					$('#review_result_turn_page .pageitems.selected').removeClass("selected");
-					$('#review_result_turn_page .pageitems:nth(' + (position - 2) + ')').addClass("selected");
-				}
-				else
-				{
-					var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text()) - 2;
-					var i = 1;
-
-					//alert("showPos:" + showPos + " pageitem:" + $('#review_result_turn_page .pageitems:nth(0)').text());
-
-					$('#review_result_turn_page .pageitems').each(function() {
-							$(this).text(showPos + i);
-							i++;
-					});
-			   }
-
-				searchSake(in_disp_from, disp_max, data, false);
-
-				if(in_disp_from == 0)
-					 $('#prev_review').removeClass('active');
-
-				$("#in_disp_from").val(in_disp_from);
-				$("#in_disp_from").val(in_disp_to);
-				$('#disp_sake').text((in_disp_from + 1) + ' ～ ' + in_disp_to + ' / 全' +　$("#count_sake").val());
-		});
-
-
-		$(document).on('click', '#review_result_turn_page .pageitems', function(e){
-
-				var search_type = 1;
-				var disp_max = 25;
-				var limit = 0;
-				var showPos = parseInt($('#review_result_turn_page .pageitems:nth(0)').text());
-				var position = $(this).index();
-
-				var in_disp_from = (showPos + position - 2) * disp_max;
-				var in_disp_to = in_disp_from + disp_max;
-				var username = <?php echo json_encode($username); ?>;
-				var data = "search_type="+search_type+"&in_disp_from="+in_disp_from+"&disp_max="+disp_max.toString()+"&username="+username+"&orderby="+ $("#hidden_order_by").val()+"&pref="+$('span[name="sake_pref"]').attr("value")+"&special_name="+$('span[name="special_name"]').attr("value");
-
-				//alert("position:" + position);
-				$('#review_result_turn_page .pageitems.selected').removeClass("selected");
-				$('#in_disp_from').val((position - 1) * disp_max);
-
-				limit = parseInt(parseInt($('#in_disp_from').val()) + disp_max);
-				limit = (limit > $("#count_sake").val()) ? $("#count_sake").val() : limit;
-
-				$('#in_disp_to').val(limit);
-				$('#in_disp_from').val(in_disp_from);
-				$('#in_disp_to').val(in_disp_to);
-
-				if(in_disp_from + disp_max > $("#count_sake").val())
-				{
-					 $('#next_review').removeClass('active');
-				}
-				else
-				{
-					 $('#next_review').addClass('active');
-				}
-
-				if(in_disp_from > 0 && $("#count_sake").val() > disp_max)
-				{
-					 $('#prev_review').addClass('active');
-				}
-				else
-				{
-					 $('#prev_review').removeClass('active');
-				}
-
-				$('#review_result_turn_page .search_result_count').text((in_disp_from + 1) + '件目 ～ ' + $('#in_disp_to').val() + '件目を表示 / 全' + $('#count_sakagura').val() + '件');
-				$('#review_result_turn_page .pageitems:nth(' + (position - 1) + ')').addClass("selected");
-
-				searchSake(in_disp_from, disp_max, data, false);
-		});
-
-		$('#sake_sort span').click(function() {
-
-				var search_type = 1;
-				var disp_max = 25;
-				var username = <?php echo json_encode($username); ?>;
-				var in_disp_from = 0;
-				var disp_max = 25;
-				var data = "search_type="+search_type+"&in_disp_from="+in_disp_from+"&disp_max="+disp_max.toString()+"&username="+username+"&orderby="+ $(this).attr("value")+"&pref="+ $('span[name="sake_pref"]').attr("value")+ "&special_name="+ $('span[name="special_name"]').attr("value");
-
-				//alert("data:" + data);
-				//alert("sake_sort span click");
-				$("#hidden_order_by").val($(this).attr("value"));
-				$("#sake_sort span").css({"background": "#d2d2d2", "color": "#ffffff"});
-				$(this).css({"background": "#28809E", "color": "#ffffff"});
-				//alert('value:' + $(this).attr("value"));
-				searchSake(in_disp_from, disp_max, data, false);
-		});
-
 		$("body").on("nonda_saved", function(event, sake_id, contributor, write_date, committed, title, ranke, message, imagepath, tastes, flavor) {
 			location.reload();
 
@@ -1852,23 +1013,63 @@ $(function() {
 		});
 });
 
+$(function() {
+	$(document).on('click', '.user_sake_image', function(){
+		var touch_start_y;
+		var path = $(this).find('img');
+
+		$("#preview_image").attr("src", $(path).attr("src"));
+		$("#dialog_preview .dialog_preview_user_name").text($(this).data("contributor"));
+		$("#dialog_preview .dialog_preview_date").text($(this).data("added_date"));
+
+		if($(this).data("desc") && $(this).data("desc") != "") {
+			$("#dialog_preview .dialog_preview_caption").text($(this).data("desc"));
+			$("#dialog_preview .dialog_preview_caption").css({"display":"flex"});
+		}
+		else {
+			$("#dialog_preview .dialog_preview_caption").css({"display":"none"});
+		}
+
+		// タッチしたとき開始位置を保存しておく
+		$(window).on('touchstart', function(event) {
+			touch_start_y = event.originalEvent.changedTouches[0].screenY;
+		});
+
+		// スワイプしているとき
+		$(window).on('touchmove.noscroll', function(event) {
+			var current_y = event.originalEvent.changedTouches[0].screenY,
+			height = $('#dialog_preview').outerHeight(),
+			is_top = touch_start_y <= current_y && $('#dialog_preview')[0].scrollTop === 0,
+			is_bottom = touch_start_y >= current_y && $('#dialog_preview')[0].scrollHeight - $('#dialog_preview')[0].scrollTop === height;
+
+			// スクロール対応モーダルの上端または下端のとき
+			if(is_top || is_bottom) {
+				// スクロール禁止
+				event.preventDefault();
+			}
+		});
+
+		// スクロール禁止
+		$('html, body').css('overflow', 'hidden');
+		$("#dialog_preview").css({"display":"flex"});
+	});
+
+	$('#close_preview_button').click(function() {
+		// イベントを削除
+		$(window).off('touchmove.noscroll');
+		$('html, body').css('overflow', '');
+		$("#dialog_preview").css({"display":"none"});
+	});
+});
+
 jQuery(document).ready(function($) {
 
-  $("body").wrapInner('<div id="wrapper"></div>');
+	$("body").wrapInner('<div id="wrapper"></div>');
 
-	$("#tab_sake").addClass("nomitai_set");
-	$('#tab_main').createTabs({
-			text : $('#tab_main ul')
-	});
-
-	$('#cancel_user_button').click(function() {
-			$("#dialog_addimage").css({"display":"none"});
-	});
-
-    $('#profile_name').click(function(){
+	$('#profile_name').click(function(){
 		var username = $('#user_information').data('contributor');
-        window.open('user_view.php?username=' + username, '_self');
-    });
+		window.open('user_view.php?username=' + username, '_self');
+	});
 });
 
 </script>

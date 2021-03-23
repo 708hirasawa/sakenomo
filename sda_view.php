@@ -394,9 +394,6 @@ print('<div id="container"
       print("</ul>");
 
       print('<ul class="sakagura_buttons">');
-        //非表示中
-        /*print('<li id="button_sakagura_bbs"><svg class="sakagura_buttons_writing1816"><use xlink:href="#writing1816"/></svg>コメント・写真</li>');*/
-
         $result = executequery($db, "SELECT * FROM FOLLOW_J WHERE username = '$username' AND sakagura_id = '$id'");
 
         if($rd = getnextrow($result))
@@ -408,9 +405,6 @@ print('<div id="container"
           print('<li id="follow" value=false><svg class="sakagura_buttons_pin1616"><use xlink:href="#pin1616"/></svg>お気に入り</li>');
         }
 
-        //非表示中
-        /*print('<li id="share"><svg class="sakagura_buttons_share1816"><use xlink:href="#share1816"/></svg>シェア</li>');*/
-
       print("</ul>");
     print("</div>");
 
@@ -419,52 +413,11 @@ print('<div id="container"
         // tabs
         print('<div id="tab_main">');
           print('<ul class="simpleTabs">');
-            //非表示中
-            /*print('<li><a class="active" href="#tab-top"><span><svg class="simpleTabs_brewery3630"><use xlink:href="#brewery3630"/></svg><span>トップ</span></span></a></li>');*/
             print('<li><a class="active" href="#tab-sake"><span><svg class="simpleTabs_product3630"><use xlink:href="#product3630"/></svg><span>商品</span></span></a></li>');
-            //非表示中
-            /*print('<li><a href="#tab-comment"><span><svg class="simpleTabs_review3630"><use xlink:href="#review3630"/></svg><span>コメント</span></span></a></li>');*/
-            //非表示中
-            /*print('<li><a href="#tab-photo"><span><svg class="simpleTabs_camera3630"><use xlink:href="#camera3630"/></svg><span>写真</span></span></a></li>');*/
             print('<li><a href="#tab-map"><span><svg class="simpleTabs_map2430"><use xlink:href="#map2430"/></svg><span>地図</span></span></a></li>');
           print('</ul>');
 
           $result = executequery($db, "SELECT * FROM SAKE_J WHERE sakagura_id = '$id'");
-
-          ////////////////////////////////////////
-          //非表示中
-          /*print('<div id="tab-top" class="form-action show">');
-            print('<div class="tab-top_note"><div>一般ユーザーのご協力によって編集・投稿された情報は最新のものと異なる場合があります</div><a href=""><svg class="tab-top_note_pen1616"><use xlink:href="#pen1616"/></svg>酒蔵向け無料会員登録はこちら</a></div>');
-
-            //hirasawa追加ここから
-            print('<ul class="slider multiple-brewery-image">');
-              print('<li>');
-                print('<div><img src="images/icons/noimage320.svg"></div>');
-              print("</li>");
-              print('<li>');
-                print('<div><img src="images/icons/noimage320.svg"></div>');
-              print("</li>");
-              print('<li>');
-                print('<div><img src="images/icons/noimage320.svg"></div>');
-              print("</li>");
-              print('<li>');
-                print('<div><img src="images/icons/noimage320.svg"></div>');
-              print("</li>");
-            print("</ul>");
-            //hirasawa追加ここまで
-
-            ////////////////////////////////////////
-            // 酒蔵の紹介
-            print('<div class="brewery_profile_container">');
-              print('<div class="brewery_profile_title">');
-                print('<svg class="brewery_profile_profile2420"><use xlink:href="#profile2420"/></svg>');
-                print('<span>プロフィール</span>');
-              print('</div>');
-              $row["sakagura_intro"] = nl2br($row["sakagura_intro"]);
-              $row["sakagura_intro"] = stripslashes($row["sakagura_intro"]);
-              print('<div id="sakagura_intro">'.$row["sakagura_intro"].'</div>');
-            print('</div>');
-          print('</div>');//tab-top*/
           ////////////////////////////////////////
           print('<div id="tab-sake" class="form-action show">');
 
@@ -616,14 +569,6 @@ print('<div id="container"
                         print('<span class="sake_rank_sake_rate" style="color: #b2b2b2;">--</span>');
                       }
                     print('</div>');
-                    /*$rank_value = intval($record["sake_rank"]);
-                    print('<div class="sake_rank">');
-                      $i = 0;
-                      print('<div>');
-                        if($record["rank"] != null)
-                        print('<span>' .$record["rank"] .'</span>');
-                      print("</div>");
-                    print("</div>");*/
                     ////////////////////////////////////////
                     print('<div class="spec">');
 
@@ -794,11 +739,9 @@ print('<div id="container"
             print('<div class="sakagura_map_select">');
               print('<div class="sakagura_map_button_container">');
                 print('<div class="sakagura_map_button"><svg class="sakagura_map_map1216"><use xlink:href="#map1216"/><div>'.stripslashes($row["sakagura_name"]).'</div></div>');
-                /*print('<div class="sakagura_map_button"><svg class="sakagura_map_map1216"><use xlink:href="#map1216"/><div>周辺の酒蔵</div></div>');*/
               print('</div>');
             print('</div>');
             print('<div id="sakagura_map">');
-              //print("<iframe class=\"map\" frameborder=\"0\" scrolling=\"yes\" marginheight=\"0\" marginwidth=\"0\" src=\"https://maps.google.co.jp/maps?hl=&amp;ie=UTF8&amp;q=loc:".$address."&amp;z=18&amp;iwloc=B&amp;output=embed\"></iframe>");
               print("<iframe class=\"map\" frameborder=\"0\" scrolling=\"yes\" marginheight=\"0\" marginwidth=\"0\" src=\"https://maps.google.co.jp/maps?hl=&amp;ie=UTF8&amp;q=loc:".$address."&amp;z=18&amp;iwloc=B&amp;output=embed\"></iframe>");
             print('</div>');
           print('</div>');
@@ -1113,202 +1056,6 @@ print("</div>"); //container
 writefooter();
 ?>
 
-<!--コメントタブダイアログ-->
-<div id="dialog_sakagura_review_background">
-	<div class="dialog_table">
-		<div class="dialog_table-cell">
-      <div id="dialog_sakagura_review">
-
-        <span id="dialog_sakagura_review_button_container">
-          <div class="prev_next_sakagura_review_button">
-            <button id="prev_sakagura_review_button">前へ</button>
-            <button id="next_sakagura_review_button">次へ</button>
-          </div>
-          <button id="close_sakagura_review_button"><svg class="close_sakagura_review_close2020"><use xlink:href="#close2020"/></svg></button>
-        </span>
-
-        <div class="dialog_sakagura_container">
-          <!--ユーザー-->
-          <div class="dialog_sakagura_user_container">
-            <div class="dialog_sakagura_user_image_container">
-              <img src="images/icons/noimage_user30.svg">
-            </div>
-            <div class="dialog_sakagura_user_name_container">
-              <a class="dialog_sakagura_user_name" href="">ここにユーザー名が表示されます(マイページへリンク)</a>
-              <div class="dialog_sakagura_user_profile_date_container">
-                <div class="dialog_sakagura_user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>
-                <div class="dialog_sakagura_date">2018/4/5</div>
-              </div>
-            </div>
-          </div>
-
-          <!--酒蔵-->
-          <div class="dialog_sakagura_sakagura_container">
-            <div class="dialog_sakagura_name_brewery_date_container">
-              <div class="dialog_sakagura_name">ここに酒蔵名が表示されます</div>
-              <div class="dialog_sakagura_brewery_date_container">
-                <div>都道府県</div>
-              </div>
-            </div>
-          </div>
-
-          <!--レビューテキスト-->
-          <div class="dialog_sakagura_subject_message_container">
-            <div class="dialog_sakagura_subject">ここにコメントタイトルが表示されますここにコメントタイトルが表示されます</div>
-            <div class="dialog_sakagura_message">ここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されますここにコメント本文が表示されます</div>
-          </div>
-
-          <!--写真-->
-          <div class="dialog_sakagura_image_container">
-            <div class="dialog_sakagura_image"><img src=""></div>
-          </div>
-
-          <!--いいね-->
-          <div class="dialog_sakagura_like_container">
-            <a class="dialog_sakagura_like">
-              <svg class="dialog_sakagura_like_icon"><use xlink:href="#like1616"/></svg>
-              <div class="dialog_sakagura_like_title">いいね!</div>
-            </a>
-            <div class="dialog_sakagura_like_count">123</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--新bbs-->
-<div id="dialog_kura_bbs_background">
-	<div class="dialog_table">
-		<div class="dialog_table-cell">
-      <div id="dialog_kura_bbs" value="" write_date="">
-
-        <div class="dialog_kura_bbs_title_close_container">
-          <div class="dialog_kura_bbs_title_blanc"></div>
-          <div class="dialog_kura_bbs_title">「コメント・写真」登録</div>
-          <span class="close_kura_bbs_button_container">
-            <button id="close_kura_bbs_button"><svg class="close_kura_bbs_close2020"><use xlink:href="#close2020"/></svg></button>
-          </span>
-        </div>
-
-        <!--<div class="nonda_meigara">-->
-        <div class="dialog_kura_name_container">
-          <div id="dialog_kura_name">ここに酒蔵名が入りますここに酒蔵名が入りますここに酒蔵名が入ります</div>
-        </div>
-
-        <div id="dialog_kura_bbs_tab_container">
-          <ul class="dialog_kura_bbs_tab">
-            <li class="dialog_kura_bbs_tab_item">
-              <div class="dialog_kura_bbs_tab_click">
-                <svg class="dialog_kura_bbs_tab_review3630 dialog_kura_bbs_tab_icon"><use xlink:href="#review3630"/></svg>
-                <span>コメント</span>
-              </div>
-            </li>
-            <li class="dialog_kura_bbs_tab_item">
-              <div class="dialog_kura_bbs_tab_click">
-                <svg class="dialog_kura_bbs_tab_camera3630 dialog_kura_bbs_tab_icon"><use xlink:href="#camera3630"/></svg>
-                <span>写真</span>
-              </div>
-            </li>
-          </ul>
-
-          <div class="dialog_kura_bbs_tabs">
-            <div class="dialog_kura_bbs_article_container">
-              <div class="dialog_kura_bbs_article_title">
-                <input id="dialog_kura_bbs_input_subject" class="inputform" value="" placeholder="コメントタイトルを入力">
-              </div>
-              <div class="dialog_kura_bbs_article_text">
-                <textarea id="dialog_kura_bbs_input_message" class="inputform" placeholder="コメント本文を入力"></textarea>
-              </div>
-              <div class="dialog_kura_bbs_article_delete">
-                <div class="dialog_kura_bbs_article_delete_button"><svg class="dialog_kura_bbs_delete1616"><use xlink:href="#delete1616"/></svg>コメントを削除</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dialog_kura_bbs_tabs">
-            <div id="dialog_kura_bbs_image">
-              <div path="" id="dialog_kura_bbs_image_post">
-                <div class="dialog_kura_bbs_image_photo_container"> <!--caption開始時に追加予定hirasawa-->
-                  <input type="file">
-                  <div class="dialog_kura_bbs_image_photo"><img src=""></div>
-                  <div class="nonda_status">status</div>
-                  <div class="nonda_total">total</div>
-                  <!--<progress class="nonda_progress" value="0" max="100"></progress>-->
-                  <span class="dialog_kura_bbs_image_post_button_container">
-                    <input type="button" class="change_pic" value="登録">
-                    <input type="button" class="remove_pic" value="削除">
-                  </span>
-                </div>
-                <div class="dialog_kura_bbs_image_caption_container"><!--caption開始時に追加予定hirasawa-->
-                  <textarea id="dialog_kura_bbs_image_caption" placeholder="写真の説明文を入力"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dialog_kura_bbs_button_container">
-            <input type="button" id="dialog_kura_bbs_ok" value="登録・更新">
-            <input type="button" id="dialog_kura_bbs_draft" value="下書き保存">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- bbs -->
-<!--<div id="dialog_sakagura_bbs">
-  <div>コメントを投稿する</div>
-  <span><button id="close_sakagura_bbs_button">x</button></span>
-  <div id="dialog_sakagura_bbs_container">
-    <div>
-      <span>題名</span>
-      <span><input id="bbs_subject" value="" placeholder="題名を入力してください"></span>
-    </div>
-		<div>
-			<span>メッセージ</span>
-			<span>
-        <SELECT id="bbs_rank" name="sake_rank">
-					<OPTION VALUE="0">0</OPTION>
-					<OPTION VALUE="1">1</OPTION>
-					<OPTION VALUE="2">2</OPTION>
-					<OPTION VALUE="3">3</OPTION>
-					<OPTION VALUE="4">4</OPTION>
-					<OPTION VALUE="5">5</OPTION>
-				</SELECT>
-			</span>
-			<span>酒販店の評価</span>
-			<span><textarea id="bbs_message" placeholder="コメントを入力してください"></textarea></span>
-		</div>
-		<div>
-			<input type="button" id="sakagura_bbs_ok" class="regular_button" value="投稿する">
-			<input type="button" id="sakagura_bbs_close" class="regular_button" value="閉じる">
-		</div>
-  </div>
-</div>-->
-
-<!-- send mail -->
-<!--<div id="dialog_send_sakagura">
-	<div>酒蔵にメールを送る</div>
-	<span><button id="close_mail_button">x</button></span>
-	<div id="dialog_send_sakagura_container">
-			<div>
-					<div>
-						<span>題名</span>
-						<span><input id="mail_subject" value="" placeholder="題名を入力してください"></span>
-					</div>
-
-					<div>
-						<span>メッセージ</span>
-						<span><textarea id="mail_message" placeholder="コメントを入力してください"></textarea></span>
-					</div>
-			</div>
-			<input type="button" id="send_sakagura_close" value="閉じる">
-	</div>
-</div>-->
-
-<!-- dialog_background -->
 <div id="search_background">
 	<div id="inner_background">
 		<div class="loader"></div>
@@ -1329,341 +1076,6 @@ writefooter();
 ***************************************************************************************/
 
 /////////////////////////////////////////////////////////////////////////////////////
-/*コメント・写真モーダル*/
-$('#button_sakagura_bbs').click(function() {
-  var touch_start_y;
-
-  // タッチしたとき開始位置を保存しておく
-  $(window).on('touchstart', function(event) {
-    touch_start_y = event.originalEvent.changedTouches[0].screenY;
-  });
-  // スワイプしているとき
-  $(window).on('touchmove.noscroll', function(event) {
-    var current_y = event.originalEvent.changedTouches[0].screenY,
-    height = $('#dialog_kura_bbs_background').outerHeight(),
-    is_top = touch_start_y <= current_y && $('#dialog_kura_bbs_background')[0].scrollTop === 0,
-    is_bottom = touch_start_y >= current_y && $('#dialog_kura_bbs_background')[0].scrollHeight - $('#dialog_kura_bbs_background')[0].scrollTop === height;
-
-    // スクロール対応モーダルの上端または下端のとき
-    if(is_top || is_bottom) {
-      // スクロール禁止
-      event.preventDefault();
-    }
-  });
-
-  // スクロール禁止
-  $('html, body').css('overflow', 'hidden');
-  $("#dialog_kura_bbs_background").css({"display":"flex"});
-});
-
-$('#close_kura_bbs_button, #dialog_kura_bbs_ok, #dialog_kura_bbs_draft').click(function() {
-  // イベントを削除
-  $(window).off('touchmove.noscroll');
-  $('html, body').css('overflow', '');
-  $("#dialog_kura_bbs_background").css({"display":"none"});
-});
-
-////////////////////////////////////////////////////////////////////////////
-/*コメント・写真タブ*/
-$(function () {
-  /*初期表示*/
-  $('.dialog_kura_bbs_tabs').hide();
-  $('.dialog_kura_bbs_tabs').eq(0).show();
-  $('.dialog_kura_bbs_tab_click').eq(0).addClass('is-active');
-  /*クリックイベント*/
-  $('.dialog_kura_bbs_tab_click').each(function () {
-    $(this).on('click', function () {
-      var index = $('.dialog_kura_bbs_tab_click').index(this);
-      $('.dialog_kura_bbs_tab_click').removeClass('is-active');
-      $(this).addClass('is-active');
-      $('.dialog_kura_bbs_tabs').hide();
-      $('.dialog_kura_bbs_tabs').eq(index).show();
-    });
-  });
-});
-
-$(function() {
-	$('.dialog_kura_bbs_tab_click').click(function() {
-	$('.dialog_kura_bbs_tab_click').css({"color": "#8c8c8c"});
-    $('.dialog_kura_bbs_tab_click').css({"background": "#f5f5f5"});
-    $('.dialog_kura_bbs_tab_click').css({"border-bottom": "1px solid #d2d2d2"});
-    $('.dialog_kura_bbs_tab_icon').css({"fill": "#8c8c8c"});
-	$(this).css({"color": "#3f3f3f"});
-    $(this).css({"background": "#ffffff"});
-    $(this).css({"border-bottom": "1px solid transparent"});
-    $(this).find(".dialog_kura_bbs_tab_icon").css({"fill": "#3f3f3f"});
-	});
-});
-
-////////////////////////////////////////////////////////////////////////////
-/*コメント詳細モーダル*/
-$('.brewery_comment').click(function() {
-  var touch_start_y;
-
-  // タッチしたとき開始位置を保存しておく
-  $(window).on('touchstart', function(event) {
-    touch_start_y = event.originalEvent.changedTouches[0].screenY;
-  });
-  // スワイプしているとき
-  $(window).on('touchmove.noscroll', function(event) {
-    var current_y = event.originalEvent.changedTouches[0].screenY,
-    height = $('#dialog_sakagura_review_background').outerHeight(),
-    is_top = touch_start_y <= current_y && $('#dialog_sakagura_review_background')[0].scrollTop === 0,
-    is_bottom = touch_start_y >= current_y && $('#dialog_sakagura_review_background')[0].scrollHeight - $('#dialog_sakagura_review_background')[0].scrollTop === height;
-
-    // スクロール対応モーダルの上端または下端のとき
-    if (is_top || is_bottom) {
-      // スクロール禁止
-      event.preventDefault();
-    }
-  });
-
-  // スクロール禁止
-  $('html, body').css('overflow', 'hidden');
-  $("#dialog_sakagura_review_background").css({"display":"flex"});
-});
-
-$('#close_sakagura_review_button').click(function() {
-  // イベントを削除
-  $(window).off('touchmove.noscroll');
-  $('html, body').css('overflow', '');
-  $("#dialog_sakagura_review_background").css({"display":"none"});
-});
-
-////////////////////////////////////////////////////////////////////////////
-
-function AutoLink(str) {
-    var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
-    var regexp_makeLink = function(all, url, h, href) {
-		return '<a href="h' + href + '" target="_blank">' + url + '</a>';
-    }
-
-    return str.replace(regexp_url, regexp_makeLink);
-}
-
-$(function() {
-
-	function _(el){
-		return document.getElementById(el);
-	}
-
-	function progressHandler(event){
-		_("loaded_n_total").innerHTML = "Uploaded "+event.loaded+" bytes of "+event.total;
-		var percent = (event.loaded / event.total) * 100;
-		_("progressBar").value = Math.round(percent);
-		_("status").innerHTML = Math.round(percent)+"% uploaded... please wait";
-	}
-
-	function completeHandler(event){
-		var responseText = event.target.responseText;
-		var responseArray = JSON.parse(responseText);
-		var path = "images\\photo\\" + responseArray[0];
-
-		//alert("array[0]:" + responseArray[0] + " array[1]:" + responseArray[1] + " array[2]:" + responseArray[2] + " array[3]:" + responseArray[3]);
-
-		if($('#hidden_data_type').val() == "sakagura")
-		{
-			path = "images\\sakagura\\" + responseArray[0];
-		}
-
-		_("status").innerHTML = responseArray[0];
-		_("progressBar").value = 0;
-
-		var innerHTML = '<div class="sakagura_photo">' +
-				'<img src="' + path + '">' +
-				'<button class="navigate_button" filename ="' + responseArray[0] + '">削除</button>' +
-				'<span>' + responseArray[0] + '</span></div></div>';
-
-		$element = $('#addimage_container').prepend(innerHTML);
-		//$element.effects("highlight", {}, 2000);
-		$("#dialog_background").css({"display":"none"});
-		$("#dialog_addimage").fadeOut();
-	}
-
-	function errorHandler(event){
-		_("status").innerHTML = "Upload Failed";
-	}
-
-	function abortHandler(event){
-		_("status").innerHTML = "Upload Aborted";
-	}
-
-	$('#upload_image').click(function() {
-
-		var file = _("file1").files[0];
-
-		if(file)
-		{
-			var formdata = new FormData();
-
-			formdata.append("file1", file);
-			formdata.append("id", $('#hidden_id').val());
-			formdata.append("title", $('#hidden_title').val());
-			formdata.append("data_type", $('#hidden_data_type').val());
-
-			var ajax = new XMLHttpRequest();
-			ajax.upload.addEventListener("progress", progressHandler, false);
-			ajax.addEventListener("load", completeHandler, false);
-			ajax.addEventListener("error", errorHandler, false);
-			ajax.addEventListener("abort", abortHandler, false);
-			ajax.open("POST", "data_upload_parser.php");
-			ajax.send(formdata);
-		}
-	});
-
-	$('#file1').change(function() {
-
-		var filesToUpload = document.getElementById('file1').files;
-		var file = filesToUpload[0];
-		var reader = new FileReader(); // Create a file reader
-		var imageobj = $('#image');
-
-		reader.onload = function(e) {
-
-			var canvas = document.createElement("canvas");
-			var max_width = 500;
-			var max_height = 400;
-
-			$('#image').attr("src", e.target.result);
-
-			var width = $('#image').width();
-			var height = $('#image').height();
-
-			if(width > height)
-			{
-				if (width > max_width)
-				{
-					height *= max_width / width;
-					height = Math.floor(height);
-					width = max_width;
-				}
-			}
-			else
-			{
-				if(height > max_height)
-				{
-					width *= max_height / height;
-					width = Math.floor(width);
-					height = max_height;
-				}
-			}
-
-			canvas.width = width;
-			canvas.height = height;
-
-			var ctx = canvas.getContext("2d");
-			var data = e.target.result;
-			var orientation = 0;
-			var className = $("#image").attr("class");
-
-			//alert("width:" + width + " height:" + height);
-
-			if(className)
-			{
-				$("#image").removeClass(className);
-			}
-
-			if(data.split(',')[0].match('jpeg'))
-			{
-				var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
-				var isIE = /*@cc_on!@*/false || !!document.documentMode;
-				var isChrome = !!window.chrome && !!window.chrome.webstore;
-				var isFirefox = typeof InstallTrigger !== 'undefined';
-
-				//alert("safari:" + isSafari + " isIE:" + isIE + " isChrome:" + isChrome);
-
-				if(isChrome == true || isIE == true || isFirefox == true)
-				{
-					orientation = getOrientation(data);
-					//alert("orientation:" + orientation);
-
-					if(orientation == 1)
-					{
-						//ctx.transform(1, 0, 0, 1, 0, 0);
-					}
-					else if(orientation == 2)
-					{
-						//ctx.transform(-1, 0, 0, 1, width, 0);
-					}
-					else if(orientation == 3)
-					{
-						$("#image").addClass("image_rotated_by_180_clock");
-						//ctx.transform(-1, 0, 0, -1, width, height);
-					}
-					else if(orientation == 4)
-					{
-						//ctx.transform(1, 0, 0, -1, 0, height);
-					}
-					else if(orientation == 5)
-					{
-						//ctx.transform(0, 1, 1, 0, 0, 0);
-					}
-					else if(orientation == 6)
-					{
-						$("#image").addClass("image_rotated_by_90_clock");
-						//ctx.transform(0, 1, -1, 0, height , 0);
-					}
-					else if(orientation == 7)
-					{
-						//ctx.transform(0, -1, -1, 0, height , width);
-					}
-					else if(orientation == 8)
-					{
-						$("#image").addClass("image_rotated_by_90_counter_clock");
-						//ctx.transform(0, -1, 1, 0, 0, width);
-					}
-				}
-			}
-			else
-			{
-					alert("something else");
-			}
-
-			ctx.drawImage(img, 0, 0, width, height);
-			var dataurl = canvas.toDataURL("image/jpg");
-		}
-
-		reader.readAsDataURL(file); // load files into file reader
-	});
-
-	// 写真を削除する
-	$("#addimage_container").delegate('button', 'click', function() {
-
-		var filename = $(this).attr('filename');
-		var sakagura_id = $('#hidden_id').val();
-		var data_type = $('#hidden_data_type').val();
-		var obj = this;
-
-		if(confirm("削除しますか ID:" + sakagura_id + " filename:" + filename) == true)
-		{
-			var data = "id="+sakagura_id+"&data_type="+data_type+"&filename="+filename;
-			//alert("data:" + data);
-
-			$.ajax({
-					type: "post",
-					url: "image_delete.php",
-					data: data,
-			}).done(function(xml){
-					var str = $(xml).find("str").text();
-
-					if(str == "success")
-					{
-						//alert("success");
-						$(obj).closest('div').fadeOut();
-					}
-					else
-					{
-						alert("SQL returned Failed:" +str);
-					}
-			}).fail(function(data){
-						var str = $(xml).find("str").text();
-						alert("Failed:" +str);
-			});
-		}
-	});
-
-});
-
 function nl2br(str, is_xhtml) {
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>'; // Adjust comment to avoid issue on phpjs.org display
 
@@ -1680,26 +1092,6 @@ function dispLoading(){
 function removeLoading(){
 	 $('#search_background').css('display', 'none');
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 写真を追加する
-$(function() {
-	$('#addimage').click(function(){
-			$("#dialog_background").css({"display":"block"});
-			$("#dialog_addimage").css({"display":"block"});
-	});
-
-	$('#close_addimage_button').click(function(){
-			$("#dialog_background").css({"display":"none"});
-			$("#dialog_addimage").css({"display":"none"});
-	});
-
-	$('#edit_addimage_close').click(function(){
-			$("#dialog_background").css({"display":"none"});
-			$("#dialog_addimage").css({"display":"none"});
-	});
-});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // prev, next sake
@@ -1999,14 +1391,14 @@ $(function() {
 				$('#disp_sake').text((in_disp_from + 1) + "～" + limit + "件 / 全" + $("#hidden_sake_count_query").val() + "件");
 
 				if(in_disp_from >= disp_max)
-					$('#prev_sakagura_sake').css({"background":"#22445B", "cursor":"pointer"});
+					$('#prev_sakagura_sake').css({"background":"#8c8c8c", "cursor":"pointer"});
 				else
-					$('#prev_sakagura_sake').css({"background":"#b2b2b2", "cursor":"default"});
+					$('#prev_sakagura_sake').css({"background":"#d2d2d2", "cursor":"default"});
 
 				if((in_disp_from + disp_max) > parseInt($("#hidden_sake_count_query").val()))
-					$('#next_sakagura_sake').css({"background":"#b2b2b2", "cursor":"default"});
+					$('#next_sakagura_sake').css({"background":"#d2d2d2", "cursor":"default"});
 				else
-					$('#next_sakagura_sake').css({"background":"#22445B", "cursor":"pointer"});
+					$('#next_sakagura_sake').css({"background":"#8c8c8c", "cursor":"pointer"});
 
 				//////////////////////////////////////////////////////////////////////////////////////////////////////
 				//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2092,59 +1484,6 @@ $(function() {
 	});*/
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 酒蔵にメッセージを送る
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$(function() {
-
-	$("#button_sakagura_mail").click(function() {
-			$("#dialog_background").css({"display":"block"});
-			$("#dialog_send_sakagura").css({"display":"block"});
-	});
-
-	$("#mail_sakagura_ok").click(function() {
-
-			var sakagura_id = <?php echo json_encode($id); ?>;
-			var sakagura_name = $("#sakagura_name").val();
-
-			var data = "sakagura_id="  +sakagura_id +
-					"&sakagura_name=" +sakagura_name +
-					"&title="         +$("#mail_subject").val() +
-					"&message="       +$("#mail_message").val();
-
-			$.ajax({
-					type: "post",
-					url: "sda_send_message.php",
-					data: data,
-			}).done(function(xml){
-					var str = $(xml).find("str").text();
-					var intime = $(xml).find("intime").text();
-
-					//alert("received: " +str + " " + intime + " " + intime);
-
-					if(str == "success")
-					{
-						alert("message was sent:" + intime);
-					}
-					else
-					{
-						$("#sample1").text(str);
-					}
-			}).fail(function(data){
-					alert("This is Error");
-			});
-
-			$("#dialog_background").css({"display":"none"});
-			$("#dialog_send_sakagura").css({"display":"none"});
-	});
-
-	$("#send_sakagura_close, #close_mail_button").click(function() {
-			$("#dialog_background").css({"display":"none"});
-			$("#dialog_send_sakagura").css({"display":"none"});
-	});
-});
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 jQuery(document).ready(function(){
@@ -2246,13 +1585,6 @@ jQuery(document).ready(function(){
 	$(document).on('click', '#url a', function(){
 		event.preventDefault();
 		window.open($(this).attr("href"));
-	});
-
-	$("#tabs_specs").tabs();
-
-	$('#add_sake').click(function() {
-		var sakagura_id = $(this).attr('sakagura_id');
-		window.open('sake_add_form.php?id=' + sakagura_id + '&sakagura_name=' + sakagura_name.innerText, '_self');
 	});
 
 }); // jquery ready

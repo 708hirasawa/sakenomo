@@ -93,7 +93,6 @@ function write_Nonda()
                   print('<div class="nonda_flavor_category">');
                     print('<div id="nonda_flavor_type_name">');
                       print('<span class="nonda_flavor_type_sign"></span><span class="nonda_flavor_type_title">フルーティタイプ</span>');
-                      print('<p class="plus_minus_icon"><span></span><span></span></p>');
                     print('</div>');
                     print('<div class="nonda_flavor_item_container">');
                       print('<label><input type="checkbox" name="flavor[]" value="10" data-img="greenapple4040">青りんご</label>');
@@ -119,7 +118,6 @@ function write_Nonda()
 
                     print('<div id="nonda_flavor_type_name">');
                       print('<span class="nonda_flavor_type_sign"></span><span class="nonda_flavor_type_title">スッキリタイプ</span>');
-                      print('<p class="plus_minus_icon"><span></span><span></span></p>');
                     print('</div>');
                     print('<div class="nonda_flavor_item_container">');
                       print('<label><input type="checkbox" name="flavor[]" value="26" data-img="mineralwater4040">天然水・ミネラル</label>');
@@ -130,7 +128,6 @@ function write_Nonda()
 
                     print('<div id="nonda_flavor_type_name">');
                       print('<span class="nonda_flavor_type_sign"></span><span class="nonda_flavor_type_title">コクタイプ</span>');
-                      print('<p class="plus_minus_icon"><span></span><span></span></p>');
                     print('</div>');
                     print('<div class="nonda_flavor_item_container">');
                       print('<label><input type="checkbox" name="flavor[]" value="30" data-img="rice4040">ご飯・餅</label>');
@@ -145,7 +142,6 @@ function write_Nonda()
 
                     print('<div id="nonda_flavor_type_name">');
                       print('<span class="nonda_flavor_type_sign"></span><span class="nonda_flavor_type_title">その他のタイプ</span>');
-                      print('<p class="plus_minus_icon"><span></span><span></span></p>');
                     print('</div>');
                     print('<div class="nonda_flavor_item_container">');
                       print('<label><input type="checkbox" name="flavor[]" value="38" data-img="cemedine4040">セメダイン</label>');

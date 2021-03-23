@@ -72,86 +72,68 @@ require_once("nonda.php");
 	print('<div id="all_container">');
 
 		print('<div id="user_information">');
-
 			$path = "images/icons/noimage_user30.svg";
-
 			if($imagefile)
 				$path = "images/profile/" .$imagefile;
-
 			print('<div class="user_image_name_container">');
-				//写真
 				print('<div class="user_image_container">');
 					print('<img src=' .$path .'>');
 				print('</div>');
-
-				//ユーザー名
 				print('<div id="profile_name">' .$row["username"] .'</div>');
-
 			print('</div>');
-
 		print("</div>");
 
-		print('<div id="config_banner_container">');
+		print('<div id="config_container">');
+			print('<div class="mypage_config_title"><svg class="config_title_config1616"><use xlink:href="#config1616"/></svg>マイページ設定</div>');
 
-			print('<div id="config_container">');
-				print('<div class="mypage_config_title"><svg class="config_title_config1616"><use xlink:href="#config1616"/></svg>マイページ設定</div>');
-
-				print('<div id="config_content">');
-					print('<div id="config_sub_title">');
-						print('<p>アカウント設定</p>');
-					print('</div>');
-					print('<div class="config_item_container">');
-						////////////////////////////////////////////////////////////////////////////////
-						print('<div class="config_item">');
-							print('<a id="account_link_input_trigger" class="config_input_trigger" href="">');
-								print('<span>アカウント連携(初めは不要)</span>');
-							print('</a>');
-						print('</div>');
-						////////////////////////////////////////////////////////////////////////////////
-						print('<div class="config_item">');
-							print('<a id="receiving_mail_input_trigger" class="config_input_trigger" href="">');
-								print('<span>メール受信設定(初めは不要)</span>');
-							print('</a>');
-						print('</div>');
-						////////////////////////////////////////////////////////////////////////////////
-						print('<div class="config_item">');
-							print('<a id="privacy_input_trigger" class="config_input_trigger" href="">');
-								print('<span>プライバシー設定(初めは不要)</span>');
-							print('</a>');
-						print('</div>');
-						////////////////////////////////////////////////////////////////////////////////
-						print('<div class="config_item">');
-							print('<a id="withdraw_input_trigger" class="config_input_trigger" href="user_view_config_withdraw.php">');
-								print('<span>Sakenomo退会</span>');
-							print('</a>');
-						print('</div>');
-						////////////////////////////////////////////////////////////////////////////////
-					print('</div>');//config_item_container
-				print('</div>');//config_content
-
-				print('<div id="config_content">');
-					print('<div id="config_sub_title">');
-						print('<p>プロフィール設定</p>');
-					print('</div>');
-					print('<div class="config_item_container">');
-						////////////////////////////////////////////////////////////////////////////////
-						print('<div class="config_item">');
-							print('<a id="profile_input_trigger" class="config_input_trigger" href="user_view_config_profile.php">');
-								print('<span>プロフィール編集</span>');
-							print('</a>');
-						print('</div>');
-						////////////////////////////////////////////////////////////////////////////////
-					print('</div>');//config_item_container
-				print('</div>');//config_content
-			print("</div>");//config_container
-
-			print('<div id="banner_container">');
-				print('<div>');
-
+			print('<div id="config_content">');
+				print('<div id="config_sub_title">');
+					print('<p>アカウント設定</p>');
 				print('</div>');
-			print('</div>');//banner_container
+				print('<div class="config_item_container">');
+					////////////////////////////////////////////////////////////////////////////////
+					/*初期は非表示print('<div class="config_item">');
+						print('<a id="account_link_input_trigger" class="config_input_trigger" href="">');
+							print('<span>アカウント連携</span>');
+						print('</a>');
+					print('</div>');*/
+					////////////////////////////////////////////////////////////////////////////////
+					/*初期は非表示print('<div class="config_item">');
+						print('<a id="receiving_mail_input_trigger" class="config_input_trigger" href="">');
+							print('<span>メール受信設定</span>');
+						print('</a>');
+					print('</div>');*/
+					////////////////////////////////////////////////////////////////////////////////
+					/*初期は非表示print('<div class="config_item">');
+						print('<a id="privacy_input_trigger" class="config_input_trigger" href="">');
+							print('<span>プライバシー設定(初めは不要)</span>');
+						print('</a>');
+					print('</div>');*/
+					////////////////////////////////////////////////////////////////////////////////
+					print('<div class="config_item">');
+						print('<a id="withdraw_input_trigger" class="config_input_trigger" href="user_view_config_withdraw.php">');
+							print('<span>Sakenomo退会</span>');
+						print('</a>');
+					print('</div>');
+					////////////////////////////////////////////////////////////////////////////////
+				print('</div>');//config_item_container
+			print('</div>');//config_content
 
-		print("</div>");//config_banner_container
+			print('<div id="config_content">');
+				print('<div id="config_sub_title">');
+					print('<p>プロフィール設定</p>');
+				print('</div>');
+				print('<div class="config_item_container">');
+					////////////////////////////////////////////////////////////////////////////////
+					print('<div class="config_item">');
+						print('<a id="profile_input_trigger" class="config_input_trigger" href="user_view_config_profile.php">');
+							print('<span>プロフィール編集</span>');
+						print('</a>');
+					print('</div>');
+					////////////////////////////////////////////////////////////////////////////////
+				print('</div>');//config_item_container
+			print('</div>');//config_content
+		print("</div>");//config_container
 
 	print("</div>");//all_container
 

@@ -28,11 +28,11 @@
   width: 1200px;
   max-width: 100%;
   height: auto;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 #banner_frame {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -40,7 +40,7 @@
   width: 1200px;
   max-width: 100%;
   height: auto;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 /*panelheader*******************/
@@ -71,7 +71,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 180%;
   margin-top: 8px;
 }
@@ -80,7 +80,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-right: 15px;
+  margin-right: 16px;
 }
 
 .sakagura_info li:last-child {
@@ -97,21 +97,12 @@
   align-items: center;
 }
 
-#address {
-  margin-left: 4px;
-}
-
-#brand {
-  margin-left: 4px;
-}
-
-#observation {
-  margin-left: 4px;
+#address, #brand, #observation, #favorite_sakagura_count {
+  margin-left: 5px;
 }
 
 #favorite_sakagura_count {
   font-weight: bold;
-  margin-left: 4px;
 }
 
 .sakagura_info_map1216, .sakagura_info_telephone1616, .sakagura_info_bottle1616, .sakagura_info_people1616, .sakagura_info_visit1616 {
@@ -251,12 +242,12 @@
   font-weight: bold;
 }
 
-.simpleTabs_brewery3630, .simpleTabs_product3630, .simpleTabs_camera3630, .simpleTabs_review3630, .simpleTabs_map2430 {
+.simpleTabs_product3630, .simpleTabs_map2430 {
   fill: #8c8c8c;
   margin-bottom: 4px;
 }
 
-.simpleTabs_brewery3630, .simpleTabs_product3630, .simpleTabs_camera3630, .simpleTabs_review3630 {
+.simpleTabs_product3630 {
   width: 24px;
   height: 20px;
 }
@@ -266,112 +257,19 @@
   height: 20px;
 }
 
-.simpleTabs a.active .simpleTabs_brewery3630, .simpleTabs a.active .simpleTabs_product3630, .simpleTabs a.active .simpleTabs_camera3630, .simpleTabs a.active .simpleTabs_review3630, .simpleTabs a.active .simpleTabs_map2430 {
+.simpleTabs a.active .simpleTabs_product3630, .simpleTabs a.active .simpleTabs_map2430 {
   fill: #000000;
 }
 
 /*tab-top(top)*******************/
-#tab-top, #tab-sake, #tab-comment, #tab-photo, #tab-map {
+#tab-sake, #tab-map {
   width: 100%;
   height: auto;
 }
 
-.tab-top_note, .page_navigation, .comment_sort, .photo_filter, .sakagura_map_select {
+.page_navigation, .sakagura_map_select {
   width: 100%;
   margin-top: 16px;
-}
-
-.tab-top_note div {
-  color: #8BA340;
-  font-size: 12px;
-  line-height: 140%;
-}
-
-.tab-top_note a {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  color: #0740A5;
-  font-size: 12px;
-  text-decoration: none;
-  padding: 2px;
-}
-
-.tab-top_note_pen1616 {
-  fill: #b2b2b2;
-  width: 14px;
-  height: 14px;
-  margin-right: 4px;
-}
-
-/*brewery-image*******************/
-.multiple-brewery-image {
-  width: 1200px;
-  max-width: 100%;
-  height: 250px;
-  margin-top: 15px;
-}
-
-.multiple-brewery-image li {
-  width: 300px;
-  height: auto;
-  margin: 0 10px;
-  outline: none;
-}
-
-.multiple-brewery-image li div {
-  width: 300px;
-  max-width: 300px;
-  height: 250px;
-  overflow: hidden;
-  border: 1px solid #d2d2d2;
-}
-
-.multiple-brewery-image li div img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-/*brewery_profile*******************/
-.brewery_profile_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  color: #3f3f3f;
-  width: 100%;
-  height: auto;
-  margin-top: 15px;
-}
-
-.brewery_profile_title {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background: #E6E6E6;
-  font-size: 14px;
-  width: 100%;
-  height: 30px;
-}
-
-.brewery_profile_profile2420 {
-  fill: #3f3f3f;
-  width: 24px;
-  height: 20px;
-  margin: 0 8px;
-}
-
-.brewery_profile_title span {
-  font-weight: bold;
-}
-
-#sakagura_intro {
-  font-size: 13px;
-  line-height: 140%;
-  width: 100%;
-  height: auto;
-  padding: 8px;
 }
 
 /*tab-sake(product)*******************/
@@ -584,7 +482,7 @@
   color: #8c8c8c;
 }
 
-.search_sake_result_button_container, .brewery_comment_button_container {
+.search_sake_result_button_container {
   display: none;
   flex-direction: column;
   justify-content: flex-start;
@@ -716,6 +614,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  font-size: 8px;
 }
 
 .spec_info {
@@ -734,260 +633,12 @@
 }
 
 /*tab-comment(comment)*******************/
-.comment_sort .click_sort {
+.click_sort {
   margin-top: 0;
 }
 
-#threads {
-  width: 100%;
-  height: auto;
-}
-
-.brewery_comment {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #d2d2d2;
-  cursor: pointer;
-}
-
-.brewery_comment:last-child {
+.custom_button:first-child {
   margin-bottom: 0;
-}
-
-.brewery_comment_user_container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-}
-
-.brewery_comment_user_image_container {
-  overflow: hidden;
-  width: 50px;
-  min-width: 50px;
-  height: 50px;
-  margin-right: 8px;
-}
-
-.brewery_comment_user_image_container img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.brewery_comment_name_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  margin-right: 0;
-}
-
-.brewery_comment_name {
-  color: #0740A5;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 140%;
-}
-
-.brewery_comment_profile_date_container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  color: #8c8c8c;
-  font-size: 12px;
-  line-height: 140%;
-  width: 100%;
-  margin-top: 4px;
-}
-
-.brewery_comment_button_container .custom_button:first-child {
-  margin-bottom: 0;
-}
-
-.brewery_comment_button_writing1816 {
-  fill: #b2b2b2;
-  width: 18px;
-  height: 16px;
-  margin-right: 5px;
-}
-
-.custom_button:hover .brewery_comment_button_writing1816 {
-  fill: #FF4545;
-}
-
-/*brewery_comment_post*******************/
-.brewery_comment_post_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-  border-top: 1px dotted #d2d2d2;
-}
-
-.brewery_comment_feeling_container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-}
-
-.brewery_comment_feeling_icon {
-  fill: ;
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-}
-
-.brewery_comment_title {
-  font-size: 13px;
-  font-weight: bold;
-  text-decoration: underline;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-}
-
-.brewery_comment_text {
-  overflow: hidden;
-  font-size: 13px;
-  line-height: 140%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  width: 100%;
-  max-height: 50px;
-  margin-top: 8px;
-}
-
-/*brewery_comment_photo*******************/
-.brewery_comment_photo_container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-  border-top: 1px dotted #d2d2d2;
-}
-
-.brewery_comment_photo {
-  overflow: hidden;
-  width: 60px;
-  height: 60px;
-  border: 1px solid #d2d2d2;
-  margin-top: 8px;
-  margin-right: 8px;
-}
-
-.brewery_comment_photo:last-child {
-  margin-right: 0;
-}
-
-.brewery_comment_photo_container img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-/*brewery_comment_like*******************/
-.brewery_comment_like_container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-  border-top: 1px dotted #d2d2d2;
-}
-
-.brewery_comment_like {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #e6e6e6;
-  color: #3f3f3f;
-  font-size: 12px;
-  height: 24px;
-  border-radius: 4px;
-  padding: 0 10px;
-  margin-top: 8px;
-  cursor: pointer;
-}
-
-.brewery_comment_like_title {
-  font-weight: bold;
-}
-
-.brewery_comment_like:hover {
-  color: #ffffff;
-  background: #FF4545;
-}
-
-.brewery_comment_like_icon {
-  fill: #8c8c8c;
-  width: 14px;
-  height: 14px;
-  margin-right: 5px;
-}
-
-.brewery_comment_like:hover .brewery_comment_like_icon {
-  fill: #ffffff;
-}
-
-.brewery_comment_like_count {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background: #e6e6e6;
-  color: #8c8c8c;
-  font-size: 12px;
-  width: 60px;
-  height: 24px;
-  border-radius: 4px;
-  border: 1px solid #e6e6e6;
-  margin-top: 8px;
-  margin-left: 8px;
-}
-
-.brewery_comment_like_count:before, .brewery_comment_like_count:after {
-  position: absolute;
-  right: 100%;
-  content: ' ';
-  width: 0;
-  height: 0;
-  border: solid transparent;
-}
-
-.brewery_comment_like_count:before {
-  border-width: 6px;
-  border-right-color: #e6e6e6;
-  top: 5px;
-}
-
-.brewery_comment_like_count:after {
-  border-width: 4px;
-  border-right-color: #e6e6e6;
-  top: 7px;
 }
 
 #search_background {
@@ -1033,321 +684,8 @@
 	100% { transform: rotate(360deg); }
 }
 
-/*dialog_sakagura_review*******************/
-#dialog_sakagura_review {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  color: #3f3f3f;
-  font-size: 13px;
-  width: 100%;
-  height: 100%;
-  padding: 16px 8px;
-  margin: 0 auto;
-}
-
-#dialog_sakagura_review_button_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.prev_next_sakagura_review_button {
-  display: flex;
-  justify-content: flex-start;
-  align-items:  center;
-}
-
-#prev_sakagura_review_button, #next_sakagura_review_button {
-  display: flex;
-  justify-content: center;
-  align-items:  center;
-  color: #3f3f3f;
-  font-size: 12px;
-  width: 50px;
-  height: 20px;
-  background: #e6e6e6;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-#prev_sakagura_review_button {
-  margin-right: 20px;
-}
-
-#close_sakagura_review_button {
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
-.close_sakagura_review_close2020 {
-  fill: #8c8c8c;
-  width: 20px;
-  height: 20px;
-}
-
-.dialog_sakagura_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  padding: 8px;
-  margin-top: 10px;
-  border: 1px solid #d2d2d2;
-}
-
-/*dialog_sakagura_user*******************/
-.dialog_sakagura_user_container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-}
-
-.dialog_sakagura_user_image_container {
-  overflow: hidden;
-  width: 50px;
-  min-width: 50px;
-  height: 50px;
-  margin-right: 8px;
-}
-
-.dialog_sakagura_user_image_container img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.dialog_sakagura_user_name_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  margin-right: 0;
-}
-
-.dialog_sakagura_user_name {
-  color: #0740A5;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 140%;
-  text-decoration: none;
-}
-
-.dialog_sakagura_user_profile_date_container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  color: #8c8c8c;
-  font-size: 12px;
-  line-height: 140%;
-  width: 100%;
-  margin-top: 4px;
-}
-
-/*dialog_sakagura_sake*******************/
-.dialog_sakagura_sakagura_container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-  border-top: 1px dotted #d2d2d2;
-}
-
-.dialog_sakagura_name_brewery_date_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: auto;
-  height: auto;
-  margin-top: 8px;
-  margin-right: 0;
-}
-
-.dialog_sakagura_name {
-  color: #0740A5;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  line-height: 140%;
-}
-
-.dialog_sakagura_brewery_date_container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  line-height: 140%;
-  width: 100%;
-  margin-top: 4px;
-}
-
-/*dialog_sakagura_subject_message*******************/
-.dialog_sakagura_subject_message_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-  border-top: 1px dotted #d2d2d2;
-}
-
-.dialog_sakagura_subject {
-  font-size: 13px;
-  font-weight: bold;
-  text-decoration: underline;
-  line-height: 140%;
-  width: 100%;
-  margin-top: 8px;
-}
-
-.dialog_sakagura_message {
-  font-size: 13px;
-  line-height: 140%;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-}
-
-/*dialog_sakagura_photo*******************/
-.dialog_sakagura_image_container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-  border-top: 1px dotted #d2d2d2;
-}
-
-.dialog_sakagura_image {
-  overflow: hidden;
-  width: 60px;
-  height: 60px;
-  border: 1px solid #d2d2d2;
-  margin-top: 8px;
-  margin-right: 8px;
-}
-
-.dialog_sakagura_image:last-child {
-  margin-right: 0;
-}
-
-.dialog_sakagura_image img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-/*dialog_sakagura_like*******************/
-.dialog_sakagura_like_container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  margin-top: 8px;
-  border-top: 1px dotted #d2d2d2;
-}
-
-.dialog_sakagura_like {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #e6e6e6;
-  color: #3f3f3f;
-  font-size: 12px;
-  height: 24px;
-  border-radius: 4px;
-  padding: 0 10px;
-  margin-top: 8px;
-  cursor: pointer;
-}
-
-.dialog_sakagura_like_title {
-  font-weight: bold;
-}
-
-.dialog_sakagura_like:hover {
-  color: #ffffff;
-  background: #FF4545;
-}
-
-.dialog_sakagura_like_icon {
-  fill: #8c8c8c;
-  width: 14px;
-  height: 14px;
-  margin-right: 5px;
-}
-
-.dialog_sakagura_like:hover .dialog_sakagura_like_icon {
-  fill: #ffffff;
-}
-
-.dialog_sakagura_like_count {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background: #e6e6e6;
-  color: #8c8c8c;
-  font-size: 12px;
-  width: 60px;
-  height: 24px;
-  border-radius: 4px;
-  border: 1px solid #e6e6e6;
-  margin-top: 8px;
-  margin-left: 8px;
-}
-
-.dialog_sakagura_like_count:before, .dialog_sakagura_like_count:after {
-  position: absolute;
-  right: 100%;
-  content: ' ';
-  width: 0;
-  height: 0;
-  border: solid transparent;
-}
-
-.dialog_sakagura_like_count:before {
-  border-width: 6px;
-  border-right-color: #e6e6e6;
-  top: 5px;
-}
-
-.dialog_sakagura_like_count:after {
-  border-width: 4px;
-  border-right-color: #e6e6e6;
-  top: 7px;
-}
-
 /*tab-photo(photo)*******************/
-.photo_filter_button_container, .sakagura_map_button_container {
+.sakagura_map_button_container {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -1355,7 +693,7 @@
   height: auto;
 }
 
-.photo_filter_button, .sakagura_map_button {
+.sakagura_map_button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1368,15 +706,15 @@
   cursor: pointer;
 }
 
-.photo_filter_button:last-child, .sakagura_map_button:last-child {
+.sakagura_map_button:last-child {
   margin-right: 0;
 }
 
-.photo_filter_button:first-child, .sakagura_map_button:first-child {
+.sakagura_map_button:first-child {
   background: #22445B;
 }
 
-.photo_filter_button div, .sakagura_map_button div {
+.sakagura_map_button div {
   color: #ffffff;
   font-size: 15px;
   white-space: nowrap;
@@ -1385,66 +723,11 @@
   max-width: 80px;
 }
 
-.sakagura_map_map1216, .sakagura_map_map1216 {
+.sakagura_map_map1216 {
   fill: #ffffff;
   width: 12px;
   height: 16px;
   margin-right: 8px;
-}
-
-#addimage_container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-}
-
-.sakagura_photo {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  position: relative;
-  width: 33.333%;
-  height: auto;
-  padding: 2px;
-}
-
-.sakagura_photo_image_container {
-  width: 100%;
-  height: auto;
-  border: 1px solid #d2d2d2;
-}
-
-.sakagura_photo img {
-  object-fit: cover;
-  width: 100%;
-  height: 120px;
-}
-
-.navigate_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  font-size: 11px;
-  right: 4%;
-  top: 4%;
-  padding: 2px 12px;
-}
-
-.sakagura_photo span {
-  color:#8C143C;
-  font-size: 12px;
-  line-height: 140%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
 }
 
 /*tab-map(map)*******************/
@@ -1454,10 +737,9 @@
   margin-top: 16px;
 }
 
-
 #sakagura_map iframe {
-    width:100%;
-    height:100%;
+  width:100%;
+  height:100%;
 }
 
 /*updatebar*******************/
@@ -1539,8 +821,8 @@
   align-items: center;
   color: #000000;
   font-size: 18px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 24px;
+  margin-bottom: 16px;
 }
 
 .detail2430 {
@@ -1633,7 +915,7 @@
 }
 
 /*ad*******************/
-#ad1, #ad2 {
+#ad1 {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -1645,12 +927,7 @@
   margin-top: 20px;
 }
 
-#ad2 {
-  border: 1px solid #d2d2d2;
-  margin-top: 20px;
-}
-
-#ad1 img, #ad2 img {
+#ad1 img {
   object-fit: cover;
   width: 300px;
   height: 250px;
@@ -1662,613 +939,24 @@
   margin-right: 4px;
 }
 
-#mail_subject {
-  text-align: left;
-  width: 100%;
-}
-
-/********************/
-.search_sake_image {
-  vertical-align: middle;
-  height: 16px;
-  margin-right: 4px;
-}
-
-.search_sake_date {
-  float: right;
-  overflow: auto;
-}
-
 #fileID {
   visibility: hidden;
 }
 
-.cancel_button img {
-  width: 14px;
-  margin: 0px;
-}
-
-.image_close {
-  width: 14px;
-  margin: 0px;
-}
-
-/*dialog_edit_sakagura*******************/
-#dialog_edit_sakagura {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  color: #3f3f3f;
-  font-size: 13px;
-  width: 100%;
-  height: 100%;
-  padding: 16px 8px;
-  margin: 0 auto;
-}
-
-#close_edit_sakagura {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-}
-
-#close_edit_sakagura_button {
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
-.close_edit_sakagura_close2020 {
-  fill: #3f3f3f;
-  width: 20px;
-  height: 20px;
-}
-
-.edit_sakagura_title {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 15px;
-  font-weight: bold;
-  width: 100%;
-  padding: 8px;
-  margin-top: 10px;
-  border: 2px solid #3f3f3f;
-}
-
-.edit_sakagura_note {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  color: #8BA340;
-  font-size: 12px;
-  line-height: 120%;
-  width: 100%;
-  padding-left: 8px;
-  margin-top: 8px;
-}
-
-#dialog_edit_sakagura_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  width: 100%;
-  margin-top: 8px;
-}
-
-#dialog_edit_sakagura_container .edittable {
-  width: 100%;
-  height: auto;
-}
-
-#dialog_edit_sakagura_container .row_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  background: #f5f5f5;
-  width: 100%;
-  margin-top: 10px;
-  border: 1px solid #d2d2d2;
-}
-
-#dialog_edit_sakagura_container .row_container:first-child {
-  margin-top: 0;
-}
-
-#dialog_edit_sakagura_container .row_title_container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  padding: 8px;
-}
-
-#dialog_edit_sakagura_container .row_title_sign {
-  background: #3f3f3f;
-  width: 4px;
-  height: 18px;
-}
-
-#dialog_edit_sakagura_container .row_title {
-  margin-left: 8px;
-}
-
-.row_title span {
-  color: #ff0000;
-  font-size: 12px;
-  margin-left: 8px;
-}
-
-#dialog_edit_sakagura_container .row {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  padding: 8px;
-  border-top: 1px solid #d2d2d2;
-}
-
-#dialog_edit_sakagura_container .column1_container, #dialog_edit_sakagura_container .column3_container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  line-height: 140%;
-}
-
-#dialog_edit_sakagura_container .column3_container {
-  margin-top: 10px;
-}
-
-#dialog_edit_sakagura_container .column1, #dialog_edit_sakagura_container .column3 {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-right: 8px;
-}
-
-#dialog_edit_sakagura_container .column1_container span, #dialog_edit_sakagura_container .column3_container span {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  color: #8c8c8c;
-  font-size: 12px;
-}
-
-#dialog_edit_sakagura_container .column2, #dialog_edit_sakagura_container .column4 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  line-height: 140%;
-  width: 100%;
-}
-
-#dialog_edit_sakagura_container .column2_select {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-#dialog_edit_sakagura_container .column2 input, #dialog_edit_sakagura_container .column2 SELECT, #dialog_edit_sakagura_container .column2 textarea, #dialog_edit_sakagura_container .column4 input, #dialog_edit_sakagura_container .column4 SELECT, #dialog_edit_sakagura_container .column4 textarea {
-  width: 100%;
-  margin-top: 8px;
-}
-
-#dialog_edit_sakagura_container .column2_select label {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 8px;
-}
-
-#dialog_edit_sakagura_container .column2_select label input {
-  position: relative;
-  top: -4px;
-  width: auto;
-}
-
-.edit_sakagura_button_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-#edit_sakagura_close {
-  background: #e6e6e6;
-  outline: none;
-  color: #8c8c8c;
-  font-size: 15px;
-  font-weight: bold;
-  width: 140px;
-  height: 30px;
-  border: 1px solid #d2d2d2;
-  border-radius: 4px;
-  margin-right: 20px;
-  cursor: pointer;
-}
-
-#edit_sakagura_ok {
-  background: #C5CE51;
-  color: #3f3f3f;
-  font-size: 15px;
-  font-weight: bold;
-  width: 140px;
-  height: 30px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#dialog_send_sakagura_container {
-    overflow:auto;
-    padding:4px;
-    height:92%;
-    border:1px solid #626262;
-}
-
-#dialog_send_sakagura_container > div {
-    overflow:auto;
-    width:92%;
-    height:88%;
-    margin:18px auto auto auto;
-    border: 1px solid #ccc;
-}
-
-#dialog_send_sakagura_container span:first-child {
-    float:left;
-    width:100px;
-    margin-left:4px;
-    text-align:left;
-}
-
-#send_sakagura_close {
-    height:24px;
-}
-
-/********************/
-#dialog_addimage {
-	position: fixed;
-	display: none;
-
-	width:96%;
-	height:468px;
-	top: 50%;
-	left: 50%;
-	margin-top: -234px; /* Negative half of height. */
-	margin-left: -48%;  /* Negative half of width. */
-	z-index:200;
-
-	text-align: left;
-	background-color: #3F3F3F;
-	color:#fff;
-	padding:4px;
-	font-size: 9pt;
-	background: rgba(31, 39, 53, 0.85);
-}
-
-#dialog_addimage_container {
-    overflow:auto;
-    padding:4px;
-    height:92%;
-    width:98%;
-    border:1px solid #626262;
-    text-align:center;
-}
-
-/* close button */
-#dialog_addimage > span:first-child {
-    position:absolute;
-    top:0%;
-    right:0%;
-    margin:2px;
-}
-
-/* image frame */
-#dialog_addimage_container > div:first-child {
-    overflow:auto;
-    width:90%;
-    height:84%;
-    margin:auto;
-    border: 1px solid #ccc;
-}
-
-#dialog_addimage_container > div:first-child img {
-    margin-top:18px;
-    height:94%;
-    width:auto;
-    image-orientation:from-image;
-    background: rgba(31, 39, 53);
-}
-
-#edit_addimage_close {
-    height:24px;
-}
-
-/********************/
-#dialog_send_sakagura {
-	position: fixed;
-	display: none;
-	width:800px;
-	height:560px;
-	top: 0;
-	left: 0;
-	z-index:200;
-	text-align:left;
-	background-color: #1F2735;
-	color:#fff;
-	padding:4px;
-	font-size: 9pt;
-	background: rgba(31, 39, 53, 0.85);
-}
-
-#dialog_send_sakagura > span:first button {
-    background:#1F2735;
-    box-shadow:1px 1px 1px -1px rgba(0,0,0,.9);
-    top:-2;
-    color:#fff;
-    width:40px;
-}
-
-#dialog_send_sakagura > span:first {
-    position:absolute;
-    top:0%;
-    right:0%;
-    margin:2px;
-}
-
-/********************/
-
-
-#progressBar {
-    width:70%;
-    margin:auto;
-}
-
-#close_addimage_button {
-    float:right;
-}
-
-#close_addimage_button img {
-    width:16px;
-    margin:0px;
-}
-
-#close_addimage_button {
-    position:relative;
-    background:#1F2735;
-    box-shadow:1px 1px 1px -1px rgba(0,0,0,.9);
-    top:-2;
-    color:#fff;
-    width:40px;
-}
-
-.syuhanten:hover {
-	background: #404040;
-	color: #fff;
-}
-
-#image_panel > div:first-child {
-    overflow:auto;
-    min-height:100px;
-    margin-bottom:8px;
-    padding:4px;
-}
-
-.review > div:first-child {
-	float:left;
-    overflow:auto;
-    padding:2px;
-    width:68px;
-    height:72px;
-    border:0px solid #e3e3e3;
-}
-
-.inshokuten {
-    float:left;
-    background:#fff;
-    width: 300px;
-    height: 120px;
-    margin: 2px;
-    border: 1px solid #c6c6c6;
-    text-align:left;
-}
-
-.cancel_button {
-    //background: #e3e3e3;
-    background:transparent;
-    border: 1px solid #ccc;
-    color: #333;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 0px;
-    text-align: center;
-    height: 16px;
-    width: 100px;
-    cursor:pointer;
-    float:right;
-    border-radius: 4px;
-    text-shadow: 0px 1px 0px #fff;
-    box-shadow: 0px 0px 2px #fff inset;
-
-	border-radius:0px;
-    width:28px;
-}
-
-.cancel_button:hover {
-    background: #d9d9d9;
-    box-shadow: 0px 0px 2px #eaeaea inset;
-    color: #222;
-}
-
-.cancel_button:active {
-    background: #136899;
-}
-
-/*******************************************************************************************************************
- * table for image
- *******************************************************************************************************************/
-
-#general_click {
-    background: #dec6e6;
-    border: 1px solid #22445B;
-}
-
-#general_click:hover {
-    background: #dec6e6;
-    border: 1px solid #e3e3e3;
-}
-
-#general_click:active {
-    background: #136899;
-    border: 1px solid #40ff40;
-}
-
-#sake_click {
-    background: #dec6e6;
-    border: 1px solid #22445B;
-}
-
-#sake_click:hover {
-    background: #dec6e6;
-    border: 1px solid #e3e3e3;
-}
-
-#sake_click:active {
-    background: #136899;
-    border: 1px solid #40ff40;
-}
-
-#sakagura_click {
-    background: #dec6e6;
-    border: 1px solid #22445B;
-}
-
-#sakagura_click:hover {
-    background: #dec6e6;
-    border: 1px solid #e3e3e3;
-}
-
-#sakagura_click:active {
-    background: #136899;
-    border: 1px solid #40ff40;
-}
-
-#syuhanten_click {
-    background: #dec6e6;
-    border: 1px solid #22445B;
-}
-
-#syuhanten_click:hover {
-    background: #dec6e6;
-    border: 1px solid #e3e3e3;
-}
-
-#syuhanten_click:active {
-    background: #136899;
-    border: 1px solid #404040;
-}
-
-div.static {
-    position: relative;
-    border: 1px solid #c6c6c6;
-    background-color: #fff;
-    border-radius: 2px;
-	margin-left:0px;
-    text-align:left;
-    padding: 4px 2px 2px 4px;
-}
-
-div.review {
-    overflow: auto;
-    margin:0px;
-    margin-bottom:2px;
-    border: 1px solid #c6c6c6;
-    background-color: #fff;
-    border-radius: 2px;
-    text-align:left;
-    padding: 4px 2px 2px 4px;
-}
-
-div.review > div:first-child {
-  float:left;
-  overflow:auto;
-  padding:2px;
-  width:68px;
-  height:72px;
-  border:0px solid #e3e3e3;
-}
-
-.info li span:first-child {
-  vertical-align: middle;
-  float: left;
-  height: 18px;
-  margin-right: 4px;
-}
-
-.info li img {
-    vertical-align:middle;
-    height:18px;
-    margin-right:4px;
-}
-
-#follow span img {
-    vertical-align:middle;
-    height:18px;
-    margin-right:4px;
-}
-
-.review .cancel_button {
-	border-radius:0px;
-    background:transparent;
-    width:28px;
-}
-
-.review div:nth-child(2) {
-    margin-left:4px;
-}
-
-.review div:nth-child(3) {
-    float:right;
-    margin-left:4px;
-}
-
-.review div:nth-child(4) {
-    color:#F7931D;
-    font-size:14px;
-}
-
-#url span {
-    margin:2px 8px 2px 0px;
+@media only screen and (min-width: 340px) {
+  .spec_title {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (min-width: 370px) {
+  .spec_title {
+    font-size: 13px;
+  }
 }
 
 @media only screen and (min-width: 410px) {
   .search_sake_result_brewery_date_container {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .brewery_comment_profile_date_container {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .dialog_sakagura_user_profile_date_container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -2297,7 +985,7 @@ div.review > div:first-child {
     margin-left: 20px;
   }
 
-  .spec_item, .sakagura_spec_item, .syuhanten_spec_item {
+  .spec_item {
     width: auto;
     max-width: 120px;
     padding: 0 10px;
@@ -2315,41 +1003,8 @@ div.review > div:first-child {
     display: flex;
   }
 
-  .search_sake_result_button_container, .brewery_comment_button_container {
+  .search_sake_result_button_container {
     display: flex;
-  }
-
-  .brewery_comment_name_container {
-    margin-right: 8px;
-  }
-
-  .brewery_comment_date {
-    margin-left: 20px;
-  }
-
-  #dialog_sakagura_review {
-    width: 86%;
-    max-width: 640px;
-    height: auto;
-    padding: 32px;
-    border-radius: 4px;
-  }
-
-  .sakagura_photo {
-    width: 25%;
-    padding: 5px;
-  }
-
-  .sakagura_photo img {
-    height: 200px;
-  }
-
-  #dialog_edit_sakagura {
-    width: 86%;
-    max-width: 1200px;
-    height: auto;
-    padding: 32px;
-    border-radius: 4px;
   }
 }
 
@@ -2363,12 +1018,12 @@ div.review > div:first-child {
     flex-direction: row;
   }
 
-  .simpleTabs_brewery3630, .simpleTabs_product3630, .simpleTabs_camera3630, .simpleTabs_review3630, .simpleTabs_map2430 {
+  .simpleTabs_product3630, .simpleTabs_map2430 {
     margin-right: 8px;
     margin-bottom: 0px;
   }
 
-  .simpleTabs_brewery3630, .simpleTabs_product3630, .simpleTabs_camera3630, .simpleTabs_review3630 {
+  .simpleTabs_product3630 {
     width: 30px;
     height: 25px;
   }
@@ -2381,29 +1036,12 @@ div.review > div:first-child {
   .search_sake_name {
     font-size: 16px;
   }
-
-  .brewery_comment_name {
-    font-size: 16px;
-  }
 }
 
 @media only screen and (min-width: 880px) {
   .sakagura_info li:nth-of-type(2), .sakagura_info li:nth-of-type(3), .sakagura_info li:nth-of-type(4) {
     display: flex;
   }
-
-	#dialog_addimage {
-		width:70%;
-		height:520px;
-		top: 50%;
-		left: 50%;
-		margin-top: -260px;
-		margin-left: -35%;
-	}
-
-	.column1 {
-		float:left;
-	}
 }
 
 @media only screen and (min-width: 1260px) {
@@ -2418,6 +1056,7 @@ div.review > div:first-child {
   }
 
   #banner_frame {
+    display: flex;
     width: 300px;
   }
 
@@ -2425,7 +1064,7 @@ div.review > div:first-child {
     margin: 0;
   }
 
-  #ad1, #ad2 {
+  #ad1 {
     border-top: 0px solid transparent;
     margin-top: 0px;
   }

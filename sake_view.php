@@ -1629,7 +1629,6 @@ require_once("searchbar.php");
 											print('<div class="nonda_user_name_container">');
 												print('<div class="nonda_user_name">' .$record["username"] .'</div>');
 												print('<div class="nonda_user_profile_date_container">');
-													print('<div class="nonda_user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
 													print('<div class="nonda_date">' .gmdate("Y/m/d", $record["update_date"] + 9 * 3600) .'</div>');
 												print('</div>');
 											print('</div>');
@@ -1977,7 +1976,7 @@ require_once("searchbar.php");
 
 											//////////////////////////////////////////////////////////
 
-											if(count($flavor_lookupTable) > 0) {
+											if(count($flavor_lookupTable) > 1) {
 												getFlavorValue($flavor_lookupTable[1]['flavor'], $image_value, $flavor_name);
 												print('<div id="tastingnote_flavor_content">');
 													print('<svg><use xlink:href="#' .$image_value .'"/></svg>');
@@ -2150,7 +2149,7 @@ require_once("searchbar.php");
 									$path = "images\\photo\\".$record["filename"];
 									print('<div class="sake_photo"' .' data-filename="' .$record["filename"] .'" data-contributor="' .$record["username"] .'" data-desc="' .$record["desc"] .'" data-added_date="' .gmdate("Y/m/d", $record["added_date"] + 9 * 3600) .'">');
 
-										print('<div class="sake_photo_image_container"><img id="' .$record["filename"] .'" src="' .$path  .'"></div>');
+										print('<img id="' .$record["filename"] .'" src="' .$path  .'">');
 										/*print('<img class="menu_trigger" src="images/icons/pen20.svg">');*/
 										/*print('<ul>');
 											print('<li id="' .$record["filename"] .'" filename = "' .$record["filename"] .'">削除</li>');
@@ -2603,12 +2602,13 @@ require_once("searchbar.php");
 							print('</div>');
 						print('</div>');
 
-						/* 酒ID */
+						/*
+						//酒ID
 						print('<div class="sakerow">');
 							print('<div class="sakecolumn1">酒ID</div><div class="sakecolumn2" id="sake_id">' .$row["sake_id"] .'</div>');
 						print('</div>');
 
-						/* 開発状況 */
+						//開発状況
 						print('<div class="sakerow">');
 							print('<div class="sakecolumn1">開発状況</div><div class="sakecolumn2" id="status">');
 
@@ -2627,13 +2627,14 @@ require_once("searchbar.php");
 							print('</div>');
 						print('</div>');
 
-						/* メモ */
+						//メモ
 						$row["sake_memo"] = nl2br($row["sake_memo"]);
 						$row["sake_memo"] = stripslashes($row["sake_memo"]);
 
 						print('<div class="sakerow">');
 							print('<div class="sakecolumn1">メモ</div><div class="sakecolumn2" id="sake_memo">' .$row["sake_memo"] .'</div>');
 						print('</div>');
+						*/
 
 					print('</div>'); /*edittable*/
 				print('</div>');/*sake_spec*/
@@ -2650,7 +2651,6 @@ require_once("searchbar.php");
 			// advertisement
 			print('<div id="banner_frame">');
 
-				$path = "images/icons/notice_banner.svg";
 				print('<div id="ad1"><img src="images/icons/notice_banner.svg"></div>');
 
 			print('</div>');/*banner_frame*/
@@ -3307,7 +3307,6 @@ $(function() {
 			innerText += '<div class="nonda_user_name_container">';
 			innerText += ' <div class="nonda_user_name">' + contributor + '</div>';
 			innerText += ' <div class="nonda_user_profile_date_container">';
-			innerText += '   <div class="nonda_user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>';
 			innerText += '   <div class="nonda_date">' + intime + '</div>';
 			innerText += ' </div>';
 			innerText += '</div>';
@@ -3575,7 +3574,7 @@ $(function() {
 			for(i = 0; i < photos.length; i++)
 			{
 				var path = "images\\photo\\" + photos[i].filename;
-				innerHTML += '<div class="sake_photo"><div class="sake_photo_image_container"><img src="' + path  + '"></div><span>' + photos[i].contributor + '</span></div></div>';
+				innerHTML += '<div class="sake_photo"><img src="' + path  + '"><span>' + photos[i].contributor + '</span></div>';
 			}
 
 			$('#photoframe').html(innerHTML);

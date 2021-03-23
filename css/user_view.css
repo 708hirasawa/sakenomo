@@ -28,11 +28,11 @@
   width: 1200px;
   max-width: 100%;
   height: auto;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 #banner {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -54,11 +54,12 @@
 
 .user_image_container {
   overflow: hidden;
-  min-width: 40px;
-  max-width: 40px;
-  height: 40px;
+  min-width: 64px;
+  max-width: 64px;
+  height: 64px;
   margin-right: 8px;
-  border: 1px solid #d2d2d2;
+  border-radius: 32px;
+  border: 2px solid #d2d2d2;
 }
 
 .user_image_container img {
@@ -69,9 +70,10 @@
 
 #profile_name {
   color: #000000;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 140%;
+  word-break: break-all;
   margin-right: 8px;
 }
 
@@ -150,101 +152,60 @@
 
 /************************************************************/
 .user_profile_container {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  color: #3f3f3f;
+  color: #666666;
   width: 100%;
-  height: auto;
-  display: none;
-}
-
-.user_profile_title {
-  font-size: 14px;
-  font-weight: bold;
-  padding: 8px;
 }
 
 .user_profile_content {
   width: 100%;
-}
-
-.user_profile_text {
-  font-size: 13px;
-  line-height: 140%;
-  padding: 8px 16px;
+  padding: 8px 0;
 }
 
 .user_profile_column_container {
-  background: #f0f0f0;
-  margin: 4px 16px 8px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8c8c8c;
+  font-size: 12px;
 }
 
 .user_profile_row {
-  color: #3f3f3f;
-  width: 100%;
-  height: auto;
-  border-top: 1px solid #ffffff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 8px 16px 0 0;
 }
 
-.user_profile_row:first-child {
-  border-top: none;
+.user_profile_row:last-child {
+  margin-right: 0;
 }
 
 .user_profile_column1 {
-  position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 16px;
-  width: 100%;
-  padding: 16px 0 8px 0;
-  padding-left: 40px;
-}
-
-.user_profile_column1:before {
-  content:"\00a0";
-  display: block;
-  border: solid 9px #3f3f3f;
-  border-radius: 9px;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  height: 0;
-  width: 0;
-  position: absolute;
-  left: 16px;
-  top: 22px;
-  margin-top: -8px;
-}
-
-.user_profile_column1:after {
-  content:"\00a0";
-  display: block;
-  width: 3px;
-  height: 6px;
-  border: solid #f5f5f5;
-  border-width: 0 2px 2px 0;
-  position:absolute;
-  left: 23px;
-  top: 22px;
-  margin-top: -4px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
+  align-items: center;
+  background: #b2b2b2;
+  color: #ffffff;
+  padding: 4px 8px;
+  margin-right: 5px;
+  border-radius: 4px;
 }
 
 .user_profile_column2 {
   display: flex;
-  flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 14px;
+  align-items: center;
+}
+
+.user_profile_text {
+  font-size: 15px;
   line-height: 140%;
-  width: 100%;
-  padding: 4px 8px 8px 24px;
+  margin-top: 8px;
 }
 
 /************************************************************/
@@ -253,17 +214,15 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  font-size: 12px;
-  line-height: 180%;
-  margin-top: 4px;
+  font-size: 14px;
+  margin-top: 16px;
 }
 
 .user_activity_info li {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 4px;
-  margin-right: 15px;
+  margin-right: 16px;
 }
 
 .user_activity_info li:last-child {
@@ -274,32 +233,13 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: #8c8c8c;
 }
 
-#user_activity_nonda, #user_activity_sakagura, #user_activity_restaurant, #user_activity_store, #user_activity_follow, #user_activity_follower {
+#user_activity_nonda, #user_activity_sakagura, #user_activity_follower {
+  color: #000000;;
   font-weight: bold;
-  margin-left: 4px;
-}
-
-.user_activity_info_heart2020, .user_activity_info_store3030, .user_activity_info_pin1616, .user_activity_info_people1616 {
-  fill: #b2b2b2;
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-}
-
-.user_activity_info_brewery2016 {
-  fill: #b2b2b2;
-  width: 20px;
-  height: 16px;
-  margin-right: 5px;
-}
-
-.user_activity_info_restaurant1816 {
-  fill: #b2b2b2;
-  width: 18px;
-  height: 16px;
-  margin-right: 5px;
+  margin-right: 4px;
 }
 
 /************************************************************/
@@ -308,7 +248,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .user_buttons li, #user_follow {
@@ -828,27 +768,19 @@
 
 /************************************************************/
 .review_container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: grid;
+  grid-auto-rows: 64px;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  grid-gap: 2px;
   width: 100%;
-  height: auto;
+  padding-top: 8px;
   margin-top: 8px;
   border-top: 1px dotted #d2d2d2;
 }
 
 .review_image {
   overflow: hidden;
-  width: 60px;
-  height: 60px;
   border: 1px solid #d2d2d2;
-  margin-top: 8px;
-  margin-right: 8px;
-}
-
-.review_image:last-child {
-  margin-right: 0;
 }
 
 .review_image img {
@@ -904,9 +836,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-.tastes_item:first-child .tastes_title {
   font-size: 8px;
 }
 
@@ -1097,11 +1026,15 @@
 
 .search_sakagura_result_brewery_image, .search_users_result_brewery_image {
   overflow: hidden;
-  width: 40px;
   min-width: 40px;
+  max-width: 40px;
   height: 40px;
   border: 1px solid #d2d2d2;
   margin-right: 8px;
+}
+
+.search_users_result_brewery_image {
+  border-radius: 20px;
 }
 
 .search_result_sake_image img, .search_sakagura_result_brewery_image img, .search_syuhanten_result_store_image img, .search_users_result_brewery_image img {
@@ -1136,6 +1069,7 @@
   font-weight: bold;
   text-decoration: none;
   line-height: 140%;
+  word-break: break-all;
 }
 
 .search_result_date {
@@ -1242,13 +1176,13 @@
 }
 /*********************************************************/
 @media only screen and (min-width: 340px) {
-  .tastes_item:first-child .tastes_title {
+  .tastes_title, .spec_title {
     font-size: 11px;
   }
 }
 
 @media only screen and (min-width: 370px) {
-  .tastes_item:first-child .tastes_title {
+  .tastes_title, .spec_title {
     font-size: 13px;
   }
 }
@@ -1269,7 +1203,7 @@
     align-items: center;
   }
 
-  .search_result_brewery, .search_result_profile {
+  .search_result_brewery {
     margin-right: 20px;
   }
 
@@ -1370,8 +1304,9 @@
   }
 
   #banner {
+    display: flex;
     width: 300px;
-    margin-top: 15px;
+    margin-top: 16px;
   }
 
   #ad1 {

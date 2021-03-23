@@ -9,6 +9,7 @@
   width: 100%;
   height: auto;
   margin-top: 16px;
+  margin-bottom: 80px;
 }
 
 /********************
@@ -52,12 +53,11 @@
 }
 
 #navigation_menu {
-  display: flex;
+  display: none;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
   height: auto;
-  display: none;
 }
 
 #navigation_menu li {
@@ -84,6 +84,16 @@
 
 #navigation_menu li:hover, #login:hover, #mypage:hover {
   background: #e6e6e6;
+}
+
+#navigation_menu li:first-child:hover {
+  background: none;
+}
+
+#about_sakenomo span {
+  color: #8c8c8c;
+  font-size: 12px;
+  text-decoration: underline;
 }
 
 .header_sakenomo2020, .header_heart2020, .header_help2020, .header_person2020, .header_login2020 {
@@ -536,7 +546,7 @@
 /********************
 * dialog_background
 ********************/
-#dialog_background, #dialog_edit_sake_background, .dialog_add_sakagura_background, .dialog_add_sake_background, #dialog_kura_bbs_background, #dialog_sakagura_review_background, #dialog_edit_sakagura_background, #dialog_add_inshokuten_background {
+#dialog_background, #dialog_edit_sake_background, .dialog_add_sakagura_background, .dialog_add_sake_background, #dialog_edit_sakagura_background, #dialog_add_inshokuten_background {
   overflow: auto;
   position: fixed;
   top: 0;
@@ -596,31 +606,31 @@
 }
 
 #prev_search_all, #prev_search_sake, #prev_search_sakagura, #prev_sake_review {
-  background: #b2b2b2;
+  background: #d2d2d2;
   margin-right: 8px;
   cursor: pointer;
 }
 
 #next_search_all, #next_search_sake, #next_search_sakagura, #next_sake_review, #next_sakagura_sake {
-  background: #22445B;
+  background: #b2b2b2;
   margin-left: 8px;
   cursor: pointer;
 }
 
 #prev_sake_photo, #prev_sakagura_sake, #prev_mypage_review, #prev_mypage_sakagura {
-  background: #b2b2b2;
+  background: #d2d2d2;
   margin-right: 8px;
   cursor: default;
 }
 
 #next_sake_photo, #next_mypage_review, #next_sakagura {
-  background: #b2b2b2;
+  background: #d2d2d2;
   margin-left: 8px;
   cursor: default;
 }
 
 #prev_sake_photo.active, #next_sake_photo.active, #prev_mypage_review.active, #prev_mypage_sakagura.active, #next_mypage_review.active, #next_sakagura.active {
-  background: #22445B;
+  background: #b2b2b2;
   cursor: pointer;
 }
 
@@ -650,135 +660,52 @@
 * footer
 ********************/
 .sakenomu_footer {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  background: #c6c6c6;
+  background: #ffffff;
   width: 100%;
-  height: auto;
-  border-top: 1px solid #b2b2b2;
-  margin-top: 40px;
+  height: 48px;
+  box-shadow: 0 2px 4px #000000;
+  z-index: 99;
 }
 
 .footer_container {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column-reverse;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 1200px;
   max-width: 96%;
   height: auto;
-  padding: 40px 0;
+  padding: 0 8px;
 }
 
-.footer_border_line {
-  background: #b2b2b2;
-  width: 100%;
-  height: 1px;
-  margin: 20px 0;
-}
-
-.footer_container #logo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  cursor: default;
-}
-
-.logoheartgray14024 {
-  width: 140px;
-  height: 24px;
-}
-
-.footer_container #logo p {
-  color: #666666;
-  font-size: 12px;
-  margin-top: 8px;
-}
-
-.sakenomu_footer_menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 360px;
-  max-width: 100%;
-  height: auto;
-}
-
-.sakenomu_footer_menu ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sakenomu_footer_menu ul li {
-  margin: 0 10px;
-  margin-bottom: 12px;
-}
-
-/*.sakenomu_footer_menu ul li:nth-last-of-type(2),*/ .sakenomu_footer_menu ul li:last-child {
-  margin-bottom: 0;
-}
-
-.sakenomu_footer_menu ul li a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #666666;
-  color: #ffffff;
-  font-size: 13px;
-  text-decoration: none;
-  width: 120px;
-  height: 24px;
-  border-radius: 12px;
-}
-
-.footer_question {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 300px;
-  max-width: 100%;
-  height: auto;
-}
-
-.footer_question > textarea {
+.footer_icon {
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
-  color: #666666;
-  font-size: 16px;
-  width: 100%;
-  height: 120px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px solid #b2b2b2;
+  align-items: center;
 }
 
-.footer_question > input {
-  background: #b2b2b2;
+.footer_home2020, .footer_search2020, .footer_login2020, .footer_person2020 {
+  fill: #8c8c8c;
+  width: 20px;
+  height: 20px;
+}
+
+.footer_icon span {
   color: #3f3f3f;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
-  width: 100px;
-  height: 30px;
-  border-radius: 15px;
-  border: 0 solid transparent;
-  margin-top: 10px;
-  cursor: pointer;
+  margin-left: 5px;
 }
 
 /****************************************/
 @media only screen and (min-width: 560px) {
-  #dialog_background, #dialog_edit_sake_background, .dialog_add_sakagura_background, .dialog_add_sake_background, #dialog_kura_bbs_background, #dialog_sakagura_review_background, #dialog_edit_sakagura_background, #dialog_add_inshokuten_background {
+  #dialog_background, #dialog_edit_sake_background, .dialog_add_sakagura_background, .dialog_add_sake_background, #dialog_edit_sakagura_background, #dialog_add_inshokuten_background {
     background: rgba(0, 0, 0, 0.5);
     padding-top: 20px;
     padding-bottom: 20px;
@@ -797,42 +724,15 @@
 }
 
 @media only screen and (min-width: 800px) {
+  .sakenomu_footer {
+    display: none;
+  }
+
   .mobile_search_container {
     display: none;
   }
 
   #navigation_menu {
     display: flex;
-  }
-}
-
-@media only screen and (min-width: 1040px) {
-  .footer_container {
-    flex-direction: row;
-  }
-
-  .footer_border_line {
-    display: block;
-    background: #b2b2b2;
-    width: 1px;
-    height: 160px;
-    margin: 0;
-  }
-
-  .footer_container #logo {
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 160px;
-    margin: 0
-  }
-
-  .sakenomu_footer_menu {
-    height: 160px;
-    margin: 0;
-  }
-
-  .footer_question {
-    height: 160px;
-    margin: 0;
   }
 }

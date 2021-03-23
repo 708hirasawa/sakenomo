@@ -20,21 +20,12 @@ function write_search_bar()
       print('<div class="mobile_search_container"></div>');
 
       print('<ul id="navigation_menu">');
-        /*print('<li id="sakenomuguide">');
-          print('<svg class="header_sakenomo2020"><use xlink:href="#sakenomo2020"/></svg>');
-          print('<span>Sakenomoとは</span>');
+        print('<li id="about_sakenomo">');
+          print('<span>Sakenomoについて</span>');
         print('</li>');
-        print('<li id="nonda">');
-          print('<svg class="header_heart2020"><use xlink:href="#heart2020"/></svg>');
-          print('<span>飲んだ</span>');
-        print('</li>');
-        print('<<li id="user_message">');
+        /*print('<<li id="user_message">');
           print('<svg class="header_mail2620"><use xlink:href="#mail2620"/></svg>');
           print('<span>メッセージ</span>');
-        print('</li>');
-        print('<li>');
-          print('<svg class="header_help2020"><use xlink:href="#help2020"/></svg>');
-          print('<span>ヘルプ</span>');
         print('</li>');*/
 
         $username = $_COOKIE['login_cookie'];

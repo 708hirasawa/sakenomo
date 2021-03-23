@@ -77,6 +77,10 @@ $(function () {
     window.open('sake_search.php', '_self');
   });
 
+  $("#about_sakenomo").click(function() {
+    window.open('about_sakenomo.php', '_self');
+  });
+
   $('#close_main_menu').click(function() {
     $("#search_content, #search_content_position_adjust").css({"display":"none"});
   });

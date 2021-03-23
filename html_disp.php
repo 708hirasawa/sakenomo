@@ -572,9 +572,9 @@ function writefooter()
 			print('<a class="footer_icon" href="sake_search.php">');
 				print('<svg class="footer_home2020"><use xlink:href="#home2020"/></svg><span>Home</span>');
 			print('</a>');
-			print('<a class="footer_icon" href="search.php">');
+			/*初期非表示print('<a class="footer_icon" href="search.php">');
 				print('<svg class="footer_search2020"><use xlink:href="#search2020"/></svg><span>検索</span>');
-			print('</a>');
+			print('</a>');*/
 			if($username == "" || $username == null) {
 				print('<a class="footer_icon" href="user_login_form.php">');
 					print('<svg class="footer_login2020"><use xlink:href="#login2020"/></svg><span>ログイン</span>');

@@ -73,22 +73,12 @@
   margin: 0 10px;
 }
 
-.mobile_login2020, .mobile_person2020, .mobile_heart2020, .mobile_bell2020, .mobile_mail2620, .mobile_help2020, .mobile_sakenomo2020, .mobile_beginner1620, .mobile_logout2020 {
+.mobile_login2020, .mobile_person2020, .mobile_bell2020, .mobile_mail2620, .mobile_logout2020 {
   fill: #b2b2b2;
 }
 
-.mobile_login2020, .mobile_person2020, .mobile_heart2020, .mobile_bell2020, .mobile_help2020, .mobile_sakenomo2020, .mobile_logout2020 {
+.mobile_login2020, .mobile_person2020, .mobile_bell2020, .mobile_logout2020 {
   width: 20px;
-  height: 20px;
-}
-
-.mobile_beginner1620 {
-  width: 16px;
-  height: 20px;
-}
-
-.mobile_mail2620 {
-  width: 18px;
   height: 20px;
 }
 
@@ -101,6 +91,10 @@
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   text-decoration: none;
+}
+
+.about_sakenomo_text {
+  margin-left: 10px;
 }
 
 /*-------------------------------*/

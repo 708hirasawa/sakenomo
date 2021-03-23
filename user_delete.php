@@ -134,6 +134,7 @@ if(!$res)
 }
 
 $return = "success";
+//setcookie("login_cookie", "", time() + (10 * 365 * 24 * 60 * 60));
 setcookie("login_cookie", "", 0);
 
 header("Content-type: application/xml");

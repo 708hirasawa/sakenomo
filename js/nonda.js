@@ -171,20 +171,6 @@ $(function() {
       $('.nonda_flavor_type_sign').css({"background":"#A30D0D"});
     });
 
-    $(document).on('click', '#nonda_flavor_type_name', function(e){
-
-        $(this).next('.nonda_flavor_item_container').slideToggle();
-
-        if ($(this).children(".plus_minus_icon").hasClass('active')) {
-            // activeを削除
-            $(this).children(".plus_minus_icon").removeClass('active');
-        }
-        else {
-            // activeを追加
-            $(this).children(".plus_minus_icon").addClass('active');
-        }
-    });/*hirasawa追加*/
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // 日本酒名　自動入力
@@ -367,6 +353,7 @@ $(function() {
     //      alert("i:" + i + " files[i]:" + files);
     //      alert("evt:" + evt + " i:" + i + " file:" + file);
     // })(i, files[i]);
+    var wait_array = [];
 
 	var cancelEvent = function(event) {
 
@@ -375,7 +362,7 @@ $(function() {
 		return false;
 	}
 
-	function completeHandler1(event, obj, total, status, progress){
+	function completeHandler1(event, obj, total, status, progress, wait_array){
 		var responseText = event.target.responseText;
 		var responseArray = JSON.parse(responseText);
 		var path = "images\\photo\\thumb\\" + responseArray[0];
@@ -385,6 +372,9 @@ $(function() {
         //var innerHTML = '<div class="bbs_photo_image"><img class="preview" src="' + path + '"></div>';
 	    //$('#nonda_image .photo_container').append(innerHTML);
 
+        $(status).html(responseArray[0]);
+        $(progress).val(0);
+
         $(progress).css({"display":"none"});
         $(status).css({"display":"none"});
         $(total).css({"display":"none"});
@@ -392,9 +382,13 @@ $(function() {
         obj.removeClass('image_rotated_by_90_counter_clock', 'image_rotated_by_90_clock', 'image_rotated_by_180_clock');
         obj.attr("src", path);
 
-	    _("status").innerHTML = responseArray[0];
-		_("progressBar").value = 0;
-	}
+        wait_array.pop();
+
+        if(!wait_array.length) {
+            $('input[type="button"]').prop('disabled', false);
+            $('#close_bbs_button').prop('disabled', false);
+        }
+    }
 
 	function progressHandler1(event, total, status, progress, bShowPreview){
 
@@ -432,9 +426,16 @@ $(function() {
         $(total).css({"display":"none"});
         //alert("legnth:" + length);
 
+        $('input[type="button"]').prop('disabled', true);
+        $('#close_bbs_button').prop('disabled', true);
+
+        var wait_array = [];
+
         for(var i = 0; i < length; i++)
         {
 	        var fileReader = new FileReader(); // ファイルの内容は FileReader で読み込みます.
+
+            wait_array.push(i);
 
             // ドラッグ＆ドロップでファイルアップロードする場合は result の内容を Ajax でサーバに送信しましょう!
             (function(i, file, obj){
@@ -485,7 +486,7 @@ $(function() {
 			                innerHTML += '</div>';
                         innerHTML += '</div>';
 			            innerHTML += '<div class="nonda_image_caption_container">';
-			                innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="説明文は30字まで">';
+			                innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）">';
 			            innerHTML += '</div>';
 		            innerHTML += '</div>';
 
@@ -524,7 +525,7 @@ $(function() {
                     $(obj_img).data("filename", filename);
 
 		            ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
-		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress); }, false);
+		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, wait_array); }, false);
 		            ajax.addEventListener("error", errorHandler1, false);
 		            ajax.addEventListener("abort", abortHandler1, false);
 		            ajax.open("POST", "nonda_upload_image.php");
@@ -561,9 +562,15 @@ $(function() {
             return;
         }
 
+        $('input[type="button"]').prop('disabled', true);
+        $('#close_bbs_button').prop('disabled', true);
+
+        wait_array = [];
+
         for(var i = 0; i < $(this).prop("files").length; i++) {
 
 		    var reader = new FileReader(); // Create a file reader
+            wait_array.push(i);
 
             // Set the image once loaded into file reader
             (function(file, obj){
@@ -583,7 +590,7 @@ $(function() {
 		                    innerHTML += '</div>';
                         innerHTML += '</div>';
 		                innerHTML += '<div class="nonda_image_caption_container">';
-		                    innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="説明文は30字まで">';
+		                    innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）">';
 		                innerHTML += '</div>';
 	                innerHTML += '</div>';
 
@@ -643,7 +650,7 @@ $(function() {
 
 		            //ajax.addEventListener("load", function(event) { completeHandler1(event, $(obj).parent()); }, false);
 		            ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
-		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress); }, false);
+		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, wait_array); }, false);
 		            ajax.addEventListener("error", errorHandler1, false);
 		            ajax.addEventListener("abort", abortHandler1, false);
 		            ajax.open("POST", "nonda_upload_image.php");
@@ -827,6 +834,20 @@ $(function() {
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // input 初期化
+        $('.nonda_flavor_item_container input[name="flavor[]"]').prop("checked", false);
+        $('.nonda_flavor_list div').data('flavor', 0);
+
+		$('.nonda_flavor_category').css({"display":"none"});
+	    $('.nonda_flavor_list div').removeClass('flavor_highlight');
+        $('.nonda_flavor_list_note').html('2つまで選択可');
+
+        $('.nonda_flavor_list div').each(function() {
+            $(this).html('<span>' + ($(this).index() + 1) + '</span>');
+        });
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(sake_id != "")
         {
             $.ajax({
@@ -855,7 +876,6 @@ $(function() {
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         $('.nonda_image_photo_container').remove();//hirasawa変更0517
 	    $('#dialog_bbs').removeClass('add_nonda');
 	    $('#dialog_bbs').removeClass('edit_nonda');
@@ -1133,7 +1153,7 @@ $(function() {
 		return false;
 	}
 
-	function completeHandler1(event, obj, total, status, progress){
+	function completeHandler1(event, obj, total, status, progress, wait_array){
 		var responseText = event.target.responseText;
 		var responseArray = JSON.parse(responseText);
 		var path = "images\\photo\\thumb\\" + responseArray[0];
@@ -1147,13 +1167,22 @@ $(function() {
         obj.removeClass('image_rotated_by_90_counter_clock', 'image_rotated_by_90_clock', 'image_rotated_by_180_clock');
         obj.attr("src", path);
 
+        $(status).html(responseArray[0]);
+        $(progress).val(0);
+
         $(progress).css({"display":"none"});
         $(status).css({"display":"none"});
         $(total).css({"display":"none"});
 
-	    _("status").innerHTML = responseArray[0];
-		_("progressBar").value = 0;
-	}
+        wait_array.pop();
+
+        //alert("complete:" + wait_array.length);
+
+        if(!wait_array.length) {
+            $('input[type="button"]').prop('disabled', false);
+            $('#close_bbs_button').prop('disabled', false);
+        }
+    }
 
 	function progressHandler1(event, total, status, progress){
 
@@ -1190,9 +1219,15 @@ $(function() {
         $(total).css({"display":"none"});
         //alert("legnth:" + length);
 
+        $('input[type="button"]').prop('disabled', true);
+        $('#close_bbs_button').prop('disabled', true);
+
+        var wait_array = [];
+
         for(var i = 0; i < length; i++)
         {
 	        var fileReader = new FileReader(); // ファイルの内容は FileReader で読み込みます.
+            wait_array.push(i);
 
             // ドラッグ＆ドロップでファイルアップロードする場合は result の内容を Ajax でサーバに送信しましょう!
             (function(i, file, obj){
@@ -1245,7 +1280,7 @@ $(function() {
 			                innerHTML += '</div>';
                         innerHTML += '</div>';
 			            innerHTML += '<div class="nonda_image_caption_container">';
-			                innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="説明文は30字まで">';
+			                innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）">';
 			            innerHTML += '</div>';
 		            innerHTML += '</div>';
 
@@ -1284,7 +1319,7 @@ $(function() {
 		            ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
 
 		            //ajax.addEventListener("load", function(event) { completeHandler1(event, $(obj).parent()); }, false);
-		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress); }, false);
+		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, wait_array); }, false);
 		            ajax.addEventListener("error", errorHandler1, false);
 		            ajax.addEventListener("abort", abortHandler1, false);
 		            ajax.open("POST", "nonda_upload_image.php");
@@ -1306,6 +1341,11 @@ $(function() {
     // ファイル変更
 	$(document).on('change', '.edit_nonda input[type="file"]', function() {
 
+        $('input[type="button"]').prop('disabled', true);
+        $('#close_bbs_button').prop('disabled', true);
+
+        var wait_array = [];
+
         if($('#add_nonda_sake').val() == "") {
             alert("酒を選んでください");
             return;
@@ -1314,6 +1354,7 @@ $(function() {
         for(var i = 0; i < $(this).prop("files").length; i++) {
 
 		    var reader = new FileReader(); // Create a file reader
+            wait_array.push(i);
 
             // Set the image once loaded into file reader
             (function(file, obj){
@@ -1332,7 +1373,7 @@ $(function() {
 			                innerHTML += '</div>';
                         innerHTML += '</div>';
 			            innerHTML += '<div class="nonda_image_caption_container">';
-			                innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="説明文は30字まで">';
+			                innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）">';
 			            innerHTML += '</div>';
 		            innerHTML += '</div>';
 
@@ -1389,7 +1430,7 @@ $(function() {
 		            var ajax = new XMLHttpRequest();
 
 		            ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
-		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress); }, false);
+		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, wait_array); }, false);
 		            ajax.addEventListener("error", errorHandler1, false);
 		            ajax.addEventListener("abort", abortHandler1, false);
 		            ajax.open("POST", "nonda_upload_image.php");
@@ -1698,6 +1739,18 @@ $(function() {
         if(rank && rank != undefined)
            $('#rateYo').rateYo("rating", rank);
 
+        // input 初期化
+        $('.nonda_flavor_item_container input[name="flavor[]"]').prop("checked", false);
+        $('.nonda_flavor_list div').data('flavor', 0);
+
+		$('.nonda_flavor_category').css({"display":"none"});
+	    $('.nonda_flavor_list div').removeClass('flavor_highlight');
+        $('.nonda_flavor_list_note').html('2つまで選択可');
+
+        $('.nonda_flavor_list div').each(function() {
+            $(this).html('<span>' + ($(this).index() + 1) + '</span>');
+        });
+
         if(flavors) {
 		    var flavors_array = flavors.toString().split(',');
             var count = 1;
@@ -1725,15 +1778,15 @@ $(function() {
             }
         }
 
-				$('.nonda_flavor_list div:first-child').click(function() {
-					$('.nonda_flavor_list_note').html('フレーバー<span>1</span>選択');
-					$('.nonda_flavor_type_sign').css({"background":"#117DA8"});
-				});
+		$('.nonda_flavor_list div:first-child').click(function() {
+			$('.nonda_flavor_list_note').html('フレーバー<span>1</span>選択');
+			$('.nonda_flavor_type_sign').css({"background":"#117DA8"});
+		});
 
-				$('.nonda_flavor_list div:last-child').click(function() {
-					$('.nonda_flavor_list_note').html('フレーバー<span>2</span>選択');
-					$('.nonda_flavor_type_sign').css({"background":"#A30D0D"});
-				});
+		$('.nonda_flavor_list div:last-child').click(function() {
+			$('.nonda_flavor_list_note').html('フレーバー<span>2</span>選択');
+			$('.nonda_flavor_type_sign').css({"background":"#A30D0D"});
+		});
 
         // alert("open_nonda subject:" + subject + " message:" + message);
 		//$('#tabs-1 .rating-input').val(rank);
@@ -1781,7 +1834,7 @@ $(function() {
 			            innerHTML += '</div>';
                     innerHTML += '</div>';
 			        innerHTML += '<div class="nonda_image_caption_container">';
-			            innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="説明文は30字まで" value="' + desc_array[i] + '">';
+			            innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）" value="' + desc_array[i] + '">';
 			        innerHTML += '</div>';
 		        innerHTML += '</div>';
 		    }

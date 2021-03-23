@@ -315,17 +315,19 @@
 }
 
 #nonda_image_post {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: grid;
+  grid-auto-rows: 144px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4px;
+  width: 100%;
 }
 
 .nonda_image_photo_container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .nonda_image_photo {
@@ -334,14 +336,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 104px;
-  height: 104px;
+  width: 100%;
+  height: 120px;
 }
 
 .nonda_image_photo img {
   object-fit: cover;
   width: 100%;
-  height: 100%;
+  height: 120px;
   image-orientation: from-image;
 }
 
@@ -388,7 +390,7 @@
 }
 
 .nonda_image_caption_container {
-  width: 104px;
+  width: 100%;
   margin-top: 4px;
 }
 
@@ -399,8 +401,9 @@ input[name="nonda_image_caption"] {
   align-items: center;
   background: #f5f5f5;
   color: #8c8c8c;
-  font-size: 13px;
+  font-size: 12px;
   width: 100%;
+  height: 20px;
   border: none;
 }
 
@@ -416,10 +419,9 @@ input[name="nonda_image_caption"] {
   color: #b2b2b2;
   font-size: 16px;
   font-weight: bold;
-  width: 104px;
-  height: 104px;
+  width: 100%;
+  height: 120px;
   border: 2px dashed #d2d2d2;
-  margin: 4px;
   outline: none;
   cursor: pointer;
 }
@@ -613,64 +615,9 @@ input[name="nonda_image_caption"] {
   padding-left: 24px;
 }
 
-#nonda_flavor_type_name .plus_minus_icon, #nonda_flavor_type_name .plus_minus_icon span {
-  display: inline-block;
-  transition: all .3s;
-  box-sizing: border-box;
-}
-
-#nonda_flavor_type_name .plus_minus_icon {
-  position: relative;
-  width: 12px;
-  height: 12px;
-  margin-left: auto;
-}
-
-#nonda_flavor_type_name .plus_minus_icon span {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: #d2d2d2;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -o-border-radius: 4px;
-}
-
-#nonda_flavor_type_name .plus_minus_icon span:nth-of-type(1) {
-  top: 5px;
-  transform: rotate(0deg);
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-}
-
-#nonda_flavor_type_name .plus_minus_icon span:nth-of-type(2) {
-  top: 5px;
-  transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-}
-
-#nonda_flavor_type_name .plus_minus_icon.active span:nth-of-type(1) {
-	display: none;
-}
-
-#nonda_flavor_type_name .plus_minus_icon.active span:nth-of-type(2) {
-  top: 5px;
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
 .nonda_flavor_item_container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -678,7 +625,6 @@ input[name="nonda_image_caption"] {
   padding-top: 8px;
   border-top: 1px dotted #e6e6e6;
   cursor: default;
-  display: none;
 }
 
 .nonda_flavor_item_container label {

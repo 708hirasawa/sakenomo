@@ -127,14 +127,17 @@ print('<div id="container">');
     die("データベース接続エラー .<br />");
   }
 
-  print('<div id="mainview_container">');
+  $sql = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.email = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '')";
+  $result = executequery($db, $sql);
+  $record = getnextrow($result);
+  $count =  $record["COUNT(*)"];
+
+  $sql = "SELECT USERS_J.username AS username, USERS_J.pref AS user_pref, bdate, sex, USERS_J.address, certification, age_disclose, sex_disclose, address_disclose, certification_disclose, SAKAGURA_J.pref AS pref, contributor, update_date, TABLE_NONDA.sake_id as sake_id, sake_name, sakagura_name, TABLE_NONDA.write_date as write_date, TABLE_NONDA.rank as rank, subject, message, flavor, tastes, committed FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.email = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY UPDATE_DATE DESC LIMIT 25";
+  $result = executequery($db, $sql);
+
+  print('<div id="mainview_container" data-in_disp_from=0 data-count=' .$count .'>');
     print('<div id="mainview">');
-
       /*新着レビュー*******************/
-      $sql = "SELECT USERS_J.username AS username, USERS_J.pref AS user_pref, bdate, sex, USERS_J.address, certification, age_disclose, sex_disclose, address_disclose, certification_disclose, SAKAGURA_J.pref AS pref, contributor, update_date, TABLE_NONDA.sake_id as sake_id, sake_name, sakagura_name, TABLE_NONDA.write_date as write_date, TABLE_NONDA.rank as rank, subject, message, flavor, tastes, committed FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.email = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY UPDATE_DATE DESC LIMIT 16";
-
-      $result = executequery($db, $sql);
-
       print('<div class="new_review">');
         print('<div><svg class="top_review3630"><use xlink:href="#review3630"/></svg>新着レビュー</div>');
 
@@ -174,41 +177,6 @@ print('<div id="container">');
                 print('<div class="nonda_user_name_container">');
                   print('<div class="nonda_user_name">' .$record["username"] .'</div>');
                   print('<div class="nonda_user_profile_date_container">');
-                    print('<div class="nonda_user_profile">');
-
-                      $profile = "";
-
-                      //20代後半/女性/和歌山県/利酒師(SSI認定)
-                      if($record["age_disclose"] == 1 && $record["bdate"] != "--") {
-                        $profile = $record["bdate"];
-                      }
-
-                      if($record["sex_disclose"] == 1 && $record["sex"] != "") {
-
-                        if($profile != "")
-                          $profile .= "/" .$record["sex"];
-                        else
-                          $profile = $record["sex"];
-                      }
-
-                      if($record["address_disclose"] == 1 && $record["user_pref"] != "") {
-                        if($profile != "")
-                          $profile .= "/" .$record["user_pref"];
-                        else
-                          $profile = $record["user_pref"];
-                      }
-
-                      if($record["certification_disclose"] == 1 && $record["certification"] != "") {
-                        if($profile != "")
-                          $profile .= "/" .$record["certification"];
-                        else
-                          $profile = $record["certification"];
-                      }
-
-                      print($profile);
-
-                    print('</div>');
-
                     print('<div class="nonda_date">' .gmdate("Y/m/d", $record["update_date"] + 9 * 3600) .'</div>');
                   print('</div>');
                 print('</div>');
@@ -266,7 +234,7 @@ print('<div id="container">');
               } else {
                 print('');
               }
-            
+
             ////////////////////////////////////////
             ////////////////////////////////////////
             if($record["flavor"] || $record["tastes"]) {
@@ -278,7 +246,11 @@ print('<div id="container">');
               print('<div class="tastes">');
                 print('<div class="tastes_item">');
                   print('<div class="tastes_title"><svg class="tastes_item_flavor1816"><use xlink:href="#flavor1816"/></svg>フレーバー</div>');
-                  print('<div class="taste_value_flavor">' .GetFlavorNames($record["flavor"]) .'</div>');
+                  if($record["flavor"]) {
+                    print('<div class="taste_value_flavor">' .GetFlavorNames($record["flavor"]) .'</div>');
+                  } else {
+                    print('<div class="taste_value" style="color: #b2b2b2;">--</div>');
+                  }
                 print('</div>');
                 ////////////////////////////////////////
                 print('<div class="tastes_item">');
@@ -397,14 +369,16 @@ print('<div id="container">');
             print('</a>');//review
           }
         print("</div>"); //thread;
+
       print('</div>');//new_review
+      print('<div class="loader"></div>');
     print("</div>");//mainview
     ////////////////////////////////////////
     /*バナーサイド*******************/
     print('<div id="banner_frame">');
       print('<div id="ad1"><img src="images/icons/notice_banner.svg"></div>');
 
-      print('<ul class="slider multiple-heading">');
+      /*初期非表示print('<ul class="slider multiple-heading">');
         print('<li><a href="specialselection_kimoto.php">');
           print('<div class="slide_kimoto">');
             print('<div class="slide_kimoto_article">');
@@ -424,7 +398,7 @@ print('<div id="container">');
             print('</div>');
           print('</div>');
         print('</a></li>');
-      print("</ul>");
+      print("</ul>");*/
     print("</div>");
     ////////////////////////////////////////
 
@@ -511,7 +485,7 @@ $(function() {
 	function nonda_serialize(in_disp_from, in_disp_to, query_count) {
 
 		var data = "search_type=1" + "&from=" + in_disp_from + "&to=" + in_disp_to;
-		
+
 		if(query_count && query_count == 1) {
 			data += "&count_query=" + query_count;
 		}
@@ -520,15 +494,30 @@ $(function() {
 
 		return data;
 	}
-   
-    $(window).scroll(function () {
 
-	   if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+	// Loadingイメージ表示関数
+	function dispLoading(){
+		//$(".loading").css({"visibility": "visible"});
+		$('.loader').css('display', 'block');
+	}
 
-			var in_disp_from = 0;
-			var in_disp_to = 25;
+	// Loadingイメージ削除関数
+	function removeLoading(){
+		//$(".loading").css({"visibility": "hidden"});
+		$('.loader').css('display', 'none');
+	}
+
+	$(window).scroll(function () {
+
+		if($(window).scrollTop() + $(window).height() >= $(document).height() && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
+
+			var in_disp_from = $('#mainview_container').data('in_disp_from') + 25;
+			var in_disp_to = in_disp_from + 25;
 			var data = nonda_serialize(in_disp_from, in_disp_to, 0);
+
+			//alert("count:" + $('#mainview_container').data("count"));
 			//alert("bottom:" + data);
+		    dispLoading("処理中...");
 
 			$.ajax({
 					type: "POST",
@@ -543,9 +532,10 @@ $(function() {
 					var sake = data[0].result;
 					var nonda_values = 0;
 
+					removeLoading();
+
 					//alert("sql:" + data[0].sql);
 					//alert("count resut:" + sake.length);
-					$('#in_disp_from').val(in_disp_from);
 
 					if(count_result == 0 && sake == null) {
 						var innerText = '<div class="navigate_page_no_registry">飲んだ登録されていません</div>';
@@ -557,7 +547,7 @@ $(function() {
 					}
 					else {
 
-						for(i = 0; i < sake.length; i++) 
+						for(i = 0; i < sake.length; i++)
 						{
 							  var innerHTML = '<a class="review" href="user_view_sakereview.php?sake_id=' + sake[i].sake_id + '&contributor=' + sake[i].email + '">';
 
@@ -579,39 +569,6 @@ $(function() {
 								 innerHTML += '<div class="nonda_user_name_container">';
 								  innerHTML += '<div class="nonda_user_name">' + sake[i].username + '</div>';
 								  innerHTML += '<div class="nonda_user_profile_date_container">';
-									innerHTML += '<div class="nonda_user_profile">';
-
-									  var profile = "";
-
-									  //20代後半/女性/和歌山県/利酒師(SSI認定)
-									  if(sake[i].age_disclose == 1 && sake[i].bdate != "--") {
-										 profile = sake[i].bdate;
-									  }
-
-									  if(sake[i].sex_disclose == 1 && sake[i].sex != "") {
-										if(profile != "")
-										  profile += "/" + sake[i].sex;
-										else
-										  profile = sake[i].sex;
-									  }
-
-									  if(sake[i].address_disclose == 1 && sake[i].user_pref != "") {
-										if(profile != "")
-										  profile += "/" + sake[i].user_pref;
-										else
-										  profile = sake[i].user_pref;
-									  }
-
-									  if(sake[i].certification_disclose == 1 && sake[i].certification != "") {
-										if(profile != "")
-										   profile += "/" + sake[i].certification;
-										else
-										   profile = sake[i].certification;
-									  }
-
-									  innerHTML += profile;
-
-									innerHTML += '</div>';
 									innerHTML += '<div class="nonda_date">' + sake[i].update_date + '</div>';
 								  innerHTML += '</div>';
 								innerHTML += '</div>';
@@ -624,13 +581,13 @@ $(function() {
 							  innerHTML += '</div>';
 							  ////////////////////////////////////////
 							  var rank_width = ((sake[i].rank / 5) * 100) + '%';
-							  
+
 							  innerHTML += '<div class="nonda_rank">';
 								innerHTML += '<div class="review_star_rating">';
 								  innerHTML += '<div class="review_star_rating_front" style="width:' + rank_width + '">★★★★★</div>';
 								  innerHTML += '<div class="review_star_rating_back">★★★★★</div>';
 								innerHTML += '</div>';
-								
+
 								if(sake[i].rank) {
 								  innerHTML += '<span class="review_sake_rate">' + sake[i].rank + '</span>';
 								} else {
@@ -660,19 +617,18 @@ $(function() {
 									var pathArray = sake[i].path.split(', ');
 									var j;
 
-									for(j = 0; j < pathArray.length; j++) 
-									{
-										innerHTML += '<div class="review_container">';
-										//var path = "images\\photo\\thumb\\" + pathArray[i];
-										//alert("image:" + path);
-										innerHTML += '<div class="review_image"><img src="' + pathArray[j] + '"></div>';
-									}
-									
+									innerHTML += '<div class="review_container">';
+  									for(j = 0; j < pathArray.length; j++)
+  									{
+  										//var path = "images\\photo\\thumb\\" + pathArray[i];
+  										//alert("image:" + path);
+  										innerHTML += '<div class="review_image"><img src="' + pathArray[j] + '"></div>';
+  									}
 									innerHTML += '</div>';
 							  } else {
 									innerHTML += '';
 							  }
-				            
+
 							////////////////////////////////////////
 							////////////////////////////////////////
 							if(sake[i].flavor || sake[i].tastes) {
@@ -712,7 +668,7 @@ $(function() {
 									innerHTML += '<div class="tastes_bar_container">';
 									  innerHTML += '<input type="range" name="body" step="0.1" min="0" max="5" value="' + tastes_values[1] + '" disabled="disabled" class="user_input_range">';
 									innerHTML += '</div>';
-								
+
 									if(tastes_values[1]) {
 									  innerHTML += '<div class="taste_value">' + parseFloat(tastes_values[1]).toFixed(1) + '</div>';
 									} else {
@@ -759,7 +715,7 @@ $(function() {
 									innerHTML += '<div class="tastes_bar_container">';
 									  innerHTML += '<input type="range" name="umami" step="0.1" min="0" max="5" value="' + tastes_values[4] + '" disabled="disabled" class="user_input_range">';
 									innerHTML += '</div>';
-									
+
 									if(tastes_values[4]) {
 									  innerHTML += '<div class="taste_value">' + parseFloat(tastes_values[4]).toFixed(1) + '</div>';
 									} else {
@@ -775,7 +731,7 @@ $(function() {
 									innerHTML += '<div class="tastes_bar_container">';
 									  innerHTML += '<input type="range" name="acidity" step="0.1" min="0" max="5" value="' + tastes_values[5] + '" disabled="disabled" class="user_input_range">';
 									innerHTML += '</div>';
-									
+
 									if(tastes_values[5]) {
 										innerHTML += '<div class="taste_value">' + parseFloat(tastes_values[5]).toFixed(1) + '</div>';
 									} else {
@@ -791,7 +747,7 @@ $(function() {
 									innerHTML += '<div class="tastes_bar_container">';
 									  innerHTML += '<input type="range" name="bitter" step="0.1" min="0" max="5" value="' + tastes_values[6] + '" disabled="disabled" class="user_input_range">';
 									innerHTML += '</div>';
-									
+
 									if(tastes_values[6]) {
 									  innerHTML += '<div class="taste_value">' + parseFloat(tastes_values[6]).toFixed(1) + '</div>';
 									} else {
@@ -815,19 +771,21 @@ $(function() {
 										}
 										  innerHTML += '</div>';
 									innerHTML += '</div>';
-								innerHTML += '</div>'; 
+								innerHTML += '</div>';
 							} //if tastes
 
 							//alert("innerHTML:" + innerHTML);
 							innerHTML += '</a>'; //review
 							$('#threads').append(innerHTML);
-						
+
 							//alert("path:" + sake[i].path);
 							//break;
 
 						} // for
 						//alert("innerHTML:" + innerHTML);
-					} // else				
+					} // else
+
+					$('#mainview_container').data('in_disp_from', $('#mainview_container').data('in_disp_from') + 25);
 
 			}).fail(function(data){
 					removeLoading();

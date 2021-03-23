@@ -34,7 +34,7 @@ $(function() {
 
 	    $('#user_container').data('username', username);
 
-        //alert('username:' + username);    
+        //alert('username:' + username);
         //dispLoading("処理中...");
 
 	    $.ajax({

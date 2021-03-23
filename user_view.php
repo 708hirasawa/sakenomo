@@ -283,38 +283,28 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 				print('</div>');
 
 				print('<div class="user_profile_container">');
-					//非表示中print('<h1 class="user_profile_title">プロフィール</h1>');
 					print('<div class="user_profile_content">');
-
-						if($row['introduction']) {
-							print('<p class="user_profile_text">' .$row['introduction'] .'</p>');
-						} else {
-							print('<p class="user_profile_text" style="color: #b2b2b2">プロフィールが登録されていません</p>');
-						}
 
 						print('<div class="user_profile_column_container">');
 							print('<div class="user_profile_row">');
 								print('<div class="user_profile_column1">年代</div>');
 
-								if($row["bdate"]) {
-									print('<div class="user_profile_column2">' .$row['bdate'] .'</div>');
+								if($row["bdate"] != 0) {
+									$bdateArray = explode("-", $row["bdate"]);
+									$bdate = str_pad($bdateArray[2], 4, 0, STR_PAD_LEFT) . str_pad ($bdateArray[0], 2, 0, STR_PAD_LEFT) . str_pad ($bdateArray[1], 2, 0, STR_PAD_LEFT);
+
+									$today = date('Ymd');
+
+									$age = floor(($today - $bdate ) / 100000) * 10;
+
+									print('<div class="user_profile_column2">' .$age .'代</div>');
 								} else {
 									print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
 								}
 
 							print('</div>');
 							print('<div class="user_profile_row">');
-								print('<div class="user_profile_column1">性別</div>');
-
-								if($row["sex"]) {
-									print('<div class="user_profile_column2">' .$row['sex'] .'</div>');
-								} else {
-									print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
-								}
-
-							print('</div>');
-							print('<div class="user_profile_row">');
-								print('<div class="user_profile_column1">現住所(都道府県)</div>');
+								print('<div class="user_profile_column1">現住所</div>');
 
 								if($row["pref"]) {
 									print('<div class="user_profile_column2">' .$row["pref"] .'</div>');
@@ -327,7 +317,9 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 								print('<div class="user_profile_column1">利酒資格</div>');
 
 								if($row["certification"]) {
-									print('<div class="user_profile_column2">' .$row["certification"] .'</div>');
+									$replace = str_replace('1', '利酒師', $row["certification"]);
+									$replace = str_replace('2', '酒匠', $replace);
+									print('<div class="user_profile_column2">' .$replace .'</div>');
 								} else {
 									print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
 								}
@@ -335,38 +327,29 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 							print('</div>');
 						print('</div>');
 
+						if($row['introduction']) {
+							print('<p class="user_profile_text">' .$row['introduction'] .'</p>');
+						} else {
+							print('<p class="user_profile_text" style="color: #b2b2b2">自己紹介の登録はありません</p>');
+						}
+
 					print('</div>');
 				print('</div>');
 
 				print('<ul class="user_activity_info">');
 					print('<li>');
-						print('<span><svg class="user_activity_info_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span>');
 						print('<span id="user_activity_nonda">'.$count_nonda .'</span>');
+						print('<span>飲んだ</span>');
 					print('</li>');
 
 					print('<li>');
-						print('<span><svg class="user_activity_info_brewery2016"><use xlink:href="#brewery2016"/></svg>お気に入り酒蔵</span>');
 						print('<span id="user_activity_sakagura"></span>');
+						print('<span>お気に入り酒蔵</span>');
 					print('</li>');
 
-					/*print('<li>');
-						print('<span><svg class="user_activity_info_restaurant1816"><use xlink:href="#restaurant1816"/></svg>お気に入り飲食店</span>');
-						print('<span id="user_activity_restaurant">no code</span>');
-					print('</li>');
-
-					print('<li>');
-						print('<span><svg class="user_activity_info_store3030"><use xlink:href="#store3030"/></svg>お気に入り酒販店</span>');
-						print('<span id="user_activity_store">no code</span>');
-					print('</li>');
-
-					print('<li>');
-						print('<span><svg class="user_activity_info_pin1616"><use xlink:href="#pin1616"/></svg>フォロー中</span>');
-						print('<span id="user_activity_follow">no code</span>');
-					print('</li>');
-
-					print('<li>');
-						print('<span><svg class="user_activity_info_people1616"><use xlink:href="#people1616"/></svg>フォロワー</span>');
+					/*初期非表示print('<li>');
 						print('<span id="user_activity_follower">no code</span>');
+						print('<span>フォロワー</span>');
 					print('</li>');*/
 				print("</ul>");
 
@@ -607,7 +590,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 								if($count_result == 0) {
 									print('<div id="sakagura_table">');
-										print('<div class="navigate_page_no_registry">お気に入り登録されていません</div>');
+										print('<div class="navigate_page_no_registry">お気に入り登録はありません</div>');
 									print('</div>');
 								} else {
 									print('<div class="result_count_container">');
@@ -998,7 +981,7 @@ $(function() {
 						/////////////////////////////////////////////////////////////////
 
 						if(count_result == 0 && sake == null) {
-							var innerText = '<div class="navigate_page_no_registry">飲んだ登録されていません</div>';
+							var innerText = '<div class="navigate_page_no_registry">飲んだ登録はありません</div>';
 							$('#disp_sake').css({"display":"none"});
 							$("#sake_sort").css({"display":"none"});
 							$("#tab_sake .result_count_container").css({"display":"none"});
@@ -1633,7 +1616,7 @@ $(function() {
 						$('#sake_table').empty()
 
 						if(bCount && (count_result == 0 && sake == null)) {
-							var innerText = '<div class="navigate_page_no_registry">飲みたい登録されていません</div>';
+							var innerText = '<div class="navigate_page_no_registry">飲みたい登録はありません</div>';
 							$("#sake_sort").css({"display":"none"});
 							$('#disp_sake').css({"display":"none"});
 							$("#tab_sake .result_count_container").css({"display":"none"});
@@ -2109,7 +2092,7 @@ $(function() {
 						$('#sakagura_table').empty();
 
 						if(sakagura == null || sakagura.length == 0) {
-							var innerText = '<div class="navigate_page_no_registry">お気に入り登録されていません</div>';
+							var innerText = '<div class="navigate_page_no_registry">お気に入り登録はありません</div>';
 							$('#sakagura_table').html(innerText);
 							$('#sakagura_result_turn_page').css({"display": "none"});
 							$("#tab_sakagura #sake_sort").css({"display":"none"});
@@ -2618,6 +2601,7 @@ $(function() {
 			dispLoading("処理中...");
 			//alert("searchUsers:" + data);
 			//alert("count_result:" + $('#count_result').val());
+			//alert("category:" + category);
 
 			$.ajax({
 					type: "POST",
@@ -2639,7 +2623,15 @@ $(function() {
 					//alert("count_result:" + count_result);
 
 					if(count_result == 0 && users == null) {
-						var innerText = '<div class="navigate_page_no_registry">ユーザーをフォローしていません</div>';
+						var innerMessage = "";
+
+						if(category == 1)
+							innerMessage = "フォローはありません";
+						else if(category == 2)
+							innerMessage = "フォロワーはいません";
+
+						var innerText = '<div class="navigate_page_no_registry">' + innerMessage + '</div>';
+
 						$('#users_table').html(innerText);
 						$('#user_sort').css({"display":"none"});
 
@@ -2666,8 +2658,7 @@ $(function() {
 									innerHTML += '<div class="search_users_result_name_profile_date_container">';
 										innerHTML += '<div class="search_users_result_name">' + users[i].username + '</div>';
 										innerHTML += '<div class="search_result_profile_date_container">';
-											innerHTML += '<div class="search_result_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>';
-											innerHTML += '<div class="search_result_date">' + users[i].bdate + '</div>';
+											innerHTML += '<div class="search_result_date">' + users[i].date_followed + '</div>';
 										innerHTML += '</div>';
 
 									innerHTML += '</div>';
@@ -2819,7 +2810,7 @@ $(function() {
 	}
 
 
-	$(document).on('click', '#userfollowpage #next_mypage_review', function() 
+	$(document).on('click', '#userfollowpage #next_mypage_review', function()
 	{
 
 			var search_type = 3;
@@ -2857,7 +2848,7 @@ $(function() {
 			//alert("next user");
 	});
 
-	$(document).on('click', '#userfollowpage #prev_mypage_review', function() 
+	$(document).on('click', '#userfollowpage #prev_mypage_review', function()
 	{
 			var search_type = 3;
 			var disp_max = 25;
@@ -3001,7 +2992,7 @@ $(function() {
 		$("body").trigger("search_users", [ data, category, in_disp_from, in_disp_to, 1 ] );
 	});
 
-	$("body").on("search_users", function(event, data, category, in_disp_from, in_disp_to) 
+	$("body").on("search_users", function(event, data, category, in_disp_from, in_disp_to)
 	{
 		searchUsers(data, category, in_disp_from, in_disp_to, true)
 	});
@@ -3235,6 +3226,7 @@ jQuery(document).ready(function($) {
 		}
 		else if(state.search_type == 3)
 		{
+
 			// var data = "search_type=" + state.search_type + "&from=" + state.from + "&to="  + state.to + "&username="  + state.username + "&count_query=1" + "&orderby=" + state.orderby;
 			var data = state.data;
 			$("body").trigger("search_user", [ data, state.from, state.to ] );

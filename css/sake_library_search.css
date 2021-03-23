@@ -833,6 +833,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
+  font-size: 8px;
 }
 
 .spec_info, .sakagura_spec_info, .syuhanten_spec_info {
@@ -851,6 +852,18 @@ body {
 }
 
 /************************************************************/
+@media only screen and (min-width: 340px) {
+  .spec_title, .sakagura_spec_title, .syuhanten_spec_title {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (min-width: 370px) {
+  .spec_title, .sakagura_spec_title, .syuhanten_spec_title {
+    font-size: 13px;
+  }
+}
+
 @media only screen and (min-width: 410px) {
   .search_result_brewery_date_container, .search_sakagura_result_pref_date_container, .search_syuhanten_result_pref_date_container {
     flex-direction: row;
