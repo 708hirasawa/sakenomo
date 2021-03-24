@@ -47,14 +47,14 @@ if($category == 1)
 	
 	if($_POST["count_query"] == "1")
 	{
-		$sql1 = "SELECT COUNT(*) FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.favoriteuser AND FOLLOW_USER.username = '$username'";
+		$sql1 = "SELECT COUNT(*) FROM FOLLOW_USER, USERS_J where users_j.username = FOLLOW_USER.favoriteuser AND FOLLOW_USER.username = '$username'";
 		$res = executequery($db, $sql1);
 		$record = getnextrow($res); 
 		$count_result = $record["COUNT(*)"];
 	}
 
 	//$sql = "SELECT * FROM USERS_J AS USERS_1 WHERE USERS_1.username IN (SELECT FOLLOW_USER.favoriteuser FROM USERS_J AS USERS_2, FOLLOW_USER WHERE USERS_2.username = '$username' AND USERS_2.username = FOLLOW_USER.username)";
-	$sql1 = "SELECT * FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.favoriteuser AND FOLLOW_USER.username = '$username' ORDER BY DATE_FOLLOWED " .$desc ." LIMIT ".$from.", ".$to;
+	$sql1 = "SELECT * FROM FOLLOW_USER, USERS_J where users_j.username = FOLLOW_USER.favoriteuser AND FOLLOW_USER.username = '$username' ORDER BY DATE_FOLLOWED " .$desc ." LIMIT ".$from.", ".$to;
 
 	$res = executequery($db, $sql1);
 
@@ -101,8 +101,8 @@ if($category == 1)
 		}
 
 		$imagefile = null;
-		$email = stripslashes($row["email"]);
-		$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
+		$username = stripslashes($row["username"]);
+		$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
 		$res4 = executequery($db, $sql);
 		$rd = getnextrow($res4);
 
@@ -145,7 +145,7 @@ else if($category == 2)
 {
 	if($_POST["count_query"] == "1")
 	{
-		$sql1 = "SELECT COUNT(*) FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.username AND FOLLOW_USER.favoriteuser = '$username'";
+		$sql1 = "SELECT COUNT(*) FROM FOLLOW_USER, USERS_J where users_j.username = FOLLOW_USER.username AND FOLLOW_USER.favoriteuser = '$username'";
 		$res = executequery($db, $sql1);
 		$record = getnextrow($res); 
 		$count_result = $record["COUNT(*)"];
@@ -153,7 +153,7 @@ else if($category == 2)
 
 
 	//$sql = "SELECT * FROM USERS_J AS USERS_1 WHERE USERS_1.username IN (SELECT FOLLOW_USER.favoriteuser FROM USERS_J AS USERS_2, FOLLOW_USER WHERE USERS_2.username = '$username' AND USERS_2.username = FOLLOW_USER.username)";
-	$sql1 = "SELECT * FROM FOLLOW_USER, USERS_J where users_j.email = FOLLOW_USER.username AND FOLLOW_USER.favoriteuser = '$username' ORDER BY DATE_FOLLOWED " .$desc ." LIMIT ".$from.", ".$to;
+	$sql1 = "SELECT * FROM FOLLOW_USER, USERS_J where users_j.username = FOLLOW_USER.username AND FOLLOW_USER.favoriteuser = '$username' ORDER BY DATE_FOLLOWED " .$desc ." LIMIT ".$from.", ".$to;
 	$res = executequery($db, $sql1);
 
 	if(!$res)
@@ -168,7 +168,7 @@ else if($category == 2)
 	while($row = getnextrow($res))
 	{
 		//$username = $row["favoriteuser"];
-		$follower_name = $row["email"];	
+		$follower_name = $row["username"];	
 		$nonda_count = 0;
 		$nomitai_count = 0;
 		$follow_count = 0;
@@ -199,8 +199,8 @@ else if($category == 2)
 		}
 
 		$imagefile = null;
-		$email = stripslashes($row["email"]);
-		$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
+		$username = stripslashes($row["username"]);
+		$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
 		$res4 = executequery($db, $sql);
 		$rd = getnextrow($res4);
 

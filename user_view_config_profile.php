@@ -65,6 +65,8 @@ require_once("searchbar.php");
 
 	// $imagefile = $row["imagefile"];
 	$username = stripslashes($row["username"]);
+	$nickname = stripslashes($row["nickname"]);
+	$hidd = stripslashes($row["nickname"]);
 	$fname = stripslashes($row["fname"]);
 	$minit = stripslashes($row["minit"]);
 	$lname = stripslashes($row["lname"]);
@@ -85,6 +87,7 @@ require_once("searchbar.php");
 
 	print('<input type="hidden" name="hidden_email" value=' .$email .'>');
 	print('<input type="hidden" name="hidden_username" value=' .$username .'>');
+	print('<input type="hidden" name="hidden_nickname" value=' .$nickname .'>');
 	print('<input type="hidden" id="hidden_fname" value=' .$fname .'>');
 	print('<input type="hidden" id="hidden_minit" value=' .$minit .'>');
 	print('<input type="hidden" id="hidden_lname" value=' .$lname .'>');
@@ -113,7 +116,8 @@ require_once("searchbar.php");
 				print('<div class="user_image_container">');
 					print('<img src=' .$path .'>');
 				print('</div>');
-				print('<div id="profile_name">' .$row["username"] .'</div>');
+				print('<div id="profile_name">' .$row["nickname"] .'</div>');
+
 			print('</div>');
 		print("</div>");
 
@@ -154,7 +158,7 @@ require_once("searchbar.php");
 				print('<div class="config_item">');
 					print('<div class="config_item_title">ユーザー名</div>');
 					print('<div class="user_name_container">');
-						print('<input name="username" id="user_name_input_argument" class="user_name_inputform" value=' .$row["username"] .' placeholder="">');
+						print('<input name="nickname" id="user_name_input_argument" class="user_name_inputform" value=' .$row["nickname"] .' placeholder="">');
 					print('</div>');
 				print('</div>');
 

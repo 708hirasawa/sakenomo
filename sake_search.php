@@ -127,12 +127,12 @@ print('<div id="container">');
     die("データベース接続エラー .<br />");
   }
 
-  $sql = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.email = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '')";
+  $sql = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '')";
   $result = executequery($db, $sql);
   $record = getnextrow($result);
   $count =  $record["COUNT(*)"];
 
-  $sql = "SELECT USERS_J.username AS username, USERS_J.pref AS user_pref, bdate, sex, USERS_J.address, certification, age_disclose, sex_disclose, address_disclose, certification_disclose, SAKAGURA_J.pref AS pref, contributor, update_date, TABLE_NONDA.sake_id as sake_id, sake_name, sakagura_name, TABLE_NONDA.write_date as write_date, TABLE_NONDA.rank as rank, subject, message, flavor, tastes, committed FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.email = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY UPDATE_DATE DESC LIMIT 25";
+  $sql = "SELECT USERS_J.username AS username, USERS_J.pref AS user_pref, bdate, sex, USERS_J.address, certification, age_disclose, sex_disclose, address_disclose, certification_disclose, SAKAGURA_J.pref AS pref, contributor, update_date, TABLE_NONDA.sake_id as sake_id, sake_name, sakagura_name, TABLE_NONDA.write_date as write_date, TABLE_NONDA.rank as rank, subject, message, flavor, tastes, committed FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY UPDATE_DATE DESC LIMIT 25";
   $result = executequery($db, $sql);
 
   print('<div id="mainview_container" data-in_disp_from=0 data-count=' .$count .'>');
@@ -514,9 +514,9 @@ $(function() {
 			var in_disp_from = $('#mainview_container').data('in_disp_from') + 25;
 			var in_disp_to = in_disp_from + 25;
 			var data = nonda_serialize(in_disp_from, in_disp_to, 0);
-
+		
 			//alert("count:" + $('#mainview_container').data("count"));
-			//alert("bottom:" + data);
+			//alert("data:" + data);
 		    dispLoading("処理中...");
 
 			$.ajax({
@@ -549,9 +549,9 @@ $(function() {
 
 						for(i = 0; i < sake.length; i++)
 						{
-							  var innerHTML = '<a class="review" href="user_view_sakereview.php?sake_id=' + sake[i].sake_id + '&contributor=' + sake[i].email + '">';
+							  var innerHTML = '<a class="review" href="user_view_sakereview.php?sake_id=' + sake[i].sake_id + '&contributor=' + sake[i].username + '">';
 
-							  innerHTML += '<div class="nonda_user_container" data-contributor=' + sake[i].email;
+							  innerHTML += '<div class="nonda_user_container" data-contributor=' + sake[i].username;
 							  innerHTML += ' data-sake_id=' + sake[i].sake_id;
 							  innerHTML += ' data-pref=' + sake[i].pref;
 							  innerHTML += ' data-write_date=' + sake[i].write_date;
@@ -589,7 +589,7 @@ $(function() {
 								innerHTML += '</div>';
 
 								if(sake[i].rank) {
-								  innerHTML += '<span class="review_sake_rate">' + sake[i].rank + '</span>';
+								  innerHTML += '<span class="review_sake_rate">' + sake[i].rank.toFixed(1) + '</span>';
 								} else {
 								  innerHTML += '<span class="review_sake_rate" style="color: #b2b2b2">--</span>';
 								}

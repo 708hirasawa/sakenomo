@@ -6,7 +6,7 @@ require_once("nonda.php");
 require_once("searchbar.php");
 
 $loginname = $_COOKIE['login_cookie'];
-$username = ($_GET['username'] && $_GET['username'] != "") ? $_GET['username'] : $_COOKIE['login_cookie'];
+$url_username = ($_GET['username'] && $_GET['username'] != "") ? $_GET['username'] : $_COOKIE['login_cookie'];
 $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "プロファイル";
 ?>
 
@@ -243,15 +243,38 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 		die("データベース接続エラー .<br />");
 	}
 
-	$sql = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J WHERE SAKE_J.sake_id = TABLE_NONDA.sake_id AND contributor = '$username'";
-	$res = executequery($db, $sql);
+	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////
 
-	$record = getnextrow($res);
-	$count_nonda = ($record["COUNT(*)"] == "") ? "--" : $record["COUNT(*)"];
+	if($_GET['username'] && $_GET['username'] != "") { 
+		$sql = "SELECT * FROM USERS_J WHERE USERS_J.username = '$url_username'";
+	}
+	else {
+		$sql = "SELECT * FROM USERS_J WHERE USERS_J.username = '$url_username' or email = '$loginname'";
+	}
+
+	$res_user = executequery($db, $sql);
+	$record_user = getnextrow($res_user);
+	$username = $record_user["username"];
 
 	$sql = "SELECT * FROM USERS_J WHERE username = '$username' OR email = '$username'";
 	$res = executequery($db, $sql);
 	$row = getnextrow($res);
+
+	if($row) {
+		$username = stripslashes($row["username"]);
+		//print("<div>sql:" .$sql ."</div>");
+		//print("<div>username:" .$username ."</div>");
+	}
+
+	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////
+
+	$sql2 = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J WHERE SAKE_J.sake_id = TABLE_NONDA.sake_id AND contributor = '$username'";
+	$res2 = executequery($db, $sql2);
+
+	$record = getnextrow($res2);
+	$count_nonda = ($record["COUNT(*)"] == "") ? "--" : $record["COUNT(*)"];
 
 	print('<div id="all_container" data-username="' .$username .'" data-page="' .$page .'" data-from="' .$from .'" data-to="' .$to .'" data-max="' .$p_max .'" data-category="' .$category .'">');
 
@@ -260,8 +283,8 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 				$path = "images/icons/noimage_user30.svg";
 				$imagefile = null;
-				$email = stripslashes($row["email"]);
-				$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
+				$username = stripslashes($row["username"]);
+				$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
 				$result = executequery($db, $sql);
 				$rd = getnextrow($result);
 
@@ -275,7 +298,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 						print('<img src=' .$path .'>');
 					print('</div>');
 
-					print('<div id="profile_name">' .$row["username"] .'</div>');
+					print('<div id="profile_name">' .$row["nickname"] .'</div>');
 
 					print('<div class="user_profile_trigger">');
 						print('<p class="plus_minus_icon"><span></span><span></span></p>');
@@ -821,7 +844,7 @@ $(function() {
 
 		function nonda_serialize(in_disp_from, in_disp_to, query_count, mode) {
 
-			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
+			var loginname = $('#all_container').data('username');
 			var username =  <?php echo json_encode($_GET['username']); ?>;
 			var data = "search_type=1";
 
@@ -2342,7 +2365,7 @@ $(function() {
 			var category = 2;
 			var orderby = $("#order_sakagura").val();
 			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
-			var username =  <?php echo json_encode($_GET['username']); ?>;
+			var username =  <?php echo json_encode($username); ?>;
 			var data = "search_type=2";
 
 			if(mode == 1) { // for ajax
@@ -2354,10 +2377,12 @@ $(function() {
 					data += "&username=" + loginname;
 			}
 			else if(mode == 2) { // for url
+				var url_username =  <?php echo json_encode($_GET['username']); ?>;
+
 				data += "&page=" + (in_disp_from / $('#all_container').data('max') + 1);
 
-				if(username && username != "")
-					data += "&username=" + username;
+				if(url_username && url_username != "")
+					data += "&username=" + url_username;
 			}
 
 			if(query_count && query_count == 1) {
@@ -2581,10 +2606,12 @@ $(function() {
 				data += "&username=" + loginname;
 		}
 		else if(mode == 2) { // for url
+			var url_username =  <?php echo json_encode($_GET['username']); ?>;
+
 			data += "&page=" + (in_disp_from / $('#all_container').data('max') + 1);
 
-			if(username && username != "")
-				data += "&username=" + username;
+			if(url_username && url_username != "")
+				data += "&username=" + url_username;
 		}
 
 		if(bCount && bCount == 1) {
@@ -2652,7 +2679,7 @@ $(function() {
 								path = "images/profile/" + users[i].imagefile;
 							}
 
-							innerHTML += '<a class="usersRow_link" href="user_view.php?username=' + users[i].email + '">';
+							innerHTML += '<a class="usersRow_link" href="user_view.php?username=' + users[i].username + '">';
 								innerHTML += '<div class="search_users_result_name_container">';
 									innerHTML += '<div class="search_users_result_brewery_image"><img src="' + path + '"></div>';
 									innerHTML += '<div class="search_users_result_name_profile_date_container">';
@@ -3379,7 +3406,8 @@ jQuery(document).ready(function($) {
 	{
 		//var stateObj = { url: "#top" };
 		var href = $('.simpleTabs li a:nth(0)').attr('href');
-		var username = $('#all_container').data('username');
+		var username =  <?php echo json_encode($url_username); ?>;
+
 		var orderby = $('#order_sake').val();
 
 		var stateObj = { 'href': href,

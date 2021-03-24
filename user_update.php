@@ -2,6 +2,7 @@
 
 require_once("db_functions.php");
 $username = $_POST['username'];
+$nickname = $_POST['username'];
 $hidden_username = $_POST['hidden_username'];
 $email = $_POST['email'];
 
@@ -12,10 +13,10 @@ if(!$db = opendatabase("sake.db"))
 
 $item = "";
 
-if((isset($_POST['username']) && $_POST['username'] != undefined) && $_POST['username'] != "")
+if((isset($_POST['nickname']) && $_POST['nickname'] != undefined) && $_POST['nickname'] != "")
 {
-    $username = str_replace("%", "\%", sqlite3::escapeString($_POST['username']));
-    $item = "username='$username'";
+    $nickname = str_replace("%", "\%", sqlite3::escapeString($_POST['nickname']));
+    $item = "nickname='$nickname'";
 }
 
 if(isset($_POST['fname']) && $_POST['fname'] != undefined)
@@ -390,7 +391,7 @@ if($row)
 	}
 }
 
-$sql = "UPDATE USERS_J SET ".$item." WHERE email = '$email'";
+$sql = "UPDATE USERS_J SET ".$item." WHERE username = '$username'";
 $res = executequery($db, $sql);
 
 if(!$res)   

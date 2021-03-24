@@ -383,8 +383,8 @@ require_once("searchbar.php");
 											.'" data-sakagura_name="' .$record["sakagura_name"]
 											.'" data-pref=' .$record["pref"]
 											.' data-write_date=' .$record["write_date"]
-											.' data-contributor=' .$record["contributor"]
-											.' data-subject="' .$record["subject"]
+											.' data-contributor="' .$record["contributor"]
+											.'" data-subject="' .$record["subject"]
 											.'" data-message="' .$record["message"]
 											.'" data-rank="' .$record["rank"]
 											.'" data-tastes="' .$record["tastes"]
@@ -417,7 +417,7 @@ require_once("searchbar.php");
 				print('</div>');
 
 				//ユーザー名
-				print('<div id="profile_name">' .$row["username"] .'</div>');
+				print('<div id="profile_name">' .$row["nickname"] .'</div>');
 
 				//プロフィールボタン
 				print('<div class="user_profile_trigger">');
