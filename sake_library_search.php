@@ -3819,9 +3819,9 @@ $(function() {
 
 										for(i = 1; i <= numPage; i++) {
 											if(i == 1)
-												$('#allpage').append('<button class="search_button pageitems" style="text-align:center; width:26px; background:#22445B; color:#fff; margin-right:2px">1</button>');
+												$('#allpage').append('<button class="search_button pageitems">1</button>');
 											else
-												$('#allpage').append('<button class="search_button pageitems" style="text-align:center; width:26px; margin-right:2px">' + i + '</button>');
+												$('#allpage').append('<button class="search_button pageitems">' + i + '</button>');
 										}
 
 										$('#allpage').append('<button id="next_search_all" class="search_button" style="visibility:visible"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
@@ -3868,14 +3868,14 @@ $(function() {
 						////////////////////////////////////////////////////////////////////////
 						// prev, next grey
 						if($('#in_disp_all_from').val() >= 25) {
-						    $('#prev_search_all').css({"background":"#8c8c8c", "cursor":"pointer"});
+						    $('#prev_search_all').css({"background":"#b2b2b2", "cursor":"pointer"});
 						}
 						else {
 							$('#prev_search_all').css({"background":"#d2d2d2", "cursor":"default"});
 						}
 
 						if((parseInt($('#in_disp_all_from').val()) + 25) < $("#hidden_all_count_query").val()) {
-							$('#next_search_all').css({"background":"#8c8c8c", "cursor":"pointer"});
+							$('#next_search_all').css({"background":"#b2b2b2", "cursor":"pointer"});
 						}
 						else {
 							$('#next_search_all').css({"background":"#d2d2d2", "cursor":"default"});
@@ -3936,7 +3936,7 @@ $(function() {
 				history.pushState(stateObj, "test1", my_url);
 				searchAll(data, in_disp_from, in_disp_to, 0);
 
-				$('#prev_search_all').css({"background":"#8c8c8c"});
+				$('#prev_search_all').css({"background":"#b2b2b2"});
 			}
 		});
 
@@ -4394,9 +4394,9 @@ $(function() {
 
 								for(i = 1; i <= numPage; i++) {
 									if(i == 1)
-										$('#sakepage').append('<button class="search_button pageitems" style="text-align:center; width:26px; background:#22445B; color:#fff; margin-right:2px">1</button>');
+										$('#sakepage').append('<button class="search_button pageitems">1</button>');
 									else
-										$('#sakepage').append('<button class="search_button pageitems" style="text-align:center; width:26px; margin-right:2px">' + i + '</button>');
+										$('#sakepage').append('<button class="search_button pageitems">' + i + '</button>');
 								}
 
 								$('#sakepage').append('<button id="next_search_sake" class="search_button" style="visibility:visible"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
@@ -4458,12 +4458,12 @@ $(function() {
 					}
 
 					if(parseInt($('#in_disp_sake_from').val()) >= 25)
-						$('#prev_search_sake').css({"background":"#8c8c8c", "cursor":"pointer"});
+						$('#prev_search_sake').css({"background":"#b2b2b2", "cursor":"pointer"});
 					else
 						$('#prev_search_sake').css({"background":"#d2d2d2", "cursor":"default"});
 
 					if((parseInt($('#in_disp_sake_from').val()) + 25) < parseInt($("#hidden_sake_count_result").val()))
-						$('#next_search_sake').css({"background":"#8c8c8c", "cursor":"pointer"});
+						$('#next_search_sake').css({"background":"#b2b2b2", "cursor":"pointer"});
 					else
 						$('#next_search_sake').css({"background":"#d2d2d2", "cursor":"default"});
 
@@ -4521,7 +4521,7 @@ $(function() {
 								'to': in_disp_to };
 
 				history.pushState(stateObj, "test1", my_url);
-				$('#next_search_sake').css({"background":"#8c8c8c"});
+				$('#next_search_sake').css({"background":"#b2b2b2"});
 				searchSake(data, in_disp_from, in_disp_to, 0);
 			}
 		});
@@ -4613,7 +4613,7 @@ $(function() {
 				$('#category').val(2);
 
 				$('#prev_search_sake').css({"background":"#d2d2d2"});
-				$('#next_search_sake').css({"background":"#8c8c8c"});
+				$('#next_search_sake').css({"background":"#b2b2b2"});
 				$('.accordion_title').css({"display": "block"});
 
 				var data = sake_serialize(in_disp_from, in_disp_to) + "&count_query=1";
@@ -4954,9 +4954,9 @@ $(function() {
 
 										for(i = 1; i <= numPage; i++) {
 											if(i == 1)
-												$('#sakagurapage').append('<button class="search_button pageitems" style="text-align:center; width:26px; background:#22445B; color:#fff; margin-right:2px">1</button>');
+												$('#sakagurapage').append('<button class="search_button pageitems">1</button>');
 											else
-												$('#sakagurapage').append('<button class="search_button pageitems" style="text-align:center; width:26px; margin-right:2px">' + i + '</button>');
+												$('#sakagurapage').append('<button class="search_button pageitems">' + i + '</button>');
 										}
 
 										$('#sakagurapage').append('<button id="next_search_sakagura" class="search_button" style="visibility:visible"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
@@ -5011,12 +5011,12 @@ $(function() {
 						}
 
 						if(parseInt($('#in_disp_sakagura_from').val()) >= 25)
-							$('#prev_search_sakagura').css({"background":"#8c8c8c", "cursor":"pointer"});
+							$('#prev_search_sakagura').css({"background":"#b2b2b2", "cursor":"pointer"});
 						else
 							$('#prev_search_sakagura').css({"background":"#d2d2d2", "cursor":"default"});
 
 						if((parseInt($('#in_disp_sakagura_from').val()) + 25) < parseInt($("#hidden_sakagura_count_result").val()))
-							$('#next_search_sakagura').css({"background":"#8c8c8c", "cursor":"pointer"});
+							$('#next_search_sakagura').css({"background":"#b2b2b2", "cursor":"pointer"});
 						else
 							$('#next_search_sakagura').css({"background":"#d2d2d2", "cursor":"default"});
 
@@ -5336,14 +5336,14 @@ jQuery(document).ready(function($) {
 			////////////////////////////////////////////////////////////////////////
 			// prev, next grey
 			if($('#in_disp_all_from').val() >= 25) {
-			    $('#prev_search_all').css({"background":"#8c8c8c", "cursor":"pointer"});
+			    $('#prev_search_all').css({"background":"#b2b2b2", "cursor":"pointer"});
 			}
 			else {
 				$('#prev_search_all').css({"background":"#d2d2d2", "cursor":"default"});
 			}
 
 			if((parseInt($('#in_disp_all_from').val()) + 25) < $("#hidden_all_count_query").val()) {
-				$('#next_search_all').css({"background":"#8c8c8c", "cursor":"pointer"});
+				$('#next_search_all').css({"background":"#b2b2b2", "cursor":"pointer"});
 			}
 			else {
 				$('#next_search_all').css({"background":"#d2d2d2", "cursor":"default"});
@@ -5436,10 +5436,10 @@ jQuery(document).ready(function($) {
 			}
 
 			if($('#container').data('from') > 25) {
-				$('#prev_search_sake').css({"background":"#8c8c8c", "cursor":"default"});
+				$('#prev_search_sake').css({"background":"#b2b2b2", "cursor":"default"});
 			}
 
-			$('#next_search_sake').css({"background":"#8c8c8c"});
+			$('#next_search_sake').css({"background":"#b2b2b2"});
 			$('.accordion_title').css({"display": "block"});
 		}
 		else if($('#category').val() == "3")
@@ -5487,12 +5487,12 @@ jQuery(document).ready(function($) {
 
 			////////////////////////////////////////////////////////////////////////////////////////////////
 			if(parseInt($('#in_disp_sakagura_from').val()) >= 25)
-				$('#prev_search_sakagura').css({"background":"#8c8c8c", "cursor":"pointer"});
+				$('#prev_search_sakagura').css({"background":"#b2b2b2", "cursor":"pointer"});
 			else
 				$('#prev_search_sakagura').css({"background":"#d2d2d2", "cursor":"default"});
 
 			if((parseInt($('#in_disp_sakagura_from').val()) + 25) < parseInt($("#hidden_sakagura_count_result").val()))
-				$('#next_search_sakagura').css({"background":"#8c8c8c", "cursor":"pointer"});
+				$('#next_search_sakagura').css({"background":"#b2b2b2", "cursor":"pointer"});
 			else
 				$('#next_search_sakagura').css({"background":"#d2d2d2", "cursor":"default"});
 			////////////////////////////////////////////////////////////////////////////////////////////////

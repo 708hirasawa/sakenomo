@@ -793,8 +793,7 @@ require_once("searchbar.php");
 		////////////////////////////////////////
 
 		$sake_id = $_GET['sake_id'];
-		$nondaname = $_GET['username'];
-		$username = $_COOKIE['login_cookie'];
+		$username = $_COOKIE['username'];
 
 		if(!$db = opendatabase("sake.db"))
 		{
@@ -806,7 +805,7 @@ require_once("searchbar.php");
 		$rd_favorite = getnextrow($res);
 
 		//$sql = "SELECT * FROM TABLE_NONDA WHERE contributor = '$username' AND sake_id = '$sake_id' AND committed = 1";
-		$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE contributor = '$username' AND sake_id = '$sake_id' AND USERS_J.email = TABLE_NONDA.contributor AND committed = 1";
+		$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE contributor = '$username' AND sake_id = '$sake_id' AND USERS_J.username = TABLE_NONDA.contributor AND committed = 1";
 
 		$res = executequery($db, $sql);
 		$rd_nonda = getnextrow($res);
@@ -1085,8 +1084,8 @@ require_once("searchbar.php");
 
 					//print('<div>added_path:' .$added_path .'</div>');
 					print('<li id="button_bbs" style="background:linear-gradient(#EDCACA, #ffffff); border:1px solid #FF4545"
-					data-contributor=' .$rd_nonda["contributor"]
-					.' data-sake_id=' .$rd_nonda["sake_id"]
+					data-contributor="' .$rd_nonda["contributor"]
+					.'" data-sake_id=' .$rd_nonda["sake_id"]
 					.' data-pref=' .$rd_nonda["pref"]
 					.' data-update_date=' .$rd_nonda["update_date"]
 					.' data-rank="' .$rank_value
@@ -1197,22 +1196,9 @@ require_once("searchbar.php");
 								{
 									print('<ul id="preview_main_container">');
 										print('<li class="sakeimage"><img src="images/icons/noimage320.svg"></li>');
-										print('<li class="sakeimage"><img src="images/icons/noimage240.svg"></li>');
-										print('<li class="sakeimage"><img src="images/icons/noimage160.svg"></li>');
-										print('<li class="sakeimage"><img src="images/icons/noimage80.svg"></li>');
-										print('<li class="sakeimage"><img src="images/icons/noimage_user30.svg"></li>');
-										print('<li class="sakeimage"><img src="images/icons/test_photo1.JPG"></li>');
-										print('<li class="sakeimage"><img src="images/icons/test_photo2.JPG"></li>');
 									print("</ul>");
 
-									print('<ul id="preview_thumbnail_container">');// サムネ画像は最大9個まで
-										print('<li class="sakeimage_thumbnail"><img src="images/icons/noimage320.svg"></li>');
-										print('<li class="sakeimage_thumbnail"><img src="images/icons/noimage240.svg"></li>');
-										print('<li class="sakeimage_thumbnail"><img src="images/icons/noimage160.svg"></li>');
-										print('<li class="sakeimage_thumbnail"><img src="images/icons/noimage80.svg"></li>');
-										print('<li class="sakeimage_thumbnail"><img src="images/icons/noimage_user30.svg"></li>');
-										//print('<li class="sakeimage_thumbnail"><img src="images/icons/test_photo1.JPG"></li>');
-										//print('<li class="sakeimage_thumbnail"><img src="images/icons/test_photo2.JPG"></li>');
+									print('<ul id="preview_thumbnail_container">');
 									print("</ul>");
 								}
 							print("</div>");
@@ -1490,8 +1476,7 @@ require_once("searchbar.php");
 
 								/*フレーバー*/
 								print('<div id="flavor_information">');
-									print('<div class="flavor_information_title"><div></div>フレーバー</div>');
-
+									print('<div class="flavor_information_title"><div></div>フレーバー<span>※ユーザー投稿をもとにした評価です<span></div>');
 									print('<ul id="flavor_category">');
 
 										$image_value = "";
@@ -1517,7 +1502,7 @@ require_once("searchbar.php");
 								print('</div>');
 
 								/*主な受賞*/
-								print('<div id="sake_award_information">');
+								/*初期非表示print('<div id="sake_award_information">');
 									print('<div class="sake_award_information_title"><div></div>鑑評会・コンクール</div>');
 
 									print('<div class="sake_award_item">');
@@ -1539,12 +1524,12 @@ require_once("searchbar.php");
 											print('<span>----</span>');
 										}
 									print("</div>");
-								print("</div>");
+								print("</div>");*/
 								////////////////////////////////////////
 								////////////////////////////////////////
 								/*プロフィール
 								print('<div id="sake_profile_frame">');
-									print('<div class="sake_profile_title"><svg class="sake_profile_profile2420"><use xlink:href="#profile2420"/></svg>プロフィール</div>');
+									print('<div class="sake_profile_title"><div></div>プロフィール</div>');
 									print('<div id="definition">'.stripslashes(nl2br($row["definition"])).'</div>');
 								print('</div>');*/
 								////////////////////////////////////////
@@ -1594,7 +1579,7 @@ require_once("searchbar.php");
 								}
 							print('</div>');
 
-							$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.email = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY update_date DESC";
+							$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY update_date DESC";
 							$result = executequery($db, $sql);
 
 							print('<div id="threads">');
@@ -1645,7 +1630,7 @@ require_once("searchbar.php");
 											if($record["rank"]) {
 												print('<span class="review_sake_rate">' .number_format($record["rank"], 1) .'</span>');
 											} else {
-												print('<span class="review_sake_rate" style="color: #b2b2b2;">--</span>');
+												print('<span class="review_sake_rate" style="color: #b2b2b2">--</span>');
 											}
 										print('</div>');
 										////////////////////////////////////////
@@ -2106,7 +2091,7 @@ require_once("searchbar.php");
 						print('</div>');
 
 						//$sql = "SELECT COUNT(*) FROM		 SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND SAKE_IMAGE.sake_id = '$sake_id'";
-						$sql = "SELECT COUNT(*) FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.email = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id'";
+						$sql = "SELECT COUNT(*) FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id'";
 						$result = executequery($db, $sql);
 						$record = getnextrow($result);
 						$count_result = $record["COUNT(*)"];
@@ -2116,11 +2101,9 @@ require_once("searchbar.php");
 								$limit = 12;
 								$p_max = $limit;
 
-								//$sql = "SELECT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date, sake_name FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.email = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id' ORDER BY filename"." LIMIT $limit";
-								$sql = "SELECT DISTINCT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date FROM TABLE_NONDA, SAKE_IMAGE, USERS_J WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND USERS_J.email = SAKE_IMAGE.contributor AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC LIMIT $limit";
+								//$sql = "SELECT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date, sake_name FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id' ORDER BY filename"." LIMIT $limit";
+								$sql = "SELECT DISTINCT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date FROM TABLE_NONDA, SAKE_IMAGE, USERS_J WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC LIMIT $limit";
 								$result = executequery($db, $sql);
-
-
 
 								if($count_result > $p_max) {
 									$p_next = $p_max;
@@ -3762,6 +3745,8 @@ jQuery(document).ready(function($) {
 		var sake_id = $('#container').data('sake_id');
 		var username = $('#container').data('contributor');
 		var bFound = false;
+
+		//alert("username:" + username + " contributor:" + $('#container').data("contributor"));
 
 		if(username == undefined || username == "")
 		{

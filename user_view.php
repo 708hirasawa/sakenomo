@@ -5,8 +5,8 @@ require_once("hamburger.php");
 require_once("nonda.php");
 require_once("searchbar.php");
 
-$loginname = $_COOKIE['login_cookie'];
-$url_username = ($_GET['username'] && $_GET['username'] != "") ? $_GET['username'] : $_COOKIE['login_cookie'];
+$loginname = $_COOKIE['username'];
+$url_username = ($_GET['username'] && $_GET['username'] != "") ? $_GET['username'] : $_COOKIE['username'];
 $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "プロファイル";
 ?>
 
@@ -250,22 +250,12 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 		$sql = "SELECT * FROM USERS_J WHERE USERS_J.username = '$url_username'";
 	}
 	else {
-		$sql = "SELECT * FROM USERS_J WHERE USERS_J.username = '$url_username' or email = '$loginname'";
+		$sql = "SELECT * FROM USERS_J WHERE USERS_J.username = '$loginname'";
 	}
 
 	$res_user = executequery($db, $sql);
-	$record_user = getnextrow($res_user);
-	$username = $record_user["username"];
-
-	$sql = "SELECT * FROM USERS_J WHERE username = '$username' OR email = '$username'";
-	$res = executequery($db, $sql);
-	$row = getnextrow($res);
-
-	if($row) {
-		$username = stripslashes($row["username"]);
-		//print("<div>sql:" .$sql ."</div>");
-		//print("<div>username:" .$username ."</div>");
-	}
+	$row = getnextrow($res_user);
+	$username = $row["username"];
 
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
@@ -376,7 +366,9 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 					print('</li>');*/
 				print("</ul>");
 
-				if($loginname == $row["email"]) {
+				//print("loginname:" .$loginname ." username:" .$row["username"]);
+
+				if($loginname == $row["username"]) {
 					print('<ul class="user_buttons">');
 						print('<li id="user_mypage"><a href="user_view_config.php" class="mypage_config_link"><svg class="user_buttons_config1616"><use xlink:href="#config1616"/></svg>マイページ設定</a></li>');
 						/*print('<li id="user_trophy"><svg class="user_buttons_trophy1216"><use xlink:href="#trophy1216"/></svg>トロフィー</li>');*/
@@ -2594,7 +2586,7 @@ $(function() {
 	function users_serialize(category, in_disp_from, in_disp_to, bCount, mode)
 	{
 		var data = "search_type=3&category=" + category;
-		var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
+		var loginname = <?php echo json_encode($_COOKIE['username']); ?>;
 		var username =  <?php echo json_encode($_GET['username']); ?>;
 
 		if(mode == 1) { // for ajax
@@ -2623,7 +2615,7 @@ $(function() {
 
 	function searchUsers(data, category, in_disp_from, in_disp_to, bCount)
 	{
-			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
+			var loginname = <?php echo json_encode($_COOKIE['username']); ?>;
 			var username = $('#all_container').data('username');
 			dispLoading("処理中...");
 			//alert("searchUsers:" + data);
@@ -2683,7 +2675,7 @@ $(function() {
 								innerHTML += '<div class="search_users_result_name_container">';
 									innerHTML += '<div class="search_users_result_brewery_image"><img src="' + path + '"></div>';
 									innerHTML += '<div class="search_users_result_name_profile_date_container">';
-										innerHTML += '<div class="search_users_result_name">' + users[i].username + '</div>';
+										innerHTML += '<div class="search_users_result_name">' + users[i].nickname + '</div>';
 										innerHTML += '<div class="search_result_profile_date_container">';
 											innerHTML += '<div class="search_result_date">' + users[i].date_followed + '</div>';
 										innerHTML += '</div>';
@@ -3265,7 +3257,7 @@ jQuery(document).ready(function($) {
 
 	$('#user_follow').click(function() {
 
-		var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
+		var loginname = <?php echo json_encode($_COOKIE['username']); ?>;
 		var username = $('#all_container').data('username');
 		var favoriteuser = $('#all_container').data('username');
 		var data = "favoriteuser=" + favoriteuser;

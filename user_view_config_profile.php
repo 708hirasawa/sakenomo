@@ -54,8 +54,8 @@ require_once("searchbar.php");
 	}
 
 	$imagefile = null;
-	$email = stripslashes($row["email"]);
-	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
+	$username = stripslashes($row["username"]);
+	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
 	$result = executequery($db, $sql);
 	$rd = getnextrow($result);
 
@@ -66,7 +66,6 @@ require_once("searchbar.php");
 	// $imagefile = $row["imagefile"];
 	$username = stripslashes($row["username"]);
 	$nickname = stripslashes($row["nickname"]);
-	$hidd = stripslashes($row["nickname"]);
 	$fname = stripslashes($row["fname"]);
 	$minit = stripslashes($row["minit"]);
 	$lname = stripslashes($row["lname"]);
@@ -158,7 +157,7 @@ require_once("searchbar.php");
 				print('<div class="config_item">');
 					print('<div class="config_item_title">ユーザー名</div>');
 					print('<div class="user_name_container">');
-						print('<input name="nickname" id="user_name_input_argument" class="user_name_inputform" value=' .$row["nickname"] .' placeholder="">');
+						print('<input name="nickname" id="user_name_input_argument" class="user_name_inputform" value="' .$row["nickname"] .'" placeholder="">');
 					print('</div>');
 				print('</div>');
 
@@ -503,7 +502,7 @@ $(function() {
 
 		//<a href="javascript:history.back()">
 		var username = <?php echo json_encode($username); ?>;
-		var data = $('#main_container').serialize();
+		var data = $('#main_container').serialize() + '&username=' + username;
 		data += "&hidden_username=" + $('input[name="hidden_username"]').val();
 
 		$.ajax({
@@ -532,13 +531,16 @@ $(function() {
 	$('#submit_button').click(function() {
 
 		var username = <?php echo json_encode($username); ?>;
-		var data = $('#main_container').serialize();
+		var data = $('#main_container').serialize() + '&username=' + username;
 		data += "&hidden_username=" + $('input[name="hidden_username"]').val();
+
+		//alert("data:" + data);
+
 
 		if($('#main_container input[name="certification[]"]:checked').length == 0)
 			data += '&certification=';
 
-		if($('input[name="username"]').val() == "") {
+		if($('input[name="nickname"]').val() == "") {
 			alert("ユーザー名が入力されていません");
 			return;
 		}
@@ -568,7 +570,7 @@ $(function() {
 				return;
 			}
 			else if(str == "exist") {
-				alert("このユーザー名 " + $('input[name="username"]').val() +  " はすでに使われています");
+				alert("このユーザー名 " + $('input[name="nickname"]').val() +  " はすでに使われています");
 				//alert("sql:" + sql);
 			}
 

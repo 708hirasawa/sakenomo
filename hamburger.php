@@ -14,7 +14,7 @@ function write_HamburgerLogo()
 function write_side_menu()
 {
 	$username = $_COOKIE['login_cookie'];
-	$nickname = $_COOKIE['username'];
+	$nickname = $_COOKIE['nickname'];
 
   print('<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">');
     print('<ul class="sidebar-nav">');

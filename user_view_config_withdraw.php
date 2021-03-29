@@ -61,7 +61,7 @@ require_once("nonda.php");
 
 		print('<div id="user_information">');
 			$path = "images/icons/noimage_user30.svg";
-			$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
+			$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
 			$result = executequery($db, $sql);
 			$rd = getnextrow($result);
 			if($rd) {

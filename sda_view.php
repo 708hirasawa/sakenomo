@@ -1391,14 +1391,14 @@ $(function() {
 				$('#disp_sake').text((in_disp_from + 1) + "～" + limit + "件 / 全" + $("#hidden_sake_count_query").val() + "件");
 
 				if(in_disp_from >= disp_max)
-					$('#prev_sakagura_sake').css({"background":"#8c8c8c", "cursor":"pointer"});
+					$('#prev_sakagura_sake').css({"background":"#b2b2b2", "cursor":"pointer"});
 				else
 					$('#prev_sakagura_sake').css({"background":"#d2d2d2", "cursor":"default"});
 
 				if((in_disp_from + disp_max) > parseInt($("#hidden_sake_count_query").val()))
 					$('#next_sakagura_sake').css({"background":"#d2d2d2", "cursor":"default"});
 				else
-					$('#next_sakagura_sake').css({"background":"#8c8c8c", "cursor":"pointer"});
+					$('#next_sakagura_sake').css({"background":"#b2b2b2", "cursor":"pointer"});
 
 				//////////////////////////////////////////////////////////////////////////////////////////////////////
 				//////////////////////////////////////////////////////////////////////////////////////////////////////

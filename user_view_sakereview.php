@@ -3,7 +3,6 @@ require_once("db_functions.php");
 require_once("html_disp.php");
 require_once("hamburger.php");
 require_once("nonda.php");
-require_once("searchbar.php");
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +25,6 @@ require_once("searchbar.php");
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 	<script src="js/sakenomuui.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
-	<script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="rateyo/jquery.rateyo.js"></script>
@@ -38,7 +36,6 @@ require_once("searchbar.php");
 	include_once('images/icons/svg_sprite.svg');
 	write_side_menu();
 	write_HamburgerLogo();
-	write_search_bar();
 	write_Nonda();
 
 	$username = $_GET['contributor'];
@@ -373,10 +370,16 @@ require_once("searchbar.php");
 		$tastes_values = Array(0, 0, 0, 0, 0, 0, 0, 0);
 	}
 
+	print('<div class="post_header_container">');
+		print('<div class="post_header">');
+			print('<a href="javascript:history.back()"><svg class="post_header_prev2020"><use xlink:href="#prev2020"/></svg></a>');
+			print('<div class="post_header_title">投稿</div>');
+		print('</div>');
+	print('</div>');
+
 	print('<div id="all_container">');
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 		print('<div id="user_information" data-sake_id=' .$record["sake_id"]
 											.' data-sake_name="' .stripslashes($record["sake_name"])
 											.'" data-sake_read="' .$record["sake_read"]
@@ -399,8 +402,8 @@ require_once("searchbar.php");
 			if($row) {
 				$path = "images/icons/noimage_user30.svg";
 				$imagefile = null;
-				$email = stripslashes($row["email"]);
-				$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status = 1";
+				$username = stripslashes($row["username"]);
+				$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
 				$result = executequery($db, $sql);
 				$rd = getnextrow($result);
 

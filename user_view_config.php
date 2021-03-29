@@ -40,7 +40,6 @@ require_once("nonda.php");
 	$username = $_COOKIE['login_cookie'];
 	//$_SESSION['loginname'] = $loginname;
 
-
 	if(!$db = opendatabase("sake.db"))
 	{
 		print('<div>データベース接続エラー</div>');
@@ -61,7 +60,8 @@ require_once("nonda.php");
 
 	$imagefile = null;
 	$email = stripslashes($row["email"]);
-	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND status=1";
+	$username = stripslashes($row["username"]);
+	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status=1";
 	$result = executequery($db, $sql);
 	$rd = getnextrow($result);
 

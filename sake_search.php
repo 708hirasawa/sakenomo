@@ -622,7 +622,8 @@ $(function() {
   									{
   										//var path = "images\\photo\\thumb\\" + pathArray[i];
   										//alert("image:" + path);
-  										innerHTML += '<div class="review_image"><img src="' + pathArray[j] + '"></div>';
+ 										
+										innerHTML += '<div class="review_image"><img src="' + "images\\photo\\thumb\\" + pathArray[j] + '"></div>';
   									}
 									innerHTML += '</div>';
 							  } else {
