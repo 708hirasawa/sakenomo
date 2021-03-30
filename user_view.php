@@ -246,7 +246,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
 
-	if($_GET['username'] && $_GET['username'] != "") { 
+	if($_GET['username'] && $_GET['username'] != "") {
 		$sql = "SELECT * FROM USERS_J WHERE USERS_J.username = '$url_username'";
 	}
 	else {
@@ -360,10 +360,10 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 						print('<span>お気に入り酒蔵</span>');
 					print('</li>');
 
-					/*初期非表示print('<li>');
-						print('<span id="user_activity_follower">no code</span>');
+					print('<li>');
+						print('<span id="user_activity_follower">--</span>');
 						print('<span>フォロワー</span>');
-					print('</li>');*/
+					print('</li>');
 				print("</ul>");
 
 				//print("loginname:" .$loginname ." username:" .$row["username"]);
@@ -1579,7 +1579,7 @@ $(function() {
 		function sake_serialize(in_disp_from, in_disp_to, query_count, mode) {
 
 			var data = "search_type=1" + "&category=2";
-			var loginname = <?php echo json_encode($_COOKIE['login_cookie']); ?>;
+			var loginname = <?php echo json_encode($_COOKIE['username']); ?>;
 			var username =  <?php echo json_encode($_GET['username']); ?>;
 
 			if(mode == 1) { // for ajax
