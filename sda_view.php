@@ -332,7 +332,9 @@ print('<div id="container"
 		////////////////////////////////////////
     print('<div id="panelheader">');
       print('<div id="sakagura_name">'.stripslashes($row["sakagura_name"]).'</div>');
-      print('<div id="sakagura_english">'.stripslashes($row["sakagura_english"]).'</div>');
+
+		if($row["sakagura_english"] && $row["sakagura_english"] != "")
+			print('<div id="sakagura_english">'.stripslashes($row["sakagura_english"]).'</div>');
 
       print('<ul class="sakagura_info">');
         // 住所
@@ -905,6 +907,9 @@ print('<div id="container"
                 } else {
                   print('<span style="color: #b2b2b2;">--<span>');
                 }
+
+                if($row["observatory_info"] && $row["observatory_info"] != "")
+                  print('<span>'.stripslashes($row["observatory_info"]).'</span>');
               print('</div>');
             print('</div>');
 
