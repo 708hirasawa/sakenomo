@@ -512,7 +512,7 @@ require_once("nonda.php");
 				      print('<div class="user_sake_border_line"></div>');
 				      print('<div class="user_sake_tab_link"><svg class="user_sake_note3630 user_sake_icon"><use xlink:href="#note3630"/></svg></div>');
 				      print('<div class="user_sake_border_line"></div>');
-							if($_COOKIE['login_cookie'] == $record["contributor"]) {
+							if($_COOKIE['username'] == $record["contributor"]) {
 								print('<div id="button_bbs" class="user_nonda_edit"><svg class="user_nonda_pen1616"><use xlink:href="#pen1616"/></svg>編集する</div>');
 							}
 				    print('</div>');
@@ -893,6 +893,10 @@ $(function() {
 
 		//alert("sake_name:" + $('#user_information').data('sake_name'));
 
+		$('.user_sake_image').each(function() {
+			desc_array.push($(this).data('desc'));
+		});
+
 		$('.user_sake_image img').each(function() {
 
 			var path_array = $(this).attr("src").split('\\');
@@ -902,7 +906,6 @@ $(function() {
 			else
 				added_path += ', ' + path_array[path_array.length - 1];
 
-			desc_array.push($(this).data('desc'));
 			//alert("desc:" + $(this).data('desc'));
 		});
 
@@ -1011,7 +1014,7 @@ $(function() {
 		});
 
 		$("body").on("nonda_deleted", function(event, sake_id) {
-			var username = getCookie('login_cookie');
+			var username = getCookie('username');
 			window.open('user_view.php?username=' + username, '_self');
 		});
 });
