@@ -944,7 +944,7 @@
 }
 
 /************************************************************/
-.ad_banner {
+#ad1 {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -1153,7 +1153,7 @@
   	margin-top: 16px;
   }
 
-  .ad_banner {
+  #ad1 {
     padding-top: 0;
     border-top: none;
   }
