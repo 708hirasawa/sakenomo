@@ -705,7 +705,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 
 			//banner//////////////////////////////////////////////////////////////////////////////
 			print('<div id="banner">');
-				print('<div id="ad1"><img src="images/icons/notice_banner.svg"></div>');
+				print('<a id="ad1" href="sake_search.php"><img src="images/icons/notice_banner.jpg"></a>');
 			print('</div>');
 		print("</div>");
 

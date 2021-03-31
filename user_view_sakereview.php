@@ -767,9 +767,9 @@ require_once("nonda.php");
 			print("</div>");
 
 			print('<div id="side_container">');
-				print('<div class="ad_banner">');
-					print('<img src="images/icons/notice_banner.svg">');
-				print("</div>");
+				print('<a id="ad1" href="sake_search.php">');
+					print('<img src="images/icons/notice_banner.jpg">');
+				print("</a>");
 			print("</div>");
 		print("</div>");
 

@@ -1050,7 +1050,7 @@ print('<div id="container"
       ////////////////////////////////////////
       /* advertisement */
       print('<div id="banner_frame">');
-        print('<div id="ad1"><img src="images/icons/notice_banner.svg"></div>');
+        print('<a id="ad1" href="sake_search.php"><img src="images/icons/notice_banner.jpg"></a>');
       print("</div>");
 
     print('</div>');/*main_banner_container*/

@@ -132,7 +132,7 @@ print('<div id="container">');
   $record = getnextrow($result);
   $count =  $record["COUNT(*)"];
 
-  $sql = "SELECT USERS_J.username AS username, USERS_J.pref AS user_pref, bdate, sex, USERS_J.address, certification, age_disclose, sex_disclose, address_disclose, certification_disclose, SAKAGURA_J.pref AS pref, contributor, update_date, TABLE_NONDA.sake_id as sake_id, sake_name, sakagura_name, TABLE_NONDA.write_date as write_date, TABLE_NONDA.rank as rank, subject, message, flavor, tastes, committed FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY UPDATE_DATE DESC LIMIT 25";
+  $sql = "SELECT USERS_J.username AS username, USERS_J.nickname AS nickname, USERS_J.pref AS user_pref, bdate, sex, USERS_J.address, certification, age_disclose, sex_disclose, address_disclose, certification_disclose, SAKAGURA_J.pref AS pref, contributor, update_date, TABLE_NONDA.sake_id as sake_id, sake_name, sakagura_name, TABLE_NONDA.write_date as write_date, TABLE_NONDA.rank as rank, subject, message, flavor, tastes, committed FROM TABLE_NONDA, SAKE_J, SAKAGURA_J, USERS_J WHERE TABLE_NONDA.sake_id = SAKE_J.sake_id AND SAKE_J.sakagura_id = SAKAGURA_J.id AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY UPDATE_DATE DESC LIMIT 25";
   $result = executequery($db, $sql);
 
   print('<div id="mainview_container" data-in_disp_from=0 data-count=' .$count .'>');
@@ -175,7 +175,7 @@ print('<div id="container">');
                 print('</div>');
 
                 print('<div class="nonda_user_name_container">');
-                  print('<div class="nonda_user_name">' .$record["username"] .'</div>');
+                  print('<div class="nonda_user_name">' .$record["nickname"] .'</div>');
                   print('<div class="nonda_user_profile_date_container">');
                     print('<div class="nonda_date">' .gmdate("Y/m/d", $record["update_date"] + 9 * 3600) .'</div>');
                   print('</div>');
@@ -376,7 +376,7 @@ print('<div id="container">');
     ////////////////////////////////////////
     /*バナーサイド*******************/
     print('<div id="banner_frame">');
-      print('<div id="ad1"><img src="images/icons/notice_banner.svg"></div>');
+      print('<a id="ad1" href="sake_search.php"><img src="images/icons/notice_banner.jpg"></a>');
 
       /*初期非表示print('<ul class="slider multiple-heading">');
         print('<li><a href="specialselection_kimoto.php">');
@@ -514,7 +514,7 @@ $(function() {
 			var in_disp_from = $('#mainview_container').data('in_disp_from') + 25;
 			var in_disp_to = in_disp_from + 25;
 			var data = nonda_serialize(in_disp_from, in_disp_to, 0);
-		
+
 			//alert("count:" + $('#mainview_container').data("count"));
 			//alert("data:" + data);
 		    dispLoading("処理中...");
@@ -567,7 +567,7 @@ $(function() {
 							  innerHTML += '</div>';
 
 								 innerHTML += '<div class="nonda_user_name_container">';
-								  innerHTML += '<div class="nonda_user_name">' + sake[i].username + '</div>';
+								  innerHTML += '<div class="nonda_user_name">' + sake[i].nickname + '</div>';
 								  innerHTML += '<div class="nonda_user_profile_date_container">';
 									innerHTML += '<div class="nonda_date">' + sake[i].update_date + '</div>';
 								  innerHTML += '</div>';
@@ -622,7 +622,7 @@ $(function() {
   									{
   										//var path = "images\\photo\\thumb\\" + pathArray[i];
   										//alert("image:" + path);
- 										
+
 										innerHTML += '<div class="review_image"><img src="' + "images\\photo\\thumb\\" + pathArray[j] + '"></div>';
   									}
 									innerHTML += '</div>';

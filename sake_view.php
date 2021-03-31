@@ -1612,7 +1612,7 @@ require_once("searchbar.php");
 											print('</div>');
 
 											print('<div class="nonda_user_name_container">');
-												print('<div class="nonda_user_name">' .$record["username"] .'</div>');
+												print('<div class="nonda_user_name">' .$record["nickname"] .'</div>');
 												print('<div class="nonda_user_profile_date_container">');
 													print('<div class="nonda_date">' .gmdate("Y/m/d", $record["update_date"] + 9 * 3600) .'</div>');
 												print('</div>');
@@ -2090,7 +2090,7 @@ require_once("searchbar.php");
 							print('</div>');
 						print('</div>');
 
-						//$sql = "SELECT COUNT(*) FROM		 SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND SAKE_IMAGE.sake_id = '$sake_id'";
+						//$sql = "SELECT COUNT(*) FROM SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND SAKE_IMAGE.sake_id = '$sake_id'";
 						$sql = "SELECT COUNT(*) FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id'";
 						$result = executequery($db, $sql);
 						$record = getnextrow($result);
@@ -2102,7 +2102,7 @@ require_once("searchbar.php");
 								$p_max = $limit;
 
 								//$sql = "SELECT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date, sake_name FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id' ORDER BY filename"." LIMIT $limit";
-								$sql = "SELECT DISTINCT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date FROM TABLE_NONDA, SAKE_IMAGE, USERS_J WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC LIMIT $limit";
+								$sql = "SELECT DISTINCT SAKE_IMAGE.sake_id, SAKE_IMAGE.filename, USERS_J.username, USERS_J.nickname, SAKE_IMAGE.contributor, SAKE_IMAGE.desc, SAKE_IMAGE.added_date FROM TABLE_NONDA, SAKE_IMAGE, USERS_J WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC LIMIT $limit";
 								$result = executequery($db, $sql);
 
 								if($count_result > $p_max) {
@@ -2130,16 +2130,9 @@ require_once("searchbar.php");
 								while($record = getnextrow($result))
 								{
 									$path = "images\\photo\\".$record["filename"];
-									print('<div class="sake_photo"' .' data-filename="' .$record["filename"] .'" data-contributor="' .$record["username"] .'" data-desc="' .$record["desc"] .'" data-added_date="' .gmdate("Y/m/d", $record["added_date"] + 9 * 3600) .'">');
-
+									print('<div class="sake_photo"' .' data-filename="' .$record["filename"] .'" data-contributor="' .$record["username"] .'" data-nickname="' .$record["nickname"] .'" data-desc="' .$record["desc"] .'" data-added_date="' .gmdate("Y/m/d", $record["added_date"] + 9 * 3600) .'">');
 										print('<img id="' .$record["filename"] .'" src="' .$path  .'">');
-										/*print('<img class="menu_trigger" src="images/icons/pen20.svg">');*/
-										/*print('<ul>');
-											print('<li id="' .$record["filename"] .'" filename = "' .$record["filename"] .'">削除</li>');
-											print('<li id="' .$record["filename"] .'" filename = "' .$record["filename"] .'">プロフィール写真にする</li>');
-										print('</ul>');*/
-										/*print('<span>' .$record["filename"] .'</span>');*/
-										print('<span>' .$record["username"] .'</span>');
+										print('<span>' .$record["nickname"] .'</span>');
 									print("</div>"); /*sake_photo*/
 								}
 							print("</div>");
@@ -2634,7 +2627,7 @@ require_once("searchbar.php");
 			// advertisement
 			print('<div id="banner_frame">');
 
-				print('<div id="ad1"><img src="images/icons/notice_banner.svg"></div>');
+				print('<a id="ad1" href="sake_search.php"><img src="images/icons/notice_banner.jpg"></a>');
 
 			print('</div>');/*banner_frame*/
 			////////////////////////////////////////
@@ -3484,7 +3477,7 @@ $(function() {
 		var path = $(this).find('img');
 
 		$("#preview_image").attr("src", $(path).attr("src"));
-		$("#dialog_preview .dialog_preview_user_name").text($(this).data("contributor"));
+		$("#dialog_preview .dialog_preview_user_name").text($(this).data("nickname"));
 		$("#dialog_preview .dialog_preview_date").text($(this).data("added_date"));
 
 		if($(this).data("desc") && $(this).data("desc") != "") {

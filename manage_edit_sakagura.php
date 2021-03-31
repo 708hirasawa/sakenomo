@@ -416,7 +416,7 @@ function writeSakaguraContainer()
 
 			print('<div class="row">');
 			  print('<div class="column1_container">');
-				print('<div class="column1">蔵見学</div>');
+				print('<div class="column1">酒蔵見学</div>');
 				print('<span></span>');
 			  print('</div>');
 			  print('<div class="column2">');
