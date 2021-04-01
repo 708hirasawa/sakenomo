@@ -758,7 +758,7 @@ $(function() {
                 if($('.sakedata select[name="kakemai2"] option:selected').val() != 0) {
 				    kakemai2 = $('.sakedata select[name="kakemai2"] option:selected').text() + ":";
                 }
-            
+
 				if(rice_used_text == "") {
 					rice_used_text = kakemai2 + $('.sakedata select[name="rice_used2"] option:selected').text();
 				} else {

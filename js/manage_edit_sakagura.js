@@ -70,6 +70,8 @@ $(function() {
             $('input[name="representative"]').val(sakagura[0].representative);
             $('input[name="touji"]').val(sakagura[0].touji);
             $('input[name="email"]').val(sakagura[0].email);
+            $('input[name="url[]"]').val(sakagura[0].url);
+            $('input[name="fax"]').val(sakagura[0].fax);
             $('textarea[name="award_history"]').val(sakagura[0].award_history);
             $('input[name="observation"]').val(sakagura[0].observation);
             $('textarea[name="observatory_info"]').val(sakagura[0].observatory_info);
@@ -112,7 +114,22 @@ $(function() {
 				}
 			});
 
-            $('input[name="url"]').val(sakagura[0].url);
+            // alert("sakagura_search:" + sakagura[0].sakagura_search);
+
+            if(sakagura[0].sakagura_search && sakagura[0].sakagura_search != "") {
+                var sakagura_search_array = sakagura[0].sakagura_search.split(',');
+                var i = 0;
+
+		        $('input[name="sakagura_search[]"]').each(function(){
+                    if(i < sakagura_search_array.length) {
+                        $(this).val(sakagura_search_array[i]);
+                    }
+
+                    i++
+		        });
+            }
+
+            $('input[name="url[]"]').val(sakagura[0].url);
 
             if(sakagura[0].url && sakagura[0].url != "") {
                 var url_array = sakagura[0].url.split(',');
