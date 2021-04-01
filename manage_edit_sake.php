@@ -1223,7 +1223,7 @@ function writeDialogAddSakeConfirm()
             print('</div>');
 
             print('<div class="alt">');
-              print('<div class="confirm_item_title"><span></span>醸造年度</div>');
+              print('<div class="confirm_item_title"><span></span>醸造年度・Brewery Year(BY)</div>');
               print('<div class="confirm_item_info dialog_year_made"></div>');
             print('</div>');
 
@@ -1288,7 +1288,7 @@ function writeDialogAddSakeConfirm()
             print('</div>');
 
             print('<div class="alt">');
-              print('<div class="confirm_item_title"><span></span>使用酵母</div>');
+              print('<div class="confirm_item_title"><span></span>酵母</div>');
               print('<div class="confirm_item_info dialog_koubo_used"></div>');
             print('</div>');
 

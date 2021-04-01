@@ -75,13 +75,24 @@ $(function() {
 			$('.dialog_sakagura_name').text($('input[name="sakagura_name"]').val());
 			$('.dialog_sakagura_read').text($('input[name="sakagura_read"]').val());
 			$('.dialog_sakagura_english').text($('input[name="sakagura_english"]').val());
-			$('.dialog_sakagura_search').text($('input[name="sakagura_search[]"]').val());
+
+			var sakagura_search_text = "";
+
+			$('input[name="sakagura_search[]"]').each(function() {
+				//alert("sakagura_search:" + $(this).val());
+
+				if(sakagura_search_text != "")
+					sakagura_search_text += ",";
+
+				sakagura_search_text += $(this).val();
+			});
+
+			$('.dialog_sakagura_search').text(sakagura_search_text);
 			$('.dialog_postal_code').text($('input[name="postal_code"]').val());
 			$('.dialog_sakagura_pref').text($('select[name="pref"] option:selected').val());
 			$('.dialog_address').text($('input[name="address"]').val());
 			$('.dialog_phone').text($('input[name="phone"]').val());
 			$('.dialog_fax').text($('input[name="fax"]').val());
-			$('.dialog_url').text($('input[name="url"]').val());
 			$('.dialog_email').text($('input[name="email"]').val());
 			$('.dialog_representative').text($('input[name="representative"]').val());
 			$('.dialog_touji').text($('input[name="touji"]').val());
@@ -91,6 +102,19 @@ $(function() {
 			$('.dialog_award_history').text($('textarea[name="award_history"]').val());
 			$('.dialog_observatory_info').text($('textarea[name="observatory_info"]').val());
 			$('.dialog_observation').text($('select[name="observation"] option:selected').text());
+			$('.dialog_direct_sale').text($('select[name="direct_sale"] option:selected').text());
+
+			var url_text = "";
+
+			$('input[name="url[]"]').each(function() {
+
+				if(url_text != "")
+					url_text += ",";
+
+				url_text += $(this).val();
+			});
+
+			$('.dialog_url').text(url_text);
 			//$('.dialog_memo').text($('textarea[name="memo"]').val());
 
 			var touch_start_y;

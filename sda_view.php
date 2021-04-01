@@ -838,7 +838,7 @@ print('<div id="container"
             print('</div>');
 
             print('<div class="sakagurarow">');
-              print('<div class="sakaguracolumn1">創業</div>');
+              print('<div class="sakaguracolumn1">創業・設立</div>');
               print('<div class="sakaguracolumn2" id="establishment">');
                 $establishment = explode(',', $row["establishment"]);
                 if($establishment[0] == 9999) {
@@ -885,7 +885,7 @@ print('<div id="container"
             print('</div>');
 
             print('<div class="sakagurarow">');
-              print('<div class="sakaguracolumn1">受賞暦</div>');
+              print('<div class="sakaguracolumn1">受賞歴</div>');
               print('<div class="sakaguracolumn2" id="award_history">');
                 $row["award_history"] = nl2br($row["award_history"]);
                 $row["award_history"] = stripslashes($row["award_history"]);

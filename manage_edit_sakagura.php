@@ -85,7 +85,7 @@ function writeSakaguraContainer()
 			  print('</div>');
 			  print('<div class="column2">');
 				print('<SELECT read="" name="pref">');
-				  print('<OPTION VALUE="" read="">都道府県の選択</OPTION>');
+				  print('<OPTION VALUE="" read="">----</OPTION>');
 				  print('<OPTION VALUE="北海道" read="ほっかいどう">北海道</OPTION>');
 				  print('<OPTION VALUE="青森県" read="あおもりけん">青森県</OPTION>');
 				  print('<OPTION VALUE="岩手県" read="いわてけん">岩手県</OPTION>');
@@ -218,7 +218,7 @@ function writeSakaguraContainer()
 			  print('</div>');
 			  print('<div class="column2">');
 				print('<SELECT name="establishment">');
-				  print('<OPTION VALUE="">創業・設立年の選択</OPTION>');
+				  print('<OPTION VALUE="">----</OPTION>');
 				  print('<OPTION VALUE=2020>2020年 (令和2年)</OPTION>');
 				  print('<OPTION VALUE=2019>2019年 (令和1年)</OPTION>');
 				  print('<OPTION VALUE=2018>2018年 (平成30年)</OPTION>');
@@ -408,7 +408,7 @@ function writeSakaguraContainer()
 
 			print('<div class="row">');
 			  print('<div class="column1_container">');
-				print('<div class="column1">受賞暦</div>');
+				print('<div class="column1">鑑評会・コンクールの受賞歴</div>');
 				print('<span>全角かな/半角英数字</span>');
 			  print('</div>');
 			  print('<div class="column2"><textarea name="award_history"></textarea></div>');
@@ -421,13 +421,13 @@ function writeSakaguraContainer()
 			  print('</div>');
 			  print('<div class="column2">');
 				print('<SELECT name="observation">');
-				  print('<OPTION VALUE="">指定なし</OPTION>');
+				  print('<OPTION VALUE="">----</OPTION>');
 				  print('<OPTION VALUE=1>可</OPTION>');
 				  print('<OPTION VALUE=2>不可</OPTION>');
 				print('</SELECT>');
 			  print('</div>');
 			  print('<div class="column3_container">');
-				print('<div class="column3">備考</div>');
+				print('<div class="column3">酒蔵見学 備考</div>');
 				print('<span>全角かな/半角英数字</span>');
 			  print('</div>');
 			  print('<div class="column4">');
@@ -439,7 +439,7 @@ function writeSakaguraContainer()
 			  print('<div class="column1">酒蔵直販店</div>');
 			  print('<div class="column2">');
 				print('<SELECT name="direct_sale">');
-				  print('<OPTION VALUE="">指定なし</OPTION>');
+				  print('<OPTION VALUE="">----</OPTION>');
 				  print('<OPTION VALUE=1>有</OPTION>');
 				  print('<OPTION VALUE=2>無</OPTION>');
 				print('</SELECT>');
@@ -470,7 +470,7 @@ function writeSakaguraContainer()
 			  print('</div>');
 			  print('<div class="column2">');
 				print('<SELECT name="sakagura">');
-				  print('<OPTION VALUE="">指定なし</OPTION>');
+				  print('<OPTION VALUE="">----</OPTION>');
 				  print('<OPTION VALUE="1">S</OPTION>');
 				  print('<OPTION VALUE="2">A</OPTION>');
 				  print('<OPTION VALUE="3">B</OPTION>');
@@ -580,22 +580,22 @@ function writeDialogAddSakaguraConfirm()
 		  print('<div class="frame">');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>酒蔵名</div>');
+			print('<div class="confirm_item_title"><span></span>会社名</div>');
 			print('<div class="confirm_item_info dialog_sakagura_name" style="margin: 2px 0px 2px 0px;"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>酒蔵名よみ</div>');
+			print('<div class="confirm_item_title"><span></span>会社名 ひらがな</div>');
 			print('<div class="confirm_item_info dialog_sakagura_read" style="margin: 2px 0px 2px 0px;"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>酒蔵名英語よみ</div>');
+			print('<div class="confirm_item_title"><span></span>会社名 ローマ字</div>');
 			print('<div class="confirm_item_info dialog_sakagura_english"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>酒蔵名検索用</div>');
+			print('<div class="confirm_item_title"><span></span>その他の会社名</div>');
 			print('<div class="confirm_item_info dialog_sakagura_search"></div>');
 			print('</div>');
 
@@ -615,16 +615,6 @@ function writeDialogAddSakaguraConfirm()
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>住所よみ</div>');
-			print('<div class="confirm_item_info dialog_address_read"></div>');
-			print('</div>');
-
-			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>酒蔵の紹介</div>');
-			print('<div class="confirm_item_info dialog_intro"></div>');
-			print('</div>');
-
-			print('<div class="alt">');
 			print('<div class="confirm_item_title"><span></span>電話番号</div>');
 			print('<div class="confirm_item_info dialog_phone"></div>');
 			print('</div>');
@@ -635,59 +625,59 @@ function writeDialogAddSakaguraConfirm()
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>ウェブサイト</div>');
-			print('<div class="confirm_item_info dialog_url"></div>');
-			print('</div>');
-
-			print('<div class="alt">');
 			print('<div class="confirm_item_title"><span></span>Email</div>');
 			print('<div class="confirm_item_info dialog_email"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>代表銘柄</div>');
-			print('<div class="confirm_item_info dialog_brand"></div>');
+			print('<div class="confirm_item_title"><span></span>ホームページ</div>');
+			print('<div class="confirm_item_info dialog_url"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>代表者</div>');
-			print('<div class="confirm_item_info dialog_representative"></div>');
-			print('</div>');
-
-			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>杜氏</div>');
-			print('<div class="confirm_item_info dialog_touji"></div>');
-			print('</div>');
-
-			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>創業</div>');
+			print('<div class="confirm_item_title"><span></span>創業・設立</div>');
 			print('<div class="confirm_item_info dialog_establishment"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>受賞暦</div>');
+			print('<div class="confirm_item_title"><span></span>代表者名</div>');
+			print('<div class="confirm_item_info dialog_representative"></div>');
+			print('</div>');
+
+			print('<div class="alt">');
+			print('<div class="confirm_item_title"><span></span>杜氏名</div>');
+			print('<div class="confirm_item_info dialog_touji"></div>');
+			print('</div>');
+
+			print('<div class="alt">');
+			print('<div class="confirm_item_title"><span></span>代表的な銘柄</div>');
+			print('<div class="confirm_item_info dialog_brand"></div>');
+			print('</div>');
+
+			print('<div class="alt">');
+			print('<div class="confirm_item_title"><span></span>鑑評会・コンクールの受賞歴</div>');
 			print('<div class="confirm_item_info dialog_award_history"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>蔵見学</div>');
+			print('<div class="confirm_item_title"><span></span>酒蔵見学</div>');
 			print('<div class="confirm_item_info dialog_observation"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>蔵見学情報</div>');
+			print('<div class="confirm_item_title"><span></span>酒蔵見学 備考</div>');
 			print('<div class="confirm_item_info dialog_observatory_info"></div>');
 			print('</div>');
 
 			print('<div class="alt">');
-			print('<div class="confirm_item_title"><span></span>直販</div>');
+			print('<div class="confirm_item_title"><span></span>酒蔵直販店</div>');
 			print('<div class="confirm_item_info dialog_direct_sale"></div>');
 			print('</div>');
 
-			print('<div class="alt">');
+			/*print('<div class="alt">');
 			print('<div class="confirm_item_title"><span></span>購入方法</div>');
 			print('<div class="confirm_item_info dialog_payment_method"></div>');
-			print('</div>');
+			print('</div>');*/
 
 			// print('<div class="alt">');
 			// print('<div class="confirm_item_title"><span></span>メモ</div>');
