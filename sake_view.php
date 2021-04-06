@@ -675,122 +675,6 @@ require_once("searchbar.php");
 		}
 		////////////////////////////////////////
 		////////////////////////////////////////
-		function GetAward($award_code)
-		{
-			if($award_code == "1")
-			{
-				$retval = "全国新酒鑑評会";
-				return $retval;
-			}
-			else if($award_code == "2")
-			{
-				$retval = "International Wine Challenge";
-				return $retval;
-			}
-			else if($award_code == "3")
-			{
-				$retval = "全米日本酒歓評会";
-				return $retval;
-			}
-			else if($award_code == "4")
-			{
-				$retval = "SAKE COMPETITION";
-				return $retval;
-			}
-			else
-			{
-				$retval = "";
-				return $retval;
-			}
-		}
-
-		function GetAwardRank($award_code, $rank_code)
-		{
-			if($award_code == "1")
-			{
-				$retval = "";
-
-				if($rank_code == "1")
-				{
-					$retval = "金賞";
-				}
-				else if($rank_code == "2")
-				{
-					$retval = "入賞";
-				}
-
-				return $retval;
-			}
-			else if($award_code == "2")
-			{
-				$retval = "";
-
-				if($rank_code == "1")
-				{
-					$retval = "トロフィー";
-				}
-				else if($rank_code == "2")
-				{
-					$retval = "金賞";
-				}
-				else if($rank_code == "3")
-				{
-					$retval = "銀賞";
-				}
-				else if($rank_code == "4")
-				{
-					$retval = "銅賞";
-				}
-
-				return $retval;
-			}
-			else if($award_code == "3")
-			{
-				$retval = "";
-
-				if($rank_code == "1")
-				{
-					$retval = "グランプリ";
-				}
-				else if($rank_code == "2")
-				{
-					$retval = "準グランプリ";
-				}
-				else if($rank_code == "3")
-				{
-					$retval = "金賞";
-				}
-				else if($rank_code == "4")
-				{
-					$retval = "銀賞";
-				}
-
-				return $retval;
-			}
-			else if($award_code == "4")
-			{
-				$retval = "";
-
-				if($rank_code == "1")
-				{
-						$retval = "GOLD";
-				}
-				else if($rank_code == "2")
-				{
-						$retval = "SILVER";
-				}
-
-				return $retval;
-			}
-			else
-			{
-				$retval = "";
-				return $retval;
-			}
-		}
-
-		////////////////////////////////////////
-		////////////////////////////////////////
 
 		$sake_id = $_GET['sake_id'];
 		$username = $_COOKIE['username'];
@@ -920,7 +804,7 @@ require_once("searchbar.php");
 		// 酵母
 		$koubo_array = explode(',', $row["koubo_used"]);
 		$category_array = explode(',', $row["sake_category"]);
-		$award_array = explode('/', $row["sake_award_history"]);
+		$award_array = explode('||', $row["sake_award_history"]);
 
 		// 酒ランク
 		$rank_value = intval($row["sake_rank"]);
@@ -1146,7 +1030,7 @@ require_once("searchbar.php");
 							//$result = executequery($db, "SELECT DISTINCT FILENAME FROM SAKE_IMAGE, TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date ORDER BY SAKE_IMAGE.added_date DESC limit 10");
 							//$result = executequery($db, "SELECT	FILENAME FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id IN (SELECT TABLE_NONDA.sake_id FROM TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' ORDER BY TABLE_NONDA.update_date DESC) ORDER BY SAKE_IMAGE.added_date ASC limit 10");
 							//$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date DESC limit 10");
-							$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 10");
+							$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 8");
 
 								$rd = getnextrow($result);
 
@@ -1178,7 +1062,7 @@ require_once("searchbar.php");
 									//$rd = executequery($db, "SELECT	FILENAME FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id IN (SELECT TABLE_NONDA.sake_id FROM TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' ORDER BY TABLE_NONDA.update_date DESC) ORDER BY SAKE_IMAGE.added_date ASC limit 10");
 									//$rd = executequery($db, "SELECT DISTINCT FILENAME FROM SAKE_IMAGE, TABLE_NONDA WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date ORDER BY SAKE_IMAGE.added_date DESC limit 9");
 									//$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id ORDER BY TABLE_NONDA.update_date DESC limit 10");
-									$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 10");
+									$result = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 8");
 
 										while($rd = getnextrow($result))
 										{
@@ -1502,23 +1386,12 @@ require_once("searchbar.php");
 								print('</div>');
 
 								/*主な受賞*/
-								/*初期非表示print('<div id="sake_award_information">');
+								/*print('<div id="sake_award_information">');
 									print('<div class="sake_award_information_title"><div></div>鑑評会・コンクール</div>');
-
 									print('<div class="sake_award_item">');
-
-										if(count($award_array) > 0 && $award_array[0] != "")
-										{
-											for($j = 0; $j < count($award_array); $j++)
-											{
-												$award = explode(',', $award_array[$j]);
-												print('<div>'.GetAward($award[0]));
-
-													if($award[1] != "")
-														print(" (".$award[1].") ");
-
-													print(GetAwardRank($award[0], $award[2]));
-												print("</div>");
+										if($row["sake_award_history"]) {
+											for($j = 0; $j < count($award_array); $j++) {
+												print('<div>'.$award_array[$j].'</div>');
 											}
 										} else {
 											print('<span>----</span>');
@@ -2452,21 +2325,11 @@ require_once("searchbar.php");
 						print('<div class="sakerow">');
 							print('<div class="sakecolumn1">鑑評会・コンクール</div>');
 							print('<div class="sakecolumn2" id="detail_concour">');
-								if(count($award_array) > 0 && $award_array[0])
-								{
-									for($j = 0; $j < count($award_array); $j++)
-									{
-										$award = explode(',', $award_array[$j]);
-										print(GetAward($award[0]));
-
-											if($award[1] != "")
-												print(" (".$award[1].") ");
-
-											print(GetAwardRank($award[0], $award[2]));
-
-											if($j < (count($award_array) - 1))
-												print(" / ");
-									}
+								if($row["sake_award_history"]) {
+									$award_text = $row["sake_award_history"];
+									$award_text = rtrim($award_text, '||');
+									$award_text = str_replace('||', ' / ', $award_text);
+									print($award_text);
 								} else {
 									print('<span style="color: #b2b2b2;">--<span>');
 								}
