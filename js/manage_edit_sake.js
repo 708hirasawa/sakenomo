@@ -1,64 +1,3 @@
-function getAwardOption(award)
-{
-	if(award == 1)
-	{
-			var options = [
-				{ text: "賞",		value: 0 },
-				{ text: "金賞", value: 1 },
-				{ text: "入賞", value: 2 }
-			];
-
-			//$("#dialog_sake_award1").replaceOptions(options);
-			return options;
-	}
-	else if(award == 2)
-	{
-			var options = [
-				{ text: "賞",					value: 0 },
-				{ text: "トロフィー", value: 1 },
-				{ text: "金賞",				value: 2 },
-				{ text: "銀賞",				value: 3 },
-				{ text: "銅賞",				value: 4 }
-			];
-
-			return options;
-	}
-	else if(award == 3)
-	{
-			var options = [
-				{ text: "賞",		value: 0 },
-				{ text: "グランプリ",		value: 1 },
-				{ text: "準グランプリ",	value: 2 },
-				{ text: "金賞",					value: 3 },
-				{ text: "銀賞",					value: 4 }
-			];
-
-			return options;
-	}
-	else if(award == 4)
-	{
-			var options = [
-				{ text: "賞",					value: 0 },
-				{ text: "GOLD",				value: 1 },
-				{ text: "SILVER",			value: 2 }
-			];
-
-			return options;
-	}
-	else
-	{
-			var options = [
-				{ text: "賞",		value: 0 },
-				{ text: "金賞", value: 1 },
-				{ text: "入賞", value: 2 }
-			];
-
-			return options;
-	}
-
-	return 0;
-}
-
 function GetSakeSpecialName(sake_code)
 {
     var special_name = "";
@@ -98,6 +37,10 @@ function GetSakeSpecialName(sake_code)
     else if(sake_code == "44")
     {
         special_name = "大吟醸酒";
+    }
+    else if(sake_code == "45")
+    {
+        special_name = "非公開";
     }
     else if(sake_code == "90")
     {
@@ -917,41 +860,17 @@ $(function() {
 
 			$(".dialog_table .dialog_sake_category").text(sake_category_innertext);
 			//////////
-			var sake_award_name1 = $('.sakedata select[name="sake_award_name1"] option:selected').text();
-			var sake_award_year1 = $('.sakedata select[name="sake_award_year1"]').val();
-			var sake_award1 = $('.sakedata select[name="sake_award1"] option:selected').text();
 
-			var sake_award_name2 = $('.sakedata select[name="sake_award_name2"] option:selected').text();
-			var sake_award_year2 = $('.sakedata select[name="sake_award_year2"]').val();
-			var sake_award2	= $('.sakedata select[name="sake_award2"] option:selected').text();
-
-			var sake_award_name3 = $('.sakedata select[name="sake_award_name3"] option:selected').text();
-			var sake_award_year3 = $('.sakedata select[name="sake_award_year3"]').val();
-			var sake_award3	= $('.sakedata select[name="sake_award3"] option:selected').text();
 			var sake_award_history = "";
 
-			if($('.sakedata select[name="sake_award_name1"] option:selected').val() != undefined && $('.sakedata select[name="sake_award_name1"] option:selected').val() != "")
-			{
-				 sake_award_history = '<div><span>' + sake_award_name1 + '</span><span style="margin-left:4px">' + sake_award_year1 + '</span><span style="margin-left:4px">' + sake_award1 + '</span></div>';
-			}
-
-			if($('.sakedata .select[name="sake_award_name2"] option:selected').val() != undefined && $('.sakedata select[name="sake_award_name2"] option:selected').val() != "")
-			{
-				if(sake_award_history == "")
-					sake_award_history = '<div><span>' + sake_award_name2 + '</span><span style="margin-left:4px">' + sake_award_year2 + '</span><span style="margin-left:4px">' + sake_award2 + '</span></div>';
-				else
-					sake_award_history += '<div><span>' + sake_award_name2 + '</span><span style="margin-left:4px">' + sake_award_year2 + '</span><span style="margin-left:4px">' + sake_award2 + '</span></div>';
-			}
-
-			if($('.sakedata .sake_award_name3 option:selected').val() != undefined && $('.sakedata .sake_award_name3 option:selected').val() != "")
-			{
-				if(sake_award_history == "")
-					sake_award_history = '<div><span>' + sake_award_name3 + '</span><span style="margin-left:4px">' + sake_award_year3 + '</span><span style="margin-left:4px">' + sake_award3 + '</span></div>';
-				else
-					sake_award_history += '<div><span>' + sake_award_name3 + '</span><span style="margin-left:4px">' + sake_award_year3 + '</span><span style="margin-left:4px">' + sake_award3 + '</span></div>';
-			}
+			$('.sakedata input[name="sake_award[]"]').each(function() {
+				if($(this).val()) {
+					sake_award_history += (sake_award_history == "") ? $(this).val() : (" / " + $(this).val());
+				}
+			});
 
 			$('.dialog_table .dialog_award_history').html(sake_award_history);
+
 			//////////
 			var recommended_drink_innertext = "";
 
@@ -1177,195 +1096,19 @@ $(function() {
 			    });
             }
 
-            if(result[0].sake_award_history != null && result[0].sake_award_history != "")
-            {
+			if(result[0].sake_award_history != null && result[0].sake_award_history != "") {
 				var sake_award = result[0].sake_award_history;
-				var award_array = sake_award.split('/');
+				var award_array = sake_award.split('||');
 
-			    if(award_array.length > 0)
-				{
-					var award_entry = award_array[0].split(',');
+				$('.sake_container input[name="sake_award[]"]').each(function(index) {
 
-					$('.sakedata select[name="sake_award_name1"] option').each(function(){
+					if(index >= award_array.length) {
+						return false;
+					}
 
-						if(this.value == award_entry[0])
-						{
-							 $('.sakedata select[name="sake_award_name1"]').val(award_entry[0]);
-							 $('.sakedata select[name="sake_award1"]').replaceOptions(getAwardOption($('.sakedata select[name="sake_award_name1"]').val()));
-							 //alert("this.value:" + this.value + " entry:" + award_entry[0]);
-							 return false;
-						}
-					});
-
-
-					$('.sakedata select[name="sake_award_year1"] option').each(function(){
-
-                        //alert("this.value:" + this.value);
-
-						if(this.value == award_entry[1])
-						{
-                             //alert("award_entry[1]:" + award_entry[1]);
-
-							 $('.sakedata select[name="sake_award_year1"]').val(award_entry[1]);
-							 return false;
-						}
-					});
-
-					$('.sakedata select[name="sake_award1"] option').each(function(){
-
-						if(this.value == award_entry[2])
-						{
-							 $('.sakedata select[name="sake_award1"]').val(award_entry[2]);
-							 return false;
-						}
-					});
-				}
-
-				if(award_array.length > 1)
-				{
-					var award_entry = award_array[1].split(',');
-
-					$('.sakedata select[name="sake_award_name2"] option').each(function(){
-
-						if(this.value == award_entry[0])
-						{
-							 $('.sakedata select[name="sake_award_name2"]').val(award_entry[0]);
-							 $('.sakedata select[name="sake_award2"]').replaceOptions(getAwardOption($('.sakedata select[name="sake_award_name2"]').val()));
-							 return false;
-						}
-					});
-
-					$('.sakedata select[name="sake_award_year2"] option').each(function(){
-
-						if(this.value == award_entry[1])
-						{
-							 $('.sakedata select[name="sake_award_year2"]').val(award_entry[1]);
-							 return false;
-						}
-					});
-
-					$('.sakedata select[name="sake_award2"] option').each(function(){
-
-						if(this.value == award_entry[2])
-						{
-							 $('.sakedata select[name="sake_award2"]').val(award_entry[2]);
-							 return false;
-						}
-					});
-				}
-
-				if(award_array.length > 2)
-				{
-					var award_entry = award_array[2].split(',');
-
-					$('.sakedata select[name="sake_award_name3"] option').each(function(){
-
-						if(this.value == award_entry[0])
-						{
-							 $('.sakedata select[name="sake_award_name3"]').val(award_entry[0]);
-							 $('.sakedata select[name="sake_award3"]').replaceOptions(getAwardOption($('.sakedata select[name="sake_award_name3"]').val()));
-							 return false;
-						}
-				    });
-
-					$('.sakedata select[name="sake_award_year3"] option').each(function(){
-
-						if(this.value == award_entry[1])
-						{
-							 $('.sakedata select[name="sake_award_year3"]').val(award_entry[1]);
-							 return false;
-						}
-					});
-
-					$('.sakedata select[name="sake_award3"] option').each(function(){
-
-						if(this.value == award_entry[2])
-						{
-							 $('.sakedata select[name="sake_award3"]').val(award_entry[2]);
-							 return false;
-						}
-					});
-				}
-
-	            $('.sakedata select[name="sake_award_name1"]').change(function(){
-		            if($('.sakedata select[name="sake_award_name1"]').val() != "")
-		            {
-			            $('.sakedata select[name="sake_award_year1"]').prop('disabled', false);
-			            $('.sakedata select[name="sake_award1"]').replaceOptions(getAwardOption($('.sakedata select[name="sake_award_name1"]').val()));
-			            $('.sakedata select[name="sake_award1"]').prop('disabled', false);
-		            }
-		            else
-		            {
-			            $('.sakedata select[name="sake_award_year1"]').prop('disabled', true);
-			            $('.sakedata select[name="sake_award1"]').prop('disabled', true);
-		            }
-	            });
-
-	            $('.sakedata select[name="sake_award_name2"]').change(function(){
-		            if($('.sakedata select[name="sake_award_name2"]').val() != "")
-		            {
-			            $('.sakedata select[name="sake_award_year2"]').prop('disabled', false);
-			            $('.sakedata select[name="sake_award2"]').replaceOptions(getAwardOption($('.sakedata select[name="sake_award_name2"]').val()));
-			            $('.sakedata select[name="sake_award2"]').prop('disabled', false);
-		            }
-		            else
-		            {
-			            $('.sakedata select[name="sake_award_year2"]').prop('disabled', true);
-			            $('.sakedata select[name="sake_award2"]').prop('disabled', true);
-		            }
-	            });
-
-	            $('.sakedata select[name="sake_award_name3"]').change(function(){
-		            if($('.sakedata select[name="sake_award_name3"]').val() != "")
-		            {
-			            $('.sakedata select[name="sake_award_year3"]').prop('disabled', false);
-			            $('.sakedata select[name="sake_award3"]').replaceOptions(getAwardOption($('.sakedata select[name="sake_award_name3"]').val()));
-			            $('.sakedata select[name="sake_award3"]').prop('disabled', false);
-		            }
-		            else
-		            {
-			            $('.sakedata select[name="sake_award_year3"]').prop('disabled', true);
-			            $('.sakedata select[name="sake_award3"]').prop('disabled', true);
-		            }
-	            });
-
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	            if($('.sakedata select[name="sake_award_name1"]').val() != "")
-	            {
-		            $('.sakedata select[name="sake_award_year1"]').prop('disabled', false);
-		            $('.sakedata select[name="sake_award1"]').prop('disabled', false);
-	            }
-	            else
-	            {
-		            $('.sakedata select[name="sake_award_year1"]').prop('disabled', true);
-		            $('.sakedata select[name="sake_award1"]').prop('disabled', true);
-	            }
-
-	            if($('.sakedata select[name="sake_award_name2"]').val() != "")
-	            {
-		            $('.sakedata select[name="sake_award_year2"]').prop('disabled', false);
-		            $('.sakedata select[name="sake_award2"]').prop('disabled', false);
-	            }
-	            else
-	            {
-		            $('.sakedata select[name="sake_award_year2"]').prop('disabled', true);
-		            $('.sakedata select[name="sake_award2"]').prop('disabled', true);
-	            }
-
-	            if($('.sakedata select[name="sake_award_name3"]').val() != "")
-	            {
-		            $('.sakedata select[name="sake_award_year3"]').prop('disabled', false);
-		            $('.sakedata select[name="sake_award3"]').prop('disabled', false);
-	            }
-	            else
-	            {
-		            $('.sakedata select[name="sake_award_year3"]').prop('disabled', true);
-		            $('.sakedata select[name="sake_award3"]').prop('disabled', true);
-	            }
-            }
+					this.value = award_array[index];
+				});
+			}
 
 			////////////////////////////////////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////////////////////////////////////
