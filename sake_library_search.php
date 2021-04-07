@@ -1323,7 +1323,7 @@ print('<div id="container" data-category=' .$category
 										print('</div>');
 
 										/*非表示中print('<div class="search_result_button_container">');
-											print('<button class="custom_button" sake_id=' .$row["id"] .'><span class="button-icon"><svg class="search_result_button_heart2020"><use xlink:href="#heart2020"/></svg></span><span class="button-text">飲んだ</span></button>');
+											print('<button class="custom_button" sake_id=' .$row["id"] .'><span class="button-icon"><svg class="search_result_button_heart2020"><use xlink:href="#pen1616"/></svg></span><span class="button-text">投稿</span></button>');
 											print('<button class="custom_button" sake_id=' .$row["id"] .'><span class="button-icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button-text">飲みたい</span></button>');
 										print('</div>');*/
 
@@ -2388,7 +2388,7 @@ print('<div id="container" data-category=' .$category
 									print('</div>');
 
 									/*非表示中print('<div class="search_result_button_container">');
-										print('<button class="custom_button" sake_id=' .$row["sake_id"] .'><span class="button-icon"><svg class="search_result_button_heart2020"><use xlink:href="#heart2020"/></svg></span><span class="button-text">飲んだ</span></button>');
+										print('<button class="custom_button" sake_id=' .$row["sake_id"] .'><span class="button-icon"><svg class="search_result_button_heart2020"><use xlink:href="#pen1616"/></svg></span><span class="button-text">投稿</span></button>');
 										print('<button class="custom_button" sake_id=' .$row["sake_id"] .'><span class="button-icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button-text">飲みたい</span></button>');
 									print('</div>');*/
 
@@ -4184,7 +4184,7 @@ $(function() {
 										innerHTML += '</div>';
 
 										/*非表示中innerHTML += '<div class="search_result_button_container">';
-												innerHTML += '<button class="custom_button" sake_id=' + sake[i].sake_id + '><span class="button-icon"><svg class="search_result_button_heart2020"><use xlink:href="#heart2020"/></svg></span><span class="button-text">飲んだ</span></button>';
+												innerHTML += '<button class="custom_button" sake_id=' + sake[i].sake_id + '><span class="button-icon"><svg class="search_result_button_heart2020"><use xlink:href="#pen1616"/></svg></span><span class="button-text">投稿</span></button>';
 												innerHTML += '<button class="custom_button" sake_id=' + sake[i].sake_id + '><span class="button-icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button-text">飲みたい</span></button>';
 										innerHTML += '</div>';*/
 

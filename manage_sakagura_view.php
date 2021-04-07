@@ -21,7 +21,7 @@ require_once("html_disp.php");
 <link rel="stylesheet" type="text/css" href="css/manage_edit_sake.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 
 <body>
- 
+
 	<?php
 
 	include_once('images/icons/svg_sprite.svg');
@@ -227,7 +227,7 @@ require_once("html_disp.php");
 
 				print('<ul class="sake_content"></ul>');
 				print('<div id="sake_table" style="display:none"></div>');
-						
+
 				print('<div class="review_count_container">');
 					print('<span id="disp_sake">'. ($in_disp_from + 1) .' ～ 25/全' .$count_result .'件</span>');
 				print('</div>');
@@ -248,7 +248,7 @@ require_once("html_disp.php");
 
 				print('<ul id="sakagura_content"></ul>');
 				print('<div id="sakagura_table" style="display:none"></div>');
-						
+
 				print('<div class="review_count_container">');
 					print('<span id="disp_sakagura">'. ($in_disp_from + 1) .' ～ 25/全' .$count_result .'件</span>');
 				print('</div>');
@@ -269,7 +269,7 @@ require_once("html_disp.php");
 
 				print('<ul id="user_content"></ul>');
 				print('<div id="user_table" style="display:none"></div>');
-						
+
 				print('<div class="review_count_container">');
 					print('<span id="disp_users">'. ($in_disp_from + 1) .' ～ 25/全' .$count_result .'件</span>');
 				print('</div>');
@@ -349,7 +349,7 @@ require_once("html_disp.php");
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////
 		print('<div id="banner">');
 			//print('<div><span><svg class="logoheart14024"><use xlink:href="#logoheart14024"/></span></div>');
-			
+
 			print('<ul id="admin_menu" class="managemenu">');
 					//print('<li><a href="#logo"><div><span class="managemenu_icon"><svg class="logoheart14024"><use xlink:href="#logoheart14024"/></span></div></a></li>');
 					print('<li><a href="#sake_info"><div><span class="managemenu_icon"><svg width="10" height="10"><path d="M0 0 L10 5 L0 10 Z" style="fill:white"/></svg></span>日本酒ページ</div></a></li>');
@@ -366,7 +366,7 @@ require_once("html_disp.php");
 			print('<ul id="user_menu" class="managemenu">');
 					print('<li id="sake_info"><a href="#sake_info"><div><span class="managemenu_icon"><svg width="10" height="10"><path d="M0 0 L10 5 L0 10 Z" style="fill:white"/></svg></span>日本酒ページ</div></a></li>');
 					print('<li><a href="#sake_edit" class="active"><div>日本酒ページ登録・編集</div></a></li>');
-					print('<li><a href="#sake_nonda" class="active"><div>飲んだ登録・編集</div></a></li>');
+					print('<li><a href="#sake_nonda" class="active"><div>投稿・編集</div></a></li>');
 					print('<li><a href="#sake_nomitai" class="active"><div>飲みたい</div></a></li>');
 					print('<li><a href="#sake_iine" class="active"><div>いいね</div></a></li>');
 					print('<li><a href="#sake_comment" class="active"><div>返信コメント登録・編集</div></a></li>');
@@ -438,8 +438,8 @@ require_once("html_disp.php");
 							////////////////////////////////////////////////////////////////////////////////
 							print('<!--/#sake.form-action-->');
 							print('<div id="tab_admin" class="show">');
-	
-								// 酒編集 
+
+								// 酒編集
 								print('<div class="sake_view">');
 									print('<div class="diplay_selection">');
 										print('<div class="edit_sake diplay_selection_button selected"><span>登録済み日本酒の編集</span></div>');
@@ -450,7 +450,7 @@ require_once("html_disp.php");
 									displaySake();
 								print("</div>");
 
-								// 酒蔵編集 
+								// 酒蔵編集
 								print('<div id="sakagura_view">');
 									print('<div class="diplay_selection">');
 										print('<div id="edit_sakagura" class="diplay_selection_button selected"><span>登録済み酒蔵の編集</span></div>');
@@ -470,7 +470,7 @@ require_once("html_disp.php");
 						print('<div id="tab_users" class="form-action hide" style="border: 2px solid #00ffff">');
 
 							///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-							// 酒編集 
+							// 酒編集
 							print('<div class="sake_view">');
 								print('<div class="diplay_selection">');
 						  			print('<div class="edit_sake diplay_selection_button selected"><span>登録済み日本酒の編集</span></div>');
@@ -482,7 +482,7 @@ require_once("html_disp.php");
 							print("</div>");
 
 
-							// 酒蔵編集 
+							// 酒蔵編集
 							/*
 							print('<div class="sakagura_view">');
 								print('<div class="diplay_selection">');
@@ -496,7 +496,7 @@ require_once("html_disp.php");
 						  */
 
 							///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-							// ユーザー編集 
+							// ユーザー編集
 							///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							print('<div class="user_view">');
 								print('<div class="diplay_selection">');
@@ -607,7 +607,7 @@ $(function() {
 	});
 
 	$('#sakagura_info').click(function() {
-		
+
 		$('.sake_container').css({"display": "none"});
 		$('#tab_admin .sake_view').css({"display": "none"});
 		$('#user_view').css({"display": "none"});
@@ -693,7 +693,7 @@ $(function() {
 $(function() {
 
 	/////////////////////////////////////////////////////////////////////////////
-  // 酒検索 
+  // 酒検索
   $(document).on('keyup', '.sake_input', function(){
 
     var inputText = $(this).val().replace(/　/g, ' ');
@@ -739,8 +739,8 @@ $(function() {
     {
         $('.sake_content').empty();
     }
-  }); // keyup 
-	
+  }); // keyup
+
   $('.message_class').click(function() {
       var sake_id = $(this).attr('sake_id');
       $(".sake_input").val(this.innerText);
@@ -759,7 +759,7 @@ $(function() {
 $(function() {
 
 	/////////////////////////////////////////////////////////////////////////////
-  // 酒蔵検索 
+  // 酒蔵検索
   $(document).on('keyup', '#sakagura_input', function(){
 
     var inputText = $("#sakagura_input").val();
@@ -789,7 +789,7 @@ $(function() {
             {
                 var retobj = $('#sakagura_content').append('<li class="message_class" data-sakagura_id=' + data[i].sake_id + ' data-sakagura_name=' + data[i].sake_name + '><img src="images/icons/noimage80.svg">' + data[i].sake_name + '</li>');
             }
-				
+
             if($("#sakagura_input").val().length > 0)
                 $("#sakagura_content").css({"visibility": "visible"});
 
@@ -801,7 +801,7 @@ $(function() {
     {
         $('#sakagura_content').empty();
     }
-  }); // keyup 
+  }); // keyup
 
   $(document).on('click', '#sakagura_content .message_class', function(){
 
@@ -819,7 +819,7 @@ $(function() {
 $(function() {
 
 	/////////////////////////////////////////////////////////////////////////////
-  // ユーザー検索 
+  // ユーザー検索
   $(document).on('keyup', '#user_input', function(){
 
     var inputText = $("#user_input").val();
@@ -848,7 +848,7 @@ $(function() {
             {
                 var retobj = $('#user_content').append('<li class="message_class" data-username=' + data[i].username + ' data-lname=' + data[i].lname + ' data-fname=' + data[i].fname + '><img src="images/icons/noimage80.svg">' + data[i].username + '</li>');
             }
-				
+
             if($("#user_input").val().length > 0)
                 $("#user_content").css({"visibility": "visible"});
 
@@ -860,7 +860,7 @@ $(function() {
     {
         $('#user_content').empty();
     }
-  }); // keyup 
+  }); // keyup
 
   $(document).on('click', '#user_content .message_class', function(){
 

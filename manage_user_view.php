@@ -148,7 +148,7 @@ function writePageNumberContainer($count_result)
 				print('<ul id="user_menu" class="managemenu">');
 					print('<li id="sake_info">日本酒ページ</li>');
 					print('<li><a href="#sake_edit" class="active"><div>日本酒情報</div></a></li>');
-					print('<li><a href="#sake_nonda"><div>飲んだ</div></a></li>');
+					print('<li><a href="#sake_nonda"><div>投稿</div></a></li>');
 					print('<li><a href="#sake_nomitai"><div>飲みたい</div></a></li>');
 					print('<li><a href="#sake_iine"><div>いいね</div></a></li>');
 					print('<li><a href="#sake_comment"><div>返信コメント</div></a></li>');
@@ -336,10 +336,10 @@ function writePageNumberContainer($count_result)
 							print("</div>");
 
 							//////////////////////////////////////////////////////////////////////
-							// 日本酒ページ > 飲んだ
+							// 日本酒ページ > 投稿
 							print('<div id="sake_nonda" class="form-action hide">');
 								print('<div id="sake_nonda_list">');
-									print('<div class="menu_title">飲んだ</div>');
+									print('<div class="menu_title">投稿</div>');
 
 									print('<div class="list_selection_container">');
 										print('<ul class="list_content">');
@@ -498,10 +498,10 @@ function writePageNumberContainer($count_result)
 								print("</div>");
 
 								print('<div id="sake_nonda_detail">');
-									print('<div class="menu_title">飲んだ</div>');
+									print('<div class="menu_title">投稿</div>');
 									print('<div id="sake_nonda_prev2020"><svg class="return_button"><use xlink:href="#prev2020"/></svg>一覧へ戻る</div>');
 
-									//飲んだ詳細
+									//投稿詳細
 									print('<div id="user_sake_review">');
 
 										print('<div class="user_sake_container">');

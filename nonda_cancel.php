@@ -43,12 +43,12 @@ while($row = getnextrow($result))
 	$path = "images/".$filename;
 	$thumbpath = "images/photo/thumb/".$filename;
 
-	if(file_exists($path)) {	
-		$ret = unlink($path);	
+	if(file_exists($path)) {
+		$ret = unlink($path);
 	}
 
 	if(file_exists($thumbpath)) {
-		$ret = unlink($thumbpath);	
+		$ret = unlink($thumbpath);
 	}
 }
 
@@ -66,7 +66,7 @@ if(!$result) {
 }
 
 /*****************************************************************************************************
- * コミットしない飲んだは削除
+ * コミットしない投稿は削除
  *****************************************************************************************************/
 $sql = "DELETE FROM TABLE_NONDA WHERE sake_id = '$sake_id' AND contributor = '$contributor' AND committed = 2";
 $result = executequery($db, $sql);

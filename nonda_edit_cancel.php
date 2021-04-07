@@ -41,19 +41,19 @@ while($row = getnextrow($result))
 	$path = "images/".$filename;
 	$thumbpath = "images/photo/thumb/".$filename;
 
-	if(file_exists($path)) 
-	{	
-		$ret = unlink($path);	
+	if(file_exists($path))
+	{
+		$ret = unlink($path);
 	}
 
-	if(file_exists($thumbpath)) 
+	if(file_exists($thumbpath))
 	{
-		$ret = unlink($thumbpath);	
+		$ret = unlink($thumbpath);
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-// 飲んだ削除
+// 投稿削除
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $sql = "DELETE FROM TABLE_NONDA WHERE sake_id = '$sake_id' AND contributor = '$contributor' AND committed = 2";

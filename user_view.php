@@ -352,7 +352,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 				print('<ul class="user_activity_info">');
 					print('<li>');
 						print('<span id="user_activity_nonda">'.$count_nonda .'</span>');
-						print('<span>飲んだ</span>');
+						print('<span>投稿</span>');
 					print('</li>');
 
 					print('<li>');
@@ -407,7 +407,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 							print('<div id="tab_sake" class="show">');
 								print('<div class="tab_sake_sort_container">');
 									print('<div class="display_selection">');
-										print('<div class="display_selection_button selected"><span><svg class="display_selection_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span></div>');
+										print('<div class="display_selection_button selected"><span><svg class="display_selection_heart2020"><use xlink:href="#pen1616"/></svg>投稿</span></div>');
 										print('<div class="display_selection_button"><span><svg class="display_selection_pin1616"><use xlink:href="#pin1616"/></svg>飲みたい</span></div>');
 									print("</div>");
 
@@ -831,7 +831,7 @@ $(function() {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// 飲んだ
+		// 投稿
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		function nonda_serialize(in_disp_from, in_disp_to, query_count, mode) {
@@ -996,7 +996,7 @@ $(function() {
 						/////////////////////////////////////////////////////////////////
 
 						if(count_result == 0 && sake == null) {
-							var innerText = '<div class="navigate_page_no_registry">飲んだ登録はありません</div>';
+							var innerText = '<div class="navigate_page_no_registry">投稿はありません</div>';
 							$('#disp_sake').css({"display":"none"});
 							$("#sake_sort").css({"display":"none"});
 							$("#tab_sake .result_count_container").css({"display":"none"});
@@ -1404,7 +1404,7 @@ $(function() {
 			searchSake(in_disp_from, in_disp_to, data, bCount);
 		});
 
-		/* 次の飲んだ */
+		/* 次の投稿 */
 		$(document).on('click', '.nonda_set #next_mypage_review', function() {
 
 				var search_type = 1;
@@ -1438,7 +1438,7 @@ $(function() {
 				searchNonda(in_disp_from, disp_max, data, false);
 		});
 
-		/* 前の飲んだ */
+		/* 前の投稿 */
 		$(document).on('click', '.nonda_set #prev_mypage_review', function() {
 
 				var search_type = 1;
@@ -1510,7 +1510,7 @@ $(function() {
 		});
 
 		/////////////////////////////////////////////////////
-		// 飲んだ　更新日　click for sorting
+		// 投稿　更新日　click for sorting
 		/////////////////////////////////////////////////////
 		$(document).on('click', '#tab_sake.nonda_set .click_sort_date', function(e) {
 
@@ -1525,7 +1525,7 @@ $(function() {
 				var orderby = ($("#order_sake").val() == 1) ? 2 : 1;
 				var data = "search_type=" + search_type + "&from=" + in_disp_from + "&disp_max=" + disp_max + "&count_query=" + count_query + "&username=" + username+"&orderby=" + orderby;
 
-			    //alert("飲んだ data:" + data);
+			    //alert("投稿 data:" + data);
 
 				$("#order_sake").val(orderby);
 				$("#sake_sort span").css({"background": "#d2d2d2", "color": "#ffffff"});
@@ -1534,7 +1534,7 @@ $(function() {
 				*/
 		});
 
-		/* 飲んだ */
+		/* 投稿 */
 		$('#tab_sake .display_selection div:first-child').on( "click", function(event) {
 
 				var search_type = 1;
@@ -2704,7 +2704,7 @@ $(function() {
 								innerHTML += '<div class="spec">';
 
 									innerHTML += '<div class="spec_item">';
-										innerHTML += '<span class="spec_title"><svg class="spec_item_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</span><span class="spec_info">' + users[i].nonda_count + '</span>';
+										innerHTML += '<span class="spec_title"><svg class="spec_item_heart2020"><use xlink:href="#pen1616"/></svg>投稿</span><span class="spec_info">' + users[i].nonda_count + '</span>';
 									innerHTML += '</div>';
 									/////////////////////////////////////////////////
 									innerHTML += '<div class="spec_item">';

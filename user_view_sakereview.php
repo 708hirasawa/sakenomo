@@ -492,69 +492,65 @@ require_once("nonda.php");
 
 		print('<div id="main_container">');
 			print('<div id="link_review_container">');
-				//飲んだ詳細
 				print('<div id="user_sake_review">');
+					print('<div class="user_sake_container">');
+						print('<div class="user_sake_sake_container">');
+							print('<div class="user_sake_name_brewery_date_container">');
+								print('<a class="searchRow_link" href="sake_view.php?sake_id=' .$sake_id .'"><div class="user_sake_name">' .stripslashes($record[sake_name]) .'</div></a>');
+								print('<div class="user_sake_brewery_date_container">');
+									print('<div>' .$record['sakagura_name'] .' / ' .$record['pref'] .'</div>');
+								print('</div>');
+							print('</div>');
+						print('</div>');
 
-				  print('<div class="user_sake_container">');
-				    //酒
-				    print('<div class="user_sake_sake_container">');
-				      print('<div class="user_sake_name_brewery_date_container">');
-				        print('<a class="searchRow_link" href="sake_view.php?sake_id=' .$sake_id .'"><div class="user_sake_name">' .stripslashes($record[sake_name]) .'</div></a>');
-				        print('<div class="user_sake_brewery_date_container">');
-				          print('<div>' .$record['sakagura_name'] .' / ' .$record['pref'] .'</div>');
-				        print('</div>');
-				      print('</div>');
-				    print('</div>');
-
-				    //タブ
-				    print('<div class="user_sake_tab_container">');
-				      print('<div class="user_sake_tab_link"><svg class="user_sake_review3630 user_sake_icon"><use xlink:href="#review3630"/></svg></div>');
-				      print('<div class="user_sake_border_line"></div>');
-				      print('<div class="user_sake_tab_link"><svg class="user_sake_note3630 user_sake_icon"><use xlink:href="#note3630"/></svg></div>');
-				      print('<div class="user_sake_border_line"></div>');
+						print('<div class="user_sake_tab_container">');
+							print('<div class="user_sake_tab_link"><svg class="user_sake_review3630 user_sake_icon"><use xlink:href="#review3630"/></svg></div>');
+							print('<div class="user_sake_border_line"></div>');
+							print('<div class="user_sake_tab_link"><svg class="user_sake_note3630 user_sake_icon"><use xlink:href="#note3630"/></svg></div>');
+							print('<div class="user_sake_border_line"></div>');
 							if($_COOKIE['username'] == $record["contributor"]) {
 								print('<div id="button_bbs" class="user_nonda_edit"><svg class="user_nonda_pen1616"><use xlink:href="#pen1616"/></svg>編集する</div>');
 							}
-				    print('</div>');
+						print('</div>');
 
-				    print('<div class="user_sake_tab_body">');
+						print('<div class="user_sake_tab_body">');
 
-				      print('<!--レビュータブ-->');
-				      print('<div class="user_sake_tab_panel">');
+							print('<!--レビュータブ-->');
+							print('<div class="user_sake_tab_panel">');
 
-				        print('<!--レーティング-->');
+								print('<!--レーティング-->');
 								$rank_width = (($record[rank] / 5) * 100) .'%';
-				        print('<div class="user_sake_rank">');
-				          print('<div class="user_sake_star_rating">');
-				            print('<div class="user_sake_star_rating_front" style="width: ' .$rank_width. '">★★★★★</div>');
-				            print('<div class="user_sake_star_rating_back">★★★★★</div>');
-				          print('</div>');
+								print('<div class="user_sake_rank">');
+									print('<div class="user_sake_star_rating">');
+										print('<div class="user_sake_star_rating_front" style="width: ' .$rank_width. '">★★★★★</div>');
+										print('<div class="user_sake_star_rating_back">★★★★★</div>');
+									print('</div>');
 									if($record[rank]) {
 										print('<span class="user_sake_sake_rate">' .number_format($record[rank], 1) .'</span>');
 									} else {
 										print('<span class="user_sake_sake_rate" style="color: #b2b2b2;">--</span>');
 									}
-				        print('</div>');
+								print('</div>');
 
-				        print('<!--レビューテキスト-->');
+								print('<!--レビューテキスト-->');
 								if($record[subject] && $record[message]) {
 									print('<div class="user_sake_subject_message_container">');
-									  print('<div class="user_sake_subject">' .$record[subject] .'</div>');
-									  print('<div class="user_sake_message">' .nl2br($record[message]) .'</div>');
+										print('<div class="user_sake_subject">' .$record[subject] .'</div>');
+										print('<div class="user_sake_message">' .nl2br($record[message]) .'</div>');
 									print('</div>');
 								} else if($record[subject] && $record[message] == null) {
 									print('<div class="user_sake_subject_message_container">');
-					          print('<div class="user_sake_subject">' .$record[subject] .'</div>');
-					        print('</div>');
+										print('<div class="user_sake_subject">' .$record[subject] .'</div>');
+									print('</div>');
 								} else if($record[subject] == null && $record[message]) {
 									print('<div class="user_sake_subject_message_container">');
-					          print('<div class="user_sake_message">' .nl2br($record[message]) .'</div>');
-					        print('</div>');
+										print('<div class="user_sake_message">' .nl2br($record[message]) .'</div>');
+									print('</div>');
 								} else {
 									print('');
 								}
 
-				        print('<!--写真-->');
+								print('<!--写真-->');
 
 								$image_result = executequery($db, "SELECT * FROM SAKE_IMAGE WHERE sake_id = '$sake_id' AND contributor = '$username'");
 
@@ -743,16 +739,16 @@ require_once("nonda.php");
 							print('</div>');//user_sake_tab_panel
 						print('</div>');//user_sake_tab_body
 
-				    print('<!--いいね-->');
-				    /*print('<div class="user_sake_like_container">');
-				      print('<a class="user_sake_like">');
-				        print('<svg class="user_sake_like_icon"><use xlink:href="#like1616"/></svg>');
-				        print('<div class="user_sake_like_title">いいね!</div>');
-				      print('</a>');
-				      print('<div class="user_sake_like_count">123</div>');
-				    print('</div>');*/
+						print('<!--いいね-->');
+						/*print('<div class="user_sake_like_container">');
+							print('<a class="user_sake_like">');
+								print('<svg class="user_sake_like_icon"><use xlink:href="#like1616"/></svg>');
+								print('<div class="user_sake_like_title">いいね!</div>');
+							print('</a>');
+							print('<div class="user_sake_like_count">123</div>');
+						print('</div>');*/
 
-				  print('</div>');
+					print('</div>');
 
 				print('</div>');
 

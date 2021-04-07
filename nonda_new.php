@@ -21,9 +21,9 @@ if(!$db = opendatabase("sake.db"))
 $sql = "INSERT INTO TABLE_NONDA(sake_id, contributor, write_date, update_date, committed) VALUES ('$sake_id', '$contributor', '$in_time', '$in_time', 2)";
 $res = executequery($db, $sql);
 
-if(!$res)   
+if(!$res)
 {
-	$return = "飲んだ登録エラー".$id;
+	$return = "投稿エラー".$id;
 	header("Content-type: application/xml");
 	echo '<?xml version="1.0" encoding="utf-8" ?> ' . "\n";
 	echo '<xml>'."\n";

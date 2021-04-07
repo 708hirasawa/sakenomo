@@ -44,7 +44,7 @@ function write_side_menu()
 
 		print('</li>');
 		print('<li class="sidebar-item">');
-		  print('<a href="#" class="fa fa-fw fa-nonda"><div class="img-container"><svg class="mobile_heart2020"><use xlink:href="#heart2020"/></svg></div><span>飲んだ</span>');
+		  print('<a href="#" class="fa fa-fw fa-nonda"><div class="img-container"><svg class="mobile_heart2020"><use xlink:href="#pen1616"/></svg></div><span>投稿</span>');
 		  print('</a>');
 		print('</li>');
 		print('<li class="sidebar-item">');

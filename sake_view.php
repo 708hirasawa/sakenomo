@@ -934,7 +934,7 @@ require_once("searchbar.php");
 
 			print('</div>');
 
-			/* 飲んだ・飲みたい */
+			/* 投稿・飲みたい */
 			print('<ul id="personal">');
 
 				if($rd_nonda)
@@ -979,11 +979,11 @@ require_once("searchbar.php");
 					.'" data-tastes="' .$rd_nonda["tastes"]
 					.'" data-paths="' .$added_path
 					.'" data-desc="' .$desc
-					.'" data-committed=' .$rd_nonda["committed"] .'><svg class="button_bbs_heart2020" style="fill:#FF4545"><use xlink:href="#heart2020"/></svg>飲んだ</li>');
+					.'" data-committed=' .$rd_nonda["committed"] .'><svg class="button_bbs_heart2020" style="fill:#FF4545"><use xlink:href="#pen1616"/></svg>投稿</li>');
 				}
 				else
 				{
-					print('<li id="button_bbs"><svg class="button_bbs_heart2020"><use xlink:href="#heart2020"/></svg>飲んだ</li>');
+					print('<li id="button_bbs"><svg class="button_bbs_heart2020"><use xlink:href="#pen1616"/></svg>投稿</li>');
 				}
 
 				if($rd_favorite)

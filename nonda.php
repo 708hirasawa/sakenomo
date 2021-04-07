@@ -8,7 +8,7 @@ function write_Nonda()
         print('<div id="dialog_bbs" value="" write_date="">');
           print('<div class="dialog_bbs_title_close_container">');
             print('<div class="dialog_bbs_title_blanc"></div>');
-            print('<div class="dialog_bbs_title">「飲んだ」登録</div>');
+            print('<div class="dialog_bbs_title">投稿</div>');
             print('<span class="close_bbs_button_container">');
               print('<button id="close_bbs_button"><svg class="close_bbs_close2020"><use xlink:href="#close2020"/></svg></button>');
             print('</span>');

@@ -509,7 +509,8 @@ $(function() {
 
 	$(window).scroll(function () {
 
-		if($(window).scrollTop() + $(window).height() >= $(document).height() && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
+		//if($(window).scrollTop() + $(window).height() >= $(document).height() && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
+		if($(window).scrollTop() + window.innerHeight >= ($(document).height() - 200) && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
 
 			var in_disp_from = $('#mainview_container').data('in_disp_from') + 25;
 			var in_disp_to = in_disp_from + 25;
@@ -538,7 +539,7 @@ $(function() {
 					//alert("count resut:" + sake.length);
 
 					if(count_result == 0 && sake == null) {
-						var innerText = '<div class="navigate_page_no_registry">飲んだ登録されていません</div>';
+						var innerText = '<div class="navigate_page_no_registry">投稿はありません</div>';
 						$('#disp_sake').css({"display":"none"});
 						$("#sake_sort").css({"display":"none"});
 						$('#threads').html(innerText);

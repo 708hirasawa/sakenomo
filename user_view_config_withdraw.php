@@ -88,7 +88,7 @@ require_once("nonda.php");
 					print('<div class="user_withdraw_container">');
 						print('<div class="user_withdraw_note">Sakenomoを退会すると、現在ご利用中の機能が使用できなくなります。</div>');
 						print('<div class="user_withdraw_text_container">');
-							print('<div class="user_withdraw_text">飲んだ</div>');
+							print('<div class="user_withdraw_text">投稿</div>');
 							print('<div class="user_withdraw_text">飲みたい</div>');
 							print('<div class="user_withdraw_text">お気に入り</div>');
 							print('<div class="user_withdraw_text">フォロー</div>');
