@@ -183,38 +183,6 @@
   margin-top: 8px;
 }
 
-#personal #button_bbs, #personal .follow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(#e6e6e6, #ffffff);
-  color: #666666;
-  font-size: 13px;
-  font-weight: bold;
-  height: 28px;
-  border: 1px solid #d2d2d2;
-  border-radius: 4px;
-  padding: 0 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#button_bbs:first-child {
-  margin-right: 20px;
-}
-
-.button_bbs_heart2020, .button_bbs_pin1616 {
-  fill: #b2b2b2;
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-  transition: 0.3s;
-}
-
-#personal #button_bbs:hover, #personal .follow:hover {
-  border: 1px solid #FF4545 /*!important*/;
-}
-
 /*sakeheader*******************/
 #tab_main {
   width: 1200px;

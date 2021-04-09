@@ -128,46 +128,6 @@
   margin-top: 8px;
 }
 
-.sakagura_buttons li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(#e6e6e6, #ffffff);
-  color: #666666;
-  font-size: 13px;
-  font-weight: bold;
-  height: 28px;
-  border: 1px solid #d2d2d2;
-  border-radius: 4px;
-  padding: 0 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.sakagura_buttons li:first-child {
-  margin-right: 20px;
-}
-
-.sakagura_buttons_writing1816, .sakagura_buttons_pin1616, .sakagura_buttons_share1816 {
-  fill: #b2b2b2;
-  margin-right: 5px;
-  transition: 0.3s;
-}
-
-.sakagura_buttons_writing1816, .sakagura_buttons_share1816 {
-  width: 18px;
-  height: 16px;
-}
-
-.sakagura_buttons_pin1616 {
-  width: 16px;
-  height: 16px;
-}
-
-.sakagura_buttons li:hover {
-  border: 1px solid #FF4545;
-}
-
 /*tab_main*******************/
 #tab_main {
   width: 1200px;
@@ -482,63 +442,6 @@
   color: #8c8c8c;
 }
 
-.search_sake_result_button_container {
-  display: none;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: auto;
-  min-width: 120px;
-  height: auto;
-  margin-bottom: 8px;
-}
-
-.custom_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(#e6e6e6, #ffffff);
-  height: 28px;
-  border: 2px solid #d2d2d2;
-  border-radius: 4px;
-  padding: 0 16px;
-}
-
-.custom_button:first-child {
-  margin-bottom: 8px;
-}
-
-.custom_button:hover {
-  background: linear-gradient(#EDCACA, #ffffff);
-  border: 2px solid #FF4545;
-}
-
-.button_icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.search_sake_result_button_heart2020, .search_sake_result_button_pin1616 {
-  fill: #b2b2b2;
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-}
-
-.custom_button:hover .search_sake_result_button_heart2020, .custom_button:hover .search_sake_result_button_pin1616 {
-  fill: #FF4545;
-}
-
-.button_text {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  color: #666666;
-  font-size: 13px;
-  font-weight: bold;
-}
-
 /*sake_rank*******************/
 .sake_rank {
   display: flex;
@@ -635,10 +538,6 @@
 /*tab-comment(comment)*******************/
 .click_sort {
   margin-top: 0;
-}
-
-.custom_button:first-child {
-  margin-bottom: 0;
 }
 
 #search_background {
@@ -1000,10 +899,6 @@
   }
 
   .spec_item:nth-child(1), .spec_item:nth-child(5) {
-    display: flex;
-  }
-
-  .search_sake_result_button_container {
     display: flex;
   }
 }

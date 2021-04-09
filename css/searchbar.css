@@ -544,6 +544,106 @@
 }
 
 /********************
+* buttons
+********************/
+#personal #button_bbs, #personal .follow, .sakagura_buttons li, .user_buttons li, .custom_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#e6e6e6, #ffffff);
+  color: #666666;
+  font-size: 13px;
+  font-weight: bold;
+  width: 136px;
+  height: 28px;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.custom_button {
+  width: 40px;
+}
+
+#button_bbs:first-child, .sakagura_buttons li:first-child, .user_buttons li:first-child {
+  margin-right: 16px;
+}
+
+.custom_button:first-child {
+  margin-bottom: 8px;
+}
+
+.user_buttons li span {
+  font-weight: bold;
+}
+
+#personal #button_bbs:hover, #personal .follow:hover, .sakagura_buttons li:hover, .user_buttons li:hover, .custom_button:hover {
+  border: 1px solid #FF4545;
+}
+
+.mypage_config_link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666666;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.button_bbs_heart2020, .button_bbs_pin1616, .sakagura_buttons_pin1616, .user_buttons_config1616, .user_buttons_pin1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  transition: 0.3s;
+}
+
+.sakagura_buttons_writing1816, .sakagura_buttons_share1816 {
+  fill: #b2b2b2;
+  width: 18px;
+  height: 16px;
+  margin-right: 5px;
+  transition: 0.3s;
+}
+
+.user_buttons_trophy1216 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.search_result_button_pin1616 {
+  fill: #b2b2b2;
+  width: 16px;
+  height: 16px;
+  transition: 0.3s;
+}
+
+.button_text {
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  color: #666666;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.followed {
+  background: linear-gradient(#EDCACA, #ffffff);
+  border: 1px solid #FF4545;
+  transition: 0.3s;
+}
+
+.followed .search_result_button_pin1616 {
+  fill: #FF4545;
+  transition: 0.3s;
+}
+
+/********************
 * dialog_background
 ********************/
 #dialog_background, #dialog_edit_sake_background, .dialog_add_sakagura_background, .dialog_add_sake_background, #dialog_edit_sakagura_background, #dialog_add_inshokuten_background {
@@ -720,6 +820,18 @@
     width: 1px;
     height: 20px;
     display: block;
+  }
+
+  .custom_button {
+    width: 136px;
+  }
+
+  .search_result_button_pin1616 {
+    margin-right: 5px;
+  }
+
+  .button_text {
+    display: flex;
   }
 }
 
