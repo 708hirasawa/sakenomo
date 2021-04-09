@@ -540,10 +540,6 @@ print('<div id="container"
                           print('</div>');
                         print('</div>');
                       print('</div>');
-                      /*非表示中print('<div class="search_sake_result_button_container">');
-                        print('<button class="custom_button"><span class="button_icon"><svg class="search_sake_result_button_heart2020"><use xlink:href="#pen1616"/></svg></span><span class="button_text">投稿</span></button>');
-                        print('<button class="custom_button"><span class="button_icon"><svg class="search_sake_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">飲みたい</span></button>');
-                      print('</div>');*/
                     print('</div>');
                     ////////////////////////////////////////
                     // 酒ランク
@@ -1223,10 +1219,6 @@ $(function() {
 									innerHTML += '<div class="search_sake_result_date">' + sake[i].write_date + '</div>';
 								innerHTML += '</div>';
 							innerHTML += '</div>';
-							/*非表示中innerHTML += '<div class="search_sake_result_button_container">';
-							innerHTML += '<button class="custom_button" sake_id=' + sake[i].sake_id + '><span class="button_icon"><svg class="search_sake_result_button_heart2020"><use xlink:href="#pen1616"/></svg></span><span class="button_text">投稿</span></button>';
-							innerHTML += '<button class="custom_button" sake_id=' + sake[i].sake_id + '><span class="button_icon"><svg class="search_sake_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">飲みたい</span></button>';
-							innerHTML += '</div>';*/
 						innerHTML += '</div>';
 
 						innerHTML += '<div class="sake_rank">';

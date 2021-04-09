@@ -1676,8 +1676,7 @@ $(function() {
 										innerHTML += '<div class="search_result_button_container">';
 
 											if(username == loginname) {
-												//innerHTML += '<button id="' + sake[i].sake_id + '" class="user_button" style="float:right"><span class="button_icon"><img src="images/icons/heart.svg"></span><span class="button_text">飲みたい解除</span></button>';
-												innerHTML += '<button class="custom_button followed" sake_id=' + sake[i].sake_id + '><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">飲みたい</span></button>';
+												innerHTML += '<button class="custom_button followed" sake_id=' + sake[i].sake_id + '><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">飲みたい</span></button>';
 											}
 										innerHTML += '</div>';
 
@@ -2140,7 +2139,7 @@ $(function() {
 
 										if($('#all_container').data('username') == loginname) {
 											innerHTML += '<div class="search_sakagura_result_button_container">';
-												innerHTML += '<button class="custom_button followed" sakagura_id=' + sakagura[i].sakagura_id + '><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">お気に入り</span></button>';
+												innerHTML += '<button class="custom_button followed" sakagura_id=' + sakagura[i].sakagura_id + '><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">お気に入り</span></button>';
 											innerHTML += '</div>';
 										}
 
@@ -2685,15 +2684,14 @@ $(function() {
 
 										if(username == loginname) {
 											if(category == 1) {
-												//innerHTML += '<button class="custom_button"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
-												innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
+												innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー</span></button>';
 											}
 											else if(category == 2) {
 												if(users[i].followed) {
-													innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
+													innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー</span></button>';
 												}
 												else {
-													innerHTML += '<button class="custom_button" data-username="' + users[i].email + '"><span class="button_icon"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg></span><span class="button_text">フォロー</span></button>';
+													innerHTML += '<button class="custom_button" data-username="' + users[i].email + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー</span></button>';
 												}
 											}
 										}
