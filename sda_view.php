@@ -306,6 +306,8 @@ function GetSakeCategory($category_code)
 
 ?>
 <?php
+print('<div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v10.0" nonce="oqvO6VAM"></script>');
+
 print('<div id="container"
               data-id=' .$id
               .' data-contributor="' .$username
@@ -751,13 +753,19 @@ print('<div id="container"
         print('<div class="updatebar_container">');
           print('<div id="updatebar">');
 			if($_COOKIE['login_cookie'] != "") {
-              print('<a href="sda_add_form.php?id=' .$row["id"] .'&sakagura_name=' .$row["sakagura_name"] .'" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>この酒蔵の情報を編集する</a>');
-              print('<a href="sda_add_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>新しい酒蔵を登録する</a>');
+              print('<a href="sda_add_form.php?id=' .$row["id"] .'&sakagura_name=' .$row["sakagura_name"] .'" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>編集する</a>');
+              print('<a href="sda_add_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>追加する</a>');
             } else {
-              print('<a href="user_login_form.php" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>この酒蔵の情報を編集する</a>');
-              print('<a href="user_login_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>新しい酒蔵を登録する</a>');
+              print('<a href="user_login_form.php" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>編集する</a>');
+              print('<a href="user_login_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>追加する</a>');
             }
           print('</div>');
+        print('</div>');
+
+        print('<div class="sns_buttons_container">');
+          print('<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="'.stripslashes($row["sakagura_name"]).' / Sakenomo" data-lang="en" data-show-count="false"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
+          print('<div class="fb-share-button" data-href="https://sakenomo.xsrv.jp/sakenomo/sda_view.php?id='.$sakagura_id.'" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdrinksake.xsrv.jp%2Fhirasawa%2Fsake_view.php%3Fsake_id%3DA1010855763%23top&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>');
+          print('<div class="line-it-button" data-lang="ja" data-type="share-b" data-ver="3" data-url="https://sakenomo.xsrv.jp/sakenomo/sda_view.php?id='.$sakagura_id.'" data-color="default" data-size="small" data-count="false" style="display: none;"></div><script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>');
         print('</div>');
 
         ////////////////////////////////////////

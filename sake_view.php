@@ -886,6 +886,8 @@ require_once("searchbar.php");
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		print('<div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v10.0" nonce="oqvO6VAM"></script>');
+
 		print('<div id="container" data-sake_id=' .$row["sake_id"]
 							.' data-contributor="' .$username
 							.'" data-sake_name="' .stripslashes($row["sake_name"])
@@ -1415,7 +1417,7 @@ require_once("searchbar.php");
 					////////////////////////////////////////
 					print('<div id="review" class="form-action hide">');
 
-						$sql = "SELECT COUNT(*) FROM TABLE_NONDA WHERE sake_id = '$sake_id' AND committed = 1 AND (subject IS NOT '' OR message IS NOT '')";
+						$sql = "SELECT COUNT(*) FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '')";
 						$res = executequery($db, $sql);
 						$record = getnextrow($res);
 						$count_result = $record["COUNT(*)"];
@@ -2046,13 +2048,19 @@ require_once("searchbar.php");
 					print('<div class="edit_sake_bar">');
 						if($_COOKIE['login_cookie'] != "")
 						{
-							print('<a id="edit_sake" sakagura_id="' .$row["sakagura_id"] .'"><svg class="edit_sake_penplus2020"><use xlink:href="#penplus2020"/></svg>この日本酒の情報を編集する</a>');
-							print('<a id="add_sake" sakagura_id="' .$row["sakagura_id"] .'"><svg class="add_sake_pen1616"><use xlink:href="#pen1616"/></svg>新しい日本酒を登録する</a>');
+							print('<a id="edit_sake" sakagura_id="' .$row["sakagura_id"] .'"><svg class="edit_sake_penplus2020"><use xlink:href="#penplus2020"/></svg>編集する</a>');
+							print('<a id="add_sake" sakagura_id="' .$row["sakagura_id"] .'"><svg class="add_sake_pen1616"><use xlink:href="#pen1616"/></svg>追加する</a>');
 						} else {
-							print('<a class="edit_sake" href="user_login_form.php"><svg class="edit_sake_penplus2020"><use xlink:href="#penplus2020"/></svg>この日本酒の情報を編集する</a>');
-							print('<a class="add_sake" href="user_login_form.php"><svg class="add_sake_pen1616"><use xlink:href="#pen1616"/></svg>新しい日本酒を登録する</a>');
+							print('<a class="edit_sake" href="user_login_form.php"><svg class="edit_sake_penplus2020"><use xlink:href="#penplus2020"/></svg>編集する</a>');
+							print('<a class="add_sake" href="user_login_form.php"><svg class="add_sake_pen1616"><use xlink:href="#pen1616"/></svg>追加する</a>');
 						}
 					print("</div>");
+				print('</div>');
+
+				print('<div class="sns_buttons_container">');
+					print('<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="'.stripslashes($row["sake_name"]).' / Sakenomo" data-url="https://sakenomo.xsrv.jp/sakenomo/sake_view.php?sake_id='.$sake_id.'" data-lang="en" data-show-count="false"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
+					print('<div class="fb-share-button" data-href="https://sakenomo.xsrv.jp/sakenomo/sake_view.php?sake_id='.$sake_id.'" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdrinksake.xsrv.jp%2Fhirasawa%2Fsake_view.php%3Fsake_id%3DA1010855763%23top&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>');
+					print('<div class="line-it-button" data-lang="ja" data-type="share-b" data-ver="3" data-url="https://sakenomo.xsrv.jp/sakenomo/sake_view.php?sake_id='.$sake_id.'" data-color="default" data-size="small" data-count="false" style="display: none;"></div><script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>');
 				print('</div>');
 
 				////////////////////////////////////////
