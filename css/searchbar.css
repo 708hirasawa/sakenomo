@@ -644,6 +644,66 @@
 }
 
 /********************
+* edit_buttons
+********************/
+.edit_sake_bar_container, .updatebar_container {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.edit_sake_bar, #updatebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+  width: 100%;
+  padding: 24px 0;
+}
+
+#edit_sake, #add_sake, .edit_sake, .add_sake, #update_sakagura, #add_new_sakagura, #update_inshokuten, #add_new_inshokuten {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#f5f5f5, #ffffff);
+  color: #666666;
+  font-size: 14px;
+  font-weight: bold;
+  width: 40%;
+  max-width: 320px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #b2b2b2;
+  cursor: pointer;
+}
+
+.edit_sake_bar a:first-child, #updatebar a:first-child {
+  margin-right: 16px;
+}
+
+.edit_sake_penplus2020, .add_sake_pen1616, .update_sakagura_penplus2020, .add_new_sakagura_pen1616, .update_inshokuten_penplus2020, .add_new_inshokuten_pen1616 {
+  fill: #8c8c8c;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+/********************
+* sns
+********************/
+.sns_buttons_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+  height: 32px;
+}
+
+.twitter-share-button, .fb-share-button {
+  margin-right: 16px;
+}
+
+/********************
 * dialog_background
 ********************/
 #dialog_background, #dialog_edit_sake_background, .dialog_add_sakagura_background, .dialog_add_sake_background, #dialog_edit_sakagura_background, #dialog_add_inshokuten_background {

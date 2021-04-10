@@ -1,6 +1,5 @@
 #panelheader {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -12,7 +11,6 @@
 
 #main_banner_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -23,7 +21,6 @@
 
 #mainframe {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -36,7 +33,6 @@
 
 #banner_frame {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -65,7 +61,6 @@
 .inshokuten_info {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   font-size: 12px;
@@ -75,8 +70,6 @@
 
 .inshokuten_info li {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-right: 15px;
@@ -92,8 +85,6 @@
 
 .inshokuten_info li span {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
@@ -125,7 +116,6 @@
 .inshokuten_buttons {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: 8px;
@@ -133,8 +123,6 @@
 
 .inshokuten_buttons li {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: linear-gradient(#e6e6e6, #ffffff);
@@ -182,8 +170,6 @@
 /*simpleTabs*******************/
 .simpleTabs {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background: #fff;
@@ -193,8 +179,6 @@
 
 .simpleTabs li {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
@@ -205,7 +189,6 @@
 .simpleTabs li a {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -229,7 +212,6 @@
 
 .simpleTabs li a span {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -291,8 +273,6 @@
 
 .tab-top_note a {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #0740A5;
@@ -340,7 +320,6 @@
 /*brewery_profile*******************/
 .inshokuten_profile_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -352,8 +331,6 @@
 
 .inshokuten_profile_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   background: #E6E6E6;
@@ -385,7 +362,6 @@
 .user_drop_down {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -394,7 +370,6 @@
 .sake_search_icon {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #e6e6e6;
@@ -411,8 +386,6 @@
 
 .drop_down_select_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-left: 12px;
@@ -420,8 +393,6 @@
 
 .sake_selection {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #3f3f3f;
@@ -435,7 +406,6 @@
 .click_sort {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -444,7 +414,6 @@
 .click_sort div:first-child {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #e6e6e6;
@@ -462,7 +431,6 @@
 .click_sort_read, .click_sort_date, .click_sort_ranking, .click_sort_standard, .click_sort_like {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   color: #ffffff;
@@ -483,7 +451,6 @@
 .product_count_container, .comment_count_container, .photo_count_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -494,7 +461,6 @@
 .navigate_page {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   color: #3f3f3f;
@@ -504,8 +470,6 @@
 
 #add_sake_menu_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: linear-gradient(#e6e6e6, #ffffff);
@@ -536,7 +500,6 @@
 /********************/
 #dialog_add_inshokuten {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -551,8 +514,6 @@
 
 .close_add_inshokuten {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -575,8 +536,6 @@
 
 .add_inshokuten_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-size: 15px;
@@ -590,8 +549,6 @@
 
 .add_inshokuten_note {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #8BA340;
@@ -609,8 +566,6 @@
 
 #add_sake_input {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   background: #e6e6e6;
@@ -631,8 +586,6 @@
 
 #add_sake_content li {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #000000;
@@ -656,7 +609,6 @@
 
 #add_sake_content li div {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -678,8 +630,6 @@
 
 .add_inshokuten_button_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -702,7 +652,6 @@ input[name="add_inshokuten_ok"] {
 /*product_result*******************/
 #search_sake_result {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -712,7 +661,6 @@ input[name="add_inshokuten_ok"] {
 
 .searchRow {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -731,8 +679,6 @@ input[name="add_inshokuten_ok"] {
 
 .search_sake_result_name_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -756,7 +702,6 @@ input[name="add_inshokuten_ok"] {
 
 .search_sake_result_sake_brewery_date_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -794,7 +739,6 @@ input[name="add_inshokuten_ok"] {
 
 .sake_menu_delete_button_container, .brewery_comment_button_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -804,8 +748,6 @@ input[name="add_inshokuten_ok"] {
 
 .custom_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f0f0f0;
@@ -833,8 +775,6 @@ input[name="add_inshokuten_ok"] {
 /*sake_rank*******************/
 .sake_rank {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: baseline;
   width: 100%;
@@ -875,7 +815,6 @@ input[name="add_inshokuten_ok"] {
 .spec {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -886,7 +825,6 @@ input[name="add_inshokuten_ok"] {
 
 .spec_item {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -911,8 +849,6 @@ input[name="add_inshokuten_ok"] {
 
 .spec_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -936,8 +872,6 @@ input[name="add_inshokuten_ok"] {
 /************************************************************/
 .search_result_turn_page {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-top: 15px;
@@ -947,8 +881,6 @@ input[name="add_inshokuten_ok"] {
 
 #prev_sakagura, #next_sakagura {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   font-weight: bold;
@@ -964,8 +896,6 @@ input[name="add_inshokuten_ok"] {
 
 .pageitems {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #b2b2b2;
@@ -992,7 +922,6 @@ input[name="add_inshokuten_ok"] {
 
 .brewery_comment {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1010,8 +939,6 @@ input[name="add_inshokuten_ok"] {
 
 .brewery_comment_user_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1034,7 +961,6 @@ input[name="add_inshokuten_ok"] {
 
 .brewery_comment_name_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1081,7 +1007,6 @@ input[name="add_inshokuten_ok"] {
 /*brewery_comment_post*******************/
 .brewery_comment_post_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1093,8 +1018,6 @@ input[name="add_inshokuten_ok"] {
 
 .brewery_comment_feeling_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -1135,7 +1058,6 @@ input[name="add_inshokuten_ok"] {
 .brewery_comment_photo_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1166,8 +1088,6 @@ input[name="add_inshokuten_ok"] {
 /*brewery_comment_like*******************/
 .brewery_comment_like_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -1178,8 +1098,6 @@ input[name="add_inshokuten_ok"] {
 
 .brewery_comment_like {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #e6e6e6;
@@ -1214,8 +1132,6 @@ input[name="add_inshokuten_ok"] {
 
 .brewery_comment_like_count {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -1254,7 +1170,6 @@ input[name="add_inshokuten_ok"] {
 /*dialog_sakagura_review*******************/
 #dialog_sakagura_review {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -1269,8 +1184,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_sakagura_review_button_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -1278,16 +1191,12 @@ input[name="add_inshokuten_ok"] {
 
 .prev_next_sakagura_review_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items:  center;
 }
 
 #prev_sakagura_review_button, #next_sakagura_review_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items:  center;
   color: #3f3f3f;
@@ -1324,7 +1233,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_sakagura_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1338,8 +1246,6 @@ input[name="add_inshokuten_ok"] {
 /*dialog_sakagura_user*******************/
 .dialog_sakagura_user_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1362,7 +1268,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_sakagura_user_name_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1395,8 +1300,6 @@ input[name="add_inshokuten_ok"] {
 /*dialog_sakagura_sake*******************/
 .dialog_sakagura_sakagura_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1407,7 +1310,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_sakagura_name_brewery_date_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1428,7 +1330,6 @@ input[name="add_inshokuten_ok"] {
 .dialog_sakagura_brewery_date_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
@@ -1440,7 +1341,6 @@ input[name="add_inshokuten_ok"] {
 /*dialog_sakagura_subject_message*******************/
 .dialog_sakagura_subject_message_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1471,7 +1371,6 @@ input[name="add_inshokuten_ok"] {
 .dialog_sakagura_image_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1502,8 +1401,6 @@ input[name="add_inshokuten_ok"] {
 /*dialog_sakagura_like*******************/
 .dialog_sakagura_like_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -1514,8 +1411,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_sakagura_like {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #e6e6e6;
@@ -1550,8 +1445,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_sakagura_like_count {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -1591,7 +1484,6 @@ input[name="add_inshokuten_ok"] {
 .photo_filter_button_container, .inshokuten_map_button_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   height: auto;
@@ -1599,8 +1491,6 @@ input[name="add_inshokuten_ok"] {
 
 .photo_filter_button, .inshokuten_map_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #d2d2d2;
@@ -1639,7 +1529,6 @@ input[name="add_inshokuten_ok"] {
 #addimage_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -1672,7 +1561,6 @@ input[name="add_inshokuten_ok"] {
 
 .navigate_button {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -1701,81 +1589,14 @@ input[name="add_inshokuten_ok"] {
   margin-top: 16px;
 }
 
-
 #inshokuten_map iframe {
   width: 100%;
   height: 100%;
 }
 
-/*updatebar*******************/
-.updatebar_container {
-  width: 100%;
-  height: auto;
-  margin-top: 20px;
-}
-
-#updatebar {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: #f5f5f5;
-  width: 100%;
-  height: auto;
-  padding: 16px 0;
-}
-
-#update_inshokuten, #add_new_inshokuten {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  padding: 0;
-  appearance: none;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  width: 240px;
-  height: 30px;
-  border-radius: 4px;
-  margin: 8px 20px;
-  cursor: pointer;
-}
-
-#update_inshokuten {
-  background: #28809E;
-  color:#ffffff;
-}
-
-#add_new_inshokuten {
-  background: #C5CE51;
-  color:#000000;
-}
-
-.update_inshokuten_penplus2020, .add_new_inshokuten_pen1616 {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-}
-
-.update_inshokuten_penplus2020 {
-  fill: #ffffff;
-}
-
-.add_new_inshokuten_pen1616 {
-  fill: #3f3f3f;
-}
-
 /*inshokuten_spec*******************/
 #inshokuten_spec, .spec_extra {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1786,8 +1607,6 @@ input[name="add_inshokuten_ok"] {
 
 #inshokuten_spec > div:first-child, .spec_extra > div:first-child {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #000000;
@@ -1817,7 +1636,6 @@ input[name="add_inshokuten_ok"] {
 .inshokutencolumn1 {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1864,7 +1682,6 @@ input[name="add_inshokuten_ok"] {
 
 .inshokutencolumn2 {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1890,7 +1707,6 @@ input[name="add_inshokuten_ok"] {
 /*banner_frame brewery*******************/
 .brewery, .recommend_sake {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1904,8 +1720,6 @@ input[name="add_inshokuten_ok"] {
 
 .brewery > div:first-child, .recommend_sake > div:first-child {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #000000;
@@ -1945,8 +1759,6 @@ input[name="add_inshokuten_ok"] {
 
 .banner_item {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 300px;
@@ -1980,7 +1792,6 @@ input[name="add_inshokuten_ok"] {
 
 .banner_item_article_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -1992,7 +1803,6 @@ input[name="add_inshokuten_ok"] {
 
 .banner_item_name_pref_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -2003,8 +1813,6 @@ input[name="add_inshokuten_ok"] {
 
 .banner_item_name_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -2024,8 +1832,6 @@ input[name="add_inshokuten_ok"] {
 
 .banner_item_pref_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -2043,7 +1849,6 @@ input[name="add_inshokuten_ok"] {
 
 .banner_item_profile_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -2054,8 +1859,6 @@ input[name="add_inshokuten_ok"] {
 
 .banner_item_brewery_profile {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -2090,7 +1893,6 @@ input[name="add_inshokuten_ok"] {
 
 .sakeitem_click {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -2124,7 +1926,6 @@ input[name="add_inshokuten_ok"] {
 
 .sakeitem_sake_brewery_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -2138,8 +1939,6 @@ input[name="add_inshokuten_ok"] {
 
 .sakeitem_sake_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 140px;
@@ -2159,8 +1958,6 @@ input[name="add_inshokuten_ok"] {
 
 .sakeitem_brewery_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 140px;
@@ -2180,8 +1977,6 @@ input[name="add_inshokuten_ok"] {
 /*ad*******************/
 #ad1, #ad2 {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   overflow: hidden;
@@ -2243,7 +2038,6 @@ input[name="add_inshokuten_ok"] {
 /*dialog_edit_sakagura*******************/
 #dialog_edit_sakagura {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -2258,8 +2052,6 @@ input[name="add_inshokuten_ok"] {
 
 #close_edit_sakagura {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
@@ -2282,8 +2074,6 @@ input[name="add_inshokuten_ok"] {
 
 .edit_sakagura_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-size: 15px;
@@ -2296,8 +2086,6 @@ input[name="add_inshokuten_ok"] {
 
 .edit_sakagura_note {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #8BA340;
@@ -2310,7 +2098,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_edit_sakagura_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -2326,7 +2113,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_edit_sakagura_container .row_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -2343,7 +2129,6 @@ input[name="add_inshokuten_ok"] {
 #dialog_edit_sakagura_container .row_title_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -2368,7 +2153,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_edit_sakagura_container .row {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -2380,7 +2164,6 @@ input[name="add_inshokuten_ok"] {
 #dialog_edit_sakagura_container .column1_container, #dialog_edit_sakagura_container .column3_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   line-height: 140%;
@@ -2392,8 +2175,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_edit_sakagura_container .column1, #dialog_edit_sakagura_container .column3 {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-right: 8px;
@@ -2401,8 +2182,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_edit_sakagura_container .column1_container span, #dialog_edit_sakagura_container .column3_container span {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #8c8c8c;
@@ -2411,7 +2190,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_edit_sakagura_container .column2, #dialog_edit_sakagura_container .column4 {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -2422,7 +2200,6 @@ input[name="add_inshokuten_ok"] {
 #dialog_edit_sakagura_container .column2_select {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
@@ -2434,8 +2211,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_edit_sakagura_container .column2_select label {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-top: 8px;
@@ -2449,8 +2224,6 @@ input[name="add_inshokuten_ok"] {
 
 .edit_sakagura_button_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
@@ -2485,7 +2258,6 @@ input[name="add_inshokuten_ok"] {
 /*dialog_kura_bbs*******************/
 #dialog_kura_bbs {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -2499,8 +2271,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_title_close_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background: #3f3f3f;
@@ -2544,8 +2314,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_kura_name {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-weight: bold;
@@ -2556,7 +2324,6 @@ input[name="add_inshokuten_ok"] {
 /*tab_bbs*******************/
 #dialog_kura_bbs_tab_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -2568,8 +2335,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_tab {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -2578,8 +2343,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_tab_item {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   overflow: hidden;
@@ -2590,8 +2353,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_tab_click {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
@@ -2619,8 +2380,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_tab_click span {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: auto;
@@ -2653,7 +2412,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_article_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -2695,7 +2453,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_article_delete {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -2705,8 +2462,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_article_delete_button {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
@@ -2726,7 +2481,6 @@ input[name="add_inshokuten_ok"] {
 /*dialog_kura_bbs_tabs-2*******************/
 #dialog_kura_bbs_image {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -2737,8 +2491,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_kura_bbs_image_post {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
@@ -2752,7 +2504,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_image_photo_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -2803,8 +2554,6 @@ input[name="add_inshokuten_ok"] {
 
 .dialog_kura_bbs_image_post_button_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -2813,8 +2562,6 @@ input[name="add_inshokuten_ok"] {
 
 #dialog_kura_bbs_image input[type="button"] {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 64px;
@@ -2855,8 +2602,6 @@ input[name="add_inshokuten_ok"] {
 /*tab_bbs_button*******************/
 .dialog_kura_bbs_button_container {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;

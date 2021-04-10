@@ -641,68 +641,6 @@
   height:100%;
 }
 
-/*updatebar*******************/
-.updatebar_container {
-  width: 100%;
-  height: auto;
-  margin-top: 24px;
-}
-
-#updatebar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: #f5f5f5;
-  width: 100%;
-  height: auto;
-  padding: 16px 0;
-}
-
-#update_sakagura, #add_new_sakagura {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  padding: 0;
-  appearance: none;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  width: 240px;
-  height: 30px;
-  border-radius: 4px;
-  margin: 8px 20px;
-  cursor: pointer;
-}
-
-#update_sakagura {
-  background: #28809E;
-  color:#ffffff;
-}
-
-#add_new_sakagura {
-  background: #C5CE51;
-  color:#000000;
-}
-
-.update_sakagura_penplus2020, .add_new_sakagura_pen1616 {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-}
-
-.update_sakagura_penplus2020 {
-  fill: #ffffff;
-}
-
-.add_new_sakagura_pen1616 {
-  fill: #3f3f3f;
-}
-
 /*sakagura_spec*******************/
 #sakagura_spec, .spec_extra {
   display: flex;
