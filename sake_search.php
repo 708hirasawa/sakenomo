@@ -510,7 +510,7 @@ $(function() {
 	$(window).scroll(function () {
 
 		//if($(window).scrollTop() + $(window).height() >= $(document).height() && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
-		if($(window).scrollTop() + window.innerHeight >= ($(document).height() - 200) && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
+		if($(window).scrollTop() + window.innerHeight >= ($(document).height() - 100) && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
 
 			var in_disp_from = $('#mainview_container').data('in_disp_from') + 25;
 			var in_disp_to = in_disp_from + 25;
