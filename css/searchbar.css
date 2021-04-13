@@ -848,6 +848,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding: 8px;
 }
 
 .footer_home2020, .footer_search2020, .footer_login2020, .footer_person2020 {
