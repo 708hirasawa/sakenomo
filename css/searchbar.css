@@ -546,7 +546,7 @@
 /********************
 * buttons
 ********************/
-#personal #button_bbs, #personal .follow, .sakagura_buttons li, .user_buttons li, .custom_button {
+#personal #button_bbs, #personal .follow, .sakagura_buttons li, .user_buttons li, .custom_button, .inshokuten_buttons li {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -566,7 +566,7 @@
   width: 40px;
 }
 
-#button_bbs:first-child, .sakagura_buttons li:first-child, .user_buttons li:first-child {
+#button_bbs:first-child, .sakagura_buttons li:first-child, .user_buttons li:first-child, .inshokuten_buttons li:first-child {
   margin-right: 16px;
 }
 
@@ -578,7 +578,7 @@
   font-weight: bold;
 }
 
-#personal #button_bbs:hover, #personal .follow:hover, .sakagura_buttons li:hover, .user_buttons li:hover, .custom_button:hover {
+#personal #button_bbs:hover, #personal .follow:hover, .sakagura_buttons li:hover, .user_buttons li:hover, .custom_button:hover, .inshokuten_buttons li:hover {
   border: 1px solid #FF4545;
 }
 
@@ -593,17 +593,9 @@
   text-decoration: none;
 }
 
-.button_bbs_heart2020, .button_bbs_pin1616, .sakagura_buttons_pin1616, .user_buttons_config1616, .user_buttons_pin1616 {
+.button_bbs_heart2020, .button_bbs_pin1616, .sakagura_buttons_pin1616, .user_buttons_config1616, .user_buttons_pin1616, .inshokuten_buttons_pin1616 {
   fill: #b2b2b2;
   width: 16px;
-  height: 16px;
-  margin-right: 5px;
-  transition: 0.3s;
-}
-
-.sakagura_buttons_writing1816, .sakagura_buttons_share1816 {
-  fill: #b2b2b2;
-  width: 18px;
   height: 16px;
   margin-right: 5px;
   transition: 0.3s;
@@ -752,7 +744,7 @@
   color:#fff;
 }
 
-#prev_search_all, #next_search_all, #prev_search_sake, #next_search_sake, #prev_search_sakagura, #next_search_sakagura, #prev_sake_review, #next_sake_review, #prev_sake_photo, #next_sake_photo, #prev_sakagura_sake, #next_sakagura_sake, #prev_mypage_review, #next_mypage_review, #prev_mypage_sakagura, #next_sakagura {
+#prev_search_all, #next_search_all, #prev_search_sake, #next_search_sake, #prev_search_sakagura, #next_search_sakagura, #prev_sake_review, #next_sake_review, #prev_sake_photo, #next_sake_photo, #prev_sakagura_sake, #next_sakagura_sake, #prev_inshokuten_sake, #next_inshokuten_sake, #prev_mypage_review, #next_mypage_review, #prev_mypage_sakagura, #next_sakagura {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -771,13 +763,13 @@
   cursor: pointer;
 }
 
-#next_search_all, #next_search_sake, #next_search_sakagura, #next_sake_review, #next_sakagura_sake {
+#next_search_all, #next_search_sake, #next_search_sakagura, #next_sake_review, #next_sakagura_sake, #next_inshokuten_sake {
   background: #b2b2b2;
   margin-left: 8px;
   cursor: pointer;
 }
 
-#prev_sake_photo, #prev_sakagura_sake, #prev_mypage_review, #prev_mypage_sakagura {
+#prev_sake_photo, #prev_sakagura_sake, #prev_inshokuten_sake, #prev_mypage_review, #prev_mypage_sakagura {
   background: #d2d2d2;
   margin-right: 8px;
   cursor: default;

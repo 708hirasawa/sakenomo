@@ -535,11 +535,6 @@
   margin-right: 5px;
 }
 
-/*tab-comment(comment)*******************/
-.click_sort {
-  margin-top: 0;
-}
-
 #search_background {
 	z-index: 100;
 	width: 100%;
@@ -853,7 +848,7 @@
 
   .simpleTabs_product3630, .simpleTabs_map2430 {
     margin-right: 8px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   .simpleTabs_product3630 {
@@ -893,16 +888,12 @@
     width: 300px;
   }
 
-  .multiple-brewery li {
-    margin: 0;
-  }
-
   #ad1 {
-    border-top: 0px solid transparent;
-    margin-top: 0px;
+    border-top: 0 solid transparent;
+    margin-top: 0;
   }
 
   #ad1 img {
-    margin-top: 0px;
+    margin-top: 0;
   }
 }
