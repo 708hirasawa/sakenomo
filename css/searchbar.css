@@ -636,6 +636,65 @@
 }
 
 /********************
+* sort_buttons
+********************/
+.sake_search_search2020 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 12px;
+}
+
+.click_sort, #sake_sort, #user_sort {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+#sake_sort, #user_sort {
+  margin-top: 16px;
+}
+
+.library_sort_icon, .sake_sort_icon, .sake_search_icon, .sake_review_sort_icon, .sakagura_product_sort_icon, .inshokuten_menu_sort_icon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: #e6e6e6;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.library_sort_icon {
+  background: #ffffff;
+}
+
+.click_sort_sort1214, .sake_sort_sort1214 {
+  fill: #b2b2b2;
+  width: 12px;
+  height: 14px;
+}
+
+.click_sort_button, .click_sort_standard, .click_sort_date, .click_sort_read, .click_sort_ranking, .click_sort_like {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b2b2b2;
+  font-size: 13px;
+  height: 20px;
+  padding: 0 4px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.click_sort_standard, .click_sort_date, .click_sort_read, .click_sort_ranking, .click_sort_like {
+  color: #0740A5;
+}
+
+/********************
 * edit_buttons
 ********************/
 .edit_sake_bar_container, .updatebar_container {

@@ -525,44 +525,6 @@
   margin-bottom: 8px;
 }
 
-/* review *******************/
-.click_sort {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-}
-
-.click_sort div:first-child {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: #e6e6e6;
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-}
-
-.click_sort_sort1214 {
-  fill: #b2b2b2;
-  width: 12px;
-  height: 14px;
-}
-
-.click_sort_standard, .click_sort_date, .click_sort_ranking {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #0740A5;
-  font-size: 13px;
-  height: 20px;
-  padding: 0 4px;
-  margin-left: 8px;
-  cursor: pointer;
-}
-
 /*review_count*******************/
 .review_count_container, .photo_count_container {
   display: flex;

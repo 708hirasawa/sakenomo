@@ -450,51 +450,6 @@
 }
 
 /************************************************************/
-#sake_sort, #user_sort {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  margin-top: 16px;
-}
-
-.sake_search_icon, .sake_sort_icon {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: #e6e6e6;
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-}
-
-.sake_search_search2020 {
-  fill: #b2b2b2;
-  width: 12px;
-  height: 12px;
-}
-
-.sake_sort_sort1214 {
-  fill: #b2b2b2;
-  width: 12px;
-  height: 14px;
-}
-
-.click_sort_date, .click_sort_read, .click_sort_ranking {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #0740A5;
-  font-size: 13px;
-  height: 20px;
-  padding: 0 4px;
-  margin-left: 8px;
-  cursor: pointer;
-}
-
-/************************************************************/
 .result_count_container {
   display: flex;
   flex-wrap: wrap;
