@@ -492,9 +492,9 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 									print('<div id="sake_sort">');
 										print('<div class="sake_sort_icon"><svg class="sake_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 										print('<span value="favorite_date" class="click_sort_date">更新日</span>');
-										/*非表示中print('<span value="sake_read"  class="click_sort_read">読み</span>');
-										print('<span value="sake_rank"  class="click_sort_ranking">ランキング</span>');
-										print('<span value="sake_like"  class="click_sort_like">いいね!</span>');*/
+										//print('<span value="sake_read"  class="click_sort_read">読み</span>');
+										//print('<span value="sake_rank"  class="click_sort_ranking">ランキング</span>');
+										//print('<span value="sake_like"  class="click_sort_like">いいね!</span>');
 									print("</div>");
 								print("</div>");
 
@@ -2009,7 +2009,7 @@ $(function() {
 				var data = sake_serialize(in_disp_from, disp_max, 1, 1);
 				var my_url = "?" + sake_serialize(in_disp_from, disp_max, 0, 2) + href;
 
-				$('#all_container').data('cateogry', 2);
+				$('#all_container').data('category', 2);
 				$('#tab_sake').removeClass('nonda_set');
 				$('#tab_sake').addClass('nomitai_set');
 
@@ -2757,7 +2757,7 @@ $(function() {
 						}
 
 						var limit = (in_disp_to >= $("#count_user").val()) ? $("#count_user").val() : in_disp_to;
-						var text = parseInt($('#in_user_disp_from').val()) + in_disp_from + 1 + '～' + limit + '件 / 全' + $('#count_user').val() + '件'
+						var text = in_disp_from + 1 + '～' + limit + '件 / 全' + $('#count_user').val() + '件'
 
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2837,12 +2837,10 @@ $(function() {
 			var in_disp_from = parseInt($("#in_user_disp_from").val()) + disp_max;
 			var in_disp_to = ((in_disp_from + disp_max) > $('#count_user').val()) ? $('#count_user').val() : in_disp_from + disp_max;
 			var bCount = 0;
-
+			var category = $('#all_container').data('category');
 			var href = $('.simpleTabs li a:nth(2)').attr('href');
-			var data = users_serialize(1, in_disp_from, in_disp_to, bCount, 1);
-			var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, bCount, 2) + href;
-			var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
-
+			var data = users_serialize(category, in_disp_from, in_disp_to, bCount, 1);
+			var my_url = "?" + users_serialize(category, in_disp_from, in_disp_to, bCount, 2) + href;
 
 			if((parseInt($("#in_user_disp_from").val()) + disp_max) >= $("#count_user").val())
 				return false;
@@ -2873,11 +2871,12 @@ $(function() {
 			var orderby = $("#order_sakagura").val();
 			var in_disp_from = parseInt($("#in_user_disp_from").val()) - disp_max;
 			var in_disp_to = ((in_disp_from + disp_max) > $('#count_user').val()) ? $('#count_user').val() : in_disp_from + disp_max;
+			var category = $('#all_container').data('category');
 			var bCount = 0;
 
 			var href = $('.simpleTabs li a:nth(2)').attr('href');
-			var data = users_serialize(1, in_disp_from, in_disp_to, bCount, 1);
-			var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, bCount, 2) + href;
+			var data = users_serialize(category, in_disp_from, in_disp_to, bCount, 1);
+			var my_url = "?" + users_serialize(category, in_disp_from, in_disp_to, bCount, 2) + href;
 			var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
 
 			if(($("#in_user_disp_from").val() - disp_max) < 0)
@@ -2910,8 +2909,9 @@ $(function() {
 			var orderby = $("#order_user").val();
 			var username = $('#all_container').data('username');
 			var href = $('.simpleTabs li a:nth(2)').attr('href');
-			var data = users_serialize(1, in_disp_from, in_disp_to, 0, 1);
-			var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, 0, 2) + href;
+			var category = $('#all_container').data('category');
+			var data = users_serialize(category, in_disp_from, in_disp_to, 0, 1);
+			var my_url = "?" + users_serialize(category, in_disp_from, in_disp_to, 0, 2) + href;
 
 			$('#userfollowpage .pageitems.selected').removeClass("selected");
 
@@ -3016,12 +3016,14 @@ $(function() {
 
 	$('#tab_users .display_selection div:first-child').on( "click", function(event) {
 
+
 		$('#tab_users .display_selection_button.selected').removeClass('selected');
 		$(this).addClass('selected');
 
 		var href = "#tab_users";
 		var search_type = 3;
 		var category = 1;
+
 		var in_disp_from = 0;
 		var in_disp_to = 25;
 		var bCount = 1;
@@ -3040,7 +3042,10 @@ $(function() {
 						'to': 25 };
 
 		history.pushState(stateObj, "user", my_url);
+
 		//$("body").trigger("search_users", [ data, in_disp_from, in_disp_to, 1 ] );
+
+		$('#all_container').data('category', 1);
 		searchUsers(data, category, in_disp_from, in_disp_to, true);
 	});
 
@@ -3060,6 +3065,8 @@ $(function() {
 		var data = users_serialize(category, in_disp_from, in_disp_to, bCount, 1);
 		var my_url = "?" + users_serialize(category, in_disp_from, in_disp_to, bCount, 2) + href;
 		//alert("data:" + data);
+
+		$('#all_container').data('category', 2);
 
 		var stateObj = { 'search_type': search_type,
 						'category': 3,
@@ -3214,7 +3221,7 @@ jQuery(document).ready(function($) {
 				var in_disp_to = in_disp_from + disp_max;
 
 				//alert("data:" + data);
-				$('#all_container').data('cateogry', 1);
+				$('#all_container').data('category', 1);
 				$('#tab_sake').removeClass('nomitai_set');
 				$('#tab_sake').addClass('nonda_set');
 				$('#tab_sake .display_selection_button.selected').removeClass('selected');
@@ -3227,7 +3234,7 @@ jQuery(document).ready(function($) {
 				var data = state.data;
 				//var data = "search_type=" + state.search_type +"&from=" + state.from + "&disp_max=" + disp_max + "&username=" + state.username + "&orderby=" + state.orderby;
 
-				$('#all_container').data('cateogry', 2);
+				$('#all_container').data('category', 2);
 				$('#tab_sake').removeClass('nonda_set');
 				$('#tab_sake').addClass('nomitai_set');
 				$('#tab_sake .display_selection_button.selected').removeClass('selected');

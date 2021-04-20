@@ -158,7 +158,12 @@ print('<div id="container">');
 								print("</div>");
 							print("</div>");*/
 
-							print('<div class="click_sort"><div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div><div value="sake_read" class="click_sort_read">標準</div><!--非表示中<div value="write_date" class="click_sort_date">更新日</div><div value="write_date" class="click_sort_ranking">ランキング</div>--></div>');
+							print('<div class="click_sort">');
+								print('<div class="inshokuten_menu_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+								print('<div value="sake_read" class="click_sort_read">標準</div>');
+								//print('<div value="write_date" class="click_sort_date">更新日</div>');
+								//print('<div value="write_date" class="click_sort_ranking">ランキング</div>');
+							print('</div>');
 						print('</div>');
 
 						////////////////////////////////////////

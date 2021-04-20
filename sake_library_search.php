@@ -1243,19 +1243,11 @@ print('<div id="container" data-category=' .$category
 
 					/////////////////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
-						/*非表示中print('<div class="sake_view">');
-
-							print('<div class="search_result_keyword">');
-								print('<div class="search_result_keyword_content"><span><svg class="search_result_keyword_search2020"><use xlink:href="#search2020"/></svg>検索ワード&nbsp;:&nbsp;</span>'.$keyword.'</div>');
-							print('</div>');
-
-						print("</div>");*/
-
-						print('<div class="click_sort">
-							<div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>
-							<div class="click_sort_standard click_sort_button">標準</div>
-							<!--非表示中<div class="click_sort_date click_sort_button">更新日</div>-->
-						</div>');
+						print('<div class="click_sort">');
+							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+							print('<div class="click_sort_standard click_sort_button">標準</div>');
+							//print('<div class="click_sort_date click_sort_button">更新日</div>');
+						print('</div>');
 					print("</div>");
 
 					//////////////////////////////////////////////////////////////////////////////////////
@@ -1635,17 +1627,11 @@ print('<div id="container" data-category=' .$category
 					print('<input type="hidden" id="hidden_all_count_query" name="count_all_query" value=0>');
 
 					print('<div class="count_sort_container">');
-						/*非表示中print('<div class="sake_view">');
-							print('<div class="search_result_keyword">');
-								print('<div class="search_result_keyword_content"><span><svg class="search_result_keyword_search2020"><use xlink:href="#search2020"/></svg>検索ワード&nbsp;:&nbsp;</span>'.$keyword.'</div>');
-							print('</div>');
-						print("</div>");*/
-
-						print('<div class="click_sort">
-							<div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>
-							<div class="click_sort_standard click_sort_button">標準</div>
-							<!--非表示中<div class="click_sort_date click_sort_button">更新日</div>-->
-						</div>');
+						print('<div class="click_sort">');
+							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+							print('<div class="click_sort_standard click_sort_button">標準</div>');
+							//print('<div class="click_sort_date click_sort_button">更新日</div>');
+						print('</div>');
 					print("</div>");
 
 					print('<div class="search_result_count">');
@@ -2306,30 +2292,12 @@ print('<div id="container" data-category=' .$category
 
 					///////////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
-						/*非表示中print('<div class="sake_view">');
-							print('<div class="search_result_keyword">');
-								print('<div class="search_result_keyword_content"><span><svg class="search_result_keyword_search2020"><use xlink:href="#search2020"/></svg>検索ワード&nbsp;:&nbsp;</span>'.$keyword.'</div>');
-							print('</div>');
-						print("</div>");*/
-
-						print('<div class="click_sort">
-							<div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>
-							<div class="click_sort_standard click_sort_button" value = "sake_read">標準</div>
-							<!--非表示中<div class="click_sort_date click_sort_button" value = "">更新日</div>-->
-							<!--非表示中<div class="click_sort_ranking click_sort_button" value = "sake_rank">ランキング</div>-->
-						</div>');
-						/*print('<div class="click_sort">
-							<div><img src="images/icons/sort.svg"></div>
-							<div value = "" style="background:#22445B; color:#fff">更新日</div>
-							<div value = "sake_read">よみ</div>
-							<div value = "sake_rank">ランキング</div>
-							<div value = "">レビュー数</div>
-							<div value = "oxidation_level">酸度</div>
-							<div value = "alcohol_level">アルコール</div>
-							<div value = "jsake_level">日本酒度</div>
-							<div value = "seimai_rate">精米歩合</div>
-							<div value = "amino_level">アミノ酸度</div>
-						</div>');*/
+						print('<div class="click_sort">');
+							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+							print('<div class="click_sort_standard click_sort_button" value = "sake_read">標準</div>');
+							//print('<div class="click_sort_date click_sort_button" value = "">更新日</div>');
+							//print('<div class="click_sort_ranking click_sort_button" value = "sake_rank">ランキング</div>');
+						print('</div>');
 					print("</div>");
 
 					print('<div class="search_result_count">');
@@ -2588,18 +2556,12 @@ print('<div id="container" data-category=' .$category
 
 					///////////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
-						/*非表示中print('<div class="sake_view">');
-							print('<div class="search_result_keyword">');
-								print('<div class="search_result_keyword_content"><span><svg class="search_result_keyword_search2020"><use xlink:href="#search2020"/></svg>検索ワード&nbsp;:&nbsp;</span>'.$keyword.'</div>');
-							print('</div>');
-						print("</div>");*/
-
-						print('<div class="click_sort">
-							<div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>
-							<div class="click_sort_standard click_sort_button" value = "sake_read">標準</div>
-							<!--非表示中<div class="click_sort_date click_sort_button" value = "">更新日</div>-->
-							<!--非表示中<div class="click_sort_ranking click_sort_button" value = "sake_rank">ランキング</div>-->
-						</div>');
+						print('<div class="click_sort">');
+							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+							print('<div class="click_sort_standard click_sort_button" value = "sake_read">標準</div>');
+							//print('<div class="click_sort_date click_sort_button" value = "">更新日</div>');
+							//print('<div class="click_sort_ranking click_sort_button" value = "sake_rank">ランキング</div>');
+						print('</div>');
 					print("</div>");
 
 					print('<div class="search_result_count">');
@@ -2779,17 +2741,11 @@ print('<div id="container" data-category=' .$category
 
 					///////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
-						/*非表示中print('<div class="sake_view">');
-							print('<div class="search_result_keyword">');
-								print('<div class="search_result_keyword_content"><span><svg class="search_result_keyword_search2020"><use xlink:href="#search2020"/></svg>検索ワード&nbsp;:&nbsp;</span>'.$keyword.'</div>');
-							print('</div>');
-						print("</div>");*/
-
-						print('<div class="click_sort">
-							<div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>
-							<div class="click_sort_standard click_sort_button" value = "">標準</div>
-							<!--非表示中<div class="click_sort_date click_sort_button" value = "">更新日</div>-->
-						</div>');
+						print('<div class="click_sort">');
+							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+							print('<div class="click_sort_standard click_sort_button" value = "">標準</div>');
+							//print('<div class="click_sort_date click_sort_button" value = "">更新日</div>');
+						print('</div>');
 					print("</div>");
 
 					print('<div class="search_result_count">');
@@ -2994,17 +2950,11 @@ print('<div id="container" data-category=' .$category
 
 					///////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
-						/*非表示中print('<div class="sake_view">');
-							print('<div class="search_result_keyword">');
-								print('<div class="search_result_keyword_content"><span><svg class="search_result_keyword_search2020"><use xlink:href="#search2020"/></svg>検索ワード&nbsp;:&nbsp;</span>'.$keyword.'</div>');
-							print('</div>');
-						print("</div>");*/
-
-						print('<div class="click_sort">
-							<div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>
-							<div class="click_sort_standard click_sort_button" value = "">標準</div>
-							<!--非表示中<div class="click_sort_date click_sort_button" value = "">更新日</div>-->
-						</div>');
+						print('<div class="click_sort">');
+							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+							print('<div class="click_sort_standard click_sort_button" value = "">標準</div>');
+							//print('<div class="click_sort_date click_sort_button" value = "">更新日</div>');
+						print('</div>');
 					print("</div>");
 
 					print('<div class="search_result_count">');
@@ -3023,18 +2973,8 @@ print('<div id="container" data-category=' .$category
 
 					print('<div id="sakagurapage" class="search_result_turn_page">');
 						print('<button id="prev_search_sakagura" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
-						/*$i = 1;
-
-						print('<button class="search_button pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
-
-						for($i++; $i <= $numPage; $i++)
-						{
-							print('<button class="search_button pageitems">' .$i .'</button>');
-						}*/
-
 						print('<button id="next_search_sakagura" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 					print("</div>");
-
 				}
 			print("</div>"); // tabs-sakagura
 
@@ -3103,17 +3043,11 @@ print('<div id="container" data-category=' .$category
 
 					///////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
-						/*非表示中print('<div class="sake_view">');
-							print('<div class="search_result_keyword">');
-								print('<div class="search_result_keyword_content"><span><svg class="search_result_keyword_search2020"><use xlink:href="#search2020"/></svg>検索ワード&nbsp;:&nbsp;</span>'.$keyword.'</div>');
-							print('</div>');
-						print("</div>");*/
-
-						print('<div class="click_sort">
-							<div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>
-							<div class="click_sort_standard click_sort_button" value = "">標準</div>
-							<!--非表示中<div class="click_sort_date click_sort_button" value = "">更新日</div>-->
-						</div>');
+						print('<div class="click_sort">');
+							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+							print('<div class="click_sort_standard click_sort_button" value = "">標準</div>');
+							//print('<div class="click_sort_date click_sort_button" value = "">更新日</div>');
+						print('</div>');
 					print("</div>");
 
 					print('<div class="search_result_count">');
@@ -3176,15 +3110,6 @@ print('<div id="container" data-category=' .$category
 
 					print('<div id="syuhantenpage" class="search_result_turn_page">');
 						print('<button id="prev_syuhanten" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
-						/*$i = 1;
-
-						print('<button class="search_button pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
-
-						for($i++; $i <= $numPage; $i++)
-						{
-							print('<button class="search_button pageitems">' .$i .'</button>');
-						}*/
-
 						print('<button id="next_syuhanten" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#next2020"/></svg></button>');
 					print("</div>");
 
@@ -3198,17 +3123,11 @@ print('<div id="container" data-category=' .$category
 
 					///////////////////////////////////////////////////////////////////////////////
 					print('<div class="count_sort_container">');
-						/*非表示中print('<div class="sake_view">');
-							print('<div class="search_result_keyword">');
-								print('<div class="search_result_keyword_content"><span><svg class="search_result_keyword_search2020"><use xlink:href="#search2020"/></svg>検索ワード&nbsp;:&nbsp;</span>'.$keyword.'</div>');
-							print('</div>');
-						print("</div>");*/
-
-						print('<div class="click_sort">
-							<div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>
-							<div class="click_sort_standard click_sort_button" value = "">標準</div>
-							<!--非表示中<div class="click_sort_date click_sort_button" value = "">更新日</div>-->
-						</div>');
+						print('<div class="click_sort">');
+							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+							print('<div class="click_sort_standard click_sort_button" value = "">標準</div>');
+							//print('<div class="click_sort_date click_sort_button" value = "">更新日</div>');
+						print('</div>');
 					print("</div>");
 
 					print('<div class="search_result_count">');
@@ -3226,15 +3145,6 @@ print('<div id="container" data-category=' .$category
 
 					print('<div id="syuhantenpage" class="search_result_turn_page">');
 						print('<button id="prev_syuhanten" class="search_button"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
-						/*$i = 1;
-
-						print('<button class="search_button pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
-
-						for($i++; $i <= $numPage; $i++)
-						{
-							print('<button class="search_button pageitems">' .$i .'</button>');
-						}*/
-
 						print('<button id="next_syuhanten" class="search_button"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 					print("</div>");
 

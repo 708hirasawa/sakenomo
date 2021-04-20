@@ -1430,7 +1430,12 @@ require_once("searchbar.php");
 
 						if($count_result > 0) {
 							print('<div class="review_sort">');
-								print('<div class="click_sort"><div><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div><!--<div class="click_sort_standard">標準</div>--><div class="click_sort_date">更新日</div><!--非表示中<div class="click_sort_ranking">ランキング</div>--></div>');
+								print('<div class="click_sort">');
+									print('<div class="sake_review_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
+									print('<div class="click_sort_date">更新日</div>');
+									//print('<div class="click_sort_standard">標準</div>');
+									//print('<div class="click_sort_ranking">ランキング</div>');
+								print('</div>');
 							print('</div>');
 
 							print('<div class="review_count_container">');
