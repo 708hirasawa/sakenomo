@@ -1242,7 +1242,7 @@ print('<div id="container" data-category=' .$category
 					//print('<div>' .$sql .'</div>');
 
 					/////////////////////////////////////////////////////////////////////////////////////////
-					print('<div class="count_sort_container">');
+					print('<div class="library_sort_container">');
 						print('<div class="click_sort">');
 							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 							print('<div class="click_sort_standard click_sort_button">標準</div>');
@@ -1626,7 +1626,7 @@ print('<div id="container" data-category=' .$category
 
 					print('<input type="hidden" id="hidden_all_count_query" name="count_all_query" value=0>');
 
-					print('<div class="count_sort_container">');
+					print('<div class="library_sort_container">');
 						print('<div class="click_sort">');
 							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 							print('<div class="click_sort_standard click_sort_button">標準</div>');
@@ -2291,7 +2291,7 @@ print('<div id="container" data-category=' .$category
 					//print('<div>' .$sql: .'</div>');
 
 					///////////////////////////////////////////////////////////////////////////////////
-					print('<div class="count_sort_container">');
+					print('<div class="library_sort_container">');
 						print('<div class="click_sort">');
 							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 							print('<div class="click_sort_standard click_sort_button" value = "sake_read">標準</div>');
@@ -2555,7 +2555,7 @@ print('<div id="container" data-category=' .$category
 					print('<input type="hidden" id="hidden_sake_count_result" name="count_sake_result" value=' .$count_sake_result .'>');
 
 					///////////////////////////////////////////////////////////////////////////////////
-					print('<div class="count_sort_container">');
+					print('<div class="library_sort_container">');
 						print('<div class="click_sort">');
 							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 							print('<div class="click_sort_standard click_sort_button" value = "sake_read">標準</div>');
@@ -2740,7 +2740,7 @@ print('<div id="container" data-category=' .$category
 					$res = executequery($db, $sql);
 
 					///////////////////////////////////////////////////////////////////////////////
-					print('<div class="count_sort_container">');
+					print('<div class="library_sort_container">');
 						print('<div class="click_sort">');
 							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 							print('<div class="click_sort_standard click_sort_button" value = "">標準</div>');
@@ -2949,7 +2949,7 @@ print('<div id="container" data-category=' .$category
 					print('<input type="hidden" id="hidden_sakagura_count_result"	name="count_sakagura_result" value=' .$count_sakagura_result .'>');
 
 					///////////////////////////////////////////////////////////////////////////////
-					print('<div class="count_sort_container">');
+					print('<div class="library_sort_container">');
 						print('<div class="click_sort">');
 							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 							print('<div class="click_sort_standard click_sort_button" value = "">標準</div>');
@@ -3042,7 +3042,7 @@ print('<div id="container" data-category=' .$category
 					print('<input type="hidden" id="hidden_syuhanten_count_result"  name="count_result" value=' .$count_result .'>');
 
 					///////////////////////////////////////////////////////////////////////////////
-					print('<div class="count_sort_container">');
+					print('<div class="library_sort_container">');
 						print('<div class="click_sort">');
 							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 							print('<div class="click_sort_standard click_sort_button" value = "">標準</div>');
@@ -3122,7 +3122,7 @@ print('<div id="container" data-category=' .$category
 					print('<input type="hidden" id="hidden_syuhanten_count_result" name="count_syuhanten_result" value=' .$count_syuhanten_result .'>');
 
 					///////////////////////////////////////////////////////////////////////////////
-					print('<div class="count_sort_container">');
+					print('<div class="library_sort_container">');
 						print('<div class="click_sort">');
 							print('<div class="library_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 							print('<div class="click_sort_standard click_sort_button" value = "">標準</div>');

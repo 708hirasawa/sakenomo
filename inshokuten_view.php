@@ -133,7 +133,7 @@ print('<div id="container">');
 
 					// メニュータブ
 					print('<div id="tab-sake" class="form-action show">');
-						print('<div class="page_navigation">');
+						print('<div class="menu_sort_container">');
 							/*print('<div class="user_drop_down">');
 								print('<div class="sake_search_icon"><svg class="sake_search_search2020"><use xlink:href="#search2020"/></svg></div>');
 

@@ -700,6 +700,8 @@ require_once("searchbar.php");
 		$avg_rank = $rd_average["AVG(rank)"];
 		$avg_percent = ($avg_rank / 5) * 100;
 
+		$from = 0;
+
 		/////////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////
@@ -779,12 +781,6 @@ require_once("searchbar.php");
 		}
 
 		usort($flavor_lookupTable, 'sortByCount');
-
-		/////////////////////////////////////////////////////////
-		// 内容量
-		$xmltext = $row["volume_other"];
-		$xml = simplexml_load_string($row["volume_other"]);
-		//$xml_array = object2array($xml);
 
 		// アルコール
 		$alcohol_array = explode(',', $row["alcohol_level"]);
@@ -888,7 +884,7 @@ require_once("searchbar.php");
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		print('<div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v10.0" nonce="oqvO6VAM"></script>');
 
-		print('<div id="container" data-sake_id=' .$row["sake_id"]
+		print('<div id="container" data-sake_id=' .$sake_id
 							.' data-contributor="' .$username
 							.'" data-sake_name="' .stripslashes($row["sake_name"])
 							.'" data-sake_read="' .$row["sake_read"]
@@ -1423,13 +1419,16 @@ require_once("searchbar.php");
 						$count_result = $record["COUNT(*)"];
 						$count_tastes = array(0, 0, 0, 0, 0, 0, 0, 0);
 						$tastes_all = array(0, 0, 0, 0, 0, 0, 0, 0);
+						$in_disp_from = 0;
 						$p_max = 25;
+						$order = "DESC";
+						$numPage = ceil($count_result / $p_max);
 
 						////////////////////////////////////////
 						////////////////////////////////////////
 
 						if($count_result > 0) {
-							print('<div class="review_sort">');
+							print('<div class="review_sort_container">');
 								print('<div class="click_sort">');
 									print('<div class="sake_review_sort_icon"><svg class="click_sort_sort1214"><use xlink:href="#sort1214"/></svg></div>');
 									print('<div class="click_sort_date">更新日</div>');
@@ -1459,10 +1458,20 @@ require_once("searchbar.php");
 								}
 							print('</div>');
 
-							$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY update_date DESC";
+							$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY update_date DESC LIMIT	" .$in_disp_from .", " .$p_max;
+							//print("sql:" .$sql);
+
 							$result = executequery($db, $sql);
 
-							print('<div id="threads">');
+							//print('<div id="all_container" data-username="' .$username .'" data-page="' .$page .'" data-from="' .$from .'" data-to="' .$to .'" data-max="' .$p_max .'" data-category="' .$category .'">');
+
+							print('<div id="threads" '	.' data-numPage="'	.$numPage
+														.'" data-from="'	.$from
+														.'" data-to="'		.$to
+														.'" data-max="'		.$p_max
+														.'" data-count="'	.$count_result
+														.'" data-order="'	.$order
+														.'">');
 
 								while($result && $record = getnextrow($result))
 								{
@@ -1698,7 +1707,7 @@ require_once("searchbar.php");
 							////////////////////////////////////////
 							print('<div class="search_result_turn_page">');
 
-								if($p_max > 25) {
+								if($count_result > 25) {
 
 									print('<button id="prev_sake_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 									$i = 1;
@@ -2376,49 +2385,6 @@ require_once("searchbar.php");
 							print('</div>');
 						print('</div>');
 
-						/* 内容量・価格 */
-						/*print('<div class="sakerow">');
-							print('<div class="sakecolumn1">内容量・価格</div>');
-							print('<div class="sakecolumn2" id="volume">');
-
-								if($row["volume_180"] == 1)
-								print("180ml/" .$row["price_180"] ."円 ");
-
-								if($row["volume_300"] == 1)
-								print("300ml/" .$row["price_300"] ."円 ");
-
-								if($row["volume_720"] == 1)
-								print("720ml/" .$row["price_720"] ."円 ");
-
-								if($row["volume_1800"] == 1)
-								print("1800ml/" .$row["price_1800"] ."円 ");
-
-								if($xml)
-								{
-									//print("<ul>");
-									//foreach ($xml->item as $data) {
-									//    print("<li>".$data->size_other. "ml: " .$data->price_other."円</li>");
-									//}
-
-									$volume_count = $xml->count();
-
-									if($volume_count > 0 && $xml->item[0]->other_size1 != "")
-									print("その他1: ".$xml->item[0]->other_size1 . "ml: " .$xml->item[0]->other_price1.'円  ');
-
-									if($volume_count > 1 && $xml->item[1]->other_size2 != "")
-									print("その他2: ".$xml->item[1]->other_size2 . "ml: " .$xml->item[1]->other_price2.'円  ');
-
-									if($volume_count > 2 && $xml->item[2]->other_size3 != "")
-									print("その他3: ".$xml->item[2]->other_size3 . "ml: " .$xml->item[2]->other_price3.'円  ');
-
-									if($volume_count > 3 && $xml->item[3]->other_size4 != "")
-									print("その他4: ".$xml->item[3]->other_size4 . "ml: " .$xml->item[3]->other_price4.'円  ');
-
-									//print("</ul>");
-								}
-							print('</div>');
-						print('</div>');*/
-
 						/* JANコード */
 						print('<div class="sakerow">');
 							print('<div class="sakecolumn1">JANコード</div>');
@@ -2612,8 +2578,6 @@ var users_chart = new Chart(ctx, {
     }
   }
 });
-
-var xmltext = <?php echo json_encode($xmltext); ?>;
 
 function getOrientation(imgDataURL)
 {
@@ -2913,14 +2877,18 @@ $(function() {
 
 $(function() {
 
-	var in_disp_from = 0;
-	var in_disp_to = 1;
-	var count_query = 1;
-	var sake_id = <?php echo json_encode($sake_id); ?>;
-	var count_nonda = <?php echo json_encode($count_nonda); ?>;
+	function nl2br(str, is_xhtml) {
+		var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>'; // Adjust comment to avoid issue on phpjs.org display
+
+		return (str + '')
+		.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+	}
 
 	function searchNonda(in_disp_from, in_disp_to, data, bCount)
 	{
+		//dispLoading("処理中...");
+		//alert("SearchNonda:" + data);
+
 		$.ajax({
 			type: "POST",
 			url: "nonda_list.php",
@@ -2933,134 +2901,487 @@ $(function() {
 			var sake = data[0].result;
 			var nonda_values = 0;
 
-			if(count_result > 0)
-			{
-				//alert("succeed:" + data.length + " count:" + data[0].count + " sake_name:" + sake[0].sake_name + " username:" + sake[0].username);
-				//alert("username:" + $(this).attr('username'));
-				//alert("sake:" + sake[0].path);
-				//alert("sql:" + sake[0].sql);
+			//alert("sql:" + data[0].sql);
+				//alert("count resut:" + sake.length);
+				$('#threads').empty()
 
-				////////////////////////////////////////
-				////////////////////////////////////////
-
-				var innerHTML = $('#nonda_sake_image > div:last-child')[0].outerHTML;
-				var image_paths = sake[0].path;
-				var count = 1;
-				var i = 0;
-
-				//alert("username:" + $(this).attr('username'));
-
-				$('#nonda_sake_image').empty();
-				$('#dialog_nonda_username').text(sake[0].username);
-				$('#dialog_nonda_title').text(sake[0].subject);
-				$('#dialog_nonda_message').text(sake[0].message);
-
-				/*
-				$('#dialog_nonda_userinfo img').attr("src", sake[0].userpath);
-				$('#dialog_nonda_user_addr').attr("src", sake[0].user_addr);
-				*/
-
-				var rankHTML = "";
-				var rank_value = parseInt(sake[0].sake_rank);
-
-				for(i = 0; i < rank_value && i < 5; i++)
-				{
-					rankHTML += '<svg  version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" ';
-					rankHTML += 'width="20" height="18" viewBox="-0.758 -0.272 21 21" enable-background="new -0.758 -0.272 21 21" xml:space="preserve">';
-					rankHTML += '<polygon fill="#D55319" points="0,7.64 5,12.763 3.82,20 6,18.794 6,6.722 "/>'
-					rankHTML += '<polygon fill="#D55319" points="10,0 6.91,6.583 6,6.722 6,18.794 10,16.583 "/>'
-					rankHTML += '<polygon fill="#D55319" points="13.088,6.583 10,0 10,16.583 14,18.794 14,6.723 "/>'
-					rankHTML += '<polygon fill="#D55319" points="15,12.763 20,7.64 14,6.723 14,18.794 16.178,20 "/>'
-					rankHTML += '</svg>';
+				if(count_result == 0 && sake == null) {
+					var innerText = '<div class="navigate_page_no_registry">投稿はありません</div>';
+					$('#disp_sake').css({"display":"none"});
+					$("#sake_sort").css({"display":"none"});
+					$("#tab_sake .result_count_container").css({"display":"none"});
+					$('#sake_table').html(innerText);
+					$('.search_result_turn_page').css({"display": "none"});
+					removeLoading();
 				}
+				else {
 
-				for(; i < 5; i++)
-				{
-					rankHTML += '<svg  version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" ';
-					rankHTML += 'width="20" height="18" viewBox="-0.046 -0.845 21 21" enable-background="new -0.046 -0.845 21 21" xml:space="preserve">';
-					rankHTML += '<polygon fill="#B1B0B1" points="0,7.64 5,12.763 3.82,20 6,18.794 6,6.722 "/>';
-					rankHTML += '<polygon fill="#B1B1B2" points="10,0 6.91,6.583 6,6.722 6,18.794 10,16.583 "/>';
-					rankHTML += '<polygon fill="#B1B1B2" points="13.088,6.583 10,0 10,16.583 14,18.794 14,6.723 "/>';
-					rankHTML += '<polygon fill="#B1B1B2" points="15,12.763 20,7.64 14,6.723 14,18.794 16.178,20 "/>';
-					rankHTML += '</svg>';
-				}
+					$("#sake_sort").css({"display":"flex"});
+					$('#disp_sake').css({"display":"block"});
+					$("#tab_sake .result_count_container").css({"display":"flex"});
+					//alert("sake.length:" + sake.length);
+					var sake_id = <?php echo json_encode($_GET['sake_id']); ?>;
 
-				$('#dialog_nonda_rank').html(rankHTML);
+					//alert("sake_id:" + sake_id);
 
-				if(image_paths)
-				{
-					var pathArray = image_paths.split(',');
-
-					for(i = 0; i < pathArray.length; i++)
+					for(i = 0; i < sake.length; i++)
 					{
-						$('#nonda_sake_image').append(innerHTML);
-						var path = "images\\photo\\" + pathArray[i];
-						var imageObj = $('#nonda_sake_image div:last img');
+						var tablename = "table_review" + sake[i].sake_id;
+						var sake_id = $('#threads').data('sake_id');
+						var innerText = '<a class="user_nonda_link" href="user_view_sakereview.php?sake_id=' + sake[i].sake_id + '&contributor=' + sake[i].username + '">';
+						var path = "images/icons/noimage_user30.svg";
 
-						$(imageObj).attr("src", path);
-						$('#nonda_sake_image div:last-child').attr("path", pathArray[i]);
+						innerText += '<a class="review" href="user_view_sakereview.php?sake_id=' + sake[i].sake_id +'&contributor=' +  sake[i].username + '">';
+						innerText += '<div class="nonda_user_container">';
+						innerText += '<div class="nonda_user_image_container">';
+						innerText += '<img src="' + path + '">';
+						innerText += '</div>';
+
+						innerText += '<div class="nonda_user_name_container">';
+						innerText += '<div class="nonda_user_name">' + sake[i].username + '</div>';
+						innerText += '<div class="nonda_user_profile_date_container">';
+						innerText += '<div class="nonda_date">' + sake[i].update_date + '</div>';
+						innerText += '</div>';
+						innerText += '</div>';
+						innerText += '</div>';
+
+						var rank_width = ((sake[i].rank / 5) * 100) + '%';
+
+						innerText += '<div class="nonda_rank">';
+						innerText += '<div class="review_star_rating">';
+						innerText += '<div class="review_star_rating_front" style="width:' + rank_width + '">★★★★★</div>';
+						innerText += '<div class="review_star_rating_back">★★★★★</div>';
+						innerText += '</div>';
+
+						if(sake[i].rank) {
+							innerText += '<span class="review_sake_rate">' + sake[i].rank.toFixed(1) + '</span>';
+						} else {
+							innerText += '<span class="review_sake_rate" style="color: #b2b2b2">--</span>';
+						}
+
+						innerText += '</div>';
+
+						if(sake[i].subject && sake[i].message) {
+							innerText += '<div class="nonda_subject_message_container">';
+								innerText += '<div class="nonda_subject">' + sake[i].subject + '</div>';
+								innerText += '<div class="nonda_message">' + sake[i].message + '</div>';
+							innerText += '</div>';
+						} else if(sake[i].subject && sake[i].message == null) {
+							innerText += '<div class="nonda_subject_message_container">';
+								innerText += '<div class="nonda_subject">' + sake[i].subject + '</div>';
+							innerText += '</div>';
+						} else if(sake[i].subject == null && sake[i].message) {
+							innerText += '<div class="nonda_subject_message_container">';
+								innerText += '<div class="nonda_message">' + nl2br(sake[i].message) + '</div>';
+							innerText += '</div>';
+						} else {
+							innerText += '';
+						}
+
+						if(sake[i].added_paths && sake[i].added_paths != "")
+						{
+							var pathArray = sake[i].added_paths.split(', ');
+							var j = 0;
+
+							innerText += '<div class="review_container">';
+								var path = "images\\photo\\thumb\\" + pathArray[j++];
+								innerText += '<div class="review_image"><img src="' + path + '"></div>';
+
+								while(j < pathArray.length)
+								{
+									path = "images\\photo\\thumb\\" + pathArray[j];
+									innerText += '<div class="review_image"><img src="' + path + '"></div>';
+								}
+
+							innerText += '</div>';
+						} else {
+							innerText += '';
+						}
+
+						if(sake[i].flavor || sake[i].tastes)
+						{
+							if(sake[i].tastes)
+								var tastes_values = sake[i].tastes.split(',');
+							else
+								var tastes_values = [0, 0, 0, 0, 0, 0, 0, 0];
+
+							innerText += '<div class="tastes">';
+
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_flavor1816"><use xlink:href="#flavor1816"/></svg>フレーバー</div>';
+
+									if(sake[i].flavor) {
+										innerText += '<div class="taste_value_flavor">' + GetFlavorNames(sake[i].flavor) + '</div>';
+									} else {
+										innerText += '<div class="taste_value_flavor" style="color: #b2b2b2">--</div>';
+									}
+
+								innerText += '</div>';
+
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_aroma1216"><use xlink:href="#aroma1216"/></svg>香り</div>';
+									innerText += '<div class="tastes_value_container">';
+										innerText += '<div class="tastes_bar_container">';
+											innerText += '<input type="range" name="aroma" step="0.1" min="0" max="5" value="' + tastes_values[0] + '" disabled="disabled" class="user_input_range">';
+										innerText += '</div>';
+
+										if(tastes_values[0]) {
+											innerText += '<div class="taste_value">' + parseFloat(tastes_values[0]).toFixed(1) + '</div>';
+										} else {
+											innerText += '<div class="taste_value" style="color: #b2b2b2">--</div>';
+										}
+
+									innerText += '</div>';
+								innerText += '</div>';
+
+								////////////////////////////////////////
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_body1216"><use xlink:href="#body1216"/></svg>ボディ</div>';
+									innerText += '<div class="tastes_value_container">';
+										innerText += '<div class="tastes_bar_container">';
+											innerText += '<input type="range" name="body" step="0.1" min="0" max="5" value="' + tastes_values[1] + '" disabled="disabled" class="user_input_range">';
+										innerText += '</div>';
+
+										if(tastes_values[1]) {
+											innerText += '<div class="taste_value">' + parseFloat(tastes_values[1]).toFixed(1) + '</div>';
+										} else {
+											innerText += '<div class="taste_value" style="color: #b2b2b2">--</div>';
+										}
+									innerText += '</div>';
+								innerText += '</div>';
+
+								////////////////////////////////////////
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_clear3030"><use xlink:href="#clear3030"/></svg>クリア</div>';
+									innerText += '<div class="tastes_value_container">';
+										innerText += '<div class="tastes_bar_container">';
+											innerText += '<input type="range" name="clear" step="0.1" min="0" max="5" value="' + tastes_values[2] + '" disabled="disabled" class="user_input_range">';
+										innerText += '</div>';
+
+										if(tastes_values[2]) {
+											//innerText += '<div class="taste_value">' + parseFloat(tastes_values[2]).toFixed(1) + '</div>';
+										} else {
+											innerText += '<div class="taste_value" style="color: #b2b2b2">--</div>';
+										}
+									innerText += '</div>';
+								innerText += '</div>';
+								////////////////////////////////////////
+
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_sweetness3030"><use xlink:href="#sweetness3030"/></svg>甘辛</div>';
+									innerText += '<div class="tastes_value_container">';
+										innerText += '<div class="tastes_bar_container">';
+											innerText += '<input type="range" name="sweetness" step="0.1" min="0" max="5" value="' + tastes_values[3] + '" disabled="disabled" class="user_input_range">';
+										innerText += '</div>';
+
+										if(tastes_values[3]) {
+											innerText += '<div class="taste_value">' + parseFloat(tastes_values[3]).toFixed(1) + '</div>';
+										} else {
+											innerText += '<div class="taste_value" style="color: #b2b2b2;">--</div>';
+										}
+
+									innerText += '</div>';
+								innerText += '</div>';
+
+								////////////////////////////////////////
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_umami3030"><use xlink:href="#umami3030"/></svg>旨味</div>';
+									innerText += '<div class="tastes_value_container">';
+										innerText += '<div class="tastes_bar_container">';
+											innerText += '<input type="range" name="umami" step="0.1" min="0" max="5" value="' + tastes_values[4] + '" disabled="disabled" class="user_input_range">';
+										innerText += '</div>';
+
+										if(tastes_values[4]) {
+											innerText += '<div class="taste_value">' + parseFloat(tastes_values[4]).toFixed(1) + '</div>';
+										} else {
+											innerText += '<div class="taste_value" style="color: #b2b2b2">--</div>';
+										}
+									innerText += '</div>';
+								innerText += '</div>';
+
+								////////////////////////////////////////
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_acidity3030"><use xlink:href="#acidity3030"/></svg>酸味</div>';
+									innerText += '<div class="tastes_value_container">';
+										innerText += '<div class="tastes_bar_container">';
+											innerText += '<input type="range" name="acidity" step="0.1" min="0" max="5" value="' + tastes_values[5] + '" disabled="disabled" class="user_input_range">';
+										innerText += '</div>';
+
+										if(tastes_values[5]) {
+											innerText += '<div class="taste_value">' + parseFloat(tastes_values[5]).toFixed(1) + '</div>';
+										} else {
+											innerText += '<div class="taste_value" style="color: #b2b2b2">--</div>';
+										}
+									innerText += '</div>';
+								innerText += '</div>';
+
+								////////////////////////////////////////
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_bitter1216"><use xlink:href="#bitter1216"/></svg>ビター</div>';
+									innerText += '<div class="tastes_value_container">';
+										innerText += '<div class="tastes_bar_container">';
+											innerText += '<input type="range" name="bitter" step="0.1" min="0" max="5" value="' + tastes_values[6] + '" disabled="disabled" class="user_input_range">';
+										innerText += '</div>';
+
+										if(tastes_values[6]) {
+											innerText += '<div class="taste_value">' + parseFloat(tastes_values[6]).toFixed(1) + '</div>';
+										} else {
+											innerText += '<div class="taste_value" style="color: #b2b2b2">--</div>';
+										}
+									innerText += '</div>';
+								innerText += '</div>';
+
+								////////////////////////////////////////
+								innerText += '<div class="tastes_item">';
+									innerText += '<div class="tastes_title"><svg class="tastes_item_yoin3030"><use xlink:href="#yoin3030"/></svg>余韻</div>';
+									innerText += '<div class="tastes_value_container">';
+										innerText += '<div class="tastes_bar_container">';
+											innerText += '<input type="range" name="yoin" step="0.1" min="0" max="5" value="' + tastes_values[7] + '" disabled="disabled" class="user_input_range">';
+										innerText += '</div>';
+
+										if(tastes_values[7]) {
+											innerText += '<div class="taste_value">' + parseFloat(tastes_values[7]).toFixed(1) + '</div>';
+										} else {
+											innerText += '<div class="taste_value" style="color: #b2b2b2">--</div>';
+										}
+									innerText += '</div>';
+								innerText += '</div>';
+
+							innerText += '</div>';
+						}
+
+						innerText += '</a>';
+
+						//alert("innerText:" + innerText);
+						$('#threads').append(innerText);
 					}
+
+					if(bCount == true)
+					{
+						var p_max = 25;
+						var numPage = Math.ceil(count_result / p_max);
+						var i = 1;
+
+						numPage = (numPage < 5) ? numPage : 5;
+
+						$("#count_sake").val(count_result);
+
+						if(count_result > 25) {
+							innerText = '<button id="prev_mypage_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>';
+							innerText += '<button class="pageitems selected">' + i + '</button>';
+
+							for(i++; i <= numPage; i++)
+								 innerText += '<button class="pageitems">' + i + '</button>';
+
+							if(count_result > p_max)
+								 innerText += '<button id="next_mypage_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
+							else
+								 innerText += '<button id="next_mypage_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
+
+							$('.search_result_turn_page').empty();
+							$('.search_result_turn_page').append(innerText);
+						}
+						else {
+							$('.search_result_turn_page').empty();
+						}
+					}
+
+					///////////////////////////////////////////////////////////////////////////////////////////////////
+					/////////////////////////////////////////////////////////////////////////////////////////////////
+					var pagenum = in_disp_from / 25;
+					var showPos = parseInt($('.search_result_turn_page .pageitems:nth(0)').text()) - 1;
+					var position = pagenum - showPos;
+
+					if(position >= $('.search_result_turn_page .pageitems').length)
+					{
+						var showPos = (pagenum - $('.search_result_turn_page .pageitems').length) + 1;
+
+						var i = 1;
+
+						$('.search_result_turn_page .pageitems').each(function() {
+								$(this).text(showPos + i);
+								i++;
+						});
+
+						position = $('.search_result_turn_page .pageitems').length - 1;
+					}
+					else if(position < 0)
+					{
+						var showPos = parseInt($('.search_result_turn_page .pageitems:nth(0)').text()) - 2;
+						var i = 1;
+
+						$('.search_result_turn_page .pageitems').each(function() {
+								$(this).text(showPos + i);
+								i++;
+						});
+
+						position = 0;
+					}
+
+					//alert("showPos:" + showPos + " position:" + position);
+					$('.search_result_turn_page .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
+					$('.search_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
+
+					///////////////////////////////////////////////////////////////////////////////////////////////////
+
+					if(in_disp_from >= parseInt($('#threads').data('from')))
+						$('#prev_mypage_review').addClass('active');
+					else
+						$('#prev_mypage_review').removeClass('active');
+
+					if((in_disp_from + parseInt($('#threads').data('max'))) > parseInt($('#threads').data('max')))
+						$('#next_mypage_review').removeClass('active');
+					else
+						$('#next_mypage_review').addClass('active');
+
+					var limit = ((in_disp_from + parseInt($('#threads').data('max'))) >= parseInt($('#threads').data('count'))) ? parseInt($('#threads').data('count')) : (in_disp_from + parseInt($('#threads').data('max')));
+
+					/////////////////////////////////////////////////////////////////
+					//alert("from:" + $('#threads').data('from'));
+					$('#threads').data('from', in_disp_from);
+					/////////////////////////////////////////////////////////////////
+
+					$('#disp_sake').text((in_disp_from + 1) + "～" + limit + "件 / 全" + parseInt($('#threads').data('count')) + "件");
+					$('html, body').animate({scrollTop:0}, '100');
 				}
-				else
-				{
-					$('#nonda_sake_image').append(innerHTML);
-				}
-
-				var tastes = sake[0].tastes;
-
-				if(tastes)
-				{
-					var nomitai_values = tastes.split(',');
-
-					$('#tabs_nonda_2 .graph .tasting_box').each(function(index) {
-						var width = Math.floor((nomitai_values[index] / 5) * 100) + "%";
-						//alert("width:" + width);
-
-
-						$(this).find('.horizontal_bar').animate({"width": width}, 500);
-						//$(this).find('div:first-child').text(nomitai_values[i++]);
-					});
-				}
-
-				////////////////////////////////////////
-				////////////////////////////////////////
-				$('#dialog_nonda_username').text(sake[0].username);
-				$('#dialog_nonda_title').text(sake[0].subject);
-				$('#dialog_nonda_message').text(sake[0].message);
-			}
 
 		}).fail(function(data){
-			alert("Failed:" + data);
+				//removeLoading();
+				alert("Failed:" + data);
 		}).complete(function(data){
-			//removeLoading();
+				// Loadingイメージを消す
+				//removeLoading();
 		});
 	}
 
-	$('.dialog_nonda_next button:first-child').click(function() {
+	function nonda_serialize(in_disp_from, in_disp_to, query_count, mode) {
 
-		if(in_disp_from > 0)
-		{
-			//alert("in_disp_from:" + in_disp_from + " count_nonda:" + count_nonda);
-			in_disp_from--;
+		var data = "search_type=1&sake_id=" + $('#container').data('sake_id');
 
-			var data = "sake_id="+sake_id+"&in_disp_from="+in_disp_from+"&in_disp_to="+in_disp_to+"&count_query="+count_query;
-			searchNonda(in_disp_from, in_disp_to, data, true);
+		if(mode == 1) { // for ajax
+			data += "&from=" + in_disp_from + "&to=" + in_disp_to;
 		}
+		else if(mode == 2) { // for url
+			data += "&page=" + (in_disp_from / $('#threads').data('max') + 1);
+		}
+
+		if(query_count && query_count == 1) {
+			data += "&count_query=" + query_count;
+		}
+
+		data += "&orderby=" + $('#threads').data('order');
+		return data;
+	}
+
+	$(document).on('click', '.search_result_turn_page #prev_sake_review', function(){
+
+		var search_type = 1;
+		var category = 1;
+		var disp_max = 25;
+		var sake_id = $('#threads').data('sake_id');
+		var in_disp_from = $('#threads').data('from') - $('#threads').data('max');
+		var in_disp_to = parseInt(in_disp_from) + $('#threads').data('max');
+		var orderby = $('#threads').data('order');
+		var href = $('.simpleTabs li a:nth(1)').attr('href');
+		var data = nonda_serialize(in_disp_from, in_disp_to, 0, 1);
+		var my_url = "?" + nonda_serialize(in_disp_from, in_disp_to, 0, 2) + href;
+
+		// alert("prev:" + in_disp_from + " count:" + $('#threads').data('count'));
+
+		if(in_disp_from < 0)
+		{
+			$('#prev_mypage_review').removeClass('active');
+			return false;
+		}
+
+		var stateObj = { 'search_type': search_type,
+						 'sake_id': sake_id,
+						 'category': category,
+						 'data': data,
+						 'url': my_url,
+						 'href': href,
+						 'orderby': orderby,
+						 'from': in_disp_from,
+						 'to': in_disp_to };
+
+		history.pushState(stateObj, "user", my_url);
+		searchNonda(in_disp_from, disp_max, data, false);
 	});
 
-	$('.dialog_nonda_next button:last-child').click(function() {
+	$(document).on('click', '.search_result_turn_page #next_sake_review', function(){
 
-		if(in_disp_from < count_nonda - 1)
-		{
-			//alert("in_disp_from:" + in_disp_from + " count_nonda:" + count_nonda);
-			in_disp_from++;
+		var search_type = 1;
+		var category = 1;
+		var disp_max = 25;
+		var sake_id = $('#threads').data('sake_id');
+		var in_disp_from = $('#threads').data('from') + $('#threads').data('max');
+		var in_disp_to = parseInt(in_disp_from) + $('#threads').data('max');
+		var orderby = $('#threads').data('order');
+		var href = $('.simpleTabs li a:nth(1)').attr('href');
+		var data = nonda_serialize(in_disp_from, in_disp_to, 0, 1);
+		var my_url = "?" + nonda_serialize(in_disp_from, in_disp_to, 0, 2) + href;
 
-			var data = "sake_id="+sake_id+"&in_disp_from="+in_disp_from+"&in_disp_to="+in_disp_to+"&count_query="+count_query;
-			searchNonda(in_disp_from, in_disp_to, data, true);
+		//alert("next:" + in_disp_from + " count:" + $('#threads').data('count'));
+
+		if(in_disp_from >= $('#threads').data('count')) {
+			return false;
 		}
+
+		var stateObj = { 'search_type': search_type,
+						 'sake_id': sake_id,
+						 'category': category,
+						 'data': data,
+						 'url': my_url,
+						 'href': href,
+						 'orderby': orderby,
+						 'from': in_disp_from,
+						 'to': in_disp_to };
+
+		history.pushState(stateObj, "user", my_url);
+
+		event.preventDefault();
+
+		searchNonda(in_disp_from, disp_max, data, false);
 	});
 
-    $("body").on( "nonda_message", function( event, id, username, update_date) {
+	$(document).on('click', '.search_result_turn_page .pageitems', function(){
+
+			var search_type = 1;
+			var category = 1;
+			var limit = 0;
+			var disp_max = 25;
+			var count_query = 1;
+			var href = $('.simpleTabs li a:nth(0)').attr('href');
+			var orderby = $("#order_sake").val();
+			var username = $('#all_container').data('username');
+			var showPos = parseInt($('.search_result_turn_page .pageitems:nth(0)').text());
+			var position = $(this).index();
+
+			var in_disp_from = (showPos + position - 2) * disp_max;
+			var in_disp_to = in_disp_from + disp_max;
+			var href = $('.simpleTabs li a:nth(0)').attr('href');
+
+			var data = nonda_serialize(in_disp_from, in_disp_to, 0, 1);
+			var my_url = "?" + nonda_serialize(in_disp_from, in_disp_to, 0, 2) + href;
+
+			$('.nonda_set .search_result_turn_page .pageitems.selected').removeClass("selected");
+
+			var stateObj = { 'search_type': search_type,
+							 'category': category,
+							 'data': data,
+							 'url': my_url,
+							 'username': username,
+							 'href': href,
+							 'from': 0,
+							 'to': 25,
+							 'orderby': orderby };
+
+			history.pushState(stateObj, "user", my_url);
+			searchNonda(in_disp_from, disp_max, data, false);
+	});
+
+
+	$("body").on( "nonda_message", function( event, id, username, update_date) {
 		var data = "sake_id="+sake_id+"&username="+username+"&update_date="+update_date+"&in_disp_from="+in_disp_from+"&in_disp_to="+in_disp_to+"&count_query="+count_query;
 		//alert("data:" + data + " in_disp_form:" + in_disp_from + " in_disp_to:" + in_disp_to);
 		//alert("nonda_message:" + sake_id + " username:" + username);
