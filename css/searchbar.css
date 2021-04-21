@@ -690,7 +690,7 @@
   cursor: pointer;
 }
 
-.click_sort_standard, .click_sort_date, .click_sort_read, .click_sort_ranking, .click_sort_like {
+.library_sort_container .click_sort_standard, .tab_sake_sort_container .click_sort_date, .tab_sakagura_sort_container .click_sort_date, .tab_users_sort_container .click_sort_date, .review_sort_container .click_sort_date, .product_sort_container .click_sort_read, .menu_sort_container .click_sort_read {
   color: #0740A5;
 }
 

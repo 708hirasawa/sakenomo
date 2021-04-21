@@ -220,7 +220,7 @@
   margin-top: 8px;
 }
 
-.page_navigation, .comment_sort, .photo_filter, .inshokuten_map_select {
+.menu_sort_container, .comment_sort, .photo_filter, .inshokuten_map_select {
   width: 100%;
   margin-top: 16px;
 }
