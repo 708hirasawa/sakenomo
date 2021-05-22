@@ -15,18 +15,25 @@ function write_side_menu()
 {
 	$username = $_COOKIE['login_cookie'];
 	$nickname = $_COOKIE['nickname'];
+	$path = $_COOKIE['user_profile_image'];
 
   print('<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">');
     print('<ul class="sidebar-nav">');
       print('<li class="sidebar-brand">');
         print('<div class="sidebar-user">');
 
-          $path = "images/icons/noimage_user30.svg";
           print('<div class="user-img-container">');
-            print('<img src="' .$path .'">');
+            if($path) {
+              print('<img src="' .$path .'">');
+            } else {
+              print('<img src="images/icons/noimage_user30.svg">');
+            }
           print('</div>');
-          print('<span>'.$nickname.'</span>');
-
+          if($nickname) {
+            print('<span>'.$nickname.'</span>');
+          } else {
+            print('<span style="color: #8c8c8c">Not logged in</span>');
+          }
         print('</div>');
       print('</li>');
 
