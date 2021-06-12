@@ -704,6 +704,7 @@
 
 .edit_sake_bar, #updatebar {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
@@ -719,8 +720,7 @@
   color: #666666;
   font-size: 14px;
   font-weight: bold;
-  width: 40%;
-  max-width: 320px;
+  width: 80%;
   height: 30px;
   border-radius: 4px;
   border: 1px solid #b2b2b2;
@@ -728,7 +728,7 @@
 }
 
 .edit_sake_bar a:first-child, #updatebar a:first-child {
-  margin-right: 16px;
+  margin-bottom: 16px;
 }
 
 .edit_sake_penplus2020, .add_sake_pen1616, .update_sakagura_penplus2020, .add_new_sakagura_pen1616, .update_inshokuten_penplus2020, .add_new_inshokuten_pen1616 {
@@ -840,7 +840,8 @@
   cursor: default;
 }
 
-#prev_sake_photo.active, #next_sake_photo.active, #prev_mypage_review.active, #prev_mypage_sakagura.active, #next_mypage_review.active, #next_sakagura.active {
+#prev_sake_photo.active, #next_sake_photo.active, #prev_mypage_review.active, #prev_mypage_sakagura.active, #prev_sake_review.active, #next_mypage_review.active, #next_sakagura.active, #next_sake_review.active
+{
   background: #b2b2b2;
   cursor: pointer;
 }
@@ -944,6 +945,19 @@
 
   .button_text {
     display: flex;
+  }
+
+  .edit_sake_bar, #updatebar {
+    flex-direction: row;
+  }
+
+  #edit_sake, #add_sake, .edit_sake, .add_sake, #update_sakagura, #add_new_sakagura, #update_inshokuten, #add_new_inshokuten {
+    width: 40%;
+  }
+
+  .edit_sake_bar a:first-child, #updatebar a:first-child {
+    margin-bottom: 0;
+    margin-right: 16px;
   }
 }
 
