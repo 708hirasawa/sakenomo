@@ -260,11 +260,36 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
 
-	$sql2 = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J WHERE SAKE_J.sake_id = TABLE_NONDA.sake_id AND contributor = '$username'";
+	$sql2 = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J WHERE SAKE_J.sake_id = TABLE_NONDA.sake_id AND contributor = '$username' AND committed = 1";
 	$res2 = executequery($db, $sql2);
 
 	$record = getnextrow($res2);
-	$count_nonda = ($record["COUNT(*)"] == "") ? "--" : $record["COUNT(*)"];
+	$count_nonda = ($record["COUNT(*)"] == "") ? "0" : $record["COUNT(*)"];
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//$sql = "SELECT count(FOLLOW_USER.username) FROM FOLLOW_USER WHERE FOLLOW_USER.username = '$username'";
+	//$sql = "SELECT count(*) FROM FOLLOW_USER, USERS_J where users_j.username = FOLLOW_USER.favoriteuser AND FOLLOW_USER.username = '$username'";
+
+	$sql = "SELECT count(*) FROM FOLLOW_USER, USERS_J where users_j.username = FOLLOW_USER.username AND FOLLOW_USER.favoriteuser = '$username'";
+
+	$res3 = executequery($db, $sql);
+
+	if($row3 = getnextrow($res3)) {
+		//$follow_count = $row3["count(FOLLOW_USER.username)"];
+		$follow_count = $row3["count(*)"];
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 	print('<div id="all_container" data-username="' .$username .'" data-page="' .$page .'" data-from="' .$from .'" data-to="' .$to .'" data-max="' .$p_max .'" data-category="' .$category .'">');
 
@@ -356,12 +381,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 					print('</li>');
 
 					print('<li>');
-						print('<span id="user_activity_sakagura"></span>');
-						print('<span>お気に入り酒蔵</span>');
-					print('</li>');
-
-					print('<li>');
-						print('<span id="user_activity_follower">--</span>');
+						print('<span id="user_activity_follower"></span>');
 						print('<span>フォロワー</span>');
 					print('</li>');
 				print("</ul>");
@@ -531,6 +551,7 @@ $title = ($_COOKIE['login_cookie'] == $_GET['username']) ? "マイページ" : "
 									print('<input type="hidden" id="in_sakagura_disp_from" value=0>');
 									print('<input type="hidden" id="order_sakagura" value="favorite_date">');
 									print('<input type="hidden" id="count_sakagura" value=' .$count_result .'>');
+									print('<input type="hidden" id="count_follower" value=' .$follow_count .'>');
 
 									$numPage = $count_result / $p_max;
 									$numPage = ($count_result % $p_max) ? ($numPage + 1) : $numPage;
@@ -2009,7 +2030,10 @@ $(function() {
 				var data = sake_serialize(in_disp_from, disp_max, 1, 1);
 				var my_url = "?" + sake_serialize(in_disp_from, disp_max, 0, 2) + href;
 
+
 				$('#all_container').data('category', 2);
+
+
 				$('#tab_sake').removeClass('nonda_set');
 				$('#tab_sake').addClass('nomitai_set');
 
@@ -2034,6 +2058,7 @@ $(function() {
 		/////////////////////////////////////////////////////
 		// 飲みたい　更新日　click for sorting
 		/////////////////////////////////////////////////////
+		/*
 		$(document).on('click', '#tab_sake.nomitai_set .click_sort_date', function(e) {
 
 				var search_type = 1;
@@ -2062,6 +2087,7 @@ $(function() {
 				history.pushState(stateObj, "user", href);
 				searchSake(in_disp_from, disp_max, data, false);
 		});
+		*/
 });
 
 /*****************************************************************************************************************************************************************************************
@@ -2684,14 +2710,19 @@ $(function() {
 
 										if(username == loginname) {
 											if(category == 1) {
-												innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー</span></button>';
+												if(users[i].followed) {
+													innerHTML += '<button class="custom_button followed" data-username="' + users[i].username + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー中</span></button>';
+												}
+												else {
+													innerHTML += '<button class="custom_button" data-username="' + users[i].username + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー</span></button>';
+												}
 											}
 											else if(category == 2) {
 												if(users[i].followed) {
-													innerHTML += '<button class="custom_button followed" data-username="' + users[i].email + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー</span></button>';
+													innerHTML += '<button class="custom_button followed" data-username="' + users[i].username + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー中</span></button>';
 												}
 												else {
-													innerHTML += '<button class="custom_button" data-username="' + users[i].email + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー</span></button>';
+													innerHTML += '<button class="custom_button" data-username="' + users[i].username + '"><svg class="search_result_button_pin1616"><use xlink:href="#pin1616"/></svg><span class="button_text">フォロー</span></button>';
 												}
 											}
 										}
@@ -2931,6 +2962,7 @@ $(function() {
 	});
 
 
+	/*
 	$('#user_sort .click_sort_date').click(function() {
 
 		var data = "username=" + $('#all_container').data('username');
@@ -2949,6 +2981,7 @@ $(function() {
 		//alert("data:" + data);
 		searchUsers(data, category, 0, 25, false);
 	});
+	*/
 
 	$(document).on('click', '#tab_users .custom_button', function(e) {
 
@@ -2990,7 +3023,8 @@ $(function() {
 		var bCount = 1;
 		var data = users_serialize(1, in_disp_from, in_disp_to, bCount, 1);
 		var my_url = "?" + users_serialize(1, in_disp_from, in_disp_to, bCount, 2) + href;
-		var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
+		//var category = $('#all_container').data('category') ? $('#all_container').data('category') : 1;
+		var category = 1;
 
 		$('#tab_users .display_selection_button.selected').removeClass('selected');
 		$('#tab_users .display_selection_button:nth(0)').addClass('selected');
@@ -3005,6 +3039,8 @@ $(function() {
 						'from': 0,
 						'to': 25 };
 
+
+		//alert('search user category:' + category);
 		history.pushState(stateObj, "user", my_url);
 		$("body").trigger("search_users", [ data, category, in_disp_from, in_disp_to, 1 ] );
 	});
@@ -3015,7 +3051,6 @@ $(function() {
 	});
 
 	$('#tab_users .display_selection div:first-child').on( "click", function(event) {
-
 
 		$('#tab_users .display_selection_button.selected').removeClass('selected');
 		$(this).addClass('selected');
@@ -3159,14 +3194,15 @@ jQuery(document).ready(function($) {
 	});
 
 	$('#user_activity_nonda').text($('#count_sake').val());
-	$('#user_activity_sakagura').text($('#count_sakagura').val());
+	$('#user_activity_follower').text($('#count_follower').val());
 
-	if($('#user_activity_nonda').text() == '--') {
+
+	if($('#user_activity_nonda').text() == 0) {
 		$("#user_activity_nonda").css('color', '#b2b2b2');
 	}
 
-	if($('#user_activity_sakagura').text() == '--') {
-		$("#user_activity_sakagura").css('color', '#b2b2b2');
+	if($('#user_activity_follower').text() == 0) {
+		$("#user_activity_follower").css('color', '#b2b2b2');
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
