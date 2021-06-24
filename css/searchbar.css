@@ -313,18 +313,18 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  display: flex;
+  display: none;
   justify-content: flex-start;
   align-items: flex-start;
   width: 1200px;
   max-width: 96%;
   height: auto;
-  display: none;
+  z-index: 100;
 }
 
 #search_content {
   overflow: hidden;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -339,8 +339,6 @@
   height: auto;
   border: 1px solid #d2d2d2;
   border-radius: 4px;
-  z-index: 100;
-  display: none;
 }
 
 .search_content_close {
