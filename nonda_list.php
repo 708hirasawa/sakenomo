@@ -7,7 +7,6 @@ $count_query = $_POST["count_query"];
 
 //$orderby = $_POST["orderby"];
 $orderby = "update_date";
-$intime = gmdate("Y/m/d H:i:s", $row["update_date"] + 9 * 3600);
 $count_result = 0;
 
 if(!$db = opendatabase("sake.db"))
@@ -17,7 +16,7 @@ if(!$db = opendatabase("sake.db"))
 	echo json_encode($result_set);
 }
 
-$condition = "WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKE_J.sake_id = TABLE_NONDA.sake_id AND committed = 1";
+$condition = "WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKE_J.sake_id = TABLE_NONDA.sake_id AND USERS_J.username = TABLE_NONDA.contributor AND committed = 1";
 
 if(isset($_POST['username']) && $_POST['username'] != "")
 {
@@ -51,7 +50,7 @@ if(isset($_POST['special_name']) && $_POST['special_name'] != "")
 
 if($count_query == 1)
 {
-	$sql = "SELECT COUNT(*) FROM SAKE_J, SAKAGURA_J, TABLE_NONDA " .$condition;
+	$sql = "SELECT COUNT(*) FROM SAKE_J, SAKAGURA_J, USERS_J, TABLE_NONDA " .$condition;
 	//$sql = "SELECT COUNT(*) FROM SAKE_J, SAKAGURA_J, db1.TABLE_NONDA AS TABLE_NONDA WHERE TABLE_NONDA.contributor = '$username' AND SAKE_J.sakagura_id=SAKAGURA_J.id AND SAKE_J.sake_id = TABLE_NONDA.sake_id";
 	$res = executequery($db, $sql);
 
@@ -95,7 +94,9 @@ if(isset($_POST['from']) && $_POST['from'] != undefined)
     $condition .= " LIMIT ".$from.", ".$to;
 }
 
-$sql = "SELECT TABLE_NONDA.sake_id AS sake_id, TABLE_NONDA.rank AS rank, TABLE_NONDA.flavor AS flavor, TABLE_NONDA.update_date AS update_date, TABLE_NONDA.contributor AS contributor, sake_name, sake_read, sakagura_name, pref, sake_rank, subject, message, tastes, committed FROM SAKE_J, SAKAGURA_J, TABLE_NONDA " .$condition;
+//$sql = "SELECT TABLE_NONDA.sake_id AS sake_id, TABLE_NONDA.rank AS rank, TABLE_NONDA.flavor AS flavor, TABLE_NONDA.update_date AS update_date, TABLE_NONDA.contributor AS contributor, sake_name, sake_read, sakagura_name, SAKAGURA_J.pref AS pref, sake_rank, subject, message, tastes, committed FROM SAKE_J, SAKAGURA_J, TABLE_NONDA, USERS_J " .$condition;
+$sql = "SELECT USERS_J.username AS username, USERS_J.nickname AS nickname, TABLE_NONDA.sake_id AS sake_id, TABLE_NONDA.rank AS rank, TABLE_NONDA.flavor AS flavor, TABLE_NONDA.update_date AS update_date, TABLE_NONDA.contributor AS contributor, sake_name, sake_read, sakagura_name, SAKAGURA_J.pref AS pref, sake_rank, subject, message, tastes, committed FROM SAKE_J, SAKAGURA_J, USERS_J, TABLE_NONDA " .$condition;
+
 $res = executequery($db, $sql);
 
 if(!res)
@@ -123,11 +124,25 @@ else
 				$added_paths .= ", " .$image_record["filename"];
 		}
 
+
+		$username = $row["username"];		
+        $sql3 = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
+        $res_profile = executequery($db, $sql3);
+        $rd_profile = getnextrow($res_profile);
+        $profile_image = "images/icons/noimage_user30.svg";
+
+        if($rd_profile) {
+			$profile_image = "images/profile/" .$rd_profile["filename"];
+        }
+
 		$result[] = array('path' => $added_paths,
 						'count' => $count_result,
 						'sake_id'	=> $row["sake_id"],
+						'username'	=> $row["username"],
+						'nickname'	=> $row["nickname"],
 						'sake_name' => stripslashes($row["sake_name"]), 
 						'sake_read' => $row["sake_read"], 
+						'profile_image' => $profile_image,
 						'sakagura_name' => $row["sakagura_name"], 
 						'pref' => $row["pref"],
 						'sake_rank' => $row["rank"],

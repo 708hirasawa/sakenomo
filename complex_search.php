@@ -1223,7 +1223,7 @@ else if($_POST["category"] == 3)
 	//$to = $_POST["to"];
 	$to = 25;
 	
-	$sql = "SELECT sakagura_name, sakagura_read, sakagura_english, id, establishment, sakagura, pref, address, email, touji, representative, postal_code, phone, url, award_history, observation, observatory_info, direct_sale, brand, status, date_updated, kumiai, kokuzei FROM SAKAGURA_J " .$condition." ORDER BY sakagura_read"." LIMIT ".$from.", ".$to;
+	$sql = "SELECT sakagura_name, sakagura_read, sakagura_english, sakagura_search, id, establishment, sakagura, pref, address, email, fax, touji, representative, postal_code, phone, url, award_history, observation, observatory_info, direct_sale, brand, status, date_updated, kumiai, kokuzei FROM SAKAGURA_J " .$condition." ORDER BY sakagura_read"." LIMIT ".$from.", ".$to;
 
 	$res = executequery($db, $sql);
 
@@ -1246,6 +1246,7 @@ else if($_POST["category"] == 3)
 			$result2[] = array('sakagura_name' => $row["sakagura_name"], 
 								'sakagura_read' => $row["sakagura_read"], 
 								'sakagura_english' => $row["sakagura_english"], 
+								'sakagura_search' => $row["sakagura_search"], 
 								'id' => $row["id"], 
 								'pref' => $row["pref"], 
 								'postal_code' => $row["postal_code"], 

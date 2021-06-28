@@ -2,8 +2,9 @@
 
 require_once("db_functions.php");
 $username = $_POST['username'];
-$nickname = $_POST['username'];
+$nickname = $_POST['nickname'];
 $hidden_username = $_POST['hidden_username'];
+//$hidden_nickname = $_POST['hidden_nickname'];
 $email = $_POST['email'];
 
 if(!$db = opendatabase("sake.db"))
@@ -318,6 +319,7 @@ if(isset($_POST['certification_disclose_select']) && $_POST['certification_discl
     }
 }
 
+/*
 if($hidden_username != $username) 
 {
 	$sql = "SELECT username from USERS_J WHERE username = '$username'";
@@ -338,12 +340,13 @@ if($hidden_username != $username)
 		return;
 	}
 }
+*/
 
 if(isset($_POST['delete_image']) && $_POST['delete_image'] != undefined)
 {
     if($_POST['delete_image'] == 1) 
 	{
-		$sql = "DELETE FROM PROFILE_IMAGE WHERE contributor = '$email'";
+		$sql = "DELETE FROM PROFILE_IMAGE WHERE contributor = '$username'";
 		$res = executequery($db, $sql);
 
 		if(!$res)   
@@ -355,16 +358,31 @@ if(isset($_POST['delete_image']) && $_POST['delete_image'] != undefined)
 			echo '<str>'.$return.'</str>'."\n";
 			echo '</xml>'."\n";
 		}
+
+		/*
+		if(file_exists($path)) {
+			$ret = unlink($path);	
+
+			if($ret == FALSE)
+				$return = "failed unlink1";
+		}
+		else {
+			$return = "file_does_not_exit";
+		}
+		*/
+
+		$path = "images/icons/noimage_user30.svg";
+		setcookie("user_profile_image", $path, time() + (10 * 365 * 24 * 60 * 60));
 	}
 }
 
-$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$email' AND STATUS = 2";
+$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND STATUS = 2";
 $result = executequery($db, $sql);
 $row = getnextrow($result);
 
 if($row) 
 {
-	$sql = "DELETE FROM PROFILE_IMAGE WHERE contributor = '$email' AND STATUS = 1";
+	$sql = "DELETE FROM PROFILE_IMAGE WHERE contributor = '$username' AND STATUS = 1";
 	$res = executequery($db, $sql);
 
 	if(!$res)   
@@ -377,7 +395,7 @@ if($row)
 		echo '</xml>'."\n";
 	}
 
-	$sql = "UPDATE PROFILE_IMAGE SET STATUS = 1 WHERE contributor = '$email' AND STATUS = 2";
+	$sql = "UPDATE PROFILE_IMAGE SET STATUS = 1 WHERE contributor = '$username' AND STATUS = 2";
 	$res = executequery($db, $sql);
 
 	if(!$res)   
@@ -388,6 +406,18 @@ if($row)
 		echo '<xml>'."\n";
 		echo '<str>'.$return.'</str>'."\n";
 		echo '</xml>'."\n";
+	}
+
+	$path = "images/icons/noimage_user30.svg";
+	$imagefile = null;
+	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
+	$result = executequery($db, $sql);
+	$rd = getnextrow($result);
+
+	if($rd) {
+		$imagefile = $rd["filename"];
+		$path = "images/profile/" .$imagefile;
+		setcookie("user_profile_image", $path, time() + (10 * 365 * 24 * 60 * 60));
 	}
 }
 
@@ -407,8 +437,10 @@ else
 {
 	$return = "success";
 
+	setcookie("login_cookie", $username, time() + (10 * 365 * 24 * 60 * 60));
 	setcookie("username", $username, time() + (10 * 365 * 24 * 60 * 60));
-	setcookie("login_cookie", $email, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("nickname", $nickname, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("email", $email, time() + (10 * 365 * 24 * 60 * 60));
 	setcookie("password_cookie", $password, time() + (10 * 365 * 24 * 60 * 60));
 	//setcookie("usertype_cookie", $usertype, time() + (10 * 365 * 24 * 60 * 60));
 
@@ -417,7 +449,7 @@ else
 
 	echo '<xml>'."\n";
 	echo ' <str>'.$return.'</str>'."\n";
-	echo ' <sql>'.$sql2.'</sql>'."\n";
+	echo ' <sql>'.$sql.'</sql>'."\n";
 	echo ' <username>'.$username.'</username>'."\n";
 	echo ' <fname>'.$fname.'</fname>'."\n";
 	echo ' <lname>'.$lname.'</lname>'."\n";

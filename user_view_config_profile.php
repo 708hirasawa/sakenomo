@@ -33,7 +33,7 @@ require_once("searchbar.php");
 	write_search_bar();
 
 	//$username = $_SESSION['loginname'];
-	$username = $_COOKIE['login_cookie'];
+	$username = $_COOKIE['username'];
 
 	if(!$db = opendatabase("sake.db"))
 	{
@@ -85,7 +85,7 @@ require_once("searchbar.php");
 	$introduction = stripslashes($row["introduction"]);
 
 	print('<input type="hidden" name="hidden_email" value=' .$email .'>');
-	print('<input type="hidden" name="hidden_username" value=' .$username .'>');
+	print('<input type="hidden" name="hidden_username" value="' .$username .'">');
 	print('<input type="hidden" name="hidden_nickname" value=' .$nickname .'>');
 	print('<input type="hidden" id="hidden_fname" value=' .$fname .'>');
 	print('<input type="hidden" id="hidden_minit" value=' .$minit .'>');
@@ -534,9 +534,6 @@ $(function() {
 		var data = $('#main_container').serialize() + '&username=' + username;
 		data += "&hidden_username=" + $('input[name="hidden_username"]').val();
 
-		//alert("data:" + data);
-
-
 		if($('#main_container input[name="certification[]"]:checked').length == 0)
 			data += '&certification=';
 
@@ -551,6 +548,8 @@ $(function() {
 			alert("生年月日を正しく入力してください");
 			return;
 		}
+
+		//alert("data:" + data);
 
 		$.ajax({
 			type: "post",
@@ -666,9 +665,11 @@ $(function() {
 			img_obj.attr("src", e.target.result);
 
             formdata.append("file1", file);
-            formdata.append("username", $('input[name="hidden_email"]').val());
+            formdata.append("username", $('input[name="hidden_username"]').val());
             formdata.append("max_width", 200);
             formdata.append("max_height", 200);
+
+			//alert("username:" + $('input[name="hidden_username"]').val());
 
             ajax.upload.addEventListener("progress", function(event) { progressHandler(event, total, status, progress, true); }, false);
             ajax.addEventListener("load", function(event) { completeHandler(event, img_obj, total, status, progress); }, false);

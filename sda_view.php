@@ -758,11 +758,11 @@ print('<div id="container"
         print('<div class="updatebar_container">');
           print('<div id="updatebar">');
 			if($_COOKIE['login_cookie'] != "") {
-              print('<a href="sda_add_form.php?id=' .$row["id"] .'&sakagura_name=' .$row["sakagura_name"] .'" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>編集する</a>');
-              print('<a href="sda_add_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>追加する</a>');
+              print('<a href="sda_add_form.php?id=' .$row["id"] .'&sakagura_name=' .$row["sakagura_name"] .'" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>この酒蔵を編集</a>');
+              print('<a href="sda_add_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>新しい酒蔵を追加</a>');
             } else {
-              print('<a href="user_login_form.php" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>編集する</a>');
-              print('<a href="user_login_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>追加する</a>');
+              print('<a href="user_login_form.php" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>この酒蔵を編集</a>');
+              print('<a href="user_login_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>新しい酒蔵を追加</a>');
             }
           print('</div>');
         print('</div>');

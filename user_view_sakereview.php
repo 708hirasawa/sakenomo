@@ -129,12 +129,16 @@ require_once("nonda.php");
 		return;
 	}
 
+	$row = getnextrow($res);
+	$nickname = $row["nickname"];
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//$sql = "SELECT COUNT(*) FROM TABLE_NONDA WHERE sake_id = '$sake_id'";
 	$sql = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J WHERE SAKE_J.sake_id = TABLE_NONDA.sake_id AND contributor = '$username'";
 
 	$res = executequery($db, $sql);
 	$rd = getnextrow($res);
+
 	$nonda_count = ($rd["COUNT(*)"] == 0 || $rd["COUNT(*)"] == "") ? "no code" : $rd["COUNT(*)"];
 	$count_result = $rd["COUNT(*)"];
 
@@ -387,6 +391,7 @@ require_once("nonda.php");
 											.'" data-pref=' .$record["pref"]
 											.' data-write_date=' .$record["write_date"]
 											.' data-contributor="' .$record["contributor"]
+											.'" data-nickname="' .$nickname
 											.'" data-subject="' .$record["subject"]
 											.'" data-message="' .$record["message"]
 											.'" data-rank="' .$record["rank"]
@@ -1019,9 +1024,10 @@ $(function() {
 	$(document).on('click', '.user_sake_image', function(){
 		var touch_start_y;
 		var path = $(this).find('img');
+		var nickname = $('#profile_name').text();
 
 		$("#preview_image").attr("src", $(path).attr("src"));
-		$("#dialog_preview .dialog_preview_user_name").text($(this).data("contributor"));
+		$("#dialog_preview .dialog_preview_user_name").text(nickname);
 		$("#dialog_preview .dialog_preview_date").text($(this).data("added_date"));
 
 		if($(this).data("desc") && $(this).data("desc") != "") {

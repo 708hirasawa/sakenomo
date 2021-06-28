@@ -80,7 +80,7 @@ $(function() {
 
 			$('input[name="sakagura_search[]"]').each(function() {
 				//alert("sakagura_search:" + $(this).val());
-
+			
 				if(sakagura_search_text != "")
 					sakagura_search_text += ",";
 
@@ -93,28 +93,23 @@ $(function() {
 			$('.dialog_address').text($('input[name="address"]').val());
 			$('.dialog_phone').text($('input[name="phone"]').val());
 			$('.dialog_fax').text($('input[name="fax"]').val());
+			$('.dialog_url').text($('input[name="url"]').val());
 			$('.dialog_email').text($('input[name="email"]').val());
 			$('.dialog_representative').text($('input[name="representative"]').val());
 			$('.dialog_touji').text($('input[name="touji"]').val());
-			$('.dialog_establishment').text($('select[name="establishment"] option:selected').val());
+
+			if($('select[name="establishment"] option:selected').val() == 9999) {
+				$('.dialog_establishment').text('その他:' + $('input[name="other_year"]').val());
+			}
+			else {
+				$('.dialog_establishment').text($('select[name="establishment"] option:selected').val());
+			}
+
 			$('.dialog_brand').text($('input[name="brand"]').val());
 			$('.dialog_payment_method').text($('input[name="payment_method"]').val());
 			$('.dialog_award_history').text($('textarea[name="award_history"]').val());
 			$('.dialog_observatory_info').text($('textarea[name="observatory_info"]').val());
 			$('.dialog_observation').text($('select[name="observation"] option:selected').text());
-			$('.dialog_direct_sale').text($('select[name="direct_sale"] option:selected').text());
-
-			var url_text = "";
-
-			$('input[name="url[]"]').each(function() {
-
-				if(url_text != "")
-					url_text += ",";
-
-				url_text += $(this).val();
-			});
-
-			$('.dialog_url').text(url_text);
 			//$('.dialog_memo').text($('textarea[name="memo"]').val());
 
 			var touch_start_y;

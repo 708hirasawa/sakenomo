@@ -3943,6 +3943,40 @@ $(function() {
 			return data;
 		}
 
+		$(document).on('click', '#tabs-30_content #mobile_accordion_search_clear', function(e){
+
+			$('#tabs-30_content SELECT[name="pref"]').val("");
+			$('#tabs-30_content SELECT[name="special_name"]').val("");
+			$('#tabs-30_content SELECT[name="rice_used"]').val("");
+			$('#tabs-30_content SELECT[name="seimai_rate"]').val("");
+
+			$('input[name="sake_category[]"]').each(function() {
+				this.checked = false;
+			});
+
+			$('#tabs-30_content .dialog_sidebar').slideUp();
+			$("#tabs-30_content .arrow_icon").removeClass('active');
+
+
+			var p_max = 25;
+			var in_disp_from = 0;
+			var in_disp_to = in_disp_from + p_max;
+
+			$('#category').val(2);
+			var data = sake_serialize(in_disp_from, in_disp_to) + "&count_query=1";
+			var my_url = "?" + sake_serialize(in_disp_from, 0) + "&count_query=1";
+
+			var stateObj = { 'url': my_url,
+							'category': $('#category').val(),
+							'keyword': $('#sake_input').val(),
+							'from': in_disp_from,
+							'to': in_disp_to };
+
+			history.pushState(stateObj, "test1", my_url);
+			searchSake(data, in_disp_from, in_disp_to, 1);
+
+		});
+
 		$('#sake_sidebar_form .sake_option_trigger').click(function(){
 
 				var obj = this;
@@ -5030,6 +5064,29 @@ $(function() {
 
 				history.pushState(stateObj, "test1", my_url);
 				searchSakagura(data, in_disp_from, in_disp_to, 1);
+		});
+
+		$(document).on('click', '#tabs-31_content #mobile_accordion_search_clear', function(e){
+
+			$('#tabs-31_content SELECT[name="sakagura_pref"]').val("");
+			$('#tabs-31_content SELECT[name="observation"]').val("");
+
+			$('#category').val(3);
+
+			var p_max = 25;
+			var in_disp_from = 0;
+			var in_disp_to = in_disp_from + p_max;
+			var data = sakagura_serialize(in_disp_from, in_disp_to) + '&count_query=1';
+			var my_url = "?" + sakagura_serialize(in_disp_from, 0) + '&count_query=1';
+			var stateObj = { 'url': my_url,
+							'category': $('#category').val(),
+							'keyword': $('#sake_input').val(),
+							'from': in_disp_from,
+							'to': in_disp_to };
+
+			history.pushState(stateObj, "test1", my_url);
+
+			searchSakagura(data, in_disp_from, in_disp_to, 1);
 		});
 });
 

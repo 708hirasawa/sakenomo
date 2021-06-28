@@ -1422,7 +1422,10 @@ require_once("searchbar.php");
 						$in_disp_from = 0;
 						$p_max = 25;
 						$order = "DESC";
+
 						$numPage = ceil($count_result / $p_max);
+						$numPage = ($count_result % $p_max) ? ($numPage + 1) : $numPage;
+						$numPage = ($numPage > 5) ? 5 : $numPage;
 
 						////////////////////////////////////////
 						////////////////////////////////////////
@@ -1709,7 +1712,7 @@ require_once("searchbar.php");
 
 								if($count_result > 25) {
 
-									print('<button id="prev_sake_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
+									print('<button id="prev_mypage_review"><svg class="prev_button_prev2020"><use xlink:href="#prev2020"/></svg></button>');
 									$i = 1;
 
 									print('<button class="pageitems" style="background:#22445B; color:#ffffff;">' .$i .'</button>');
@@ -1719,7 +1722,7 @@ require_once("searchbar.php");
 										print('<button class="pageitems">' .$i .'</button>');
 									}
 
-									print('<button id="next_sake_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
+									print('<button id="next_mypage_review" class="active"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>');
 								}
 							print("</div>");
 						}
@@ -1980,10 +1983,12 @@ require_once("searchbar.php");
 						print('</div>');
 
 						//$sql = "SELECT COUNT(*) FROM SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND SAKE_IMAGE.sake_id = '$sake_id'";
-						$sql = "SELECT COUNT(*) FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id'";
+						//$sql = "SELECT COUNT(*) FROM USERS_J, SAKE_IMAGE, SAKE_J WHERE SAKE_IMAGE.sake_id = SAKE_J.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND SAKE_IMAGE.sake_id = '$sake_id'";
+						$sql = "SELECT COUNT(distinct SAKE_IMAGE.filename) FROM TABLE_NONDA, SAKE_IMAGE, USERS_J WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND USERS_J.username = SAKE_IMAGE.contributor AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor";
+
 						$result = executequery($db, $sql);
 						$record = getnextrow($result);
-						$count_result = $record["COUNT(*)"];
+						$count_result = $record["COUNT(distinct SAKE_IMAGE.filename)"];
 
 						if($count_result > 0) {
 							print('<div class="photo_count_container">');
@@ -2062,11 +2067,11 @@ require_once("searchbar.php");
 					print('<div class="edit_sake_bar">');
 						if($_COOKIE['login_cookie'] != "")
 						{
-							print('<a id="edit_sake" sakagura_id="' .$row["sakagura_id"] .'"><svg class="edit_sake_penplus2020"><use xlink:href="#penplus2020"/></svg>編集する</a>');
-							print('<a id="add_sake" sakagura_id="' .$row["sakagura_id"] .'"><svg class="add_sake_pen1616"><use xlink:href="#pen1616"/></svg>追加する</a>');
+							print('<a id="edit_sake" sakagura_id="' .$row["sakagura_id"] .'"><svg class="edit_sake_penplus2020"><use xlink:href="#penplus2020"/></svg>この日本酒を編集</a>');
+							print('<a id="add_sake" sakagura_id="' .$row["sakagura_id"] .'"><svg class="add_sake_pen1616"><use xlink:href="#pen1616"/></svg>新しい日本酒を追加</a>');
 						} else {
-							print('<a class="edit_sake" href="user_login_form.php"><svg class="edit_sake_penplus2020"><use xlink:href="#penplus2020"/></svg>編集する</a>');
-							print('<a class="add_sake" href="user_login_form.php"><svg class="add_sake_pen1616"><use xlink:href="#pen1616"/></svg>追加する</a>');
+							print('<a class="edit_sake" href="user_login_form.php"><svg class="edit_sake_penplus2020"><use xlink:href="#penplus2020"/></svg>この日本酒を編集</a>');
+							print('<a class="add_sake" href="user_login_form.php"><svg class="add_sake_pen1616"><use xlink:href="#pen1616"/></svg>新しい日本酒を追加</a>');
 						}
 					print("</div>");
 				print('</div>');
@@ -2507,6 +2512,13 @@ print('</div>');
 writefooter();
 ?>
 
+<!-- dialog_background -->
+<div id="search_background">
+	<div id="inner_background">
+		<div class="loader"></div>
+	</div>
+</div>
+
 <script type="text/javascript">
 
 $(function () {
@@ -2753,6 +2765,21 @@ function GetFlavorNames(flavors)
 	return ret_value;
 }
 
+function nl2br(str, is_xhtml) {
+	var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>'; // Adjust comment to avoid issue on phpjs.org display
+
+	return (str + '')
+	.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
+
+function dispLoading(){
+	 $('#search_background').css('display', 'block');
+}
+
+function removeLoading(){
+	 $('#search_background').css('display', 'none');
+}
+
 /*slick***************************************/
 $(function(){
 	var slider = "#preview_main_container"; // スライダー
@@ -2877,33 +2904,27 @@ $(function() {
 
 $(function() {
 
-	function nl2br(str, is_xhtml) {
-		var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>'; // Adjust comment to avoid issue on phpjs.org display
-
-		return (str + '')
-		.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-	}
-
 	function searchNonda(in_disp_from, in_disp_to, data, bCount)
 	{
-		//dispLoading("処理中...");
 		//alert("SearchNonda:" + data);
+	    dispLoading();
 
 		$.ajax({
-			type: "POST",
-			url: "nonda_list.php",
-			data: data,
-			dataType: 'json',
+				type: "POST",
+				url: "nonda_list.php",
+				data: data,
+				dataType: 'json',
 
 		}).done(function(data){
 
-			var count_result = data[0].count;
-			var sake = data[0].result;
-			var nonda_values = 0;
+				var count_result = data[0].count;
+				var sake = data[0].result;
+				var nonda_values = 0;
 
-			//alert("sql:" + data[0].sql);
+				//alert("sql:" + data[0].sql);
 				//alert("count resut:" + sake.length);
 				$('#threads').empty()
+				removeLoading();
 
 				if(count_result == 0 && sake == null) {
 					var innerText = '<div class="navigate_page_no_registry">投稿はありません</div>';
@@ -2911,8 +2932,7 @@ $(function() {
 					$("#sake_sort").css({"display":"none"});
 					$("#tab_sake .result_count_container").css({"display":"none"});
 					$('#sake_table').html(innerText);
-					$('.search_result_turn_page').css({"display": "none"});
-					removeLoading();
+					$('#review .search_result_turn_page').css({"display": "none"});
 				}
 				else {
 
@@ -2929,18 +2949,17 @@ $(function() {
 						var tablename = "table_review" + sake[i].sake_id;
 						var sake_id = $('#threads').data('sake_id');
 						var innerText = '<a class="user_nonda_link" href="user_view_sakereview.php?sake_id=' + sake[i].sake_id + '&contributor=' + sake[i].username + '">';
-						var path = "images/icons/noimage_user30.svg";
 
 						innerText += '<a class="review" href="user_view_sakereview.php?sake_id=' + sake[i].sake_id +'&contributor=' +  sake[i].username + '">';
 						innerText += '<div class="nonda_user_container">';
 						innerText += '<div class="nonda_user_image_container">';
-						innerText += '<img src="' + path + '">';
+						innerText += '<img src="' + sake[i].profile_image + '">';
 						innerText += '</div>';
 
 						innerText += '<div class="nonda_user_name_container">';
 						innerText += '<div class="nonda_user_name">' + sake[i].username + '</div>';
 						innerText += '<div class="nonda_user_profile_date_container">';
-						innerText += '<div class="nonda_date">' + sake[i].update_date + '</div>';
+						innerText += '<div class="nonda_date">' + sake[i].local_time + '</div>';
 						innerText += '</div>';
 						innerText += '</div>';
 						innerText += '</div>';
@@ -2978,23 +2997,22 @@ $(function() {
 							innerText += '';
 						}
 
-						if(sake[i].added_paths && sake[i].added_paths != "")
+						////////////////////////////////////////
+						////////////////////////////////////////
+						if(sake[i].path != null && sake[i].path != "")
 						{
-							var pathArray = sake[i].added_paths.split(', ');
-							var j = 0;
-
 							innerText += '<div class="review_container">';
-								var path = "images\\photo\\thumb\\" + pathArray[j++];
-								innerText += '<div class="review_image"><img src="' + path + '"></div>';
+								var pathArray = sake[i].path.split(', ');
 
-								while(j < pathArray.length)
+								for(j = 0; j < pathArray.length; j++)
 								{
-									path = "images\\photo\\thumb\\" + pathArray[j];
-									innerText += '<div class="review_image"><img src="' + path + '"></div>';
+									var path = "images\\photo\\thumb\\" + pathArray[j];
+									innerText += '<div class="review_image">' + '<img class="preview" src="' + path + '">' + '</div>';
 								}
-
 							innerText += '</div>';
-						} else {
+						}
+						else
+						{
 							innerText += '';
 						}
 
@@ -3178,39 +3196,41 @@ $(function() {
 							else
 								 innerText += '<button id="next_mypage_review"><svg class="next_button_next2020"><use xlink:href="#next2020"/></svg></button>';
 
-							$('.search_result_turn_page').empty();
-							$('.search_result_turn_page').append(innerText);
+							$('#review .search_result_turn_page').empty();
+							$('#review .search_result_turn_page').append(innerText);
 						}
 						else {
-							$('.search_result_turn_page').empty();
+							$('#review .search_result_turn_page').empty();
 						}
 					}
 
 					///////////////////////////////////////////////////////////////////////////////////////////////////
 					/////////////////////////////////////////////////////////////////////////////////////////////////
 					var pagenum = in_disp_from / 25;
-					var showPos = parseInt($('.search_result_turn_page .pageitems:nth(0)').text()) - 1;
+					var showPos = parseInt($('#review .search_result_turn_page .pageitems:nth(0)').text()) - 1;
 					var position = pagenum - showPos;
 
-					if(position >= $('.search_result_turn_page .pageitems').length)
+					//alert("position:" + position + " length:" + $('#review .search_result_turn_page .pageitems').length);
+
+					if(position >= $('#review .search_result_turn_page .pageitems').length)
 					{
-						var showPos = (pagenum - $('.search_result_turn_page .pageitems').length) + 1;
+						var showPos = (pagenum - $('#review .search_result_turn_page .pageitems').length) + 1;
 
 						var i = 1;
 
-						$('.search_result_turn_page .pageitems').each(function() {
+						$('#review .search_result_turn_page .pageitems').each(function() {
 								$(this).text(showPos + i);
 								i++;
 						});
 
-						position = $('.search_result_turn_page .pageitems').length - 1;
+						position = $('#review .search_result_turn_page .pageitems').length - 1;
 					}
 					else if(position < 0)
 					{
-						var showPos = parseInt($('.search_result_turn_page .pageitems:nth(0)').text()) - 2;
+						var showPos = parseInt($('#review .search_result_turn_page .pageitems:nth(0)').text()) - 2;
 						var i = 1;
 
-						$('.search_result_turn_page .pageitems').each(function() {
+						$('#review .search_result_turn_page .pageitems').each(function() {
 								$(this).text(showPos + i);
 								i++;
 						});
@@ -3219,17 +3239,17 @@ $(function() {
 					}
 
 					//alert("showPos:" + showPos + " position:" + position);
-					$('.search_result_turn_page .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
-					$('.search_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
+					$('#review .search_result_turn_page .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
+					$('#review .search_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
 
 					///////////////////////////////////////////////////////////////////////////////////////////////////
 
-					if(in_disp_from >= parseInt($('#threads').data('from')))
+					if(in_disp_from >= parseInt($('#threads').data('max')))
 						$('#prev_mypage_review').addClass('active');
 					else
 						$('#prev_mypage_review').removeClass('active');
 
-					if((in_disp_from + parseInt($('#threads').data('max'))) > parseInt($('#threads').data('max')))
+					if((in_disp_from + parseInt($('#threads').data('max'))) > parseInt($('#threads').data('count')))
 						$('#next_mypage_review').removeClass('active');
 					else
 						$('#next_mypage_review').addClass('active');
@@ -3246,11 +3266,11 @@ $(function() {
 				}
 
 		}).fail(function(data){
-				//removeLoading();
+				removeLoading();
 				alert("Failed:" + data);
 		}).complete(function(data){
 				// Loadingイメージを消す
-				//removeLoading();
+				removeLoading();
 		});
 	}
 
@@ -3273,7 +3293,7 @@ $(function() {
 		return data;
 	}
 
-	$(document).on('click', '.search_result_turn_page #prev_sake_review', function(){
+	$(document).on('click', '#review .search_result_turn_page #prev_mypage_review', function(){
 
 		var search_type = 1;
 		var category = 1;
@@ -3308,7 +3328,7 @@ $(function() {
 		searchNonda(in_disp_from, disp_max, data, false);
 	});
 
-	$(document).on('click', '.search_result_turn_page #next_sake_review', function(){
+	$(document).on('click', '#review .search_result_turn_page #next_mypage_review', function(){
 
 		var search_type = 1;
 		var category = 1;
@@ -3344,7 +3364,7 @@ $(function() {
 		searchNonda(in_disp_from, disp_max, data, false);
 	});
 
-	$(document).on('click', '.search_result_turn_page .pageitems', function(){
+	$(document).on('click', '#review .search_result_turn_page .pageitems', function(){
 
 			var search_type = 1;
 			var category = 1;
@@ -3354,7 +3374,7 @@ $(function() {
 			var href = $('.simpleTabs li a:nth(0)').attr('href');
 			var orderby = $("#order_sake").val();
 			var username = $('#all_container').data('username');
-			var showPos = parseInt($('.search_result_turn_page .pageitems:nth(0)').text());
+			var showPos = parseInt($('#review .search_result_turn_page .pageitems:nth(0)').text());
 			var position = $(this).index();
 
 			var in_disp_from = (showPos + position - 2) * disp_max;
@@ -3725,6 +3745,7 @@ $(function() {
 	function searchPhoto(in_disp_from, disp_max, data, bCount)
 	{
 		//alert("data:" + data);
+	    dispLoading();
 
 		$.ajax({
 			type: "POST",
@@ -3741,41 +3762,62 @@ $(function() {
 			//alert("result:" + result);
 
 			$('#photoframe').empty();
+			removeLoading();
 
 			var photos = data[0].result;
 
+			//alert("photo.length:" + photos.length);
+
 			for(i = 0; i < photos.length; i++)
 			{
-				var path = "images\\photo\\" + photos[i].filename;
-				innerHTML += '<div class="sake_photo"><img src="' + path  + '"><span>' + photos[i].contributor + '</span></div>';
+					var path = "images\\photo\\" + photos[i].filename;
+					//innerHTML += '<div class="sake_photo"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
+					//innerHTML += '<div class="sake_photo"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
+
+					innerHTML += '<div class="sake_photo" data-filename="' + photos[i].filename + '" data-contributor="' + photos[i].contributor + '" data-nickname="' + photos[i].nickname + '" data-desc="' + photos[i].desc + '"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
 			}
 
 			$('#photoframe').html(innerHTML);
 
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			var showPos = parseInt($('#photo .pageitems:first').text()) - 1;
-			var position = Math.ceil(in_disp_from / $('#photoframe').data('limit'));
-			var nth = position - showPos;
-			var numPages = 5;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////////
+			var pagenum = in_disp_from / disp_max;
+			var showPos = parseInt($('#photo .search_result_turn_page .pageitems:nth(0)').text()) - 1;
+			var position = pagenum - showPos;
 
-			if((nth + 1) < numPages)
+			if(position >= $('#photo .search_result_turn_page .pageitems').length)
 			{
-				//alert("showPos:" + showPos + " position:" + position + " nth:" + nth);
-				$('.pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
-				$('.pageitems:nth(' + nth + ')').css({"background": "#22445B", "color":"#ffffff"});
-			}
-			else
-			{
-				$(".pageitems").each(function() {
-					$(this).text(parseInt($(this).text()) - 1);
-					$(this).val($(this).val() - 1);
+				var showPos = (pagenum - $('#photo .search_result_turn_page .pageitems').length) + 1;
+
+				var i = 1;
+
+				$('#photo .search_result_turn_page .pageitems').each(function() {
+						$(this).text(showPos + i);
+						i++;
 				});
 
-				$('.pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
-				$('.pageitems:nth-child(2)').css({"background": "#22445B", "color":"#ffffff"});
+				position = $('#photo .search_result_turn_page .pageitems').length - 1;
+			}
+			else if(position < 0)
+			{
+				var showPos = parseInt($('#photo .search_result_turn_page .pageitems:nth(0)').text()) - 2;
+				var i = 1;
+
+				$('#photo .search_result_turn_page .pageitems').each(function() {
+						$(this).text(showPos + i);
+						i++;
+				});
+
+				position = 0;
 			}
 
-			////////////////////////////////////////
+			$('#photo .search_result_turn_page .pageitems').css({"background": "#b2b2b2", "color":"#ffffff"});
+			$('#photo .search_result_turn_page .pageitems:nth(' + position + ')').css({"background": "#22445B", "color":"#ffffff"});
+
+			//alert("in_disp_from:" + in_disp_from + " position:" + position);
+
+			///////////////////////////////////////////////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////////
 
 			if(in_disp_from >= disp_max)
 				$('#prev_sake_photo').addClass('active');
@@ -3790,13 +3832,24 @@ $(function() {
 
 			$('#photoframe').data('in_disp_from', in_disp_from)
 			$('#photoframe').data('in_disp_to', in_disp_from + disp_max)
-			//alert('in_disp_from:' + $('#photoframe').data('in_disp_from'));
+
+			//alert('in_disp_from:' + in_disp_from);
+
+			var limit = ((in_disp_from + disp_max) >= parseInt($('#photoframe').data('count'))) ? parseInt($('#photoframe').data('count')) : (in_disp_from + disp_max);
+			var text = (in_disp_from + 1) + "～" + limit + "件 / 全" + parseInt($('#photoframe').data('count')) + "件";
+
+			//alert("text2": + text);
+			$('#photo #disp_sake').text(text);
 
 			$('html, body').animate({scrollTop:0}, '100');
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		}).fail(function(data){
+			removeLoading();
 			alert("Failed:" + data);
+		}).complete(function(data){
+			// Loadingイメージを消す
+			removeLoading();
 		});
 	}
 
@@ -3806,23 +3859,19 @@ $(function() {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	$(document).on('click', '#photo .pageitems', function(){
+
 		var index = $(this).index();
-		var numPages = 5;
-		var limit = $('#photoframe').data('limit');
 		var sake_id = <?php echo json_encode($sake_id); ?>;
 		var in_disp_from = $('#photoframe').data('limit') * (index - 1);
 		var disp_max = 12;
 
         var data = "sake_id=" + sake_id + "&in_disp_from=" + in_disp_from + "&in_disp_to=" + $('#photoframe').data('limit');
-		var position = Math.ceil(in_disp_from / limit);
-
 		searchPhoto(in_disp_from, disp_max, data, false);
 	});
 
 	$(document).on('click', '#prev_sake_photo', function(){
 
 		var numPages = 5;
-		var limit = $('#photoframe').data('limit');
 		var disp_max = 12;
 		var sake_id = <?php echo json_encode($sake_id); ?>;
 		var in_disp_from = $('#photoframe').data('in_disp_from') - $('#photoframe').data('limit')

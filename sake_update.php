@@ -256,54 +256,23 @@ if($rice_used_set == true)
     }
 }
 
-$sake_award_history = "";
-$sake_award_set = false;
-
-if(isset($_POST['sake_award_name1']) && $_POST['sake_award_name1'] != undefined)
+if(isset($_POST['sake_award']) && !empty($_POST['sake_award']))
 {
-	if($_POST['sake_award_name1'] != "")
+	$sake_award = "";
+
+	foreach($_POST['sake_award'] as $selected)
 	{
-		$sake_award_history = $_POST['sake_award_name1'] .',' .$_POST['sake_award_year1'] .',' .$_POST['sake_award1'];
+		$selected = sqlite3::escapeString($selected);
+		$sake_award = ($sake_award == "") ? $selected : ($sake_award ."||" .$selected);	
 	}
 
-	$sake_award_set = true;
-}
-
-if(isset($_POST['sake_award_name2']) && $_POST['sake_award_name2'] != undefined)
-{
-	if($_POST['sake_award_name2'] != "")
-	{
-		if($sake_award_history != "")
-			$sake_award_history .= '/';
-
-		$sake_award_history .= $_POST['sake_award_name2'] .',' .$_POST['sake_award_year2'] .',' .$_POST['sake_award2'];
-	}
-
-	$sake_award_set = true;
-}
-
-if(isset($_POST['sake_award_name3']) && $_POST['sake_award_name3'] != undefined)
-{
-	if($_POST['sake_award_name3'] != "")
-	{
-		if($sake_award_history != "")
-			$sake_award_history .= '/';
-
-		$sake_award_history .= $_POST['sake_award_name3'] .',' .$_POST['sake_award_year3'] .',' .$_POST['sake_award3'];
-	}
-	
-	$sake_award_set = true;
-}
-
-if($sake_award_set == true)
-{
     if($item == "")
 	{
-        $item = "sake_award_history='$sake_award_history'";
+        $item = "sake_award_history='$sake_award'";
     }
 	else
 	{
-        $item .= ", sake_award_history='$sake_award_history'";
+        $item .= ", sake_award_history='$sake_award'";
     }
 }
 
@@ -418,199 +387,6 @@ if(isset($_POST['definition']) && $_POST['definition'] != undefined)
 	{
         $item .= ", definition='$definition'";
     }
-}
-
-if(isset($_POST['volume_180']) && $_POST['volume_180'] != undefined)
-{
-	$volume_180 = $_POST['volume_180'];
-
-	if($item == "")
-	{
-		$item = "volume_180='$volume_180'";
-	}
-	else
-	{
-		$item .= ", volume_180='$volume_180'";
-	}
-}
-
-if(isset($_POST['volume_300']) && $_POST['volume_300'] != undefined)
-{
-	$volume_300 = $_POST['volume_300'];
-
-	if($item == "")
-	{
-		$item = "volume_300='$volume_300'";
-	}
-	else
-	{
-		$item .= ", volume_300='$volume_300'";
-	}
-}
-
-if(isset($_POST['volume_720']) && $_POST['volume_720'] != undefined)
-{
-	$volume_720 = $_POST['volume_720'];
-
-	if($item == "")
-	{
-		$item = "volume_720='$volume_720'";
-	}
-	else
-	{
-		$item .= ", volume_720='$volume_720'";
-	}
-}
-
-if(isset($_POST['volume_1800']) && $_POST['volume_1800'] != undefined)
-{
-	$volume_1800 = $_POST['volume_1800'];
-
-	if($item == "")
-	{
-		$item = "volume_1800='$volume_1800'";
-	}
-	else
-	{
-		$item .= ", volume_1800='$volume_1800'";
-	}
-}
-
-if(isset($_POST['price_180']) && $_POST['price_180'] != undefined)
-{
-	$price_180 = $_POST['price_180'];
-
-	if($item == "")
-	{
-		$item = "price_180='$price_180'";
-	}
-	else
-	{
-		$item .= ", price_180='$price_180'";
-	}
-}
-
-if(isset($_POST['price_300']) && $_POST['price_300'] != undefined)
-{
-	$price_300 = $_POST['price_300'];
-
-	if($item == "")
-	{
-		$item = "price_300='$price_300'";
-	}
-	else
-	{
-		$item .= ", price_300='$price_300'";
-	}
-}
-
-if(isset($_POST['price_720']) && $_POST['price_720'] != undefined)
-{
-	$price_720 = $_POST['price_720'];
-
-	if($item == "")
-	{
-		$item = "price_720='$price_720'";
-	}
-	else
-	{
-		$item .= ", price_720='$price_720'";
-	}
-}
-
-if(isset($_POST['price_1800']) && $_POST['price_1800'] != undefined)
-{
-	$price_1800 = $_POST['price_1800'];
-
-	if($item == "")
-	{
-		$item = "price_1800='$price_1800'";
-	}
-	else
-	{
-		$item .= ", price_1800='$price_1800'";
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-$volume_other = '<rss version="2.0">';
-
-if(isset($_POST['volume_other']) && $_POST['volume_other'] != undefined)
-{
-	$volume_other1 = $_POST['volume_other'];
-
-	if($volume_other1 == true)
-	{
-		$other_size1 = $_POST['other_size'];
-		$price_other1 = $_POST['other_price'];
-		$volume_other = $volume_other."<item><other_size1>".$other_size1."</other_size1><other_price1>".$price_other1."</other_price1></item>";
-	}
-}
-else
-{
-	$volume_other = $volume_other."<item><other_size1></other_size1><other_price1></other_price1></item>";
-}
-
-if(isset($_POST['volume_other2']) && $_POST['volume_other2'] != undefined)
-{
-	$volume_other2 = $_POST['volume_other2'];
-
-	if($volume_other2 == true)
-	{
-		$other_size2 = $_POST['other_size2'];
-		$other_price2 = $_POST['other_price2'];
-		$volume_other = $volume_other."<item><other_size2>".$other_size2."</other_size2><other_price2>".$other_price2."</other_price2></item>";
-	}
-}
-else
-{
-	$volume_other = $volume_other."<item><other_size2></other_size2><other_price2></other_price2></item>";
-}
-
-if(isset($_POST['volume_other3']) && $_POST['volume_other3'] != undefined)
-{
-	$volume_other3 = $_POST['volume_other3'];
-
-	if($volume_other3 == true)
-	{
-		$other_size3 = $_POST['other_size3'];
-		$other_price3 = $_POST['other_price3'];
-		$volume_other = $volume_other."<item><other_size3>".$other_size3."</other_size3><other_price3>".$other_price3."</other_price3></item>";
-	}
-}
-else
-{
-	$volume_other = $volume_other."<item><other_size3></other_size3><other_price3></other_price3></item>";
-}
-
-if(isset($_POST['volume_other4']) && $_POST['volume_other4'] != undefined)
-{
-	$volume_other4 = $_POST['volume_other4'];
-
-	if($volume_other4 == true)
-	{
-		$other_size4 = $_POST['other_size4'];
-		$other_price4 = $_POST['other_price4'];
-		$volume_other = $volume_other."<item><other_size4>".$other_size4."</other_size4><other_price4>".$other_price4."</other_price4></item>";
-	}
-}
-else
-{
-	$volume_other = $volume_other."<item><other_size4></other_size4><other_price4></other_price4></item>";
-}
-
-
-//$volume_other = "<rss version=\"2.0\"><item><other_size1>1000</other_size1><other_price1>1000</other_price1></item><item><other_size2>2000</other_size2><other_price2>2000円</other_price2></item><item><other_size4>4000</other_size4><other_price4>5000</other_price4></item></rss>";
-$volume_other = $volume_other.'</rss>';
-
-if($item == "")
-{
-	$item = "volume_other='$volume_other'";
-}
-else
-{
-	$item .= ", volume_other='$volume_other'";
 }
 
 
@@ -886,20 +662,6 @@ if(isset($_POST['feature']) && $_POST['feature'] != undefined)
     }
 }
 
-if(isset($_POST['sake_award_history']) && $_POST['sake_award_history'] != undefined)
-{
-	$sake_award_history = $_POST['sake_award_history'];
-
-    if($item == "")
-	{
-        $item = "sake_award_history='$sake_award_history'";
-    }
-	else
-	{
-        $item .= ", sake_award_history='$sake_award_history'";
-    }
-}
-
 if(isset($_POST['sake_memo']) && $_POST['sake_memo'] != undefined)
 {
     $sake_memo = sqlite3::escapeString($_POST['sake_memo']);
@@ -969,10 +731,6 @@ else
 	echo '<xml>'."\n";
 	echo ' <str>'.$return.'</str>'."\n";
 	echo ' <sql>'.$sql.'</sql>'."\n";
-	echo ' <rice_used>'.$rice_used.'</rice_used>'."\n";
-	echo ' <sake_award_history>'.$sake_award_history.'</sake_award_history>'."\n";
-	echo ' <seimai_rate>'.$seimai_rate.'</seimai_rate>'."\n";
-	echo ' <volume>'.$volume_other.'</volume>'."\n";
 	echo '</xml>'."\n";
 }
 ?>

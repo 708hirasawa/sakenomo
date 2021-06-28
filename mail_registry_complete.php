@@ -45,16 +45,13 @@ require_once("nonda.php");
 			<div id="registry_user_content">
 				<div class="row_container">
           <div class="column1_container">
-            <div class="column1">マイページからプロフィールを編集することができます。</div>
+            <div class="column1">マイページ設定からユーザー名や写真、自己紹介などのプロフィールを編集することができます。</div>
           </div>
           <div class="column2">
-            <?php print('<a href="user_view_config_profile.php?username=' .$username .'">プロフィール編集へ</a>'); ?>
+            <?php print('<a href="user_view_config_profile.php?username=' .$username .'">プロフィール編集</a>'); ?>
           </div>
         </div>
 			</div>
-
-			<a class="top_link_button" href="sake_search.php"><span>Top Page</span></a>
-
 		</div>
 	</div>
 

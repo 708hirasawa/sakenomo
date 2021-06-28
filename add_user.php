@@ -13,16 +13,18 @@ if(!$db = opendatabase("sake.db"))
 $intime = time();
 $username = "sakenomo" .$intime;
 
-$sql = "INSERT INTO USERS_J(username, 
-	                        password, 
-	                        email) VALUES(
-                            '$username', 
-                            '$password', 
-                            '$email')";
+$sql = "INSERT INTO USERS_J(username,
+							nickname,
+							password,
+							email) VALUES(
+							'$username',
+							'$username',
+							'$password',
+							'$email')";
 
 $res = executequery($db, $sql);
 
-if(!$res)   
+if(!$res)
 {
 	print('<!DOCTYPE html>');
 	print('<html lang="ja">');
@@ -44,20 +46,27 @@ if(!$res)
 }
 else
 {
-	setcookie("login_cookie", $email);
-    setcookie("password_cookie", $password);
-	setcookie("username", $username);
-	setcookie("usertype_cookie", 9);
+	//setcookie("login_cookie", $email);
+  //setcookie("password_cookie", $password);
+	//setcookie("username", $username);
+	//setcookie("usertype_cookie", 9);
+
+	setcookie("login_cookie", $username, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("username", $username, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("nickname", $username, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("email", $email, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("password_cookie", $password, time() + (10 * 365 * 24 * 60 * 60));
+	setcookie("usertype_cookie", 9, time() + (10 * 365 * 24 * 60 * 60));
 
 	$url = "";
 
-	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-		$url = "https://";   
-	else  
-		$url = "http://";   
+	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+		$url = "https://";
+	else
+		$url = "http://";
 
-	// Append the host(domain name, ip) to the URL.   
-	$url.= $_SERVER['HTTP_HOST'] ."/" .basename(__DIR__);   
+	// Append the host(domain name, ip) to the URL.
+	$url.= $_SERVER['HTTP_HOST'] ."/" .basename(__DIR__);
 	header('Location: ' .$url . '/mail_registry_complete.php?username=' .$username);
 }
 

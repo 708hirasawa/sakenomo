@@ -507,15 +507,29 @@ $(function() {
 		$('.loader').css('display', 'none');
 	}
 
-	$(window).scroll(function () {
+ 
+   var loadingFlag = false;
+
+   //$(window).on('load scroll', function() {
+   $(window).scroll(function () {
+
+		var footerHeight = $('.sakenomu_footer').is(":hidden") ? 0 : $('.sakenomu_footer').height();
 
 		//if($(window).scrollTop() + $(window).height() >= $(document).height() && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
-		if($(window).scrollTop() + window.innerHeight >= ($(document).height() - 100) && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
+		//if($(window).scrollTop() + window.innerHeight >= ($(document).height() - $('.sakenomu_footer').height()) && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
+		//if($(window).scrollTop() + $(window).height() == $(document).height())  {
+        //if($(window).scrollTop() + $(window).height() >= ($(document).height() - footerHeight) && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
 
+		if(!loadingFlag && $(window).scrollTop() + $(window).height() >= ($(document).height() - footerHeight - 75) && ($('#mainview_container').data('in_disp_from') + 25) < $('#mainview_container').data("count")) {
+
+			loadingFlag = true;
+
+			//alert("footerHeight:" + footerHeight);
 			var in_disp_from = $('#mainview_container').data('in_disp_from') + 25;
 			var in_disp_to = in_disp_from + 25;
 			var data = nonda_serialize(in_disp_from, in_disp_to, 0);
 
+			//$(this).unbind('scroll');
 			//alert("count:" + $('#mainview_container').data("count"));
 			//alert("data:" + data);
 		    dispLoading("処理中...");
@@ -547,6 +561,8 @@ $(function() {
 						removeLoading();
 					}
 					else {
+
+						//alert("Ajax_scroll length:" + sake.length);
 
 						for(i = 0; i < sake.length; i++)
 						{
@@ -788,6 +804,8 @@ $(function() {
 					} // else
 
 					$('#mainview_container').data('in_disp_from', $('#mainview_container').data('in_disp_from') + 25);
+                    loadingFlag = false;
+					//$('html, body').animate({scrollTop: $(window).scrollTop() - 8 }, '100');
 
 			}).fail(function(data){
 					removeLoading();

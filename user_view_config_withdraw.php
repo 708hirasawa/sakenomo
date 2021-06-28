@@ -72,7 +72,7 @@ require_once("nonda.php");
 				print('<div class="user_image_container">');
 					print('<img src=' .$path .'>');
 				print('</div>');
-				print('<div id="profile_name">' .$row["username"] .'</div>');
+				print('<div id="profile_name">' .$row["nickname"] .'</div>');
 			print('</div>');
 		print("</div>");
 

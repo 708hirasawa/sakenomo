@@ -48,40 +48,44 @@ require_once("nonda.php");
 			<form id="registry_user_form" action="mail_registry.php" method="post">
 
 				<div id="registry_user_content">
+					<div class="row_container">
+						<div class="row_title_container">
+							<div class="row_title_sign"></div>
+							<div class="row_title">メールアドレス</div>
+						</div>
+						<div class="row">
+							<div class="column1_container">
+								<div class="column1">※必ずSakenomoからのメールを受信できるアドレスを入力してください。</div>
+							</div>
+							<div class="column2">
+								<label><input id="email" type="text" name="email"></label>
+								<span id="email_verify"></span>
+							</div>
+						</div>
+					</div>
 
 					<div class="row_container">
 						<div class="row_title_container">
-						  <div class="row_title_sign"></div>
-						  <div class="row_title">メールアドレス</div>
+							<div class="row_title_sign"></div>
+							<div class="row_title">パスワード</div>
 						</div>
 						<div class="row">
-						  <div class="column1_container">
-							<div class="column1">※必ずSakenomoからのメールを受信できるアドレスを入力してください。</div>
-						  </div>
-						  <div class="column2">
-							<label><input id="email" type="text" name="email"></label>
-							<span id="email_verify" style="color:#ff0000"></span>
-						  </div>
+							<div class="column1_container">
+								<div class="column1">※以下の条件を含む半角英数字のパスワードを設定してください。</div>
+							</div>
+							<div id="message">
+								<p id="letter" class="invalid"><b>アルファベット小文字</b></p>
+								<p id="capital" class="invalid"><b>アルファベット大文字</b></p>
+								<p id="number" class="invalid"><b>数字</b></p>
+								<p id="length" class="invalid"><b>6文字以上</b></p>
+							</div>
+							<div class="column2">
+								<label>
+									<input type="password" id="user_password" name="user_password">
+								</label>
+							</div>
 						</div>
-					  </div>
-
-					<div class="row_container">
-					<div class="row_title_container">
-					  <div class="row_title_sign"></div>
-					  <div class="row_title">パスワード</div>
 					</div>
-					<div class="row">
-					  <div class="column1_container">
-						<div class="column1">※半角英数6文字以上のパスワードを設定してください。</div>
-					  </div>
-					  <div class="column2">
-						<label>
-							<input id="user_password" type="password" name="user_password">
-						</label>
-					  </div>
-					</div>
-				  </div>
-
 				</div>
 
 				<div class="registry_user_button_container">
@@ -94,6 +98,7 @@ require_once("nonda.php");
 		</div>
 	</div>
 
+
 	<?php
 		writefooter();
 	?>
@@ -101,6 +106,7 @@ require_once("nonda.php");
 </body>
 
 <script type="text/javascript">
+
 
 	jQuery(document).ready(function(){
 
@@ -117,7 +123,7 @@ require_once("nonda.php");
 		$('#submit_button').click(function() {
 			if(!$('input[name="email"]').val() || $('input[name="email"]').val() == "") {
 				$('#submit_button').prop('disabled', true);
-				$('#email_verify').text("emailを入力してください");					
+				$('#email_verify').text("メールアドレスを入力してください");
 				event.stopPropagation();
 				event.preventDefault();
 			}
@@ -138,23 +144,79 @@ require_once("nonda.php");
 				//alert("str:" + str);
 
 				if(str == "already_exist") {
-					$('#email_verify').text("email already exist");					
+					$('#email_verify').text("すでに使われているメールアドレスです");
 					$('#submit_button').prop('disabled', true);
 				}
 				else if(str == "invalid_email") {
-					$('#email_verify').text("invalid email, please enter correct email");					
+					$('#email_verify').text("正しいメールアドレスを入力してください");
 					$('#submit_button').prop('disabled', true);
 				}
 				else {
-					$('#email_verify').text("");					
+					$('#email_verify').text("");
 					$('#submit_button').prop('disabled', false);
 				}
-				
+
 			}).fail(function(data){
 				  var str = $(xml).find("str").text();
 				  alert("Failed:" +str);
 			});
 		});
+
+		////////////////////////////////////////////////////////////////////////////////////
+		// パスワード検証
+		////////////////////////////////////////////////////////////////////////////////////
+		// When the user clicks outside of the password field, hide the message box
+		$('input[name="user_password"]').blur(function() {
+			if($('#letter').hasClass('invalid') || $('#capital').hasClass('invalid') || $('#number').hasClass('invalid') || $('#length').hasClass('invalid')) {
+				$('#submit_button').prop('disabled', true);
+				$("#submit_button").css('background', '#e6e6e6');
+			}
+			else {
+				$('#submit_button').prop('disabled', false);
+				$("#submit_button").css('background', '#C5CE51');
+			}
+		});
+
+		// When the user starts to type something inside the password field
+		$(document).on('keyup', '#user_password', function(){
+
+		  // Validate lowercase letters
+		  if($('#user_password').val().match(/[a-z]/g)) {
+				$('#letter').removeClass('invalid');
+				$('#letter').addClass('valid');
+		  } else {
+				$('#letter').removeClass('valid');
+				$('#letter').addClass('invalid');
+		  }
+
+		  // Validate capital letters
+		  if($('#user_password').val().match(/[A-Z]/g)) {
+				$('#capital').removeClass('invalid');
+				$('#capital').addClass('valid');
+		  } else {
+				$('#capital').removeClass('valid');
+				$('#capital').addClass('invalid');
+		  }
+
+		  // Validate numbers
+		  if($('#user_password').val().match(/[0-9]/g)) {
+				$('#number').removeClass('invalid');
+				$('#number').addClass('valid');
+		  } else {
+				$('#number').removeClass('valid');
+				$('#number').addClass('invalid');
+		  }
+
+		  // Validate length
+		  if($('#user_password').val().length >= 6) {
+				$('#length').removeClass('invalid');
+				$('#length').addClass('valid');
+		  } else {
+				$('#length').removeClass('valid');
+				$('#length').addClass('invalid');
+		  }
+		});
+
 	}); // jQuery ready
 
 </script>

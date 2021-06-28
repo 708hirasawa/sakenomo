@@ -26,8 +26,8 @@
             print('<div class="mail_registry_message">メールを送信しました。メール本文のURLをクリックし、本登録手続きを行ってください。</div>');
           } else {
             print('<div class="mail_registry_message">メールを送信できませんでした。ご入力いただいたメールアドレスに間違いがないかご確認ください。</div>');
-          };
-          print('<svg class="logoheartgray14024"><use xlink:href="#logoheartgray14024"/></svg>');
+          }
+          print('<svg class="logoheart14024"><use xlink:href="#logoheart14024"/></svg>');
         print('</div>');
       print('</div>');
     ?>
