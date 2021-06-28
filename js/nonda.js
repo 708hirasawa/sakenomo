@@ -362,7 +362,7 @@ $(function() {
 		return false;
 	}
 
-	function completeHandler1(event, obj, total, status, progress, wait_array){
+	function completeHandler1(event, obj, total, status, progress, loader, wait_array){
 		var responseText = event.target.responseText;
 		var responseArray = JSON.parse(responseText);
 		var path = "images\\photo\\thumb\\" + responseArray[0];
@@ -376,11 +376,13 @@ $(function() {
         $(progress).val(0);
 
         $(progress).css({"display":"none"});
+        $(loader).css({"display":"none"});
         $(status).css({"display":"none"});
         $(total).css({"display":"none"});
 
         obj.removeClass('image_rotated_by_90_counter_clock', 'image_rotated_by_90_clock', 'image_rotated_by_180_clock');
         obj.attr("src", path);
+        obj.removeClass('gray');
 
         wait_array.pop();
 
@@ -395,8 +397,8 @@ $(function() {
  		var percent = (event.loaded / event.total) * 100;
 
         if(bShowPreview) {
-            total.html(event.loaded + "/" + event.total + " bytes");
-		    status.html(Math.round(percent) + "% uploaded");
+            //total.html(event.loaded + "/" + event.total + " bytes");
+		    //status.html(Math.round(percent) + "% uploaded");
 		    progress.val(Math.round(percent));
         }
 	}
@@ -450,7 +452,8 @@ $(function() {
 	                var data = evt.target.result;
 		            var orientation = 0;
 
-		            if(data.split(',')[0].match('jpeg')) {
+			        if(data.split(',')[0].match('jpeg') || data.split(',')[0].match('png') || data.split(',')[0].match('gif')) 
+                    {
 			            orientation = getOrientation(data);
 
 			            if(orientation == 1) {
@@ -477,10 +480,11 @@ $(function() {
                     var path = "images\\icons\\noimage80.svg";
 				    var innerHTML = '<div class="nonda_image_photo_container">';
 		                innerHTML += '<div class="nonda_image_photo">';
-		                    innerHTML += '<img class="thumb" src="' + path + '">';
-			                innerHTML += '<input type="button" class="remove_pic" value="削除">';
-			                innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
+		                    innerHTML += '<img class="thumb gray" src="' + path + '">';
 			                innerHTML += '<div class="nonda_status_total_container">';
+			                    innerHTML += '<input type="button" class="remove_pic" value="削除">';
+			                    innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
+		                        innerHTML += '<div class="loader"></div>';
                                 innerHTML += '<div class="nonda_status">status</div>';
                                 innerHTML += '<div class="nonda_total">total</div>';
 			                innerHTML += '</div>';
@@ -514,18 +518,20 @@ $(function() {
 
 			        var ajax = new XMLHttpRequest();
                     var obj_img = $('.nonda_image_photo .thumb:last');
+                    var loader = $('.nonda_image_photo:last').find('.loader');
                     var progress = $('.nonda_image_photo:last').find('.nonda_progress');
                     var status   = $('.nonda_image_photo:last').find('.nonda_status');
                     var total    = $('.nonda_image_photo:last').find('.nonda_total');
                     var value    = 4;
 
-                    $(progress).css({"display":"block"});
-                    $(status).css({"display":"block"});
-                    $(total).css({"display":"block"});
+                    $(loader).css({"display":"block"});
+                    $(progress).css({"display":"none"});
+                    $(status).css({"display":"none"});
+                    $(total).css({"display":"none"});
                     $(obj_img).data("filename", filename);
 
 		            ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
-		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, wait_array); }, false);
+		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, loader, wait_array); }, false);
 		            ajax.addEventListener("error", errorHandler1, false);
 		            ajax.addEventListener("abort", abortHandler1, false);
 		            ajax.open("POST", "nonda_upload_image.php");
@@ -577,40 +583,45 @@ $(function() {
 		        reader.onload = function(e) {
 
                     /////////////////////////////////////////////////////////////////////////////////////////////////////
-                    var path = "images\\icons\\noimage80.svg";
-			        var innerHTML = '<div class="nonda_image_photo_container">';
-		                // innerHTML += '<input type="file">';
-	                    innerHTML += '<div class="nonda_image_photo">';
-	                        innerHTML += '<img class="thumb" src="' + path + '">';
-		                    innerHTML += '<input type="button" class="remove_pic" value="削除">';
-		                    innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
-		                    innerHTML += '<div class="nonda_status_total_container">';
-                                innerHTML += '<div class="nonda_status">status</div>';
-                                innerHTML += '<div class="nonda_total">total</div>';
+		            var data = e.target.result;
+		            var orientation = 0;
+
+			        if(data.split(',')[0].match('jpeg') || data.split(',')[0].match('png') || data.split(',')[0].match('gif')) 
+                    {
+                        var path = "images\\icons\\noimage80.svg";
+			            var innerHTML = '<div class="nonda_image_photo_container">';
+		                    // innerHTML += '<input type="file">';
+	                        innerHTML += '<div class="nonda_image_photo">';
+	                            innerHTML += '<img class="thumb gray" src="' + path + '">';
+		                        innerHTML += '<div class="nonda_status_total_container">';
+		                            innerHTML += '<input type="button" class="remove_pic" value="削除">';
+		                            innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
+ 		                            innerHTML += '<div class="loader"></div>';
+                                    innerHTML += '<div class="nonda_status">status</div>';
+                                    innerHTML += '<div class="nonda_total">total</div>';
+		                        innerHTML += '</div>';
+                            innerHTML += '</div>';
+		                    innerHTML += '<div class="nonda_image_caption_container">';
+		                        innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）">';
 		                    innerHTML += '</div>';
-                        innerHTML += '</div>';
-		                innerHTML += '<div class="nonda_image_caption_container">';
-		                    innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）">';
-		                innerHTML += '</div>';
-	                innerHTML += '</div>';
+	                    innerHTML += '</div>';
 
 
-                    $('#nonda_image_post .nonda_image_post_button_container').before(innerHTML);
-                    $('.nonda_image_photo .thumb:last').attr("src", e.target.result);
+                        $('#nonda_image_post .nonda_image_post_button_container').before(innerHTML);
+                        $('.nonda_image_photo .thumb:last').attr("src", e.target.result);
 
-                    var obj_img = $('.nonda_image_photo .thumb:last');
-                    var progress = $('.nonda_image_photo:last').find('.nonda_progress');
-                    var status = $('.nonda_image_photo:last').find('.nonda_status');
-                    var total = $('.nonda_image_photo:last').find('.nonda_total');
-			        var data = e.target.result;
-			        var orientation = 0;
-			        //alert("width:" + width + " height:" + height + " className:" + className);
+                        var obj_img = $('.nonda_image_photo .thumb:last');
+                        var loader = $('.nonda_image_photo:last').find('.loader');
+                        var progress = $('.nonda_image_photo:last').find('.nonda_progress');
+                        var status = $('.nonda_image_photo:last').find('.nonda_status');
+                        var total = $('.nonda_image_photo:last').find('.nonda_total');
+			            //alert("width:" + width + " height:" + height + " className:" + className);
 
-                    $(progress).css({"display":"block"});
-                    $(status).css({"display":"block"});
-                    $(total).css({"display":"block"});
+                        $(loader).css({"display":"block"});
+                        $(progress).css({"display":"none"});
+                        $(status).css({"display":"none"});
+                        $(total).css({"display":"none"});
 
-			        if(data.split(',')[0].match('jpeg')) {
 				        orientation = getOrientation(data);
 				        //alert("orientation:" + orientation);
 				        //alert("data:" + data);
@@ -621,40 +632,44 @@ $(function() {
 				        else if(orientation == 8) {
 					        $(obj_img).addClass("image_rotated_by_90_counter_clock");
 				        }
+
+                        var prefix = "sn_" + (new Date()).getTime();
+                        var filename =  prefix + file.name;
+		                var formdata = new FormData();
+
+		                formdata.append("file1", file);
+                        formdata.append("id", $("#add_nonda_sake").attr("sake_id"));
+                        formdata.append("prefix", prefix);
+                        formdata.append("contributor", $('#dialog_bbs').data('contributor'));
+		                formdata.append("max_width", 800);
+		                formdata.append("max_height", 800);
+		                formdata.append("thumb_width", 200);
+		                formdata.append("thumb_height", 200);
+		                formdata.append("status", 2);
+		                formdata.append("tablename", "sake_image");
+                        $(obj_img).data("filename", filename);
+
+		                var ajax = new XMLHttpRequest();
+
+		                //ajax.addEventListener("load", function(event) { completeHandler1(event, $(obj).parent()); }, false);
+		                ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
+		                ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, loader, wait_array); }, false);
+		                ajax.addEventListener("error", errorHandler1, false);
+		                ajax.addEventListener("abort", abortHandler1, false);
+		                ajax.open("POST", "nonda_upload_image.php");
+		                ajax.send(formdata);
 			        }
 			        else {
 				        alert("something else");
+                        wait_array.pop();
+
+                        if(!wait_array.length) {
+                            $('input[type="button"]').prop('disabled', false);
+                            $('#close_bbs_button').prop('disabled', false);
+                        }
+
+                        return;
 			        }
-
-                    $(progress).css({"display":"block"});
-                    $(status).css({"display":"block"});
-                    $(total).css({"display":"block"});
-
-                    var prefix = "sn_" + (new Date()).getTime();
-                    var filename =  prefix + file.name;
-		            var formdata = new FormData();
-
-		            formdata.append("file1", file);
-                    formdata.append("id", $("#add_nonda_sake").attr("sake_id"));
-                    formdata.append("prefix", prefix);
-                    formdata.append("contributor", $('#dialog_bbs').data('contributor'));
-		            formdata.append("max_width", 800);
-		            formdata.append("max_height", 800);
-		            formdata.append("thumb_width", 200);
-		            formdata.append("thumb_height", 200);
-		            formdata.append("status", 2);
-		            formdata.append("tablename", "sake_image");
-                    $(obj_img).data("filename", filename);
-
-		            var ajax = new XMLHttpRequest();
-
-		            //ajax.addEventListener("load", function(event) { completeHandler1(event, $(obj).parent()); }, false);
-		            ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
-		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, wait_array); }, false);
-		            ajax.addEventListener("error", errorHandler1, false);
-		            ajax.addEventListener("abort", abortHandler1, false);
-		            ajax.open("POST", "nonda_upload_image.php");
-		            ajax.send(formdata);
 
                 } // end of onread function
             })($(this).prop("files")[i], this);
@@ -673,11 +688,14 @@ $(function() {
         var sake_id = $('#dialog_bbs').data('sake_id');
         var contributor = $('#dialog_bbs').data('contributor');
         var committed = $('#dialog_bbs').data('committed');
-        var path_array = $(this).parent().find('img').attr("src").split('\\');
-        //var filename = path_array[path_array.length - 1];
-        var	filename = $(this).parent().find('img').data('filename');
+        var	filename = $(this).closest('.nonda_image_photo_container').find('img').data('filename');
         var data = "id="+sake_id+"&filename="+filename+"&contributor="+contributor+"&status=3";
-        var obj = $(this).parent().parent();
+        var obj = $(this).closest('.nonda_image_photo_container');
+
+        //if(confirm("削除しますか ID:" + sake_id + " filename:" + filename) == true)
+        //{
+        var data = "id="+sake_id+"&filename="+filename+"&contributor="+contributor+"&status=3";
+
         //alert("data:" + data);
         //alert("add_nonda remove pic filename:" + filename);
 
@@ -899,8 +917,8 @@ $(function() {
 	function progressHandler(event){
 		var percent = (event.loaded / event.total) * 100;
 
-        $('#upload_n_total').html( "Uploaded " + event.loaded + " bytes of " + event.total);
-		$('#upload_status').html(Math.round(percent) + "% uploaded... please wait");
+        //$('#upload_n_total').html( "Uploaded " + event.loaded + " bytes of " + event.total);
+		//$('#upload_status').html(Math.round(percent) + "% uploaded... please wait");
 		$('#upload_progressBar').val(Math.round(percent));
 
 		//_("upload_progressBar").value = Math.round(percent);
@@ -1153,7 +1171,7 @@ $(function() {
 		return false;
 	}
 
-	function completeHandler1(event, obj, total, status, progress, wait_array){
+	function completeHandler1(event, obj, total, status, progress, loader, wait_array){
 		var responseText = event.target.responseText;
 		var responseArray = JSON.parse(responseText);
 		var path = "images\\photo\\thumb\\" + responseArray[0];
@@ -1164,15 +1182,14 @@ $(function() {
 	    //$('#nonda_image .photo_container').append(innerHTML);
 
         //alert("path:" + path);
-        obj.removeClass('image_rotated_by_90_counter_clock', 'image_rotated_by_90_clock', 'image_rotated_by_180_clock');
+        obj.removeClass('image_rotated_by_90_counter_clock', 'image_rotated_by_90_clock', 'image_rotated_by_180_clock', 'gray');
+        obj.removeClass('gray');
         obj.attr("src", path);
 
         $(status).html(responseArray[0]);
         $(progress).val(0);
-
         $(progress).css({"display":"none"});
-        $(status).css({"display":"none"});
-        $(total).css({"display":"none"});
+        $(loader).css({"display":"none"});
 
         wait_array.pop();
 
@@ -1187,8 +1204,8 @@ $(function() {
 	function progressHandler1(event, total, status, progress){
 
  		var percent = (event.loaded / event.total) * 100;
-        total.html(event.loaded + "/" + event.total + " bytes");
-		status.html(Math.round(percent) + "% uploaded");
+        //total.html(event.loaded + "/" + event.total + " bytes");
+		//status.html(Math.round(percent) + "% uploaded");
 		progress.val(Math.round(percent));
 	}
 
@@ -1243,7 +1260,7 @@ $(function() {
 		            var orientation = 0;
                     //$(imageObj).attr("src", evt.target.result);
 
-		            if(data.split(',')[0].match('jpeg'))
+			        if(data.split(',')[0].match('jpeg') || data.split(',')[0].match('png') || data.split(',')[0].match('gif'))
 		            {
 			            orientation = getOrientation(data);
 
@@ -1271,10 +1288,11 @@ $(function() {
                     var path = "images\\icons\\noimage80.svg";
 				    var innerHTML = '<div class="nonda_image_photo_container">';
 		                innerHTML += '<div class="nonda_image_photo">';
-		                    innerHTML += '<img class="thumb" src="' + path + '">';
-			                innerHTML += '<input type="button" class="remove_pic" value="削除">';
-			                innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
+		                    innerHTML += '<img class="thumb gray" src="' + path + '">';
 			                innerHTML += '<div class="nonda_status_total_container">';
+			                    innerHTML += '<input type="button" class="remove_pic" value="削除">';
+			                    innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
+		                        innerHTML += '<div class="loader"></div>';
                                 innerHTML += '<div class="nonda_status">status</div>';
                                 innerHTML += '<div class="nonda_total">total</div>';
 			                innerHTML += '</div>';
@@ -1309,12 +1327,14 @@ $(function() {
 			        var ajax = new XMLHttpRequest();
                     var obj_img = $('.nonda_image_photo .thumb:last');
                     var progress = $('.nonda_image_photo:last').find('.nonda_progress');
+                    var loader   = $('.nonda_image_photo:last').find('.loader');
                     var status   = $('.nonda_image_photo:last').find('.nonda_status');
                     var total    = $('.nonda_image_photo:last').find('.nonda_total');
 
-                    $(progress).css({"display":"block"});
-                    $(status).css({"display":"block"});
-                    $(total).css({"display":"block"});
+                    $(loader).css({"display":"block"});
+                    $(progress).css({"display":"none"});
+                    $(status).css({"display":"none"});
+                    $(total).css({"display":"none"});
 
 		            ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
 
@@ -1360,38 +1380,42 @@ $(function() {
             (function(file, obj){
 		        reader.onload = function(e) {
 
-                    var path = "images\\icons\\noimage80.svg";
-				    var innerHTML = '<div class="nonda_image_photo_container">';
-			            // innerHTML += '<input type="file">';
-		                innerHTML += '<div class="nonda_image_photo">';
-		                    innerHTML += '<img class="thumb" src="' + path + '">';
-			                innerHTML += '<input type="button" class="remove_pic" value="削除">';
-			                innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
-			                innerHTML += '<div class="nonda_status_total_container">';
-                                innerHTML += '<div class="nonda_status">status</div>';
-                                innerHTML += '<div class="nonda_total">total</div>';
-			                innerHTML += '</div>';
-                        innerHTML += '</div>';
-			            innerHTML += '<div class="nonda_image_caption_container">';
-			                innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）">';
-			            innerHTML += '</div>';
-		            innerHTML += '</div>';
-
-                    $('#nonda_image_post .nonda_image_post_button_container').before(innerHTML);
-                    $('.nonda_image_photo .thumb:last').attr("src", e.target.result);
-
-                    var obj_img = $('.nonda_image_photo .thumb:last');
-                    var progress = $('.nonda_image_photo:last').find('.nonda_progress');
-                    var status = $('.nonda_image_photo:last').find('.nonda_status');
-                    var total = $('.nonda_image_photo:last').find('.nonda_total');
-
 			        var data = e.target.result;
 			        var orientation = 0;
-			        //alert("width:" + width + " height:" + height);
 
-			        if(data.split(',')[0].match('jpeg')) {
+			        if(data.split(',')[0].match('jpeg') || data.split(',')[0].match('png') || data.split(',')[0].match('gif')) 
+                    {
+                        var path = "images\\icons\\noimage80.svg";
+				        var innerHTML = '<div class="nonda_image_photo_container">';
+			                // innerHTML += '<input type="file">';
+		                    innerHTML += '<div class="nonda_image_photo">';
+		                        innerHTML += '<img class="thumb gray" src="' + path + '">';
+			                    innerHTML += '<div class="nonda_status_total_container">';
+			                        innerHTML += '<input type="button" class="remove_pic" value="削除">';
+			                        innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
+			                        innerHTML += '<div class="loader"></div>';
+                                    innerHTML += '<div class="nonda_status">status</div>';
+                                    innerHTML += '<div class="nonda_total">total</div>';
+			                    innerHTML += '</div>';
+                            innerHTML += '</div>';
+			                innerHTML += '<div class="nonda_image_caption_container">';
+			                    innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）">';
+			                innerHTML += '</div>';
+		                innerHTML += '</div>';
+
+                        $('#nonda_image_post .nonda_image_post_button_container').before(innerHTML);
+                        $('.nonda_image_photo .thumb:last').attr("src", e.target.result);
+
+                        var obj_img = $('.nonda_image_photo .thumb:last');
+                        var progress = $('.nonda_image_photo:last').find('.nonda_progress');
+                        var loader = $('.nonda_image_photo:last').find('.loader');
+                        var status = $('.nonda_image_photo:last').find('.nonda_status');
+                        var total = $('.nonda_image_photo:last').find('.nonda_total');
+
 				        orientation = getOrientation(data);
+
 				        //alert("orientation:" + orientation);
+			            //alert("width:" + width + " height:" + height);
 				        //alert("data:" + data);
 
 				        if(orientation == 6) {
@@ -1400,41 +1424,50 @@ $(function() {
 				        else if(orientation == 8) {
 					        $(obj_img).addClass("image_rotated_by_90_counter_clock");
 				        }
+
+                        $(loader).css({"display":"block"});
+                        $(progress).css({"display":"none"});
+                        $(status).css({"display":"none"});
+                        $(total).css({"display":"none"});
+
+                        ////////////////////////////////////////////////////////////////////////////////
+                        var prefix = "sn_" + (new Date()).getTime();
+                        var filename =  prefix + file.name;
+		                var formdata = new FormData();
+
+                        $(obj_img).data("filename", filename);
+		                formdata.append("file1", file);
+                        formdata.append("id", $("#add_nonda_sake").attr("sake_id"));
+                        formdata.append("contributor", $('#dialog_bbs').data('contributor'));
+                        formdata.append("prefix", prefix);
+                        formdata.append("desc", $('input[name="nonda_image_caption"]').text());
+		                formdata.append("max_width", 800);
+		                formdata.append("max_height", 800);
+		                formdata.append("thumb_width", 200);
+		                formdata.append("thumb_height", 200);
+		                formdata.append("status", 2);
+		                formdata.append("tablename", "sake_image");
+
+		                var ajax = new XMLHttpRequest();
+
+		                ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
+		                ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, loader, wait_array); }, false);
+		                ajax.addEventListener("error", errorHandler1, false);
+		                ajax.addEventListener("abort", abortHandler1, false);
+		                ajax.open("POST", "nonda_upload_image.php");
+		                ajax.send(formdata);
 			        }
 			        else {
 				        alert("something else");
+                        wait_array.pop();
+
+                        if(!wait_array.length) {
+                            $('input[type="button"]').prop('disabled', false);
+                            $('#close_bbs_button').prop('disabled', false);
+                        }
+
+                        return;
 			        }
-
-                    $(progress).css({"display":"block"});
-                    $(status).css({"display":"block"});
-                    $(total).css({"display":"block"});
-
-                    ////////////////////////////////////////////////////////////////////////////////
-                    var prefix = "sn_" + (new Date()).getTime();
-                    var filename =  prefix + file.name;
-		            var formdata = new FormData();
-
-                    $(obj_img).data("filename", filename);
-		            formdata.append("file1", file);
-                    formdata.append("id", $("#add_nonda_sake").attr("sake_id"));
-                    formdata.append("contributor", $('#dialog_bbs').data('contributor'));
-                    formdata.append("prefix", prefix);
-                    formdata.append("desc", $('input[name="nonda_image_caption"]').text());
-		            formdata.append("max_width", 800);
-		            formdata.append("max_height", 800);
-		            formdata.append("thumb_width", 200);
-		            formdata.append("thumb_height", 200);
-		            formdata.append("status", 2);
-		            formdata.append("tablename", "sake_image");
-
-		            var ajax = new XMLHttpRequest();
-
-		            ajax.upload.addEventListener("progress", function(event) { progressHandler1(event, total, status, progress, true); }, false);
-		            ajax.addEventListener("load", function(event) { completeHandler1(event, obj_img, total, status, progress, wait_array); }, false);
-		            ajax.addEventListener("error", errorHandler1, false);
-		            ajax.addEventListener("abort", abortHandler1, false);
-		            ajax.open("POST", "nonda_upload_image.php");
-		            ajax.send(formdata);
                 }
             })($(this).prop("files")[i], this);
 
@@ -1463,8 +1496,8 @@ $(function() {
 
 	function progressHandler(event){
 		var percent = (event.loaded / event.total) * 100;
-        $('#upload_n_total').html( "Uploaded " + event.loaded + " bytes of " + event.total);
-		$('#upload_status').html(Math.round(percent) + "% uploaded... please wait");
+        //$('#upload_n_total').html( "Uploaded " + event.loaded + " bytes of " + event.total);
+		//$('#upload_status').html(Math.round(percent) + "% uploaded... please wait");
 		$('#upload_progressBar').val(Math.round(percent));
 	}
 
@@ -1655,11 +1688,8 @@ $(function() {
         var sake_id = $('#dialog_bbs').data('sake_id');
         var contributor = $('#dialog_bbs').data('contributor');
         var committed = $('#dialog_bbs').data('committed');
-        var path_array = $(this).parent().find('img').attr("src").split('\\');
-        //var filename = path_array[path_array.length - 1];
-        var	filename = $(this).parent().find('img').data('filename');
-        var obj = $(this).parent().parent();
-        //alert("filename:" + filename);
+        var	filename = $(this).closest('.nonda_image_photo_container').find('img').data('filename');
+        var obj = $(this).closest('.nonda_image_photo_container');
 
         //if(confirm("削除しますか ID:" + sake_id + " filename:" + filename) == true)
         //{
@@ -1726,6 +1756,7 @@ $(function() {
     /* 飲んだ編集開く */
     $("body").on("open_nonda", function( event, subject, message, rank, added_paths, desc_array, sake_id, sake_name, sake_read, sakagura_name, pref, write_date, contributor, tastes, flavors, committed) {
 
+
         //alert("added_paths:" + added_paths);
 		var innerHTML = '';
 
@@ -1739,6 +1770,7 @@ $(function() {
         if(rank && rank != undefined)
            $('#rateYo').rateYo("rating", rank);
 
+
         // input 初期化
         $('.nonda_flavor_item_container input[name="flavor[]"]').prop("checked", false);
         $('.nonda_flavor_list div').data('flavor', 0);
@@ -1750,6 +1782,7 @@ $(function() {
         $('.nonda_flavor_list div').each(function() {
             $(this).html('<span>' + ($(this).index() + 1) + '</span>');
         });
+
 
         if(flavors) {
 		    var flavors_array = flavors.toString().split(',');
@@ -1826,13 +1859,15 @@ $(function() {
 
 		            innerHTML += '<div class="nonda_image_photo">';
 		                innerHTML += '<img class="thumb" src="' + path + '" data-desc = "' + desc_array[i] + '" data-filename = "' + pathArray[i] + '">';
-			            innerHTML += '<input type="button" class="remove_pic" value="削除">';
-			            innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
-			            innerHTML += '<div class="nonda_status_total_container">';
+	                    innerHTML += '<div class="nonda_status_total_container">';
+	                        innerHTML += '<input type="button" class="remove_pic" value="削除">';
+	                        innerHTML += '<progress class="nonda_progress" value="0" max="100"></progress>';
+	                        innerHTML += '<div class="loader"></div>';
                             innerHTML += '<div class="nonda_status">status</div>';
                             innerHTML += '<div class="nonda_total">total</div>';
 			            innerHTML += '</div>';
                     innerHTML += '</div>';
+
 			        innerHTML += '<div class="nonda_image_caption_container">';
 			            innerHTML += '<input type="text" name="nonda_image_caption" maxlength="30" placeholder="メモ（30字以内）" value="' + desc_array[i] + '">';
 			        innerHTML += '</div>';
@@ -1910,31 +1945,34 @@ $(function() {
 		//var sake_id = <?php echo json_encode($sake_id); ?>;
         var data = "sake_id="+$('#dialog_bbs').data('sake_id') +"&contributor=" + $('#dialog_bbs').data('contributor');
 		var obj = this;
-        alert("...delete edit_nonda:" + data);
+        //alert("...delete edit_nonda:" + data);
 
-		$.ajax({
-			  type: "post",
-			  url: "nonda_delete.php",
-			  data: data,
-		}).done(function(xml){
+		if(confirm("飲んだを削除しますか？") == true)
+		{
+		    $.ajax({
+			      type: "post",
+			      url: "nonda_delete.php",
+			      data: data,
+		    }).done(function(xml){
 
-		    var str = $(xml).find("str").text();
-		    var sql = $(xml).find("sql").text();
+		        var str = $(xml).find("str").text();
+		        var sql = $(xml).find("sql").text();
 
-		    if(str == "success")
-		    {
-		        $("#dialog_background").css({"display":"none"});
-                $("body").trigger( "nonda_deleted", [ $('#dialog_bbs').data('sake_id'), $('#dialog_bbs').data('contributor') ] );
-		    }
-            else
-            {
-		        alert("ret:" + str);
-		        alert("sql:" + sql);
-            }
-		}).fail(function(data){
-			var str = $(xml).find("str").text();
-			alert("Failed:" +str);
-		});
+		        if(str == "success")
+		        {
+		            $("#dialog_background").css({"display":"none"});
+                    $("body").trigger( "nonda_deleted", [ $('#dialog_bbs').data('sake_id'), $('#dialog_bbs').data('contributor') ] );
+		        }
+                else
+                {
+		            alert("ret:" + str);
+		            alert("sql:" + sql);
+                }
+		    }).fail(function(data){
+			    var str = $(xml).find("str").text();
+			    alert("Failed:" +str);
+		    });
+        }
 	});
 
  	$(document).on('click', '#tabs-1 .review_article_delete_button', function() {
@@ -1963,16 +2001,6 @@ $(function() {
         $('#tabs-3 input[name="yoin"]').val(0);
 
 
-        /*
-        $('#tabs-3 input[name="aroma"]').val('--');
-        $('#tabs-3 input[name="body"]').val('--');
-        $('#tabs-3 input[name="clear"]').val('--');
-        $('#tabs-3 input[name="sweetness"]').val('--');
-        $('#tabs-3 input[name="umami"]').val('--');
-        $('#tabs-3 input[name="acidity"]').val('--');
-        $('#tabs-3 input[name="bitter"]').val('--');
-        $('#tabs-3 input[name="yoin"]').val('--');
-        */
         $('#tabs-3 .tasting_score').text('--');
 
         $('.nonda_flavor_category > div input').prop("checked", false);

@@ -89,10 +89,23 @@ $(function() {
 
             $('select[name="establishment"] option').each(function(){
 
-                if(this.value == sakagura[0].establishment)
+                //alert("establishmament:" + sakagura[0].establishment);
+                var yearArray = sakagura[0].establishment.split(',');
+    
+                if(this.value == yearArray[0])
 				{
-					 $('select[name="establishment"]').val(sakagura[0].establishment);
-					 return false;
+					$('select[name="establishment"]').val(yearArray[0]);
+
+		            if(yearArray[0] == 9999)
+		            {
+			            if($('input[name="other_year"]').prop("disabled") == true)
+			            {
+				            $('input[name="other_year"]').prop('disabled', false);
+				            $('input[name="other_year"]').val(yearArray[1]);
+			            }
+		            }
+
+					return false;
 				}
 			});
 
