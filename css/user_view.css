@@ -386,6 +386,10 @@
   margin-right: 0;
 }
 
+.tab_sakagura_sort_container .display_selection_button:first-child {
+  display: none;
+}
+
 .display_selection .selected {
   background: #22445B;
 }
