@@ -42,17 +42,19 @@ require_once("nonda.php");
 
 			$.ajax({
 				type: "post",
-				url: "user_login.php",
+				url: "cgi/user_login.php",
 				data: data,
 			}).done(function(xml){
 				var str = $(xml).find("str").text();
 
-			  //alert("str:" + str);
+				//alert("str:" + str);
+				var base = $(xml).find("base").text();
+				//alert("base:" + base);
 
 				if(str == "success")
 					window.open('./sake_search.php', '_self');
 				else
-					$("#message").text('パスワードが違います');
+					$("#message").text('メールアドレスもしくはパスワードが違います');
 			}).fail(function(data){
 				alert("failed");
 				$("#message").text('This is Error');
