@@ -48,8 +48,6 @@ require_once("nonda.php");
 				var str = $(xml).find("str").text();
 
 				//alert("str:" + str);
-				var base = $(xml).find("base").text();
-				//alert("base:" + base);
 
 				if(str == "success")
 					window.open('./sake_search.php', '_self');
@@ -88,49 +86,43 @@ require_once("nonda.php");
 
 	<div id="container">
 		<div id="registry_user_container">
-
 			<div class="registry_user_title">ログイン</div>
-
 			<form id="registry_user_form" action="" method="post">
 				<div id="registry_user_content">
 					<div class="row_container">
-            <div class="row_title_container">
-
-              <div class="row_title">メールアドレス</div>
-            </div>
-            <div class="row">
-              <div class="column2">
-                <label><input id="email" type="text" name="email"></label>
-              </div>
-            </div>
-          </div>
-
+						<div class="row_title_container">
+							<div class="row_title">メールアドレス</div>
+						</div>
+						<div class="row">
+							<div class="column2">
+								<label><input id="email" type="text" name="email"></label>
+							</div>
+						</div>
+					</div>
 					<div class="row_container">
-            <div class="row_title_container">
-
-              <div class="row_title">パスワード</div>
-            </div>
-            <div class="row">
-              <div class="column2">
-                <label>
+						<div class="row_title_container">
+							<div class="row_title">パスワード</div>
+						</div>
+						<div class="row">
+							<div class="column2">
+								<label>
 									<input id="user_password" type="password" name="user_password">
 								</label>
 								<p id="message"></p>
-              </div>
-            </div>
-          </div>
-
+							</div>
+						</div>
+					</div>
 				</div>
-
 				<div class="registry_user_button_container">
 					<input type="button" id="submit_button" name="send" value="ログインする">
+					<a class="registry_user_link" href="user_view_password_inquiry.php">
+						<span>パスワードを忘れた方はこちら</span>
+					</a>
 					<a class="registry_user_link" href="user_add_form.php">
 						<span>会員登録されていない方はこちら</span>
 					</a>
 				</div>
-
 			</form>
-
 		</div>
 	</div>
 
