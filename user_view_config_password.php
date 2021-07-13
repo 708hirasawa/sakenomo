@@ -9,8 +9,7 @@ require_once("searchbar.php");
 
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
@@ -98,7 +97,6 @@ require_once("searchbar.php");
 								<p id="length" class="invalid"><b>6文字以上</b></p>
 							</div>
 						</div>
-
 					</div>
 					<div class="row_container">
 						<div class="row_title_container">
@@ -113,8 +111,9 @@ require_once("searchbar.php");
 							</div>
 						</div>
 					</div>
-					<div id="password_check" style="display:none">パスワード入力に間違いがないようご注意ください</div>
+					<div id="password_check" style="display:none">パスワードが一致しません</div>
 				</div>
+
 				<div class="password_button_container">
 					<input type="button" id="submit_button" name="submit_button" disabled=true value="パスワードを保存">
 				</div>
@@ -131,6 +130,75 @@ require_once("searchbar.php");
 <script type="text/javascript">
 
 	$(function() {
+
+		function verifyEntries() {
+			var status = true;
+
+			// new password verification
+			if($('#letter').hasClass('invalid') || $('#capital').hasClass('invalid') || $('#number').hasClass('invalid') || $('#length').hasClass('invalid')) {
+				status = false;
+			}
+
+			// new password verification
+			if($('#password_verify').hasClass('invalid')) {
+				status = false;
+			}
+
+			// password match verification
+			if($('#password_check').hasClass('invalid')) {
+				status = false;
+			}
+
+			/////////////////////////////////////////
+			if(status == false) {
+				$('#submit_button').prop('disabled', true);
+				$('#submit_button').css('background', '#e6e6e6');
+			}
+			else {
+				$('#submit_button').prop('disabled', false);
+				$('#submit_button').css('background', '#C5CE51');
+			}
+		}
+
+		// when the user starts to type something inside the password field
+		$(document).on('keyup', '#new_password', function() {
+
+			// validate lowercase letters
+			if($('#new_password').val().match(/[a-z]/g)) {
+				$('#letter').removeClass('invalid');
+				$('#letter').addClass('valid');
+			} else {
+				$('#letter').removeClass('valid');
+				$('#letter').addClass('invalid');
+			}
+
+			// validate capital letters
+			if($('#new_password').val().match(/[A-Z]/g)) {
+				$('#capital').removeClass('invalid');
+				$('#capital').addClass('valid');
+			} else {
+				$('#capital').removeClass('valid');
+				$('#capital').addClass('invalid');
+			}
+
+			// validate numbers
+			if($('#new_password').val().match(/[0-9]/g)) {
+				$('#number').removeClass('invalid');
+				$('#number').addClass('valid');
+			} else {
+				$('#number').removeClass('valid');
+				$('#number').addClass('invalid');
+			}
+
+			// validate length
+			if($('#new_password').val().length >= 6) {
+				$('#length').removeClass('invalid');
+				$('#length').addClass('valid');
+			} else {
+				$('#length').removeClass('valid');
+				$('#length').addClass('invalid');
+			}
+		});
 
 		$(document).on('blur', 'input[name="password"]', function() {
 
@@ -150,32 +218,22 @@ require_once("searchbar.php");
 
 				if(str == "success") {
 					$('#password_verify').text("現在のパスワードが一致しました");
-					$('#password_verify').css({"color":"#C5CE51"});
-
-					if($('input[name="new_password"]').val() != $('input[name="new_password_repeat"]').val()) {
-						$('#password_check').removeClass('valid');
-						$('#password_check').addClass('invalid');
-						$('#password_check').css({"display":"none"});
-						$('#submit_button').prop('disabled', false);
-					}
-					else {
-						$('#password_check').removeClass('invalid');
-						$('#password_check').addClass('valid');
-						$('#password_check').css({"display":"block"});
-						$('#submit_button').prop('disabled', true);
-					}
+					$('#password_verify').removeClass('invalid');
+					$('#password_verify').addClass('valid');
+					$('#password_verify').css({"display":"block"});
 				}
 				else {
-					$('#password_check').removeClass('valid');
-					$('#password_check').addClass('invalid');
-					$('#password_verify').text("現在のパスワードが一致していません");
-					$('#password_verify').css({"color":"#CD0000"});
-					$('#submit_button').prop('disabled', true);
+					$('#password_verify').text("現在のパスワードが一致しません");
+					$('#password_verify').removeClass('valid');
+					$('#password_verify').addClass('invalid');
+					$('#password_verify').css({"display":"block"});
 				}
 
+				verifyEntries();
+
 			}).fail(function(data){
-				  var str = $(xml).find("str").text();
-				  alert("Failed:" +str);
+				var str = $(xml).find("str").text();
+				alert("Failed:" +str);
 			});
 		});
 
@@ -183,78 +241,39 @@ require_once("searchbar.php");
 		// パスワード検証
 		////////////////////////////////////////////////////////////////////////////////////
 		// when the user clicks outside of the password field, hide the message box
-		$('input[name="new_password"]').blur(function() {
+		$('input[name="new_password"], input[name="new_password_repeat"]').blur(function() {
 
-			if($('input[name="new_password"]').val() != $('input[name="new_password_repeat"]').val() || $('#password_check').hasClass('invalid') || $('#letter').hasClass('invalid') || $('#capital').hasClass('invalid') || $('#number').hasClass('invalid') || $('#length').hasClass('invalid'))
+			// check for password match
+			if($('input[name="new_password"]').val() != $('input[name="new_password_repeat"]').val())
 			{
-				$('#submit_button').prop('disabled', true);
-				$("#submit_button").css('background', '#e6e6e6');
+				if($('input[name="new_password"]').val() != "" && $('input[name="new_password_repeat"]').val() != "")
+				{
+					$('#password_check').text("パスワードが一致しません");
+					$('#password_check').removeClass('valid');
+					$('#password_check').addClass('invalid');
+					$('#password_check').css({"display":"block"});
+				}
+				else
+				{
+					$('#password_check').removeClass('valid');
+					$('#password_check').addClass('invalid');
+					$('#password_check').css({'display':'none'});
+				}
+
+				status = false;
 			}
 			else
 			{
-				$('#submit_button').prop('disabled', false);
-				$("#submit_button").css('background', '#C5CE51');
+				$('#password_check').text("パスワードが一致しました");
+				$('#password_check').removeClass('invalid');
+				$('#password_check').addClass('valid');
+				$('#password_check').css({'display':'block'});
 			}
-		});
 
-		// when the user starts to type something inside the password field
-		$(document).on('keyup', '#new_password', function() {
-
-			  // validate lowercase letters
-			  if($('#new_password').val().match(/[a-z]/g)) {
-					$('#letter').removeClass('invalid');
-					$('#letter').addClass('valid');
-			  } else {
-					$('#letter').removeClass('valid');
-					$('#letter').addClass('invalid');
-			  }
-
-			  // validate capital letters
-			  if($('#new_password').val().match(/[A-Z]/g)) {
-					$('#capital').removeClass('invalid');
-					$('#capital').addClass('valid');
-			  } else {
-					$('#capital').removeClass('valid');
-					$('#capital').addClass('invalid');
-			  }
-
-			  // validate numbers
-			  if($('#new_password').val().match(/[0-9]/g)) {
-					$('#number').removeClass('invalid');
-					$('#number').addClass('valid');
-			  } else {
-					$('#number').removeClass('valid');
-					$('#number').addClass('invalid');
-			  }
-
-			  // validate length
-			  if($('#new_password').val().length >= 6) {
-					$('#length').removeClass('invalid');
-					$('#length').addClass('valid');
-			  } else {
-					$('#length').removeClass('valid');
-					$('#length').addClass('invalid');
-			  }
+			verifyEntries();
 		});
 
 		////////////////////////////////////////////////////////////////////////
-		$(document).on('blur', '#new_password_repeat', function() {
-
-			if($('input[name="new_password"]').val() != $('input[name="new_password_repeat"]').val() || $('#password_check').hasClass('invalid') || $('#letter').hasClass('invalid') || $('#capital').hasClass('invalid') || $('#number').hasClass('invalid') || $('#length').hasClass('invalid'))
-			{
-				$('#password_check').css({"display":"block"});
-				$('#submit_button').prop('disabled', true);
-				$("#submit_button").css('background', '#e6e6e6');
-			}
-			else
-			{
-				$('#password_check').css({"display":"none"});
-				$('#submit_button').prop('disabled', false);
-				$("#submit_button").css('background', '#C5CE51');
-			}
-		});
-		////////////////////////////////////////////////////////////////////////
-
 		$(document).on('click','#submit_button', function() {
 
 			var username = <?php echo json_encode($username); ?>;
