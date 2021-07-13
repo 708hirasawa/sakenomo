@@ -115,7 +115,7 @@ require_once("nonda.php");
 				</div>
 				<div class="registry_user_button_container">
 					<input type="button" id="submit_button" name="send" value="ログインする">
-					<a class="registry_user_link" href="user_view_password_inquiry.php">
+					<a class="password_reset_link" href="user_view_password_inquiry.php">
 						<span>パスワードを忘れた方はこちら</span>
 					</a>
 					<a class="registry_user_link" href="user_add_form.php">
