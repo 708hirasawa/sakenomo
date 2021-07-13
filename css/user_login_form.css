@@ -4,7 +4,6 @@ body {
 
 #registry_user_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -17,8 +16,6 @@ body {
 /************************************************************/
 .registry_user_title {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   font-size: 20px;
@@ -46,7 +43,6 @@ body {
 /************************************************************/
 .row_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -61,7 +57,6 @@ body {
 .row_title_container {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -75,7 +70,6 @@ body {
 
 .row {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -85,7 +79,6 @@ body {
 
 .column2 {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -95,8 +88,6 @@ body {
 
 .column2 label {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -106,8 +97,6 @@ body {
 
 .column2 label input {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-size: 16px;
@@ -126,7 +115,6 @@ body {
 /************************************************************/
 .registry_user_button_container {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -145,20 +133,25 @@ body {
   cursor: pointer;
 }
 
+.password_reset_link {
+  margin-top: 16px;
+}
+
+.password_reset_link span {
+  color: #259AFF;
+}
+
 .registry_user_link {
   text-decoration: none;
   margin-top: 16px;
 }
 
-.registry_user_link span{
+.registry_user_link span {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: #FF7F00;
-  font-size: 14px;
   font-weight: bold;
   text-shadow: 1px 1px 0px #b2b2b2;
   width: 250px;
