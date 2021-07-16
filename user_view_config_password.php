@@ -35,6 +35,7 @@ require_once("searchbar.php");
 		write_search_bar();
 
 		$username = $_COOKIE['login_cookie'];
+		$email = $_COOKIE['email'];
 
 		if(!$db = opendatabase("sake.db"))
 		{
@@ -149,7 +150,7 @@ require_once("searchbar.php");
 				status = false;
 			}
 
-			/////////////////////////////////////////
+			// disable/enable submit button based on status
 			if(status == false) {
 				$('#submit_button').prop('disabled', true);
 				$('#submit_button').css('background', '#e6e6e6');
@@ -277,7 +278,8 @@ require_once("searchbar.php");
 		$(document).on('click','#submit_button', function() {
 
 			var username = <?php echo json_encode($username); ?>;
-			var data = "username=" + username + "&" + $("#password_form").serialize();
+			var email = <?php echo json_encode($email); ?>;
+			var data = "username=" + username + "&email=" + email + "&" + $("#password_form").serialize();
 			//alert("data:" + data);
 
 			$.ajax({
