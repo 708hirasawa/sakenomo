@@ -1,4 +1,5 @@
 <?php
+/* 現在のパスワードを入力して新しいパスワードを入力するフォーム */
 require_once("db_functions.php");
 require_once("html_disp.php");
 require_once("hamburger.php");
@@ -37,8 +38,7 @@ require_once("searchbar.php");
 		$username = $_COOKIE['login_cookie'];
 		$email = $_COOKIE['email'];
 
-		if(!$db = opendatabase("sake.db"))
-		{
+		if(!$db = opendatabase("sake.db")) {
 			print('<div>データベース接続エラー</div>');
 			print('</body></html>');
 			return;
@@ -48,9 +48,8 @@ require_once("searchbar.php");
 		$res = executequery($db, $sql);
 		$row = getnextrow($res);
 
-		if(!$row)
-		{
-			print('<div>データベース接続エラー</div>');
+		if(!$row) {
+			print('<div>ユーザーが見つかりません</div>');
 			print('</body></html>');
 			return;
 		}
@@ -245,17 +244,14 @@ require_once("searchbar.php");
 		$('input[name="new_password"], input[name="new_password_repeat"]').blur(function() {
 
 			// check for password match
-			if($('input[name="new_password"]').val() != $('input[name="new_password_repeat"]').val())
-			{
-				if($('input[name="new_password"]').val() != "" && $('input[name="new_password_repeat"]').val() != "")
-				{
+			if($('input[name="new_password"]').val() != $('input[name="new_password_repeat"]').val()) {
+				if($('input[name="new_password"]').val() != "" && $('input[name="new_password_repeat"]').val() != "") {
 					$('#password_check').text("パスワードが一致しません");
 					$('#password_check').removeClass('valid');
 					$('#password_check').addClass('invalid');
 					$('#password_check').css({"display":"block"});
 				}
-				else
-				{
+				else {
 					$('#password_check').removeClass('valid');
 					$('#password_check').addClass('invalid');
 					$('#password_check').css({'display':'none'});
@@ -263,8 +259,7 @@ require_once("searchbar.php");
 
 				status = false;
 			}
-			else
-			{
+			else {
 				$('#password_check').text("パスワードが一致しました");
 				$('#password_check').removeClass('invalid');
 				$('#password_check').addClass('valid');
@@ -286,7 +281,7 @@ require_once("searchbar.php");
 				type: "post",
 				url: "cgi/user_password_update.php",
 				data: data,
-			}).done(function(xml){
+			}).done(function(xml) {
 				var str = $(xml).find("str").text();
 				var sql = $(xml).find("sql").text();
 
