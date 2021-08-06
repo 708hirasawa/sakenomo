@@ -458,49 +458,27 @@ print('<div id="container" data-category=' .$category
 										<OPTION VALUE="yamadanishiki" kanji="山田錦">山田錦</OPTION>
 										<OPTION VALUE="gohyakumangoku" kanji="五百万石">五百万石</OPTION>
 										<OPTION VALUE="omachi" kanji="雄町">雄町</OPTION>
+										<OPTION VALUE="miyamanishiki" kanji="美山錦">美山錦</OPTION>
 										<OPTION VALUE="aiyama" kanji="愛山">愛山</OPTION>
 										<OPTION VALUE="akitashukomachi" kanji="秋田酒こまち">秋田酒こまち</OPTION>
-										<OPTION VALUE="akinosei" kanji="秋の精">秋の精</OPTION>
-										<OPTION VALUE="ipponjime" kanji="一本〆">一本〆</OPTION>
-										<OPTION VALUE="oyamanishiki" kanji="雄山錦">雄山錦</OPTION>
-										<OPTION VALUE="kairyoshinko" kanji="改良信交">改良信交</OPTION>
 										<OPTION VALUE="kamenoo" kanji="亀の尾">亀の尾</OPTION>
-										<OPTION VALUE="ginotome" kanji="ぎんおとめ">ぎんおとめ</OPTION>
 										<OPTION VALUE="ginginga" kanji="吟ぎんが">吟ぎんが</OPTION>
-										<OPTION VALUE="ginnosato" kanji="吟のさと">吟のさと</OPTION>
 										<OPTION VALUE="ginnosei" kanji="吟の精">吟の精</OPTION>
 										<OPTION VALUE="gimpu" kanji="吟風">吟風</OPTION>
-										<OPTION VALUE="ginfubuki" kanji="吟吹雪">吟吹雪</OPTION>
-										<OPTION VALUE="kinmonnishiki" kanji="金紋錦">金紋錦</OPTION>
 										<OPTION VALUE="kuranohana" kanji="蔵の華">蔵の華</OPTION>
 										<OPTION VALUE="koshitanrei" kanji="越淡麗">越淡麗</OPTION>
-										<OPTION VALUE="koshinoshizuku" kanji="越の雫">越の雫</OPTION>
-										<OPTION VALUE="saitonoshizuku" kanji="西都の雫">西都の雫</OPTION>
 										<OPTION VALUE="sakemirai" kanji="酒未来">酒未来</OPTION>
-										<OPTION VALUE="sakemusashi" kanji="さけ武蔵">さけ武蔵</OPTION>
-										<OPTION VALUE="shinriki" kanji="神力">神力</OPTION>
 										<OPTION VALUE="suisei" kanji="彗星">彗星</OPTION>
-										<OPTION VALUE="senbonnishiki" kanji="千本錦">千本錦</OPTION>
-										<OPTION VALUE="tatsunootoshigo" kanji="龍の落とし子">龍の落とし子</OPTION>
-										<OPTION VALUE="tamazakae" kanji="玉栄">玉栄</OPTION>
 										<OPTION VALUE="dewasansan" kanji="出羽燦々">出羽燦々</OPTION>
 										<OPTION VALUE="dewanosato" kanji="出羽の里">出羽の里</OPTION>
 										<OPTION VALUE="hattan" kanji="八反">八反</OPTION>
 										<OPTION VALUE="hattannishiki" kanji="八反錦">八反錦</OPTION>
 										<OPTION VALUE="hanaomoi" kanji="華想い">華想い</OPTION>
 										<OPTION VALUE="hanafubuki" kanji="華吹雪">華吹雪</OPTION>
-										<OPTION VALUE="hitachinishiki" kanji="ひたち錦">ひたち錦</OPTION>
 										<OPTION VALUE="hitogokochi" kanji="ひとごこち">ひとごこち</OPTION>
-										<OPTION VALUE="hohai" kanji="豊盃">豊盃</OPTION>
-										<OPTION VALUE="hoshiakari" kanji="星あかり">星あかり</OPTION>
-										<OPTION VALUE="maikaze" kanji="舞風">舞風</OPTION>
 										<OPTION VALUE="misatonishiki" kanji="美郷錦">美郷錦</OPTION>
-										<OPTION VALUE="miyamanishiki" kanji="美山錦">美山錦</OPTION>
-										<OPTION VALUE="yamasakeyongo" kanji="山酒4号（玉苗）">山酒4号（玉苗）</OPTION>
 										<OPTION VALUE="yamadaho" kanji="山田穂">山田穂</OPTION>
-										<OPTION VALUE="yuinoka" kanji="結の香">結の香</OPTION>
 										<OPTION VALUE="yumenoka" kanji="夢の香">夢の香</OPTION>
-										<OPTION VALUE="wakamizu" kanji="若水">若水</OPTION>
 										<OPTION VALUE="wataribune" kanji="渡船">渡船</OPTION>
 										<OPTION VALUE="other" kanji="その他">その他</OPTION>
 									</SELECT>
@@ -515,49 +493,27 @@ print('<div id="container" data-category=' .$category
 											<label><li value="yamadanishiki"><input type="checkbox" name="rice_used[]" value="yamadanishiki">山田錦</li></label>
 											<label><li value="gohyakumangoku"><input type="checkbox" name="rice_used[]" value="gohyakumangoku">五百万石</li></label>
 											<label><li value="omachi"><input type="checkbox" name="rice_used[]" value="omachi">雄町</li></label>
+											<label><li value="miyamanishiki"><input type="checkbox" name="rice_used[]" value="miyamanishiki">美山錦</li></label>
 											<label><li value="aiyama"><input type="checkbox" name="rice_used[]" value="aiyama">愛山</li></label>
 											<label><li value="akitashukomachi"><input type="checkbox" name="rice_used[]" value="akitashukomachi">秋田酒こまち</li></label>
-											<label><li value="akinosei"><input type="checkbox" name="rice_used[]" value="akinosei">秋の精</li></label>
-											<label><li value="ipponjime"><input type="checkbox" name="rice_used[]" value="ipponjime">一本〆</li></label>
-											<label><li value="oyamanishiki"><input type="checkbox" name="rice_used[]" value="oyamanishiki">雄山錦</li></label>
-											<label><li value="kairyoshinko"><input type="checkbox" name="rice_used[]" value="kairyoshinko">改良信交</li></label>
 											<label><li value="kamenoo"><input type="checkbox" name="rice_used[]" value="kamenoo">亀の尾</li></label>
-											<label><li value="ginotome"><input type="checkbox" name="rice_used[]" value="ginotome">ぎんおとめ</li></label>
 											<label><li value="ginginga"><input type="checkbox" name="rice_used[]" value="ginginga">吟ぎんが</li></label>
-											<label><li value="ginnosato"><input type="checkbox" name="rice_used[]" value="ginnosato">吟のさと</li></label>
 											<label><li value="ginnosei"><input type="checkbox" name="rice_used[]" value="ginnosei">吟の精</li></label>
 											<label><li value="gimpu"><input type="checkbox" name="rice_used[]" value="gimpu">吟風</li></label>
-											<label><li value="ginfubuki"><input type="checkbox" name="rice_used[]" value="ginfubuki">吟吹雪</li></label>
-											<label><li value="kinmonnishiki"><input type="checkbox" name="rice_used[]" value="kinmonnishiki">金紋錦</li></label>
 											<label><li value="kuranohana"><input type="checkbox" name="rice_used[]" value="kuranohana">蔵の華</li></label>
 											<label><li value="koshitanrei"><input type="checkbox" name="rice_used[]" value="koshitanrei">越淡麗</li></label>
-											<label><li value="koshinoshizuku"><input type="checkbox" name="rice_used[]" value="koshinoshizuku">越の雫</li></label>
-											<label><li value="saitonoshizuku"><input type="checkbox" name="rice_used[]" value="saitonoshizuku">西都の雫</li></label>
 											<label><li value="sekemirai"><input type="checkbox" name="rice_used[]" value="sekemirai">酒未来</li></label>
-											<label><li value="sakemusashi"><input type="checkbox" name="rice_used[]" value="sakemusashi">さけ武蔵</li></label>
-											<label><li value="shinriki"><input type="checkbox" name="rice_used[]" value="shinriki">神力</li></label>
 											<label><li value="suisei"><input type="checkbox" name="rice_used[]" value="suisei">彗星</li></label>
-											<label><li value="senbonnishiki"><input type="checkbox" name="rice_used[]" value="senbonnishiki">千本錦</li></label>
-											<label><li value="tatsunootoshigo"><input type="checkbox" name="rice_used[]" value="tatsunootoshigo">龍の落とし子</li></label>
-											<label><li value="tamazakae"><input type="checkbox" name="rice_used[]" value="tamazakae">玉栄</li></label>
 											<label><li value="dewasansan"><input type="checkbox" name="rice_used[]" value="dewasansan">出羽燦々</li></label>
 											<label><li value="dewanosato"><input type="checkbox" name="rice_used[]" value="dewanosato">出羽の里</li></label>
 											<label><li value="hattan"><input type="checkbox" name="rice_used[]" value="hattan">八反</li></label>
 											<label><li value="hattannishiki"><input type="checkbox" name="rice_used[]" value="hattannishiki">八反錦</li></label>
 											<label><li value="hanaomoi"><input type="checkbox" name="rice_used[]" value="hanaomoi">華想い</li></label>
 											<label><li value="hanafubuki"><input type="checkbox" name="rice_used[]" value="hanafubuki">華吹雪</li></label>
-											<label><li value="hitachinishiki"><input type="checkbox" name="rice_used[]" value="hitachinishiki">ひたち錦</li></label>
 											<label><li value="hitogokochi"><input type="checkbox" name="rice_used[]" value="hitogokochi">ひとごこち</li></label>
-											<label><li value="hohai"><input type="checkbox" name="rice_used[]" value="hohai">豊盃</li></label>
-											<label><li value="hoshiakari"><input type="checkbox" name="rice_used[]" value="hoshiakari">星あかり</li></label>
-											<label><li value="maikaze"><input type="checkbox" name="rice_used[]" value="maikaze">舞風</li></label>
 											<label><li value="misatonishiki"><input type="checkbox" name="rice_used[]" value="misatonishiki">美郷錦</li></label>
-											<label><li value="miyamanishiki"><input type="checkbox" name="rice_used[]" value="miyamanishiki">美山錦</li></label>
-											<label><li value="yamasakeyongo"><input type="checkbox" name="rice_used[]" value="yamasakeyongo">山酒4号（玉苗）</li></label>
 											<label><li value="yamadaho"><input type="checkbox" name="rice_used[]" value="yamadaho">山田穂</li></label>
-											<label><li value="yuinoka"><input type="checkbox" name="rice_used[]" value="yuinoka">結の香</li></label>
 											<label><li value="yumenoka"><input type="checkbox" name="rice_used[]" value="yumenoka">夢の香</li></label>
-											<label><li value="wakamizu"><input type="checkbox" name="rice_used[]" value="wakamizu">若水</li></label>
 											<label><li value="wataribune"><input type="checkbox" name="rice_used[]" value="wataribune">渡船</li></label>
 											<label><li value="other"><input type="checkbox" name="rice_used[]" value="other">その他</li></label>
 										</ul>
@@ -3172,53 +3128,31 @@ writefooter();
 <script type="text/javascript">
 
 var rice_items = [
-		  ["kokusanmai", "国産米", "こくさんまい"],
+          ["kokusanmai", "国産米", "こくさんまい"],
           ["yamadanishiki", "山田錦", "やまだにしき"],
           ["yamadaho", "山田穂", "やまだぼ"],
           ["gohyakumangoku", "五百万石", "ごひゃくまんごく"],
           ["omachi", "雄町", "おまち"],
+          ["miyamanishiki", "美山錦", "みやまにしき"],
           ["aiyama", "愛山", "あいやま"],
           ["akitashukomachi", "秋田酒こまち", "あきたさけこまち"],
-          ["akinosei", "秋の精", "あきのせい"],
-          ["ipponjime", "一本〆", "いっぽんじめ"],
-          ["oyamanishiki", "雄山錦", "おやまにしき"],
-          ["kairyoshinko", "改良信交", "かいりょうしんこう"],
           ["kamenoo", "亀の尾", "かめのお"],
-          ["ginotome", "ぎんおとめ", "ぎんおとめ"],
           ["ginginga", "吟ぎんが", "ぎんぎんが"],
-          ["ginnosato", "吟のさと", "ぎんのさと"],
           ["ginnosei", "吟の精", "ぎんのせい"],
           ["gimpu", "吟風", "ぎんぷう"],
-          ["ginfubuki", "吟吹雪", "ぎんふぶき"],
-          ["kinmonnishiki", "金紋錦", "きんもんにしき"],
           ["kuranohana", "蔵の華", "くらのはな"],
           ["koshitanrei", "越淡麗", "こしたんれい"],
-          ["koshinoshizuku", "越の雫", "こしのしずく"],
-          ["saitonoshizuku", "西都の雫", "さいとのしずく"],
           ["sakemirai", "酒未来", "さけみらい"],
-          ["sakemusashi", "さけ武蔵", "さけむさし"],
-          ["shinriki", "神力", "しんりき"],
           ["suisei", "彗星", "すいせい"],
-          ["senbonnishiki", "千本錦", "せんぼんにしき"],
-          ["tatsunootoshigo", "龍の落とし子", "たつのおとしご"],
-          ["tamazakae", "玉栄", "たまさかえ"],
           ["dewasansan", "出羽燦々", "でわさんさん"],
           ["dewanosato", "出羽の里", "でわのさと"],
           ["hattan", "八反", "はったん"],
           ["hattannishiki", "八反錦", "はったんにしき"],
           ["hanaomoi", "華想い", "はなおもい"],
           ["hanafubuki", "華吹雪", "はなふぶき"],
-          ["hitachinishiki", "ひたち錦", "ひたちにしき"],
           ["hitogokochi", "ひとごこち", "ひとごこち"],
-          ["hohai", "豊盃", "ほうはい"],
-          ["hoshiakari", "星あかり", "ほしあかり"],
-          ["maikaze", "舞風", "まいかぜ"],
           ["misatonishiki", "美郷錦", "みさとにしき"],
-          ["miyamanishiki", "美山錦", "みやまにしき"],
-		  ["yamasakeyongo", "山酒4号（玉苗）", "やまさけよんごう（たまなえ）"],
-          ["yuinoka", "結の香", "ゆいのか"],
           ["yumenoka", "夢の香", "ゆめのかおり"],
-          ["wakamizu", "若水", "わかみず"],
           ["wataribune", "渡船", "わたりぶね"],
           ["other", "その他", "そのた"]];
 
@@ -3350,7 +3284,7 @@ $(function() {
 
 				$.ajax({
 						type: "POST",
-						url: "complex_search.php",
+						url: "cgi/complex_search.php",
 						data: data,
 						dataType: 'json',
 
@@ -4048,7 +3982,7 @@ $(function() {
 
 			 $.ajax({
 					type: "post",
-					url: "sake_follow.php?sake_id=<?php print($_GET['sake_id']);?>",
+					url: "cgi/sake_follow.php?sake_id=<?php print($_GET['sake_id']);?>",
 					data: data,
 			 }).done(function(xml){
 						var str = $(xml).find("str").text();
@@ -4056,8 +3990,8 @@ $(function() {
 
 						if(str == "follow")
 						{
-								//$(obj).css('background-color', '#fff');
-								$(obj).animate({backgroundColor: '#e3e3e3', color: '#000'}, 'fast');
+							//$(obj).css('background-color', '#fff');
+							$(obj).animate({backgroundColor: '#e3e3e3', color: '#000'}, 'fast');
 						}
 						else if(str == "followed")
 						{
@@ -4079,7 +4013,7 @@ $(function() {
 
 			$.ajax({
 					type: "POST",
-					url: "complex_search.php",
+					url: "cgi/complex_search.php",
 					data: data,
 					dataType: 'json',
 
@@ -4705,7 +4639,7 @@ $(function() {
 
 				$.ajax({
 						type: "POST",
-						url: "complex_search.php",
+						url: "cgi/complex_search.php",
 						data: data,
 						dataType: 'json',
 
@@ -5202,7 +5136,7 @@ $(function() {
 
 				$.ajax({
 						type: "POST",
-						url: "complex_search.php",
+						url: "cgi/complex_search.php",
 						data: data,
 						dataType: 'json',
 
