@@ -389,7 +389,11 @@
   height: 100%;
 }
 
+<<<<<<< HEAD
 .loader {
+=======
+.nonda_loader {
+>>>>>>> 8ffc5c76628e9fbf2d4d95e583fd051380c69d81
   border: 2px solid #3498db;
   border-radius: 50%;
   border-top: 2px solid #ffffff;
@@ -444,6 +448,8 @@ input[name="nonda_image_caption"] {
 }
 
 .nonda_image_post_button_container .change_pic {
+  -webkit-appearance: none;
+  border-radius: 0;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -61,6 +61,7 @@ require_once("twitterlogin/User.class.php"); // Include User class
 				var base = $(xml).find("base").text();
 
 				//alert("str:" + str);
+<<<<<<< HEAD
 				//alert("base:" + base);
 
 				if(str == "success")
@@ -70,6 +71,13 @@ require_once("twitterlogin/User.class.php"); // Include User class
 					$("#message").text('メールアドレスもしくはパスワードが違います');
 					$("#message").fadeIn();
 				}
+=======
+
+				if(str == "success")
+					window.open('./sake_search.php', '_self');
+				else
+					$("#message").text('メールアドレスもしくはパスワードが違います');
+>>>>>>> 8ffc5c76628e9fbf2d4d95e583fd051380c69d81
 			}).fail(function(data){
 				alert("failed");
 				$("#message").text('This is Error');
@@ -135,6 +143,7 @@ require_once("twitterlogin/User.class.php"); // Include User class
 						<span>パスワードを忘れた方はこちら</span>
 					</a>
 					<input type="button" id="submit_button" name="send" value="ログインする">
+<<<<<<< HEAD
 
 					<p class="another_account_login">または別のアカウントからログイン</p>
 
@@ -144,6 +153,11 @@ require_once("twitterlogin/User.class.php"); // Include User class
 						print($output);
 					?>
 
+=======
+					<a class="password_reset_link" href="user_view_password_inquiry.php">
+						<span>パスワードを忘れた方はこちら</span>
+					</a>
+>>>>>>> 8ffc5c76628e9fbf2d4d95e583fd051380c69d81
 					<a class="registry_user_link" href="user_add_form.php">
 						<span>会員登録されていない方はこちら</span>
 					</a>
