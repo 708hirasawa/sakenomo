@@ -1,5 +1,5 @@
 ﻿<?php
-require_once("db_functions.php");
+require_once("../db_functions.php");
 
 function displaySpecialName($sake_code)
 {
@@ -275,7 +275,7 @@ $disp_max = (isset($_POST["disp_max"]) && ($_POST["disp_max"] != "")) ? $_POST["
 $search_type = $_POST["search_type"];
 $count_query = $_POST["count_query"];
 
-if(!$db = opendatabase("sake.db"))
+if(!$db = opendatabase("../sake.db"))
 {
 	die("データベース接続エラー .<br />");
 }
@@ -301,7 +301,7 @@ if($_POST["search_type"] == "1")
         $condition .= " AND pref LIKE \"%".$pref."%\"";
 	}
 
-	if($special_name != "" && $special_name != undefined)
+	if($special_name != "" && $special_name != 'undefined')
 	{
         $condition .= " AND special_name LIKE \"%".$special_name."%\"";
 	}
@@ -357,8 +357,8 @@ if($_POST["search_type"] == "1")
 	{
 		while($row = getnextrow($res))
 		{
-            $sake_id = $row[sake_id];
-			$intime = gmdate("Y/m/d", $row["favorite_date"] + 9 * 3600);
+            $sake_id = $row["sake_id"];
+			$favorite_date = gmdate("Y/m/d", $row["favorite_date"] + 9 * 3600);
 			$path = "images/icons/noimage160.svg";
             
 			//$sql1 = "SELECT * FROM SAKE_IMAGE WHERE sake_id = '$sake_id' LIMIT 2";
@@ -396,7 +396,7 @@ if($_POST["search_type"] == "1")
 							  'address'	  => $row["address"],
 							  'username'  => $row["username"],
 							  'sake_rank' => $avg_rank,
-							  'write_date' => $intime);
+							  'write_date' => $favorite_date);
 		}
 
 		header('Content-Type: application/json');
@@ -459,7 +459,7 @@ else if($_POST["search_type"] == "2")
 	}
 	else
 	{
-		$default_image = "images/icons/noimage160.svg";
+		$default_image = "../images/icons/noimage160.svg";
 
 		while($row = getnextrow($res))
 		{

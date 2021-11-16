@@ -175,7 +175,7 @@ nav li #login-content {
 
 		  $.ajax({
 				type: "post",
-				url: "./syuhan_update.php?syuhanten_id=<?php print($_GET['syuhanten_id']);?>",
+				url: "cgi/syuhan_update.php?syuhanten_id=<?php print($_GET['syuhanten_id']);?>",
 				data: data,
 		  }).done(function(xml){
 			  var str = $(xml).find("str").text();

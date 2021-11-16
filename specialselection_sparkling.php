@@ -213,9 +213,9 @@ require_once("searchbar.php");
 	      41	槽しぼり
 	      42	きもと
 	      43	山廃もと
-	      44	樽酒</span>
-	      45	原酒</span>
-	      46	生一本</span>
+	      44	木桶仕込
+	      45	原酒
+	      46	生一本
 	      48	古酒・長期貯蔵酒
 	      51	スパークリング
 	      31	中取り/中垂/中汲み
@@ -326,27 +326,6 @@ jQuery(document).ready(function($) {
 
   $("body").wrapInner('<div id="wrapper"></div>');
   $("body").fadeIn(400);
-
-  function ScaleDocument() {
-	    var parentWidth = $(window).width();
-			scaleNavigator(parentWidth);
-
-			if(parentWidth > 700)
-			{
-				if($('.hamburger').hasClass('is-open')) {
-					$('.overlay').hide();
-					$('.hamburger').removeClass('is-open');
-					$('.hamburger').addClass('is-closed');
-					$('#wrapper').toggleClass('toggled');
-					$('.header').toggleClass('toggled');
-				}
-			}
-  }
-
-  ScaleDocument();
-  $(window).bind("load", ScaleDocument);
-  $(window).bind("resize", ScaleDocument);
-  $(window).bind("orientationchange", ScaleDocument);
 });
 
 </script>

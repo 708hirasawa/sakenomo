@@ -25,6 +25,16 @@ require_once("nonda.php");
 <script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-1X2ZRV0BES');
+</script>
 </head>
 
 <body>
@@ -38,7 +48,6 @@ require_once("nonda.php");
 
 	// if no login information send back to to page
 	$username = $_COOKIE['login_cookie'];
-	//$_SESSION['loginname'] = $loginname;
 
 	if(!$db = opendatabase("sake.db"))
 	{
@@ -58,28 +67,47 @@ require_once("nonda.php");
 		return;
 	}
 
-	$imagefile = null;
 	$email = stripslashes($row["email"]);
 	$username = stripslashes($row["username"]);
-	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status=1";
-	$result = executequery($db, $sql);
-	$rd = getnextrow($result);
+	$imagefile = null;
+	$path = "images/icons/noimage_user30.svg";
 
-	if($rd) {
-		$imagefile = $rd["filename"];
+	//print('<div>name' .$row['username'] .'</div>');
+	//print('<div>picture' .$row['picture'] .'</div>');
+
+	if($row['oauth_uid'] && ($row['picture'] && $row['picture'] != "")) {
+		$path = $row['picture'];
+	}
+	else {
+
+		$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status=1";
+		$result = executequery($db, $sql);
+		$rd = getnextrow($result);
+
+		if($rd) {
+			$imagefile = $rd["filename"];
+			$path = "images/profile/" .$imagefile;
+		}
+	}
+
+	// twitterアカウント有無
+	$nickname = $row["nickname"];
+
+	if(!$nickname) {
+		if($row['oauth_uid']) {
+			$nickname = $row["first_name"];
+		}
 	}
 
 	print('<div id="all_container">');
 
 		print('<div id="user_information">');
-			$path = "images/icons/noimage_user30.svg";
-			if($imagefile)
-				$path = "images/profile/" .$imagefile;
+
 			print('<div class="user_image_name_container">');
 				print('<div class="user_image_container">');
 					print('<img src=' .$path .'>');
 				print('</div>');
-				print('<div id="profile_name">' .$row["nickname"] .'</div>');
+				print('<div id="profile_name">' .$nickname .'</div>');
 
 			print('</div>');
 		print("</div>");
@@ -111,6 +139,15 @@ require_once("nonda.php");
 						print('</a>');
 					print('</div>');*/
 					////////////////////////////////////////////////////////////////////////////////
+
+					if(!$row['oauth_uid']) {
+						print('<div class="config_item">');
+							print('<a id="withdraw_input_trigger" class="config_input_trigger" href="user_view_config_password.php">');
+								print('<span>パスワード変更</span>');
+							print('</a>');
+						print('</div>');
+					}
+
 					print('<div class="config_item">');
 						print('<a id="withdraw_input_trigger" class="config_input_trigger" href="user_view_config_withdraw.php">');
 							print('<span>Sakenomo退会</span>');
@@ -141,7 +178,7 @@ require_once("nonda.php");
 	writefooter();
 
 	//print("<hr>");
-	//print("<img src=\"drinksake.gif\" id=\"logoimage\" Title=\"Sake and Sakagura Listings\" alt=\"Sake and Sakagura Listings sakenomu.com\">");
+	//print("<img src=\"drinksake.gif\" id=\"logoimage\" Title=\"Sake and Sakagura Listings\" alt=\"Sake and Sakagura Listings sakenomo.com\">");
 
 	?>
 

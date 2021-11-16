@@ -51,22 +51,22 @@ function displayUsers()
 function displayUserInfo()
 {
 	print('<div class="registoryUserInfo">');
-					print('<div class="row_container">');
+		print('<div class="row_container">');
 
-						print('<div class="row_title_container">');
-							print('<div class="row_title_sign"></div>');
-							print('<div class="row_title">日本酒の名称<span>必須</span></div>');
-						print('</div>');
+			print('<div class="row_title_container">');
+				print('<div class="row_title_sign"></div>');
+				print('<div class="row_title">日本酒の名称<span>必須</span></div>');
+			print('</div>');
 
-						print('<div class="row">');
-							print('<div class="column1_container">');
-								print('<div class="column1">その他の日本酒名 ※上記以外の旧字体・異字体(例:桜/櫻など)を含む日本酒名も登録したい場合は以下に入力してください</div>');
-								print('<span>全角かな/半角英数字</span>');
-							print('</div>');
-							print('<div class="column2"><label><input id="sake_search" type="text" name="sake_search"></label></div>');
-						print('</div>');
+			print('<div class="row">');
+				print('<div class="column1_container">');
+					print('<div class="column1">その他の日本酒名 ※上記以外の旧字体・異字体(例:桜/櫻など)を含む日本酒名も登録したい場合は以下に入力してください</div>');
+					print('<span>全角かな/半角英数字</span>');
+				print('</div>');
+				print('<div class="column2"><label><input id="sake_search" type="text" name="sake_search"></label></div>');
+			print('</div>');
 
-					print('</div>');
+		print('</div>');
 	print('</div>');
 }
 
@@ -123,11 +123,7 @@ function writePageNumberContainer($count_result)
 
 	include_once('images/icons/svg_sprite.svg');
     $username = $_COOKIE['login_cookie'];
-
 	$in_disp_from = 0;
-
-	///////////////////////////////////////
-	///////////////////////////////////////
 
 	if(!$db = opendatabase("sake.db"))
 	{
@@ -169,7 +165,6 @@ function writePageNumberContainer($count_result)
 			print('</div>');
 
 			////////////////////////////////////////////////////////////////////////////////
-
 			print('<div id="container_wrapper">');
 
 				print('<div id="table_wrapper">');
@@ -264,8 +259,6 @@ function writePageNumberContainer($count_result)
 
 									/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 									/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-									/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 									$sql = "SELECT COUNT(*) FROM SAKE_J, SAKAGURA_J WHERE SAKE_J.sakagura_id = SAKAGURA_J.id";
 									$res = executequery($db, $sql);
 									$row = getnextrow($res);
@@ -284,15 +277,7 @@ function writePageNumberContainer($count_result)
 									$res = executequery($db, $sql);
 									$username = $_COOKIE['login_cookie'];
 
-									///////////////////////////////////////////////////////
-									$contributor = $row["contributor"];
-									$user_result = executequery($db, "SELECT * FROM USERS_J WHERE username = '$contributor'");
-									$user_record = getnextrow($user_result);
-
-									if($user_record)
-										$path = "images/profile/" .$user_record["imagefile"];
-									///////////////////////////////////////////////////////
-
+									//print("user:" .$contributor);
 									print('<div class="review_result_sake_page">');
 
 									while($row = getnextrow($res))
@@ -323,12 +308,10 @@ function writePageNumberContainer($count_result)
 
 								/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 								/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-								/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 								print("</div>");
 
 								print('<div id="sake_edit_detail">');
-
 									print('<div class="menu_title">日本酒情報</div>');
 									print('<div id="sake_edit_prev2020"><svg class="return_button"><use xlink:href="#prev2020"/></svg>一覧へ戻る</div>');
 									writeSakeContainer("", "");
@@ -412,8 +395,8 @@ function writePageNumberContainer($count_result)
 										print('</SELECT></label>');
 									print('</div>');
 
-									$condition = "WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKE_J.sake_id = TABLE_NONDA.sake_id";
-									$sql = "SELECT COUNT(*) FROM SAKE_J, SAKAGURA_J, TABLE_NONDA " .$condition ." LIMIT 25";
+									$condition = "WHERE SAKE_J.sakagura_id = SAKAGURA_J.id AND SAKE_J.sake_id = TABLE_NONDA.sake_id AND USERS_J.username = TABLE_NONDA.contributor";
+									$sql = "SELECT COUNT(*) FROM SAKE_J, USERS_J, SAKAGURA_J, TABLE_NONDA " .$condition ." LIMIT 25";
 
 									$res = executequery($db, $sql);
 									$row = getnextrow($res);
@@ -429,7 +412,7 @@ function writePageNumberContainer($count_result)
 									writePageNumberContainer($count_result);
 									///////////////////////////////////////////////////////////////////////////////////
 
-									$sql = "SELECT TABLE_NONDA.sake_id AS sake_id, TABLE_NONDA.rank AS rank, TABLE_NONDA.write_date AS write_date, TABLE_NONDA.update_date AS update_date, TABLE_NONDA.contributor AS contributor, sake_name, sake_read, sakagura_name, pref, sake_rank, subject, message, tastes, committed FROM SAKE_J, SAKAGURA_J, TABLE_NONDA " .$condition  ." ORDER BY update_date DESC LIMIT 25";;
+									$sql = "SELECT TABLE_NONDA.sake_id AS sake_id, TABLE_NONDA.rank AS rank, USERS_J.nickname AS nickname, TABLE_NONDA.write_date AS write_date, TABLE_NONDA.update_date AS update_date, TABLE_NONDA.contributor AS contributor, sake_name, sake_read, sakagura_name, USERS_J.pref AS pref, sake_rank, subject, message, tastes, committed FROM SAKE_J, SAKAGURA_J, TABLE_NONDA, USERS_J " .$condition  ." ORDER BY update_date DESC LIMIT 25";
 									$res = executequery($db, $sql);
 
 									print('<div class="review_result_sake_page">');
@@ -452,7 +435,18 @@ function writePageNumberContainer($count_result)
 													$added_paths .= ", " .$image_record["filename"];
 											}
 
-											//////////////////////////////////////////////////////////////////////////////
+											///////////////////////////////////////////////////////
+											$path = "images/icons/noimage_user30.svg";
+											$contributor = $row["contributor"];
+											$user_result = executequery($db, "SELECT * FROM profile_image WHERE contributor = '$contributor' AND status = 1");
+											$user_record = getnextrow($user_result);
+
+											if($user_record) 
+												$path = "images/profile/" .$user_record["filename"];
+											else
+												$path = "images/icons/noimage_user30.svg";
+											///////////////////////////////////////////////////////
+
 											print('<div class="sake_nonda_container" data-sake_id=' .$sake_id
 																					.' data-sake_name="' .$row["sake_name"]
 																					.'" data-sake_read="' .$row["sake_read"]
@@ -460,7 +454,8 @@ function writePageNumberContainer($count_result)
 																					.'" data-pref=' .$row["pref"]
 																					.' data-update_date=' .$row["update_date"]
 																					.' data-write_date=' .$row["write_date"]
-																					.' data-contributor="' .$row["contributor"]
+																					.' data-nickname="' .$row["nickname"]
+																					.'" data-contributor="' .$row["contributor"]
 																					.'" data-subject="' .$row["subject"]
 																					.'" data-rank=' .$row["rank"]
 																					.' data-message="' .$row["message"]
@@ -476,7 +471,7 @@ function writePageNumberContainer($count_result)
 													print('</div>');
 
 													print('<div class="user_registration_container">');
-														print('<div class="user_name">' .$row["contributor"] .'</div>');
+														print('<div class="user_name">' .$row["nickname"] .'</div>');
 														print('<div class="user_profile_date_container">');
 															print('<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
 															print('<div class="user_date">' .$local_time .'</div>');
@@ -488,11 +483,168 @@ function writePageNumberContainer($count_result)
 													print('<div class="sake_name">' .$row["sake_name"] .'</div>');
 													print('<div class="brewery_prefecture_name">' .$row["sakagura_name"] .' / ' .$row["pref"] .'</div>');
 												print('</div>');
+
+											////////////////////////////////////////
+											////////////////////////////////////////
+
+											 ////////////////////////////////////////
+											  if($row["subject"] && $row["message"]) {
+												print('<div class="nonda_subject_message_container">');
+												  print('<div class="user_nonda_subject">' .$row["subject"] .'</div>');
+												  print('<div class="user_nonda_message">'.nl2br($row["message"]).'</div>');
+												print('</div>');
+											  } else if($row["subject"] && $row["message"] == null) {
+												print('<div class="user_nonda_subject_message_container">');
+												  print('<div class="user_nonda_subject">' .$row["subject"] .'</div>');
+												print('</div>');
+											  } else if($row["subject"] == null && $row["message"]) {
+												print('<div class="user_nonda_subject_message_container">');
+												  print('<div class="user_nonda_message">'.nl2br($row["message"]).'</div>');
+												print('</div>');
+											  } else {
+												print('');
+											  }
+
+											/*
+											if($row["flavor"] || $row["tastes"]) {
+											  if($row["tastes"])
+												$tastes_values = explode(',', $row["tastes"]);
+											  else
+												$tastes_values = Array(0, 0, 0, 0, 0, 0, 0, 0);
+
+											  print('<div class="tastes">');
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_flavor1816"><use xlink:href="#flavor1816"/></svg>フレーバー</div>');
+												  if($row["flavor"]) {
+													print('<div class="taste_value_flavor">' .GetFlavorNames($row["flavor"]) .'</div>');
+												  } else {
+													print('<div class="taste_value" style="color: #b2b2b2;">--</div>');
+												  }
+												print('</div>');
+												////////////////////////////////////////
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_aroma1216"><use xlink:href="#aroma1216"/></svg>香り</div>');
+												  print('<div class="tastes_value_container">');
+													print('<div class="tastes_bar_container">');
+													  print('<input type="range" name="aroma" step="0.1" min="0" max="5" value="' .$tastes_values[0] .'" disabled="disabled" class="user_input_range">');
+													print('</div>');
+													if($tastes_values[0]) {
+													  print('<div class="taste_value">'. number_format($tastes_values[0], 1).'</div>');
+													} else {
+													  print('<div class="taste_value" style="color: #b2b2b2">--</div>');
+													}
+												  print('</div>');
+												print('</div>');
+												////////////////////////////////////////
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_body1216"><use xlink:href="#body1216"/></svg>ボディ</div>');
+												  print('<div class="tastes_value_container">');
+													print('<div class="tastes_bar_container">');
+													  print('<input type="range" name="body" step="0.1" min="0" max="5" value="' .$tastes_values[1] .'" disabled="disabled" class="user_input_range">');
+													print('</div>');
+													if($tastes_values[1]) {
+													  print('<div class="taste_value">'. number_format($tastes_values[1], 1).'</div>');
+													} else {
+													  print('<div class="taste_value" style="color: #b2b2b2;">--</div>');
+													}
+												  print('</div>');
+												print('</div>');
+												////////////////////////////////////////
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_clear3030"><use xlink:href="#clear3030"/></svg>クリア</div>');
+												  print('<div class="tastes_value_container">');
+													print('<div class="tastes_bar_container">');
+													  print('<input type="range" name="clear" step="0.1" min="0" max="5" value="' .$tastes_values[2] .'" disabled="disabled" class="user_input_range">');
+													print('</div>');
+													if($tastes_values[2]) {
+													  print('<div class="taste_value">'. number_format($tastes_values[2], 1).'</div>');
+													} else {
+													  print('<div class="taste_value" style="color: #b2b2b2;">--</div>');
+													}
+												  print('</div>');
+												print('</div>');
+												////////////////////////////////////////
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_sweetness3030"><use xlink:href="#sweetness3030"/></svg>甘辛</div>');
+												  print('<div class="tastes_value_container">');
+													print('<div class="tastes_bar_container">');
+													  print('<input type="range" name="sweetness" step="0.1" min="0" max="5" value="' .$tastes_values[3] .'" disabled="disabled" class="user_input_range">');
+													print('</div>');
+													if($tastes_values[3]) {
+													  print('<div class="taste_value">'. number_format($tastes_values[3], 1).'</div>');
+													} else {
+													  print('<div class="taste_value" style="color: #b2b2b2;">--</div>');
+													}
+												  print('</div>');
+												print('</div>');
+												////////////////////////////////////////
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_umami3030"><use xlink:href="#umami3030"/></svg>旨味</div>');
+												  print('<div class="tastes_value_container">');
+													print('<div class="tastes_bar_container">');
+													  print('<input type="range" name="umami" step="0.1" min="0" max="5" value="' .$tastes_values[4] .'" disabled="disabled" class="user_input_range">');
+													print('</div>');
+													if($tastes_values[4]) {
+													  print('<div class="taste_value">'. number_format($tastes_values[4], 1).'</div>');
+													} else {
+													  print('<div class="taste_value" style="color: #b2b2b2;">--</div>');
+													}
+												  print('</div>');
+												print('</div>');
+												////////////////////////////////////////
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_acidity3030"><use xlink:href="#acidity3030"/></svg>酸味</div>');
+												  print('<div class="tastes_value_container">');
+													print('<div class="tastes_bar_container">');
+													  print('<input type="range" name="acidity" step="0.1" min="0" max="5" value="' .$tastes_values[5] .'" disabled="disabled" class="user_input_range">');
+													print('</div>');
+													if($tastes_values[5]) {
+													  print('<div class="taste_value">'. number_format($tastes_values[5], 1).'</div>');
+													} else {
+													  print('<div class="taste_value" style="color: #b2b2b2">--</div>');
+													}
+												  print('</div>');
+												print('</div>');
+												////////////////////////////////////////
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_bitter1216"><use xlink:href="#bitter1216"/></svg>ビター</div>');
+												  print('<div class="tastes_value_container">');
+													print('<div class="tastes_bar_container">');
+													  print('<input type="range" name="bitter" step="0.1" min="0" max="5" value="' .$tastes_values[6] .'" disabled="disabled" class="user_input_range">');
+													print('</div>');
+													if($tastes_values[6]) {
+													  print('<div class="taste_value">'. number_format($tastes_values[6], 1).'</div>');
+													} else {
+													  print('<div class="taste_value" style="color: #b2b2b2;">--</div>');
+													}
+												  print('</div>');
+												print('</div>');
+												////////////////////////////////////////
+												print('<div class="tastes_item">');
+												  print('<div class="tastes_title"><svg class="tastes_item_yoin3030"><use xlink:href="#yoin3030"/></svg>余韻</div>');
+												  print('<div class="tastes_value_container">');
+													print('<div class="tastes_bar_container">');
+													  print('<input type="range" name="yoin" step="0.1" min="0" max="5" value="' .$tastes_values[7] .'" disabled="disabled" class="user_input_range">');
+													print('</div>');
+													if($tastes_values[7]) {
+													  print('<div class="taste_value">'. number_format($tastes_values[7], 1).'</div>');
+													} else {
+													  print('<div class="taste_value" style="color: #b2b2b2;">--</div>');
+													}
+												  print('</div>');
+												print('</div>');
+											  print('</div>');//tastes
+											}
+											print('</a>');//review
+											*/
+
+											////////////////////////////////////////
+											////////////////////////////////////////
+
 											print('</div>');
 									}
 
 									print('</div>');
-
 									//////////////////////////////////////////////////////////////////////////////
 
 								print("</div>");
@@ -648,38 +800,38 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($tastes_values[1]) {
-																			print('<span>' .number_format($tastes_values[1], 1) .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($tastes_values[1]) {
+																print('<span>' .number_format($tastes_values[1], 1) .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
-										            print('<!--クリア-->');
-										            print('<div class="user_sake_tasting_box">');
-										              print('<div class="user_sake_tasting_title_container">');
-										                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_clear3030"><use xlink:href="#clear3030"/></svg></span>クリア</div>');
-										              print('</div>');
+													print('<!--クリア-->');
+													print('<div class="user_sake_tasting_box">');
+														print('<div class="user_sake_tasting_title_container">');
+														print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_clear3030"><use xlink:href="#clear3030"/></svg></span>クリア</div>');
+														print('</div>');
 
-										              print('<div class="user_sake_tasting_bar_container">');
-										                print('<div class="tastingnote_input_range_container">');
-										                  print('<input type="range" name="clear" step="0.1" min="0" max="5" value="' .$tastes_values[2] .'" disabled="disabled" class="user_input_range">');
-										                print('</div>');
-										                print('<div class="user_sake_tasting_caption">');
-										                  print('<span>雑味がある</span>');
-										                  print('<span>味がきれい</span>');
-										                print('</div>');
-										              print('</div>');
+														print('<div class="user_sake_tasting_bar_container">');
+														print('<div class="tastingnote_input_range_container">');
+															print('<input type="range" name="clear" step="0.1" min="0" max="5" value="' .$tastes_values[2] .'" disabled="disabled" class="user_input_range">');
+														print('</div>');
+														print('<div class="user_sake_tasting_caption">');
+															print('<span>雑味がある</span>');
+															print('<span>味がきれい</span>');
+														print('</div>');
+														print('</div>');
 
 										              print('<div class="user_sake_tasting_score">');
-																		if ($tastes_values[2]) {
-																			print('<span>' .number_format($tastes_values[2], 1) .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+															if ($tastes_values[2]) {
+																print('<span>' .number_format($tastes_values[2], 1) .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
 										            print('<!--甘辛-->');
@@ -723,14 +875,14 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($tastes_values[4]) {
-																			print('<span>' .number_format($tastes_values[4], 1) .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
-										            print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($tastes_values[4]) {
+																print('<span>' .number_format($tastes_values[4], 1) .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
+													print('</div>');
 
 										            print('<!--酸味-->');
 										            print('<div class="user_sake_tasting_box">');
@@ -749,12 +901,12 @@ function writePageNumberContainer($count_result)
 										              print('</div>');
 
 										              print('<div class="user_sake_tasting_score">');
-																		if ($tastes_values[5]) {
-																			print('<span>' .number_format($tastes_values[5], 1) .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+															if ($tastes_values[5]) {
+																print('<span>' .number_format($tastes_values[5], 1) .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+															print('</div>');
 										            print('</div>');
 
 										            print('<!--ビター-->');
@@ -773,13 +925,13 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($tastes_values[6]) {
-																			print('<span>' .number_format($tastes_values[6], 1) .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($tastes_values[6]) {
+																print('<span>' .number_format($tastes_values[6], 1) .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
 										            print('<!--余韻-->');
@@ -886,13 +1038,13 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($taste2_all != 0) {
-																			print('<span>' .$taste2_all .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($taste2_all != 0) {
+																print('<span>' .$taste2_all .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
 										            print('<!--クリア-->');
@@ -911,13 +1063,13 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($taste3_all != 0) {
-																			print('<span>' .$taste3_all .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($taste3_all != 0) {
+																print('<span>' .$taste3_all .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
 										            print('<!--甘辛-->');
@@ -926,23 +1078,23 @@ function writePageNumberContainer($count_result)
 										                print('<div class="user_sake_tasting_title"><span class="user_sake_icon_adjust"><svg class="user_sake_sweetness3030"><use xlink:href="#sweetness3030"/></svg></span>甘辛</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_bar_container">');
-										                print('<div class="tastingnote_input_range_container">');
-										                  print('<input type="range" name="sweetness" step="0.1" min="0" max="5" value="' .$taste4_all .'" disabled="disabled" class="everyone_input_range">');
-										                print('</div>');
-										                print('<div class="user_sake_tasting_caption">');
-										                  print('<span>ドライ・辛口</span>');
-										                  print('<span>スイート・甘口</span>');
-										                print('</div>');
-										              print('</div>');
+														print('<div class="user_sake_tasting_bar_container">');
+														print('<div class="tastingnote_input_range_container">');
+															print('<input type="range" name="sweetness" step="0.1" min="0" max="5" value="' .$taste4_all .'" disabled="disabled" class="everyone_input_range">');
+														print('</div>');
+														print('<div class="user_sake_tasting_caption">');
+															print('<span>ドライ・辛口</span>');
+															print('<span>スイート・甘口</span>');
+														print('</div>');
+														print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($taste4_all != 0) {
-																			print('<span>' .$taste4_all .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+														if ($taste4_all != 0) {
+															print('<span>' .$taste4_all .'</span>');
+														} else {
+															print('<span style="color: #b2b2b2;">--</span>');
+														}
+														print('</div>');
 										            print('</div>');
 
 										            print('<!--旨味-->');
@@ -961,13 +1113,13 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($taste5_all != 0) {
-																			print('<span>' .$taste5_all .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($taste5_all != 0) {
+																print('<span>' .$taste5_all .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
 										            print('<!--酸味-->');
@@ -986,13 +1138,13 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($taste6_all != 0) {
-																			print('<span>' .$taste6_all .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($taste6_all != 0) {
+																print('<span>' .$taste6_all .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
 										            print('<!--ビター-->');
@@ -1011,13 +1163,13 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($taste7_all != 0) {
-																			print('<span>' .$taste7_all .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($taste7_all != 0) {
+																print('<span>' .$taste7_all .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
 										            print('<!--余韻-->');
@@ -1036,13 +1188,13 @@ function writePageNumberContainer($count_result)
 										                print('</div>');
 										              print('</div>');
 
-										              print('<div class="user_sake_tasting_score">');
-																		if ($taste8_all != 0) {
-																			print('<span>' .$taste8_all .'</span>');
-																		} else {
-																			print('<span style="color: #b2b2b2;">--</span>');
-																		}
-																	print('</div>');
+														print('<div class="user_sake_tasting_score">');
+															if ($taste8_all != 0) {
+																print('<span>' .$taste8_all .'</span>');
+															} else {
+																print('<span style="color: #b2b2b2;">--</span>');
+															}
+														print('</div>');
 										            print('</div>');
 
 										          print('</div><!--user_sake_graph_all-->');
@@ -1060,6 +1212,7 @@ function writePageNumberContainer($count_result)
 									        print('<div class="user_sake_like_title">いいね!</div>');
 									      print('</a>');
 									      print('<div class="user_sake_like_count">123</div>');
+									      print('<div class="user_nonda_delete">削除</div>');
 									    print('</div>');
 
 									  print('</div>');
@@ -1148,7 +1301,7 @@ function writePageNumberContainer($count_result)
 									$row = getnextrow($res);
 									$count_result = $row["COUNT(*)"];
 
-									$sql = "SELECT SAKE_J.sake_id, SAKE_J.sake_name, SAKE_J.sake_read, SAKE_J.special_name, SAKE_J.alcohol_level, SAKE_J.rice_used, SAKE_J.seimai_rate, SAKE_J.jsake_level, SAKE_J.oxidation_level, SAKE_J.amino_level, SAKE_J.koubo_used, SAKE_J.sake_rank, SAKE_J.write_date, SAKAGURA_J.sakagura_name, SAKAGURA_J.sakagura_name, SAKAGURA_J.id, SAKAGURA_J.pref, SAKAGURA_J.address, FAVORITE_J.username FROM FAVORITE_J, SAKE_J, SAKAGURA_J " .$condition ." LIMIT ".$in_disp_from.", ".$disp_max;
+									$sql = "SELECT SAKE_J.sake_id, SAKE_J.sake_name, SAKE_J.sake_read, FAVORITE_J.username AS username, SAKE_J.special_name, SAKE_J.alcohol_level, SAKE_J.rice_used, SAKE_J.seimai_rate, SAKE_J.jsake_level, SAKE_J.oxidation_level, SAKE_J.amino_level, SAKE_J.koubo_used, SAKE_J.sake_rank, SAKE_J.write_date, SAKAGURA_J.sakagura_name, SAKAGURA_J.sakagura_name, SAKAGURA_J.id, SAKAGURA_J.pref, SAKAGURA_J.address FROM FAVORITE_J, SAKE_J, SAKAGURA_J " .$condition ." LIMIT ".$in_disp_from.", ".$disp_max;
 									$res = executequery($db, $sql);
 
 									print('<div class="count_result">' .($in_disp_from + 1) .'～' .$in_disp_to .'/全'.$count_result.'件</div>');
@@ -1157,50 +1310,49 @@ function writePageNumberContainer($count_result)
 
 									if(!$res)
 									{
-											header('Content-Type: application/json');
-											$result_set[] = array('count' => $count_result, 'result' => null);
-											echo json_encode($result_set);
+										header('Content-Type: application/json');
+										$result_set[] = array('count' => $count_result, 'result' => null);
+										echo json_encode($result_set);
 									}
 									else
 									{
-											print('<div class="review_result_sake_page">');
+										print('<div class="review_result_sake_page">');
 
-											while($row = getnextrow($res))
-											{
-													$sakd_id = $row[sake_id];
-													$intime = gmdate("Y/m/d H:i:s", $row["write_date"] + 9 * 3600);
-													$path = "images/icons/noimage160.svg";
+										while($row = getnextrow($res))
+										{
+												$sakd_id = $row['sake_id'];
+												$intime = gmdate("Y/m/d H:i:s", $row["write_date"] + 9 * 3600);
+												$path = "images/icons/noimage160.svg";
 
-													$sql = "SELECT * FROM SAKE_IMAGE WHERE sake_id = '$sakd_id' LIMIT 2";
-													$res_image = executequery($db, $sql);
+												$sql = "SELECT * FROM SAKE_IMAGE WHERE sake_id = '$sakd_id' LIMIT 2";
+												$res_image = executequery($db, $sql);
 
-													if($record = getnextrow($res_image))
-													{
-														$path = "images\\photo\\thumb\\".$record["filename"];
-													}
+												if($record = getnextrow($res_image))
+												{
+													$path = "images\\photo\\thumb\\".$record["filename"];
+												}
 
-													print('<div class="sake_nomitai_container" data-sake_id=' .$row["sake_id"] .' data-sake_name=' .$row["sake_name"] .'>');
+												print('<div class="sake_nomitai_container" data-sake_id=' .$row["sake_id"] .' data-sake_name=' .$row["sake_name"] .'>');
 
-														print('<div class="user_info_container">');
-															print('<div class="user_image_container">');
-																print('<img src="' .$path .'">');
-															print('</div>');
-
-															print('<div class="user_registration_container">');
-																print('<div class="user_name">' .$row["username"] .'</div>');
-																print('<div class="user_profile_date_container">');
-																	print('<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
-																	print('<div class="user_date">' .gmdate("Y/m/d", $row["write_date"] + 9 * 3600) .'</div>');
-																print('</div>');
-															print('</div>');
+													print('<div class="user_info_container">');
+														print('<div class="user_image_container">');
+															print('<img src="' .$path .'">');
 														print('</div>');
 
-														print('<div class="sake_info_container">');
-															print('<div class="sake_name">' .$row["sake_name"] .'</div>');
-															print('<div class="brewery_prefecture_name">' .$row["sakagura_name"] .' / ' .$row["pref"] .'</div>');
+														print('<div class="user_registration_container">');
+															print('<div class="user_name">username:' .$row["username"] .'</div>');
+															print('<div class="user_profile_date_container">');
+																print('<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
+																print('<div class="user_date">' .gmdate("Y/m/d", $row["write_date"] + 9 * 3600) .'</div>');
+															print('</div>');
 														print('</div>');
 													print('</div>');
 
+													print('<div class="sake_info_container">');
+														print('<div class="sake_name">' .$row["sake_name"] .'</div>');
+														print('<div class="brewery_prefecture_name">' .$row["sakagura_name"] .' / ' .$row["pref"] .'</div>');
+													print('</div>');
+												print('</div>');
 											}
 
 											print('</div>');
@@ -1339,26 +1491,26 @@ function writePageNumberContainer($count_result)
 
 									while($row = getnextrow($res))
 									{
-											print('<div class="brewery_registry_container" data-sakagura_id=' .$row["id"] .' data-sakagura_name=' .$row["sakagura_name"] .'>');
-												print('<div class="user_info_container">');
-													print('<div class="user_image_container">');
-														print('<img src="' .$path .'">');
-													print('</div>');
-
-													print('<div class="user_registration_container">');
-														print('<div class="user_name">' .$username .'</div>');
-														print('<div class="user_profile_date_container">');
-															print('<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
-															print('<div class="user_date">' .gmdate("Y/m/d", $row["date_added"] + 9 * 3600) .'</div>');
-														print('</div>');
-													print('</div>');
+										print('<div class="brewery_registry_container" data-sakagura_id=' .$row["id"] .' data-sakagura_name=' .$row["sakagura_name"] .'>');
+											print('<div class="user_info_container">');
+												print('<div class="user_image_container">');
+													print('<img src="' .$path .'">');
 												print('</div>');
 
-												print('<div class="brewery_info_container">');
-													print('<div class="brewery_name">' .$row["sakagura_name"] .'</div>');
-													print('<div class="brewery_prefecture_name">' .$row["pref"] .'</div>');
+												print('<div class="user_registration_container">');
+													print('<div class="user_name">' .$username .'</div>');
+													print('<div class="user_profile_date_container">');
+														print('<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
+														print('<div class="user_date">' .gmdate("Y/m/d", $row["date_added"] + 9 * 3600) .'</div>');
+													print('</div>');
 												print('</div>');
 											print('</div>');
+
+											print('<div class="brewery_info_container">');
+												print('<div class="brewery_name">' .$row["sakagura_name"] .'</div>');
+												print('<div class="brewery_prefecture_name">' .$row["pref"] .'</div>');
+											print('</div>');
+										print('</div>');
 									}
 
 									/*
@@ -1495,26 +1647,26 @@ function writePageNumberContainer($count_result)
 
 									while($row = getnextrow($res))
 									{
-											print('<div class="brewery_favorite_container">');
-												print('<div class="user_info_container">');
-													print('<div class="user_image_container">');
-														print('<img src="' .$default_image .'">');
-													print('</div>');
-
-													print('<div class="user_registration_container">');
-														print('<div class="user_name">' .$row["username"] .'</div>');
-														print('<div class="user_profile_date_container">');
-															print('<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
-															print('<div class="user_date">' .gmdate("Y/m/d", $row["favorite_date"] + 9 * 3600) .'</div>');
-														print('</div>');
-													print('</div>');
+										print('<div class="brewery_favorite_container">');
+											print('<div class="user_info_container">');
+												print('<div class="user_image_container">');
+													print('<img src="' .$default_image .'">');
 												print('</div>');
 
-												print('<div class="brewery_info_container">');
-													print('<div class="brewery_name">' .$row["sakagura_name"] .'</div>');
-													print('<div class="brewery_prefecture_name">' .$row["pref"] .'</div>');
+												print('<div class="user_registration_container">');
+													print('<div class="user_name">' .$row["username"] .'</div>');
+													print('<div class="user_profile_date_container">');
+														print('<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>');
+														print('<div class="user_date">' .gmdate("Y/m/d", $row["favorite_date"] + 9 * 3600) .'</div>');
+													print('</div>');
 												print('</div>');
 											print('</div>');
+
+											print('<div class="brewery_info_container">');
+												print('<div class="brewery_name">' .$row["sakagura_name"] .'</div>');
+												print('<div class="brewery_prefecture_name">' .$row["pref"] .'</div>');
+											print('</div>');
+										print('</div>');
 									}
 
 									/*
@@ -1644,20 +1796,20 @@ function writePageNumberContainer($count_result)
 
 									while($row = getnextrow($res))
 									{
-											print('<div class="user_account_container">');
-												print('<div class="user_info_container">');
-													print('<div class="user_registration_container">');
-														print('<div class="user_name">' .$row["username"] .'</div>');
-														print('<div class="user_profile_date_container">');
-															print('<div class="user_date">' .gmdate("Y/m/d", $row["user_added_date"] + 9 * 3600) .'</div>');
-														print('</div>');
+										print('<div class="user_account_container">');
+											print('<div class="user_info_container">');
+												print('<div class="user_registration_container">');
+													print('<div class="user_name">' .$row["username"] .'</div>');
+													print('<div class="user_profile_date_container">');
+														print('<div class="user_date">' .gmdate("Y/m/d", $row["user_added_date"] + 9 * 3600) .'</div>');
 													print('</div>');
 												print('</div>');
-
-												print('<div class="mail_address_container">');
-													print('<div class="mail_address_content">' .$row["email"] .'</div>');
-												print('</div>');
 											print('</div>');
+
+											print('<div class="mail_address_container">');
+												print('<div class="mail_address_content">' .$row["email"] .'</div>');
+											print('</div>');
+										print('</div>');
 									}
 
 									print('</div>');
@@ -1826,7 +1978,6 @@ function writePageNumberContainer($count_result)
 			</div>
 		</form>
 	</div>
-
 </body>
 
 <script src="js/manage_edit_user.js"></script>
@@ -1881,7 +2032,7 @@ $(function(){
 
 	var username = <?php echo json_encode($username); ?>;
 
-    if(!username || username == undefined) {
+    if(!username || username == 'undefined') {
 		$('#dialog_login').css('display', 'flex');
 	}
 
@@ -1891,7 +2042,7 @@ $(function(){
 
 	  $.ajax({
 			type: "post",
-			url: "user_login.php",
+			url: "cgi/user_login.php",
 			data: data,
 	  }).done(function(xml){
 		  var str = $(xml).find("str").text();
@@ -1906,7 +2057,6 @@ $(function(){
 	  });
 	});
 });
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1989,89 +2139,104 @@ jQuery(document).ready(function($) {
 	///////////////////////////////////////////////////////////////////////////////////////////
 
 	$('.simpleTabs a[href="#tab_admin"]').click(function() {
-      window.open("manage_view.php", '_self');
+		window.open("manage_view.php", '_self');
 	});
 
 	$(document).on('click', '.sake_registry_container', function(e){
 
-			//alert("sake_id:" + $(this).data('sake_id') + " sake_name: " + $(this).data('sake_name'));
+		//alert("sake_id:" + $(this).data('sake_id') + " sake_name: " + $(this).data('sake_name'));
 
-			$('#sake_edit .sake_container').css({"display":"block"});
-			$('#sake_edit_detail').css({"display":"flex"});
-			$("body").trigger( "open_edit_sake", [ $(this).data('sake_id'), $(this).data('sake_name') ] );
+		$('#sake_edit .sake_container').css({"display":"block"});
+		$('#sake_edit_detail').css({"display":"flex"});
+		$("body").trigger( "open_edit_sake", [ $(this).data('sake_id'), $(this).data('sake_name') ] );
 	});
 
 	$('#sake_edit_prev2020').click(function() {
-			$('#sake_edit_detail').css({"display":"none"});
+		$('#sake_edit_detail').css({"display":"none"});
 	});
 
 	$(document).on('click', '.sake_nonda_container', function(e){
 
-			$('#sake_nonda_detail .user_sake_subject').text($(this).data('subject'));
-			$('#sake_nonda_detail .user_sake_message').text($(this).data('message'));
-			$('#sake_nonda_detail .user_name').text($(this).data('username'));
-			$('#sake_nonda_detail .user_date').text($(this).data('write_date'));
-			$('#sake_nonda_detail .sake_name').text($(this).data('sake_name'));
-			$('#sake_nonda_detail .brewery_prefecture_name').text($(this).data('sakagura_name') + ' / '  + $(this).data('pref'));
-			$('#sake_nonda_detail .sake_rate').text($(this).data('rank'));
+		//alert("sake_id:" + $(this).data('sake_id'));
+		//alert("username:" + $(this).data('contributor'));
+		//alert("nickname:" + $(this).data('nickname'));
 
-			//alert("tastes:" + $(this).data('tastes'));
+		$('#sake_nonda_detail').data("username", $(this).data('contributor'));
+		$('#sake_nonda_detail').data("sake_id", $(this).data('sake_id'));
+		$('#sake_nonda_detail .user_sake_subject').text($(this).data('subject'));
+		$('#sake_nonda_detail .user_sake_message').text($(this).data('message'));
+		$('#sake_nonda_detail .user_name').text($(this).data('nickname'));
+		$('#sake_nonda_detail .user_date').text($(this).data('write_date'));
+		$('#sake_nonda_detail .sake_name').text($(this).data('sake_name'));
+		$('#sake_nonda_detail .brewery_prefecture_name').text($(this).data('sakagura_name') + ' / '  + $(this).data('pref'));
+		$('#sake_nonda_detail .sake_rate').text($(this).data('rank'));
 
-			if($(this).data('tastes') && $(this).data('tastes') != undefined) {
-				var tastes = $(this).data('tastes').toString();
-				var taste_values = tastes.split(',');
-				var i = 0;
+		//alert("tastes:" + $(this).data('tastes'));
 
-				$('.user_sake_user_bar').css({"width": "0%"});
-				$('.user_sake_tasting_score span').text("0.0");
+		if($(this).data('tastes') && $(this).data('tastes') != 'undefined') {
+			var tastes = $(this).data('tastes').toString();
+			var taste_values = tastes.split(',');
+			var i = 0;
 
-				for(i = 0; i < taste_values.length; i++)　{
-					 taste_values[i] = (taste_values[i] == "") ? 0 : taste_values[i];
-					 var width = (taste_values[i] / 10) * 100 + '%';
-					 //alert("taste_values[i]:" + taste_values[i] + " width:" + width);
+			$('.user_sake_user_bar').css({"width": "0%"});
+			$('.user_sake_tasting_score span').text("0.0");
 
-					 $('.user_sake_user_bar:nth(' + i + ')').css({"width": width});
-					 $('.user_sake_tasting_score:nth(' + i + ') span').text((taste_values[i] == 0) ? "0.0" : taste_values[i]);
-				}
+			for(i = 0; i < taste_values.length; i++)　{
+				taste_values[i] = (taste_values[i] == "") ? 0 : taste_values[i];
+				var width = (taste_values[i] / 10) * 100 + '%';
+				//alert("taste_values[i]:" + taste_values[i] + " width:" + width);
+
+				$('.user_sake_user_bar:nth(' + i + ')').css({"width": width});
+				$('.user_sake_tasting_score:nth(' + i + ') span').text((taste_values[i] == 0) ? "0.0" : taste_values[i]);
+			}
+		}
+
+		if($(this).data('flavor') != 'undefined' && $(this).data('flavor') != "") {
+			var flavors = $(this).data('flavor').toString();
+			var flavor_values = flavors.split(',');
+			var flavor_text = "";
+
+			//alert("flavors:" + flavors);
+
+			for(i = 0; i < flavor_values.length; i++)
+			{
+				flavor_text += GetFlavorNames(flavor_values[i])
 			}
 
-			if($(this).data('flavor') != undefined && $(this).data('flavor') != "") {
-				var flavors = $(this).data('flavor').toString();
-				var flavor_values = flavors.split(',');
-				var flavor_text = "";
+			$('.user_sake_flavor_caption').text(flavor_text);
+		}
 
-				//alert("flavors:" + flavors);
+		//////////////////////////////////////////////////////////////////////////////
+		$('.sake_nonda_container .user_sake_image_container').remove();
+		//$('.sake_nonda_container .user_sake_image_container').html('');
 
-				for(i = 0; i < flavor_values.length; i++)
-				{
-					 flavor_text += GetFlavorNames(flavor_values[i])
-				}
+		if($(this).data('path') != "" && $(this).data('path') != 'undefined') {
 
-				$('.user_sake_flavor_caption').text(flavor_text);
+			var pathArray = $(this).data('path').split(', ');
+			var innerHTML = "";
+			var path = "";
+
+			//alert("path:" + $(this).data('path'));
+
+			for(var i = 0; i < pathArray.length; i++) {
+				path = "images\\photo\\thumb\\" + pathArray[i];
+				innerHTML += '<div class="user_sake_image"><img src="' + path + '"></div>';
 			}
 
-			//////////////////////////////////////////////////////////////////////////////
-			$('.sake_nonda_container .user_sake_image_container').remove();
-			//$('.sake_nonda_container .user_sake_image_container').html('');
+			$('.user_sake_image_container').html(innerHTML);
+			//alert("innerHTML:" + innerHTML);
+		}
+	
+		var offset = $('#sake_nonda').offset();
+		var width = $('.sake_nonda_container').width();
 
-			if($(this).data('path') != "" && $(this).data('path') != undefined) {
+		$("#sake_nonda_detail").css({
+			position: "fixed",
+			left: offset.left + "px",
+			width: width + "px"
+		}).show();
 
-  				var pathArray = $(this).data('path').split(', ');
-				var innerHTML = "";
-				var path = "";
-
-				//alert("path:" + $(this).data('path'));
-
-				for(var i = 0; i < pathArray.length; i++) {
-					path = "images\\photo\\thumb\\" + pathArray[i];
-					innerHTML += '<div class="user_sake_image"><img src="' + path + '"></div>';
-				}
-
-				$('.user_sake_image_container').html(innerHTML);
-				//alert("innerHTML:" + innerHTML);
-			}
-
-			$('#sake_nonda_detail').css({"display":"flex"});
+		//$('#sake_nonda_detail').css({"display": "flex", "left" : offset.left });
 	});
 
 	$('#sake_nonda_prev2020').click(function() {
@@ -2083,7 +2248,6 @@ jQuery(document).ready(function($) {
 		$('#user_container').css({"display":"block"});
 		$('#user_profile_detail').css({"display":"flex"});
 		$("body").trigger("open_edit_user", [ $(this).data('username'), $(this).data('fname') ] );
-
 		//alert("user_container:" + $('#user_container'));
 	});
 
@@ -2095,21 +2259,21 @@ jQuery(document).ready(function($) {
 
 /*レビューモーダルウィンドウ内タブ*/
 $(function () {
-  /*初期表示*/
-  $('.user_sake_tab_panel').hide();
-  $('.user_sake_tab_panel').eq(0).show();
-  $('.user_sake_tab_link').eq(0).addClass('is-active');
+	/*初期表示*/
+	$('.user_sake_tab_panel').hide();
+	$('.user_sake_tab_panel').eq(0).show();
+	$('.user_sake_tab_link').eq(0).addClass('is-active');
 
-  /*クリックイベント*/
-  $('.user_sake_tab_link').each(function () {
-    $(this).on('click', function () {
-      var index = $('.user_sake_tab_link').index(this);
-      $('.user_sake_tab_link').removeClass('is-active');
-      $(this).addClass('is-active');
-      $('.user_sake_tab_panel').hide();
-      $('.user_sake_tab_panel').eq(index).show();
-    });
-  });
+	/*クリックイベント*/
+	$('.user_sake_tab_link').each(function () {
+		$(this).on('click', function () {
+			var index = $('.user_sake_tab_link').index(this);
+			$('.user_sake_tab_link').removeClass('is-active');
+			$(this).addClass('is-active');
+			$('.user_sake_tab_panel').hide();
+			$('.user_sake_tab_panel').eq(index).show();
+		});
+	});
 });
 
 $(function() {
@@ -2164,7 +2328,6 @@ $(function() {
 	});
 });
 
-
 // 酒検索
 $(function() {
 		$(document).on('keyup', '#sake_edit .sake_input', function(){
@@ -2183,8 +2346,8 @@ $(function() {
 		{
 			$.ajax({
 				type: "POST",
-				url: "auto_complete.php",
-							data: data,
+				url: "cgi/auto_complete.php",
+				data: data,
 				dataType: 'json',
 
 			}).done(function(data){
@@ -2194,8 +2357,8 @@ $(function() {
 
 				for(var i = 0; i < data.length; i++)
 				{
-									sake_content.append('<li data-sake_id=' + data[i].sake_id + ' data-sake_name=' + data[i].sake_name + ' data-sakagura_name=' + data[i].sakagura_name + '><img src="images/icons/noimage80.svg">' + data[i].sake_name + '</li>');
-							}
+						sake_content.append('<li data-sake_id=' + data[i].sake_id + ' data-sake_name=' + data[i].sake_name + ' data-sakagura_name=' + data[i].sakagura_name + '><img src="images/icons/noimage80.svg">' + data[i].sake_name + '</li>');
+				}
 
 				if($("#sake_edit .sake_input").val().length > 0)
 					$("#sake_edit .sake_content").css({"visibility": "visible"});
@@ -2236,7 +2399,7 @@ $(function() {
 
 			$.ajax({
 					type: "POST",
-					url: "ajax_favorite.php",
+					url: "cgi/ajax_favorite.php",
 					data: data,
 					dataType: 'json',
 
@@ -2300,7 +2463,7 @@ $(function() {
 
 		$.ajax({
 				type: "POST",
-				url: "complex_search.php",
+				url: "cgi/complex_search.php",
 				data: data,
 				dataType: 'json',
 
@@ -2445,38 +2608,38 @@ $(function() {
 
 			if(in_disp_from < $("#sake_edit .page_number_container").data('count'))
 			{
+				//alert("position:" + position + " length:" + $('#sake_edit .pageitems').length);
+
+				if(position < $('#sake_edit .pageitems').length)
+				{
 					//alert("position:" + position + " length:" + $('#sake_edit .pageitems').length);
+					$('#sake_edit .pageitems.selected.selected').removeClass("selected");
+					$('#sake_edit .pageitems:nth(' + position + ')').addClass("selected");
+				}
+				else
+				{
+					var showPos = parseInt($('#sake_edit .pageitems:nth(0)').text());
+					var i = 1;
 
-					if(position < $('#sake_edit .pageitems').length)
-					{
-							//alert("position:" + position + " length:" + $('#sake_edit .pageitems').length);
-							$('#sake_edit .pageitems.selected.selected').removeClass("selected");
-							$('#sake_edit .pageitems:nth(' + position + ')').addClass("selected");
-					}
-					else
-					{
-							var showPos = parseInt($('#sake_edit .pageitems:nth(0)').text());
-							var i = 1;
+					$('#sake_edit .pageitems').each(function() {
+							$(this).text(showPos + i);
+							i++;
+					});
+				}
 
-							$('#sake_edit .pageitems').each(function() {
-									$(this).text(showPos + i);
-									i++;
-							});
-					}
+				$("#sake_edit .page_number_container").data('in_disp_from', in_disp_from);
+				$("#sake_edit .page_number_container").data('in_disp_to', in_disp_to);
 
-					$("#sake_edit .page_number_container").data('in_disp_from', in_disp_from);
-					$("#sake_edit .page_number_container").data('in_disp_to', in_disp_to);
+				var data = "&count_query=" + count_query +
+										"&category=" + search_category +
+										"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
+										"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
+										"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
+										"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
+										"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
 
-					var data = "&count_query=" + count_query +
-											"&category=" + search_category +
-											"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
-											"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-											"&from=" + $("#sake_edit .page_number_container").data('in_disp_from') +
-											"&to=" + $("#sake_edit .page_number_container").data('in_disp_to') +
-											"&in_disp_max="  + $("#sake_edit .page_number_container").data('in_disp_max');
-
-					//alert("search_sake:" + data);
-					searchSake(data);
+				//alert("search_sake:" + data);
+				searchSake(data);
 			}
 	});
 
@@ -2596,50 +2759,44 @@ $(function() {
 
 			if(val1 && val2 && val3)
 			{
-					str1 = val1 + '.' + val2 + '.' + val3;
-				  //alert("val1:" + val1 + " val2:" + val2 + " val3:" + val3);
+				str1 = val1 + '.' + val2 + '.' + val3;
+				//alert("val1:" + val1 + " val2:" + val2 + " val3:" + val3);
 
-					date1 = new Date(str1);
-					date2 = new Date(str1);
-					date2.setDate(date2.getDate() + 1);
+				date1 = new Date(str1);
+				date2 = new Date(str1);
+				date2.setDate(date2.getDate() + 1);
 
-					//date2.add(1).day();
-					//alert("date1:" + date1);
-					//alert("date1:" + date2);
+				//date2.add(1).day();
+				//alert("date1:" + date1);
+				//alert("date1:" + date2);
 
-					date1 = date1.getTime() / 1000;
-					date2 = date2.getTime() / 1000;
+				date1 = date1.getTime() / 1000;
+				date2 = date2.getTime() / 1000;
 			}
 			else if((val1 && val2) && !val3)
 			{
-					if(parseInt(val2) == 12)
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = (parseInt(val1) + 1) + '.1.1';
-					}
-					else
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
-					}
+				if(parseInt(val2) == 12)
+				{
+					str1 = val1 + '.' + val2 + '.1';
+					str2 = (parseInt(val1) + 1) + '.1.1';
+				}
+				else
+				{
+					str1 = val1 + '.' + val2 + '.1';
+					str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
+				}
 
-
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
-
+				date1 = new Date(str1).getTime() / 1000;
+				date2 = new Date(str2).getTime() / 1000;
 			}
 			else if(val1 && (!val2 && !val3))
 			{
-					str1 = val1 + '.1.1';
-					str2 = (parseInt(val1) + 1) + '.1.1';
+				str1 = val1 + '.1.1';
+				str2 = (parseInt(val1) + 1) + '.1.1';
 
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
+				date1 = new Date(str1).getTime() / 1000;
+				date2 = new Date(str2).getTime() / 1000;
 			}
-
-
-			//alert("Date1:" + date1);
-			//alert("Date2:" + date2);
 
 			var position = $(this).index();
 			var showPos = parseInt($(this).text()) - 1;
@@ -2698,278 +2855,269 @@ $(function() {
 
 			if($("#sake_nomitai .page_number_container").data('in_disp_from') >= $("#sake_edit .page_number_container").data('in_disp_max'))
 			{
-					if(position > 1)
-					{
-							//alert("position:" + position + " length:" + $('#sake_nomitai .pageitems').length);
-							$('#sake_nomitai .pageitems.selected.selected').removeClass("selected");
-							$('#sake_nomitai .pageitems:nth(' + (position - 2) + ')').addClass("selected");
-					}
-					else
-					{
-								var showPos = parseInt($('#sake_nomitai .pageitems:nth(0)').text()) - 2;
-								var i = 1;
-								//alert("showPos:" + showPos + " pageitem:" + $('#sake_nomitai .pageitems:nth(0)').text());
+				if(position > 1)
+				{
+					//alert("position:" + position + " length:" + $('#sake_nomitai .pageitems').length);
+					$('#sake_nomitai .pageitems.selected.selected').removeClass("selected");
+					$('#sake_nomitai .pageitems:nth(' + (position - 2) + ')').addClass("selected");
+				}
+				else
+				{
+					var showPos = parseInt($('#sake_nomitai .pageitems:nth(0)').text()) - 2;
+					var i = 1;
+					//alert("showPos:" + showPos + " pageitem:" + $('#sake_nomitai .pageitems:nth(0)').text());
 
-								$('#sake_nomitai .pageitems').each(function() {
-										$(this).text(showPos + i);
-										i++;
-								});
-					}
+					$('#sake_nomitai .pageitems').each(function() {
+							$(this).text(showPos + i);
+							i++;
+					});
+				}
 
-					in_disp_from = $("#sake_nomitai .page_number_container").data('in_disp_from') - $("#sake_nomitai .page_number_container").data('in_disp_max');
-					var in_disp_to = in_disp_from + $("#sake_nomitai .page_number_container").data('in_disp_max');
+				in_disp_from = $("#sake_nomitai .page_number_container").data('in_disp_from') - $("#sake_nomitai .page_number_container").data('in_disp_max');
+				var in_disp_to = in_disp_from + $("#sake_nomitai .page_number_container").data('in_disp_max');
 
-					$("#sake_nomitai .page_number_container").data('in_disp_from', in_disp_from);
-					$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
+				$("#sake_nomitai .page_number_container").data('in_disp_from', in_disp_from);
+				$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
 
-					var data = "search_type=" + search_type +
-											"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
-											"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
-											"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
-											"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-											"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
-											"&orderby="  + orderby;
+				var data = "search_type=" + search_type +
+										"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
+										"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
+										"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
+										"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
+										"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
+										"&orderby="  + orderby;
 
-					//alert("search_sake:" + data);
-					searchFavoriteSake(in_disp_from, $("#sake_nomitai .page_number_container").data('in_disp_max'), data, 1);
-					$("#sake_nomitai .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nomitai .page_number_container").data('count') + '件');
+				//alert("search_sake:" + data);
+				searchFavoriteSake(in_disp_from, $("#sake_nomitai .page_number_container").data('in_disp_max'), data, 1);
+				$("#sake_nomitai .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nomitai .page_number_container").data('count') + '件');
 			}
 	});
 
 	$(document).on('click', '#sake_nomitai .page_number_container .next_page', function(e){
 
-			//alert("sake next_page");
-			var search_type = 1;
-			var count_query = 0;
-			var search_category = 2;
-			var in_disp_from = $("#sake_nomitai .page_number_container").data('in_disp_from') + $("#sake_nomitai .page_number_container").data('in_disp_max');
-			var in_disp_to = $("#sake_nomitai .page_number_container").data('in_disp_to') + $("#sake_nomitai .page_number_container").data('in_disp_max');
-			var position = $('#sake_nomitai .pageitems.selected').index();
-			var username = <?php echo json_encode($username); ?>;
-			var orderby = "write_date";
+		//alert("sake next_page");
+		var search_type = 1;
+		var count_query = 0;
+		var search_category = 2;
+		var in_disp_from = $("#sake_nomitai .page_number_container").data('in_disp_from') + $("#sake_nomitai .page_number_container").data('in_disp_max');
+		var in_disp_to = $("#sake_nomitai .page_number_container").data('in_disp_to') + $("#sake_nomitai .page_number_container").data('in_disp_max');
+		var position = $('#sake_nomitai .pageitems.selected').index();
+		var username = <?php echo json_encode($username); ?>;
+		var orderby = "write_date";
 
-			in_disp_to = (in_disp_to > $("#sake_nomitai .page_number_container").data('count')) ? $("#sake_nomitai .page_number_container").data('count') : in_disp_to;
+		in_disp_to = (in_disp_to > $("#sake_nomitai .page_number_container").data('count')) ? $("#sake_nomitai .page_number_container").data('count') : in_disp_to;
 
-			if(in_disp_from < $("#sake_nomitai .page_number_container").data('count'))
+		if(in_disp_from < $("#sake_nomitai .page_number_container").data('count'))
+		{
+			if(position < $('#sake_nomitai .pageitems').length)
 			{
-					if(position < $('#sake_nomitai .pageitems').length)
-					{
-							//alert("position:" + position + " length:" + $('#sake_nomitai .pageitems').length);
-							$('#sake_nomitai .pageitems.selected.selected').removeClass("selected");
-							$('#sake_nomitai .pageitems:nth(' + position + ')').addClass("selected");
-					}
-					else if($('#sake_nomitai .pageitems').length >= 5)
-					{
-							//alert("position2:" + position + " length:" + $('#sake_nomitai .pageitems').length);
-							var showPos = parseInt($('#sake_nomitai .pageitems:nth(0)').text());
-							var i = 1;
-
-							$('#sake_nomitai .pageitems').each(function() {
-									$(this).text(showPos + i);
-									i++;
-							});
-					}
-					else
-					{
-							return 0;
-					}
-
-					$("#sake_nomitai .page_number_container").data('in_disp_from', in_disp_from);
-					$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
-
-					var data = "search_type=" + search_type +
-											"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
-											"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
-											"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
-											"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
-											"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
-											"&orderby="  + orderby;
-
-					//alert("search_sake:" + data);
-					searchFavoriteSake(in_disp_from, $("#sake_nomitai .page_number_container").data('in_disp_max'), data, 1);
-					$("#sake_nomitai .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nomitai .page_number_container").data('count') + '件');
+				//alert("position:" + position + " length:" + $('#sake_nomitai .pageitems').length);
+				$('#sake_nomitai .pageitems.selected.selected').removeClass("selected");
+				$('#sake_nomitai .pageitems:nth(' + position + ')').addClass("selected");
 			}
-	});
+			else if($('#sake_nomitai .pageitems').length >= 5)
+			{
+				//alert("position2:" + position + " length:" + $('#sake_nomitai .pageitems').length);
+				var showPos = parseInt($('#sake_nomitai .pageitems:nth(0)').text());
+				var i = 1;
 
-	$(document).on('click', '#sake_nomitai .pageitems', function(e){
-
-			var search_type = 1;
-			var position = $(this).index();
-			var showPos = parseInt($(this).text()) - 1;
-			var in_disp_from = showPos * $("#sake_nomitai .page_number_container").data('in_disp_max');
-			var in_disp_to = in_disp_from + 25;
-			var orderby = "write_date";
-			var username = <?php echo json_encode($username); ?>;
+				$('#sake_nomitai .pageitems').each(function() {
+					$(this).text(showPos + i);
+					i++;
+				});
+			}
+			else
+			{
+				return 0;
+			}
 
 			$("#sake_nomitai .page_number_container").data('in_disp_from', in_disp_from);
 			$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
-			$('#sake_nomitai .pageitems').removeClass("selected");
-			$(this).addClass("selected");
-			//alert("showPos:" + showPos + " position:" + position);
 
 			var data = "search_type=" + search_type +
 									"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
 									"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
-									"&write_date_from=" + $("#sake_nomitai .page_number_container").data('write_date_from') +
-									"&write_date_to="   + $("#sake_nomitai .page_number_container").data('write_date_to') +
+									"&write_date_from=" + $("#sake_edit .page_number_container").data('write_date_from') +
+									"&write_date_to="   + $("#sake_edit .page_number_container").data('write_date_to') +
 									"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
 									"&orderby="  + orderby;
 
-			//alert("data:" + data);
+			//alert("search_sake:" + data);
 			searchFavoriteSake(in_disp_from, $("#sake_nomitai .page_number_container").data('in_disp_max'), data, 1);
 			$("#sake_nomitai .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nomitai .page_number_container").data('count') + '件');
+		}
+	});
+
+	$(document).on('click', '#sake_nomitai .pageitems', function(e){
+
+		var search_type = 1;
+		var position = $(this).index();
+		var showPos = parseInt($(this).text()) - 1;
+		var in_disp_from = showPos * $("#sake_nomitai .page_number_container").data('in_disp_max');
+		var in_disp_to = in_disp_from + 25;
+		var orderby = "write_date";
+		var username = <?php echo json_encode($username); ?>;
+
+		$("#sake_nomitai .page_number_container").data('in_disp_from', in_disp_from);
+		$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
+		$('#sake_nomitai .pageitems').removeClass("selected");
+		$(this).addClass("selected");
+		//alert("showPos:" + showPos + " position:" + position);
+
+		var data = "search_type=" + search_type +
+								"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
+								"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
+								"&write_date_from=" + $("#sake_nomitai .page_number_container").data('write_date_from') +
+								"&write_date_to="   + $("#sake_nomitai .page_number_container").data('write_date_to') +
+								"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
+								"&orderby="  + orderby;
+
+		//alert("data:" + data);
+		searchFavoriteSake(in_disp_from, $("#sake_nomitai .page_number_container").data('in_disp_max'), data, 1);
+		$("#sake_nomitai .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nomitai .page_number_container").data('count') + '件');
 	});
 
 	$("#sake_nomitai .sort_content SELECT").change(function(){
 
-			var index = $(this).parent().index();
-			var count_query = 1;
-			var val1 = $("#sake_nomitai .sort_content SELECT:nth(0)").val();
-			var val2 = $("#sake_nomitai .sort_content SELECT:nth(1)").val();
-			var val3 = $("#sake_nomitai .sort_content SELECT:nth(2)").val();
-			var str1 = "", str2 = "";
-			var date1 = "", date2 = "";
-			var i = 1;
+		var index = $(this).parent().index();
+		var count_query = 1;
+		var val1 = $("#sake_nomitai .sort_content SELECT:nth(0)").val();
+		var val2 = $("#sake_nomitai .sort_content SELECT:nth(1)").val();
+		var val3 = $("#sake_nomitai .sort_content SELECT:nth(2)").val();
+		var str1 = "", str2 = "";
+		var date1 = "", date2 = "";
+		var i = 1;
 
-			$("#sake_nomitai .sort_content SELECT").prop("disabled", false);
+		$("#sake_nomitai .sort_content SELECT").prop("disabled", false);
 
-			if(val1 && val2 && val3)
+		if(val1 && val2 && val3)
+		{
+			str1 = val1 + '.' + val2 + '.' + val3;
+			//alert("val1:" + val1 + " val2:" + val2 + " val3:" + val3);
+
+			date1 = new Date(str1);
+			date2 = new Date(str1);
+			date2.setDate(date2.getDate() + 1);
+
+			//date2.add(1).day();
+			//alert("date1:" + date1);
+			//alert("date1:" + date2);
+
+			date1 = date1.getTime() / 1000;
+			date2 = date2.getTime() / 1000;
+		}
+		else if((val1 && val2) && !val3)
+		{
+			if(parseInt(val2) == 12)
 			{
-					str1 = val1 + '.' + val2 + '.' + val3;
-				  //alert("val1:" + val1 + " val2:" + val2 + " val3:" + val3);
-
-					date1 = new Date(str1);
-					date2 = new Date(str1);
-					date2.setDate(date2.getDate() + 1);
-
-					//date2.add(1).day();
-					//alert("date1:" + date1);
-					//alert("date1:" + date2);
-
-					date1 = date1.getTime() / 1000;
-					date2 = date2.getTime() / 1000;
+				str1 = val1 + '.' + val2 + '.1';
+				str2 = (parseInt(val1) + 1) + '.1.1';
 			}
-			else if((val1 && val2) && !val3)
+			else
 			{
-					if(parseInt(val2) == 12)
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = (parseInt(val1) + 1) + '.1.1';
-					}
-					else
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
-					}
-
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
-
-			}
-			else if(val1 && (!val2 && !val3))
-			{
-					str1 = val1 + '.1.1';
-					str2 = (parseInt(val1) + 1) + '.1.1';
-
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
+				str1 = val1 + '.' + val2 + '.1';
+				str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
 			}
 
-			//alert("Date1:" + date1);
-			//alert("Date2:" + date2);
+			date1 = new Date(str1).getTime() / 1000;
+			date2 = new Date(str2).getTime() / 1000;
+		}
+		else if(val1 && (!val2 && !val3))
+		{
+				str1 = val1 + '.1.1';
+				str2 = (parseInt(val1) + 1) + '.1.1';
 
-			var search_type = 1;
-			var position = $(this).index();
-			var showPos = parseInt($(this).text()) - 1;
-			var in_disp_from = 0;
-			var in_disp_to = in_disp_from + 25;
-			var orderby = "write_date";
-			var username = <?php echo json_encode($username); ?>;
+				date1 = new Date(str1).getTime() / 1000;
+				date2 = new Date(str2).getTime() / 1000;
+		}
 
-			$("#sake_nomitai .page_number_container").data('in_disp_from', in_disp_from);
-			$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
-			$('#sake_nomitai .pageitems').removeClass("selected");
-			$('#sake_nomitai .pageitems:nth(0)').addClass("selected");
+		var search_type = 1;
+		var position = $(this).index();
+		var showPos = parseInt($(this).text()) - 1;
+		var in_disp_from = 0;
+		var in_disp_to = in_disp_from + 25;
+		var orderby = "write_date";
+		var username = <?php echo json_encode($username); ?>;
 
-			$('#sake_nomitai .pageitems').each(function() {
-					$(this).text(i);
-					i++;
-			});
+		$("#sake_nomitai .page_number_container").data('in_disp_from', in_disp_from);
+		$("#sake_nomitai .page_number_container").data('in_disp_to', in_disp_to);
+		$('#sake_nomitai .pageitems').removeClass("selected");
+		$('#sake_nomitai .pageitems:nth(0)').addClass("selected");
 
-			$("#sake_nomitai .page_number_container").data('write_date_from', date1);
-			$("#sake_nomitai .page_number_container").data('write_date_to', date2);
+		$('#sake_nomitai .pageitems').each(function() {
+				$(this).text(i);
+				i++;
+		});
 
-			//alert("showPos:" + showPos + " position:" + position);
-			var data = "&count_query=" + count_query +
-									"&search_type=" + search_type +
-									"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
-									"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
-									"&write_date_from=" + date1 +
-									"&write_date_to="   + date2 +
-									"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
-									"&orderby="  + orderby;
+		$("#sake_nomitai .page_number_container").data('write_date_from', date1);
+		$("#sake_nomitai .page_number_container").data('write_date_to', date2);
 
-			//alert("data:" + data);
-			searchFavoriteSake(in_disp_from, $("#sake_nomitai .page_number_container").data('in_disp_max'), data, 1);
-			$("#sake_nomitai .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nomitai .page_number_container").data('count') + '件');
-  });
+		//alert("showPos:" + showPos + " position:" + position);
+		var data = "&count_query=" + count_query +
+								"&search_type=" + search_type +
+								"&from=" + $("#sake_nomitai .page_number_container").data('in_disp_from') +
+								"&in_disp_to=" + $("#sake_nomitai .page_number_container").data('in_disp_to') +
+								"&write_date_from=" + date1 +
+								"&write_date_to="   + date2 +
+								"&disp_max="  + $("#sake_nomitai .page_number_container").data('in_disp_max') +
+								"&orderby="  + orderby;
+
+		//alert("data:" + data);
+		searchFavoriteSake(in_disp_from, $("#sake_nomitai .page_number_container").data('in_disp_max'), data, 1);
+		$("#sake_nomitai .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nomitai .page_number_container").data('count') + '件');
+	});
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  $("#sakagura_favorite .sort_content SELECT").change(function(){
+	$("#sakagura_favorite .sort_content SELECT").change(function(){
 
-			var index = $(this).parent().index();
-			var count_query = 1;
-		  var val1 = $("#sakagura_favorite .sort_content SELECT:nth(0)").val();
-			var val2 = $("#sakagura_favorite .sort_content SELECT:nth(1)").val();
-			var val3 = $("#sakagura_favorite .sort_content SELECT:nth(2)").val();
-			var str1 = "", str2 = "";
-			var date1 = "", date2 = "";
-			var i = 1;
+		var index = $(this).parent().index();
+		var count_query = 1;
+		var val1 = $("#sakagura_favorite .sort_content SELECT:nth(0)").val();
+		var val2 = $("#sakagura_favorite .sort_content SELECT:nth(1)").val();
+		var val3 = $("#sakagura_favorite .sort_content SELECT:nth(2)").val();
+		var str1 = "", str2 = "";
+		var date1 = "", date2 = "";
+		var i = 1;
 
-		  $("#sakagura_favorite .sort_content SELECT").prop("disabled", false);
+		$("#sakagura_favorite .sort_content SELECT").prop("disabled", false);
 
 			if(val1 && val2 && val3)
 			{
-					str1 = val1 + '.' + val2 + '.' + val3;
-				  //alert("val1:" + val1 + " val2:" + val2 + " val3:" + val3);
+				str1 = val1 + '.' + val2 + '.' + val3;
+				//alert("val1:" + val1 + " val2:" + val2 + " val3:" + val3);
 
-					date1 = new Date(str1);
-					date2 = new Date(str1);
-					date2.setDate(date2.getDate() + 1);
+				date1 = new Date(str1);
+				date2 = new Date(str1);
+				date2.setDate(date2.getDate() + 1);
 
-					//date2.add(1).day();
-					//alert("date1:" + date1);
-					//alert("date1:" + date2);
-
-					date1 = date1.getTime() / 1000;
-					date2 = date2.getTime() / 1000;
+				date1 = date1.getTime() / 1000;
+				date2 = date2.getTime() / 1000;
 			}
 			else if((val1 && val2) && !val3)
 			{
-					if(parseInt(val2) == 12)
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = (parseInt(val1) + 1) + '.1.1';
-					}
-					else
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
-					}
+				if(parseInt(val2) == 12)
+				{
+					str1 = val1 + '.' + val2 + '.1';
+					str2 = (parseInt(val1) + 1) + '.1.1';
+				}
+				else
+				{
+					str1 = val1 + '.' + val2 + '.1';
+					str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
+				}
 
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
-
+				date1 = new Date(str1).getTime() / 1000;
+				date2 = new Date(str2).getTime() / 1000;
 			}
 			else if(val1 && (!val2 && !val3))
 			{
-					str1 = val1 + '.1.1';
-					str2 = (parseInt(val1) + 1) + '.1.1';
+				str1 = val1 + '.1.1';
+				str2 = (parseInt(val1) + 1) + '.1.1';
 
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
+				date1 = new Date(str1).getTime() / 1000;
+				date2 = new Date(str2).getTime() / 1000;
 			}
 
 			//alert("Date1:" + date1);
@@ -3009,7 +3157,6 @@ $(function() {
 			searchFavoriteSakagura(data);
 	});
 
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	function searchUser(data)
@@ -3017,56 +3164,55 @@ $(function() {
 		//alert("searchUser data:" + data);
 
 		$.ajax({
-				type: "POST",
-				url: "complex_search.php",
-				data: data,
-				dataType: 'json',
+			type: "POST",
+			url: "cgi/complex_search.php",
+			data: data,
+			dataType: 'json',
 
 		}).done(function(data){
+			var i = 0;
+			var user = data[0].sake;
+			var path = "images/icons/noimage_user30.svg";
 
-					var i = 0;
-					var user = data[0].sake;
-          var path = "images/icons/noimage_user30.svg";
+			$('#user_account .review_result_user_page').empty();
+			//alert("success:" + data[0].sql);
+			//alert("success: count:" + data[0].count);
 
-					$('#user_account .review_result_user_page').empty();
-					//alert("success:" + data[0].sql);
-					//alert("success: count:" + data[0].count);
+			for(i = 0; i < user.length; i++)
+			{
+				var innerHTML = "";
 
-					for(i = 0; i < user.length; i++)
-					{
-							var innerHTML = "";
-
-							innerHTML += '<div class="user_account_container">';
-								innerHTML += '<div class="user_info_container">';
-									innerHTML += '<div class="user_registration_container">';
-										innerHTML += '<div class="user_name">' + user[i].username + '</div>';
-										innerHTML += '<div class="user_profile_date_container">';
-											innerHTML += '<div class="user_date">' + user[i].write_date + '</div>';
-										innerHTML += '</div>';
-									innerHTML += '</div>';
-								innerHTML += '</div>';
-
-								innerHTML += '<div class="mail_address_container">';
-									innerHTML += '<div class="mail_address_content">' + user[i].email + '</div>';
-								innerHTML += '</div>';
+				innerHTML += '<div class="user_account_container">';
+					innerHTML += '<div class="user_info_container">';
+						innerHTML += '<div class="user_registration_container">';
+							innerHTML += '<div class="user_name">' + user[i].username + '</div>';
+							innerHTML += '<div class="user_profile_date_container">';
+								innerHTML += '<div class="user_date">' + user[i].write_date + '</div>';
 							innerHTML += '</div>';
+						innerHTML += '</div>';
+					innerHTML += '</div>';
 
-							$('#user_account .review_result_user_page').append(innerHTML);
-					}
+					innerHTML += '<div class="mail_address_container">';
+						innerHTML += '<div class="mail_address_content">' + user[i].email + '</div>';
+					innerHTML += '</div>';
+				innerHTML += '</div>';
 
-					if(data[0].count != 0)
-						$("#user_account .page_number_container").data('count', data[0].count);
+				$('#user_account .review_result_user_page').append(innerHTML);
+			}
 
-					$("#user_account .count_result").text(($("#user_account .page_number_container").data('in_disp_from') + 1) + '～' +  $("#user_account .page_number_container").data('in_disp_to') + '/全' + $("#user_account .page_number_container").data('count') + '件');
+			if(data[0].count != 0)
+				$("#user_account .page_number_container").data('count', data[0].count);
+
+			$("#user_account .count_result").text(($("#user_account .page_number_container").data('in_disp_from') + 1) + '～' +  $("#user_account .page_number_container").data('in_disp_to') + '/全' + $("#user_account .page_number_container").data('count') + '件');
 
 			}).fail(function(data){
-					alert("Failed:" + data);
+				alert("Failed:" + data);
 			}).complete(function(data){
-					// Loadingイメージを消す
+				// Loadingイメージを消す
 			});
 	}
 
-  $("#user_account .sort_content SELECT").change(function(){
+	$("#user_account .sort_content SELECT").change(function(){
 
 			var index = $(this).parent().index();
 			var count_query = 1;
@@ -3081,36 +3227,35 @@ $(function() {
 
 			if(val1 && val2 && val3)
 			{
-					str1 = val1 + '.' + val2 + '.' + val3;
-				  //alert("val1:" + val1 + " val2:" + val2 + " val3:" + val3);
+				str1 = val1 + '.' + val2 + '.' + val3;
+				//alert("val1:" + val1 + " val2:" + val2 + " val3:" + val3);
 
-					date1 = new Date(str1);
-					date2 = new Date(str1);
-					date2.setDate(date2.getDate() + 1);
+				date1 = new Date(str1);
+				date2 = new Date(str1);
+				date2.setDate(date2.getDate() + 1);
 
-					//date2.add(1).day();
-					//alert("date1:" + date1);
-					//alert("date1:" + date2);
+				//date2.add(1).day();
+				//alert("date1:" + date1);
+				//alert("date1:" + date2);
 
-					date1 = date1.getTime() / 1000;
-					date2 = date2.getTime() / 1000;
+				date1 = date1.getTime() / 1000;
+				date2 = date2.getTime() / 1000;
 			}
 			else if((val1 && val2) && !val3)
 			{
-					if(parseInt(val2) == 12)
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = (parseInt(val1) + 1) + '.1.1';
-					}
-					else
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
-					}
+				if(parseInt(val2) == 12)
+				{
+					str1 = val1 + '.' + val2 + '.1';
+					str2 = (parseInt(val1) + 1) + '.1.1';
+				}
+				else
+				{
+					str1 = val1 + '.' + val2 + '.1';
+					str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
+				}
 
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
-
+				date1 = new Date(str1).getTime() / 1000;
+				date2 = new Date(str2).getTime() / 1000;
 			}
 			else if(val1 && (!val2 && !val3))
 			{
@@ -3162,12 +3307,11 @@ $(function() {
 
 	function searchNonda(data, bCount)
 	{
-		    //alert("searchNonda:" + data);
 			$('#sake_nonda .image_progress').css({"display":"block"});
 
 			$.ajax({
 					type: "POST",
-					url: "nonda_list.php",
+					url: "cgi/nonda_list.php",
 					data: data,
 					dataType: 'json',
 
@@ -3183,7 +3327,7 @@ $(function() {
 
 				if(sake.length > 0) {
 
-					var path = "images/icons/noimage_user30.svg";
+					var path = sake[i].profile_image;
 
 					$('#sake_nonda .review_result_sake_page').empty()
 
@@ -3196,7 +3340,8 @@ $(function() {
 								innerHTML += ' data-pref=' + sake[i].pref;
 								innerHTML += ' data-write_date=' + sake[i].write_date;
 								innerHTML += ' data-update_date=' + sake[i].update_date;
-								innerHTML += ' data-contributor=' + sake[i].contributor;
+								innerHTML += ' data-contributor=' + sake[i].username;
+								innerHTML += ' data-nickname=' + sake[i].nickname;
 								innerHTML += ' data-subject="' + sake[i].subject;
 								innerHTML += '" data-rank="' + sake[i].rank;
 								innerHTML += '" data-message="' + sake[i].message;
@@ -3239,6 +3384,43 @@ $(function() {
 			});
 	}
 
+    // 飲んだ キャンセル
+ 	$(document).on('click', '#sake_nonda_detail .user_nonda_delete', function() {
+
+		var username = $('#sake_nonda_detail').data('username');
+		var sake_id = $('#sake_nonda_detail').data('sake_id');
+        var data = "sake_id="+sake_id +"&contributor=" + username;
+		var obj = this;
+
+		//alert("data:" + data);
+
+		if(confirm("飲んだを削除しますか？") == true)
+		{
+		    $.ajax({
+			      type: "post",
+			      url: "cgi/nonda_delete.php",
+			      data: data,
+		    }).done(function(xml){
+
+		        var str = $(xml).find("str").text();
+		        var sql = $(xml).find("sql").text();
+
+		        if(str == "success")
+		        {
+					  window.open('manage_user_view.php', '_self');
+		        }
+                else
+                {
+		            alert("ret:" + str);
+		            alert("sql:" + sql);
+                }
+		    }).fail(function(data){
+			    var str = $(xml).find("str").text();
+			    alert("Failed:" +str);
+		    });
+        }
+	});
+
 	$(document).on('click', '#sake_nonda .page_number_container .prev_page', function(e){
 
 		  //alert("nonda prev_page");
@@ -3252,39 +3434,39 @@ $(function() {
 
 			if($("#sake_nonda .page_number_container").data('in_disp_from') >= $("#sake_edit .page_number_container").data('in_disp_max'))
 			{
-					if(position > 1)
-					{
-							//alert("position:" + position + " length:" + $('#sake_nomitai .pageitems').length);
-							$('#sake_nonda .pageitems.selected.selected').removeClass("selected");
-							$('#sake_nonda .pageitems:nth(' + (position - 2) + ')').addClass("selected");
-					}
-					else
-					{
-							var showPos = parseInt($('#sake_nonda .pageitems:nth(0)').text()) - 2;
-							var i = 1;
-							//alert("showPos:" + showPos + " pageitem:" + $('#sake_nonda .pageitems:nth(0)').text());
+				if(position > 1)
+				{
+					//alert("position:" + position + " length:" + $('#sake_nomitai .pageitems').length);
+					$('#sake_nonda .pageitems.selected.selected').removeClass("selected");
+					$('#sake_nonda .pageitems:nth(' + (position - 2) + ')').addClass("selected");
+				}
+				else
+				{
+					var showPos = parseInt($('#sake_nonda .pageitems:nth(0)').text()) - 2;
+					var i = 1;
+					//alert("showPos:" + showPos + " pageitem:" + $('#sake_nonda .pageitems:nth(0)').text());
 
-							$('#sake_nonda .pageitems').each(function() {
-									$(this).text(showPos + i);
-									i++;
-							});
-					}
+					$('#sake_nonda .pageitems').each(function() {
+						$(this).text(showPos + i);
+						i++;
+					});
+				}
 
-					in_disp_from = $("#sake_nonda .page_number_container").data('in_disp_from') - $("#sake_nonda .page_number_container").data('in_disp_max');
-					var in_disp_to = in_disp_from + $("#sake_nonda .page_number_container").data('in_disp_max');
+				in_disp_from = $("#sake_nonda .page_number_container").data('in_disp_from') - $("#sake_nonda .page_number_container").data('in_disp_max');
+				var in_disp_to = in_disp_from + $("#sake_nonda .page_number_container").data('in_disp_max');
 
-					$("#sake_nonda .page_number_container").data('in_disp_from', in_disp_from);
-					$("#sake_nonda .page_number_container").data('in_disp_to', in_disp_to);
+				$("#sake_nonda .page_number_container").data('in_disp_from', in_disp_from);
+				$("#sake_nonda .page_number_container").data('in_disp_to', in_disp_to);
 
-					var data = "search_type=" + search_type +
-											"&from=" + $("#sake_nonda .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sake_nonda .page_number_container").data('in_disp_max') +
-											"&disp_max="  + $("#sake_nonda .page_number_container").data('in_disp_max') +
-											"&orderby="  + orderby;
+				var data = "search_type=" + search_type +
+										"&from=" + $("#sake_nonda .page_number_container").data('in_disp_from') +
+										"&in_disp_to="	 + $("#sake_nonda .page_number_container").data('in_disp_max') +
+										"&disp_max="  + $("#sake_nonda .page_number_container").data('in_disp_max') +
+										"&orderby="  + orderby;
 
-					//alert("sake_nonda:" + data);
-					searchNonda(data, 1);
-					$("#sake_nonda .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nonda .page_number_container").data('count') + '件');
+				//alert("sake_nonda:" + data);
+				searchNonda(data, 1);
+				$("#sake_nonda .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nonda .page_number_container").data('count') + '件');
 			}
 	});
 
@@ -3302,35 +3484,35 @@ $(function() {
 
 			if(in_disp_to < $("#sake_nonda .page_number_container").data('count'))
 			{
-					if(position < $('#sake_nonda .pageitems').length)
-					{
-							//alert("position:" + position + " length:" + $('#sake_nonda .pageitems').length);
-							$('#sake_nonda .pageitems.selected.selected').removeClass("selected");
-							$('#sake_nonda .pageitems:nth(' + position + ')').addClass("selected");
-					}
-					else
-					{
-							var showPos = parseInt($('#sake_nonda .pageitems:nth(0)').text());
-							var i = 1;
+				if(position < $('#sake_nonda .pageitems').length)
+				{
+					//alert("position:" + position + " length:" + $('#sake_nonda .pageitems').length);
+					$('#sake_nonda .pageitems.selected.selected').removeClass("selected");
+					$('#sake_nonda .pageitems:nth(' + position + ')').addClass("selected");
+				}
+				else
+				{
+					var showPos = parseInt($('#sake_nonda .pageitems:nth(0)').text());
+					var i = 1;
 
-							$('#sake_nonda .pageitems').each(function() {
-									$(this).text(showPos + i);
-									i++;
-							});
-					}
+					$('#sake_nonda .pageitems').each(function() {
+							$(this).text(showPos + i);
+							i++;
+					});
+				}
 
-					$("#sake_nonda .page_number_container").data('in_disp_from', in_disp_from);
-					$("#sake_nonda .page_number_container").data('in_disp_to', in_disp_to);
+				$("#sake_nonda .page_number_container").data('in_disp_from', in_disp_from);
+				$("#sake_nonda .page_number_container").data('in_disp_to', in_disp_to);
 
-					var data = "search_type=" + search_type +
-											"&from=" + $("#sake_nonda .page_number_container").data('in_disp_from') +
-											"&in_disp_to="	 + $("#sake_nonda .page_number_container").data('in_disp_max') +
-											"&disp_max="  + $("#sake_nonda .page_number_container").data('in_disp_max') +
-											"&orderby="  + orderby;
+				var data = "search_type=" + search_type +
+										"&from=" + $("#sake_nonda .page_number_container").data('in_disp_from') +
+										"&in_disp_to="	 + $("#sake_nonda .page_number_container").data('in_disp_max') +
+										"&disp_max="  + $("#sake_nonda .page_number_container").data('in_disp_max') +
+										"&orderby="  + orderby;
 
-					//alert("sake_nonda:" + data);
-					searchNonda(data, 1);
-					$("#sake_nonda .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nonda .page_number_container").data('count') + '件');
+				//alert("sake_nonda:" + data);
+				searchNonda(data, 1);
+				$("#sake_nonda .count_result").text((in_disp_from + 1) + '～' + in_disp_to + '/全' + $("#sake_nonda .page_number_container").data('count') + '件');
 			}
 	});
 
@@ -3344,7 +3526,7 @@ $(function() {
 
 		$.ajax({
 			type: "POST",
-			url: "complex_search.php",
+			url: "cgi/complex_search.php",
 			data: data,
 			dataType: 'json',
 
@@ -3361,34 +3543,34 @@ $(function() {
 
 			for(i = 0; i < sakagura.length; i++)
 			{
-					var innerHTML = '<div class="brewery_registry_container" data-sakagura_id=' + sakagura[i].id + ' data-sakagura_name=' + sakagura[i].sakagura_name + '>';
-						innerHTML += '<div class="user_info_container">';
-							innerHTML += '<div class="user_image_container">';
-								innerHTML += '<img src="' + path + '">';
-							innerHTML += '</div>';
-
-							innerHTML += '<div class="user_registration_container">';
-								innerHTML += '<div class="user_name">' + username + '</div>';
-								innerHTML += '<div class="user_profile_date_container">';
-									innerHTML += '<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>';
-									innerHTML += '<div class="user_date">' + sakagura[i].write_date + '</div>';
-								innerHTML += '</div>';
-							innerHTML += '</div>';
+				var innerHTML = '<div class="brewery_registry_container" data-sakagura_id=' + sakagura[i].id + ' data-sakagura_name=' + sakagura[i].sakagura_name + '>';
+					innerHTML += '<div class="user_info_container">';
+						innerHTML += '<div class="user_image_container">';
+							innerHTML += '<img src="' + path + '">';
 						innerHTML += '</div>';
 
-						innerHTML += '<div class="brewery_info_container">';
-							innerHTML += '<div class="brewery_name">' + sakagura[i].sakagura_name + '</div>';
-							innerHTML += '<div class="brewery_prefecture_name">' + sakagura[i].pref + '</div>';
+						innerHTML += '<div class="user_registration_container">';
+							innerHTML += '<div class="user_name">' + username + '</div>';
+							innerHTML += '<div class="user_profile_date_container">';
+								innerHTML += '<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>';
+								innerHTML += '<div class="user_date">' + sakagura[i].write_date + '</div>';
+							innerHTML += '</div>';
 						innerHTML += '</div>';
 					innerHTML += '</div>';
 
-					$('#sakagura_edit .review_result_sake_page').append(innerHTML);
-				}
-			}).fail(function(data){
-					alert("Failed:" + data);
-			}).complete(function(data){
-					// Loadingイメージを消す
-			});
+					innerHTML += '<div class="brewery_info_container">';
+						innerHTML += '<div class="brewery_name">' + sakagura[i].sakagura_name + '</div>';
+						innerHTML += '<div class="brewery_prefecture_name">' + sakagura[i].pref + '</div>';
+					innerHTML += '</div>';
+				innerHTML += '</div>';
+
+				$('#sakagura_edit .review_result_sake_page').append(innerHTML);
+			}
+		}).fail(function(data){
+				alert("Failed:" + data);
+		}).complete(function(data){
+				// Loadingイメージを消す
+		});
 	}
 
 	$(document).on('click', '#sakagura_edit .page_number_container .pageitems', function(e){
@@ -3478,19 +3660,19 @@ $(function() {
 			{
 					if(position < $('#sakagura_edit .pageitems').length)
 					{
-							//alert("position:" + position + " length:" + $('#sakagura_edit .pageitems').length);
-							$('#sakagura_edit .pageitems.selected.selected').removeClass("selected");
-							$('#sakagura_edit .pageitems:nth(' + position + ')').addClass("selected");
+						//alert("position:" + position + " length:" + $('#sakagura_edit .pageitems').length);
+						$('#sakagura_edit .pageitems.selected.selected').removeClass("selected");
+						$('#sakagura_edit .pageitems:nth(' + position + ')').addClass("selected");
 					}
 					else
 					{
-							var showPos = parseInt($('#sakagura_edit .pageitems:nth(0)').text());
-							var i = 1;
+						var showPos = parseInt($('#sakagura_edit .pageitems:nth(0)').text());
+						var i = 1;
 
-							$('#sakagura_edit .pageitems').each(function() {
-									$(this).text(showPos + i);
-									i++;
-							});
+						$('#sakagura_edit .pageitems').each(function() {
+								$(this).text(showPos + i);
+								i++;
+						});
 					}
 
 					$("#sakagura_edit .page_number_container").data('in_disp_from', in_disp_from);
@@ -3537,28 +3719,27 @@ $(function() {
 			}
 			else if((val1 && val2) && !val3)
 			{
-					if(parseInt(val2) == 12)
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = (parseInt(val1) + 1) + '.1.1';
-					}
-					else
-					{
-							str1 = val1 + '.' + val2 + '.1';
-							str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
-					}
+				if(parseInt(val2) == 12)
+				{
+					str1 = val1 + '.' + val2 + '.1';
+					str2 = (parseInt(val1) + 1) + '.1.1';
+				}
+				else
+				{
+					str1 = val1 + '.' + val2 + '.1';
+					str2 = val1 + '.' + (parseInt(val2) + 1) + '.1';
+				}
 
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
-
+				date1 = new Date(str1).getTime() / 1000;
+				date2 = new Date(str2).getTime() / 1000;
 			}
 			else if(val1 && (!val2 && !val3))
 			{
-					str1 = val1 + '.1.1';
-					str2 = (parseInt(val1) + 1) + '.1.1';
+				str1 = val1 + '.1.1';
+				str2 = (parseInt(val1) + 1) + '.1.1';
 
-					date1 = new Date(str1).getTime() / 1000;
-					date2 = new Date(str2).getTime() / 1000;
+				date1 = new Date(str1).getTime() / 1000;
+				date2 = new Date(str2).getTime() / 1000;
 			}
 
 			//alert("Date1:" + date1);
@@ -3606,69 +3787,68 @@ $(function() {
 		//alert("searchFavorite data:" + data);
 
 		$.ajax({
-				type: "POST",
-				url: "ajax_favorite.php",
-				data: data,
-				dataType: 'json',
+			type: "POST",
+			url: "cgi/ajax_favorite.php",
+			data: data,
+			dataType: 'json',
 
 		}).done(function(data){
 
-					var i = 0;
-          var path = "images/icons/noimage_user30.svg";
-					var username = <?php echo json_encode($username); ?>;
-					var count_result = data[0].count;
-					var sakagura = data[0].result;
+			var i = 0;
+			var path = "images/icons/noimage_user30.svg";
+			var username = <?php echo json_encode($username); ?>;
+			var count_result = data[0].count;
+			var sakagura = data[0].result;
 
-					$('#sakagura_favorite .review_result_sake_page').empty();
-					//alert("success");
-					//alert("success:" + data[0].sql);
-					//alert("data:" + data.length);
+			$('#sakagura_favorite .review_result_sake_page').empty();
+			//alert("success");
+			//alert("success:" + data[0].sql);
+			//alert("data:" + data.length);
 
-					if(sakagura != null) {
-							//alert("count_result2:" + sakagura.length);
+			if(sakagura != null) {
 
-							for(i = 0; i < sakagura.length; i++)
-							{
-								var innerHTML = '<div class="brewery_registry_container" data-sakagura_id=' + sakagura[i].id + ' data-sakagura_name=' + sakagura[i].sakagura_name + '>';
-									innerHTML += '<div class="user_info_container">';
-										innerHTML += '<div class="user_image_container">';
-											innerHTML += '<img src="' + path + '">';
-										innerHTML += '</div>';
+				//alert("count_result2:" + sakagura.length);
+				for(i = 0; i < sakagura.length; i++)
+				{
+					var innerHTML = '<div class="brewery_registry_container" data-sakagura_id=' + sakagura[i].id + ' data-sakagura_name=' + sakagura[i].sakagura_name + '>';
+						innerHTML += '<div class="user_info_container">';
+							innerHTML += '<div class="user_image_container">';
+								innerHTML += '<img src="' + path + '">';
+							innerHTML += '</div>';
 
-										innerHTML += '<div class="user_registration_container">';
-											innerHTML += '<div class="user_name">' + username + '</div>';
-											innerHTML += '<div class="user_profile_date_container">';
-												innerHTML += '<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>';
-												innerHTML += '<div class="user_date">' + sakagura[i].write_date + '</div>';
-											innerHTML += '</div>';
-										innerHTML += '</div>';
-									innerHTML += '</div>';
-
-									innerHTML += '<div class="brewery_info_container">';
-										innerHTML += '<div class="brewery_name">' + sakagura[i].sakagura_name + '</div>';
-										innerHTML += '<div class="brewery_prefecture_name">' + sakagura[i].pref + '</div>';
-									innerHTML += '</div>';
+							innerHTML += '<div class="user_registration_container">';
+								innerHTML += '<div class="user_name">' + username + '</div>';
+								innerHTML += '<div class="user_profile_date_container">';
+									innerHTML += '<div class="user_profile">20代後半/女性/和歌山県/利酒師(SSI認定)</div>';
+									innerHTML += '<div class="user_date">' + sakagura[i].write_date + '</div>';
 								innerHTML += '</div>';
+							innerHTML += '</div>';
+						innerHTML += '</div>';
 
-								$('#sakagura_favorite .review_result_sake_page').append(innerHTML);
-						 }
-					}
+						innerHTML += '<div class="brewery_info_container">';
+							innerHTML += '<div class="brewery_name">' + sakagura[i].sakagura_name + '</div>';
+							innerHTML += '<div class="brewery_prefecture_name">' + sakagura[i].pref + '</div>';
+						innerHTML += '</div>';
+					innerHTML += '</div>';
 
-					if(count_result != null)
-					{
-							$("#sakagura_favorite .page_number_container").data('count', count_result);
-							//alert("count:" + $("#sakagura_favorite .page_number_container").data('count'));
-					}
+					$('#sakagura_favorite .review_result_sake_page').append(innerHTML);
+				}
+			}
 
-					$("#sakagura_favorite .count_result").text(($("#sakagura_favorite .page_number_container").data('in_disp_from') + 1) + '～' +  $("#sakagura_favorite .page_number_container").data('in_disp_to') + '/全' + $("#sakagura_favorite .page_number_container").data('count') + '件');
+			if(count_result != null)
+			{
+					$("#sakagura_favorite .page_number_container").data('count', count_result);
+					//alert("count:" + $("#sakagura_favorite .page_number_container").data('count'));
+			}
 
-					//alert("count_result3:" + sakagura.length);
+			$("#sakagura_favorite .count_result").text(($("#sakagura_favorite .page_number_container").data('in_disp_from') + 1) + '～' +  $("#sakagura_favorite .page_number_container").data('in_disp_to') + '/全' + $("#sakagura_favorite .page_number_container").data('count') + '件');
+			//alert("count_result3:" + sakagura.length);
 
-			}).fail(function(data){
-					alert("Failed:" + data);
-			}).complete(function(data){
-					// Loadingイメージを消す
-			});
+		}).fail(function(data){
+			alert("Failed:" + data);
+		}).complete(function(data){
+			// Loadingイメージを消す
+		});
 	}
 
 	$(document).on('click', '#sakagura_favorite .page_number_container .pageitems', function(e){
@@ -3712,20 +3892,20 @@ $(function() {
 			{
 					if(position > 1)
 					{
-							//alert("position:" + position + " length:" + $('#sakagura_favorite .pageitems').length);
-							$('#sakagura_favorite .pageitems.selected.selected').removeClass("selected");
-							$('#sakagura_favorite .pageitems:nth(' + (position - 2) + ')').addClass("selected");
+						//alert("position:" + position + " length:" + $('#sakagura_favorite .pageitems').length);
+						$('#sakagura_favorite .pageitems.selected.selected').removeClass("selected");
+						$('#sakagura_favorite .pageitems:nth(' + (position - 2) + ')').addClass("selected");
 					}
 					else
 					{
-								var showPos = parseInt($('#sakagura_favorite .pageitems:nth(0)').text()) - 2;
-								var i = 1;
-								//alert("showPos:" + showPos + " pageitem:" + $('#sakagura_favorite .pageitems:nth(0)').text());
+						var showPos = parseInt($('#sakagura_favorite .pageitems:nth(0)').text()) - 2;
+						var i = 1;
+						//alert("showPos:" + showPos + " pageitem:" + $('#sakagura_favorite .pageitems:nth(0)').text());
 
-								$('#sakagura_favorite .pageitems').each(function() {
-										$(this).text(showPos + i);
-										i++;
-								});
+						$('#sakagura_favorite .pageitems').each(function() {
+								$(this).text(showPos + i);
+								i++;
+						});
 					}
 
 					in_disp_from = $("#sakagura_favorite .page_number_container").data('in_disp_from') - $("#sakagura_favorite .page_number_container").data('in_disp_max');
@@ -3810,7 +3990,7 @@ $(function() {
 			/*
 			$.ajax({
 					type: "post",
-					url: "sake_update.php?id=<?php print($_GET['sake_id']);?>",
+					url: "cgi/sake_update.php?id=<?php print($_GET['sake_id']);?>",
 					data: data,
 			}).done(function(xml){
 
@@ -3844,16 +4024,16 @@ $(function() {
 
 				$.ajax({
 					type: "post",
-					url: "sake_dynamic_delete.php",
+					url: "cgi/sake_delete.php",
 					data: data,
 				}).done(function(xml){
 					var str = $(xml).find("str").text();
 
 					if(str == "success")
 					{
-							//var sakagura_id	= $("#sakagura_id").val();
-							location.reload();
-							return;
+						//var sakagura_id	= $("#sakagura_id").val();
+						location.reload();
+						return;
 					}
 
 				}).fail(function(data){
@@ -3911,8 +4091,8 @@ $(function() {
 	if(count >= 1) {
         $.ajax({
             type: "POST",
-            url: "auto_complete.php",
-						data: data,
+            url: "cgi/auto_complete.php",
+			data: data,
             dataType: 'json',
 
         }).done(function(data){
@@ -3938,7 +4118,6 @@ $(function() {
     }
   }); // keyup
 });
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3992,7 +4171,7 @@ $(function() {
 		});
 	});
 
-	/////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
   // ユーザー検索
   $(document).on('keyup', '#tab_users .user_input', function(){
 
@@ -4009,8 +4188,8 @@ $(function() {
 	if(count >= 1) {
         $.ajax({
             type: "POST",
-            url: "complex_search.php",
-						data: data,
+            url: "cgi/complex_search.php",
+			data: data,
             dataType: 'json',
 
         }).done(function(data){

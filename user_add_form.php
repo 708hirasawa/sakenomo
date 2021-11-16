@@ -13,7 +13,7 @@ require_once("nonda.php");
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
-<title>Sakenomo</title>
+<title>会員登録 [Sakenomo]</title>
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
@@ -25,6 +25,16 @@ require_once("nonda.php");
 <script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-1X2ZRV0BES');
+</script>
 </head>
 
 <body>
@@ -90,7 +100,7 @@ require_once("nonda.php");
 
 				<div class="registry_user_button_container">
 					<a class="agreement_link_button" href="agreement.php" target="_blank"><span>Sakenomo利用規約</span></a>
-					<input type="submit" id="submit_button" name="send" value="利用規約に同意して送信する" disabled>
+					<input type="submit" id="submit_button" name="send" disabled value="利用規約に同意して送信する">
 				</div>
 
 			</form>
@@ -107,7 +117,6 @@ require_once("nonda.php");
 
 <script type="text/javascript">
 
-
 	jQuery(document).ready(function(){
 
 		$("body").wrapInner('<div id="wrapper"></div>');
@@ -121,6 +130,7 @@ require_once("nonda.php");
 		*/
 
 		$('#submit_button').click(function() {
+
 			if(!$('input[name="email"]').val() || $('input[name="email"]').val() == "") {
 				$('#submit_button').prop('disabled', true);
 				$('#email_verify').text("メールアドレスを入力してください");
@@ -136,23 +146,26 @@ require_once("nonda.php");
 
 			$.ajax({
 				type: "post",
-				url: "user_verify_email.php",
+				url: "cgi/user_verify_email.php",
 				data: data,
 			}).done(function(xml){
 				var str = $(xml).find("str").text();
 				var sql = $(xml).find("sql").text();
 				//alert("str:" + str);
 
-				if(str == "already_exist") {
+				if(str == "found") {
 					$('#email_verify').text("すでに使われているメールアドレスです");
+					$('#email_verify').css({"display": "block"});
 					$('#submit_button').prop('disabled', true);
 				}
 				else if(str == "invalid_email") {
 					$('#email_verify').text("正しいメールアドレスを入力してください");
+					$('#email_verify').css({"display": "block"});
 					$('#submit_button').prop('disabled', true);
 				}
 				else {
 					$('#email_verify').text("");
+					$('#email_verify').css({"display": "none"});
 					$('#submit_button').prop('disabled', false);
 				}
 
@@ -165,9 +178,12 @@ require_once("nonda.php");
 		////////////////////////////////////////////////////////////////////////////////////
 		// パスワード検証
 		////////////////////////////////////////////////////////////////////////////////////
-		// When the user clicks outside of the password field, hide the message box
+		// when the user clicks outside of the password field, hide the message box
+
+		/*
 		$('input[name="user_password"]').blur(function() {
-			if($('#letter').hasClass('invalid') || $('#capital').hasClass('invalid') || $('#number').hasClass('invalid') || $('#length').hasClass('invalid')) {
+			if($('#email_verify').is(":visible") || $('#letter').hasClass('invalid') || $('#capital').hasClass('invalid') || $('#number').hasClass('invalid') || $('#length').hasClass('invalid')) {
+
 				$('#submit_button').prop('disabled', true);
 				$("#submit_button").css('background', '#e6e6e6');
 			}
@@ -176,45 +192,56 @@ require_once("nonda.php");
 				$("#submit_button").css('background', '#C5CE51');
 			}
 		});
+		*/
 
 		// When the user starts to type something inside the password field
-		$(document).on('keyup', '#user_password', function(){
+		$(document).on('keyup', '#user_password', function() {
 
-		  // Validate lowercase letters
-		  if($('#user_password').val().match(/[a-z]/g)) {
+			// Validate lowercase letters
+			if($('#user_password').val().match(/[a-z]/g)) {
 				$('#letter').removeClass('invalid');
 				$('#letter').addClass('valid');
-		  } else {
+			} else {
 				$('#letter').removeClass('valid');
 				$('#letter').addClass('invalid');
-		  }
+			}
 
-		  // Validate capital letters
-		  if($('#user_password').val().match(/[A-Z]/g)) {
+			// Validate capital letters
+			if($('#user_password').val().match(/[A-Z]/g)) {
 				$('#capital').removeClass('invalid');
 				$('#capital').addClass('valid');
-		  } else {
+			} else {
 				$('#capital').removeClass('valid');
 				$('#capital').addClass('invalid');
-		  }
+			}
 
-		  // Validate numbers
-		  if($('#user_password').val().match(/[0-9]/g)) {
+			// Validate numbers
+			if($('#user_password').val().match(/[0-9]/g)) {
 				$('#number').removeClass('invalid');
 				$('#number').addClass('valid');
-		  } else {
+			} else {
 				$('#number').removeClass('valid');
 				$('#number').addClass('invalid');
-		  }
+			}
 
-		  // Validate length
-		  if($('#user_password').val().length >= 6) {
+			// Validate length
+			if($('#user_password').val().length >= 6) {
 				$('#length').removeClass('invalid');
 				$('#length').addClass('valid');
-		  } else {
+			} else {
 				$('#length').removeClass('valid');
 				$('#length').addClass('invalid');
-		  }
+			}
+
+			if($('#email_verify').is(":visible") || $('#letter').hasClass('invalid') || $('#capital').hasClass('invalid') || $('#number').hasClass('invalid') || $('#length').hasClass('invalid')) {
+
+				$('#submit_button').prop('disabled', true);
+				$("#submit_button").css('background', '#e6e6e6');
+			}
+			else {
+				$('#submit_button').prop('disabled', false);
+				$("#submit_button").css('background', '#C5CE51');
+			}
 		});
 
 	}); // jQuery ready

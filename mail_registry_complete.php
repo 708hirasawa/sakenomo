@@ -13,7 +13,7 @@ require_once("nonda.php");
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
-<title>Sakenomo</title>
+<title>会員登録完了 [Sakenomo]</title>
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
@@ -24,18 +24,25 @@ require_once("nonda.php");
 <script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-1X2ZRV0BES');
+</script>
 </head>
 
 <body>
-
 	<?php
 		include_once('images/icons/svg_sprite.svg');
 		write_side_menu();
 		write_HamburgerLogo();
 		write_search_bar();
 		write_Nonda();
-
-		$username = $_GET['username'];
 	?>
 
 	<div id="container">
@@ -44,13 +51,13 @@ require_once("nonda.php");
 
 			<div id="registry_user_content">
 				<div class="row_container">
-          <div class="column1_container">
-            <div class="column1">マイページ設定からユーザー名や写真、自己紹介などのプロフィールを編集することができます。</div>
-          </div>
-          <div class="column2">
-            <?php print('<a href="user_view_config_profile.php?username=' .$username .'">プロフィール編集</a>'); ?>
-          </div>
-        </div>
+					<div class="column1_container">
+						<div class="column1">マイページ設定からユーザー名や写真、自己紹介などのプロフィールを編集することができます。</div>
+					</div>
+					<div class="column2">
+						<?php print('<a href="user_view_config_profile.php">プロフィール編集</a>'); ?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -63,7 +70,7 @@ require_once("nonda.php");
 
 <script type="text/javascript">
 
-	jQuery(document).ready(function(){
+	jQuery(document).ready(function() {
 
 		$("body").wrapInner('<div id="wrapper"></div>');
 

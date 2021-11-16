@@ -25,6 +25,16 @@ require_once("searchbar.php");
 	<script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-1X2ZRV0BES');
+	</script>
 </head>
 
 <body>
@@ -158,7 +168,7 @@ function GetSakeCategory($category_code)
 		return $retval;
 	}
 	else if($category_code == "44") {
-		$retval = "樽酒";
+		$retval = "木桶仕込";
 		return $retval;
 	}
 	else if($category_code == "45") {
@@ -200,13 +210,13 @@ function GetSakeCategory($category_code)
 }
 
 $category = $_GET["category"];
-$keyword = ($_GET['keyword'] != null && $_GET['keyword'] != undefined) ? $_GET['keyword'] : "";
+$keyword = ($_GET['keyword'] != null && $_GET['keyword'] != 'undefined') ? $_GET['keyword'] : "";
 $pref = $_GET["pref"];
 $special_name = $_GET["special_name"];
 $seimai_rate = $_GET["seimai"];
 $rice_used = $_GET["rice_used"];
 $p_max = 25;
-$page = ($_GET['page'] != null && $_GET['page'] != undefined) ? $_GET['page'] : 1;
+$page = ($_GET['page'] != null && $_GET['page'] != 'undefined') ? $_GET['page'] : 1;
 $from = ($page - 1) * $p_max;
 $to = $from + $p_max;
 $sake_category = $_GET['sake_category'];
@@ -445,7 +455,7 @@ print('<div id="container" data-category=' .$category
 											<label><li><input type="checkbox" name="sake_category[]" value="50">新酒・初しぼり・しぼりたて</li></label>
 											<label><li><input type="checkbox" name="sake_category[]" value="37">ひやおろし・秋上がり</li></label>
 											<label><li><input type="checkbox" name="sake_category[]" value="48">古酒・長期熟成酒</li></label>
-											<label><li><input type="checkbox" name="sake_category[]" value="44">樽酒</li></label>
+											<label><li><input type="checkbox" name="sake_category[]" value="44">木桶仕込</li></label>
 										</ul>
 									</div>
 								</div>
@@ -458,49 +468,27 @@ print('<div id="container" data-category=' .$category
 										<OPTION VALUE="yamadanishiki" kanji="山田錦">山田錦</OPTION>
 										<OPTION VALUE="gohyakumangoku" kanji="五百万石">五百万石</OPTION>
 										<OPTION VALUE="omachi" kanji="雄町">雄町</OPTION>
+										<OPTION VALUE="miyamanishiki" kanji="美山錦">美山錦</OPTION>
 										<OPTION VALUE="aiyama" kanji="愛山">愛山</OPTION>
 										<OPTION VALUE="akitashukomachi" kanji="秋田酒こまち">秋田酒こまち</OPTION>
-										<OPTION VALUE="akinosei" kanji="秋の精">秋の精</OPTION>
-										<OPTION VALUE="ipponjime" kanji="一本〆">一本〆</OPTION>
-										<OPTION VALUE="oyamanishiki" kanji="雄山錦">雄山錦</OPTION>
-										<OPTION VALUE="kairyoshinko" kanji="改良信交">改良信交</OPTION>
 										<OPTION VALUE="kamenoo" kanji="亀の尾">亀の尾</OPTION>
-										<OPTION VALUE="ginotome" kanji="ぎんおとめ">ぎんおとめ</OPTION>
 										<OPTION VALUE="ginginga" kanji="吟ぎんが">吟ぎんが</OPTION>
-										<OPTION VALUE="ginnosato" kanji="吟のさと">吟のさと</OPTION>
 										<OPTION VALUE="ginnosei" kanji="吟の精">吟の精</OPTION>
 										<OPTION VALUE="gimpu" kanji="吟風">吟風</OPTION>
-										<OPTION VALUE="ginfubuki" kanji="吟吹雪">吟吹雪</OPTION>
-										<OPTION VALUE="kinmonnishiki" kanji="金紋錦">金紋錦</OPTION>
 										<OPTION VALUE="kuranohana" kanji="蔵の華">蔵の華</OPTION>
 										<OPTION VALUE="koshitanrei" kanji="越淡麗">越淡麗</OPTION>
-										<OPTION VALUE="koshinoshizuku" kanji="越の雫">越の雫</OPTION>
-										<OPTION VALUE="saitonoshizuku" kanji="西都の雫">西都の雫</OPTION>
 										<OPTION VALUE="sakemirai" kanji="酒未来">酒未来</OPTION>
-										<OPTION VALUE="sakemusashi" kanji="さけ武蔵">さけ武蔵</OPTION>
-										<OPTION VALUE="shinriki" kanji="神力">神力</OPTION>
 										<OPTION VALUE="suisei" kanji="彗星">彗星</OPTION>
-										<OPTION VALUE="senbonnishiki" kanji="千本錦">千本錦</OPTION>
-										<OPTION VALUE="tatsunootoshigo" kanji="龍の落とし子">龍の落とし子</OPTION>
-										<OPTION VALUE="tamazakae" kanji="玉栄">玉栄</OPTION>
 										<OPTION VALUE="dewasansan" kanji="出羽燦々">出羽燦々</OPTION>
 										<OPTION VALUE="dewanosato" kanji="出羽の里">出羽の里</OPTION>
 										<OPTION VALUE="hattan" kanji="八反">八反</OPTION>
 										<OPTION VALUE="hattannishiki" kanji="八反錦">八反錦</OPTION>
 										<OPTION VALUE="hanaomoi" kanji="華想い">華想い</OPTION>
 										<OPTION VALUE="hanafubuki" kanji="華吹雪">華吹雪</OPTION>
-										<OPTION VALUE="hitachinishiki" kanji="ひたち錦">ひたち錦</OPTION>
 										<OPTION VALUE="hitogokochi" kanji="ひとごこち">ひとごこち</OPTION>
-										<OPTION VALUE="hohai" kanji="豊盃">豊盃</OPTION>
-										<OPTION VALUE="hoshiakari" kanji="星あかり">星あかり</OPTION>
-										<OPTION VALUE="maikaze" kanji="舞風">舞風</OPTION>
 										<OPTION VALUE="misatonishiki" kanji="美郷錦">美郷錦</OPTION>
-										<OPTION VALUE="miyamanishiki" kanji="美山錦">美山錦</OPTION>
-										<OPTION VALUE="yamasakeyongo" kanji="山酒4号（玉苗）">山酒4号（玉苗）</OPTION>
 										<OPTION VALUE="yamadaho" kanji="山田穂">山田穂</OPTION>
-										<OPTION VALUE="yuinoka" kanji="結の香">結の香</OPTION>
 										<OPTION VALUE="yumenoka" kanji="夢の香">夢の香</OPTION>
-										<OPTION VALUE="wakamizu" kanji="若水">若水</OPTION>
 										<OPTION VALUE="wataribune" kanji="渡船">渡船</OPTION>
 										<OPTION VALUE="other" kanji="その他">その他</OPTION>
 									</SELECT>
@@ -515,49 +503,27 @@ print('<div id="container" data-category=' .$category
 											<label><li value="yamadanishiki"><input type="checkbox" name="rice_used[]" value="yamadanishiki">山田錦</li></label>
 											<label><li value="gohyakumangoku"><input type="checkbox" name="rice_used[]" value="gohyakumangoku">五百万石</li></label>
 											<label><li value="omachi"><input type="checkbox" name="rice_used[]" value="omachi">雄町</li></label>
+											<label><li value="miyamanishiki"><input type="checkbox" name="rice_used[]" value="miyamanishiki">美山錦</li></label>
 											<label><li value="aiyama"><input type="checkbox" name="rice_used[]" value="aiyama">愛山</li></label>
 											<label><li value="akitashukomachi"><input type="checkbox" name="rice_used[]" value="akitashukomachi">秋田酒こまち</li></label>
-											<label><li value="akinosei"><input type="checkbox" name="rice_used[]" value="akinosei">秋の精</li></label>
-											<label><li value="ipponjime"><input type="checkbox" name="rice_used[]" value="ipponjime">一本〆</li></label>
-											<label><li value="oyamanishiki"><input type="checkbox" name="rice_used[]" value="oyamanishiki">雄山錦</li></label>
-											<label><li value="kairyoshinko"><input type="checkbox" name="rice_used[]" value="kairyoshinko">改良信交</li></label>
 											<label><li value="kamenoo"><input type="checkbox" name="rice_used[]" value="kamenoo">亀の尾</li></label>
-											<label><li value="ginotome"><input type="checkbox" name="rice_used[]" value="ginotome">ぎんおとめ</li></label>
 											<label><li value="ginginga"><input type="checkbox" name="rice_used[]" value="ginginga">吟ぎんが</li></label>
-											<label><li value="ginnosato"><input type="checkbox" name="rice_used[]" value="ginnosato">吟のさと</li></label>
 											<label><li value="ginnosei"><input type="checkbox" name="rice_used[]" value="ginnosei">吟の精</li></label>
 											<label><li value="gimpu"><input type="checkbox" name="rice_used[]" value="gimpu">吟風</li></label>
-											<label><li value="ginfubuki"><input type="checkbox" name="rice_used[]" value="ginfubuki">吟吹雪</li></label>
-											<label><li value="kinmonnishiki"><input type="checkbox" name="rice_used[]" value="kinmonnishiki">金紋錦</li></label>
 											<label><li value="kuranohana"><input type="checkbox" name="rice_used[]" value="kuranohana">蔵の華</li></label>
 											<label><li value="koshitanrei"><input type="checkbox" name="rice_used[]" value="koshitanrei">越淡麗</li></label>
-											<label><li value="koshinoshizuku"><input type="checkbox" name="rice_used[]" value="koshinoshizuku">越の雫</li></label>
-											<label><li value="saitonoshizuku"><input type="checkbox" name="rice_used[]" value="saitonoshizuku">西都の雫</li></label>
 											<label><li value="sekemirai"><input type="checkbox" name="rice_used[]" value="sekemirai">酒未来</li></label>
-											<label><li value="sakemusashi"><input type="checkbox" name="rice_used[]" value="sakemusashi">さけ武蔵</li></label>
-											<label><li value="shinriki"><input type="checkbox" name="rice_used[]" value="shinriki">神力</li></label>
 											<label><li value="suisei"><input type="checkbox" name="rice_used[]" value="suisei">彗星</li></label>
-											<label><li value="senbonnishiki"><input type="checkbox" name="rice_used[]" value="senbonnishiki">千本錦</li></label>
-											<label><li value="tatsunootoshigo"><input type="checkbox" name="rice_used[]" value="tatsunootoshigo">龍の落とし子</li></label>
-											<label><li value="tamazakae"><input type="checkbox" name="rice_used[]" value="tamazakae">玉栄</li></label>
 											<label><li value="dewasansan"><input type="checkbox" name="rice_used[]" value="dewasansan">出羽燦々</li></label>
 											<label><li value="dewanosato"><input type="checkbox" name="rice_used[]" value="dewanosato">出羽の里</li></label>
 											<label><li value="hattan"><input type="checkbox" name="rice_used[]" value="hattan">八反</li></label>
 											<label><li value="hattannishiki"><input type="checkbox" name="rice_used[]" value="hattannishiki">八反錦</li></label>
 											<label><li value="hanaomoi"><input type="checkbox" name="rice_used[]" value="hanaomoi">華想い</li></label>
 											<label><li value="hanafubuki"><input type="checkbox" name="rice_used[]" value="hanafubuki">華吹雪</li></label>
-											<label><li value="hitachinishiki"><input type="checkbox" name="rice_used[]" value="hitachinishiki">ひたち錦</li></label>
 											<label><li value="hitogokochi"><input type="checkbox" name="rice_used[]" value="hitogokochi">ひとごこち</li></label>
-											<label><li value="hohai"><input type="checkbox" name="rice_used[]" value="hohai">豊盃</li></label>
-											<label><li value="hoshiakari"><input type="checkbox" name="rice_used[]" value="hoshiakari">星あかり</li></label>
-											<label><li value="maikaze"><input type="checkbox" name="rice_used[]" value="maikaze">舞風</li></label>
 											<label><li value="misatonishiki"><input type="checkbox" name="rice_used[]" value="misatonishiki">美郷錦</li></label>
-											<label><li value="miyamanishiki"><input type="checkbox" name="rice_used[]" value="miyamanishiki">美山錦</li></label>
-											<label><li value="yamasakeyongo"><input type="checkbox" name="rice_used[]" value="yamasakeyongo">山酒4号（玉苗）</li></label>
 											<label><li value="yamadaho"><input type="checkbox" name="rice_used[]" value="yamadaho">山田穂</li></label>
-											<label><li value="yuinoka"><input type="checkbox" name="rice_used[]" value="yuinoka">結の香</li></label>
 											<label><li value="yumenoka"><input type="checkbox" name="rice_used[]" value="yumenoka">夢の香</li></label>
-											<label><li value="wakamizu"><input type="checkbox" name="rice_used[]" value="wakamizu">若水</li></label>
 											<label><li value="wataribune"><input type="checkbox" name="rice_used[]" value="wataribune">渡船</li></label>
 											<label><li value="other"><input type="checkbox" name="rice_used[]" value="other">その他</li></label>
 										</ul>
@@ -1227,15 +1193,15 @@ print('<div id="container" data-category=' .$category
 					print('<input type="hidden" id="hidden_all_count_query" name="count_all_query" value=' .$count_result .'>');
 					//$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." ORDER BY sake_read"." LIMIT ".$from.", ".$to;
 
-					$sql  = 'SELECT			SAKE_J.sake_id AS id, sake_name, SAKE_J.sake_rank AS rank, SAKE_J.write_update AS write_date, sakagura_name, special_name, sake_category, alcohol_level, jsake_level, rice_used, seimai_rate, setting, postal_code, pref, address, SAKE_J.sake_id as observation, SAKE_J.sake_id as direct_sale, SAKE_J.sake_id as brand ';
+					$sql  = 'SELECT			SAKE_J.sake_id AS id, sake_name, sake_read, SAKE_J.sake_rank AS rank, SAKE_J.write_update AS write_date, sakagura_name, special_name, sake_category, alcohol_level, jsake_level, rice_used, seimai_rate, setting, postal_code, pref, address, SAKE_J.sake_id as observation, SAKE_J.sake_id as direct_sale, SAKE_J.sake_id as brand ';
 					$sql .=	' FROM			SAKE_J, SAKAGURA_J ' .$condition1;
 					$sql .= ' UNION ';
-					$sql .= ' SELECT		SAKAGURA_J.id AS id, SAKAGURA_J.sakagura_name, SAKAGURA_J.rank AS rank,	SAKAGURA_J.date_updated AS write_date, null, null, null, null, null, null, null, null, postal_code, pref, address, observation, direct_sale, brand ';
+					$sql .= ' SELECT		SAKAGURA_J.id AS id, SAKAGURA_J.sakagura_name, SAKAGURA_J.sakagura_read, SAKAGURA_J.rank AS rank,	SAKAGURA_J.date_updated AS write_date, null, null, null, null, null, null, null, null, postal_code, pref, address, observation, direct_sale, brand ';
 					$sql .= ' FROM			SAKAGURA_J ' .$condition2;
 					//$sql .= ' UNION ';
 					//$sql .= '	SELECT		SYUHANTEN_J.syuhanten_id AS id, SYUHANTEN_J.syuhanten_name, SYUHANTEN_J.syuhanten_rank AS rank,	SYUHANTEN_J.date_added AS write_date, null, null, null, null, null, null, null, null, syuhanten_postal_code AS postal_code, syuhanten_pref, syuhanten_address AS address, null, null, null ';
 					//$sql .= ' FROM			SYUHANTEN_J ' .$condition3;
-					$sql .= '	LIMIT '		.$from .', ' .$p_max;
+					$sql .= '	ORDER BY sake_read ASC LIMIT '		.$from .', ' .$p_max;
 
 					$res = executequery($db, $sql);
 
@@ -2286,7 +2252,8 @@ print('<div id="container" data-category=' .$category
 					$p_max = 25;
 
 					//$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." ORDER BY sake_read"." LIMIT ".$from.", ".$to;
-					$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." LIMIT ".$from.", ".$p_max;
+					//$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." LIMIT ".$from.", ".$p_max;
+					$sql = "SELECT * FROM SAKE_J, SAKAGURA_J ".$condition." ORDER BY sake_read ASC LIMIT ".$from.", ".$p_max;
 					$res = executequery($db, $sql);
 					//print('<div>' .$sql: .'</div>');
 
@@ -3172,53 +3139,31 @@ writefooter();
 <script type="text/javascript">
 
 var rice_items = [
-		  ["kokusanmai", "国産米", "こくさんまい"],
+          ["kokusanmai", "国産米", "こくさんまい"],
           ["yamadanishiki", "山田錦", "やまだにしき"],
           ["yamadaho", "山田穂", "やまだぼ"],
           ["gohyakumangoku", "五百万石", "ごひゃくまんごく"],
           ["omachi", "雄町", "おまち"],
+          ["miyamanishiki", "美山錦", "みやまにしき"],
           ["aiyama", "愛山", "あいやま"],
           ["akitashukomachi", "秋田酒こまち", "あきたさけこまち"],
-          ["akinosei", "秋の精", "あきのせい"],
-          ["ipponjime", "一本〆", "いっぽんじめ"],
-          ["oyamanishiki", "雄山錦", "おやまにしき"],
-          ["kairyoshinko", "改良信交", "かいりょうしんこう"],
           ["kamenoo", "亀の尾", "かめのお"],
-          ["ginotome", "ぎんおとめ", "ぎんおとめ"],
           ["ginginga", "吟ぎんが", "ぎんぎんが"],
-          ["ginnosato", "吟のさと", "ぎんのさと"],
           ["ginnosei", "吟の精", "ぎんのせい"],
           ["gimpu", "吟風", "ぎんぷう"],
-          ["ginfubuki", "吟吹雪", "ぎんふぶき"],
-          ["kinmonnishiki", "金紋錦", "きんもんにしき"],
           ["kuranohana", "蔵の華", "くらのはな"],
           ["koshitanrei", "越淡麗", "こしたんれい"],
-          ["koshinoshizuku", "越の雫", "こしのしずく"],
-          ["saitonoshizuku", "西都の雫", "さいとのしずく"],
           ["sakemirai", "酒未来", "さけみらい"],
-          ["sakemusashi", "さけ武蔵", "さけむさし"],
-          ["shinriki", "神力", "しんりき"],
           ["suisei", "彗星", "すいせい"],
-          ["senbonnishiki", "千本錦", "せんぼんにしき"],
-          ["tatsunootoshigo", "龍の落とし子", "たつのおとしご"],
-          ["tamazakae", "玉栄", "たまさかえ"],
           ["dewasansan", "出羽燦々", "でわさんさん"],
           ["dewanosato", "出羽の里", "でわのさと"],
           ["hattan", "八反", "はったん"],
           ["hattannishiki", "八反錦", "はったんにしき"],
           ["hanaomoi", "華想い", "はなおもい"],
           ["hanafubuki", "華吹雪", "はなふぶき"],
-          ["hitachinishiki", "ひたち錦", "ひたちにしき"],
           ["hitogokochi", "ひとごこち", "ひとごこち"],
-          ["hohai", "豊盃", "ほうはい"],
-          ["hoshiakari", "星あかり", "ほしあかり"],
-          ["maikaze", "舞風", "まいかぜ"],
           ["misatonishiki", "美郷錦", "みさとにしき"],
-          ["miyamanishiki", "美山錦", "みやまにしき"],
-		  ["yamasakeyongo", "山酒4号（玉苗）", "やまさけよんごう（たまなえ）"],
-          ["yuinoka", "結の香", "ゆいのか"],
           ["yumenoka", "夢の香", "ゆめのかおり"],
-          ["wakamizu", "若水", "わかみず"],
           ["wataribune", "渡船", "わたりぶね"],
           ["other", "その他", "そのた"]];
 
@@ -3350,7 +3295,7 @@ $(function() {
 
 				$.ajax({
 						type: "POST",
-						url: "complex_search.php",
+						url: "cgi/complex_search.php",
 						data: data,
 						dataType: 'json',
 
@@ -3425,7 +3370,7 @@ $(function() {
 															//////////////////////////////////////////////
 															innerHTML += '<div class="spec_item">' + '<div class="spec_title"><svg class="spec_item_alc1616"><use xlink:href="#alc1616"/></svg>Alc度数</div>' + '<div class="spec_info">';
 
-																if(sake[i].alcohol_level != undefined && sake[i].alcohol_level != null && sake[i].alcohol_level != "") {
+																if(sake[i].alcohol_level != 'undefined' && sake[i].alcohol_level != null && sake[i].alcohol_level != "") {
 																	var alcohol_array = sake[i].alcohol_level.split(',');
 																	if(alcohol_array.length == 1) {
 																		innerHTML += alcohol_array[0] + '%';
@@ -3467,11 +3412,11 @@ $(function() {
 															innerHTML += '<div class="spec_title"><svg class="spec_item_cleanedrice1616"><use xlink:href="#cleanedrice1616"/></svg>精米歩合</div>';
 															innerHTML += '<div class="spec_info">';
 
-																if(sake[i].seimai_rate && sake[i].seimai_rate != undefined && sake[i].seimai_rate != "") {
+																if(sake[i].seimai_rate && sake[i].seimai_rate != 'undefined' && sake[i].seimai_rate != "") {
 																	var seimai_array = sake[i].seimai_rate.split(',');
 																	var rice_array = [];
 
-																	if(sake[i].rice_used && sake[i].rice_used != undefined && sake[i].rice_used != "") {
+																	if(sake[i].rice_used && sake[i].rice_used != 'undefined' && sake[i].rice_used != "") {
 																		rice_array = sake[i].rice_used.split('/');
 																	}
 
@@ -3505,7 +3450,7 @@ $(function() {
 															innerHTML += '<div class="spec_title"><svg class="spec_item_nihonshudo1616"><use xlink:href="#nihonshudo1616"/></svg>日本酒度</div>';
 															innerHTML += '<div class="spec_info">';
 
-																if(sake[i].jsake_level && sake[i].jsake_level != undefined && sake[i].jsake_level != "") {
+																if(sake[i].jsake_level && sake[i].jsake_level != 'undefined' && sake[i].jsake_level != "") {
 																	var syudo_array = sake[i].jsake_level.split(',');
 																	if(syudo_array.length == 1) {
 																		innerHTML += parseFloat(syudo_array[0]).toFixed(1);
@@ -3559,7 +3504,7 @@ $(function() {
 													innerHTML += '<div class="sakagura_spec_item">';
 													innerHTML += '<span class="sakagura_spec_title"><svg class="spec_item_bottle1616"><use xlink:href="#bottle1616"/></svg>代表銘柄</span>';
 													innerHTML += '<span class="sakagura_spec_info">';
-														if(sake[i].brand != undefined)
+														if(sake[i].brand != 'undefined')
 															innerHTML += sake[i].brand;
 														else
 															innerHTML += '<span style="color: #b2b2b2;">--</span>';
@@ -3898,25 +3843,25 @@ $(function() {
 
 			var data = "category=" + $('#hidden_form input[name="category"]').val();
 
-			if($('#sake_input').val() != "" && $('#sake_input').val() != undefined)
+			if($('#sake_input').val() != "" && $('#sake_input').val() != 'undefined')
 				data += '&keyword=' + $('#sake_input').val();
 
-			if($('#hidden_form input[name="orderby"]').val() != "" && $('#hidden_form input[name="orderby"]').val() != undefined)
+			if($('#hidden_form input[name="orderby"]').val() != "" && $('#hidden_form input[name="orderby"]').val() != 'undefined')
 				data += '&orderby=' + $('#hidden_form input[name="orderby"]').val();
 
-			if($('#hidden_form input[name="desc"]').val() != "" && $('#hidden_form input[name="desc"]').val() != undefined)
+			if($('#hidden_form input[name="desc"]').val() != "" && $('#hidden_form input[name="desc"]').val() != 'undefined')
 				data += '&desc=' + $('#hidden_form input[name="desc"]').val();
 
-			if($('#sake_sidebar_form select[name="pref"]').val() != "" && $('#sake_sidebar_form select[name="pref"]').val() != undefined)
+			if($('#sake_sidebar_form select[name="pref"]').val() != "" && $('#sake_sidebar_form select[name="pref"]').val() != 'undefined')
 				data += '&pref=' + $('#sake_sidebar_form select[name="pref"]').val();
 
-			if($('#sake_sidebar_form select[name="special_name"]').val() != "" && $('#sake_sidebar_form select[name="special_name"]').val() != undefined)
+			if($('#sake_sidebar_form select[name="special_name"]').val() != "" && $('#sake_sidebar_form select[name="special_name"]').val() != 'undefined')
 				data += '&special_name=' + $('#sake_sidebar_form select[name="special_name"]').val();
 
-			if($('#sake_sidebar_form select[name="rice_used"]').val() != "" && $('#sake_sidebar_form select[name="rice_used"]').val() != undefined)
+			if($('#sake_sidebar_form select[name="rice_used"]').val() != "" && $('#sake_sidebar_form select[name="rice_used"]').val() != 'undefined')
 				data += '&rice_used=' + $('#sake_sidebar_form select[name="rice_used"]').val();
 
-			if($('#sake_sidebar_form select[name="seimai_rate"]').val() != "" && $('#sake_sidebar_form select[name="seimai_rate"]').val() != undefined)
+			if($('#sake_sidebar_form select[name="seimai_rate"]').val() != "" && $('#sake_sidebar_form select[name="seimai_rate"]').val() != 'undefined')
 				data += '&seimai_rate=' + $('#sake_sidebar_form select[name="seimai_rate"]').val();
 
 			///////////////////////////////////////////////////////////////////////
@@ -3928,10 +3873,10 @@ $(function() {
 			}
 			///////////////////////////////////////////////////////////////////////
 
-			//if($('#sake_sidebar_form input[name="from"]').val() != "" && $('#sake_sidebar_form input[name="from"]').val() != undefined)
+			//if($('#sake_sidebar_form input[name="from"]').val() != "" && $('#sake_sidebar_form input[name="from"]').val() != 'undefined')
 			//	data += '&from=' + $('#sake_sidebar_form input[name="from"]').val();
 
-			//if($('#sake_sidebar_form input[name="to]').val() != "" && $('#sake_sidebar_form input[name="to"]').val() != undefined)
+			//if($('#sake_sidebar_form input[name="to]').val() != "" && $('#sake_sidebar_form input[name="to"]').val() != 'undefined')
 			//	data += '&to=' + $('#sake_sidebar_form input[name="to"]').val();
 
 			//&sake_category%5B%5D=11&sake_category%5B%5D=45&sake_category%5B%5D=39
@@ -4048,7 +3993,7 @@ $(function() {
 
 			 $.ajax({
 					type: "post",
-					url: "sake_follow.php?sake_id=<?php print($_GET['sake_id']);?>",
+					url: "cgi/sake_follow.php?sake_id=<?php print($_GET['sake_id']);?>",
 					data: data,
 			 }).done(function(xml){
 						var str = $(xml).find("str").text();
@@ -4056,8 +4001,8 @@ $(function() {
 
 						if(str == "follow")
 						{
-								//$(obj).css('background-color', '#fff');
-								$(obj).animate({backgroundColor: '#e3e3e3', color: '#000'}, 'fast');
+							//$(obj).css('background-color', '#fff');
+							$(obj).animate({backgroundColor: '#e3e3e3', color: '#000'}, 'fast');
 						}
 						else if(str == "followed")
 						{
@@ -4079,7 +4024,7 @@ $(function() {
 
 			$.ajax({
 					type: "POST",
-					url: "complex_search.php",
+					url: "cgi/complex_search.php",
 					data: data,
 					dataType: 'json',
 
@@ -4169,7 +4114,7 @@ $(function() {
 										/////////////////////////////////////////////////
 										innerHTML += '<div class="spec_item">' + '<div class="spec_title"><svg class="spec_item_alc1616"><use xlink:href="#alc1616"/></svg>Alc度数</div>' + '<div class="spec_info">';
 
-											if(sake[i].alcohol_level != undefined && sake[i].alcohol_level != null && sake[i].alcohol_level != "") {
+											if(sake[i].alcohol_level != 'undefined' && sake[i].alcohol_level != null && sake[i].alcohol_level != "") {
 												var alcohol_array = sake[i].alcohol_level.split(',');
 												if(alcohol_array.length == 1) {
 													innerHTML += alcohol_array[0] + '%';
@@ -4195,7 +4140,7 @@ $(function() {
 										innerHTML += '<div class="spec_title"><img src="images/icons/sando.svg">酸度</div>';
 										innerHTML += '<div class="spec_info">';
 
-										if(sake[i].oxidation_level != null && sake[i].oxidation_level != undefined && sake[i].oxidation_level != "") {
+										if(sake[i].oxidation_level != null && sake[i].oxidation_level != 'undefined' && sake[i].oxidation_level != "") {
 											var oxidation_level = "" + sake[i].oxidation_level + " ";
 											var oxidation_array = oxidation_level.split(',');
 
@@ -4257,7 +4202,7 @@ $(function() {
 										innerHTML += '<div class="spec_title"><svg class="spec_item_cleanedrice1616"><use xlink:href="#cleanedrice1616"/></svg>精米歩合</div>';
 										innerHTML += '<div class="spec_info">';
 
-											if(sake[i].seimai_rate && sake[i].seimai_rate != undefined && sake[i].seimai_rate != "") {
+											if(sake[i].seimai_rate && sake[i].seimai_rate != 'undefined' && sake[i].seimai_rate != "") {
 												var seimai_array = sake[i].seimai_rate.split(',');
 												var rice_array = [];
 
@@ -4593,16 +4538,16 @@ $(function() {
 			if($('#sake_input').val())
 				data += '&keyword=' + $('#sake_input').val();
 
-			if($('#hidden_form input[name="orderby"]').val() != "" && $('#hidden_form input[name="orderby"]').val() != undefined)
+			if($('#hidden_form input[name="orderby"]').val() != "" && $('#hidden_form input[name="orderby"]').val() != 'undefined')
 				data += '&orderby=' + $('#hidden_form input[name="orderby"]').val();
 
-			if($('#hidden_form input[name="desc"]').val() != "" && $('#hidden_form input[name="desc"]').val() != undefined)
+			if($('#hidden_form input[name="desc"]').val() != "" && $('#hidden_form input[name="desc"]').val() != 'undefined')
 				data += '&desc=' + $('#hidden_form input[name="desc"]').val();
 
-			if($('#sakagura_sidebar_form select[name="sakagura_pref"]').val() != "" && $('#sakagura_sidebar_form select[name="sakagura_pref"]').val() != undefined)
+			if($('#sakagura_sidebar_form select[name="sakagura_pref"]').val() != "" && $('#sakagura_sidebar_form select[name="sakagura_pref"]').val() != 'undefined')
 				data += '&pref=' + $('#sakagura_sidebar_form select[name="sakagura_pref"]').val();
 
-			if($('#sakagura_sidebar_form select[name="observation"]').val() != "" && $('#sakagura_sidebar_form select[name="observation"]').val() != undefined)
+			if($('#sakagura_sidebar_form select[name="observation"]').val() != "" && $('#sakagura_sidebar_form select[name="observation"]').val() != 'undefined')
 				data += '&observation=' + $('#sakagura_sidebar_form select[name="observation"]').val();
 
 			if(in_disp_to && in_disp_to > 0) {
@@ -4613,10 +4558,10 @@ $(function() {
 				data += "&page=" + page;
 			}
 
-			//if($('#sakagura_sidebar_form input[name="from"]').val() != "" && $('#sakagura_sidebar_form input[name="from"]').val() != undefined)
+			//if($('#sakagura_sidebar_form input[name="from"]').val() != "" && $('#sakagura_sidebar_form input[name="from"]').val() != 'undefined')
 			//	data += '&from=' + $('#sakagura_sidebar_form input[name="from"]').val();
 
-			//if($('#sakagura_sidebar_form input[name="to]').val() != "" && $('#sakagura_sidebar_form input[name="to"]').val() != undefined)
+			//if($('#sakagura_sidebar_form input[name="to]').val() != "" && $('#sakagura_sidebar_form input[name="to"]').val() != 'undefined')
 			//	data += '&to=' + $('#sakagura_sidebar_form input[name="to"]').val();
 
 			return data;
@@ -4705,7 +4650,7 @@ $(function() {
 
 				$.ajax({
 						type: "POST",
-						url: "complex_search.php",
+						url: "cgi/complex_search.php",
 						data: data,
 						dataType: 'json',
 
@@ -5202,7 +5147,7 @@ $(function() {
 
 				$.ajax({
 						type: "POST",
-						url: "complex_search.php",
+						url: "cgi/complex_search.php",
 						data: data,
 						dataType: 'json',
 
@@ -5366,7 +5311,7 @@ jQuery(document).ready(function($) {
 			}
 
 			// sake_category
-			if($('#container').data('sake_category') != null && $('#container').data('sake_category') != undefined) {
+			if($('#container').data('sake_category') != null && $('#container').data('sake_category') != 'undefined') {
 
 				var sake_category = $('#container').data('sake_category').split(',');
 
@@ -5425,7 +5370,7 @@ jQuery(document).ready(function($) {
 
 			var observation = <?php echo json_encode($_GET['observation']); ?>;
 
-			if(observation != "" && observation != undefined)
+			if(observation != "" && observation != 'undefined')
 				$('#sakagura_sidebar_form input[name="observation"]').data('checked', observation);
 
 			$('#submit_sakagura_search').addClass("sakagura_accordion");
@@ -5476,7 +5421,7 @@ jQuery(document).ready(function($) {
 		{
 			var syuhanten_pref = <?php echo json_encode($_GET['syuhanten_pref']); ?>;
 
-			if(syuhanten_pref != "" && syuhanten_pref != undefined)
+			if(syuhanten_pref != "" && syuhanten_pref != 'undefined')
 			{
 				$('#syuhanten_sidebar_form .dialog_sidebar:nth(0)').find('ul li').each(function() {
 
@@ -5538,7 +5483,7 @@ jQuery(document).ready(function($) {
 		$(window).on('popstate', function(event) {
 
 				var state = event.originalEvent.state;
-				var keyword = (state.keyword != undefined) ? keyword : "";
+				var keyword = (state.keyword != 'undefined') ? keyword : "";
 
 				//alert("category:" + state.category + " popstate1b:" + category + " pop state:" + state.url + " from:" + state.from + " to:" + state.to);
 
@@ -5547,7 +5492,7 @@ jQuery(document).ready(function($) {
 					var data = "category=" + state.category;
 					var pagenum = state.from / 25;
 
-					if(state.keyword != "" && state.keyword != undefined)
+					if(state.keyword != "" && state.keyword != 'undefined')
 						data += "&keyword=" + state.keyword;
 
 					data += "&from=" + state.from + "&to=" + state.to + "&count_query=1";
@@ -5579,27 +5524,27 @@ jQuery(document).ready(function($) {
 					var pagenum = state.from / 25;
 					var data = "category=" + state.category;
 
-					if(state.keyword && state.keyword != undefined)
+					if(state.keyword && state.keyword != 'undefined')
 						data += "&keyword=" + state.keyword;
 
-					if(state.pref && state.pref != undefined)
+					if(state.pref && state.pref != 'undefined')
 						data += "&pref=" + state.pref;
 
-					if(state.special_name && state.special_name != undefined)
+					if(state.special_name && state.special_name != 'undefined')
 						data += "&special_name=" + state.special_name;
 
-					if(state.rice_used && state.rice_used != undefined)
+					if(state.rice_used && state.rice_used != 'undefined')
 						data += "&rice_used=" + state.rice_used;
 
 					data += "&from=" + state.from + "&to=" + state.to + "&count_query=1";
 
-					if(state.pref && state.pref != undefined)
+					if(state.pref && state.pref != 'undefined')
 						 $('#sake_sidebar_form select[name="pref"]').val(state.pref);
 
-					if(state.special_name && state.special_name != undefined)
+					if(state.special_name && state.special_name != 'undefined')
 						 $('#sake_sidebar_form select[name="special_name"]').val(state.special_name);
 
-					if(state.rice_used && state.rice_used != undefined)
+					if(state.rice_used && state.rice_used != 'undefined')
 						 $('#sake_sidebar_form select[name="rice_used"]').val(state.rice_used);
 
 					$('#tab_accordion ul').find(".active").removeClass('active');
@@ -5625,18 +5570,18 @@ jQuery(document).ready(function($) {
 					var pagenum = state.from / 25;
 					var data = "category=" + state.category;
 
-					if(state.keyword && state.keyword != undefined)
+					if(state.keyword && state.keyword != 'undefined')
 						data += "&keyword=" + state.keyword;
 
-					if(state.pref && state.pref != undefined)
+					if(state.pref && state.pref != 'undefined')
 						data += "&pref=" + state.pref;
 
-					if(state.observation && state.observation != undefined)
+					if(state.observation && state.observation != 'undefined')
 						data += "&observation=" + state.observation;
 
 					data += "&from=" + state.from + "&to=" + state.to + "&count_query=1";
 
-					if(state.pref && state.pref != undefined)
+					if(state.pref && state.pref != 'undefined')
 						$('#sakagura_sidebar_form select[name="sakagura_pref"]').val(state.pref);
 
 					$('#tab_accordion ul').find(".active").removeClass('active');

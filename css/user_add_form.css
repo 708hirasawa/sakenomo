@@ -155,11 +155,6 @@
   border: 1px solid #d2d2d2;
 }
 
-#email_verify {
-  color: #cd0000;
-  margin-top: 8px;
-}
-
 /************************************************************/
 .registry_user_button_container {
   display: flex;

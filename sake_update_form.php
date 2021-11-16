@@ -474,15 +474,15 @@ else
 		 
 		  $.ajax({
 				type: "post",
-				url: "sake_update.php?id=<?php print($_GET['sakeid']);?>",
+				url: "cgi/sake_update.php?id=<?php print($_GET['sakeid']);?>",
 				data: data,
 		  }).done(function(xml){
-			  var str = $(xml).find("str").text();
-			  //alert(str);
-      
-			  if(str == "success")
+				var str = $(xml).find("str").text();
+				//alert(str);
+
+				if(str == "success")
 				  window.open('./sake/sake_view.php?sake_id=<?php print($_GET['sakeid']);?>', '_self');
-			  else
+				else
 				  $("#sample1").text(str);
 		  }).fail(function(data){
 			  //alert("This is Error");

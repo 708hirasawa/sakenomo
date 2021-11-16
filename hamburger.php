@@ -62,6 +62,7 @@ function write_side_menu()
         print('<a href="#" class="fa fa-fw fa-folder"><div class="img-container"><svg class="mobile_mail2620"><use xlink:href="#mail2620"/></svg></div><span>メッセージ</span>');
         print('</a>');
       print('</li>');*/
+
       print('<li class="sidebar-item">');
         print('<a href="about_sakenomo.php"><span class="about_sakenomo_text">Sakenomoについて</span>');
         print('</a>');

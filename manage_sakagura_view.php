@@ -331,7 +331,6 @@ require_once("html_disp.php");
 	///////////////////////////////////////
 	///////////////////////////////////////
 
-
 	if(!$db = opendatabase("sake.db"))
 	{
 		die("データベース接続エラー .<br />");
@@ -531,7 +530,7 @@ require_once("html_disp.php");
 	print("</div>");
 
 	//print("<hr>");
-	//print("<img src=\"drinksake.gif\" id=\"logoimage\" Title=\"Sake and Sakagura Listings\" alt=\"Sake and Sakagura Listings sakenomu.com\">");
+	//print("<img src=\"drinksake.gif\" id=\"logoimage\" Title=\"Sake and Sakagura Listings\" alt=\"Sake and Sakagura Listings sakenomo.com\">");
 
 	?>
 
@@ -544,7 +543,7 @@ jQuery(document).ready(function($) {
 	$('#dialog_edit_sake').css({"display":"none"});
 
 
-//		alert("create tab");
+	// alert("create tab");
 	$('#tab_main').createTabs({
 			text : $('#tab_main ul')
 	});
@@ -649,12 +648,12 @@ $(function() {
 
 	// Loadingイメージ表示関数
 	function dispLoading(){
-			 $("#loading").css({"visibility": "visible"});
+		$("#loading").css({"visibility": "visible"});
 	}
 
 	// Loadingイメージ削除関数
 	function removeLoading(){
-			 $("#loading").css({"visibility": "hidden"});
+		$("#loading").css({"visibility": "hidden"});
 	}
 });
 
@@ -686,14 +685,13 @@ $(function() {
 		alert("user_edit");
 
 	});
-
 });
 
 
 $(function() {
 
 	/////////////////////////////////////////////////////////////////////////////
-  // 酒検索
+	// 酒検索
   $(document).on('keyup', '.sake_input', function(){
 
     var inputText = $(this).val().replace(/　/g, ' ');
@@ -701,32 +699,31 @@ $(function() {
     var search_type = 1;
     var search_limit = 24;
     var data = "search_type=" + search_type + "&search_limit=" + search_limit + "&search_text=" + inputText;
-		//var sake_content = $(this).parent().next('.sake_content');
-		var sake_content = $(this).parent().parent().find('.sake_content');
+	var sake_content = $(this).parent().parent().find('.sake_content');
 
     $(".sake_content").css({"visibility": "hidden"})
     $(".sake_content").empty();
 
-	  if(count >= 1)
+	if(count >= 1)
     {
         $.ajax({
             type: "POST",
-            url: "auto_complete.php",
-						data: data,
+            url: "cgi/auto_complete.php",
+			data: data,
             dataType: 'json',
 
         }).done(function(data){
 
             //alert("succeded:" + data + "length:" + data.length);
             $('.sake_content').empty();
-						//alert("obj:" + obj);
+			//alert("obj:" + obj);
 
             for(var i = 0; i < data.length; i++)
             {
                 //var retobj = $('.sake_content').append('<li class="message_class" data-sake_id=' + data[i].sake_id + ' data-sake_name=' + data[i].sake_name + ' data-sakagura_name=' + data[i].sakagura_name + '><img src="images/icons/noimage80.svg">' + data[i].sake_name + '</li>');
-								//$(retobj).data('sake_name', data[i].sake_name);
-								sake_content.append('<li class="message_class" data-sake_id=' + data[i].sake_id + ' data-sake_name=' + data[i].sake_name + ' data-sakagura_name=' + data[i].sakagura_name + '><img src="images/icons/noimage80.svg">' + data[i].sake_name + '</li>');
-						 }
+				//$(retobj).data('sake_name', data[i].sake_name);
+				sake_content.append('<li class="message_class" data-sake_id=' + data[i].sake_id + ' data-sake_name=' + data[i].sake_name + ' data-sakagura_name=' + data[i].sakagura_name + '><img src="images/icons/noimage80.svg">' + data[i].sake_name + '</li>');
+			}
 
             if($(".sake_input").val().length > 0)
                 $(".sake_content").css({"visibility": "visible"});
@@ -747,130 +744,127 @@ $(function() {
       window.open('sake_view.php?sake_id=' + sake_id, '_self');
   });
 
-  $(document).on('click', '.sake_content .message_class', function(){
+  $(document).on('click', '.sake_content .message_class', function() {
 
-			$('.manage_sake_search_container').css({"display":"none"});
-			$('.sake_container').css({"display":"block"});
-			$("body").trigger( "open_edit_sake", [ $(this).data('sake_id'), $(this).data('sake_name') ] );
+		$('.manage_sake_search_container').css({"display":"none"});
+		$('.sake_container').css({"display":"block"});
+		$("body").trigger( "open_edit_sake", [ $(this).data('sake_id'), $(this).data('sake_name') ] );
 	});
 });
 
-
 $(function() {
 
-	/////////////////////////////////////////////////////////////////////////////
-  // 酒蔵検索
-  $(document).on('keyup', '#sakagura_input', function(){
+		/////////////////////////////////////////////////////////////////////////////
+		// 酒蔵検索
+		$(document).on('keyup', '#sakagura_input', function(){
 
-    var inputText = $("#sakagura_input").val();
-    var count = inputText.length;
-    var search_type = 2;
-    var search_limit = 24;
-    var data = "search_type=" + search_type + "&search_limit=" + search_limit + "&search_text=" + inputText;
+		var inputText = $("#sakagura_input").val();
+		var count = inputText.length;
+		var search_type = 2;
+		var search_limit = 24;
+		var data = "search_type=" + search_type + "&search_limit=" + search_limit + "&search_text=" + inputText;
 
-    $("#sakagura_content").css({"visibility": "hidden"})
-    $("#sakagura_content").empty();
+		$("#sakagura_content").css({"visibility": "hidden"})
+		$("#sakagura_content").empty();
 		//alert("count:" + count);
 
-	  if(count >= 1)
-    {
-        $.ajax({
-            type: "POST",
-            url: "auto_complete.php",
-						data: data,
-            dataType: 'json',
+		if(count >= 1)
+		{
+			$.ajax({
+				type: "POST",
+				url: "cgi/auto_complete.php",
+				data: data,
+				dataType: 'json',
 
-        }).done(function(data){
+			}).done(function(data){
 
-            //alert("succeded:" + data + "length:" + data.length);
-            $('.sake_content').empty();
+				//alert("succeded:" + data + "length:" + data.length);
+				$('.sake_content').empty();
 
-            for(var i = 0; i < data.length; i++)
-            {
-                var retobj = $('#sakagura_content').append('<li class="message_class" data-sakagura_id=' + data[i].sake_id + ' data-sakagura_name=' + data[i].sake_name + '><img src="images/icons/noimage80.svg">' + data[i].sake_name + '</li>');
-            }
+				for(var i = 0; i < data.length; i++)
+				{
+					var retobj = $('#sakagura_content').append('<li class="message_class" data-sakagura_id=' + data[i].sake_id + ' data-sakagura_name=' + data[i].sake_name + '><img src="images/icons/noimage80.svg">' + data[i].sake_name + '</li>');
+				}
 
-            if($("#sakagura_input").val().length > 0)
-                $("#sakagura_content").css({"visibility": "visible"});
+				if($("#sakagura_input").val().length > 0)
+					$("#sakagura_content").css({"visibility": "visible"});
 
-        }).fail(function(data){
-            alert("Failed:" + data);
-        });
-    }
-    else
-    {
-        $('#sakagura_content').empty();
-    }
-  }); // keyup
+			}).fail(function(data){
+				alert("Failed:" + data);
+			});
+		}
+		else
+		{
+			$('#sakagura_content').empty();
+		}
+	}); // keyup
 
-  $(document).on('click', '#sakagura_content .message_class', function(){
+  $(document).on('click', '#sakagura_content .message_class', function() {
 
-			//alert("sakagura:" + $(this).data('sakagura_name'));
-			//alert("id:" + $(this).data('sakagura_id'));
+		//alert("sakagura:" + $(this).data('sakagura_name'));
+		//alert("id:" + $(this).data('sakagura_id'));
 
-			$('.manage_sakagura_search_container').css({"display":"none"});
-			$('#sakagura_container').css({"display":"block"});
+		$('.manage_sakagura_search_container').css({"display":"none"});
+		$('#sakagura_container').css({"display":"block"});
 
-			$("body").trigger( "open_edit_sakagura", [ $(this).data('sakagura_id'), $(this).data('sakagura_name') ] );
+		$("body").trigger( "open_edit_sakagura", [ $(this).data('sakagura_id'), $(this).data('sakagura_name') ] );
 	});
 });
-
 
 $(function() {
 
 	/////////////////////////////////////////////////////////////////////////////
-  // ユーザー検索
-  $(document).on('keyup', '#user_input', function(){
+	// ユーザー検索
+	$(document).on('keyup', '#user_input', function(){
 
-    var inputText = $("#user_input").val();
-    var count = inputText.length;
-    var search_type = 4;
-    var search_limit = 24;
-    var data = "search_type=" + search_type + "&search_limit=" + search_limit + "&search_text=" + inputText;
+		var inputText = $("#user_input").val();
+		var count = inputText.length;
+		var search_type = 4;
+		var search_limit = 24;
+		var data = "search_type=" + search_type + "&search_limit=" + search_limit + "&search_text=" + inputText;
 
-    $("#user_content").css({"visibility": "hidden"})
-    $("#user_content").empty();
+		$("#user_content").css({"visibility": "hidden"})
+		$("#user_content").empty();
 
-	  if(count >= 1)
-    {
-        $.ajax({
-            type: "POST",
-            url: "auto_complete.php",
-						data: data,
-            dataType: 'json',
+		if(count >= 1)
+		{
+			$.ajax({
+				type: "POST",
+				url: "cgi/auto_complete.php",
+				data: data,
+				dataType: 'json',
 
-        }).done(function(data){
+			}).done(function(data){
 
-            //alert("succeded:" + data + "length:" + data.length);
-            $('.sake_content').empty();
+				//alert("succeded:" + data + "length:" + data.length);
+				$('.sake_content').empty();
 
-            for(var i = 0; i < data.length; i++)
-            {
-                var retobj = $('#user_content').append('<li class="message_class" data-username=' + data[i].username + ' data-lname=' + data[i].lname + ' data-fname=' + data[i].fname + '><img src="images/icons/noimage80.svg">' + data[i].username + '</li>');
-            }
+				for(var i = 0; i < data.length; i++)
+				{
+					var retobj = $('#user_content').append('<li class="message_class" data-username=' + data[i].username + ' data-lname=' + data[i].lname + ' data-fname=' + data[i].fname + '><img src="images/icons/noimage80.svg">' + data[i].username + '</li>');
+				}
 
-            if($("#user_input").val().length > 0)
-                $("#user_content").css({"visibility": "visible"});
+				if($("#user_input").val().length > 0)
+					$("#user_content").css({"visibility": "visible"});
 
-        }).fail(function(data){
-            alert("Failed:" + data);
-        });
-    }
-    else
-    {
-        $('#user_content').empty();
-    }
+			}).fail(function(data){
+				alert("Failed:" + data);
+			});
+		}
+		else
+		{
+			$('#user_content').empty();
+		}
   }); // keyup
 
-  $(document).on('click', '#user_content .message_class', function(){
+  $(document).on('click', '#user_content .message_class', function() {
+		//alert("user:" + $(this).data('username'));
+		//alert("id:" + $(this).data('sakagura_id'));
 
-			//alert("user:" + $(this).data('username'));
-			//alert("id:" + $(this).data('sakagura_id'));
+		$('#manage_users_search_container').css({"display":"none"});
+		$('#user_container').css({"display":"block"});
 
-			$('#manage_users_search_container').css({"display":"none"});
-			$('#user_container').css({"display":"block"});
-
-			$("body").trigger( "open_edit_user", [ $(this).data('username'), $(this).data('fname') ] );
+		$("body").trigger( "open_edit_user", [ $(this).data('username'), $(this).data('fname') ] );
 	});
 });
 

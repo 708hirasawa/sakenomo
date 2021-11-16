@@ -31,6 +31,16 @@ require_once("searchbar.php");
 	<script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="rateyo/jquery.rateyo.js"></script>
 	<script type="text/javascript" src="slick/slick.min.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-1X2ZRV0BES');
+	</script>
 </head>
 
 <body>
@@ -224,7 +234,7 @@ require_once("searchbar.php");
 			}
 			else if($category_code == "44")
 			{
-				// 樽酒
+				// 木桶仕込
 				$path = '<use xlink:href="#taru4040"/>';
 				return $path;
 			}
@@ -385,7 +395,7 @@ require_once("searchbar.php");
 			}
 			else if($category_code == "44")
 			{
-				$retval = "樽酒";
+				$retval = "木桶仕込";
 				return $retval;
 			}
 			else if($category_code == "45")
@@ -1342,7 +1352,7 @@ require_once("searchbar.php");
 													print('<div>'.$category_array[$j + 1].'</div></li>');
 													$j++;
 												}
-												else if($category_array[$j] != undefined && $category_array[$j] != "")
+												else if($category_array[$j] != 'undefined' && $category_array[$j] != "")
 												{
 													print('<li>');
 														print('<svg  version="1.1" id="sparkling" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="40" height="40" viewBox="0 0 40 40">' .GetSakeCategoryImage($category_array[$j]) .'</svg>');
@@ -1413,7 +1423,7 @@ require_once("searchbar.php");
 					////////////////////////////////////////
 					print('<div id="review" class="form-action hide">');
 
-						$sql = "SELECT COUNT(*) FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '')";
+						$sql = "SELECT COUNT(*) FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.username = TABLE_NONDA.contributor AND (subject != '' OR message != '')";
 						$res = executequery($db, $sql);
 						$record = getnextrow($res);
 						$count_result = $record["COUNT(*)"];
@@ -1461,7 +1471,7 @@ require_once("searchbar.php");
 								}
 							print('</div>');
 
-							$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.username = TABLE_NONDA.contributor AND (subject IS NOT '' OR message IS NOT '') ORDER BY update_date DESC LIMIT	" .$in_disp_from .", " .$p_max;
+							$sql = "SELECT * FROM TABLE_NONDA, USERS_J WHERE sake_id = '$sake_id' AND committed = 1 AND USERS_J.username = TABLE_NONDA.contributor AND (subject != '' OR message != '') ORDER BY update_date DESC LIMIT	" .$in_disp_from .", " .$p_max;
 							//print("sql:" .$sql);
 
 							$result = executequery($db, $sql);
@@ -1513,7 +1523,7 @@ require_once("searchbar.php");
 										print('</div>');
 										////////////////////////////////////////
 										////////////////////////////////////////
-										$rank_width = (($record[rank] / 5) * 100) .'%';
+										$rank_width = (($record['rank'] / 5) * 100) .'%';
 										print('<div class="nonda_rank">');
 											print('<div class="review_star_rating">');
 												print('<div class="review_star_rating_front" style="width:' .$rank_width. '">★★★★★</div>');
@@ -2077,9 +2087,9 @@ require_once("searchbar.php");
 				print('</div>');
 
 				print('<div class="sns_buttons_container">');
-					print('<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="'.stripslashes($row["sake_name"]).' / Sakenomo" data-url="https://sakenomo.xsrv.jp/sakenomo/sake_view.php?sake_id='.$sake_id.'" data-lang="en" data-show-count="false"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
-					print('<div class="fb-share-button" data-href="https://sakenomo.xsrv.jp/sakenomo/sake_view.php?sake_id='.$sake_id.'" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdrinksake.xsrv.jp%2Fhirasawa%2Fsake_view.php%3Fsake_id%3DA1010855763%23top&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>');
-					print('<div class="line-it-button" data-lang="ja" data-type="share-b" data-ver="3" data-url="https://sakenomo.xsrv.jp/sakenomo/sake_view.php?sake_id='.$sake_id.'" data-color="default" data-size="small" data-count="false" style="display: none;"></div><script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>');
+					print('<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="'.stripslashes($row["sake_name"]).' / Sakenomo" data-url="https://sakenomo.com/sake_view.php?sake_id='.$sake_id.'" data-lang="en" data-show-count="false"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
+					print('<div class="fb-share-button" data-href="https://sakenomo.com/sake_view.php?sake_id='.$sake_id.'" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdrinksake.xsrv.jp%2Fhirasawa%2Fsake_view.php%3Fsake_id%3DA1010855763%23top&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>');
+					print('<div class="line-it-button" data-lang="ja" data-type="share-b" data-ver="3" data-url="https://sakenomo.com/sake_view.php?sake_id='.$sake_id.'" data-color="default" data-size="small" data-count="false" style="display: none;"></div><script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>');
 				print('</div>');
 
 				////////////////////////////////////////
@@ -2368,7 +2378,7 @@ require_once("searchbar.php");
 							print('<div class="sakecolumn1">おすすめの飲み方</div>');
 							print('<div class="sakecolumn2" id="recommended_drink">');
 
-								if($row["recommended_drink"] && $row["recommended_drink"] != undefined)
+								if($row["recommended_drink"] && $row["recommended_drink"] != 'undefined')
 								{
 									$drink_array = explode(',', $row["recommended_drink"]);
 									$i;
@@ -2911,7 +2921,7 @@ $(function() {
 
 		$.ajax({
 				type: "POST",
-				url: "nonda_list.php",
+				url: "cgi/nonda_list.php",
 				data: data,
 				dataType: 'json',
 
@@ -2973,7 +2983,7 @@ $(function() {
 						innerText += '</div>';
 
 						if(sake[i].rank) {
-							innerText += '<span class="review_sake_rate">' + sake[i].rank.toFixed(1) + '</span>';
+							innerText += '<span class="review_sake_rate">' + parseFloat(sake[i].rank).toFixed(1) + '</span>';
 						} else {
 							innerText += '<span class="review_sake_rate" style="color: #b2b2b2">--</span>';
 						}
@@ -3749,7 +3759,7 @@ $(function() {
 
 		$.ajax({
 			type: "POST",
-			url: "sake_photo.php",
+			url: "cgi/sake_photo.php",
 			data: data,
 			dataType: 'json',
 
@@ -3770,11 +3780,11 @@ $(function() {
 
 			for(i = 0; i < photos.length; i++)
 			{
-					var path = "images\\photo\\" + photos[i].filename;
-					//innerHTML += '<div class="sake_photo"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
-					//innerHTML += '<div class="sake_photo"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
+				var path = "images\\photo\\" + photos[i].filename;
+				//innerHTML += '<div class="sake_photo"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
+				//innerHTML += '<div class="sake_photo"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
 
-					innerHTML += '<div class="sake_photo" data-filename="' + photos[i].filename + '" data-contributor="' + photos[i].contributor + '" data-nickname="' + photos[i].nickname + '" data-desc="' + photos[i].desc + '"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
+				innerHTML += '<div class="sake_photo" data-filename="' + photos[i].filename + '" data-contributor="' + photos[i].contributor + '" data-nickname="' + photos[i].nickname + '" data-desc="' + photos[i].desc + '"><img src="' + path  + '"><span>' + photos[i].nickname + '</span></div>';
 			}
 
 			$('#photoframe').html(innerHTML);
@@ -3910,7 +3920,7 @@ $(function() {
 
         $.ajax({
             type: "post",
-			url: "sake_update.php?id=<?php print($_GET['sake_id']);?>",
+			url: "cgi/sake_update.php?id=<?php print($_GET['sake_id']);?>",
 			data: data,
         }).done(function(xml){
             var str = $(xml).find("str").text();
@@ -4023,12 +4033,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	$("#showpic").click(function() {
-		var sake_id = $(this).attr('sake_id');
-		var sake_name = $('#sake_name').text();
-		window.open('sake_image.php?sake_id=' + sake_id + '&data_type=sake&title=' + sake_name, '_self');
-	});
-
 	$('#add_sake').click(function() {
 		//alert("add sake");
 		var sakagura_id = $(this).attr('sakagura_id');
@@ -4056,7 +4060,7 @@ jQuery(document).ready(function($) {
 
 		 $.ajax({
 				type: "post",
-				url: "sake_follow.php?sake_id=<?php print($_GET['sake_id']);?>",
+				url: "cgi/sake_follow.php?sake_id=<?php print($_GET['sake_id']);?>",
 				data: data,
 		 }).done(function(xml){
 				var str = $(xml).find("str").text();
@@ -4068,7 +4072,7 @@ jQuery(document).ready(function($) {
 				//alert("success:" + str);
 				//alert("count:" + count);
 
-				if(str == "follow")
+				if(str == "unfollowed")
 				{
 					//$("#personal .follow").animate({ backgroundColor: 'linear-gradient(#e6e6e6, #ffffff)', color: '#666666'}, 'slow');
 					$("#personal .follow").css('background', 'linear-gradient(#e6e6e6, #ffffff)');

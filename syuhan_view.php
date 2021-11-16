@@ -71,21 +71,21 @@ if($row)
 {
   print('<input type="hidden" id="hidden_syuhanten_id" value="' .$row["syuhanten_id"]  .'">');
   print('<input type="hidden" id="hidden_syuhanten_country" value="' .$row["syuhanten_country"]  .'">');
-  print('<input type="hidden" id="hidden_syuhanten_region"  value="' .$row["syuhanten_region"]   .'">');
+  print('<input type="hidden" id="hidden_syuhanten_region"  value="' .$row["syuhanten_region"]  .'">');
   print('<input type="hidden" id="hidden_syuhanten_develop" value="' .$row["syuhanten_develop"]  .'">');
-  print('<input type="hidden" id="hidden_syuhanten_rank"    value="' .$row["syuhanten_rank"]     .'">');
+  print('<input type="hidden" id="hidden_syuhanten_rank"    value="' .$row["syuhanten_rank"]   .'">');
   print('<input type="hidden" id="hidden_syuhanten_address" value="' .stripslashes($row["syuhanten_address"])  .'">');
-  print('<input type="hidden" id="hidden_syuhanten"					value="' .$row["syuhanten"] .'">');
-  print('<input type="hidden" id="hidden_syuhanten_sake"		value="' .$row["syuhanten_sake"] .'">');
+  print('<input type="hidden" id="hidden_syuhanten" value="' .$row["syuhanten"] .'">');
+  print('<input type="hidden" id="hidden_syuhanten_sake"	value="' .$row["syuhanten_sake"] .'">');
 
   print('<div id="syuhantable">');
 		print('<div id="syuhantentitle" class="syuhantenRow" style="border:0px solid #c6c6c6; background:#fff">');
 			 print('<div id="syuhanpanel1">');
 
-					// 酒販店名
-					print('<div id="syuhanten_name" style="font-size:16px; font-weight: bold; color:#000">' .$row["syuhanten_name"] .'</div>');
-					print('<div id="syuhanten_read" style="margin-top:4px; font-size:12px; color: #000">' .stripslashes($row["syuhanten_read"]) .'</div>');
-					print('<div id="syuhanten_english" style="margin-top:4px; font-size:12px; color: #000">' .stripslashes($row["syuhanten_english"]) .'</div>');
+				// 酒販店名
+				print('<div id="syuhanten_name" style="font-size:16px; font-weight: bold; color:#000">' .$row["syuhanten_name"] .'</div>');
+				print('<div id="syuhanten_read" style="margin-top:4px; font-size:12px; color: #000">' .stripslashes($row["syuhanten_read"]) .'</div>');
+				print('<div id="syuhanten_english" style="margin-top:4px; font-size:12px; color: #000">' .stripslashes($row["syuhanten_english"]) .'</div>');
 
 			print("</div>");
 
@@ -202,7 +202,6 @@ if($row)
 					print("</div>");
 
 				print('</div>');
-
 
 				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// 取扱い銘柄
@@ -724,20 +723,19 @@ writefooter();
 		<span style="position:absolute; top:0%; right:0%; margin:2px;"><button id="close_addimage_button" style="position:relative; background:#1F2735; box-shadow:1px 1px 1px -1px rgba(0,0,0,.9); top:-2; color:#fff; width:40px;">x</button></span>
 
 		<div id="dialog_addimage_container" style="position:relative; overflow:auto; padding:4px; height:92%; border:1px solid #626262;">
+			<center>
+			<div style="overflow:auto; width:70%; height:88%; margin:auto; border: 1px solid #ccc;">
+					<img style="position:relative; margin-top:18px; height:80%; width:auto; image-orientation:from-image; background: rgba(31, 39, 53);" src="" id="image">
+			</div>
 
-						<center>
-						<div style="overflow:auto; width:70%; height:88%; margin:auto; border: 1px solid #ccc;">
-								<img style="position:relative; margin-top:18px; height:80%; width:auto; image-orientation:from-image; background: rgba(31, 39, 53);" src="" id="image">
-						</div>
+			<progress style="width:70%; margin:auto" id="progressBar" value="0" max="100"></progress>
+			<div id="status"></div>
+			<div id="loaded_n_total"></div>
 
-						<progress style="width:70%; margin:auto" id="progressBar" value="0" max="100"></progress>
-						<div id="status"></div>
-						<div id="loaded_n_total"></div>
-
-						<input type="file" id="file1" onchange="handleFiles()">
-						<input type="button" id="submit" value="アップロード" onclick="uploadFile()">
-						<input type="button" id="edit_addimage_close" style="height:24px;" value="閉じる">
-						</center>
+			<input type="file" id="file1" onchange="handleFiles()">
+			<input type="button" id="submit" value="アップロード" onclick="uploadFile()">
+			<input type="button" id="edit_addimage_close" style="height:24px;" value="閉じる">
+			</center>
 		</div>
 </div>
 
@@ -829,24 +827,24 @@ $(function() {
 	});
 
 	$("#add_sake_close").click(function() {
-			$("#dialog_background").css({"display":"none"});
-			$("#dialog_add_sake").css({"display":"none"});
+		$("#dialog_background").css({"display":"none"});
+		$("#dialog_add_sake").css({"display":"none"});
 	});
 
 	$("#add_sake_content li").click(function () {
 
-			if($(this).hasClass("checked"))
-			{
-					$(this).removeClass("checked");
-					this.style.backgroundColor = "";
-					this.style.color = "#000"
-			}
-			else
-			{
-					$(this).addClass("checked");
-					this.style.backgroundColor = "#FFC88D";
-					this.style.color = "#404040"
-			}
+		if($(this).hasClass("checked"))
+		{
+				$(this).removeClass("checked");
+				this.style.backgroundColor = "";
+				this.style.color = "#000"
+		}
+		else
+		{
+				$(this).addClass("checked");
+				this.style.backgroundColor = "#FFC88D";
+				this.style.color = "#404040"
+		}
 	});
 
 	$("#add_sake_ok").click(function() {
@@ -863,15 +861,15 @@ $(function() {
 
 					if(jQuery.inArray($(this).attr('sake_id'), sake_array) < 0)
 					{
-							//alert("find the value " + $(this).attr('sake_id') + " in " + sake_ids + ":" + jQuery.inArray($(this).attr('sake_id'), sake_ids));
-							//sake_names.push($(this).find("span").text());
+						//alert("find the value " + $(this).attr('sake_id') + " in " + sake_ids + ":" + jQuery.inArray($(this).attr('sake_id'), sake_ids));
+						//sake_names.push($(this).find("span").text());
 
-							//alert("children:" + $(this).children('span:first').text());
-							//alert("sake_name:" + $(this).text());
+						//alert("children:" + $(this).children('span:first').text());
+						//alert("sake_name:" + $(this).text());
 
-							sake_ids.push($(this).attr('sake_id'));
-							sake_names.push($(this).text());
-							sake_images.push($(this).find("img").attr('src'));
+						sake_ids.push($(this).attr('sake_id'));
+						sake_names.push($(this).text());
+						sake_images.push($(this).find("img").attr('src'));
 					}
 			});
 
@@ -885,30 +883,30 @@ $(function() {
 
 				$.ajax({
 						type: "post",
-						url: "syuhan_update.php?id=<?php print($_GET['syuhanten_id']);?>",
+						url: "cgi/syuhan_update.php?id=<?php print($_GET['syuhanten_id']);?>",
 						data: data,
 				}).done(function(xml){
 						var str = $(xml).find("str").text();
 
 						if(str == "success")
 						{
-								//alert("success:" + $(xml).find("sql").text());
-								var path = "images/icons/NoPhotoSake.jpg";
+							//alert("success:" + $(xml).find("sql").text());
+							var path = "images/icons/NoPhotoSake.jpg";
 
-								for(var i = 0; i < sake_ids.length; i++)
-								{
-										//alert("sake_names[i]:" + sake_names[i]);
-										var innerHTML = '<div class="griditem" style="position:relative; float:left; height:200px; min-width:120px; margin:8px; padding:4px; background:#c6c6c6; border: 1px solid #c6c6c6;"><div style="position:relative;">' +
-												'<img style="height:180px; width:auto; border-radius: 6px; box-shadow: 1px 1px 1px -1px rgba(0,0,0,.9);" src="' + sake_images[i] + '">' +
-												'<button style="position:absolute; right:0px; top:0px; width:46; height:22" id="' + sake_ids[i] + '" class="navigate_button" sake_name = "' + sake_names[i] + '">削除</button>' +
-												'<span style="position:absolute; width:98%; left:0px; top:164px; background:#404040; color:fff">' + sake_names[i] + '</span>' +
-												'</div></div>';
+							for(var i = 0; i < sake_ids.length; i++)
+							{
+								//alert("sake_names[i]:" + sake_names[i]);
+								var innerHTML = '<div class="griditem" style="position:relative; float:left; height:200px; min-width:120px; margin:8px; padding:4px; background:#c6c6c6; border: 1px solid #c6c6c6;"><div style="position:relative;">' +
+										'<img style="height:180px; width:auto; border-radius: 6px; box-shadow: 1px 1px 1px -1px rgba(0,0,0,.9);" src="' + sake_images[i] + '">' +
+										'<button style="position:absolute; right:0px; top:0px; width:46; height:22" id="' + sake_ids[i] + '" class="navigate_button" sake_name = "' + sake_names[i] + '">削除</button>' +
+										'<span style="position:absolute; width:98%; left:0px; top:164px; background:#404040; color:fff">' + sake_names[i] + '</span>' +
+										'</div></div>';
 
-										$(innerHTML).hide().prependTo('#gridframe').fadeIn(900);
-										//$('#gridframe').prepend(innerHTML);
-								}
+								$(innerHTML).hide().prependTo('#gridframe').fadeIn(900);
+								//$('#gridframe').prepend(innerHTML);
+							}
 
-								$('#hidden_syuhanten_sake').val(sake_array);
+							$('#hidden_syuhanten_sake').val(sake_array);
 						}
 						else
 						{
@@ -946,10 +944,10 @@ $(function() {
 		if(count >= 1)
     {
         $.ajax({
-            type: "POST",
-            url: "auto_complete.php",
-			      data: data,
-            dataType: 'json',
+			type: "POST",
+			url: "cgi/auto_complete.php",
+			data: data,
+			dataType: 'json',
 
         }).done(function(data){
 
@@ -1077,9 +1075,9 @@ $(function() {
 				var data = "syuhanten_id=" +syuhanten_id + '&' + $("#form_edit_syuhanten").serialize();
 
 				$.ajax({
-							type: "post",
-							url: "syuhan_update.php?id=<?php print($_GET['syuhanten_id']);?>",
-							data: data,
+						type: "post",
+						url: "cgi/syuhan_update.php?id=<?php print($_GET['syuhanten_id']);?>",
+						data: data,
 				}).done(function(xml){
 						str = $(xml).find("str").text();
 						//alert("success:" + str);
@@ -1185,7 +1183,7 @@ $(function() {
 
       $.ajax({
           type: "post",
-          url: "sda_send_message.php",
+          url: "cgi/sda_send_message.php",
           data: data,
       }).done(function(xml){
           var str = $(xml).find("str").text();
@@ -1238,7 +1236,6 @@ $(function() {
 	});
 });
 
-
 function _(el){
   return document.getElementById(el);
 }
@@ -1287,7 +1284,6 @@ function uploadFile()
         // alert(file.name+" | "+file.size+" | "+file.type);
         var formdata = new FormData();
 
-        //window.open('sake_image.php?sake_id=' + sake_id + '&data_type=sake&title=' + sake_name, '_self');
         formdata.append("file1", file);
         formdata.append("id", $('#hidden_id').val());
         formdata.append("title", $('#hidden_title').val());
@@ -1380,7 +1376,7 @@ jQuery(document).ready(function(){
 
 		  $.ajax({
 					type: "post",
-					url: "syuhan_follow.php?syuhanten_id=<?php print($_GET['syuhanten_id']);?>",
+					url: "cgi/syuhan_follow.php?syuhanten_id=<?php print($_GET['syuhanten_id']);?>",
 					data: data,
 		  }).done(function(xml){
 					var str = $(xml).find("str").text();
@@ -1410,7 +1406,7 @@ jQuery(document).ready(function(){
 
 			  $.ajax({
 				  type: "post",
-				  url: "syuhan_dynamic_delete.php?id=<?php print($_GET['syuhanten_id']);?>",
+				  url: "cgi/syuhan_dynamic_delete.php?id=<?php print($_GET['syuhanten_id']);?>",
 				  data: data,
 			  }).done(function(xml){
 				  var str = $(xml).find("str").text();
@@ -1458,29 +1454,29 @@ jQuery(document).ready(function(){
 
 					$('#hidden_syuhanten_sake').val(sake_array);
 					data += "&syuhanten_sake=" + $('#hidden_syuhanten_sake').val();
-          //alert("data:" + data);
+			//alert("data:" + data);
 
-          $.ajax({
-              type: "post",
-							url: "syuhan_update.php?id=<?php print($_GET['syuhanten_id']);?>",
-              data: data,
-          }).done(function(xml){
-              var str = $(xml).find("str").text();
-							//alert("success");
+			$.ajax({
+				type: "post",
+				url: "cgi/syuhan_update.php?id=<?php print($_GET['syuhanten_id']);?>",
+				data: data,
+			}).done(function(xml){
+				var str = $(xml).find("str").text();
+				//alert("success");
 
-              if(str == "success")
-              {
-									$(obj).closest('div').parent().fadeOut();
-									//$(obj).closest('div').fadeOut();
-              }
-              else
-              {
-                  alert("SQL returned Failed:" +str);
-              }
-          }).fail(function(data){
-              var str = $(xml).find("str").text();
-              alert("Failed:" +str);
-          });
+					if(str == "success")
+					{
+						$(obj).closest('div').parent().fadeOut();
+						//$(obj).closest('div').fadeOut();
+					}
+					else
+					{
+					  alert("SQL returned Failed:" +str);
+					}
+				}).fail(function(data){
+					var str = $(xml).find("str").text();
+					alert("Failed:" +str);
+				});
 			}
    });
 
@@ -1550,39 +1546,6 @@ jQuery(document).ready(function(){
   $("ul#content").mouseleave(function () {
       $("#content").css({"visibility": "hidden"});
   });
-
-  function ScaleSlider() {
-	    var parentWidth = $(window).width();
-
-      if(parentWidth)
-      {
-					scaleNavigator(parentWidth);
-
-          if(parentWidth > 700)
-					{
-							if($('.hamburger').hasClass('is-open')) {
-								$('.overlay').hide();
-								$('.hamburger').removeClass('is-open');
-								$('.hamburger').addClass('is-closed');
-								$('#wrapper').toggleClass('toggled');
-								$('.header').toggleClass('toggled');
-							}
-					}
-
-					update_dialog("#dialog_add_sake");
-					update_dialog("#dialog_edit_syuhanten");
-					update_dialog("#dialog_syuhanten_bbs");
-					update_dialog("#dialog_send_syuhanten");
-      }
-      else
-          window.setTimeout(ScaleSlider, 30);
-
-  } // resize
-
-  ScaleSlider();
-  $(window).bind("load", ScaleSlider);
-  $(window).bind("resize", ScaleSlider);
-  $(window).bind("orientationchange", ScaleSlider);
 }); // jquery
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -331,7 +331,7 @@ jQuery(document).ready(function(){
 
             $.ajax({
                 type: "post",
-                url: "syuhan_add.php",
+                url: "cgi/syuhan_add.php",
                 data: data,
             }).done(function(xml){
                 var str = $(xml).find("str").text();

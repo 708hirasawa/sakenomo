@@ -9,7 +9,7 @@ require_once("searchbar.php");
 
 <html lang="ja">
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
@@ -22,6 +22,16 @@ require_once("searchbar.php");
 <script src="js/sakenomuui.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-1X2ZRV0BES');
+</script>
 </head>
 
 <body>
@@ -32,7 +42,6 @@ require_once("searchbar.php");
 	write_HamburgerLogo();
 	write_search_bar();
 
-	//$username = $_SESSION['loginname'];
 	$username = $_COOKIE['username'];
 
 	if(!$db = opendatabase("sake.db"))
@@ -53,17 +62,25 @@ require_once("searchbar.php");
 		return;
 	}
 
-	$imagefile = null;
-	$username = stripslashes($row["username"]);
-	$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
-	$result = executequery($db, $sql);
-	$rd = getnextrow($result);
+	///////////////////////////////////////////////////////////////////////////////
+	$path = "images/icons/noimage_user30.svg";
 
-	if($rd) {
-		$imagefile = $rd["filename"];
+	if($row['oauth_uid'] && ($row['picture'] && $row['picture'] != "")) {
+		$path = $_COOKIE['user_profile_image'];
 	}
+	else {
 
-	// $imagefile = $row["imagefile"];
+		$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
+		$result = executequery($db, $sql);
+		$rd = getnextrow($result);
+
+		if($rd) {
+			$imagefile = $rd["filename"];
+			$path = "images/profile/" .$imagefile;
+		}
+	}
+	///////////////////////////////////////////////////////////////////////////////
+
 	$username = stripslashes($row["username"]);
 	$nickname = stripslashes($row["nickname"]);
 	$fname = stripslashes($row["fname"]);
@@ -83,6 +100,13 @@ require_once("searchbar.php");
 	$address_disclose = $row["address_disclose"];
 	$certification_disclose = $row["certification_disclose"];
 	$introduction = stripslashes($row["introduction"]);
+
+	// twitterアカウント有無
+	if(!$nickname) {
+		if($row['oauth_uid'] && ($row['picture'] && $row['picture'] != "")) {
+			$nickname = $row["first_name"];
+		}
+	}
 
 	print('<input type="hidden" name="hidden_email" value=' .$email .'>');
 	print('<input type="hidden" name="hidden_username" value="' .$username .'">');
@@ -108,14 +132,12 @@ require_once("searchbar.php");
 	print('<div id="all_container">');
 
 		print('<div id="user_information">');
-			$path = "images/icons/noimage_user30.svg";
-			if($imagefile)
-				$path = "images/profile/" .$imagefile;
+
 			print('<div class="user_image_name_container">');
 				print('<div class="user_image_container">');
 					print('<img src=' .$path .'>');
 				print('</div>');
-				print('<div id="profile_name">' .$row["nickname"] .'</div>');
+				print('<div id="profile_name">' .$nickname .'</div>');
 
 			print('</div>');
 		print("</div>");
@@ -131,33 +153,37 @@ require_once("searchbar.php");
 
 			print('<div id="config_content">');
 
-				//写真//////////////////////////////////////////////////////////////////////////
-				print('<div class="config_item">');
-					print('<div class="config_item_title">プロフィール写真</div>');
-					print('<div class="profile_photo_container">');
-						print('<input type="file">');
-						print('<div class="profile_photo">');
-							print('<img src=' .$path .'>');
-							print('<progress class="profile_photo_progress" value="0" max="100"></progress>');
-							print('<div class="profile_status_total_container">');
-								print('<div class="profile_status">status</div>');
-								print('<div class="profile_total">total</div>');
+				// 写真 //////////////////////////////////////////////////////////////////////////
+				// twitterでログインした場合は非表示 ///////////////
+				if(!$row['oauth_uid']) {
+					print('<div class="config_item">');
+						print('<div class="config_item_title">プロフィール写真</div>');
+						print('<div class="profile_photo_container">');
+							print('<input type="file">');
+							print('<div class="profile_photo">');
+								print('<img src=' .$path .'>');
+								print('<progress class="profile_photo_progress" value="0" max="100"></progress>');
+								print('<div class="profile_status_total_container">');
+									print('<div class="profile_status">status</div>');
+									print('<div class="profile_total">total</div>');
+								print('</div>');
+								print('<div class="profile_photo_button_container">');
+									print('<input type="button" class="change_pic" value="+">');
+									print('<input type="button" class="remove_profile_pic" value="削除">');
+								print('</div>');
+								print('<input type="hidden" name="delete_image" value=0>');
+								print('<input type="file" id="file1">');
 							print('</div>');
-							print('<div class="profile_photo_button_container">');
-								print('<input type="button" class="change_pic" value="+">');
-								print('<input type="button" class="remove_profile_pic" value="削除">');
-							print('</div>');
-							print('<input type="hidden" name="delete_image" value=0>');
-							print('<input type="file" id="file1">');
 						print('</div>');
 					print('</div>');
-				print('</div>');
+				}
 
-				//名前//////////////////////////////////////////////////////////////////////////
+				// 名前 //////////////////////////////////////////////////////////////////////////
+
 				print('<div class="config_item">');
 					print('<div class="config_item_title">ユーザー名</div>');
 					print('<div class="user_name_container">');
-						print('<input name="nickname" id="user_name_input_argument" class="user_name_inputform" value="' .$row["nickname"] .'" placeholder="">');
+						print('<input name="nickname" id="user_name_input_argument" class="user_name_inputform" value="' .$nickname .'" placeholder="">');
 					print('</div>');
 				print('</div>');
 
@@ -451,21 +477,21 @@ require_once("searchbar.php");
 				print('</div>');
 
 				//資格//////////////////////////////////////////////////////////////////////////
-				print('<div class="config_item">');
+				/*print('<div class="config_item">');
 					print('<div class="config_item_title">利酒資格<span>※保有資格を選択してください</span></div>');
 					print('<div class="user_certification_container">');
 						print('<div class="user_certification_select_item">');
 							print('<label><input type="checkbox" name="certification[]" value="1">利酒師(SSI認定)</label>');
 							print('<label><input type="checkbox" name="certification[]" value="2">酒匠(SSI認定)</label>');
 						print('</div>');
-						/*print('<div class="disclose_select_item">');
+						print('<div class="disclose_select_item">');
 							print('<SELECT id="certification_disclose_select" name="certification_disclose_select">');
 								print('<OPTION VALUE=1>公開</OPTION>');
 								print('<OPTION VALUE=2>非公開</OPTION>');
 							print('</SELECT>');
-						print('</div>');*/
+						print('</div>');
 					print('</div>');
-				print('</div>');
+				print('</div>');*/
 
 				//自己紹介//////////////////////////////////////////////////////////////////////////
 				print('<div class="config_item">');
@@ -507,7 +533,7 @@ $(function() {
 
 		$.ajax({
 			type: "post",
-			url: "user_update_cancel.php?username=<?php print($username);?>",
+			url: "cgi/user_update_cancel.php?username=<?php print($username);?>",
 			data: data,
 		}).done(function(xml){
 
@@ -531,7 +557,8 @@ $(function() {
 	$('#submit_button').click(function() {
 
 		var username = <?php echo json_encode($username); ?>;
-		var data = $('#main_container').serialize() + '&username=' + username;
+		var data = $("#main_container :input[value!='']").serialize() + '&username=' + username;
+
 		data += "&hidden_username=" + $('input[name="hidden_username"]').val();
 
 		if($('#main_container input[name="certification[]"]:checked').length == 0)
@@ -553,7 +580,7 @@ $(function() {
 
 		$.ajax({
 			type: "post",
-			url: "user_update.php?username=<?php print($username);?>",
+			url: "cgi/user_update.php",
 			data: data,
 		}).done(function(xml){
 
@@ -602,7 +629,7 @@ $(function() {
 		var responseArray = JSON.parse(responseText);
 		var path = "images\\profile\\" + responseArray[0];
 
-		//alert("success:" + responseArray[1] + ", " + responseArray[1] + ", " + responseArray[2]);
+		//alert("success:" + responseArray[0] + ", " + responseArray[1] + ", " + responseArray[2]);
 
 		status.html(responseArray[0]);
 		progress.val(0);
@@ -654,29 +681,38 @@ $(function() {
 
 		reader.onload = function(e) {
 
-   			var width = img_obj.width();
-			var height = img_obj.height();
-            var formdata = new FormData();
-            var ajax = new XMLHttpRequest();
+            var data = e.target.result;
+            var orientation = 0;
 
-            progress.css({"display":"block"});
-            status.css({"display":"block"});
-            total.css({"display":"block"});
-			img_obj.attr("src", e.target.result);
+	        if(data.split(',')[0].match('jpeg') || data.split(',')[0].match('png') || data.split(',')[0].match('gif')) {
+				var width = img_obj.width();
+				var height = img_obj.height();
+				var formdata = new FormData();
+				var ajax = new XMLHttpRequest();
 
-            formdata.append("file1", file);
-            formdata.append("username", $('input[name="hidden_username"]').val());
-            formdata.append("max_width", 200);
-            formdata.append("max_height", 200);
+				progress.css({"display":"block"});
+				status.css({"display":"block"});
+				total.css({"display":"block"});
+				img_obj.attr("src", e.target.result);
 
-			//alert("username:" + $('input[name="hidden_username"]').val());
+				formdata.append("file1", file);
+				formdata.append("username", $('input[name="hidden_username"]').val());
+				formdata.append("max_width", 200);
+				formdata.append("max_height", 200);
 
-            ajax.upload.addEventListener("progress", function(event) { progressHandler(event, total, status, progress, true); }, false);
-            ajax.addEventListener("load", function(event) { completeHandler(event, img_obj, total, status, progress); }, false);
-            ajax.addEventListener("error", function(event) { errorHandler(event, status); }, false);
-            ajax.addEventListener("abort", function(event) { abortHandler(event, status); }, false);
-            ajax.open("POST", "upload_user_image.php");
-            ajax.send(formdata);
+				//alert("username:" + $('input[name="hidden_username"]').val());
+
+				ajax.upload.addEventListener("progress", function(event) { progressHandler(event, total, status, progress, true); }, false);
+				ajax.addEventListener("load", function(event) { completeHandler(event, img_obj, total, status, progress); }, false);
+				ajax.addEventListener("error", function(event) { errorHandler(event, status); }, false);
+				ajax.addEventListener("abort", function(event) { abortHandler(event, status); }, false);
+				ajax.open("POST", "cgi/upload_user_image.php");
+				ajax.send(formdata);
+			}
+	        else {
+		        alert("unsupported file format");
+                return;
+	        }
 		}
 
 		reader.readAsDataURL(file);

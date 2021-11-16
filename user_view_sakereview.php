@@ -9,7 +9,7 @@ require_once("nonda.php");
 
 <html lang="ja">
 <head>
-	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Style-Type" content="text/css">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta content='width=device-width, initial-scale=1' name='viewport'/>
@@ -28,6 +28,16 @@ require_once("nonda.php");
 	<script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="rateyo/jquery.rateyo.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-1X2ZRV0BES');
+	</script>
 </head>
 
 <body>
@@ -38,8 +48,9 @@ require_once("nonda.php");
 	write_HamburgerLogo();
 	write_Nonda();
 
-	$username = $_GET['contributor'];
+	$contributor = $_GET['contributor'];
 	$sake_id = $_GET['sake_id'];
+	$username = $_COOKIE['login_cookie'];
 
 	function sortByCount($a, $b) {
 		return  $b['count'] - $a['count'];
@@ -104,12 +115,11 @@ require_once("nonda.php");
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//$sql = "SELECT COUNT(*) FROM FOLLOW_J, SAKE_J WHERE SAKE_J.sakagura_id = FOLLOW_J.sakagura_id AND SAKE_J.sake_id = '$sake_id'";
-	$sql = "SELECT COUNT(*) FROM FOLLOW_J, SAKAGURA_J WHERE username = '$username' AND sakagura_id = id";
+	$sql = "SELECT COUNT(*) FROM FOLLOW_J, SAKAGURA_J WHERE username = '$contributor' AND sakagura_id = id";
 
 	$res = executequery($db, $sql);
 
-	if(!$res)
-	{
+	if(!$res) {
 		print('<div>データベース接続エラー</div>');
 		print('</body></html>');
 		return;
@@ -119,11 +129,10 @@ require_once("nonda.php");
 	$count_sakagura = ($record["COUNT(*)"] == "") ? "--" : $record["COUNT(*)"];
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
-	$sql = "SELECT * FROM USERS_J WHERE username = '$username'";
+	$sql = "SELECT * FROM USERS_J WHERE username = '$contributor'";
 	$res = executequery($db, $sql);
 
-	if(!$res)
-	{
+	if(!$res) {
 		print('<div>データベース接続エラー</div>');
 		print('</body></html>');
 		return;
@@ -132,9 +141,16 @@ require_once("nonda.php");
 	$row = getnextrow($res);
 	$nickname = $row["nickname"];
 
+	/* twitter 有無 */
+	if(!$nickname) {
+		if($row['oauth_uid']) {
+			$nickname = $row["username"];
+		}
+	}
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//$sql = "SELECT COUNT(*) FROM TABLE_NONDA WHERE sake_id = '$sake_id'";
-	$sql = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J WHERE SAKE_J.sake_id = TABLE_NONDA.sake_id AND contributor = '$username'";
+	$sql = "SELECT COUNT(*) FROM TABLE_NONDA, SAKE_J WHERE SAKE_J.sake_id = TABLE_NONDA.sake_id AND contributor = '$contributor'";
 
 	$res = executequery($db, $sql);
 	$rd = getnextrow($res);
@@ -156,14 +172,14 @@ require_once("nonda.php");
 
 	while($rd = getnextrow($res)) {
 		$tastes_values = explode(',', $rd["tastes"]);
-		$tastes_all[0] += $tastes_values[0];
-		$tastes_all[1] += $tastes_values[1];
-		$tastes_all[2] += $tastes_values[2];
-		$tastes_all[3] += $tastes_values[3];
-		$tastes_all[4] += $tastes_values[4];
-		$tastes_all[5] += $tastes_values[5];
-		$tastes_all[6] += $tastes_values[6];
-		$tastes_all[7] += $tastes_values[7];
+		$tastes_all[0] += floatval($tastes_values[0]);
+		$tastes_all[1] += floatval($tastes_values[1]);
+		$tastes_all[2] += floatval($tastes_values[2]);
+		$tastes_all[3] += floatval($tastes_values[3]);
+		$tastes_all[4] += floatval($tastes_values[4]);
+		$tastes_all[5] += floatval($tastes_values[5]);
+		$tastes_all[6] += floatval($tastes_values[6]);
+		$tastes_all[7] += floatval($tastes_values[7]);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -355,7 +371,7 @@ require_once("nonda.php");
 	// retrieve nonda information
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	$sql = "SELECT TABLE_NONDA.sake_id AS sake_id, TABLE_NONDA.rank AS rank, TABLE_NONDA.write_date AS write_date, TABLE_NONDA.contributor AS contributor, sake_name, sake_read, sakagura_name, pref, sake_rank, subject, message, flavor, tastes, committed FROM SAKE_J, SAKAGURA_J, TABLE_NONDA WHERE TABLE_NONDA.sake_id='$sake_id' AND TABLE_NONDA.contributor='$username' AND (SAKE_J.sake_id=TABLE_NONDA.sake_id) AND (SAKAGURA_J.id=SAKE_J.sakagura_id)";
+	$sql = "SELECT TABLE_NONDA.sake_id AS sake_id, TABLE_NONDA.rank AS rank, TABLE_NONDA.write_date AS write_date, TABLE_NONDA.contributor AS contributor, sake_name, sake_read, sakagura_name, pref, sake_rank, subject, message, flavor, tastes, committed FROM SAKE_J, SAKAGURA_J, TABLE_NONDA WHERE TABLE_NONDA.sake_id='$sake_id' AND TABLE_NONDA.contributor='$contributor' AND (SAKE_J.sake_id=TABLE_NONDA.sake_id) AND (SAKAGURA_J.id=SAKE_J.sakagura_id)";
 	$result = executequery($db, $sql);
 
 	if(!$result)
@@ -376,7 +392,7 @@ require_once("nonda.php");
 
 	print('<div class="post_header_container">');
 		print('<div class="post_header">');
-			print('<a href="javascript:history.back()"><svg class="post_header_prev2020"><use xlink:href="#prev2020"/></svg></a>');
+			print('<a href="#"><svg class="post_header_prev2020"><use xlink:href="#prev2020"/></svg></a>');
 			print('<div class="post_header_title">投稿</div>');
 		print('</div>');
 	print('</div>');
@@ -400,21 +416,27 @@ require_once("nonda.php");
 											.'" data-committed="' .$record["committed"]
 											.'">');
 
-			$sql = "SELECT * FROM USERS_J WHERE username = '$username' OR email = '$username'";
+			$sql = "SELECT * FROM USERS_J WHERE username = '$contributor' OR email = '$contributor'";
 			$res = executequery($db, $sql);
 			$row = getnextrow($res);
 
 			if($row) {
 				$path = "images/icons/noimage_user30.svg";
-				$imagefile = null;
-				$username = stripslashes($row["username"]);
-				$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$username' AND status = 1";
-				$result = executequery($db, $sql);
-				$rd = getnextrow($result);
 
-				if($rd) {
-					$imagefile = $rd["filename"];
-					$path = "images/profile/" .$imagefile;
+				if($row['oauth_uid'] && ($row['picture'] && $row['picture'] != "")) {
+					$path = $row['picture'];
+				}
+				else {
+					$imagefile = null;
+					$contributor = stripslashes($row["username"]);
+					$sql = "SELECT * FROM PROFILE_IMAGE WHERE contributor = '$contributor' AND status = 1";
+					$result = executequery($db, $sql);
+					$rd = getnextrow($result);
+
+					if($rd) {
+						$imagefile = $rd["filename"];
+						$path = "images/profile/" .$imagefile;
+					}
 				}
 			}
 
@@ -425,7 +447,7 @@ require_once("nonda.php");
 				print('</div>');
 
 				//ユーザー名
-				print('<div id="profile_name">' .$row["nickname"] .'</div>');
+				print('<div id="profile_name">' .$nickname .'</div>');
 
 				//プロフィールボタン
 				print('<div class="user_profile_trigger">');
@@ -464,7 +486,7 @@ require_once("nonda.php");
 								print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
 							}
 						print('</div>');
-						print('<div class="user_profile_row">');
+						/*print('<div class="user_profile_row">');
 							print('<div class="user_profile_column1">利酒資格 </div>');
 
 							if($row["certification"]) {
@@ -475,7 +497,7 @@ require_once("nonda.php");
 								print('<div class="user_profile_column2" style="color: #b2b2b2;">--</div>');
 							}
 
-						print('</div>');
+						print('</div>');*/
 					print('</div>');
 
 					if($row['introduction']) {
@@ -490,7 +512,7 @@ require_once("nonda.php");
 
 			//マイページタブリンク
 			print('<div class="mypage_top_link_container">');
-				print('<a href="user_view.php?username=' .$username .'" class="mypage_top_link"><svg class="mypage_top_link_person2020"><use xlink:href="#person2020"/></svg><span>マイページトップへ</span></a>');
+				print('<a href="user_view.php?username=' .$contributor .'" class="mypage_top_link"><svg class="mypage_top_link_person2020"><use xlink:href="#person2020"/></svg><span>マイページトップへ</span></a>');
 			print("</div>");
 
 		print("</div>");
@@ -501,7 +523,7 @@ require_once("nonda.php");
 					print('<div class="user_sake_container">');
 						print('<div class="user_sake_sake_container">');
 							print('<div class="user_sake_name_brewery_date_container">');
-								print('<a class="searchRow_link" href="sake_view.php?sake_id=' .$sake_id .'"><div class="user_sake_name">' .stripslashes($record[sake_name]) .'</div></a>');
+								print('<a class="searchRow_link" href="sake_view.php?sake_id=' .$sake_id .'"><div class="user_sake_name">' .stripslashes($record['sake_name']) .'</div></a>');
 								print('<div class="user_sake_brewery_date_container">');
 									print('<div>' .$record['sakagura_name'] .' / ' .$record['pref'] .'</div>');
 								print('</div>');
@@ -524,32 +546,32 @@ require_once("nonda.php");
 							print('<div class="user_sake_tab_panel">');
 
 								print('<!--レーティング-->');
-								$rank_width = (($record[rank] / 5) * 100) .'%';
+								$rank_width = ((floatval($record['rank']) / 5) * 100) .'%';
 								print('<div class="user_sake_rank">');
 									print('<div class="user_sake_star_rating">');
 										print('<div class="user_sake_star_rating_front" style="width: ' .$rank_width. '">★★★★★</div>');
 										print('<div class="user_sake_star_rating_back">★★★★★</div>');
 									print('</div>');
-									if($record[rank]) {
-										print('<span class="user_sake_sake_rate">' .number_format($record[rank], 1) .'</span>');
+									if($record['rank']) {
+										print('<span class="user_sake_sake_rate">' .number_format($record['rank'], 1) .'</span>');
 									} else {
 										print('<span class="user_sake_sake_rate" style="color: #b2b2b2;">--</span>');
 									}
 								print('</div>');
 
 								print('<!--レビューテキスト-->');
-								if($record[subject] && $record[message]) {
+								if($record['subject'] && $record['message']) {
 									print('<div class="user_sake_subject_message_container">');
-										print('<div class="user_sake_subject">' .$record[subject] .'</div>');
-										print('<div class="user_sake_message">' .nl2br($record[message]) .'</div>');
+										print('<div class="user_sake_subject">' .$record['subject'] .'</div>');
+										print('<div class="user_sake_message">' .nl2br($record['message']) .'</div>');
 									print('</div>');
-								} else if($record[subject] && $record[message] == null) {
+								} else if($record['subject'] && $record['message'] == null) {
 									print('<div class="user_sake_subject_message_container">');
-										print('<div class="user_sake_subject">' .$record[subject] .'</div>');
+										print('<div class="user_sake_subject">' .$record['subject'] .'</div>');
 									print('</div>');
-								} else if($record[subject] == null && $record[message]) {
+								} else if($record['subject'] == null && $record['message']) {
 									print('<div class="user_sake_subject_message_container">');
-										print('<div class="user_sake_message">' .nl2br($record[message]) .'</div>');
+										print('<div class="user_sake_message">' .nl2br($record['message']) .'</div>');
 									print('</div>');
 								} else {
 									print('');
@@ -557,9 +579,9 @@ require_once("nonda.php");
 
 								print('<!--写真-->');
 
-								$image_result = executequery($db, "SELECT * FROM SAKE_IMAGE WHERE sake_id = '$sake_id' AND contributor = '$username'");
+								$image_result = executequery($db, "SELECT * FROM SAKE_IMAGE WHERE sake_id = '$sake_id' AND contributor = '$contributor'");
 
-								if($image_result != undefined) {
+								if($image_result != 'undefined') {
 									$image_record = getnextrow($image_result);
 
 									if($image_record) {
@@ -744,14 +766,27 @@ require_once("nonda.php");
 							print('</div>');//user_sake_tab_panel
 						print('</div>');//user_sake_tab_body
 
+						/////////////////////////////////////////////////////////
+						$sql2 = "SELECT COUNT(*) FROM NONDA_LIKE, TABLE_NONDA WHERE TABLE_NONDA.contributor = '$contributor' AND TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.contributor = NONDA_LIKE.contributor AND TABLE_NONDA.sake_id = NONDA_LIKE.sake_id";
+						$result2 = executequery($db, $sql2);
+						$count = ($rd = getnextrow($result2)) ? $rd["COUNT(*)"] : 0;
+
+						$sql3 = "SELECT username FROM NONDA_LIKE, TABLE_NONDA WHERE NONDA_LIKE.username = '$username' AND TABLE_NONDA.contributor = '$contributor' AND TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.contributor = NONDA_LIKE.contributor AND TABLE_NONDA.sake_id = NONDA_LIKE.sake_id";
+						$result3 = executequery($db, $sql3);
+						/////////////////////////////////////////////////////////
+
 						print('<!--いいね-->');
-						/*print('<div class="user_sake_like_container">');
-							print('<a class="user_sake_like">');
-								print('<svg class="user_sake_like_icon"><use xlink:href="#like1616"/></svg>');
-								print('<div class="user_sake_like_title">いいね!</div>');
-							print('</a>');
-							print('<div class="user_sake_like_count">123</div>');
-						print('</div>');*/
+						print('<div class="sake_like_container">');
+							print('<div class="sake_like">');
+
+								if($rd = getnextrow($result3)) 
+									print('<svg class="sake_like_icon active"><use xlink:href="#heart2020"/></svg>');
+								else
+									print('<svg class="sake_like_icon"><use xlink:href="#heart2020"/></svg>');
+
+								print('<div class="sake_like_count">' .$count .'</div>');
+							print('</div>');
+						print('</div>');
 
 					print('</div>');
 
@@ -800,6 +835,10 @@ require_once("nonda.php");
 	?>
 
 <script type="text/javascript">
+
+$('.post_header a').click(function() {
+	window.location = document.referrer;
+});
 
 $('.user_profile_trigger').click(function() {
 
@@ -1067,6 +1106,50 @@ $(function() {
 		$(window).off('touchmove.noscroll');
 		$('html, body').css('overflow', '');
 		$("#dialog_preview").css({"display":"none"});
+	});
+
+	$(document).on('click', '.sake_like_container', function() {
+
+		var username = <?php echo json_encode($username); ?>;
+
+		if(username == undefined || username == "")
+		{
+			window.location.href = "user_login_form.php";
+			return;
+		}
+
+		var sake_id = <?php echo json_encode($sake_id); ?>;
+		var contributor = <?php echo json_encode($contributor); ?>;
+		var data = "sake_id=" + sake_id + "&contributor=" + contributor + "&username=" + username;
+		var obj = this;
+ 
+		//alert("sake_id:" + sake_id + " contributor:" + contributor);
+		//alert("data:" + data);
+
+		$.ajax({
+			type: "post",
+			url: "cgi/nonda_like.php",
+			data: data,
+		}).done(function(xml){
+			var str = $(xml).find("str").text();
+			var count = $(xml).find("count").text();
+			var sql = $(xml).find("sql").text();
+			//alert("str:" + str + " sql:" + sql);
+
+			if(str == "unliked")
+			{
+				$(obj).find('.sake_like_icon').removeClass("active");
+				$(obj).find('.sake_like_count').text(count);
+			}
+			else if(str == "liked")
+			{
+				$(obj).find('.sake_like_icon').addClass("active");
+				$(obj).find('.sake_like_count').text(count);
+			}
+
+		}).fail(function(data){
+			alert("This is Error");
+		});
 	});
 });
 

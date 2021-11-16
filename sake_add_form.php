@@ -14,7 +14,7 @@ require_once("searchbar.php");
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
-<title>Sakenomo</title>
+<title>日本酒登録 [Sakenomo]</title>
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
@@ -27,6 +27,16 @@ require_once("searchbar.php");
 <script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/manage_edit_sake.js?random=<?php echo uniqid(); ?>"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-1X2ZRV0BES');
+</script>
 </head>
 
 <body>
@@ -94,11 +104,14 @@ jQuery(document).ready(function(){
 		$('#container input[name="update_button"]').css({"display":"none"});
 
 		/* 自動カナ、ローマ字入力 */
+
+		/*
 		$('#container .sakedata').createAutoKana({
 			sakagura_name		: $('#container input[name="sake_name"]'),
 			sakagura_read		: $('#container input[name="sake_read"]'),
 			sakagura_english	: $('#container input[name="sake_english"]')
 		});
+		*/
 	}
 });
 
@@ -122,7 +135,7 @@ $(function() {
 
 		$.ajax({
 			type: "post",
-			url: "sake_add.php",
+			url: "cgi/sake_add.php",
 			data: data,
 		}).done(function(xml){
 			var str = $(xml).find("str").text();
@@ -169,7 +182,7 @@ $(function() {
 
 		$.ajax({
 				type: "post",
-				url: "sake_update.php?id=" + sake_id,
+				url: "cgi/sake_update.php?id=" + sake_id,
 				data: data,
 		}).done(function(xml){
 

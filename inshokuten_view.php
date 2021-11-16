@@ -45,10 +45,6 @@ if(!$db = opendatabase("sake.db")) {
 
 $inshokuten_id = $_GET['inshokuten_id'];
 
-if(!$db = opendatabase("sake.db")) {
-	die("データベース接続エラー .<br />");
-}
-
 $sql = "SELECT * FROM INSHOKUTEN_J WHERE inshokuten_id = '$inshokuten_id'";
 $res = executequery($db, $sql);
 $row = getnextrow($res);
@@ -193,7 +189,7 @@ print('<div id="container">');
 
 								$path = "images/icons/noimage160.svg";
 
-								if($record["setting"] != "" && $record["setting"] != undefined) {
+								if($record["setting"] != "" && $record["setting"] != 'undefined') {
 									$path = "images/photo/thumb/" .$record["setting"];
 								} else {
 									$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
@@ -729,7 +725,7 @@ $(function() {
 		if(count >= 1) {
 			$.ajax({
 				type: "POST",
-				url: "auto_complete.php",
+				url: "cgi/auto_complete.php",
 				data: data,
 				dataType: 'json',
 			}).done(function(data) {

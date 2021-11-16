@@ -219,6 +219,7 @@ function writeSakaguraContainer()
 			  print('<div class="column2">');
 				print('<SELECT name="establishment">');
 				  print('<OPTION VALUE="">----</OPTION>');
+				  print('<OPTION VALUE=2021>2021年 (令和3年)</OPTION>');
 				  print('<OPTION VALUE=2020>2020年 (令和2年)</OPTION>');
 				  print('<OPTION VALUE=2019>2019年 (令和1年)</OPTION>');
 				  print('<OPTION VALUE=2018>2018年 (平成30年)</OPTION>');

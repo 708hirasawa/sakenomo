@@ -279,7 +279,7 @@ function write_Nonda()
 
             print('<div class="tab_bbs_button_container">');
               print('<input type="button" id="dialog_bbs_ok" value="登録・更新">');
-              print('<input type="button" id="dialog_bbs_draft" value="下書き保存">');
+              //print('<input type="button" id="dialog_bbs_draft" value="下書き保存">');
               print('<input type="button" id="dialog_bbs_delete" value="削除">');
             print('</div>');
           print('</div>');

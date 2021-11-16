@@ -14,7 +14,7 @@ require_once("searchbar.php");
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
-<title>Sakenomo</title>
+<title>酒蔵登録 [Sakenomo]</title>
 <link rel="stylesheet" type="text/css" href="css/common.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/hamburger.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
 <link rel="stylesheet" type="text/css" href="css/searchbar.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" />
@@ -28,6 +28,16 @@ require_once("searchbar.php");
 <script src="js/nonda.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script src="js/manage_edit_sakagura.js?random=<?php echo uniqid(); ?>"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-1X2ZRV0BES');
+</script>
 </head>
 
 <body>
@@ -80,11 +90,26 @@ $(function() {
 
 			$('input[name="sakagura_search[]"]').each(function() {
 				//alert("sakagura_search:" + $(this).val());
-			
+
 				if(sakagura_search_text != "")
 					sakagura_search_text += ",";
 
 				sakagura_search_text += $(this).val();
+			});
+
+			var url = "";
+
+			$('input[name="url[]"]').each(function() {
+
+				if(this.value && this.value != "") {
+
+					if(url == "") {
+						url = this.value;
+					}
+					else {
+						url += ", " + this.value;
+					}
+				}
 			});
 
 			$('.dialog_sakagura_search').text(sakagura_search_text);
@@ -93,7 +118,7 @@ $(function() {
 			$('.dialog_address').text($('input[name="address"]').val());
 			$('.dialog_phone').text($('input[name="phone"]').val());
 			$('.dialog_fax').text($('input[name="fax"]').val());
-			$('.dialog_url').text($('input[name="url"]').val());
+			$('.dialog_url').text(url);
 			$('.dialog_email').text($('input[name="email"]').val());
 			$('.dialog_representative').text($('input[name="representative"]').val());
 			$('.dialog_touji').text($('input[name="touji"]').val());
@@ -110,6 +135,7 @@ $(function() {
 			$('.dialog_award_history').text($('textarea[name="award_history"]').val());
 			$('.dialog_observatory_info').text($('textarea[name="observatory_info"]').val());
 			$('.dialog_observation').text($('select[name="observation"] option:selected').text());
+			$('.dialog_direct_sale').text($('select[name="direct_sale"] option:selected').text());
 			//$('.dialog_memo').text($('textarea[name="memo"]').val());
 
 			var touch_start_y;
@@ -167,30 +193,30 @@ $(function() {
 
 	$('#container input[name="update_sakagura"]').click(function() {
 
-			var sakagura_id = <?php echo json_encode($sakagura_id); ?>;
-			var data = $('#container .sakagura_form').serialize();
+		var sakagura_id = <?php echo json_encode($sakagura_id); ?>;
+		var data = $('#container .sakagura_form').serialize();
 
-			data += "&sakagura_id=" + $('#container .sakagura_container').data('sakagura_id');
-			//alert("sakagura_id:" + sakagura_id);
-			//alert("update data:" + data);
+		data += "&sakagura_id=" + $('#container .sakagura_container').data('sakagura_id');
+		//alert("sakagura_id:" + sakagura_id);
+		//alert("update data:" + data);
 
-			$.ajax({
-					type: "post",
-					url: "sakagura_update.php?id=" + sakagura_id,
-					data: data,
-			}).done(function(xml){
+		$.ajax({
+				type: "post",
+				url: "cgi/sakagura_update.php?id=" + sakagura_id,
+				data: data,
+		}).done(function(xml){
 
-					str = $(xml).find("str").text();
-					sql = $(xml).find("sql").text();
+				str = $(xml).find("str").text();
+				sql = $(xml).find("sql").text();
 
-					//alert("success:" + str);
-					//alert("sql:" + sql);
+				//alert("success:" + str);
+				//alert("sql:" + sql);
 
-					if(str == "success")
-					{
-						window.open('sda_view.php?id=' + sakagura_id, '_self');
-						return;
-					}
+				if(str == "success")
+				{
+					window.open('sda_view.php?id=' + sakagura_id, '_self');
+					return;
+				}
 
 			}).fail(function(data){
 				 alert("This is Error");
@@ -204,7 +230,7 @@ $(function() {
 
 		$.ajax({
 			type: "post",
-			url: "sda_add.php",
+			url: "cgi/sda_add.php",
 			data: data,
 		}).done(function(xml){
 			var str = $(xml).find("str").text();
@@ -230,7 +256,7 @@ $(function() {
 		  $(this).val(han);
 	});
 
-	$('.sakagura_wrapper select[name="establishment"]').change(function(){
+	$('.sakagura_wrapper select[name="establishment"]').change(function() {
 
 		if($('.sakagura_wrapper select[name="establishment"]').val() == 9999)
 		{
@@ -281,7 +307,6 @@ jQuery(document).ready(function($) {
 		$('#container input[name="delete_sakagura"]').css({"display":"none"});
 	}
 })(); // 匿名関数
-
 
 </script>
 </html>

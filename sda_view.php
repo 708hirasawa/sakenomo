@@ -26,6 +26,16 @@ require_once("searchbar.php");
 	<script src="js/sakenomuui.js?<?php echo date('l jS \of F Y h:i:s A'); ?>" charset="Shift-JIS"></script>
 	<script src="js/searchbar.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 	<script src="js/hamburger.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X2ZRV0BES"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-1X2ZRV0BES');
+	</script>
 </head>
 
 <body>
@@ -254,7 +264,7 @@ function GetSakeCategory($category_code)
 	}
 	else if($category_code == "44")
 	{
-		$retval = "樽酒";
+		$retval = "木桶仕込";
 		return $retval;
 	}
 	else if($category_code == "45")
@@ -313,20 +323,20 @@ print('<div id="container"
               .' data-contributor="' .$username
               .'">');
 	if($row) {
-		print('<input type="hidden" id="hidden_title"				value="'  .stripslashes($row["sakagura_name"]) .'">');
-		print('<input type="hidden" id="region_name"				value="'  .$row["region_name"] .'">');
-		print('<input type="hidden" id="hidden_pref_read"			value="'  .$row["pref_read"] .'">');
-		print('<input type="hidden" id="hidden_id"					value="'  .$id .'">');
-		print('<input type="hidden" id="hidden_data_type"			value="sakagura">');
-		print('<input type="hidden" id="hidden_sakagura"			value="' .$row["sakagura"] .'">');
-		print('<input type="hidden" id="hidden_sakagura_search"		value="' .$row["sakagura_search"]		.'">');
+		print('<input type="hidden" id="hidden_title"	value="'  .stripslashes($row["sakagura_name"]) .'">');
+		print('<input type="hidden" id="region_name"	value="'  .$row["region_name"] .'">');
+		print('<input type="hidden" id="hidden_pref_read"	value="'  .$row["pref_read"] .'">');
+		print('<input type="hidden" id="hidden_id"	value="'  .$id .'">');
+		print('<input type="hidden" id="hidden_data_type"	value="sakagura">');
+		print('<input type="hidden" id="hidden_sakagura"	value="' .$row["sakagura"] .'">');
+		print('<input type="hidden" id="hidden_sakagura_search"	value="' .$row["sakagura_search"]		.'">');
 		print('<input type="hidden" id="hidden_sakagura_develop"	value="' .$row["sakagura_develop"]	.'">');
-		print('<input type="hidden" id="hidden_rank"				value="' .$row["rank"]							.'">');
-		print('<input type="hidden" id="hidden_kumiai"				value="' .$row["kumiai"]							.'">');
-		print('<input type="hidden" id="hidden_kokuzei"				value="' .$row["kokuzei"]							.'">');
-		print('<input type="hidden" id="hidden_status"				value="' .$row["status"]							.'">');
+		print('<input type="hidden" id="hidden_rank"	value="' .$row["rank"]	.'">');
+		print('<input type="hidden" id="hidden_kumiai"	value="' .$row["kumiai"]	.'">');
+		print('<input type="hidden" id="hidden_kokuzei"	value="' .$row["kokuzei"]	.'">');
+		print('<input type="hidden" id="hidden_status"	value="' .$row["status"]	.'">');
 		print('<input type="hidden" id="hidden_establishment"		value="' .$row["establishment"]			.'">');
-		print('<input type="hidden" id="hidden_url"					value="' .$row["url"]								.'">');
+		print('<input type="hidden" id="hidden_url"	value="' .$row["url"]	.'">');
 
 		print('<input type="hidden" id="in_disp_from" value=0>');
 		print('<input type="hidden" id="in_disp_to" value=25>');
@@ -454,7 +464,6 @@ print('<div id="container"
             $i = 0;
 
             ////////////////////////////////////////
-
             ////////////////////////////////////////
             if($count_result > 0) {
               print('<div class="product_sort_container">');
@@ -520,19 +529,19 @@ print('<div id="container"
 
                     $path = "images/icons/noimage160.svg";
 
-                    //if($record["setting"] != "" && $record["setting"] != undefined)
+                    //if($record["setting"] != "" && $record["setting"] != 'undefined')
                     //{
                     //  $path = "images/photo/thumb/" .$record["setting"];
                     //}
                     //else
                     {
-						//$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
-						$result_set = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 2");
+                      //$result_set = executequery($db, "SELECT filename FROM SAKE_IMAGE WHERE SAKE_IMAGE.sake_id = '" .$record["sake_id"] ."' LIMIT 8");
+                      $result_set = executequery($db, "SELECT DISTINCT FILENAME, TABLE_NONDA.update_date FROM TABLE_NONDA, SAKE_IMAGE WHERE TABLE_NONDA.sake_id = '$sake_id' AND TABLE_NONDA.sake_id = SAKE_IMAGE.sake_id AND TABLE_NONDA.contributor = SAKE_IMAGE.contributor ORDER BY TABLE_NONDA.update_date DESC limit 2");
 
-						if($rd = getnextrow($result_set))
-						{
-							$path = "images/photo/thumb/" .$rd["filename"];
-						}
+                      if($rd = getnextrow($result_set))
+                      {
+                          $path = "images/photo/thumb/" .$rd["filename"];
+                      }
                     }
 
                     print('<div class="search_sake_result_name_container">');
@@ -757,7 +766,7 @@ print('<div id="container"
 
         print('<div class="updatebar_container">');
           print('<div id="updatebar">');
-			if($_COOKIE['login_cookie'] != "") {
+            if($_COOKIE['login_cookie'] != "") {
               print('<a href="sda_add_form.php?id=' .$row["id"] .'&sakagura_name=' .$row["sakagura_name"] .'" id="update_sakagura"><svg class="update_sakagura_penplus2020"><use xlink:href="#penplus2020"/></svg>この酒蔵を編集</a>');
               print('<a href="sda_add_form.php" id="add_new_sakagura"><svg class="add_new_sakagura_pen1616"><use xlink:href="#pen1616"/></svg>新しい酒蔵を追加</a>');
             } else {
@@ -769,8 +778,8 @@ print('<div id="container"
 
         print('<div class="sns_buttons_container">');
           print('<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="'.stripslashes($row["sakagura_name"]).' / Sakenomo" data-lang="en" data-show-count="false"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
-          print('<div class="fb-share-button" data-href="https://sakenomo.xsrv.jp/sakenomo/sda_view.php?id='.$sakagura_id.'" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdrinksake.xsrv.jp%2Fhirasawa%2Fsake_view.php%3Fsake_id%3DA1010855763%23top&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>');
-          print('<div class="line-it-button" data-lang="ja" data-type="share-b" data-ver="3" data-url="https://sakenomo.xsrv.jp/sakenomo/sda_view.php?id='.$sakagura_id.'" data-color="default" data-size="small" data-count="false" style="display: none;"></div><script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>');
+          print('<div class="fb-share-button" data-href="https://sakenomo.com/sda_view.php?id='.$id.'" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdrinksake.xsrv.jp%2Fhirasawa%2Fsake_view.php%3Fsake_id%3DA1010855763%23top&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>');
+          print('<div class="line-it-button" data-lang="ja" data-type="share-b" data-ver="3" data-url="https://sakenomo.com/sda_view.php?id='.$id.'" data-color="default" data-size="small" data-count="false" style="display: none;"></div><script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>');
         print('</div>');
 
         ////////////////////////////////////////
@@ -1202,7 +1211,7 @@ $(function() {
 
 		$.ajax({
 				type: "POST",
-				url: "complex_search.php",
+				url: "cgi/complex_search.php",
 				data: data,
 				dataType: 'json',
 
@@ -1519,7 +1528,7 @@ jQuery(document).ready(function(){
 
 		$.ajax({
 			type: "post",
-			url: "sda_follow.php?id="+id,
+			url: "cgi/sda_follow.php?id="+id,
 			data: data,
 		}).done(function(xml){
 			var str = $(xml).find("str").text();

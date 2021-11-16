@@ -4,8 +4,7 @@ require_once("db_functions.php");
 
 $email = $_POST['email'];
 
-if(!$db = opendatabase("sake.db"))
-{
+if(!$db = opendatabase("sake.db")) {
 	$return = "connection_failure";
 
 	header("Content-type: application/xml");
