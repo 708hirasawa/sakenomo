@@ -516,8 +516,8 @@ $(function() {
         {
             $.ajax({
                 type: "POST",
-                url: "auto_complete.php",
-		              data: data,
+                url: "cgi/auto_complete.php",
+                data: data,
                 dataType: 'json',
 
             }).done(function(data){
@@ -952,7 +952,7 @@ $(function() {
 
 	    $.ajax({
 		    type: "POST",
-		    url: "complex_search.php",
+		    url: "cgi/complex_search.php",
 		    data: data,
 		    dataType: 'json',
 

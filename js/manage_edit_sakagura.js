@@ -19,7 +19,7 @@ $(function() {
 
 	    $.ajax({
 		    type: "POST",
-		    url: "sakagura_delete.php",
+		    url: "cgi/sakagura_delete.php",
 		    data: data,
         }).done(function(xml){
             var str = $(xml).find("str").text();
@@ -49,7 +49,7 @@ $(function() {
 
 	    $.ajax({
 		    type: "POST",
-		    url: "complex_search.php",
+		    url: "cgi/complex_search.php",
 		    data: data,
 		    dataType: 'json',
 

@@ -8,7 +8,7 @@ $(function() {
 
 	    $.ajax({
 		    type: "POST",
-		    url: "sakagura_delete.php",
+		    url: "cgi/sakagura_delete.php",
 		    data: data,
         }).done(function(xml){
             var str = $(xml).find("str").text();
@@ -39,7 +39,7 @@ $(function() {
 
 	    $.ajax({
 		    type: "POST",
-		    url: "complex_search.php",
+		    url: "cgi/complex_search.php",
 		    data: data,
 		    dataType: 'json',
 
@@ -61,6 +61,8 @@ $(function() {
 		　$('#birthday_month').val(bdateArray[0]);
 		　$('#birthday_day').val(bdateArray[1]);
 		　$('#birthday_year').val(bdateArray[2]);
+
+          $('.profile_photo img').attr("src", user[0].filename);
 
 		　$('#user_container').data('fname', user[0].fname);
           $('#user_container').data('minit', user[0].minit);
